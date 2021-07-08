@@ -6,17 +6,21 @@ $breakpoints: (
   'lg': 1280px
 );
 
+$font--primary: Barlow;
+$font--secondary: 'input-sans';
+
 // Colors
 // We'll want to namespace these by theme later
 $text--primary: #090422;
 $text--secondary: #cecdd3;
 $text--placeholder: #465968;
+$text--white: #ffffff;
 
 $inactive: #cecdd3;
 $disabled: #f5f4fa;
 $background: #f7f8fa;
 
-$primary: #4263eb;
+$primary: #024dfd;
 $error: #fb4e4e;
 $warning: #f6a609;
 $success: #2ac769;

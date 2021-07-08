@@ -1,5 +1,12 @@
 @use '../abstracts/variables';
+@use '../abstracts/mixins';
 
 button {
+  @include mixins.miter(1);
+
   background-color: variables.$primary;
+  border: none;
+  border-radius: 4px;
+  color: variables.$text--white;
+  font-size: 14px;
 }
