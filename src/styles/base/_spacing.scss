@@ -1,0 +1,71 @@
+@use '../abstracts/variables';
+
+$directions: (
+  'a': (
+    'top',
+    'right',
+    'bottom',
+    'left'
+  ),
+  'x': (
+    'right',
+    'left'
+  ),
+  'y': (
+    'top',
+    'bottom'
+  ),
+  't': (
+    'top'
+  ),
+  'b': (
+    'bottom'
+  ),
+  'r': (
+    'right'
+  ),
+  'l': (
+    'left'
+  )
+);
+
+@each $break, $value in variables.$breakpoints {
+  @each $direction, $properties in $directions {
+    @for $i from 0 through 10 {
+      $selector: if(
+        $break != '',
+        #{$direction}-#{$break}-#{$i},
+        #{$direction}-#{$i}
+      );
+      $amount: $i * 8px;
+
+      @if $break != '' {
+        @media (min-width: $value) {
+          .m#{$selector} {
+            @each $property in $properties {
+              margin-#{$property}: $amount;
+            }
+          }
+
+          .p#{$selector} {
+            @each $property in $properties {
+              padding-#{$property}: $amount;
+            }
+          }
+        }
+      } @else {
+        .m#{$selector} {
+          @each $property in $properties {
+            margin-#{$property}: $amount;
+          }
+        }
+
+        .p#{$selector} {
+          @each $property in $properties {
+            padding-#{$property}: $amount;
+          }
+        }
+      }
+    }
+  }
+}
