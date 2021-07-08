@@ -1,0 +1,19 @@
+@use 'abstracts/variables';
+
+@import url('https://use.typekit.net/kuq1xhl.css');
+@import url('https://fonts.googleapis.com/css?family=Barlow');
+
+:root {
+  --font-primary: 'Barlow';
+  --font-secondary: 'Input Sans';
+
+  /* set base values */
+  --text-base-size: 1em;
+  --text-scale-ratio: 1.2;
+}
+
+body {
+  color: variables.$text--primary;
+  font-family: var(--font-primary);
+  font-size: var(--text-base-size);
+}

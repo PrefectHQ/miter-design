@@ -1,5 +1,5 @@
 <template>
-  <button><slot></slot></button>
+  <button class="py-1 px-2"><slot></slot></button>
 </template>
 
 <script lang="ts">

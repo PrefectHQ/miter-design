@@ -6,12 +6,9 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import Button from './components/Button/Button.vue'
 
 @Options({
-  components: {
-    Button
-  }
+  components: {}
 })
 export default class App extends Vue {}
 </script>

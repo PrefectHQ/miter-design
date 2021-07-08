@@ -1,3 +1,5 @@
+@use '../abstracts/variables';
+
 button {
-  color: green;
+  background-color: variables.$primary;
 }
