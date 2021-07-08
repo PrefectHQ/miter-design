@@ -1,5 +1,7 @@
 <template>
-  <Button>Hello!</Button>
+  <div>
+    <Button>Hello!</Button>
+  </div>
 </template>
 
 <script lang="ts">
