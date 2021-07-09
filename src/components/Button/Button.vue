@@ -52,6 +52,7 @@ export default class Button extends Vue.with(Props) {
   
   */
   handleMouseEnter(): void {
+    if (this.disabled) return
     this.hovered = true
   }
 
@@ -60,14 +61,17 @@ export default class Button extends Vue.with(Props) {
   }
 
   handleMouseDown(): void {
+    if (this.disabled) return
     this.active = true
   }
 
   handleMouseUp(): void {
+    if (this.disabled) return
     this.active = false
   }
 
   handleFocus(): void {
+    if (this.disabled) return
     this.hovered = true
   }
 
@@ -80,6 +84,7 @@ export default class Button extends Vue.with(Props) {
   }
 
   handleKeydown(): void {
+    if (this.disabled) return
     this.active = true
   }
   /*

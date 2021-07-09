@@ -8,6 +8,7 @@
         :key="style"
         class="ml-2 text-capitalize"
         :color="style"
+        :disabled="state == 'disabled'"
       >
         {{ style }}
       </Button>
