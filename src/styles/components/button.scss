@@ -28,9 +28,37 @@
   > div {
     @include mixins.input-transition;
     border-radius: 4px;
+    padding-left: 32px;
+    padding-right: 32px;
+    position: relative;
 
     > span {
       margin-right: 4px;
+    }
+  }
+
+  &.icon {
+    border-radius: 50%;
+    height: 60px;
+    line-height: 60px;
+    overflow: hidden;
+    width: 60px;
+
+    > div {
+      border-radius: 50%;
+      height: calc(100% - 2px);
+      width: calc(100% - 2px);
+      top: 1px;
+      left: 1px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    i {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
@@ -96,7 +124,7 @@
     > div {
       background-color: variables.$white;
       height: calc(100% - 2px);
-      position: relative;
+
       top: 0;
       left: 1px;
       width: calc(100% - 2px);

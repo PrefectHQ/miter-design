@@ -12,7 +12,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <div class="px-4">
+    <div>
       <span>
         <slot />
       </span>

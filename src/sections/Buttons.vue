@@ -12,7 +12,8 @@
         :icon="state == 'icon'"
         @click="handleClick"
       >
-        {{ style }}
+        <i v-if="state == 'icon'" class="material-icons">add_task</i>
+        <span v-else>{{ style }}</span>
       </Button>
     </div>
   </div>
