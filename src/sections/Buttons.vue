@@ -1,7 +1,6 @@
 <template>
   <div>
     <h3>Buttons</h3>
-    <button>hello</button>
     <div v-for="state in states" :key="state" class="my-2">
       <span class="font-weight-light text-capitalize">{{ state }}:</span>
       <Button
