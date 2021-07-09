@@ -26,21 +26,29 @@ $text-alignments: 'left', 'center', 'right', 'end', 'justify', 'start',
 }
 
 .d-block {
-  display: block;
+  display: block !important;
 }
 
 .d-inline-block {
-  display: inline-block;
+  display: inline-block !important;
 }
 
 .d-flex {
-  display: flex;
+  display: flex !important;
   flex-wrap: wrap;
 }
 
 .d-inline-flex {
-  display: inline-flex;
+  display: inline-flex !important;
   flex-wrap: nowrap;
+}
+
+.flex-row {
+  flex-direction: row !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
 }
 
 a {

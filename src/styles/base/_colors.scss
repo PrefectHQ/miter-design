@@ -1,0 +1,10 @@
+@use '../abstracts/variables';
+
+// TODO: Add the rest of the text and background color classes
+.text--primary-100 {
+  color: variables.$primary-100;
+}
+
+.grey-1 {
+  background-color: variables.$grey-1;
+}

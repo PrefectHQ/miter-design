@@ -10,6 +10,8 @@ const app = createApp(App)
 
 app.component('Button', Components.Button)
 app.component('Card', Components.Card)
+app.component('CardActions', Components.CardActions)
+app.component('CardHeader', Components.CardHeader)
 
 app.config.performance = true
 

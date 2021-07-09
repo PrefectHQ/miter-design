@@ -18,11 +18,8 @@
     border-radius: 1px;
     display: flex;
     flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
     padding: 16px;
-
-    .actions {
-      margin-top: auto;
-      justify-self: flex-end;
-    }
   }
 }
