@@ -20,7 +20,7 @@ import { Vue, Options } from 'vue-class-component'
 
 @Options({})
 export default class Button extends Vue {
-  styles = ['primary', 'secondary', 'alternate']
+  styles = ['primary', 'secondary', 'outlined']
   states = ['default', 'hovered', 'disabled']
 
   mounted(): void {

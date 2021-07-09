@@ -2,7 +2,10 @@
 @use '../abstracts/mixins';
 
 .button {
-  @include mixins.miter(1);
+  &:not(&.active) {
+    @include mixins.miter(1);
+  }
+
   @include mixins.input-transition;
 
   background-color: none;
@@ -28,12 +31,8 @@
   }
 
   &.primary {
-    &:hover,
-    &:focus,
-    &:focus:focus-visible {
-      > div {
-        background-color: variables.$primary-101;
-      }
+    &.hovered > div {
+      background-color: variables.$primary-101;
     }
 
     > div {
@@ -43,12 +42,8 @@
   }
 
   &.secondary {
-    &:hover,
-    &:focus,
-    &:focus:focus-visible {
-      > div {
-        background-color: variables.$grey-4;
-      }
+    &.hovered > div {
+      background-color: variables.$grey-4;
     }
 
     > div {
@@ -57,19 +52,18 @@
     }
   }
 
-  &.alternate {
+  &.outlined {
     background-color: variables.$grey-4;
 
-    &:hover,
-    &:focus,
-    &:focus-visible {
-      > div {
-        background-color: variables.$grey-5;
-      }
+    &.hovered > div {
+      background-color: variables.$grey-5;
+    }
+
+    &:not(&.active) > div {
+      @include mixins.miter(1, true);
     }
 
     > div {
-      @include mixins.miter(1, true);
       background-color: variables.$white;
       color: variables.$grey-1;
       height: calc(100% - 2px);
