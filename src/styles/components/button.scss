@@ -21,7 +21,7 @@
     outline: none;
   }
 
-  :not(.icon) > div {
+  &:not(.icon) > div {
     @include mixins.miter(1);
   }
 
@@ -71,7 +71,7 @@
     background-color: variables.$disabled !important;
     color: variables.$grey-4 !important;
 
-    &:not(&.outlined) > div {
+    &:not(.outlined) > div {
       background-color: variables.$grey-3 !important;
     }
   }
