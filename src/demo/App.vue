@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import Buttons from '@/sections/Buttons.vue'
-import Cards from '@/sections/Cards.vue'
+import Buttons from './sections/Buttons.vue'
+import Cards from './sections/Cards.vue'
 
 @Options({
   components: {

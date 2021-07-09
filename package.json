@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --host localhost",
+    "serve": "vue-cli-service serve --host localhost src/demo/main.ts",
     "build": "vue-cli-service build",
     "build:bundle": "vue-cli-service build --target lib --name miter-design ./src/components/index.ts",
     "test:unit": "vue-cli-service test:unit",
