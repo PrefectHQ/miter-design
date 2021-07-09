@@ -23,7 +23,7 @@
 import { Vue, Options } from 'vue-class-component'
 
 @Options({})
-export default class Button extends Vue {
+export default class Buttons extends Vue {
   styles = ['primary', 'secondary', 'outlined']
   states = ['default', 'disabled', 'icon']
 
