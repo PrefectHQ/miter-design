@@ -27,6 +27,7 @@ import { computed } from 'vue'
 class Props {
   color = prop<string>({ default: 'secondary' })
   disabled = prop<boolean>({ default: false })
+  icon = prop<boolean>({ default: false })
 }
 
 @Options({})
@@ -39,6 +40,7 @@ export default class Button extends Vue.with(Props) {
       ...(this.disabled ? ['disabled'] : []),
       ...(this.hovered ? ['hovered'] : []),
       ...(this.active ? ['active'] : []),
+      ...(this.icon ? ['icon'] : []),
       this.color
     ]
   })

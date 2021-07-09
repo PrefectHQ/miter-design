@@ -9,6 +9,7 @@
         class="ml-2 text-capitalize"
         :color="style"
         :disabled="state == 'disabled'"
+        :icon="state == 'icon'"
         @click="handleClick"
       >
         {{ style }}
@@ -23,7 +24,7 @@ import { Vue, Options } from 'vue-class-component'
 @Options({})
 export default class Button extends Vue {
   styles = ['primary', 'secondary', 'outlined']
-  states = ['default', 'disabled']
+  states = ['default', 'disabled', 'icon']
 
   mounted(): void {
     return

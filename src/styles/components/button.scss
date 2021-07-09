@@ -4,7 +4,7 @@
 .button {
   @include mixins.input-transition;
 
-  &:not(.active) {
+  &:not(.active):not(.icon) {
     @include mixins.miter(1);
   }
 
@@ -21,10 +21,13 @@
     outline: none;
   }
 
+  :not(.icon) > div {
+    @include mixins.miter(1);
+  }
+
   > div {
     @include mixins.input-transition;
-    @include mixins.miter(1);
-    border-radius: 4px !important;
+    border-radius: 4px;
 
     > span {
       margin-right: 4px;
@@ -78,7 +81,7 @@
       background-color: transparent;
     }
 
-    &:not(.active) {
+    &:not(.active):not(.icon) {
       @include mixins.miter(1);
     }
 
@@ -86,8 +89,11 @@
       background-color: variables.$grey-5;
     }
 
-    > div {
+    &:not(.icon) > div {
       @include mixins.miter(1, true);
+    }
+
+    > div {
       background-color: variables.$white;
       height: calc(100% - 2px);
       position: relative;
