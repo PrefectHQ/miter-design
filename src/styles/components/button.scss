@@ -22,6 +22,7 @@
   }
 
   > div {
+    @include mixins.input-transition;
     @include mixins.miter(1);
     border-radius: 4px !important;
 
