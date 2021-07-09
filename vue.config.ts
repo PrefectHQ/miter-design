@@ -1,3 +1,5 @@
+import HtmlWebpackPlugin = require('html-webpack-plugin')
+
 module.exports = {
   chainWebpack: (config) => {
     config.plugin('html').tap((args) => {
@@ -14,7 +16,8 @@ module.exports = {
       },
       contentBase: './src',
       hot: true
-    }
+    },
+    plugins: [new HtmlWebpackPlugin()]
   },
   css: {
     loaderOptions: {
