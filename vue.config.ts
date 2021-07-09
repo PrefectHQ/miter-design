@@ -3,7 +3,7 @@ import HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   chainWebpack: (config) => {
     config.plugin('html').tap((args) => {
-      args[0].title = 'Prefect Design Library'
+      args[0].title = 'Miter Design Library'
       return args
     })
   },
