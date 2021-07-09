@@ -30,6 +30,10 @@
     }
   }
 
+  &.disabled {
+    cursor: not-allowed;
+  }
+
   &.primary {
     &.hovered > div {
       background-color: variables.$primary-101;

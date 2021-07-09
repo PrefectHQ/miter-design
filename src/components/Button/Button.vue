@@ -6,6 +6,8 @@
     @mouseleave="handleMouseLeave"
     @mousedown="handleMouseDown"
     @mouseup="handleMouseUp"
+    @keydown.enter.space="handleKeydown"
+    @keyup.enter.space="handleKeyup"
     @focus="handleFocus"
     @blur="handleBlur"
   >
@@ -19,52 +21,72 @@
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
+import { computed } from 'vue'
 
 class Props {
   color = prop<string>({ default: 'secondary' })
+  disabled = prop<boolean>({ default: false })
 }
 
 @Options({})
 export default class Button extends Vue.with(Props) {
-  classList: Array<string> = [this.color]
+  active: boolean = false
+  hovered: boolean = false
 
-  private addClass(className: string): void {
-    if (!this.classList.includes(className)) {
-      this.classList.push(className)
-    }
-  }
-
-  private removeClass(className: string): void {
-    this.classList = this.classList.filter((c) => c !== className)
-  }
+  classList = computed(() => {
+    return [
+      ...(this.disabled ? ['disabled'] : []),
+      ...(this.hovered ? ['hovered'] : []),
+      ...(this.active ? ['active'] : []),
+      this.color
+    ]
+  })
 
   mounted(): void {
     return
   }
 
+  /*
+  
+    Start input methods
+  
+  */
   handleMouseEnter(): void {
-    this.addClass('hovered')
+    this.hovered = true
   }
 
   handleMouseLeave(): void {
-    this.removeClass('hovered')
+    this.hovered = false
   }
 
   handleMouseDown(): void {
-    this.addClass('active')
+    this.active = true
   }
 
   handleMouseUp(): void {
-    this.removeClass('active')
+    this.active = false
   }
 
   handleFocus(): void {
-    this.addClass('hovered')
+    this.hovered = true
   }
 
   handleBlur(): void {
-    this.removeClass('hovered')
+    this.hovered = false
   }
+
+  handleKeyup(): void {
+    this.active = false
+  }
+
+  handleKeydown(): void {
+    this.active = true
+  }
+  /*
+  
+    End input methods
+  
+  */
 }
 </script>
 
