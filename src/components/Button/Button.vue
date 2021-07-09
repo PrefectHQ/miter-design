@@ -2,6 +2,7 @@
   <button
     class="cursor-pointer button"
     :class="classList"
+    :disabled="disabled"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousedown="handleMouseDown"
@@ -58,6 +59,7 @@ export default class Button extends Vue.with(Props) {
 
   handleMouseLeave(): void {
     this.hovered = false
+    this.active = false
   }
 
   handleMouseDown(): void {
@@ -77,6 +79,7 @@ export default class Button extends Vue.with(Props) {
 
   handleBlur(): void {
     this.hovered = false
+    this.active = false
   }
 
   handleKeyup(): void {

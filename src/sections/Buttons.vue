@@ -9,6 +9,7 @@
         class="ml-2 text-capitalize"
         :color="style"
         :disabled="state == 'disabled'"
+        @click="handleClick"
       >
         {{ style }}
       </Button>
@@ -26,6 +27,11 @@ export default class Button extends Vue {
 
   mounted(): void {
     return
+  }
+
+  handleClick(): void {
+    // eslint-disable-next-line no-console
+    console.log('clicked!')
   }
 }
 </script>
