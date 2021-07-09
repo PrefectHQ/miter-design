@@ -12,7 +12,6 @@
       >
         {{ style }}
       </Button>
-      <Button class="ml-2"></Button>
     </div>
   </div>
 </template>
