@@ -1,0 +1,16 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.card {
+  @include mixins.input-transition;
+  @include mixins.miter(2);
+
+  background-color: variables.$grey-4;
+  padding: 1px;
+
+  > div {
+    @include mixins.miter(2, true);
+    background-color: variables.$white;
+    padding: 16px;
+  }
+}

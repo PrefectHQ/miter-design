@@ -15,3 +15,12 @@ html {
 .cursor-pointer {
   cursor: pointer;
 }
+
+$text-alignments: 'left', 'center', 'right', 'end', 'justify', 'start',
+  'inherit', 'initial', 'unset';
+
+@each $alignment in $text-alignments {
+  .text-#{$alignment} {
+    text-align: #{$alignment};
+  }
+}
