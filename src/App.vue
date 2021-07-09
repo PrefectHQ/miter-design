@@ -1,7 +1,7 @@
 <template>
   <div v-cloak>
     <Cards class="ma-2" />
-    <Buttons class="ma-2" />
+    <Buttons class="ma-2 mt-10" />
   </div>
 </template>
 

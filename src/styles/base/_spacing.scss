@@ -1,5 +1,7 @@
 @use '../abstracts/variables';
 
+// TODO: This file could use some work, I think we're generating more classes than we need to here;
+// it'd also be great to incorporate the auto-classes into primary loop
 $directions: (
   'a': (
     'top',
@@ -28,6 +30,22 @@ $directions: (
     'left'
   )
 );
+
+@each $direction, $properties in $directions {
+  $selector: #{$direction}-auto;
+
+  .m#{$selector} {
+    @each $property in $properties {
+      margin-#{$property}: auto;
+    }
+  }
+
+  .p#{$selector} {
+    @each $property in $properties {
+      padding-#{$property}: auto;
+    }
+  }
+}
 
 @each $break, $value in variables.$breakpoints {
   @each $direction, $properties in $directions {

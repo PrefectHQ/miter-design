@@ -1,7 +1,11 @@
 <template>
-  <div class="card" :style="style">
-    <div>
+  <div class="card">
+    <div :style="style">
       <slot />
+
+      <div class="actions">
+        <slot name="actions" />
+      </div>
     </div>
   </div>
 </template>
@@ -11,6 +15,7 @@ import { Vue, Options, prop } from 'vue-class-component'
 import { computed } from 'vue'
 
 class Props {
+  height = prop<string>({ default: null })
   width = prop<string>({ default: null })
 }
 
@@ -18,6 +23,7 @@ class Props {
 export default class Card extends Vue.with(Props) {
   style = computed(() => {
     return {
+      height: this.height,
       width: this.width
     }
   })

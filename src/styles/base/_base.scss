@@ -24,3 +24,26 @@ $text-alignments: 'left', 'center', 'right', 'end', 'justify', 'start',
     text-align: #{$alignment};
   }
 }
+
+.d-block {
+  display: block;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.d-inline-flex {
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -7,12 +7,22 @@
 
   background-color: variables.$grey-4;
   border-radius: 2px;
+  display: block;
+  height: min-content;
   padding: 1px;
+  position: relative;
 
   > div {
     @include mixins.miter(2, true);
     background-color: variables.$white;
     border-radius: 1px;
+    display: flex;
+    flex-direction: column;
     padding: 16px;
+
+    .actions {
+      margin-top: auto;
+      justify-self: flex-end;
+    }
   }
 }
