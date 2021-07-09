@@ -7,58 +7,76 @@
 
   background-color: none;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 14px;
   height: 36px;
   line-height: 36px;
+  overflow: hidden;
   padding: 0;
   user-select: none;
 
-  > div {
-    border-radius: 3px !important;
+  &:focus-visible {
+    outline: none;
   }
 
-  &.primary > div {
-    background-color: variables.$primary-100;
-    color: variables.$text--white;
+  > div {
+    border-radius: 4px !important;
 
-    &:hover,
-    &:focus,
-    &:focus:not(:focus-visible) {
-      background-color: variables.$primary-101;
+    > span {
+      margin-right: 4px;
     }
   }
 
-  &.secondary > div {
-    background-color: variables.$grey-3;
-    color: variables.$grey-1;
-
+  &.primary {
     &:hover,
     &:focus,
-    &:focus:not(:focus-visible) {
-      background-color: variables.$grey-4;
+    &:focus:focus-visible {
+      > div {
+        background-color: variables.$primary-101;
+      }
+    }
+
+    > div {
+      background-color: variables.$primary-100;
+      color: variables.$text--white;
+    }
+  }
+
+  &.secondary {
+    &:hover,
+    &:focus,
+    &:focus:focus-visible {
+      > div {
+        background-color: variables.$grey-4;
+      }
+    }
+
+    > div {
+      background-color: variables.$grey-3;
+      color: variables.$grey-1;
     }
   }
 
   &.alternate {
     background-color: variables.$grey-4;
 
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      > div {
+        background-color: variables.$grey-5;
+      }
+    }
+
     > div {
       @include mixins.miter(1, true);
       background-color: variables.$white;
-      border-radius: 3px !important;
       color: variables.$grey-1;
       height: calc(100% - 2px);
       position: relative;
       top: 0;
       left: 1px;
       width: calc(100% - 2px);
-
-      &:hover,
-      &:focus,
-      &:focus:not(:focus-visible) {
-        background-color: variables.$grey-5;
-      }
     }
   }
 }

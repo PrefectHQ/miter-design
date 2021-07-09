@@ -4,9 +4,15 @@
     <button>hello</button>
     <div v-for="state in states" :key="state" class="my-2">
       <span class="font-weight-light text-capitalize">{{ state }}:</span>
-      <Button v-for="style in styles" :key="style" class="ml-2" :style="style">
+      <Button
+        v-for="style in styles"
+        :key="style"
+        class="ml-2 text-capitalize"
+        :color="style"
+      >
         {{ style }}
       </Button>
+      <Button class="ml-2"></Button>
     </div>
   </div>
 </template>
