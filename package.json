@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve --host localhost src/demo/main.ts",
     "build": "vue-cli-service build",
-    "build:bundle": "vue-cli-service build --target lib --name miter-design ./src/components/index.ts",
+    "build:bundle": "vue-cli-service build --target lib --name miter-design ./src/entry.ts",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
