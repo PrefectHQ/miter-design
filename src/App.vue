@@ -1,7 +1,6 @@
 <template>
-  <div>
-    Hello
-    <Button>Hello!</Button>
+  <div v-cloak>
+    <Button color="primary">Hello!</Button>
   </div>
 </template>
 
@@ -14,4 +13,8 @@ import { Options, Vue } from 'vue-class-component'
 export default class App extends Vue {}
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+[v-cloak] {
+  display: none;
+}
+</style>

@@ -29,7 +29,13 @@ module.exports = {
     ],
     quotes: ['error', 'single', { avoidEscape: true }],
     semi: ['error', 'never'],
-    'vue/valid-v-slot': 'off'
+    'vue/valid-v-slot': 'off',
+    '@typescript-eslint/no-inferrable-types': [
+      'off',
+      {
+        ignoreProperties: true
+      }
+    ]
   },
   overrides: [
     {

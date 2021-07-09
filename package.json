@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --host localhost",
     "build": "vue-cli-service build",
     "build:bundle": "vue-cli-service build --target lib --name prefect-design-library ./src/components/index.ts",
     "test:unit": "vue-cli-service test:unit",
@@ -14,7 +14,8 @@
     "core-js": "^3.6.5",
     "sass": "^1.35.2",
     "vue": "^3.0.0",
-    "vue-class-component": "^8.0.0-0"
+    "vue-class-component": "^8.0.0-0",
+    "vue-property-decorator": "^9.1.2"
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",

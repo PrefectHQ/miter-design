@@ -11,3 +11,7 @@ $cuts: 8, 16, 24, 32, 40, 48;
     0 100%
   );
 }
+
+@mixin input-transition {
+  transition: all 150ms;
+}

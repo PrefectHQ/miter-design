@@ -3,10 +3,29 @@
 
 button {
   @include mixins.miter(1);
+  @include mixins.input-transition;
 
-  background-color: variables.$primary;
   border: none;
   border-radius: 4px;
-  color: variables.$text--white;
   font-size: 14px;
+
+  &.primary {
+    background-color: variables.$primary-100;
+    color: variables.$text--white;
+
+    &:hover,
+    &:focus {
+      background-color: variables.$primary-101;
+    }
+  }
+
+  &.secondary {
+    background-color: variables.$grey-3;
+    color: variables.$grey-1;
+
+    &:hover,
+    &:focus {
+      background-color: variables.$grey-4;
+    }
+  }
 }
