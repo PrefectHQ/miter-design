@@ -6,11 +6,13 @@
   @include mixins.miter(2);
 
   background-color: variables.$grey-4;
+  border-radius: 2px;
   padding: 1px;
 
   > div {
     @include mixins.miter(2, true);
     background-color: variables.$white;
+    border-radius: 1px;
     padding: 16px;
   }
 }
