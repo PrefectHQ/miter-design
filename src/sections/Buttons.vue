@@ -1,0 +1,30 @@
+<template>
+  <div>
+    <h3>Buttons</h3>
+    <button>hello</button>
+    <div v-for="state in states" :key="state" class="my-2">
+      <span class="font-weight-light text-capitalize">{{ state }}:</span>
+      <Button v-for="style in styles" :key="style" class="ml-2" :style="style">
+        {{ style }}
+      </Button>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Vue, Options } from 'vue-class-component'
+
+@Options({})
+export default class Button extends Vue {
+  styles = ['primary', 'secondary', 'alternate']
+  states = ['default', 'hovered', 'disabled']
+
+  mounted(): void {
+    return
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@use '@/styles/components/button';
+</style>

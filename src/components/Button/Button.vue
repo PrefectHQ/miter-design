@@ -1,17 +1,21 @@
 <template>
-  <button class="py-1 px-2" :class="classList"><slot></slot></button>
+  <button class="cursor-pointer button" :class="classList">
+    <div class="px-2">
+      <slot></slot>
+    </div>
+  </button>
 </template>
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
 
 class Props {
-  color = prop<string>({ default: 'primary' })
+  style = prop<string>({ default: 'primary' })
 }
 
 @Options({})
 export default class Button extends Vue.with(Props) {
-  classList: Array<string> = [this.color]
+  classList: Array<string> = [this.style]
 
   mounted(): void {
     return

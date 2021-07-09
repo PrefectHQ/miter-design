@@ -8,5 +8,54 @@
 body {
   color: variables.$text--primary;
   font-family: variables.$font--secondary !important;
-  font-size: 1em;
+  font-size: 17px;
+  letter-spacing: -0.41px;
+  line-height: 24px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: variables.$font--primary !important;
+}
+
+h1 {
+  font-size: 40px;
+  letter-spacing: 0.4px;
+  line-height: 48px;
+}
+
+h2 {
+  font-size: 34px;
+  letter-spacing: 0.3px;
+  line-height: 40px;
+}
+
+h3 {
+  font-size: 28px;
+  letter-spacing: 0.24px;
+  line-height: 34px;
+}
+
+h4 {
+  font-size: 24px;
+  letter-spacing: 0.2px;
+  line-height: 28px;
+}
+
+h5 {
+  font-size: 20px;
+  letter-spacing: 0.18px;
+  line-height: 24px;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
 }

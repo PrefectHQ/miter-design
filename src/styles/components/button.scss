@@ -1,31 +1,64 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-button {
+.button {
   @include mixins.miter(1);
   @include mixins.input-transition;
 
+  background-color: none;
   border: none;
   border-radius: 4px;
   font-size: 14px;
+  height: 36px;
+  line-height: 36px;
+  padding: 0;
+  user-select: none;
 
-  &.primary {
+  > div {
+    border-radius: 3px !important;
+  }
+
+  &.primary > div {
     background-color: variables.$primary-100;
     color: variables.$text--white;
 
     &:hover,
-    &:focus {
+    &:focus,
+    &:focus:not(:focus-visible) {
       background-color: variables.$primary-101;
     }
   }
 
-  &.secondary {
+  &.secondary > div {
     background-color: variables.$grey-3;
     color: variables.$grey-1;
 
     &:hover,
-    &:focus {
+    &:focus,
+    &:focus:not(:focus-visible) {
       background-color: variables.$grey-4;
+    }
+  }
+
+  &.alternate {
+    background-color: variables.$grey-4;
+
+    > div {
+      @include mixins.miter(1, true);
+      background-color: variables.$white;
+      border-radius: 3px !important;
+      color: variables.$grey-1;
+      height: calc(100% - 2px);
+      position: relative;
+      top: 0;
+      left: 1px;
+      width: calc(100% - 2px);
+
+      &:hover,
+      &:focus,
+      &:focus:not(:focus-visible) {
+        background-color: variables.$grey-5;
+      }
     }
   }
 }

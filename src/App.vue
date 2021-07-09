@@ -1,14 +1,17 @@
 <template>
   <div v-cloak>
-    <Button color="primary">Hello!</Button>
+    <Buttons class="ma-2" />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
+import Buttons from '@/sections/Buttons.vue'
 
 @Options({
-  components: {}
+  components: {
+    Buttons
+  }
 })
 export default class App extends Vue {}
 </script>
