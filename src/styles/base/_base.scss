@@ -52,6 +52,7 @@ $text-alignments: 'left', 'center', 'right', 'end', 'justify', 'start',
 }
 
 a {
+  color: inherit !important;
   cursor: pointer;
   text-decoration: underline;
 }
