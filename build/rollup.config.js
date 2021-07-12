@@ -82,10 +82,13 @@ const baseConfig = {
         ]
       }),
       postcss({
+        inject: true,
+        // extract: 'src/styles/main.scss',
+        sourceMap: true
         // same as true but path where to save
         // extract: join(distDir, 'main.css'),
-        extract: true,
-        minimize: true
+        // extract: true
+        // minimize: true
       }),
       // debugTransformer,
       commonjs()

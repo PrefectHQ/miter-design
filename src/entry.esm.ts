@@ -1,3 +1,5 @@
+import './styles/main.scss'
+
 import { App, Plugin } from 'vue'
 
 // Import vue components
