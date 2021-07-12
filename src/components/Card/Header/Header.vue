@@ -1,12 +1,14 @@
 <template>
   <div class="card-header" :style="style">
+    <!-- :style="style" -->
     <slot />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-import { computed } from 'vue'
+import { computed, ComputedRef } from 'vue'
+// import {StyleValue} from ''
 
 class Props {
   height = prop<string>({ default: null })
@@ -14,7 +16,7 @@ class Props {
 
 @Options({})
 export default class Header extends Vue.with(Props) {
-  style = computed(() => {
+  style: ComputedRef<{ [key: string]: string }> = computed(() => {
     return {
       height: this.height
     }
