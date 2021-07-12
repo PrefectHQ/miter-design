@@ -27,5 +27,5 @@ export default class Header extends Vue.with(Props) {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/components/card-header';
+@use '../../../styles/components/card-header';
 </style>

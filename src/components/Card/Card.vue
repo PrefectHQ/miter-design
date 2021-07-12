@@ -34,5 +34,5 @@ export default class Card extends Vue.with(Props) {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/components/card';
+@use '../../styles/components/card';
 </style>

@@ -4,14 +4,10 @@ import { createApp } from 'vue'
 import '@/styles/main.scss'
 
 import App from './App.vue'
-import * as Components from '@/components'
+import MiterDesign from '@/entry.esm'
 
 const app = createApp(App)
-
-app.component('Button', Components.Button)
-app.component('Card', Components.Card)
-app.component('CardActions', Components.CardActions)
-app.component('CardHeader', Components.CardHeader)
+app.use(MiterDesign)
 
 app.config.performance = true
 

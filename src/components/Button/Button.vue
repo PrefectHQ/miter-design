@@ -101,5 +101,5 @@ export default class Button extends Vue.with(Props) {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/components/button';
+@use '../../styles/components/button';
 </style>

@@ -28,3 +28,5 @@ export const createMiter = (
 
   return { install }
 }
+
+export default createMiter
