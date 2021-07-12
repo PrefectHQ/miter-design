@@ -39,6 +39,10 @@ const srcRoot = path.resolve(__dirname, '../src')
 
 const baseConfig = {
   input: 'src/entry.ts',
+  watch: {
+    chokidar: false,
+    include: 'src/**'
+  },
   plugins: {
     preVue: [
       alias({
