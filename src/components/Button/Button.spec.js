@@ -14,16 +14,42 @@ test('displays text in the default slot', () => {
   expect(button.text()).toBe(text)
 })
 
-test('adds the disabled class when disabled is passed as a prop', () => {
-  const wrapper = mount(Button, {
-    props: {
-      disabled: true
-    }
+describe('disabled state', () => {
+  test('adds the disabled class when disabled:true is passed as a prop', () => {
+    const wrapper = mount(Button, {
+      props: {
+        disabled: true
+      }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).toContain('disabled')
   })
 
-  const button = wrapper.get('button')
+  test('adds the disabled attribute when disabled:true is passed as a prop', () => {
+    const wrapper = mount(Button, {
+      props: {
+        disabled: true
+      }
+    })
 
-  expect(button.classes()).toContain('disabled')
+    const button = wrapper.get('button')
+
+    expect(button.attributes('disabled')).toBeDefined()
+  })
+
+  test("doesn't pass the disabled attribute when disabled:false is passed as a prop", () => {
+    const wrapper = mount(Button, {
+      props: {
+        disabled: false
+      }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.attributes('disabled')).toBeUndefined()
+  })
 })
 
 describe('hovered and focused states', () => {
