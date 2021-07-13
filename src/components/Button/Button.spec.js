@@ -46,3 +46,24 @@ describe('hovered and focused states', () => {
     expect(button.classes()).not.toContain('hovered')
   })
 })
+
+describe('active states', () => {
+  const wrapper = mount(Button, {})
+  const button = wrapper.get('button')
+
+  test('mousedown adds the active class and mouseup removes the active class', async () => {
+    await button.trigger('mousedown')
+    expect(button.classes()).toContain('active')
+
+    await button.trigger('mouseup')
+    expect(button.classes()).not.toContain('active')
+  })
+
+  test('keydown.enter adds the active class and keyup.enter removes the active class', async () => {
+    await button.trigger('keydown', { key: 'Enter' })
+    expect(button.classes()).toContain('active')
+
+    await button.trigger('keyup', { key: 'Enter' })
+    expect(button.classes()).not.toContain('active')
+  })
+})
