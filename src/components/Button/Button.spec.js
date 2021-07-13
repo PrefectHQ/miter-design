@@ -36,6 +36,28 @@ describe('color prop', () => {
   })
 })
 
+describe('icon prop', () => {
+  test('defaults to the block button when no icon prop is passed', () => {
+    const wrapper = mount(Button, {
+      props: {}
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).not.toContain('icon')
+  })
+
+  test('passes the icon prop as a class when passed', () => {
+    const wrapper = mount(Button, {
+      props: { icon: true }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).toContain('icon')
+  })
+})
+
 describe('disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
     const wrapper = mount(Button, {
