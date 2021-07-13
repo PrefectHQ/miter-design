@@ -6,6 +6,7 @@
     "serve": "vite",
     "build": "vite build",
     "test:unit": "vue-cli-service test:unit",
+    "test:unit:watch": "vue-cli-service test:unit --watch",
     "lint": "vue-cli-service lint",
     "dev": "vite build --watch"
   },

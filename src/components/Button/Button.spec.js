@@ -9,7 +9,19 @@ test('displays text in the default slot', () => {
     }
   })
 
-  const todo = wrapper.get('[data-test="default"]')
+  const button = wrapper.get('[data-test="default"]')
 
-  expect(todo.text()).toBe(text)
+  expect(button.text()).toBe(text)
+})
+
+test('adds the disabled class when disabled is passed as a prop', () => {
+  const wrapper = mount(Button, {
+    props: {
+      disabled: true
+    }
+  })
+
+  const button = wrapper.get('button')
+
+  expect(button.classes()).toContain('disabled')
 })
