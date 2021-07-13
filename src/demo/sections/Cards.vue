@@ -62,7 +62,7 @@ import { Vue, Options } from 'vue-class-component'
 
 @Options({})
 export default class Cards extends Vue {
-  cards = [
+  cards: {} = [
     {
       title: 'Welcome to PREFECT',
       titleTag: 'h2',
