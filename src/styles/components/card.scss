@@ -12,7 +12,7 @@
   padding: 1px;
   position: relative;
 
-  > div {
+  > section {
     @include mixins.miter(2, true);
     background-color: variables.$white;
     border-radius: 3px;

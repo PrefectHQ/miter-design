@@ -1,11 +1,16 @@
 <template>
   <div class="card">
-    <slot name="header" />
-    <div :style="style">
-      <slot />
-
-      <slot name="actions" />
-    </div>
+    <header>
+      <slot name="header" />
+    </header>
+    <section>
+      <main :style="style">
+        <slot />
+      </main>
+      <footer>
+        <slot name="actions" />
+      </footer>
+    </section>
   </div>
 </template>
 
