@@ -31,6 +31,6 @@ test('adds the hovered class when button is hovered or focused', async () => {
 
   const button = wrapper.get('button')
 
-  await button.trigger('mouseover')
+  await button.trigger('mouseenter')
   expect(button.classes()).toContain('hovered')
 })
