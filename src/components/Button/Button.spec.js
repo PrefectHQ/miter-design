@@ -25,3 +25,12 @@ test('adds the disabled class when disabled is passed as a prop', () => {
 
   expect(button.classes()).toContain('disabled')
 })
+
+test('adds the hovered class when button is hovered or focused', async () => {
+  const wrapper = mount(Button, {})
+
+  const button = wrapper.get('button')
+
+  await button.trigger('mouseover')
+  expect(button.classes()).toContain('hovered')
+})

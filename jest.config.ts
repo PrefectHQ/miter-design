@@ -14,6 +14,7 @@ const config: Config.InitialOptions = {
     '.*\\.(vue)$': ['vue-jest', {}] // process `*.vue` files with vue-jest
   },
   testURL: 'http://localhost/',
+  setupFiles: ['./tests/setupJest.js'],
   verbose: true
 }
 
