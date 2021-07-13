@@ -2,20 +2,18 @@
   "name": "@prefect/miter-design",
   "version": "0.1.0",
   "private": true,
-  "sideEffects": false,
+  "scripts": {
+    "serve": "vite",
+    "build": "vite build",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
+    "dev": "vite build --watch"
+  },
   "main": "./dist/miter-design.umd.js",
   "module": "./dist/miter-design.es.js",
-  "style": "./dist/style.css",
   "files": [
     "dist/*"
   ],
-  "scripts": {
-    "serve": "vite",
-    "dev": "vite build --watch",
-    "build": "vite build",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
-  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -27,22 +25,23 @@
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "@vitejs/plugin-vue": "^1.2.5",
-    "@vue/cli": "^4.5.13",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-plugin-babel": "^5.0.0-beta.2",
+    "@vue/cli-plugin-eslint": "^5.0.0-beta.2",
+    "@vue/cli-plugin-typescript": "^5.0.0-beta.2",
+    "@vue/cli-plugin-unit-jest": "^5.0.0-beta.2",
+    "@vue/cli-service": "^4.5.13",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-rc.10",
     "core-js": "^3.6.5",
     "cross-env": "^7.0.3",
-    "eslint": "^6.7.2",
+    "eslint": "^7.20.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-vue": "^7.0.0",
+    "eslint-plugin-vue": "^7.6.0",
     "prettier": "^2.2.1",
     "sass": "^1.35.2",
+    "ts-jest": "^26.5.3",
     "typescript": "~4.1.5",
     "vite": "^2.4.2",
     "vue": "^3.0.5",
@@ -52,5 +51,7 @@
   },
   "peerDependencies": {
     "vue": "^3.0.5"
-  }
+  },
+  "sideEffects": false,
+  "style": "./dist/style.css"
 }
