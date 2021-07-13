@@ -41,6 +41,17 @@
         >
           {{ card.subtitle }}
         </component>
+
+        <template v-if="card.asideTag" v-slot:aside>
+          <component
+            :is="card.asideTag || 'div'"
+            :class="card.asideClass"
+            :width="card.asideWidth"
+          >
+            {{ card.aside }}
+          </component>
+        </template>
+
         <component
           v-if="card.content"
           :is="card.contentTag || 'div'"
@@ -100,6 +111,9 @@ export default class Cards extends Vue {
       width: '730px',
       contentClass: ['my-auto'],
       content: "See all the new features we've added in the tutorial.",
+      asideTag: 'CardAside',
+      asideClass: ['grey-1'],
+      asideWidth: '175px',
       actions: [
         { tag: 'Button', color: 'primary', text: 'Primary' },
         { tag: 'a', text: 'Skip for now' }

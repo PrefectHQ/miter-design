@@ -1,5 +1,5 @@
 <template>
-  <div class="card-header" :style="style">
+  <div class="card-aside" :style="style">
     <slot />
   </div>
 </template>
@@ -9,14 +9,14 @@ import { Vue, Options, prop } from 'vue-class-component'
 import { computed, ComputedRef } from 'vue'
 
 class Props {
-  height = prop<string>({ default: null })
+  width = prop<string>({ default: null })
 }
 
 @Options({})
-export default class Header extends Vue.with(Props) {
+export default class Aside extends Vue.with(Props) {
   style: ComputedRef<{ [key: string]: string }> = computed(() => {
     return {
-      height: this.height
+      width: this.width
     }
   })
 
@@ -27,5 +27,5 @@ export default class Header extends Vue.with(Props) {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../styles/components/card-header';
+@use '../../../styles/components/card-aside';
 </style>
