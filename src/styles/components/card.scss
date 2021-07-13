@@ -6,7 +6,7 @@
   @include mixins.miter(2);
 
   background-color: variables.$grey-4;
-  border-radius: 2px;
+  border-radius: 4px;
   display: block;
   height: min-content;
   padding: 1px;
@@ -15,7 +15,7 @@
   > div {
     @include mixins.miter(2, true);
     background-color: variables.$white;
-    border-radius: 1px;
+    border-radius: 3px;
     display: flex;
     flex-direction: column;
     align-content: flex-start;
