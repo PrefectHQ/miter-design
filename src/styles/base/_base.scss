@@ -1,3 +1,5 @@
+@use '../abstracts/variables';
+
 html {
   box-sizing: border-box;
 }
@@ -55,4 +57,12 @@ a {
   color: inherit !important;
   cursor: pointer;
   text-decoration: underline;
+
+  &:hover {
+    color: variables.$primary-100 !important;
+  }
+
+  &.disabled {
+    color: variables.$grey-4 !important;
+  }
 }
