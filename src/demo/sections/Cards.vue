@@ -20,16 +20,32 @@
           </component>
         </template>
 
-        <component :is="card.overlineTag || 'div'" :class="card.overlineClass">
+        <component
+          v-if="card.overline"
+          :is="card.overlineTag || 'div'"
+          :class="card.overlineClass"
+        >
           {{ card.overline }}
         </component>
-        <component :is="card.titleTag || 'div'" :class="card.titleClass">
+        <component
+          v-if="card.title"
+          :is="card.titleTag || 'div'"
+          :class="card.titleClass"
+        >
           {{ card.title }}
         </component>
-        <component :is="card.subtitleTag || 'div'" :class="card.subtitleClass">
+        <component
+          v-if="card.subtitle"
+          :is="card.subtitleTag || 'div'"
+          :class="card.subtitleClass"
+        >
           {{ card.subtitle }}
         </component>
-        <component :is="card.contentTag || 'div'" :class="card.contentClass">
+        <component
+          v-if="card.content"
+          :is="card.contentTag || 'div'"
+          :class="card.contentClass"
+        >
           {{ card.content }}
         </component>
 
@@ -66,7 +82,7 @@ export default class Cards extends Vue {
     {
       title: 'Welcome to PREFECT',
       titleTag: 'h2',
-      cardClass: ['text-center', 'px-10'],
+      cardClass: ['text-center'],
       height: '385px',
       width: '350px',
       contentClass: ['my-auto'],
@@ -98,7 +114,7 @@ export default class Cards extends Vue {
       overline: 'Hello world',
       overlineClass: ['text-caption-1'],
       subtitle: 'Tasks Pending',
-      subtitleClass: ['text--primary-100'],
+      subtitleClass: ['mb-auto', 'text--primary-100'],
       actions: [
         {
           tag: 'div',
