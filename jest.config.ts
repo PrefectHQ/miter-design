@@ -9,9 +9,9 @@ const config: Config.InitialOptions = {
   moduleFileExtensions: ['js', 'ts', 'json', 'vue'],
   rootDir: '.',
   transform: {
-    '^.+\\.js$': ['babel-jest', { cwd: undefined }],
-    '^.+\\.tsx?$': ['ts-jest', { config: { cwd: undefined } }], // process `*.ts` files with ts-jest
-    '.*\\.(vue)$': ['vue-jest', { config: { cwd: undefined } }] // process `*.vue` files with vue-jest
+    '^.+\\.js$': ['babel-jest', {}],
+    '^.+\\.tsx?$': ['ts-jest', {}], // process `*.ts` files with ts-jest
+    '.*\\.(vue)$': ['vue-jest', {}] // process `*.vue` files with vue-jest
   },
   testURL: 'http://localhost/',
   verbose: true
