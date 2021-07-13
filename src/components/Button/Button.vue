@@ -1,6 +1,5 @@
 <template>
   <button
-    data-test="button"
     class="cursor-pointer button"
     :class="classList"
     :disabled="disabled"
@@ -14,7 +13,7 @@
     @blur="handleBlur"
   >
     <div>
-      <span>
+      <span data-test="default">
         <slot />
       </span>
     </div>
