@@ -66,4 +66,12 @@ describe('active states', () => {
     await button.trigger('keyup', { key: 'Enter' })
     expect(button.classes()).not.toContain('active')
   })
+
+  test('keydown.space adds the active class and keyup.space removes the active class', async () => {
+    await button.trigger('keydown', { key: 'Space' })
+    expect(button.classes()).toContain('active')
+
+    await button.trigger('keyup', { key: 'Space' })
+    expect(button.classes()).not.toContain('active')
+  })
 })
