@@ -1,42 +1,20 @@
 import type { Config } from '@jest/types'
 
-// Temporary workaround re: https://github.com/vuejs/vue-cli/issues/1879
-process.env.VUE_CLI_BABEL_TARGET_NODE = 'true'
-process.env.VUE_CLI_BABEL_TRANSPILE_MODULES = 'true'
+process.env.VUE_CLI_BABEL_TARGET_NODE = true as unknown as string
+process.env.VUE_CLI_BABEL_TRANSPILE_MODULES = true as unknown as string
 
+// Sync object
 const config: Config.InitialOptions = {
-  maxWorkers: null,
-  rootDir: null,
-  automock: false,
-  timers: 'fake',
-  collectCoverageFrom: [
-    'src/**/*.{js,vue}',
-    '!**/node_modules/**',
-    '!**/dist/**',
-    '!src/main.js',
-    '!src/router.js'
-  ],
-  coverageDirectory: 'tests/__coverage__',
-  moduleFileExtensions: ['js', 'jsx', 'json', 'vue'],
+  maxWorkers: 1,
+  moduleFileExtensions: ['js', 'ts', 'json', 'vue'],
+  rootDir: '.',
   transform: {
-    '^.+\\.vue$': 'vue-jest',
-    '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
-      'jest-transform-stub',
-    '^.+\\.jsx?$': 'babel-jest'
+    '^.+\\.js$': ['babel-jest', { cwd: undefined }],
+    '^.+\\.tsx?$': ['ts-jest', { config: { cwd: undefined } }], // process `*.ts` files with ts-jest
+    '.*\\.(vue)$': ['vue-jest', { config: { cwd: undefined } }] // process `*.vue` files with vue-jest
   },
-  moduleNameMapper: {
-    '\\.(css|scss|less)$': '<rootDir>/__mocks__/styleMock.js',
-    '^@/(.*)$': '<rootDir>/src/$1'
-  },
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
-  roots: ['src', 'tests'],
-  setupFiles: ['jest-localstorage-mock', 'jest-fetch-mock', 'jest-canvas-mock'],
-  setupFilesAfterEnv: ['<rootDir>/tests/jestSetup.js'],
-  snapshotSerializers: ['jest-serializer-vue'],
-  testMatch: [
-    '**/src/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
-  ],
-  testURL: 'http://localhost/'
+  testURL: 'http://localhost/',
+  verbose: true
 }
 
 export default config

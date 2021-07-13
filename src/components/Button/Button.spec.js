@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
-// import Button from './Button.vue'
+import Button from './Button.vue'
 
-// test('displays text in the default slot', () => {
-//   const text = 'Hello!'
-//   const wrapper = mount(Button, { text: text })
+test('displays text in the default slot', () => {
+  const text = 'Hello!'
+  const wrapper = mount(Button, { text: text })
 
-//   const todo = wrapper.get('[data-test="button"]')
+  const todo = wrapper.get('[data-test="button"]')
 
-//   expect(todo.text()).toBe(text)
-// })
+  expect(todo.text()).toBe(text)
+})
