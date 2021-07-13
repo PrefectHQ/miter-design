@@ -1,5 +1,6 @@
 <template>
   <button
+    data-test="button"
     class="cursor-pointer button"
     :class="classList"
     :disabled="disabled"
