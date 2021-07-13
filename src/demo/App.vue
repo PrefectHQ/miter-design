@@ -1,7 +1,8 @@
 <template>
-  <div v-cloak>
+  <div class="pb-10" v-cloak>
     <Cards class="ma-2" />
     <Buttons class="ma-2 mt-10" />
+    <Links class="ma-2 mt-10" />
   </div>
 </template>
 
@@ -9,11 +10,13 @@
 import { Options, Vue } from 'vue-class-component'
 import Buttons from './sections/Buttons.vue'
 import Cards from './sections/Cards.vue'
+import Links from './sections/Links.vue'
 
 @Options({
   components: {
     Buttons,
-    Cards
+    Cards,
+    Links
   }
 })
 export default class App extends Vue {}

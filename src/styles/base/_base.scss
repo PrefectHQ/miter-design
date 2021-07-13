@@ -64,5 +64,6 @@ a {
 
   &.disabled {
     color: variables.$grey-4 !important;
+    cursor: not-allowed;
   }
 }
