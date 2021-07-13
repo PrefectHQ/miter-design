@@ -14,6 +14,28 @@ test('displays text in the default slot', () => {
   expect(button.text()).toBe(text)
 })
 
+describe('color prop', () => {
+  test('defaults to the secondary color when no color prop is passed', () => {
+    const wrapper = mount(Button, {
+      props: {}
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).toContain('secondary')
+  })
+
+  test('passes the color prop as a class when passed', () => {
+    const wrapper = mount(Button, {
+      props: { color: 'primary' }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).toContain('primary')
+  })
+})
+
 describe('disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
     const wrapper = mount(Button, {
