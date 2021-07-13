@@ -36,3 +36,15 @@ test('displays text in the footer slot', () => {
   const card = wrapper.get('footer')
   expect(card.text()).toBe(text)
 })
+
+test('displays text in the aside slot', () => {
+  const text = 'Hello!'
+  const wrapper = mount(Card, {
+    slots: {
+      aside: text
+    }
+  })
+
+  const card = wrapper.get('aside')
+  expect(card.text()).toBe(text)
+})
