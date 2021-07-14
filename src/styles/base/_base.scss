@@ -53,6 +53,22 @@ $text-alignments: 'left', 'center', 'right', 'end', 'justify', 'start',
   flex-direction: column !important;
 }
 
+.align-center {
+  align-items: center;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-space-around {
+  justify-content: space-around;
+}
+
 a {
   color: inherit !important;
   cursor: pointer;

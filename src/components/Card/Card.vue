@@ -9,9 +9,9 @@
       </aside>
 
       <section>
-        <main v-if="$slots.default" :style="style">
+        <article v-if="$slots.default" :style="style">
           <slot />
-        </main>
+        </article>
 
         <footer v-if="$slots.actions">
           <slot name="actions" />
