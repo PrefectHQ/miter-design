@@ -1,5 +1,19 @@
 <template>
-  <input type="range" :disabled="disabled" :min="minVal" :max="maxVal" v-model="val" @input="$emit('sliderChange', val)" />
+  <input 
+  type="range" 
+  @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
+    @mousedown="handleMouseDown"
+    @mouseup="handleMouseUp"
+    @keydown.enter.space="handleKeydown"
+    @keyup.enter.space="handleKeyup"
+    @focus="handleFocus"
+    @blur="handleBlur"
+    :disabled="disabled" 
+    :min="minVal" 
+    :max="maxVal" 
+    v-model="val" 
+    @input="$emit('sliderChange', val)" />
 </template>
 
 <script lang="ts">
@@ -54,7 +68,6 @@ mounted(): void {
 },
 methods: {
   handleMouseEnter(): void {
-    console.log('enter')
     if (this.disabled) return
   },
 
