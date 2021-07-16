@@ -32,3 +32,15 @@
 .grey-1 {
   background-color: variables.$grey-1;
 }
+
+.text--success {
+  color: variables.$success;
+}
+
+.text--error {
+  color: variables.$error;
+}
+
+.text--white {
+  color: variables.$text--white;
+}
