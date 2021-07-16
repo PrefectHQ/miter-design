@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h3>Links</h3>
+    <h3 id="links">Links</h3>
 
     <div class="my-1 text--grey-4">(hover for active)</div>
 
-    <a>Link</a>
+    <a href="#cards" tabindex="1">Link</a>
     <a class="disabled ml-4">Link</a>
   </div>
 </template>
