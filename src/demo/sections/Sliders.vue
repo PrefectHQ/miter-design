@@ -3,7 +3,7 @@
     <h3>Slider</h3>
     <div v-for="state in states" :key="state" class="my-2">
       <span class="font-weight-light text-capitalize">{{ state }}:</span>
-      <Slider />
+      <Slider @sliderChange="handleSlide" />
     </div>
   </div>
 </template>
@@ -19,9 +19,9 @@ export default class Sliders extends Vue {
     return
   }
 
-  handleSlide(): void {
+  handleSlide(val: number): void {
     // eslint-disable-next-line no-console
-    console.log('slider!')
+    console.log('slider!', val)
   }
 }
 </script>
