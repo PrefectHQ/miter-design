@@ -12,8 +12,9 @@
     :disabled="disabled" 
     :min="minVal" 
     :max="maxVal" 
+    :step="stepVal"
     v-model="val" 
-    class="slider cursor-pointer"
+    class="slider"
     :class="classList"
     @input="$emit('sliderChange', val)" />
 </template>
@@ -36,6 +37,10 @@ export default defineComponent ({
       maxVal: {
           type: Number,
           default: 50
+       },
+       stepVal: {
+           type: Number,
+           default: 1
        },
        valProp: {
            type: Number,
@@ -63,6 +68,7 @@ mounted(): void {
 },
 methods: {
   handleMouseEnter(): void {
+    this.active=true
     if (this.disabled) return
   },
 
@@ -82,7 +88,7 @@ methods: {
   },
 
   handleFocus(): void {
-      this.active=true
+    this.active=true
     if (this.disabled) return
   },
 

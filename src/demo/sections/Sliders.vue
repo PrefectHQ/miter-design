@@ -3,7 +3,7 @@
     <h3>Slider</h3>
     <div v-for="state in states" :key="state" class="my-2">
       <span class="font-weight-light text-capitalize mr-2">{{ state }}:</span>
-      <Slider @sliderChange="handleSlide" :min-val=minVal :max-val=maxVal :valProp=val :disabled="state == 'disabled'" />
+      <Slider @sliderChange="handleSlide" :min-val=minVal :max-val=maxVal :step-val="stepVal" :valProp=val :disabled="state == 'disabled'" />
     </div>
   </div>
 </template>
@@ -15,6 +15,7 @@ import { Vue, Options } from 'vue-class-component'
 export default class Sliders extends Vue {
   states = ['default', 'disabled', 'active']
   val=2 as number
+  stepVal=1 as number
   minVal= 0 as number
   maxVal=10 as number
   mounted(): void {
