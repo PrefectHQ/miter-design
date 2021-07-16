@@ -3,14 +3,8 @@
 </template>
 
 <script lang="ts">
-// import { Vue, Options, prop } from 'vue-class-component'
+
 import { defineComponent } from 'vue'
-
-
-// class Props {
-//   color = prop<string>({ default: 'secondary' })
-//   disabled = prop<boolean>({ default: false })
-// }
 
 export default defineComponent ({
   name: 'Slider',  
@@ -45,20 +39,7 @@ computed: {
 mounted(): void {
     return
 },
-
-  /*
-  
-    Start input methods
-  
-  */
-
-
 methods: {
-  handleChange(): void {
-    console.log('val', this.val)
-    this.$emit('sliderChange', this.val)
-  },
-
   handleMouseEnter(): void {
     console.log('enter')
     if (this.disabled) return
@@ -94,11 +75,6 @@ methods: {
     if (this.disabled) return
     this.active = true
   }
-  /*
-  
-    End input methods
-  
-  */
 }
 })
 </script>
