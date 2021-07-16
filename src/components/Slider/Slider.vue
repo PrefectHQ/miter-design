@@ -13,6 +13,8 @@
     :min="minVal" 
     :max="maxVal" 
     v-model="val" 
+    class="slider cursor-pointer"
+    :class="classList"
     @input="$emit('sliderChange', val)" />
 </template>
 
@@ -23,10 +25,6 @@ import { defineComponent } from 'vue'
 export default defineComponent ({
   name: 'Slider',  
   props: {
-      color: {
-          type: String,
-          default: 'secondary'
-      },
       disabled: {
           type: Boolean,
           default: false
@@ -55,12 +53,9 @@ export default defineComponent ({
       this.val = this.valProp
   },
 computed: {
-    classList(): String[] {
-    return [
-      ...(this.disabled ? ['disabled'] : []),
-      ...(this.active ? ['active'] : []),
-      this.color
-    ]
+    classList(): any {
+     return this.disabled ?  ['disabled'] : 
+     this.active ? ['active'] : ['default'] 
   }
 },
 mounted(): void {
@@ -78,6 +73,7 @@ methods: {
   handleMouseDown(): void {
     if (this.disabled) return
     this.active = true
+    console.log('classList', this.classList)
   },
 
   handleMouseUp(): void {
@@ -86,6 +82,7 @@ methods: {
   },
 
   handleFocus(): void {
+      this.active=true
     if (this.disabled) return
   },
 

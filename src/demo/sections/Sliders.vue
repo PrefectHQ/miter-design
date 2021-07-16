@@ -14,16 +14,16 @@ import { Vue, Options } from 'vue-class-component'
 @Options({})
 export default class Sliders extends Vue {
   states = ['default', 'disabled', 'active']
-  val=2
-  minVal= 0
-  maxVal=10
+  val=2 as number
+  minVal= 0 as number
+  maxVal=10 as number
   mounted(): void {
     return
   }
 
-  handleSlide(val: number): void {
+  handleSlide(val: string): void {
     // eslint-disable-next-line no-console
-    this.val = val
+    this.val = parseInt(val)
     console.log('slider!', this.val)
   }
 }
