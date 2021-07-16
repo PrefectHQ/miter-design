@@ -1,6 +1,6 @@
 <template>
   <label class="checkbox ml-2" :class="classList" :disabled="disabled">
-    <input type="checkbox" :disabled="disabled" />
+    <input type="checkbox" :disabled="disabled" v-model="checked" />
     <span class="box"><i class="material-icons">done</i></span>
     <span data-test="default"><slot /></span>
   </label>
@@ -16,6 +16,7 @@ class Props {
 
 @Options({})
 export default class Checkbox extends Vue.with(Props) {
+  checked: boolean = false
   classList = computed(() => {
     return [...(this.disabled ? ['disabled'] : [])]
   })
