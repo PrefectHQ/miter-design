@@ -1,5 +1,5 @@
 <template>
-  <input type="range" :min="minVal" :max="maxVal" v-model="val" @input="$emit('sliderChange', val)" />
+  <input type="range" :disabled="disabled" :min="minVal" :max="maxVal" v-model="val" @input="$emit('sliderChange', val)" />
 </template>
 
 <script lang="ts">
@@ -16,16 +16,29 @@ export default defineComponent ({
       disabled: {
           type: Boolean,
           default: false
-      }
+      },
+      minVal: {
+          type: Number,
+          default: 0
+      },
+      maxVal: {
+          type: Number,
+          default: 50
+       },
+       valProp: {
+           type: Number,
+           default: 25
+       } 
   },  
   emits: ['sliderChange'],
   data() {
       return {
         active: false as boolean,
-        minVal: 0 as number,
-        maxVal: 50 as number,
-        val:10 as number
+        val: 0 as number,
       }
+  },
+  created() {
+      this.val = this.valProp
   },
 computed: {
     classList(): String[] {

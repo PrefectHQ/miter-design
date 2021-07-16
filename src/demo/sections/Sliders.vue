@@ -3,7 +3,7 @@
     <h3>Slider</h3>
     <div v-for="state in states" :key="state" class="my-2">
       <span class="font-weight-light text-capitalize">{{ state }}:</span>
-      <Slider @sliderChange="handleSlide" />
+      <Slider @sliderChange="handleSlide" :min-val=minVal :max-val=maxVal :valProp=val :disabled="state == 'disabled'" />
     </div>
   </div>
 </template>
@@ -14,14 +14,17 @@ import { Vue, Options } from 'vue-class-component'
 @Options({})
 export default class Sliders extends Vue {
   states = ['default', 'disabled', 'active']
-
+  val=2
+  minVal= 0
+  maxVal=10
   mounted(): void {
     return
   }
 
   handleSlide(val: number): void {
     // eslint-disable-next-line no-console
-    console.log('slider!', val)
+    this.val = val
+    console.log('slider!', this.val)
   }
 }
 </script>
