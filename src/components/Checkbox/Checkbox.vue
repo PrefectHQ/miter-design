@@ -1,13 +1,8 @@
 <template>
-  <label
-    data-test="default"
-    class="checkbox ml-2"
-    :class="classList"
-    :disabled="disabled"
-  >
+  <label class="checkbox ml-2" :class="classList" :disabled="disabled">
     <input type="checkbox" :disabled="disabled" />
     <span class="box"><i class="material-icons">done</i></span>
-    <slot />
+    <span data-test="default"><slot /></span>
   </label>
 </template>
 
