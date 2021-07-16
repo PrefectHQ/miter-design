@@ -9,7 +9,7 @@ test('displays text in the default slot', () => {
     }
   })
 
-  const card = wrapper.get('main')
+  const card = wrapper.get('article')
   expect(card.text()).toBe(text)
 })
 
