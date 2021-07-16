@@ -1,6 +1,6 @@
 <template>
   <label
-    data-text="default"
+    data-test="default"
     class="checkbox ml-2"
     :class="classList"
     :disabled="disabled"
