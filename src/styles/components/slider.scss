@@ -37,7 +37,7 @@
 
 
   &.disabled {
-    cursor: not-allowed;
+    
     background-color: variables.$grey-7 !important;
 
     &::-webkit-slider-thumb {
@@ -45,7 +45,10 @@
         height: 14px;
         width: 14px;
         border-radius: 50%;
-        background: variables.$grey-7 !important;
+        
+        border: solid 2px;
+  border-color: variables.$grey-7 !important;
+  cursor: not-allowed;
    
     }
     
