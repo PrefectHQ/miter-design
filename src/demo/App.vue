@@ -1,8 +1,9 @@
 <template>
-  <div v-cloak>
-    <Cards class="ma-2" />
-    <Buttons class="ma-2 mt-10" />
-    <Sliders class="ma-2 mt-10" />
+  <div class="pt-5 px-10 pb-10" v-cloak>
+    <Cards />
+    <Buttons class="mt-10" />
+    <Links class="mt-10" />
+     <Sliders class="ma-2 mt-10" />
   </div>
 </template>
 
@@ -11,12 +12,14 @@ import { Options, Vue } from 'vue-class-component'
 import Buttons from './sections/Buttons.vue'
 import Cards from './sections/Cards.vue'
 import Sliders from './sections/Sliders.vue'
+import Links from './sections/Links.vue'
 
 @Options({
   components: {
     Buttons,
     Cards,
-    Sliders
+    Sliders,
+    Links
   }
 })
 export default class App extends Vue {}

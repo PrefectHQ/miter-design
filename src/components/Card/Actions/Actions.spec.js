@@ -1,14 +1,14 @@
 import { mount } from '@vue/test-utils'
-import Header from './Header.vue'
+import Actions from './Actions.vue'
 
 test('displays text in the default slot', () => {
   const text = 'Hello!'
-  const wrapper = mount(Header, {
+  const wrapper = mount(Actions, {
     slots: {
       default: text
     }
   })
 
-  const card = wrapper.get('.card-header')
+  const card = wrapper.get('.card-actions')
   expect(card.text()).toBe(text)
 })

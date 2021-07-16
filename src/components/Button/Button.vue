@@ -13,7 +13,7 @@
     @blur="handleBlur"
   >
     <div>
-      <span>
+      <span data-test="default">
         <slot />
       </span>
     </div>

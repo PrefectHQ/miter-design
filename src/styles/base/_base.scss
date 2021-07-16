@@ -1,3 +1,5 @@
+@use '../abstracts/variables';
+
 html {
   box-sizing: border-box;
 }
@@ -51,7 +53,33 @@ $text-alignments: 'left', 'center', 'right', 'end', 'justify', 'start',
   flex-direction: column !important;
 }
 
+.align-center {
+  align-items: center;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-space-around {
+  justify-content: space-around;
+}
+
 a {
+  color: inherit !important;
   cursor: pointer;
   text-decoration: underline;
+
+  &:hover {
+    color: variables.$primary-100 !important;
+  }
+
+  &.disabled {
+    color: variables.$grey-4 !important;
+    cursor: not-allowed;
+  }
 }
