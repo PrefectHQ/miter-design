@@ -16,6 +16,7 @@
     v-model="val" 
     class="slider"
     :class="classList"
+    :style="sliderVal"
     @input="$emit('sliderChange', val)" />
 </template>
 
@@ -52,6 +53,7 @@ export default defineComponent ({
       return {
         active: false as boolean,
         val: 0 as number,
+       
       }
   },
   created() {
@@ -62,9 +64,12 @@ computed: {
      return this.disabled ?  ['disabled'] : this.active ? ['active'] :
      [] 
   },
-  sliderVal(): number {
-      return 200
-  }
+  sliderVal(): object {
+      const val = this.val/(this.maxVal - this.minVal) * 100
+      return {
+          '--slider-val': `${val}%`
+      }
+  },
 },
 mounted(): void {
     return
@@ -111,6 +116,7 @@ methods: {
 })
 </script>
 
-<style lang="scss" scoped>
+
+<style lang="scss" scoped >
 @use '../../styles/components/slider';
 </style>

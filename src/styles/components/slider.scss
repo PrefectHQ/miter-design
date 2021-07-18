@@ -24,9 +24,8 @@
   width: 320px;
   height: 4px; 
   outline: none; 
-  background: linear-gradient(to right, variables.$primary 250px, variables.$grey-7 0);
-  -webkit-appearance: none;
-
+-webkit-appearance: none;
+  background: linear-gradient(to right, variables.$primary var(--slider-val), variables.$grey-7 0);
 
 
 &::-webkit-slider-thumb {
@@ -45,7 +44,7 @@
   &.disabled {
     background: variables.$grey-7;
 
-    &::-webkit-slider-thumb {
+&::-webkit-slider-thumb {
         -webkit-appearance: none;
         @include slider-thumb($disabled: true)
     }
