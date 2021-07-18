@@ -59,8 +59,11 @@ export default defineComponent ({
   },
 computed: {
     classList(): any {
-     return this.disabled ?  ['disabled'] : 
-     this.active ? ['active'] : ['default'] 
+     return this.disabled ?  ['disabled'] : this.active ? ['active'] :
+     [] 
+  },
+  sliderVal(): number {
+      return 200
   }
 },
 mounted(): void {

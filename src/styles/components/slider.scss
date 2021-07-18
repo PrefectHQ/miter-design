@@ -1,70 +1,55 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
+@mixin slider-thumb($disabled) {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    border: solid 2px;
+    background-color: variables.$background;
+    @if($disabled) {
+        border-color: variables.$grey-7;
+        cursor: not-allowed;
+    }
+    @else {
+        border-color: variables.$primary;
+        cursor: pointer;
+    }
+    
+}
+
+
 .slider {
   @include mixins.input-transition;
   width: 320px;
   height: 4px; 
   outline: none; 
-  background-color: variables.$primary !important;
+  background: linear-gradient(to right, variables.$primary 250px, variables.$grey-7 0);
   -webkit-appearance: none;
-  
+
+
+
 &::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 14px;
-  width: 14px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: solid 2px;
-  border-color: variables.$primary !important;
-  
-  
-  
+  @include slider-thumb($disabled: false)
 }
 
-  > div {
-    @include mixins.input-transition;
-    border-radius: 4px;
-    padding-left: 32px;
-    padding-right: 32px;
-    position: relative;
-    color: variables.$warning !important;
-
-    > span {
-      margin-right: 4px;
-    }
+&::-moz-range-thumb {
+    @include slider-thumb($disabled: false)
   }
 
+&::-ms-thumb {
+    @include slider-thumb($disabled: false)
+}
 
   &.disabled {
-    
-    background-color: variables.$grey-7 !important;
+    background: variables.$grey-7;
 
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
-        height: 14px;
-        width: 14px;
-        border-radius: 50%;
-        
-        border: solid 2px;
-  border-color: variables.$grey-7 !important;
-  cursor: not-allowed;
-   
+        @include slider-thumb($disabled: true)
     }
-    
-  }
-
-  
-
-
-  
-
-    
-
-    
-
-    
-  
+  }  
 }
 
 

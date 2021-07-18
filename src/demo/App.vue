@@ -3,7 +3,7 @@
     <Cards />
     <Buttons class="mt-10" />
     <Links class="mt-10" />
-     <Sliders class="ma-2 mt-10" />
+    <Sliders class="mt-10" />
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   <div>
     <h3>Slider</h3>
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize mr-2">{{ state }}:</span>
+      <span class="font-weight-light text-capitalize pr-2">{{ state }}:</span>
       <Slider @sliderChange="handleSlide" :min-val=minVal :max-val=maxVal :step-val="stepVal" :valProp=val :disabled="state == 'disabled'" />
     </div>
   </div>
