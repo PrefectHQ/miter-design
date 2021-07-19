@@ -1,3 +1,12 @@
+---
+name: "Component \U0001F680"
+about: Create a PR for a new component.
+title: 'COMPONENT: '
+labels: component
+assignees: ''
+
+---
+
 ## PR Checklist
 (_all items must be checked off for a PR to be merged_)
 
