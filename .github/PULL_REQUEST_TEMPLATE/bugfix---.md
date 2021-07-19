@@ -17,6 +17,14 @@ This PR:
 - [ ] strictly follows the design spec given 
 - [ ] addresses the linked bug report
 
+This PR has been tested in the following browsers (the latest version of each is fine):
+- [ ] Chrome
+- [ ] Firefox
+- [ ] Edge
+- [ ] Safari
+
+<!-- Any browser-specific implementations or considerations should be documented in the code (where applicable) and noted in the PR description -->
+
 ## PR description
 
 <!--- 
