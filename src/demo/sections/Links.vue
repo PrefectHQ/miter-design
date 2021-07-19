@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 id="links">Links</h3>
+    <h3>Links</h3>
 
     <div class="my-1 text--grey-4">(hover for active)</div>
 
