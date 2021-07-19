@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 id="cards">Cards</h3>
+    <h3>Cards</h3>
     <div class="d-flex">
       <Card
         v-for="(card, index) in cards"
