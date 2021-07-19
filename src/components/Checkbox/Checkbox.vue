@@ -1,10 +1,20 @@
 <template>
-  <label class="checkbox ml-2" :class="classList" :disabled="disabled">
+  <label
+    class="checkbox ml-2"
+    :class="classList"
+    :disabled="disabled"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
+    @mousedown="handleMouseDown"
+    @mouseup="handleMouseUp"
+  >
     <input
       type="checkbox"
       :disabled="disabled"
       :checked="checked"
       @input="(event) => $emit('update:checked', event.target.checked)"
+      @focus="handleFocus"
+      @blur="handleBlur"
     />
     <span class="box"><i class="material-icons">done</i></span>
     <span data-test="default"><slot /></span>
@@ -22,12 +32,53 @@ class Props {
 
 @Options({})
 export default class Checkbox extends Vue.with(Props) {
+  active: boolean = false
+  hovered: boolean = false
   classList = computed(() => {
-    return [...(this.disabled ? ['disabled'] : [])]
+    return [
+      ...(this.disabled ? ['disabled'] : []),
+      ...(this.hovered ? ['hovered'] : []),
+      ...(this.active ? ['hovered'] : [])
+    ]
   })
 
   mounted(): void {
     return
+  }
+
+  /*
+  
+    Start input methods
+  
+  */
+  handleMouseEnter(): void {
+    if (this.disabled) return
+    this.hovered = true
+  }
+
+  handleMouseLeave(): void {
+    this.hovered = false
+    this.active = false
+  }
+
+  handleMouseDown(): void {
+    if (this.disabled) return
+    this.active = true
+  }
+
+  handleMouseUp(): void {
+    if (this.disabled) return
+    this.active = false
+  }
+
+  handleFocus(): void {
+    if (this.disabled) return
+    this.hovered = true
+  }
+
+  handleBlur(): void {
+    this.hovered = false
+    this.active = false
   }
 }
 </script>

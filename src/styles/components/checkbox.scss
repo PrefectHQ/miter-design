@@ -1,7 +1,10 @@
 @use '../abstracts/variables';
+@use '../abstracts/mixins';
 
 .checkbox {
+  @include mixins.input-transition;
   align-items: center;
+  border: 1px;
   display: inline-flex;
   font-size: 15px;
   line-height: 20px;
@@ -11,6 +14,7 @@
     position: absolute;
     height: 0;
     width: 0;
+    margin-left: 6px;
   }
   .box {
     background-color: variables.$white;
@@ -41,6 +45,15 @@
     color: variables.$black-40 !important;
     .box {
       background-color: variables.$grey-4;
+    }
+  }
+
+  &:focus,
+  &.hovered,
+  &.active {
+    cursor: pointer;
+    .box {
+      background-color: variables.$grey-5;
     }
   }
 }
