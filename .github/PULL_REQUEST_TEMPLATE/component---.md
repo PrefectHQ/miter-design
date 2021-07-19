@@ -16,6 +16,14 @@ This PR:
 - [ ] adheres to [a11y guidelines](https://www.a11yproject.com/checklist/) where applicable
 - [ ] strictly follows the design spec given 
 
+This PR has been tested in the following browsers (the latest version of each is fine):
+- [ ] Chrome
+- [ ] Firefox
+- [ ] Edge
+- [ ] Safari
+
+<!-- Any browser-specific implementations or considerations should be documented in the code (where applicable) and noted in the PR description -->
+
 ## PR description
 
 <!--- 
