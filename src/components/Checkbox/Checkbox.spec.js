@@ -51,3 +51,16 @@ describe('disabled state', () => {
     expect(checkbox.attributes('disabled')).toContain('false')
   })
 })
+
+test('emit event when checked', () => {
+  const wrapper = mount(Checkbox, {
+    props: {
+      disabled: false,
+      checked: false
+    }
+  })
+
+  wrapper.find('input[type="checkbox"]').trigger('input')
+
+  expect(wrapper.emitted()).toHaveProperty('update:checked')
+})

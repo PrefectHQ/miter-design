@@ -5,7 +5,10 @@
     <h5 class="mt-5">Checkbox</h5>
     <div v-for="state in states" :key="state" class="my-2">
       <span class="font-weight-light text-capitalize">{{ state }}:</span>
-      <Checkbox :disabled="state == 'disabled'">
+      <Checkbox
+        :disabled="state == 'disabled'"
+        v-model:checked="checked[state]"
+      >
         <span>Label</span>
       </Checkbox>
     </div>
@@ -18,6 +21,12 @@ import { Vue, Options } from 'vue-class-component'
 @Options({})
 export default class Checkboxes extends Vue {
   states = ['enabled', 'disabled']
+
+  data() {
+    return {
+      checked: { enabled: false, disabled: false }
+    }
+  }
 
   mounted(): void {
     return
