@@ -15,6 +15,12 @@ This PR:
 - [ ] adds new tests or updates existing tests (or hasn't, for reasons explained below)
 - [ ] adheres to [a11y guidelines](https://www.a11yproject.com/checklist/) where applicable
 
+This PR has been tested in the following browsers (the latest version of each is fine):
+- [ ] Chrome
+- [ ] Firefox
+- [ ] Edge
+- [ ] Safari
+
 ## PR description
 
 <!--- 
