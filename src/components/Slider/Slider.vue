@@ -13,11 +13,11 @@
     :min="minVal" 
     :max="maxVal" 
     :step="stepVal"
-    v-model="val" 
+    :value="modelValue"
     class="slider"
     :class="classList"
     :style="sliderVal"
-    @input="$emit('sliderChange', val)" />
+    @input="$emit('update:modelValue', $event.target.value)" />
 </template>
 
 <script lang="ts">
@@ -43,21 +43,17 @@ export default defineComponent ({
            type: Number,
            default: 1
        },
-       valProp: {
-           type: Number,
-           default: 25
+       modelValue: {
+           type: String,
+           required: true
        } 
   },  
-  emits: ['sliderChange'],
+  emits: ['update:modelValue'],
   data() {
       return {
         active: false as boolean,
-        val: 0 as number,
        
       }
-  },
-  created() {
-      this.val = this.valProp
   },
 computed: {
     classList(): any {
@@ -65,7 +61,7 @@ computed: {
      [] 
   },
   sliderVal(): object {
-      const val = this.val/(this.maxVal - this.minVal) * 100
+      const val = this.modelValue/(this.maxVal - this.minVal) * 100
       return {
           '--slider-val': `${val}%`
       }
@@ -76,28 +72,27 @@ mounted(): void {
 },
 methods: {
   handleMouseEnter(): void {
-    this.active=true
     if (this.disabled) return
+    this.active=true
   },
 
   handleMouseLeave(): void {
+    if (this.disabled) return
     this.active = false
   },
 
   handleMouseDown(): void {
     if (this.disabled) return
     this.active = true
-    console.log('classList', this.classList)
   },
 
   handleMouseUp(): void {
-    if (this.disabled) return
     this.active = false
   },
 
   handleFocus(): void {
-    this.active=true
     if (this.disabled) return
+    this.active=true
   },
 
   handleBlur(): void {

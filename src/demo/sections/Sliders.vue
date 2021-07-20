@@ -2,31 +2,29 @@
   <div>
     <h3>Slider</h3>
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize pr-2">{{ state }}:</span>
-      <Slider @sliderChange="handleSlide" :min-val=minVal :max-val=maxVal :step-val="stepVal" :valProp=val :disabled="state == 'disabled'" />
+      <span v-if="logVal" class="font-weight-light text-capitalize pr-2">{{ state.state }}:</span>
+      <Slider v-model=state.val :min-val=minVal :max-val=maxVal :step-val="stepVal" :disabled="state.state == 'disabled'" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component'
+import { Vue, Options,  } from 'vue-class-component'
+import { computed } from 'vue'
 
 @Options({})
 export default class Sliders extends Vue {
-  states = ['default', 'disabled', 'active']
-  val=2 as number
+  states = [{state: 'default', val: '3'} , {state: 'disabled', val: '5'}]
   stepVal=1 as number
   minVal= 0 as number
   maxVal=10 as number
   mounted(): void {
     return
   }
-
-  handleSlide(val: string): void {
-    // eslint-disable-next-line no-console
-    this.val = parseInt(val)
-    console.log('slider!', this.val)
-  }
+  logVal = computed(() => {
+    console.log('val', this.states.map(state => state.val))
+    return true
+})
 }
 </script>
 
