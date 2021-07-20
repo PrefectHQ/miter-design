@@ -11,9 +11,9 @@
   background-color: transparent;
   border: none;
   border-radius: 5px;
-  font-size: 14px;
-  height: 30px;
-  line-height: 30px;
+  font-size: 11px;
+  height: 26px;
+  line-height: 26px;
   padding: 0;
   user-select: none;
   display: inline-block;
@@ -25,8 +25,8 @@
   > div {
     @include mixins.input-transition;
     border-radius: 4px;
-    padding-left: 22px;
-    padding-right: 22px;
+    padding-left: 23px;
+    padding-right: 23px;
   }
 
   &:not(.selected) {
