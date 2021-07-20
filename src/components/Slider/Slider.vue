@@ -1,5 +1,6 @@
 <template>
   <input 
+  data-test="default"
   type="range" 
   @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -17,6 +18,7 @@
     class="slider"
     :class="classList"
     :style="sliderVal"
+    role="slider"
     @input="$emit('update:modelValue', $event.target.value)" />
 </template>
 
