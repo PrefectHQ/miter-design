@@ -2,8 +2,8 @@
   <div>
     <h3>Tabs</h3>
     <div class="my-1 text--grey-4">
-      <label for="dense">Dense</label>
-      <input v-model="dense" name="dense" type="checkbox" />
+      <label for="dense"> Dense </label>
+      <input v-model="dense" id="dense" name="dense" type="checkbox" />
     </div>
 
     <div class="container">
