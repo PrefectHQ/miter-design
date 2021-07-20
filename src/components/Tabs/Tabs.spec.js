@@ -67,10 +67,10 @@ describe('model', () => {
     const container = wrapper.get('.tabs-container')
     const tabs = container.findAll('.tab')
 
-    tabs[0].trigger('click')
-    tabs[1].trigger('click')
-    tabs[2].trigger('click')
-    tabs[0].trigger('click')
+    tabs[0].trigger('mouseup')
+    tabs[1].trigger('mouseup')
+    tabs[2].trigger('mouseup')
+    tabs[0].trigger('mouseup')
 
     const emit = wrapper.emitted('update:modelValue')
 
