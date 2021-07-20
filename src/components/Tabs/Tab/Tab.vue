@@ -1,22 +1,33 @@
 <template>
-  <button class="tab">
+  <button class="tab" @click="handleClick">
     <slot> Tab </slot>
   </button>
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component'
+import { defineComponent } from 'vue'
 
-class Props {}
-
-@Options({})
-export default class Tab extends Vue.with(Props) {
-  mounted(): void {
-    return
+export default defineComponent({
+  name: 'Tab',
+  emits: {
+    click(e: Event, ...args: any[]) {
+      return { e, ...args }
+    }
+  },
+  props: {
+    href: {
+      type: String
+    }
+  },
+  methods: {
+    handleClick(e: Event): Event {
+      this.$emit('click', e, this.href)
+      return e
+    }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
-@use '../../styles/components/tab';
+@use '../../../styles/components/tab';
 </style>

@@ -46,3 +46,35 @@ test('displays tabs passed in the default slot', async () => {
   expect(tabs[1].text()).toBe('Cilantro')
   expect(tabs[2].text()).toBe('Chives')
 })
+
+test('updates the model when a keyed child is activated', () => {
+  const wrapper = factoryMount(
+    {},
+    {
+      // Using functions for the default slot in the renderer avoids Vue warns
+      default: () => [
+        h(Tab, { href: 'basil' }, () => 'Red Basil'),
+        h(Tab, { href: 'cilantro' }, () => 'Cilantro'),
+        h(Tab, { href: 'chives' }, () => 'Chives')
+      ]
+    }
+  )
+
+  const container = wrapper.get('.tabs-container')
+  const tabs = container.findAll('.tab')
+
+  tabs[0].trigger('click')
+  tabs[1].trigger('click')
+  tabs[2].trigger('click')
+  tabs[0].trigger('click')
+
+  const firstClick = wrapper.emitted('click')
+  const secondClick = wrapper.emitted('click')
+  const thirdClick = wrapper.emitted('click')
+  const fourthClick = wrapper.emitted('click')
+
+  expect(firstClick).toEqual(tabs[0].key)
+  expect(secondClick).toEqual(tabs[1].key)
+  expect(thirdClick).toEqual(tabs[2].key)
+  expect(fourthClick).toEqual(tabs[0].key)
+})
