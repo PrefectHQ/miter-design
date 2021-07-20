@@ -1,7 +1,7 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.chip {
+.tag {
   @include mixins.input-transition;
 
   &:not(.icon) {

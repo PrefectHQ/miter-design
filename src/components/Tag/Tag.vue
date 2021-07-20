@@ -1,5 +1,5 @@
 <template>
-  <div class="chip" :class="classList">
+  <div class="tag" :class="classList">
     <div data-test="default">
       <slot />
     </div>
@@ -11,7 +11,7 @@ import { Vue, Options, prop } from 'vue-class-component'
 import { computed } from 'vue'
 
 class Props {
-  color = prop<string>({ default: 'primary' })
+  color = prop<string>({ default: 'secondary' })
   selected = prop<boolean>({ default: false })
   disabled = prop<boolean>({ default: false })
   icon = prop<boolean>({ default: false })
