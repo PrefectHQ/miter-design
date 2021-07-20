@@ -1,7 +1,7 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-@mixin slider-thumb($disabled) {
+@mixin slider-thumb($disabled, $active) {
     border-radius: 50%;
     border: solid 2px;
     background-color: variables.$background;
@@ -11,6 +11,10 @@
     @else {
         border-color: variables.$primary;
     }
+    @if($active) {
+      border: 3px solid variables.$grey-4;
+      box-shadow: inset 0 0 0 2px variables.$primary;
+  }
     
 }
 
@@ -29,19 +33,19 @@
   -webkit-appearance: none;
     height: 14px;
     width: 14px;
-  @include slider-thumb($disabled: false)
+  @include slider-thumb($disabled: false, $active: false)
 }
 
 &::-moz-range-thumb {
     height: 10px;
     width: 10px;
-    @include slider-thumb($disabled: false)
+    @include slider-thumb($disabled: false, $active: false)
   }
 
 &::-ms-thumb {
     height: 10px;
     width: 10px;
-    @include slider-thumb($disabled: false)
+    @include slider-thumb($disabled: false, $active: false)
 }
 
   &.disabled {
@@ -50,40 +54,39 @@
 
 &::-webkit-slider-thumb {
         -webkit-appearance: none;
-        @include slider-thumb($disabled: true)
+        @include slider-thumb($disabled: true, $active: false)
     }
 
     &::-moz-range-thumb {
-        @include slider-thumb($disabled: true)
+        @include slider-thumb($disabled: true, $active: false)
       }
     
     &::-ms-thumb {
-        @include slider-thumb($disabled: true)
+        @include slider-thumb($disabled: true, $active: false)
     }
   }  
-  &.active {
+&.active {
 
 &::-webkit-slider-thumb {
         -webkit-appearance: none;
-        // @include slider-thumb($disabled: true);
-        height: 18px;
-        width: 18px;
-        border: 2px solid variables.$grey-4;
-        box-shadow: inset 0 0 0 2px variables.$primary;
-        
-    }
+        @include slider-thumb($disabled: false, $active: true);
+        height: 20px;
+        width: 20px;
+}
 
     &::-moz-range-thumb {
         height: 14px;
         width: 14px;
-        // @include slider-thumb($disabled: true)
-        border: 2px solid variables.$grey-4;
+        @include slider-thumb($disabled: false, $active: true);
+        border: 3px solid variables.$grey-4;
         box-shadow: inset 0 0 0 2px variables.$primary;
       }
     
     &::-ms-thumb {
-        // @include slider-thumb($disabled: true)
-        border: 2px solid variables.$grey-4;
+      height: 14px;
+        width: 14px;
+        @include slider-thumb($disabled: false, $active: true);
+        border: 3px solid variables.$grey-4;
         box-shadow: inset 0 0 0 2px variables.$primary;
     }
   }  
