@@ -34,7 +34,7 @@
         :selected="state == 'selected'"
         :icon="true"
       >
-        <span class="container"> <i class="material-icons">favorite</i></span>
+        <i class="material-icons">sentiment_very_satisfied</i>
       </Tag>
     </div>
   </div>
@@ -58,6 +58,6 @@ export default class Tag extends Vue {
 @use '../../styles/components/tag';
 
 .container > i {
-  font-size: 14px;
+  font-size: 11px;
 }
 </style>

@@ -51,22 +51,12 @@
 
   &.icon {
     border-radius: 50%;
-    height: 20px;
-    line-height: 20px;
-    overflow: hidden;
-    width: 20px;
 
     > div {
       border-radius: 50%;
       height: calc(100% - 0px);
       width: calc(100% - 0px);
       padding: 0;
-    }
-
-    i {
-      // border: solid;
-      margin-left: 2px;
-      margin-top: 2px;
     }
   }
 
