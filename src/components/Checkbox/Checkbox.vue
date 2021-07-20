@@ -12,7 +12,8 @@
       type="checkbox"
       :disabled="disabled"
       :checked="checked"
-      @input="(event) => $emit('update:checked', event.target.checked)"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.checked)"
       @focus="handleFocus"
       @blur="handleBlur"
     />
@@ -30,7 +31,7 @@ class Props {
   checked = prop<boolean>({ default: false })
 }
 
-@Options({})
+@Options({ emits: ['checked'] })
 export default class Checkbox extends Vue.with(Props) {
   active: boolean = false
   hovered: boolean = false
