@@ -9,30 +9,28 @@ import {
 } from 'vue'
 import Tab from './Tab/Tab.vue'
 
-interface Data {
-  tab: string | undefined
-}
-
-const data: Data = { tab: undefined }
-
 export default defineComponent({
   name: 'Tabs',
   components: { Tab },
+  props: ['modelValue'],
   emits: {
-    'update:tab'(e: string | undefined) {
+    'update:modelValue'(e: string | number | undefined) {
       return !!e
-    },
-    click(e: Event) {
-      return { e }
     }
   },
-  data() {
-    return data
+  computed: {
+    value: {
+      get(): string | number | undefined {
+        return this.modelValue
+      },
+      set(value: string | number | undefined) {
+        this.$emit('update:modelValue', value)
+      }
+    }
   },
   methods: {
     handleTabClick(e: Event, ...args: any[]): Event {
-      this.tab = args[0]
-      this.$emit('update:tab', this.tab)
+      this.value = args[0]
       return e
     }
   },
@@ -44,23 +42,25 @@ export default defineComponent({
       { [key: string]: any }
     >[][]
 
-    const onClick = ($e: Event, ...args: any): void => {
+    const onClick = ($e: Event, ...args: any): Event =>
       this.handleTabClick($e, ...args)
-    }
 
     if (slottedItems) {
       children = [
-        slottedItems?.map((ti) => {
-          return h(
-            ti,
-            mergeProps(
-              {
-                onClick: onClick
-              },
-              { ...ti.props }
+        slottedItems?.map(
+          (ti: RendererNode | RendererElement | { [key: string]: any }) => {
+            return h(
+              ti,
+              mergeProps(
+                {
+                  onClick: onClick,
+                  active: this.value == ti.props?.href
+                },
+                { ...ti.props }
+              )
             )
-          )
-        })
+          }
+        )
       ]
     } else {
       children = [
@@ -69,7 +69,8 @@ export default defineComponent({
             Tab,
             mergeProps({
               href: i + 1,
-              onClick: onClick
+              onClick: onClick,
+              active: this.value == i + 1
             }),
             () => `Tab ${i + 1}`
           )

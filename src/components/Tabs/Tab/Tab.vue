@@ -1,5 +1,5 @@
 <template>
-  <button class="tab" @click="handleClick">
+  <button class="tab" :class="classes" @click="handleClick">
     <slot> Tab </slot>
   </button>
 </template>
@@ -15,8 +15,17 @@ export default defineComponent({
     }
   },
   props: {
+    active: {
+      type: Boolean,
+      default: false
+    },
     href: {
       type: [String, Number]
+    }
+  },
+  computed: {
+    classes(): string[] {
+      return [...(this.active ? ['active'] : [])]
     }
   },
   methods: {
