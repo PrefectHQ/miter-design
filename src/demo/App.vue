@@ -3,7 +3,6 @@
     <Cards />
     <Buttons class="mt-10" />
     <Links class="mt-10" />
-    <Tabs class="mt-10" />
   </div>
 </template>
 
@@ -12,14 +11,12 @@ import { Options, Vue } from 'vue-class-component'
 import Buttons from './sections/Buttons.vue'
 import Cards from './sections/Cards.vue'
 import Links from './sections/Links.vue'
-import Tabs from './sections/Tabs.vue'
 
 @Options({
   components: {
     Buttons,
     Cards,
-    Links,
-    Tabs
+    Links
   }
 })
 export default class App extends Vue {}
