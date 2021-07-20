@@ -12,7 +12,9 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <slot> Tab </slot>
+    <div>
+      <slot> Tab </slot>
+    </div>
   </button>
 </template>
 
@@ -84,8 +86,10 @@ export default defineComponent({
       this.focused = false
     },
 
-    handleKeyup(): void {
+    handleKeyup(e: Event): Event {
+      this.$emit('click', e, this.href)
       this.focused = false
+      return e
     },
 
     handleKeydown(): void {

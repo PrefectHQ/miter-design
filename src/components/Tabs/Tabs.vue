@@ -15,7 +15,8 @@ export default defineComponent({
   props: {
     modelValue: [String, Number],
     color: { type: String, default: () => 'primary' },
-    outlined: Boolean
+    outlined: Boolean,
+    dense: Boolean
   },
   emits: {
     'update:modelValue'(e: string | number | undefined) {
@@ -46,19 +47,35 @@ export default defineComponent({
       { [key: string]: any }
     >[][]
 
+    const activeIndex = slottedItems?.findIndex(
+      (ti) => ti.props?.href == this.value
+    )
+
+    const computedProps = [
+      ...(this.color ? [this.color] : []),
+      ...(this.outlined ? ['outlined'] : []),
+      ...(this.dense ? ['dense'] : [])
+    ]
+
     const onClick = ($e: Event, ...args: any): Event =>
       this.handleTabClick($e, ...args)
 
     if (slottedItems) {
       children = [
+        [
+          h('div', {
+            class: ['slider', `tab-${activeIndex}-active`]
+          })
+        ],
         slottedItems?.map(
           (ti: RendererNode | RendererElement | { [key: string]: any }) => {
             return h(
               ti,
               mergeProps(
                 {
-                  onClick: onClick,
-                  active: this.value == ti.props?.href
+                  active: this.value == ti.props?.href,
+                  class: computedProps,
+                  onClick: onClick
                 },
                 { ...ti.props }
               )
@@ -68,6 +85,11 @@ export default defineComponent({
       ]
     } else {
       children = [
+        [
+          h('div', {
+            class: ['slider', `tab-${activeIndex}-active`]
+          })
+        ],
         Array.from({ length: 2 }).map((elem, i) => {
           return h(
             Tab,
@@ -81,11 +103,6 @@ export default defineComponent({
         })
       ]
     }
-
-    const computedProps = [
-      ...(this.color ? [this.color] : []),
-      ...(this.outlined ? ['outlined'] : [])
-    ]
 
     return h('div', { class: ['tabs-container', ...computedProps] }, children)
   }

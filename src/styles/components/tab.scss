@@ -1,0 +1,75 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+button.tab {
+  $width: 247.5px;
+  $miter-width: 16px;
+
+  > div {
+    display: flex;
+    align-content: center;
+  }
+
+  background-color: transparent !important;
+  border: none;
+  border-left: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  letter-spacing: 0px;
+  line-height: 24px;
+  height: 72px;
+  position: relative;
+  transition: all 250ms;
+  text-align: left;
+  padding-left: 32px;
+  width: $width;
+
+  &.dense {
+    height: 56px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.active {
+    color: variables.$white;
+  }
+
+  &::after,
+  &::before {
+    content: '';
+    background-color: variables.$white;
+    border-radius: 3px;
+    position: absolute;
+    z-index: -2;
+  }
+
+  &::after {
+    @include mixins.miter(2);
+    content: '';
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  &:not(:first-of-type)::before {
+    bottom: 0;
+    clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    left: calc(-#{$miter-width} + 1px);
+    height: calc(#{$miter-width} + 1px);
+    width: calc(#{$miter-width} + 1px);
+    z-index: -2;
+  }
+
+  &.focused:not(.active),
+  &.hovered:not(.active) {
+    &::after,
+    &::before {
+      background-color: variables.$grey-3 !important;
+    }
+  }
+}

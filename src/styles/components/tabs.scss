@@ -1,0 +1,73 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.tabs-container {
+  $width: 247.5px;
+  $left-margin: -24px;
+  $miter-width: 16px;
+
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+
+  white-space: nowrap;
+
+  &::after {
+    @include mixins.miter(2);
+    background-color: variables.$grey-3;
+    border-radius: 4px;
+    content: '';
+    height: calc(100% + 4px);
+    top: -2px;
+    left: -2px;
+    position: absolute;
+    width: calc(100% + 4px);
+    z-index: -3;
+  }
+
+  .slider {
+    pointer-events: none;
+
+    &::after,
+    &::before {
+      content: '';
+      background-color: variables.$primary-100;
+      position: absolute;
+      z-index: -1;
+    }
+
+    &::after {
+      @include mixins.miter(2);
+      height: 100%;
+      left: 0;
+      top: 0;
+      transition: all 250ms ease-in-out;
+      width: calc(#{$width} - 2px);
+    }
+
+    &::before {
+      bottom: 0;
+      border: none;
+      clip-path: polygon(0 100%, 100% 100%, 100% 0);
+      left: calc(#{$miter-width} - 1px);
+      height: $miter-width;
+      width: 0px;
+      transition: left 250ms ease-in-out;
+      transform-origin: top left;
+    }
+
+    @for $i from 0 through 100 {
+      &.tab-#{$i}-active {
+        &::after {
+          left: calc(#{$i} * #{$width} + 2px);
+          border-radius: 3px 3px 0 #{if($i != 0, 0, 3px)};
+        }
+
+        &::before {
+          left: calc(#{$i} * #{$width} - #{$miter-width} + 3px);
+          width: if($i != 0, $miter-width, 0px) !important;
+        }
+      }
+    }
+  }
+}

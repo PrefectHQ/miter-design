@@ -1,15 +1,21 @@
 <template>
   <div>
     <h3>Tabs</h3>
-    <div class="container">
-      <Tabs v-model="tab" class="mt-5">
-        <Tab href="1">Tab 1</Tab>
-        <Tab href="2">Tab 2</Tab>
-        <Tab href="3">Tab 3</Tab>
-        <Tab href="4">Tab 4</Tab>
-      </Tabs>
+    <div class="my-1 text--grey-4">
+      <label for="dense">Dense</label>
+      <input v-model="dense" name="dense" type="checkbox" />
+    </div>
 
-      <div class="divider mt-2" />
+    <div class="container">
+      <Tabs v-model="tab" class="mt-5" :dense="dense">
+        <Tab href="1">
+          <i class="material-icons mr-1">favorite</i>
+          Tab 1
+        </Tab>
+        <Tab href="2"> <i class="material-icons mr-1">language</i>Tab 2 </Tab>
+        <Tab href="3"> <i class="material-icons mr-1">savings</i>Tab 3 </Tab>
+        <Tab href="4"> <i class="material-icons mr-1">timeline</i>Tab 4 </Tab>
+      </Tabs>
 
       <div class="pr-4 py-2">
         <div v-if="tab == 1">
@@ -102,6 +108,7 @@ import { Vue, Options } from 'vue-class-component'
 @Options({})
 export default class TabSection extends Vue {
   tab = 1
+  dense = false
 
   mounted(): void {
     return
