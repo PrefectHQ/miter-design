@@ -17,7 +17,7 @@
           {{ style }}</span
         >
 
-        <span v-else>{{ style }}</span>
+        <span v-else>hello world</span>
       </Tag>
     </div>
   </div>
