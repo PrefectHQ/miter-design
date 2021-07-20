@@ -2,6 +2,7 @@
   <div class="pt-5 px-10 pb-10" v-cloak>
     <Cards />
     <Buttons class="mt-10" />
+    <Radio class="mt-10" />
     <Links class="mt-10" />
   </div>
 </template>
@@ -10,12 +11,14 @@
 import { Options, Vue } from 'vue-class-component'
 import Buttons from './sections/Buttons.vue'
 import Cards from './sections/Cards.vue'
+import Radio from './sections/Radio.vue'
 import Links from './sections/Links.vue'
 
 @Options({
   components: {
     Buttons,
     Cards,
+    Radio,
     Links
   }
 })

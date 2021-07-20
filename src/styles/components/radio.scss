@@ -1,0 +1,35 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.radio {
+  @include mixins.input-transition;
+  align-items: center;
+  border: 1px;
+  display: inline-flex;
+  font-size: 15px;
+  line-height: 20px;
+  position: absolute;
+
+  > input {
+    height: 28px;
+    width: 28px;
+    margin-right: 12px;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    color: variables.$inactive !important;
+    .box {
+      background-color: variables.$grey-4;
+    }
+  }
+
+  &:focus,
+  &.hovered,
+  &.active {
+    cursor: pointer;
+    .box {
+      background-color: variables.$grey-5;
+    }
+  }
+}
