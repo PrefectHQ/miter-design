@@ -2,4 +2,12 @@ button {
   &.active {
     color: red;
   }
+
+  &.focused {
+    color: green;
+  }
+
+  &.hovered {
+    background-color: antiquewhite;
+  }
 }

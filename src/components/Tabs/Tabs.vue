@@ -12,7 +12,11 @@ import Tab from './Tab/Tab.vue'
 export default defineComponent({
   name: 'Tabs',
   components: { Tab },
-  props: ['modelValue'],
+  props: {
+    modelValue: [String, Number],
+    color: { type: String, default: () => 'primary' },
+    outlined: Boolean
+  },
   emits: {
     'update:modelValue'(e: string | number | undefined) {
       return !!e
@@ -78,7 +82,12 @@ export default defineComponent({
       ]
     }
 
-    return h('div', { class: ['tabs-container'] }, children)
+    const computedProps = [
+      ...(this.color ? [this.color] : []),
+      ...(this.outlined ? ['outlined'] : [])
+    ]
+
+    return h('div', { class: ['tabs-container', ...computedProps] }, children)
   }
 })
 </script>
