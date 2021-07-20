@@ -16,7 +16,7 @@ export default defineComponent({
   },
   props: {
     href: {
-      type: String
+      type: [String, Number]
     }
   },
   methods: {

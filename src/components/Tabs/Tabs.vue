@@ -44,6 +44,10 @@ export default defineComponent({
       { [key: string]: any }
     >[][]
 
+    const onClick = ($e: Event, ...args: any): void => {
+      this.handleTabClick($e, ...args)
+    }
+
     if (slottedItems) {
       children = [
         slottedItems?.map((ti) => {
@@ -51,9 +55,7 @@ export default defineComponent({
             ti,
             mergeProps(
               {
-                onClick: ($e: Event, ...args: any): void => {
-                  this.handleTabClick($e, ...args)
-                }
+                onClick: onClick
               },
               { ...ti.props }
             )
@@ -63,7 +65,14 @@ export default defineComponent({
     } else {
       children = [
         Array.from({ length: 2 }).map((elem, i) => {
-          return h(Tab, () => `Tab ${i + 1}`)
+          return h(
+            Tab,
+            mergeProps({
+              href: i + 1,
+              onClick: onClick
+            }),
+            () => `Tab ${i + 1}`
+          )
         })
       ]
     }
