@@ -20,6 +20,23 @@
         <span v-else>hello world</span>
       </Tag>
     </div>
+
+    <h3>Icon Tags</h3>
+
+    <div v-for="state in states" :key="state" class="my-2 mt-5">
+      <span class="font-weight-light text-capitalize">{{ state }}:</span>
+      <Tag
+        v-for="style in tagStyles"
+        :key="style"
+        class="ml-2 text-capitalize"
+        :color="style"
+        :disabled="state == 'disabled'"
+        :selected="state == 'selected'"
+        :icon="true"
+      >
+        <span class="container"> <i class="material-icons">favorite</i></span>
+      </Tag>
+    </div>
   </div>
 </template>
 
@@ -42,8 +59,5 @@ export default class Tag extends Vue {
 
 .container > i {
   font-size: 14px;
-  float: right;
-  margin-left: 5px;
-  margin-top: 7px;
 }
 </style>
