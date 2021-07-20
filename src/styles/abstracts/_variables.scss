@@ -9,9 +9,18 @@ $breakpoints: (
 $font--primary: Barlow;
 $font--secondary: 'input-sans';
 
+$box-shadow-sm: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+$box-shadow-md: 0px 2px 4px rgba(0, 0, 0, 0.06), 0px 4px 6px rgba(0, 0, 0, 0.1);
+$box-shadow-lg: 0px 10px 15px rgba(0, 0, 0, 0.1),
+  0px 4px 6px rgba(0, 0, 0, 0.05);
+$box-shadow-xl: 0px 20px 25px rgba(0, 0, 0, 0.1),
+  0px 10px 10px rgba(0, 0, 0, 0.04);
+$box-shadow-2xl: 0px 25px 50px rgba(0, 0, 0, 0.25);
+$box-shadow-inset: inset 0px 2px 4px rgba(0, 0, 0, 0.06);
+
 // Colors
 // We'll want to namespace these by theme later
-$text--primary: #090422;
+$text--primary: #465968;
 $text--secondary: #cecdd3;
 $text--placeholder: #465968;
 $text--white: #ffffff;
@@ -43,11 +52,37 @@ $grey-5: #f7f8fa;
 $grey-6: #ebeef7;
 $grey-7: #e8e8e8;
 
-$box-shadow-sm: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
-$box-shadow-md: 0px 2px 4px rgba(0, 0, 0, 0.06), 0px 4px 6px rgba(0, 0, 0, 0.1);
-$box-shadow-lg: 0px 10px 15px rgba(0, 0, 0, 0.1),
-  0px 4px 6px rgba(0, 0, 0, 0.05);
-$box-shadow-xl: 0px 20px 25px rgba(0, 0, 0, 0.1),
-  0px 10px 10px rgba(0, 0, 0, 0.04);
-$box-shadow-2xl: 0px 25px 50px rgba(0, 0, 0, 0.25);
-$box-shadow-inset: inset 0px 2px 4px rgba(0, 0, 0, 0.06);
+$colors: (
+  text--primary: $text--primary,
+  text--secondary: $text--secondary,
+  text--placeholder: $text--placeholder,
+  text--white: $text--white,
+  inactive: $inactive,
+  disabled: $disabled,
+  background: $background,
+  white: $white,
+  primary: $primary,
+  error: $error,
+  warning: $warning,
+  success: $success,
+  primary-101: $primary-101,
+  primary-100: $primary-100,
+  primary-80: $primary-80,
+  primary-60: $primary-60,
+  primary-40: $primary-40,
+  primary-20: $primary-20,
+  primary-10: $primary-10,
+  primary-5: $primary-5,
+  grey-1: $grey-1,
+  grey-2: $grey-2,
+  grey-3: $grey-3,
+  grey-4: $grey-4,
+  grey-5: $grey-5,
+  grey-6: $grey-6
+);
+
+:root {
+  @each $key, $color in $colors {
+    --#{$key}: #{$color};
+  }
+}

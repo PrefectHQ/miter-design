@@ -19,6 +19,7 @@ h3,
 h4,
 h5,
 h6 {
+  color: variables.$grey-1;
   font-family: variables.$font--primary !important;
   margin-block-start: 0.1em;
   margin-block-end: 0.1em;
@@ -49,9 +50,17 @@ h4 {
 }
 
 h5 {
+  color: variables.$grey-2;
   font-size: 20px;
   letter-spacing: 0.18px;
   line-height: 24px;
+}
+
+h6 {
+  color: variables.$grey-2;
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  line-height: 20px;
 }
 
 .font-weight-light {
@@ -76,4 +85,10 @@ h5 {
 
 .text-uppercase {
   text-transform: uppercase;
+}
+
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
