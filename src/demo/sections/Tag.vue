@@ -34,7 +34,7 @@
         :selected="state == 'selected'"
         :icon="true"
       >
-        <i class="material-icons">sentiment_very_satisfied</i>
+        <span><i class="material-icons">sentiment_very_satisfied</i></span>
       </Tag>
     </div>
   </div>

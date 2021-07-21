@@ -7,16 +7,16 @@
   &:not(.icon) {
     @include mixins.miter(1);
   }
-
-  background-color: transparent;
+  background-color: variables.$primary;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 11px;
   height: 26px;
   line-height: 26px;
   padding: 0;
   user-select: none;
   display: inline-block;
+  white-space: nowrap;
 
   &:not(.icon) > div {
     @include mixins.miter(1);
@@ -24,7 +24,7 @@
 
   > div {
     @include mixins.input-transition;
-    border-radius: 4px;
+    border-radius: 3px;
     padding-left: 23px;
     padding-right: 23px;
   }
@@ -39,26 +39,39 @@
     }
 
     > div {
+      position: relative;
       background-color: variables.$white;
-      height: calc(100% - 0px);
 
       top: 1px;
       left: 1px;
-      border: solid 1px;
-      // width: calc(100% - 2px);
+      width: calc(100% - 2px);
+      height: calc(100% - 2px);
     }
   }
 
   &.icon {
     border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
 
     > div {
       border-radius: 50%;
-      height: calc(100% - 0px);
-      width: calc(100% - 0px);
-      padding: 0;
+      height: calc(100% - 2px);
+      width: calc(100% - 2px);
+      top: 1px;
+      left: 1px;
+      padding-left: 0;
+      padding-right: 0;
     }
   }
+
+  // &.icon {
+  //   border-radius: 50%;
+  //   > div {
+  //     border-radius: 50%;
+  //     padding: 0;
+  //   }
+  // }
 
   &.disabled {
     cursor: not-allowed;
