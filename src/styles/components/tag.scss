@@ -7,12 +7,12 @@
   &:not(.icon) {
     @include mixins.miter(1);
   }
+
   background-color: variables.$primary;
   border: none;
   border-radius: 4px;
   font-size: 11px;
   height: 26px;
-  line-height: 26px;
   padding: 0;
   user-select: none;
   display: inline-block;
