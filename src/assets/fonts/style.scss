@@ -1,0 +1,143 @@
+@import 'variables';
+
+@font-face {
+  font-family: '#{$prefect-font-family}';
+  src: url('#{$prefect-font-path}/#{$prefect-font-family}.eot');
+  src: url('#{$prefect-font-path}/#{$prefect-font-family}.eot')
+      format('embedded-opentype'),
+    url('#{$prefect-font-path}/#{$prefect-font-family}.ttf') format('truetype'),
+    url('#{$prefect-font-path}/#{$prefect-font-family}.woff') format('woff'),
+    url('#{$prefect-font-path}/#{$prefect-font-family}.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^='pi-'],
+[class*=' pi-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$prefect-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pi-arrow {
+  &:before {
+    content: $pi-arrow;
+  }
+}
+.pi-divide {
+  &:before {
+    content: $pi-divide;
+  }
+}
+.pi-fire {
+  &:before {
+    content: $pi-fire;
+  }
+}
+.pi-menu {
+  &:before {
+    content: $pi-menu;
+  }
+}
+.pi-key {
+  &:before {
+    content: $pi-key;
+  }
+}
+.pi-numeric-keypad {
+  &:before {
+    content: $pi-numeric-keypad;
+  }
+}
+.pi-pin {
+  &:before {
+    content: $pi-pin;
+  }
+}
+.pi-sand-clock {
+  &:before {
+    content: $pi-sand-clock;
+  }
+}
+.pi-settings {
+  &:before {
+    content: $pi-settings;
+  }
+}
+.pi-shut-down {
+  &:before {
+    content: $pi-shut-down;
+  }
+}
+
+.pi-lg {
+  font-size: 1.33333em !important;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.pi-xs {
+  font-size: 0.75em !important;
+}
+
+.pi-sm {
+  font-size: 0.875em !important;
+}
+
+.pi-1x {
+  font-size: 1em !important;
+}
+
+.pi-2x {
+  font-size: 2em !important;
+}
+
+.pi-3x {
+  font-size: 3em !important;
+}
+
+.pi-4x {
+  font-size: 4em !important;
+}
+
+.pi-5x {
+  font-size: 5em !important;
+}
+
+.pi-6x {
+  font-size: 6em !important;
+}
+
+.pi-7x {
+  font-size: 7em !important;
+}
+
+.pi-8x {
+  font-size: 8em !important;
+}
+
+.pi-9x {
+  font-size: 9em;
+}
+
+.pi-10x {
+  font-size: 10em !important;
+}
+
+.pi-fw {
+  display: inline-block;
+  height: 1em;
+  text-align: center;
+  vertical-align: -0.25em;
+  width: 1.25em;
+}
