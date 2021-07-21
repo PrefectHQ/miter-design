@@ -17,6 +17,7 @@
   user-select: none;
   display: inline-block;
   white-space: nowrap;
+  cursor: default;
 
   &:not(.icon) > div {
     @include mixins.miter(1);
