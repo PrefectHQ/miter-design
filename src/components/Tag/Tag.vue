@@ -47,7 +47,6 @@ export default class Tag extends Vue.with(Props) {
 
   handleMouseLeave(): void {
     this.hovered = false
-    this.active = false
   }
 }
 </script>
