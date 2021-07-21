@@ -48,11 +48,6 @@ export default class Tag extends Vue.with(Props) {
     return
   }
 
-  /*
-  
-    Start input methods
-  
-  */
   handleMouseEnter(): void {
     if (this.disabled) return
     this.hovered = true
@@ -91,11 +86,6 @@ export default class Tag extends Vue.with(Props) {
     if (this.disabled) return
     this.active = true
   }
-  /*
-  
-    End input methods
-  
-  */
 }
 </script>
 
