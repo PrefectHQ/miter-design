@@ -84,20 +84,6 @@ describe('hovered state', () => {
   })
 })
 
-describe('disabled state', () => {
-  test('adds the disabled class when disabled:true is passed as a prop', () => {
-    const wrapper = mount(Tag, {
-      props: {
-        disabled: true
-      }
-    })
-
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).toContain('disabled')
-  })
-})
-
 describe('selected state', () => {
   test('adds the selected class when selected:true is passed as a prop', () => {
     const wrapper = mount(Tag, {
