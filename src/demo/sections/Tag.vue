@@ -14,7 +14,7 @@
       >
         <span v-if="tagStyles[1] == style" class="container">
           <i class="material-icons">favorite</i>
-          {{ style }}
+          hello world
         </span>
 
         <span v-else>hello world</span>
@@ -34,7 +34,7 @@
         :selected="state == 'selected'"
         :icon="true"
       >
-        <span><i class="material-icons">sentiment_very_satisfied</i></span>
+        <span><i class="material-icons">favorite</i></span>
       </Tag>
     </div>
   </div>

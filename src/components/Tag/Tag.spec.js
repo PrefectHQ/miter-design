@@ -47,30 +47,6 @@ describe('disabled state', () => {
 
     expect(tag.classes()).toContain('disabled')
   })
-
-  test('adds the disabled attribute when disabled:true is passed as a prop', () => {
-    const wrapper = mount(Tag, {
-      props: {
-        disabled: true
-      }
-    })
-
-    const tag = wrapper.get('.tag')
-
-    expect(tag.attributes('disabled')).toBeDefined()
-  })
-
-  test("doesn't pass the disabled attribute when disabled:false is passed as a prop", () => {
-    const wrapper = mount(Tag, {
-      props: {
-        disabled: false
-      }
-    })
-
-    const tag = wrapper.get('.tag')
-
-    expect(tag.attributes('disabled')).toBeUndefined()
-  })
 })
 
 describe('hovered state', () => {
@@ -98,30 +74,6 @@ describe('disabled state', () => {
 
     expect(tag.classes()).toContain('disabled')
   })
-
-  test('adds the disabled attribute when disabled:true is passed as a prop', () => {
-    const wrapper = mount(Tag, {
-      props: {
-        disabled: true
-      }
-    })
-
-    const tag = wrapper.get('.tag')
-
-    expect(tag.attributes('disabled')).toBeDefined()
-  })
-
-  test("doesn't pass the disabled attribute when disabled:false is passed as a prop", () => {
-    const wrapper = mount(Tag, {
-      props: {
-        disabled: false
-      }
-    })
-
-    const tag = wrapper.get('.tag')
-
-    expect(tag.attributes('disabled')).toBeUndefined()
-  })
 })
 
 describe('selected state', () => {
@@ -147,5 +99,34 @@ describe('selected state', () => {
     const tag = wrapper.get('.tag')
 
     expect(tag.attributes('selected')).toBeUndefined()
+  })
+})
+
+describe('active states', () => {
+  const wrapper = mount(Tag, {})
+  const tag = wrapper.get('.tag')
+
+  test('mousedown adds the active class and mouseup removes the active class', async () => {
+    await tag.trigger('mousedown')
+    expect(tag.classes()).toContain('active')
+
+    await tag.trigger('mouseup')
+    expect(tag.classes()).not.toContain('active')
+  })
+
+  test('keydown.enter adds the active class and keyup.enter removes the active class', async () => {
+    await tag.trigger('keydown', { key: 'Enter' })
+    expect(tag.classes()).toContain('active')
+
+    await tag.trigger('keyup', { key: 'Enter' })
+    expect(tag.classes()).not.toContain('active')
+  })
+
+  test('keydown.space adds the active class and keyup.space removes the active class', async () => {
+    await tag.trigger('keydown', { key: 'Space' })
+    expect(tag.classes()).toContain('active')
+
+    await tag.trigger('keyup', { key: 'Space' })
+    expect(tag.classes()).not.toContain('active')
   })
 })

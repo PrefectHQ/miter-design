@@ -4,6 +4,12 @@
     :class="classList"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
+    @mousedown="handleMouseDown"
+    @mouseup="handleMouseUp"
+    @keydown.enter.space="handleKeydown"
+    @keyup.enter.space="handleKeyup"
+    @focus="handleFocus"
+    @blur="handleBlur"
   >
     <div data-test="default">
       <slot />
@@ -24,6 +30,7 @@ class Props {
 
 @Options({})
 export default class Tag extends Vue.with(Props) {
+  active: boolean = false
   hovered: boolean = false
 
   classList = computed(() => {
@@ -32,6 +39,7 @@ export default class Tag extends Vue.with(Props) {
       ...(this.icon ? ['icon'] : []),
       ...(this.selected ? ['selected'] : []),
       ...(this.hovered ? ['hovered'] : []),
+      ...(this.active ? ['active'] : []),
       this.color
     ]
   })
@@ -40,6 +48,11 @@ export default class Tag extends Vue.with(Props) {
     return
   }
 
+  /*
+  
+    Start input methods
+  
+  */
   handleMouseEnter(): void {
     if (this.disabled) return
     this.hovered = true
@@ -47,7 +60,42 @@ export default class Tag extends Vue.with(Props) {
 
   handleMouseLeave(): void {
     this.hovered = false
+    this.active = false
   }
+
+  handleMouseDown(): void {
+    if (this.disabled) return
+    this.active = true
+  }
+
+  handleMouseUp(): void {
+    if (this.disabled) return
+    this.active = false
+  }
+
+  handleFocus(): void {
+    if (this.disabled) return
+    this.hovered = true
+  }
+
+  handleBlur(): void {
+    this.hovered = false
+    this.active = false
+  }
+
+  handleKeyup(): void {
+    this.active = false
+  }
+
+  handleKeydown(): void {
+    if (this.disabled) return
+    this.active = true
+  }
+  /*
+  
+    End input methods
+  
+  */
 }
 </script>
 

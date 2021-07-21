@@ -20,6 +20,10 @@
   white-space: nowrap;
   cursor: default;
 
+  &:focus-visible {
+    outline: none;
+  }
+
   &:not(.icon) > div {
     @include mixins.miter(1);
   }
@@ -37,15 +41,21 @@
     }
   }
 
+  &.active {
+    filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.5));
+  }
+
   &:not(.selected) {
     background-color: variables.$white;
     color: variables.$white;
     transition: background-color 0s, clip-path 0s !important;
 
-    &:not(.icon) > div {
-      @include mixins.miter(1, true);
+    &:not(.active):not(.icon) {
+      @include mixins.miter(1);
     }
-
+    &:active {
+      background-color: transparent;
+    }
     > div {
       position: relative;
       background-color: variables.$white;
@@ -54,6 +64,33 @@
       left: 1px;
       width: calc(100% - 2px);
       height: calc(100% - 2px);
+    }
+  }
+
+  &.icon {
+    border-radius: 50%;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    width: 30px;
+
+    > div {
+      border-radius: 50%;
+      height: calc(100% - 2px);
+      width: calc(100% - 2px);
+      top: 1px;
+      left: 1px;
+      padding-left: 0;
+      padding-right: 0;
+
+      position: relative;
+    }
+
+    i {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
@@ -68,8 +105,6 @@
   &.primary {
     background-color: variables.$primary;
     color: variables.$text--white;
-
-    background-color: variables.$primary-101;
 
     &:not(.selected) {
       background-color: variables.$primary;
