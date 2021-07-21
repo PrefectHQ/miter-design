@@ -116,32 +116,3 @@ describe('hovered state', () => {
     expect(tag.classes()).not.toContain('hovered')
   })
 })
-
-describe('active states', () => {
-  const wrapper = mount(Tag, {})
-  const tag = wrapper.get('.tag')
-
-  test('mousedown adds the active class and mouseup removes the active class', async () => {
-    await tag.trigger('mousedown')
-    expect(tag.classes()).toContain('active')
-
-    await tag.trigger('mouseup')
-    expect(tag.classes()).not.toContain('active')
-  })
-
-  test('keydown.enter adds the active class and keyup.enter removes the active class', async () => {
-    await tag.trigger('keydown', { key: 'Enter' })
-    expect(tag.classes()).toContain('active')
-
-    await tag.trigger('keyup', { key: 'Enter' })
-    expect(tag.classes()).not.toContain('active')
-  })
-
-  test('keydown.space adds the active class and keyup.space removes the active class', async () => {
-    await tag.trigger('keydown', { key: 'Space' })
-    expect(tag.classes()).toContain('active')
-
-    await tag.trigger('keyup', { key: 'Space' })
-    expect(tag.classes()).not.toContain('active')
-  })
-})
