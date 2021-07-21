@@ -69,6 +69,16 @@ describe('disabled state', () => {
 
     expect(tag.classes()).toContain('disabled')
   })
+
+  test('does not pass the disabled class when disabled is not passed as a prop', () => {
+    const wrapper = mount(Tag, {
+      props: {}
+    })
+
+    const tag = wrapper.get('.tag')
+
+    expect(tag.classes()).not.toContain('disabled')
+  })
 })
 
 describe('hovered state', () => {
@@ -97,16 +107,14 @@ describe('selected state', () => {
     expect(tag.classes()).toContain('selected')
   })
 
-  test("doesn't pass the selected attribute when selected:false is passed as a prop", () => {
+  test("doesn't pass the selected class when selected is not passed as a prop", () => {
     const wrapper = mount(Tag, {
-      props: {
-        selected: false
-      }
+      props: {}
     })
 
     const tag = wrapper.get('.tag')
 
-    expect(tag.attributes('selected')).toBeUndefined()
+    expect(tag.classes()).not.toContain('selected')
   })
 })
 
