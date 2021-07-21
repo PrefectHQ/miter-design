@@ -1,8 +1,8 @@
 <template>
   <div>
     <h3>Tags</h3>
-
-    <div v-for="state in states" :key="state" class="my-2 mt-5">
+    <h5 class="mt-5">Block</h5>
+    <div v-for="state in states" :key="state" class="my-2">
       <span class="font-weight-light text-capitalize">{{ state }}:</span>
       <Tag
         v-for="style in tagStyles"
@@ -12,18 +12,18 @@
         :disabled="state == 'disabled'"
         :selected="state == 'selected'"
       >
-        <span v-if="tagStyles[1] == style" class="container">
+        <span v-if="tagStyles[1] == style" class="icon-style">
           <i class="material-icons">favorite</i>
-          hello world
+          tag
         </span>
 
-        <span v-else>hello world</span>
+        <span v-else>tag</span>
       </Tag>
     </div>
 
-    <h3>Icon Tags</h3>
+    <h5 class="mt-5">Icon</h5>
 
-    <div v-for="state in states" :key="state" class="my-2 mt-5">
+    <div v-for="state in states" :key="state" class="my-2">
       <span class="font-weight-light text-capitalize">{{ state }}:</span>
       <Tag
         v-for="style in tagStyles"
@@ -34,7 +34,7 @@
         :selected="state == 'selected'"
         :icon="true"
       >
-        <span><i class="material-icons">favorite</i></span>
+        <span class="icon-style"><i class="material-icons">favorite</i></span>
       </Tag>
     </div>
   </div>
@@ -57,7 +57,7 @@ export default class Tag extends Vue {
 <style lang="scss" scoped>
 @use '../../styles/components/tag';
 
-.container > i {
+.icon-style > i {
   font-size: 14px;
   margin-right: 5.33px;
 }
