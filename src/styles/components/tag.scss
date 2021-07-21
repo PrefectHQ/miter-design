@@ -27,6 +27,12 @@
     border-radius: 3px;
     padding-left: 23px;
     padding-right: 23px;
+
+    > span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &:not(.selected) {
@@ -49,30 +55,6 @@
     }
   }
 
-  &.icon {
-    border-radius: 50%;
-    overflow: hidden;
-    text-align: center;
-
-    > div {
-      border-radius: 50%;
-      height: calc(100% - 2px);
-      width: calc(100% - 2px);
-      top: 1px;
-      left: 1px;
-      padding-left: 0;
-      padding-right: 0;
-    }
-  }
-
-  // &.icon {
-  //   border-radius: 50%;
-  //   > div {
-  //     border-radius: 50%;
-  //     padding: 0;
-  //   }
-  // }
-
   &.disabled {
     cursor: not-allowed;
     background-color: variables.$disabled !important;
@@ -83,11 +65,17 @@
 
   &.primary {
     background-color: variables.$primary;
-
     color: variables.$text--white;
+
+    background-color: variables.$primary-101;
+
     &:not(.selected) {
       background-color: variables.$primary;
       color: variables.$primary;
+
+      &.hovered > div {
+        background-color: variables.$grey-5;
+      }
     }
   }
 
@@ -98,6 +86,10 @@
     &:not(.selected) {
       background-color: variables.$success;
       color: variables.$success;
+
+      &.hovered > div {
+        background-color: variables.$grey-5;
+      }
     }
   }
 
@@ -108,6 +100,10 @@
     &:not(.selected) {
       background-color: variables.$grey-2;
       color: variables.$grey-2;
+
+      &.hovered > div {
+        background-color: variables.$grey-5;
+      }
     }
   }
 }

@@ -14,8 +14,8 @@
       >
         <span v-if="tagStyles[1] == style" class="container">
           <i class="material-icons">favorite</i>
-          {{ style }}</span
-        >
+          {{ style }}
+        </span>
 
         <span v-else>hello world</span>
       </Tag>
@@ -59,5 +59,6 @@ export default class Tag extends Vue {
 
 .container > i {
   font-size: 11px;
+  margin-right: 5.33px;
 }
 </style>
