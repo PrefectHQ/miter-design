@@ -35,6 +35,28 @@ describe('color prop', () => {
   })
 })
 
+describe('icon prop', () => {
+  test('defaults to the block tag when no icon prop is passed', () => {
+    const wrapper = mount(Tag, {
+      props: {}
+    })
+
+    const tag = wrapper.get('.tag')
+
+    expect(tag.classes()).not.toContain('icon')
+  })
+
+  test('passes the icon prop as a class when passed', () => {
+    const wrapper = mount(Tag, {
+      props: { icon: true }
+    })
+
+    const tag = wrapper.get('.tag')
+
+    expect(tag.classes()).toContain('icon')
+  })
+})
+
 describe('disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
     const wrapper = mount(Tag, {
