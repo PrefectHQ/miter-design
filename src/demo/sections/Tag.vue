@@ -58,7 +58,7 @@ export default class Tag extends Vue {
 @use '../../styles/components/tag';
 
 .container > i {
-  font-size: 11px;
+  font-size: 14px;
   margin-right: 5.33px;
 }
 </style>
