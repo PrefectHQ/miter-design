@@ -2,8 +2,7 @@ import { mount } from '@vue/test-utils'
 import Slider from './Slider.vue'
 
 
-
-
+//States
 
 describe('disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
@@ -47,7 +46,11 @@ describe('disabled state', () => {
 })
 
 describe('active states', () => {
-  const wrapper = mount(Slider, {})
+  const wrapper = mount(Slider, {
+    props: {
+     disabled: false,
+     modelValue: '3'
+  }})
   const slider = wrapper.get('input')
 
   test('mousedown adds the active class and mouseup removes the active class', async () => {
@@ -74,3 +77,22 @@ describe('active states', () => {
     expect(slider.classes()).not.toContain('active')
   })
 })
+
+// Logic
+
+describe('model', () => {
+    test('updates the outer value when the inner value is updated', () => {
+        const wrapper = mount(Slider, {
+            props: {
+              disabled: true,
+              modelValue: '3'
+            }
+          })
+  
+      const slider = wrapper.get('input')
+      slider.value = '5'
+      const emit = wrapper.emit('update:modelValue')
+      console.log('input', slider.value, 'emit', wrapper)
+      expect(emit[0]).toEqual('3')
+    })
+  })

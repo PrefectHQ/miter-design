@@ -18,7 +18,7 @@
     class="slider"
     :class="classList"
     :style="sliderVal"
-    role="slider"
+    label="slider"
     @input="$emit('update:modelValue', $event.target.value)" />
 </template>
 
