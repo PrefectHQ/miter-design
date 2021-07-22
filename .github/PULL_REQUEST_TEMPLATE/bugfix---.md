@@ -15,7 +15,7 @@ This PR:
 - [ ] adds new tests or updates existing tests (or hasn't, for reasons explained below)
 - [ ] adheres to [a11y guidelines](https://www.a11yproject.com/checklist/) where applicable
 - [ ] strictly follows the design spec given 
-- [ ] addresses the linked bug report
+- [ ] addresses the linked bug report using a [github keyword](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) where relevant
 
 This PR has been tested in the following browsers (the latest version of each is fine):
 - [ ] Chrome
