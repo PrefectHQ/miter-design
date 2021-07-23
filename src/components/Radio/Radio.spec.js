@@ -52,15 +52,28 @@ describe('disabled state', () => {
   })
 })
 
-test('emit event when checked', () => {
+test('emit update to true when selected', async () => {
   const wrapper = mount(RadioButton, {
     props: {
       disabled: false,
-      checked: false
+      modelValue: false
     }
   })
+  const input = wrapper.find('input[type="radio"]')
+  input.element.checked = true
+  await input.trigger('input')
+  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(true)
+})
 
-  wrapper.find('input[type="radio"]').trigger('input')
-
-  expect(wrapper.emitted()).toHaveProperty('update:modelValue')
+test('emit update to false when unselected', async () => {
+  const wrapper = mount(RadioButton, {
+    props: {
+      disabled: false,
+      modelValue: true
+    }
+  })
+  const input = wrapper.find('input[type="radio"]')
+  input.element.checked = false
+  await input.trigger('input')
+  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(false)
 })
