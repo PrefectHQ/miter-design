@@ -81,18 +81,30 @@ describe('active states', () => {
 // Logic
 
 describe('model', () => {
-    test('updates the outer value when the inner value is updated', () => {
+    test('updates the inner value', async () => {
         const wrapper = mount(Slider, {
             props: {
               disabled: true,
-              modelValue: '3'
+              modelValue: '3', 
+              label: "test-label"
             }
           })
-  
-      const slider = wrapper.get('input')
-      slider.setValue(5)
-      const emit = wrapper.emit('update:modelValue')
-      console.log('input', slider.value, 'emit', wrapper)
-      expect(emit[0]).toEqual('3')
+    expect(wrapper.find('input[type="range"]').element.value).toBe('3')
+    const rangeInput = wrapper.find('input[type="range"]')
+    await rangeInput.setValue('8')  
+    expect(wrapper.find('input[type="range"]').element.value).toBe('8')
+        })
+    
+    test('emits update:modelValue', async () => {
+          const wrapper = mount(Slider, {
+              props: {
+                disabled: true,
+                modelValue: '3', 
+                label: "test-label"
+              }
+            })
+      wrapper.vm.$emit('update:modelValue', '7')
+      const emit = wrapper.emitted()
+      expect(emit['update:modelValue'][0]).toEqual(['7'])
     })
   })

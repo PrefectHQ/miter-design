@@ -73,7 +73,7 @@ computed: {
      [] 
   },
   sliderVal(): object {
-      const val = this.modelValue/(this.maxVal - this.minVal) * 100
+      const val = parseInt(this.modelValue)/(this.maxVal - this.minVal) * 100
       return {
           '--slider-val': `${val}%`
       }
