@@ -4,8 +4,8 @@
 
     <h5 class="mt-5">Checkbox</h5>
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
-      <Checkbox :disabled="state == 'disabled'" v-model="checked[state]">
+      <span class="font-weight-light text-capitalize">{{ state.state }}:</span>
+      <Checkbox :disabled="state.state == 'disabled'" v-model="state.checked">
         <span>Label</span>
       </Checkbox>
     </div>
@@ -13,17 +13,21 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component'
+import { defineComponent } from 'vue'
+import Checkbox from '@/components/Checkbox/Checkbox.vue'
 
-@Options({})
-export default class Checkboxes extends Vue {
-  states = ['enabled', 'disabled']
-  checked = { enabled: false, disabled: false }
-
-  mounted(): void {
-    return
+export default defineComponent({
+  name: 'Checkboxes',
+  components: { Checkbox },
+  data() {
+    return {
+      states: [
+        { state: 'enabled', checked: false },
+        { state: 'disabled', checked: false }
+      ]
+    }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

@@ -11,7 +11,6 @@
     <input
       type="checkbox"
       :disabled="disabled"
-      :checked="checked"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.checked)"
       @focus="handleFocus"
@@ -23,65 +22,68 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options, prop } from 'vue-class-component'
-import { computed } from 'vue'
+import { defineComponent } from 'vue'
 
-class Props {
-  disabled = prop<boolean>({ default: false })
-  checked = prop<boolean>({ default: false })
-}
+export default defineComponent({
+  name: 'Checkbox',
+  emits: {
+    'update:modelValue'(...args: any[]) {
+      return { ...args }
+    }
+  },
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      hovered: false,
+      active: false
+    }
+  },
+  computed: {
+    classList(): string[] {
+      return [
+        ...(this.disabled ? ['disabled'] : []),
+        ...(this.hovered ? ['hovered'] : []),
+        ...(this.active ? ['hovered'] : [])
+      ]
+    }
+  },
+  methods: {
+    handleMouseEnter(): void {
+      if (this.disabled) return
+      this.hovered = true
+    },
 
-@Options({ emits: ['checked'] })
-export default class Checkbox extends Vue.with(Props) {
-  active: boolean = false
-  hovered: boolean = false
-  classList = computed(() => {
-    return [
-      ...(this.disabled ? ['disabled'] : []),
-      ...(this.hovered ? ['hovered'] : []),
-      ...(this.active ? ['hovered'] : [])
-    ]
-  })
+    handleMouseLeave(): void {
+      this.hovered = false
+      this.active = false
+    },
 
-  mounted(): void {
-    return
+    handleMouseDown(): void {
+      if (this.disabled) return
+      this.active = true
+    },
+
+    handleMouseUp(): void {
+      if (this.disabled) return
+      this.active = false
+    },
+
+    handleFocus(): void {
+      if (this.disabled) return
+      this.hovered = true
+    },
+
+    handleBlur(): void {
+      this.hovered = false
+      this.active = false
+    }
   }
-
-  /*
-  
-    Start input methods
-  
-  */
-  handleMouseEnter(): void {
-    if (this.disabled) return
-    this.hovered = true
-  }
-
-  handleMouseLeave(): void {
-    this.hovered = false
-    this.active = false
-  }
-
-  handleMouseDown(): void {
-    if (this.disabled) return
-    this.active = true
-  }
-
-  handleMouseUp(): void {
-    if (this.disabled) return
-    this.active = false
-  }
-
-  handleFocus(): void {
-    if (this.disabled) return
-    this.hovered = true
-  }
-
-  handleBlur(): void {
-    this.hovered = false
-    this.active = false
-  }
-}
+})
 </script>
 
 <style lang="scss" scoped>
