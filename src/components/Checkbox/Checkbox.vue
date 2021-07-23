@@ -35,6 +35,10 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false
+    },
+    modelValue: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
