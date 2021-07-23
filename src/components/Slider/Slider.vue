@@ -1,4 +1,5 @@
 <template>
+<label for="miter-slider">{{label}}
   <input 
   data-test="default"
   type="range" 
@@ -16,11 +17,13 @@
     :step="stepVal"
     :value="modelValue"
     class="slider"
+    id="miter-slider"
     :class="classList"
     :style="sliderVal"
-    label="slider"
     @input="$emit('update:modelValue', $event.target.value)" />
+    </label>
 </template>
+
 
 <script lang="ts">
 
@@ -48,7 +51,11 @@ export default defineComponent ({
        modelValue: {
            type: String,
            required: true
-       } 
+       },
+       label: {
+         type: String,
+         default: ''
+       }
   },  
   emits: ['update:modelValue'],
   data() {

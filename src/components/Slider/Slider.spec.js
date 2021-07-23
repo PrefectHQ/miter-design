@@ -90,7 +90,7 @@ describe('model', () => {
           })
   
       const slider = wrapper.get('input')
-      slider.value = '5'
+      slider.setValue(5)
       const emit = wrapper.emit('update:modelValue')
       console.log('input', slider.value, 'emit', wrapper)
       expect(emit[0]).toEqual('3')
