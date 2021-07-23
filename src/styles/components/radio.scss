@@ -12,35 +12,43 @@
   position: absolute;
 
   > input {
-    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
   }
 
-  &:before {
-    border: 2px solid variables.$primary;
-    border-radius: 100%;
-    content: ' ';
+  .radio-button {
     display: inline-block;
     height: 28px;
-    margin-right: 12px;
     width: 28px;
+    border-radius: 100%;
+    margin-right: 12px;
+    border: 1px solid variables.$grey-4;
+    user-select: none;
+    &:after {
+      content: '';
+      position: absolute;
+      display: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 100%;
+      background: variables.$primary;
+      top: 5px;
+      left: 5px;
+    }
   }
 
-  &input[type='radio']:checked + ::after {
-    border-radius: 11px;
-    width: 12px;
-    height: 12px;
-    position: absolute;
-    top: 9px;
-    left: 10px;
-    content: ' ';
-    display: block;
-    background: pink;
+  input:checked ~ .radio-button {
+    border: 2px solid variables.$primary;
+    &:after {
+      display: inline-block;
+    }
   }
 
   &.disabled {
     cursor: not-allowed;
     color: variables.$inactive !important;
-    &:before {
+    .radio-button {
       border-color: variables.$inactive;
       background: variables.$inactive;
     }
@@ -49,7 +57,7 @@
   &:focus,
   &.hovered,
   &.active {
-    &:before {
+    .radio-button {
       background-color: variables.$grey-5;
     }
   }

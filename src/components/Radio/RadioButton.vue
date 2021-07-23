@@ -16,6 +16,7 @@
       @focus="handleFocus"
       @blur="handleBlur"
     />
+    <span class="radio-button"></span>
     <span data-test="default"><slot /></span>
   </label>
 </template>
@@ -24,7 +25,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Radio',
+  name: 'RadioButton',
   emits: {
     'update:modelValue'(...args: any[]) {
       return { ...args }
@@ -32,6 +33,10 @@ export default defineComponent({
   },
   props: {
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    modelValue: {
       type: Boolean,
       default: false
     }

@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import Radio from './Radio.vue'
+import RadioButton from './RadioButton.vue'
 
 test('displays text in the default slot', () => {
   const text = 'Hello!'
-  const wrapper = mount(Radio, {
+  const wrapper = mount(RadioButton, {
     slots: {
       default: text
     }
@@ -16,7 +16,7 @@ test('displays text in the default slot', () => {
 
 describe('disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
-    const wrapper = mount(Radio, {
+    const wrapper = mount(RadioButton, {
       props: {
         disabled: true
       }
@@ -28,7 +28,7 @@ describe('disabled state', () => {
   })
 
   test('adds the disabled attribute when disabled:true is passed as a prop', () => {
-    const wrapper = mount(Radio, {
+    const wrapper = mount(RadioButton, {
       props: {
         disabled: true
       }
@@ -40,7 +40,7 @@ describe('disabled state', () => {
   })
 
   test('sets disabled to false when disabled:false is passed as a prop', () => {
-    const wrapper = mount(Radio, {
+    const wrapper = mount(RadioButton, {
       props: {
         disabled: false
       }
@@ -53,7 +53,7 @@ describe('disabled state', () => {
 })
 
 test('emit event when checked', () => {
-  const wrapper = mount(Radio, {
+  const wrapper = mount(RadioButton, {
     props: {
       disabled: false,
       checked: false
@@ -62,5 +62,5 @@ test('emit event when checked', () => {
 
   wrapper.find('input[type="radio"]').trigger('input')
 
-  expect(wrapper.emitted()).toHaveProperty('update:checked')
+  expect(wrapper.emitted()).toHaveProperty('update:modelValue')
 })
