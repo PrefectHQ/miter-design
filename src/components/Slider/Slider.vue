@@ -1,5 +1,5 @@
 <template>
-<label for="miter-slider">{{label}}
+<label class="label" v-if="!hideLabel" :for="label">{{label}}</label>
   <input 
   data-test="default"
   type="range" 
@@ -17,11 +17,10 @@
     :step="stepVal"
     :value="modelValue"
     class="slider"
-    id="miter-slider"
+    :id="label"
     :class="classList"
     :style="sliderVal"
     @input="$emit('update:modelValue', $event.target.value)" />
-    </label>
 </template>
 
 
@@ -55,6 +54,10 @@ export default defineComponent ({
        label: {
          type: String,
          default: ''
+       },
+       hideLabel: {
+         type: Boolean,
+         default: false
        }
   },  
   emits: ['update:modelValue'],
