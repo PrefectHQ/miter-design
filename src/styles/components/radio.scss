@@ -54,6 +54,14 @@
     }
   }
 
+  &.disabled input:checked ~ .radio-button {
+    border: 2px solid variables.$inactive;
+    background: white;
+    &:after {
+      background: variables.$inactive;
+    }
+  }
+
   &:focus,
   &.hovered,
   &.active {
