@@ -4,8 +4,8 @@
 
     <h5 class="mt-5">Radio</h5>
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
-      <Radio :disabled="state == 'disabled'" v-model:checked="checked[state]">
+      <span class="font-weight-light text-capitalize">{{ state.state }}:</span>
+      <Radio :disabled="state.state == 'disabled'" v-model="state.checked">
         <span>Label</span>
       </Radio>
     </div>
@@ -13,22 +13,21 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component'
+import { defineComponent } from 'vue'
+import Radio from '@/components/Radio/Radio.vue'
 
-@Options({})
-export default class Radio extends Vue {
-  states = ['enabled', 'disabled']
-
+export default defineComponent({
+  name: 'Radio',
+  components: { Radio },
   data() {
     return {
-      checked: { enabled: false, disabled: false }
+      states: [
+        { state: 'enabled', checked: false },
+        { state: 'disabled', checked: false }
+      ]
     }
   }
-
-  mounted(): void {
-    return
-  }
-}
+})
 </script>
 
 <style lang="scss" scoped>

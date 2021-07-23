@@ -5,30 +5,51 @@
   @include mixins.input-transition;
   align-items: center;
   border: 1px;
+  cursor: pointer;
   display: inline-flex;
   font-size: 15px;
   line-height: 20px;
   position: absolute;
 
   > input {
+    display: none;
+  }
+
+  &:before {
+    border: 2px solid variables.$primary;
+    border-radius: 100%;
+    content: ' ';
+    display: inline-block;
     height: 28px;
-    width: 28px;
     margin-right: 12px;
+    width: 28px;
+  }
+
+  &input[type='radio']:checked + ::after {
+    border-radius: 11px;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    content: ' ';
+    display: block;
+    background: pink;
   }
 
   &.disabled {
     cursor: not-allowed;
     color: variables.$inactive !important;
-    .box {
-      background-color: variables.$grey-4;
+    &:before {
+      border-color: variables.$inactive;
+      background: variables.$inactive;
     }
   }
 
   &:focus,
   &.hovered,
   &.active {
-    cursor: pointer;
-    .box {
+    &:before {
       background-color: variables.$grey-5;
     }
   }
