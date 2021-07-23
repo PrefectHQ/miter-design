@@ -52,15 +52,28 @@ describe('disabled state', () => {
   })
 })
 
-test('emit event when checked', async () => {
+test('emit update to true when checked', async () => {
   const wrapper = mount(Checkbox, {
     props: {
       disabled: false,
       modelValue: false
     }
   })
+  const input = wrapper.find('input[type="checkbox"]')
+  input.element.checked = true
+  await input.trigger('input')
+  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(true)
+})
 
-  await wrapper.find('input[type="checkbox"]').trigger('input', true)
-  console.log('test: ', wrapper.emitted('update:modelValue')[0])
-  expect(wrapper.emitted('update:modelValue')[0]).toEqual(true)
+test('emit update to false when unchecked', async () => {
+  const wrapper = mount(Checkbox, {
+    props: {
+      disabled: false,
+      modelValue: true
+    }
+  })
+  const input = wrapper.find('input[type="checkbox"]')
+  input.element.checked = false
+  await input.trigger('input')
+  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(false)
 })
