@@ -13,7 +13,7 @@ assignees: ''
 This PR:
 - [ ] has a changelog entry with a short description of what's changed in `CHANGELOG.md`
 - [ ] adds new tests or updates existing tests (or hasn't, for reasons explained below)
-- [ ] adheres to [a11y guidelines](https://www.a11yproject.com/checklist/) where applicable
+- [ ] adheres to [a11y guidelines](https://www.a11yproject.com/checklist/)/[WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) guidelines where applicable; this can be tested using Lighthouse (native in Chrome dev tools or as a plugin for other browsers) and with accessibility reports in Firefox
 - [ ] strictly follows the design spec given 
 
 This PR has been tested in the following browsers (the latest version of each is fine):
