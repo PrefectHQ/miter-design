@@ -24,35 +24,22 @@ describe('color prop', () => {
 
     expect(tag.classes()).toContain('primary')
   })
-  test('defaults to the secondary color when no color prop is passed', () => {
+
+  test('check if the computed style contains the color prop if updated', async () => {
+    const wrapper = mount(Tag, {
+      props: { color: 'primary' }
+    })
+    await wrapper.setProps({ color: 'secondary' })
+    expect(wrapper.vm.classList).toContain('secondary')
+  })
+
+  test('does not pass the color prop when no color prop is provided', () => {
     const wrapper = mount(Tag, {
       props: {}
     })
 
     const tag = wrapper.get('.tag')
-    expect(tag.classes()).toContain('secondary')
-  })
-})
-
-describe('icon prop', () => {
-  test('defaults to the block tag when no icon prop is passed', () => {
-    const wrapper = mount(Tag, {
-      props: {}
-    })
-
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).not.toContain('icon')
-  })
-
-  test('passes the icon prop as a class when passed', () => {
-    const wrapper = mount(Tag, {
-      props: { icon: true }
-    })
-
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).toContain('icon')
+    expect(tag.classes()).not.toContain('primary')
   })
 })
 
@@ -69,6 +56,14 @@ describe('disabled prop', () => {
     expect(tag.classes()).toContain('disabled')
   })
 
+  test('check if the computed style contains the disabled prop if updated', async () => {
+    const wrapper = mount(Tag, {
+      props: { disabled: false }
+    })
+    await wrapper.setProps({ disabled: true })
+    expect(wrapper.vm.classList).toContain('disabled')
+  })
+
   test("doesn't pass the disabled class when disabled is not passed as a prop", () => {
     const wrapper = mount(Tag, {
       props: {}
@@ -80,68 +75,34 @@ describe('disabled prop', () => {
   })
 })
 
-describe('selected prop', () => {
-  test('adds the selected class when selected:true is passed as a prop', () => {
+describe('outlined prop', () => {
+  test('adds the outlined class when outlined:true is passed as a prop', () => {
     const wrapper = mount(Tag, {
       props: {
-        selected: true
+        outlined: true
       }
     })
 
     const tag = wrapper.get('.tag')
 
-    expect(tag.classes()).toContain('selected')
+    expect(tag.classes()).toContain('outlined')
   })
 
-  test("doesn't pass the selected class when selected is not passed as a prop", () => {
+  test('check if the computed style contains the outline prop if updated', async () => {
+    const wrapper = mount(Tag, {
+      props: { outlined: false }
+    })
+    await wrapper.setProps({ outlined: true })
+    expect(wrapper.vm.classList).toContain('outlined')
+  })
+
+  test("doesn't pass the outlined class when outlined is not passed as a prop", () => {
     const wrapper = mount(Tag, {
       props: {}
     })
 
     const tag = wrapper.get('.tag')
 
-    expect(tag.classes()).not.toContain('selected')
-  })
-})
-
-describe('hovered state', () => {
-  const wrapper = mount(Tag, {})
-  const tag = wrapper.get('.tag')
-
-  test('mouseenter adds the hovered class and mouseleave removes the hovered class', async () => {
-    await tag.trigger('mouseenter')
-    expect(tag.classes()).toContain('hovered')
-
-    await tag.trigger('mouseleave')
-    expect(tag.classes()).not.toContain('hovered')
-  })
-})
-
-describe('active states', () => {
-  const wrapper = mount(Tag, {})
-  const tag = wrapper.get('.tag')
-
-  test('mousedown adds the active class and mouseup removes the active class', async () => {
-    await tag.trigger('mousedown')
-    expect(tag.classes()).toContain('active')
-
-    await tag.trigger('mouseup')
-    expect(tag.classes()).not.toContain('active')
-  })
-
-  test('keydown.enter adds the active class and keyup.enter removes the active class', async () => {
-    await tag.trigger('keydown', { key: 'Enter' })
-    expect(tag.classes()).toContain('active')
-
-    await tag.trigger('keyup', { key: 'Enter' })
-    expect(tag.classes()).not.toContain('active')
-  })
-
-  test('keydown.space adds the active class and keyup.space removes the active class', async () => {
-    await tag.trigger('keydown', { key: 'Space' })
-    expect(tag.classes()).toContain('active')
-
-    await tag.trigger('keyup', { key: 'Space' })
-    expect(tag.classes()).not.toContain('active')
+    expect(tag.classes()).not.toContain('outlined')
   })
 })
