@@ -14,6 +14,9 @@
   height: 26px;
   cursor: default;
 
+  background-color: variables.$grey-2;
+  color: variables.$text--white;
+
   &:focus-visible {
     outline: none;
   }
