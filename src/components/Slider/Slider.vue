@@ -1,5 +1,5 @@
 <template>
-<label class="label" v-if="!hideLabel" :for="label">{{label}}</label>
+<label class="slider-label" v-if="!hideLabel" :for="label">{{label}}</label>
   <input 
   data-test="default"
   type="range" 

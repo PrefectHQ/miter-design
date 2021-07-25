@@ -18,6 +18,9 @@
     
 }
 
+.slider-label {
+  margin-right: 8px;
+}
 
 .slider {
   @include mixins.input-transition;
