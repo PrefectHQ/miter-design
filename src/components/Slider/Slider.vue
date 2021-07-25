@@ -1,7 +1,6 @@
 <template>
-<label class="slider-label" v-if="!hideLabel" :for="label">{{label}}</label>
+<label data-test="default" class="slider-label" v-if="!hideLabel" :for="label">{{label}}</label>
   <input 
-  data-test="default"
   type="range" 
   @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"

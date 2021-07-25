@@ -81,10 +81,9 @@ describe('active states', () => {
 // Logic
 
 describe('model', () => {
-    test('updates the inner value', async () => {
+    test('updates the inner & outer value', async () => {
         const wrapper = mount(Slider, {
             props: {
-              disabled: true,
               modelValue: '3', 
               label: "test-label"
             }
@@ -93,27 +92,15 @@ describe('model', () => {
     const rangeInput = wrapper.find('input[type="range"]')
     await rangeInput.setValue('8')  
     expect(wrapper.find('input[type="range"]').element.value).toBe('8')
+    const emit = wrapper.emitted()
+    expect(emit['update:modelValue'][0]).toEqual(['8'])
         })
-    
-    test('emits update:modelValue', async () => {
-          const wrapper = mount(Slider, {
-              props: {
-                disabled: true,
-                modelValue: '3', 
-                label: "test-label"
-              }
-            })
-      wrapper.vm.$emit('update:modelValue', '7')
-      const emit = wrapper.emitted()
-      expect(emit['update:modelValue'][0]).toEqual(['7'])
-    })
-  })
+      })
 
   describe('props', () => {
     test('passes max value', async () => {
         const wrapper = mount(Slider, {
             props: {
-              disabled: true,
               modelValue: '3', 
               label: "test-label",
               maxVal: 20
@@ -121,17 +108,60 @@ describe('model', () => {
           })
     expect(wrapper.find('input[type="range"]').element.max).toBe('20')
         })
-    
-    test('emits update:modelValue', async () => {
+
+    test('passes min value', async () => {
           const wrapper = mount(Slider, {
               props: {
-                disabled: true,
                 modelValue: '3', 
-                label: "test-label"
+                label: "test-label",
+                minVal: 1
               }
             })
-      wrapper.vm.$emit('update:modelValue', '7')
-      const emit = wrapper.emitted()
-      expect(emit['update:modelValue'][0]).toEqual(['7'])
-    })
+      expect(wrapper.find('input[type="range"]').element.min).toBe('1')
+          })
+
+    test('passes step value', async () => {
+            const wrapper = mount(Slider, {
+                props: {
+                  disabled: true,
+                  modelValue: '3', 
+                  label: "test-label",
+                  stepVal: 2
+                }
+              })
+      expect(wrapper.find('input[type="range"]').element.step).toBe('2')
+            })
+    
+    test('passes label', async () => {
+              const wrapper = mount(Slider, {
+                  props: {
+                    modelValue: '3', 
+                    label: "test-label",
+                  }
+                })
+        const label = wrapper.get('[data-test="default"]')
+        expect(label.text()).toBe('test-label')
   })
+
+  test('hides label if hideLabel is true', async () => {
+    const wrapper = mount(Slider, {
+        props: {
+          modelValue: '3', 
+          label: "test-label",
+          hideLabel: true
+        }
+      })
+      expect(wrapper.find('[data-test="default"]').exists()).toBe(false)
+})
+
+test('shows label if hideLabel is false', async () => {
+  const wrapper = mount(Slider, {
+      props: {
+        modelValue: '3', 
+        label: "test-label",
+        hideLabel: false
+      }
+    })
+    expect(wrapper.find('[data-test="default"]').exists()).toBe(true)
+})
+})
