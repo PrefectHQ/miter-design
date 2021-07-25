@@ -108,3 +108,30 @@ describe('model', () => {
       expect(emit['update:modelValue'][0]).toEqual(['7'])
     })
   })
+
+  describe('props', () => {
+    test('passes max value', async () => {
+        const wrapper = mount(Slider, {
+            props: {
+              disabled: true,
+              modelValue: '3', 
+              label: "test-label",
+              maxVal: 20
+            }
+          })
+    expect(wrapper.find('input[type="range"]').element.max).toBe('20')
+        })
+    
+    test('emits update:modelValue', async () => {
+          const wrapper = mount(Slider, {
+              props: {
+                disabled: true,
+                modelValue: '3', 
+                label: "test-label"
+              }
+            })
+      wrapper.vm.$emit('update:modelValue', '7')
+      const emit = wrapper.emitted()
+      expect(emit['update:modelValue'][0]).toEqual(['7'])
+    })
+  })
