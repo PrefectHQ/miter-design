@@ -28,7 +28,10 @@
     padding-right: 23px;
     border-radius: 2px;
 
-    > span {
+    display: inline-flex;
+    align-items: center;
+
+    :first-child {
       display: inline-flex;
       align-items: center;
     }
