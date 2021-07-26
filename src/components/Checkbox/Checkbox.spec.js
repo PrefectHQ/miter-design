@@ -40,11 +40,7 @@ describe('disabled state', () => {
   })
 
   test('sets disabled to false when disabled:false is passed as a prop', () => {
-    const wrapper = mount(Checkbox, {
-      props: {
-        disabled: false
-      }
-    })
+    const wrapper = mount(Checkbox)
 
     const checkbox = wrapper.get('label')
 
@@ -53,13 +49,8 @@ describe('disabled state', () => {
 })
 
 test('emit update to true when checked', async () => {
-  const wrapper = mount(Checkbox, {
-    props: {
-      disabled: false,
-      value: false
-    }
-  })
-  const input = wrapper.find('input[type="checkbox"]')
+  const wrapper = mount(Checkbox)
+  const input = wrapper.get('input[type="checkbox"]')
   input.element.checked = true
   await input.trigger('input')
   expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(true)
@@ -68,23 +59,19 @@ test('emit update to true when checked', async () => {
 test('emit update to false when unchecked', async () => {
   const wrapper = mount(Checkbox, {
     props: {
-      disabled: false,
       value: true
     }
   })
-  const input = wrapper.find('input[type="checkbox"]')
+  const input = wrapper.get('input[type="checkbox"]')
   input.element.checked = false
   await input.trigger('input')
   expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(false)
 })
 
 test('updating prop also changes value', async () => {
-  const wrapper = mount(Checkbox, {
-    props: {
-      value: false
-    }
-  })
+  // we have to test this way as vue-test-utils doesn't offer a good way to test "checked"
+  const wrapper = mount(Checkbox)
   await wrapper.setProps({ value: true })
-  const input = wrapper.find('input[type="checkbox"]')
+  const input = wrapper.get('input[type="checkbox"]')
   expect(input.attributes('value')).toEqual('true')
 })
