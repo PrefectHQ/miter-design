@@ -11,8 +11,9 @@
     <input
       type="checkbox"
       :disabled="disabled"
-      v-model="value"
-      @input="$emit('update:value', $event.target.checked)"
+      v-model="value_"
+      :value="value_"
+      @input="$emit('update:modelValue', $event.target.checked)"
       @focus="handleFocus"
       @blur="handleBlur"
     />
@@ -27,12 +28,16 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'Checkbox',
   emits: {
-    'update:value'(...args: any[]) {
+    'update:modelValue'(...args: any[]) {
       return { ...args }
     }
   },
   props: {
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    modelValue: {
       type: Boolean,
       default: false
     },
@@ -54,6 +59,14 @@ export default defineComponent({
         ...(this.hovered ? ['hovered'] : []),
         ...(this.active ? ['hovered'] : [])
       ]
+    },
+    value_: {
+      get(): boolean {
+        return this.value || this.modelValue || false
+      },
+      set(val: boolean) {
+        this.$emit('update:modelValue', val)
+      }
     }
   },
   methods: {
