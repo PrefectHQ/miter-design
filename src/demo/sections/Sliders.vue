@@ -3,9 +3,11 @@
     <h3>Slider</h3>
     <div v-for="state in states" :key="state" class="my-2">
       <span v-if="logVal" class="font-weight-light text-capitalize pr-2">{{ state.state }}:</span>
-      <Slider v-model=state.val :min-val=minVal :max-val=maxVal :step-val="stepVal" :disabled="state.state == 'disabled'" />
-    </div>
+      <Slider v-model=state.val :min=minVal :max=maxVal :step="stepVal" :disabled="state.state == 'disabled'" />
+     <button @click="state.val += 1">plus</button> <button @click="state.val -= 1">minus</button> 
+     </div>
   </div>
+ 
 </template>
 
 <script lang="ts">
@@ -14,7 +16,7 @@ import { computed } from 'vue'
 
 @Options({})
 export default class Sliders extends Vue {
-  states = [{state: 'default', val: '3'} , {state: 'disabled', val: '5'}]
+  states = [{state: 'default', val: 8} , {state: 'disabled', val: 5}]
   stepVal=1 as number
   minVal= 0 as number
   maxVal=10 as number

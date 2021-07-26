@@ -11,21 +11,28 @@
     @focus="handleFocus"
     @blur="handleBlur"
     :disabled="disabled" 
-    :min="minVal" 
-    :max="maxVal" 
-    :step="stepVal"
-    :value="modelValue"
+    :min="min" 
+    :max="max" 
+    :step="step"
     class="slider"
+    :value="internalValue"
+    @input="handleInput"
     :id="label"
     :class="classList"
     :style="sliderVal"
-    @input="$emit('update:modelValue', $event.target.value)" />
+    />
 </template>
 
 
 <script lang="ts">
 
 import { defineComponent } from 'vue'
+
+interface event {
+  target: {
+    value: string
+  }
+}
 
 export default defineComponent ({
   name: 'Slider',  
@@ -34,21 +41,25 @@ export default defineComponent ({
           type: Boolean,
           default: false
       },
-      minVal: {
+      min: {
           type: Number,
           default: 0
       },
-      maxVal: {
+      max: {
           type: Number,
           default: 50
        },
-       stepVal: {
+       step: {
            type: Number,
            default: 1
        },
        modelValue: {
-           type: String,
-           required: true
+           type: Number,
+           required: false
+       },
+       value: {
+         type: Number,
+         required: false
        },
        label: {
          type: String,
@@ -72,16 +83,23 @@ computed: {
      [] 
   },
   sliderVal(): object {
-      const val = parseInt(this.modelValue)/(this.maxVal - this.minVal) * 100
+      const val = this.internalValue ? parseFloat(this.internalValue)/(this.max - this.min) * 100 : 0
       return {
           '--slider-val': `${val}%`
       }
   },
+  internalValue(): string | undefined {
+    return this.value ? this.value?.toString() : this.modelValue?.toString() 
+    }
 },
 mounted(): void {
     return
 },
 methods: {
+  handleInput(e: event) {
+    const num = parseFloat(e.target.value)
+    this.$emit('update:modelValue', num)
+  },
   handleMouseEnter(): void {
     if (this.disabled) return
     this.active=true
@@ -119,7 +137,8 @@ methods: {
     this.active = true
   }
 }
-})
+}
+)
 </script>
 
 
