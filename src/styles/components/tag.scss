@@ -64,23 +64,15 @@
     }
   }
 
-  &.primary {
-    background-color: variables.$primary;
-    color: variables.$primary;
+  @each $name, $color in variables.$colors {
+    &.#{$name} {
+      background-color: $color;
+      color: $color;
 
-    &:not(.outlined) {
-      background-color: variables.$primary;
-      color: variables.$text--white;
-    }
-  }
-
-  &.secondary {
-    background-color: variables.$success;
-    color: variables.$success;
-
-    &:not(.outlined) {
-      background-color: variables.$success;
-      color: variables.$text--white;
+      &:not(.outlined) {
+        background-color: $color;
+        color: variables.$text--white;
+      }
     }
   }
 }

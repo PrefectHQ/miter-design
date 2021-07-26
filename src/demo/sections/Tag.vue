@@ -4,9 +4,6 @@
 
     <h6>Click to toggle props</h6>
     <div>
-      <button @click="color = color == 'primary' ? 'secondary' : 'primary'"
-        >color:{{ color }}</button
-      >
       <button @click="disabled = !disabled">disabled:{{ disabled }}</button>
       <button @click="outlined = !outlined">outlined:{{ outlined }}</button>
     </div>
@@ -18,7 +15,7 @@
         v-for="style in tagStyles"
         :key="style"
         class="ml-1 text-capitalize"
-        :color="color"
+        :color="style"
         :disabled="disabled"
         :outlined="outlined"
       >
@@ -39,8 +36,7 @@ import { Vue, Options } from 'vue-class-component'
 @Options({})
 export default class Tag extends Vue {
   states = ['default', 'outlined', 'disabled']
-  tagStyles = ['primary', 'secondary']
-  color = 'primary'
+  tagStyles = ['primary', 'warning', 'error', 'primary-101']
   disabled = false
   outlined = false
 
