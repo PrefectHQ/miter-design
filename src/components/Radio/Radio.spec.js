@@ -77,3 +77,11 @@ test('emit update to false when unselected', async () => {
   await input.trigger('input')
   expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(false)
 })
+
+test('updating prop also changes value', async () => {
+  // we have to test this way as vue-test-utils doesn't offer a good way to test "checked"
+  const wrapper = mount(RadioButton)
+  await wrapper.setProps({ modelValue: true })
+  const input = wrapper.get('input[type="radio"]')
+  expect(input.attributes('value')).toEqual('true')
+})
