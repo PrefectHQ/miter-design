@@ -48,8 +48,8 @@ describe('disabled state', () => {
 describe('active states', () => {
   const wrapper = mount(Slider, {
     props: {
-     disabled: false,
-     modelValue: 3
+    disabled: false,
+    modelValue: 3
   }})
   const slider = wrapper.get('input')
 
@@ -95,9 +95,9 @@ describe('model', () => {
     const emit = wrapper.emitted()
     expect(emit['update:modelValue'][0]).toEqual([8])
         })
-      })
+})
 
-  describe('props', () => {
+describe('props', () => {
     test('passes max value', async () => {
         const wrapper = mount(Slider, {
             props: {
@@ -143,8 +143,8 @@ describe('model', () => {
         expect(label.text()).toBe('test-label')
   })
 
-  test('hides label if hideLabel is true', async () => {
-    const wrapper = mount(Slider, {
+    test('hides label if hideLabel is true', async () => {
+      const wrapper = mount(Slider, {
         props: {
           modelValue: 3, 
           label: "test-label",
@@ -154,9 +154,9 @@ describe('model', () => {
       expect(wrapper.find('[data-test="default"]').exists()).toBe(false)
 })
 
-test('shows label if hideLabel is false', async () => {
-  const wrapper = mount(Slider, {
-      props: {
+    test('shows label if hideLabel is false', async () => {
+      const wrapper = mount(Slider, {
+        props: {
         modelValue: 3, 
         label: "test-label",
         hideLabel: false
