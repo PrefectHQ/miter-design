@@ -62,7 +62,7 @@ export default defineComponent({
     },
     value_: {
       get(): boolean {
-        return this.value || this.modelValue || false
+        return this.value || this.modelValue
       },
       set(val: boolean) {
         this.$emit('update:modelValue', val)
