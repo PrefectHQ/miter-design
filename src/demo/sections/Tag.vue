@@ -17,7 +17,7 @@
       <Tag
         v-for="style in tagStyles"
         :key="style"
-        class="ml-2 text-capitalize"
+        class="ml-1 text-capitalize"
         :color="color"
         :disabled="disabled"
         :outlined="outlined"
