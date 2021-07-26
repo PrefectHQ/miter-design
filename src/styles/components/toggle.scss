@@ -1,0 +1,72 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.toggle {
+  @include mixins.input-transition;
+  align-items: center;
+  border: 1px;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 15px;
+  line-height: 20px;
+  position: absolute;
+
+  > input {
+    position: absolute;
+    height: 0;
+    width: 0;
+  }
+
+  .toggle-switch {
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+    border-radius: 100%;
+    margin-right: 12px;
+    border: 1px solid variables.$grey-4;
+    user-select: none;
+    &:after {
+      content: '';
+      position: absolute;
+      display: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 100%;
+      background: variables.$primary;
+      top: 5px;
+      left: 5px;
+    }
+  }
+
+  input:checked ~ .toggle-switch {
+    border: 2px solid variables.$primary;
+    &:after {
+      display: inline-block;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    color: variables.$inactive !important;
+    .toggle-switch {
+      border-color: variables.$inactive;
+      background: variables.$inactive;
+    }
+  }
+
+  &.disabled input:checked ~ .toggle-switch {
+    border: 2px solid variables.$inactive;
+    background: white;
+    &:after {
+      background: variables.$inactive;
+    }
+  }
+
+  &:focus,
+  &.hovered,
+  &.active {
+    .toggle-switch {
+      background-color: variables.$grey-5;
+    }
+  }
+}
