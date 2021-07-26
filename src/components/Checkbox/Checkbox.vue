@@ -11,8 +11,8 @@
     <input
       type="checkbox"
       :disabled="disabled"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.checked)"
+      v-model="value"
+      @input="$emit('update:value', $event.target.checked)"
       @focus="handleFocus"
       @blur="handleBlur"
     />
@@ -27,7 +27,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'Checkbox',
   emits: {
-    'update:modelValue'(...args: any[]) {
+    'update:value'(...args: any[]) {
       return { ...args }
     }
   },
@@ -36,7 +36,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    modelValue: {
+    value: {
       type: Boolean,
       default: false
     }

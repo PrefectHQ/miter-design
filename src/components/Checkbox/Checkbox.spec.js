@@ -56,24 +56,24 @@ test('emit update to true when checked', async () => {
   const wrapper = mount(Checkbox, {
     props: {
       disabled: false,
-      modelValue: false
+      value: false
     }
   })
   const input = wrapper.find('input[type="checkbox"]')
   input.element.checked = true
   await input.trigger('input')
-  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(true)
+  expect(wrapper.emitted('update:value')[0][0]).toEqual(true)
 })
 
 test('emit update to false when unchecked', async () => {
   const wrapper = mount(Checkbox, {
     props: {
       disabled: false,
-      modelValue: true
+      value: true
     }
   })
   const input = wrapper.find('input[type="checkbox"]')
   input.element.checked = false
   await input.trigger('input')
-  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(false)
+  expect(wrapper.emitted('update:value')[0][0]).toEqual(false)
 })

@@ -5,7 +5,7 @@
     <h5 class="mt-5">Checkbox</h5>
     <div v-for="state in states" :key="state" class="my-2">
       <span class="font-weight-light text-capitalize">{{ state.state }}:</span>
-      <Checkbox :disabled="state.state == 'disabled'" v-model="state.checked">
+      <Checkbox :disabled="state.state == 'disabled'" :value="state.checked">
         <span>Label</span>
       </Checkbox>
     </div>
