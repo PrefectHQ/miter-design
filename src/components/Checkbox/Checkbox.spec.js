@@ -51,8 +51,7 @@ describe('disabled state', () => {
 test('emit update to true when checked', async () => {
   const wrapper = mount(Checkbox)
   const input = wrapper.get('input[type="checkbox"]')
-  input.element.checked = true
-  await input.trigger('input')
+  await input.setValue(true)
   expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(true)
 })
 
@@ -63,8 +62,7 @@ test('emit update to false when unchecked', async () => {
     }
   })
   const input = wrapper.get('input[type="checkbox"]')
-  input.element.checked = false
-  await input.trigger('input')
+  await input.setValue(false)
   expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(false)
 })
 
