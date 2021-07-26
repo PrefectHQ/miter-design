@@ -22,8 +22,9 @@
         :disabled="disabled"
         :outlined="outlined"
       >
-        <span v-if="tagStyles[1] == style" class="icon-style">
-          <i class="material-icons">favorite</i>
+        <span v-if="tagStyles[1] == style">
+          <i class="pi pi-fire pi-1x"></i>
+
           tag
         </span>
         <span v-else>tag</span>
@@ -51,8 +52,4 @@ export default class Tag extends Vue {
 
 <style lang="scss" scoped>
 @use '../../styles/components/tag';
-
-.icon-style > i {
-  font-size: 11px;
-}
 </style>
