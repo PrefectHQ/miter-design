@@ -12,12 +12,14 @@
   position: absolute;
 
   > input {
+    margin-left: 6px;
     position: absolute;
     height: 0;
     width: 0;
   }
 
   .radio-button {
+    background: variables.$white;
     display: inline-block;
     height: 28px;
     width: 28px;
@@ -25,6 +27,7 @@
     margin-right: 12px;
     border: 1px solid variables.$grey-4;
     user-select: none;
+    z-index: 1;
     &:after {
       content: '';
       position: absolute;
@@ -56,7 +59,7 @@
 
   &.disabled input:checked ~ .radio-button {
     border: 2px solid variables.$inactive;
-    background: white;
+    background: variables.$white;
     &:after {
       background: variables.$inactive;
     }
