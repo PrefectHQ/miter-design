@@ -1,8 +1,8 @@
 <template>
   <div class="avatar" :class="classList">
-    <span data-test="default">
+    <div data-test="default">
       <slot />
-    </span>
+    </div>
   </div>
 </template>
 

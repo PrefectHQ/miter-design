@@ -19,7 +19,9 @@
       style="display: inline-flex"
       class="my-2 ml-1"
     >
-      <Avatar :color="style"> <i class="pi pi-fire pi-2x"></i></Avatar>
+      <Avatar :color="style">
+        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="John" />
+      </Avatar>
     </div>
   </div>
 </template>
