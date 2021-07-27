@@ -1,20 +1,31 @@
+@use '../abstracts/variables';
 .avatar {
-  background-color: transparent; // make grey background for default
+  background-color: transparent;
+
   font-size: 24px;
   height: 24px;
   line-height: 24px;
+
   padding: 0;
   user-select: none;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
 
-  // make it round - which is default
   border-radius: 50%;
   height: 64px;
   width: 64px;
   overflow: hidden;
+  letter-spacing: 0.18px;
 
-  border: solid red;
+  background: variables.$grey-4;
+  color: variables.$white;
+
+  @each $name, $color in variables.$colors {
+    &.#{'' + $name} {
+      background-color: $color;
+      color: variables.$white;
+    }
+  }
 }

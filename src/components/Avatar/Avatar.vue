@@ -8,17 +8,16 @@
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-import { computed } from 'vue'
 
 class Props {
-  color = prop<string>({ default: 'secondary' })
+  color = prop<string>({ default: 'primary' })
 }
 
 @Options({})
 export default class Avatar extends Vue.with(Props) {
-  classList = computed(() => {
+  get classList() {
     return [this.color]
-  })
+  }
 
   mounted(): void {
     return
