@@ -94,8 +94,6 @@ export default defineComponent({
       const val = this.internalValue
         ? ((parseFloat(this.internalValue) - this.min) / diff) * 100
         : 0
-
-      // const wholeVal = Math.floor(val)
       return {
         '--slider-val': `${val}%`
       }
