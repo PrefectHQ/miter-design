@@ -11,7 +11,7 @@
   overflow: hidden;
   letter-spacing: 0.18px;
 
-  background: variables.$grey-4;
+  background: variables.$primary;
   color: variables.$white;
 
   @each $name, $color in variables.$colors {
