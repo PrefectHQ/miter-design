@@ -9,7 +9,7 @@ describe('disabled state', () => {
     const wrapper = mount(Slider, {
       props: {
         disabled: true,
-        modelValue: 3
+        modelValue: '3'
       }
     })
 
@@ -22,7 +22,7 @@ describe('disabled state', () => {
     const wrapper = mount(Slider, {
       props: {
         disabled: true,
-        modelValue: 3
+        modelValue: '3'
       }
     })
 
@@ -35,7 +35,7 @@ describe('disabled state', () => {
     const wrapper = mount(Slider, {
       props: {
         disabled: false,
-        modelValue: 3
+        modelValue: '3'
       }
     })
 
@@ -49,7 +49,7 @@ describe('active states', () => {
   const wrapper = mount(Slider, {
     props: {
     disabled: false,
-    modelValue: 3
+    modelValue: '3'
   }})
   const slider = wrapper.get('input')
 
@@ -84,7 +84,7 @@ describe('model', () => {
     test('updates the inner & outer value', async () => {
         const wrapper = mount(Slider, {
             props: {
-              modelValue: 3, 
+              modelValue: '3', 
               label: "test-label"
             }
           })
@@ -93,7 +93,7 @@ describe('model', () => {
     await rangeInput.setValue('8')  
     expect(wrapper.find('input[type="range"]').element.value).toBe('8')
     const emit = wrapper.emitted()
-    expect(emit['update:modelValue'][0]).toEqual([8])
+    expect(emit['update:modelValue'][0]).toEqual(['8'])
         })
 })
 
@@ -101,7 +101,7 @@ describe('props', () => {
     test('passes max value', async () => {
         const wrapper = mount(Slider, {
             props: {
-              modelValue: 3, 
+              modelValue: '3', 
               label: "test-label",
               max: 20
             }
@@ -112,7 +112,7 @@ describe('props', () => {
     test('passes min value', async () => {
           const wrapper = mount(Slider, {
               props: {
-                modelValue: 3, 
+                modelValue: '3', 
                 label: "test-label",
                 min: 1
               }
@@ -124,7 +124,7 @@ describe('props', () => {
             const wrapper = mount(Slider, {
                 props: {
                   disabled: true,
-                  modelValue: 3, 
+                  modelValue: '3', 
                   label: "test-label",
                   step: 2
                 }
@@ -135,7 +135,7 @@ describe('props', () => {
     test('passes label', async () => {
               const wrapper = mount(Slider, {
                   props: {
-                    modelValue: 3, 
+                    modelValue: '3', 
                     label: "test-label",
                   }
                 })
@@ -146,7 +146,7 @@ describe('props', () => {
     test('hides label if hideLabel is true', async () => {
       const wrapper = mount(Slider, {
         props: {
-          modelValue: 3, 
+          modelValue: '3', 
           label: "test-label",
           hideLabel: true
         }
@@ -157,7 +157,7 @@ describe('props', () => {
     test('shows label if hideLabel is false', async () => {
       const wrapper = mount(Slider, {
         props: {
-        modelValue: 3, 
+        modelValue: '3', 
         label: "test-label",
         hideLabel: false
       }
