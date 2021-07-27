@@ -1,17 +1,20 @@
 <template>
   <div>
     <h3>Radio Buttons</h3>
-
     <h5 class="mt-5">Radio</h5>
-    <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state.state }}:</span>
-      <RadioButton
-        :disabled="state.state == 'disabled'"
-        v-model="state.checked"
-      >
-        <span>Label</span>
-      </RadioButton>
-    </div>
+    <RadioButton
+      v-for="(state, i) in states"
+      :key="i"
+      class="my-2"
+      name="button-group"
+      :disabled="state == 'disabled'"
+      :label="i"
+      :value="state"
+      :checked="selected == state"
+      v-model="selected"
+    >
+      <span>{{ state }}</span>
+    </RadioButton>
   </div>
 </template>
 
@@ -24,10 +27,8 @@ export default defineComponent({
   components: { RadioButton },
   data() {
     return {
-      states: [
-        { state: 'enabled', checked: false },
-        { state: 'disabled', checked: false }
-      ]
+      selected: 'enabled',
+      states: ['enabled', 'also enabled', 'disabled']
     }
   }
 })

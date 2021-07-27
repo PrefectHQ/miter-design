@@ -11,8 +11,11 @@
     <input
       type="radio"
       :disabled="disabled"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.checked)"
+      :name="name"
+      :value="value"
+      :checked="checked"
+      v-model="value_"
+      @input="$emit('update:modelValue', value_)"
       @focus="handleFocus"
       @blur="handleBlur"
     />
@@ -32,13 +35,21 @@ export default defineComponent({
     }
   },
   props: {
+    checked: {
+      type: Boolean,
+      default: false
+    },
     disabled: {
       type: Boolean,
       default: false
     },
-    modelValue: {
-      type: Boolean,
-      default: false
+    value: {
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      default: 'button-group'
     }
   },
   data() {
@@ -54,6 +65,14 @@ export default defineComponent({
         ...(this.hovered ? ['hovered'] : []),
         ...(this.active ? ['hovered'] : [])
       ]
+    },
+    value_: {
+      get(): String {
+        return this.value
+      },
+      set() {
+        this.$emit('update:modelValue', this.value)
+      }
     }
   },
   methods: {
