@@ -10,6 +10,13 @@
   white-space: nowrap;
   cursor: default;
   display: inline-block;
+
+  &:not(.outlined) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   overflow: hidden;
   height: 26px;
   cursor: default;
@@ -30,6 +37,7 @@
 
     display: inline-flex;
     justify-content: center;
+    align-items: center;
 
     :first-child {
       display: inline-flex;
