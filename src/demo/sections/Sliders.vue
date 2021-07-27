@@ -6,15 +6,17 @@
         >{{ state.state }}:</span
       >
       <Slider
-        v-model="buttonVal"
+        v-model="state.val"
         :min="minVal"
         :max="maxVal"
         :step="stepVal"
         :disabled="state.state == 'disabled'"
       />
     </div>
-    <button @click="buttonVal += 1" style="margin-right: 10px">Add 1 </button>
-    <button @click="buttonVal -= 1">Minus 1</button>
+    <button @click="minVal += 1" style="margin-right: 10px">{{
+      minVal
+    }}</button>
+    <button @click="maxVal += 1">{{ maxVal }}</button>
   </div>
 </template>
 
@@ -27,17 +29,19 @@ export default class Sliders extends Vue {
   stepVal = 1 as number
   minVal = 0 as number
   maxVal = 10 as number
-  buttonVal = 2 as number
   states = [
-    { state: 'default', val: this.buttonVal },
-    { state: 'disabled', val: 5 }
+    { state: 'default', val: '3' },
+    { state: 'disabled', val: '2' }
   ]
 
   mounted(): void {
     return
   }
   logVal = computed(() => {
-    console.log('val', this.buttonVal)
+    console.log(
+      'val',
+      this.states.map((state) => state.val)
+    )
     return true
   })
 }

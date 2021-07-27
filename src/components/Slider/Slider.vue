@@ -63,11 +63,11 @@ export default defineComponent({
       default: 1
     },
     modelValue: {
-      type: Number,
+      type: String,
       required: false
     },
     value: {
-      type: Number,
+      type: String,
       required: false
     },
     label: {
@@ -90,15 +90,18 @@ export default defineComponent({
       return this.disabled ? ['disabled'] : this.active ? ['active'] : []
     },
     sliderVal(): object {
+      const diff = this.max - this.min
       const val = this.internalValue
-        ? (parseFloat(this.internalValue) / (this.max - this.min)) * 100
+        ? ((parseFloat(this.internalValue) - this.min) / diff) * 100
         : 0
+
+      // const wholeVal = Math.floor(val)
       return {
         '--slider-val': `${val}%`
       }
     },
-    internalValue(): string | undefined {
-      return this.value ? this.value?.toString() : this.modelValue?.toString()
+    internalValue(): string {
+      return this.value || this.modelValue || '0'
     }
   },
   mounted(): void {
@@ -106,8 +109,7 @@ export default defineComponent({
   },
   methods: {
     handleInput(e: event) {
-      const num = parseFloat(e.target.value)
-      this.$emit('update:modelValue', num)
+      this.$emit('update:modelValue', e.target.value)
     },
     handleMouseEnter(): void {
       if (this.disabled) return
