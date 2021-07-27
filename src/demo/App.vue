@@ -21,7 +21,7 @@ import Links from './sections/Links.vue'
     Buttons,
     Cards,
     Links,
-    Toggles
+    Toggles,
     Checkboxes
   }
 })
