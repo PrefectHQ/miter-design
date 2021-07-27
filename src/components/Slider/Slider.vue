@@ -16,7 +16,7 @@
     @keyup.enter.space="handleKeyup"
     @focus="handleFocus"
     @blur="handleBlur"
-    :disabled="disabled"
+    :disabled="disabled || readonly"
     :min="min"
     :max="max"
     :step="step"
@@ -43,6 +43,10 @@ export default defineComponent({
   name: 'Slider',
   props: {
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    readonly: {
       type: Boolean,
       default: false
     },
