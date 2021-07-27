@@ -2,63 +2,77 @@
 @use '../abstracts/mixins';
 
 .toggle {
-  @include mixins.input-transition;
   align-items: center;
-  border: 1px;
   cursor: pointer;
   display: inline-flex;
   font-size: 15px;
   line-height: 20px;
   position: absolute;
 
+  .label {
+    margin-left: 64px;
+  }
+
   > input {
+    margin-left: 6px;
     position: absolute;
     height: 0;
     width: 0;
   }
 
   .toggle-switch {
+    @include mixins.input-transition;
     display: inline-block;
-    height: 28px;
-    width: 28px;
-    border-radius: 100%;
-    margin-right: 12px;
     border: 1px solid variables.$grey-4;
+    border-radius: 16px;
+    margin-right: 12px;
     user-select: none;
-    &:after {
+    position: absolute;
+    height: 28px;
+    width: 52px;
+    &:before {
+      @include mixins.input-transition;
       content: '';
       position: absolute;
-      display: none;
-      width: 18px;
-      height: 18px;
+      width: 24px;
+      height: 24px;
       border-radius: 100%;
-      background: variables.$primary;
-      top: 5px;
-      left: 5px;
+      background: variables.$grey-4;
+      top: 1px;
+      left: 1px;
     }
   }
 
-  input:checked ~ .toggle-switch {
-    border: 2px solid variables.$primary;
-    &:after {
-      display: inline-block;
+  input:checked + .toggle-switch {
+    border: 1px solid variables.$primary;
+    background-color: variables.$primary;
+    &:before {
+      background-color: variables.$white;
+      -webkit-transform: translateX(24px);
+      -ms-transform: translateX(24px);
+      transform: translateX(24px);
     }
   }
 
   &.disabled {
     cursor: not-allowed;
-    color: variables.$inactive !important;
     .toggle-switch {
       border-color: variables.$inactive;
-      background: variables.$inactive;
+      background-color: variables.$inactive;
+      &:before {
+        background-color: variables.$grey-5;
+      }
     }
   }
 
   &.disabled input:checked ~ .toggle-switch {
-    border: 2px solid variables.$inactive;
-    background: white;
-    &:after {
-      background: variables.$inactive;
+    border-color: variables.$inactive;
+    background-color: variables.$inactive;
+    &:before {
+      background-color: variables.$grey-5;
+      -webkit-transform: translateX(24px);
+      -ms-transform: translateX(24px);
+      transform: translateX(24px);
     }
   }
 

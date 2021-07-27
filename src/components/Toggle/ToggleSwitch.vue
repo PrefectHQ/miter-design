@@ -11,13 +11,14 @@
     <input
       type="checkbox"
       :disabled="disabled"
-      :value="modelValue"
+      v-model="value_"
+      :value="value_"
       @input="$emit('update:modelValue', $event.target.checked)"
       @focus="handleFocus"
       @blur="handleBlur"
     />
     <span class="toggle-switch"></span>
-    <span data-test="default"><slot /></span>
+    <span class="label" data-test="default"><slot /></span>
   </label>
 </template>
 
@@ -39,6 +40,10 @@ export default defineComponent({
     modelValue: {
       type: Boolean,
       default: false
+    },
+    value: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -54,6 +59,14 @@ export default defineComponent({
         ...(this.hovered ? ['hovered'] : []),
         ...(this.active ? ['hovered'] : [])
       ]
+    },
+    value_: {
+      get(): boolean {
+        return this.value || this.modelValue
+      },
+      set(val: boolean) {
+        this.$emit('update:modelValue', val)
+      }
     }
   },
   methods: {
