@@ -3,7 +3,7 @@
     <h3>Avatar</h3>
 
     <div class="avatars">
-      <Avatar :color="'success'" class="avatar">
+      <Avatar :color="'primary-101'" class="avatar">
         <div>+1</div>
       </Avatar>
       <Avatar class="avatar">
