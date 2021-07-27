@@ -4,9 +4,6 @@
 
   padding: 0;
   user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   white-space: nowrap;
 
   border-radius: 50%;
@@ -22,7 +19,6 @@
   @each $name, $color in variables.$colors {
     &.#{'' + $name} {
       background-color: $color;
-      color: variables.$white;
 
       > div {
         display: inline-flex;
