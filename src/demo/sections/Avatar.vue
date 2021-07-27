@@ -4,18 +4,18 @@
 
     <div class="avatars">
       <Avatar :color="'primary-101'" class="avatar">
-        <div>+1</div>
+        <div>+5</div>
       </Avatar>
       <Avatar class="avatar">
-        <div> A </div>
+        <div> SS </div>
       </Avatar>
 
       <Avatar :color="'error'" class="avatar">
-        <div> B</div>
+        <div>KA</div>
       </Avatar>
 
       <Avatar :color="'warning'" class="avatar">
-        <div>C</div>
+        <div>TT</div>
       </Avatar>
     </div>
 
