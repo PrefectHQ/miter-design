@@ -48,8 +48,6 @@
     background-color: variables.$primary;
     &:before {
       background-color: variables.$white;
-      -webkit-transform: translateX(24px);
-      -ms-transform: translateX(24px);
       transform: translateX(24px);
     }
   }
@@ -70,8 +68,6 @@
     background-color: variables.$inactive;
     &:before {
       background-color: variables.$grey-5;
-      -webkit-transform: translateX(24px);
-      -ms-transform: translateX(24px);
       transform: translateX(24px);
     }
   }
