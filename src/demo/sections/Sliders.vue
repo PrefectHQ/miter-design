@@ -13,10 +13,6 @@
         :disabled="state.state == 'disabled'"
       />
     </div>
-    <button @click="minVal += 1" style="margin-right: 10px">{{
-      minVal
-    }}</button>
-    <button @click="maxVal += 1">{{ maxVal }}</button>
   </div>
 </template>
 

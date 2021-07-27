@@ -102,9 +102,6 @@ export default defineComponent({
       return this.value || this.modelValue || '0'
     }
   },
-  mounted(): void {
-    return
-  },
   methods: {
     handleInput(e: event) {
       this.$emit('update:modelValue', e.target.value)
@@ -113,34 +110,27 @@ export default defineComponent({
       if (this.disabled) return
       this.active = true
     },
-
     handleMouseLeave(): void {
       if (this.disabled) return
       this.active = false
     },
-
     handleMouseDown(): void {
       if (this.disabled) return
       this.active = true
     },
-
     handleMouseUp(): void {
       this.active = false
     },
-
     handleFocus(): void {
       if (this.disabled) return
       this.active = true
     },
-
     handleBlur(): void {
       this.active = false
     },
-
     handleKeyup(): void {
       this.active = false
     },
-
     handleKeydown(): void {
       if (this.disabled) return
       this.active = true
