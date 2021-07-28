@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import Avatar from './Avatar.vue'
 
 test('displays text in the default slot', () => {
-  const text = 'TS!'
+  const text = 'TS'
   const wrapper = mount(Avatar, {
     slots: {
       default: text
@@ -15,7 +15,7 @@ test('displays text in the default slot', () => {
 })
 
 describe('color prop', () => {
-  test('defaults to the primary  when no color prop is passed', () => {
+  test('defaults to primary when no color prop is passed', () => {
     const wrapper = mount(Avatar, {
       props: {}
     })
