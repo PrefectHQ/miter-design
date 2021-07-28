@@ -1,43 +1,22 @@
 <template>
   <div>
     <h3>Avatar</h3>
-    <div style="display: flex">
-      <div
-        v-for="style in backgroundColors"
-        :key="style"
-        class="my-1 ml-1"
-        style="inline-flex"
-      >
-        <Avatar :color="style">
-          <img
-            src="https://images.ctfassets.net/gm98wzqotmnx/ZXkXAGWyYCBGhH4B1p123/6284ca02f0acee1644a3ed64d84432a7/marvin.png"
-            alt="John"
-          />
-        </Avatar>
-      </div>
-    </div>
 
-    <div style="display: flex">
-      <div
+    <div class="row">
+      <Avatar
         v-for="style in backgroundColors"
         :key="style"
-        style="display: flex"
-        class="my-1 ml-1"
+        :color="style"
+        class="mr-1"
       >
-        <Avatar :color="style"> TS </Avatar>
-      </div>
-    </div>
-    <div style="display: flex">
-      <div
-        v-for="style in backgroundColors"
-        :key="style"
-        style="display: flex"
-        class="my-1 ml-1"
-      >
-        <Avatar :color="style">
-          <i class="pi pi-menu pi-2x"></i>
-        </Avatar>
-      </div>
+        <span v-if="backgroundColors[0] == style">TS</span>
+        <img
+          v-else-if="backgroundColors[1] == style"
+          src="https://images.ctfassets.net/gm98wzqotmnx/ZXkXAGWyYCBGhH4B1p123/6284ca02f0acee1644a3ed64d84432a7/marvin.png"
+          alt="marvin"
+        />
+        <i v-else class="pi pi-fire pi-2x"></i>
+      </Avatar>
     </div>
   </div>
 </template>
@@ -58,16 +37,9 @@ export default class Avatar extends Vue {
 <style lang="scss" scoped>
 @use '@/styles/components/avatar';
 
-.avatars {
+.row {
   display: inline-flex;
-  flex-direction: row-reverse;
-}
-
-.avatar {
-  position: relative;
-}
-
-.avatar:not(:last-child) {
-  margin-left: -15px;
+  justify-content: center;
+  align-items: center;
 }
 </style>

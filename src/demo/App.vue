@@ -4,8 +4,8 @@
     <Buttons class="mt-10" />
     <Checkboxes />
     <Links class="mt-10" />
-    <Avatar class="mt-10" />
     <Tag class="mt-10" />
+    <Avatar class="mt-10" />
   </div>
 </template>
 
