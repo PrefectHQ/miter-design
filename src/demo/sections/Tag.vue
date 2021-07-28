@@ -7,26 +7,21 @@
       <button @click="disabled = !disabled">disabled:{{ disabled }}</button>
       <button @click="outlined = !outlined">outlined:{{ outlined }}</button>
     </div>
+    <Tag
+      v-for="style in tagStyles"
+      :key="style"
+      class="mr-1 text-capitalize mt-2"
+      :color="style"
+      :disabled="disabled"
+      :outlined="outlined"
+    >
+      <span v-if="tagStyles[1] == style">
+        <i class="pi pi-fire pi-1x"></i>
 
-    <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
-
-      <Tag
-        v-for="style in tagStyles"
-        :key="style"
-        class="ml-1 text-capitalize"
-        :color="style"
-        :disabled="disabled"
-        :outlined="outlined"
-      >
-        <span v-if="tagStyles[1] == style">
-          <i class="pi pi-fire pi-1x"></i>
-
-          tag
-        </span>
-        <span v-else>tag</span>
-      </Tag>
-    </div>
+        tag
+      </span>
+      <span v-else>tag</span>
+    </Tag>
   </div>
 </template>
 
@@ -35,8 +30,7 @@ import { Vue, Options } from 'vue-class-component'
 
 @Options({})
 export default class Tag extends Vue {
-  states = ['default', 'outlined', 'disabled']
-  tagStyles = ['primary', 'warning', 'error', 'primary-101']
+  tagStyles = ['primary', 'error']
   disabled = false
   outlined = false
 
