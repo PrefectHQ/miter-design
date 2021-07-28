@@ -21,8 +21,9 @@
   }
 
   .toggle-switch {
-    @include mixins.input-transition;
+    @include mixins.input-transition-long;
     display: inline-block;
+    background: variables.$white;
     border: 1px solid variables.$grey-4;
     border-radius: 16px;
     margin-right: 12px;
@@ -31,7 +32,7 @@
     height: 28px;
     width: 52px;
     &:before {
-      @include mixins.input-transition;
+      @include mixins.input-transition-long;
       content: '';
       position: absolute;
       width: 24px;
