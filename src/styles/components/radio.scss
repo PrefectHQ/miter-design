@@ -6,7 +6,6 @@
 }
 
 .radio {
-  @include mixins.input-transition;
   align-items: center;
   border: 1px;
   cursor: pointer;
@@ -23,6 +22,7 @@
   }
 
   .radio-button {
+    @include mixins.input-transition-long;
     background: variables.$white;
     display: inline-block;
     height: 28px;
@@ -33,6 +33,7 @@
     user-select: none;
     z-index: 1;
     &:after {
+      @include mixins.input-transition-long;
       content: '';
       position: absolute;
       display: none;
