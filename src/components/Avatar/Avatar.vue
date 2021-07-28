@@ -16,7 +16,7 @@ class Props {
 @Options({})
 export default class Avatar extends Vue.with(Props) {
   get classList() {
-    return [this.color]
+    return this.color
   }
 
   mounted(): void {
