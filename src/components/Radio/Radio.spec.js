@@ -48,30 +48,27 @@ describe('disabled state', () => {
   })
 })
 
-test('emit update to true when selected', async () => {
-  const wrapper = mount(RadioButton)
-  const input = wrapper.get('input[type="radio"]')
-  input.element.checked = true
-  await input.trigger('input')
-  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(true)
-})
-
-test('emit update to false when unselected', async () => {
+test('emit button value when selected', async () => {
+  const buttonValue = 'radio-button'
   const wrapper = mount(RadioButton, {
     props: {
-      modelValue: true
+      value: buttonValue
     }
   })
-  const input = wrapper.get('input[type="radio"]')
-  input.element.checked = false
-  await input.trigger('input')
-  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(false)
+  const radio = wrapper.get('input[type="radio"]')
+  radio.element.selected = true
+  await radio.trigger('change')
+  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(buttonValue)
 })
 
 test('updating prop also changes value', async () => {
   // we have to test this way as vue-test-utils doesn't offer a good way to test "checked"
-  const wrapper = mount(RadioButton)
-  await wrapper.setProps({ modelValue: true })
+  const wrapper = mount(RadioButton, {
+    props: {
+      value: 'another-button'
+    }
+  })
+  await wrapper.setProps({ value: 'this-button' })
   const input = wrapper.get('input[type="radio"]')
-  expect(input.attributes('value')).toEqual('true')
+  expect(input.attributes('value')).toEqual('this-button')
 })
