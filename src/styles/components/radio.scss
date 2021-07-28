@@ -1,6 +1,10 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
+.wrapper {
+  height: 28px;
+}
+
 .radio {
   @include mixins.input-transition;
   align-items: center;

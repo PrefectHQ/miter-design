@@ -1,27 +1,29 @@
 <template>
-  <label
-    class="radio ml-2"
-    :class="classList"
-    :disabled="disabled"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
-    @mousedown="handleMouseDown"
-    @mouseup="handleMouseUp"
-  >
-    <input
-      type="radio"
+  <div class="wrapper">
+    <label
+      class="radio ml-2"
+      :class="classList"
       :disabled="disabled"
-      :name="name"
-      :value="value"
-      :checked="checked"
-      v-model="value_"
-      @input="$emit('update:modelValue', value_)"
-      @focus="handleFocus"
-      @blur="handleBlur"
-    />
-    <span class="radio-button"></span>
-    <span data-test="default"><slot /></span>
-  </label>
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+      @mousedown="handleMouseDown"
+      @mouseup="handleMouseUp"
+    >
+      <input
+        type="radio"
+        :disabled="disabled"
+        :name="name"
+        :value="value"
+        :checked="checked"
+        v-model="value_"
+        @input="$emit('update:modelValue', value_)"
+        @focus="handleFocus"
+        @blur="handleBlur"
+      />
+      <span class="radio-button"></span>
+      <span data-test="default"><slot /></span>
+    </label>
+  </div>
 </template>
 
 <script lang="ts">
