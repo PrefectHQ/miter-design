@@ -4,6 +4,7 @@
     <Buttons class="mt-10" />
     <Checkboxes />
     <Links class="mt-10" />
+    <Tag class="mt-10" />
   </div>
 </template>
 
@@ -13,13 +14,15 @@ import Buttons from './sections/Buttons.vue'
 import Cards from './sections/Cards.vue'
 import Checkboxes from './sections/Checkboxes.vue'
 import Links from './sections/Links.vue'
+import Tag from './sections/Tag.vue'
 
 @Options({
   components: {
     Buttons,
     Cards,
+    Links,
     Checkboxes,
-    Links
+    Tag
   }
 })
 export default class App extends Vue {}
