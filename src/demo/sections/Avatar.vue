@@ -1,24 +1,6 @@
 <template>
   <div>
     <h3>Avatar</h3>
-
-    <div class="avatars">
-      <Avatar :color="'primary-101'" class="avatar">
-        <div>+5</div>
-      </Avatar>
-      <Avatar class="avatar">
-        <div> SS </div>
-      </Avatar>
-
-      <Avatar :color="'error'" class="avatar">
-        <div>KA</div>
-      </Avatar>
-
-      <Avatar :color="'warning'" class="avatar">
-        <div>TT</div>
-      </Avatar>
-    </div>
-
     <div style="display: flex">
       <div
         v-for="style in backgroundColors"
@@ -28,10 +10,21 @@
       >
         <Avatar :color="style">
           <img
-            src="https://www.w3schools.com/howto/img_avatar.png"
+            src="https://images.ctfassets.net/gm98wzqotmnx/ZXkXAGWyYCBGhH4B1p123/6284ca02f0acee1644a3ed64d84432a7/marvin.png"
             alt="John"
           />
         </Avatar>
+      </div>
+    </div>
+
+    <div style="display: flex">
+      <div
+        v-for="style in backgroundColors"
+        :key="style"
+        style="display: flex"
+        class="my-1 ml-1"
+      >
+        <Avatar :color="style"> TS </Avatar>
       </div>
     </div>
     <div style="display: flex">
@@ -42,7 +35,7 @@
         class="my-1 ml-1"
       >
         <Avatar :color="style">
-          <i class="pi pi-fire pi-2x"></i>
+          <i class="pi pi-menu pi-2x"></i>
         </Avatar>
       </div>
     </div>
