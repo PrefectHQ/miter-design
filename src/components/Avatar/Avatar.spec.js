@@ -24,21 +24,14 @@ describe('color prop', () => {
     expect(avatar.classes()).toContain('primary')
   })
 
-  test('check if the computed style contains the color prop if updated', async () => {
+  test('classlist contains the color prop as a class when passed and does not contain the color prop when changed', async () => {
     const wrapper = mount(Avatar, {
       props: { color: 'primary' }
     })
     await wrapper.setProps({ color: 'error' })
     expect(wrapper.vm.classList).toContain('error')
-  })
 
-  test('passes the color prop as a class when passed', () => {
-    const wrapper = mount(Avatar, {
-      props: { color: 'error' }
-    })
-
-    const avatar = wrapper.get('.avatar')
-
-    expect(avatar.classes()).toContain('error')
+    await wrapper.setProps({ color: 'warning' })
+    expect(wrapper.vm.classList).not.toContain('error')
   })
 })

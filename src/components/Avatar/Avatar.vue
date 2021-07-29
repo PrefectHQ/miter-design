@@ -25,6 +25,6 @@ export default class Avatar extends Vue.with(Props) {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use '../../styles/components/avatar';
 </style>

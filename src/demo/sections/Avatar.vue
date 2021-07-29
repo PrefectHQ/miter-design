@@ -35,8 +35,6 @@ export default class Avatar extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/components/avatar';
-
 .row {
   display: inline-flex;
   justify-content: center;
