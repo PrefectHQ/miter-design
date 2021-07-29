@@ -2,6 +2,7 @@
   <div class="pt-5 px-10 pb-10" v-cloak>
     <Cards />
     <Buttons class="mt-10" />
+    <Toggles class="mt-10" />
     <RadioButtons class="mt-10" />
     <Checkboxes />
     <Links class="mt-10" />
@@ -12,6 +13,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import Buttons from './sections/Buttons.vue'
+import Toggles from './sections/Toggles.vue'
 import Cards from './sections/Cards.vue'
 import RadioButtons from './sections/RadioButtons.vue'
 import Checkboxes from './sections/Checkboxes.vue'
@@ -24,6 +26,7 @@ import Tag from './sections/Tag.vue'
     Cards,
     RadioButtons,
     Links,
+    Toggles,
     Checkboxes,
     Tag
   }
