@@ -22,8 +22,16 @@ $cuts: 8, 16, 24, 32, 40, 48;
   transition: all 250ms;
 }
 
-@mixin chamfer($cut-length, $color, $border-width: 0, $border-color: $color) {
+@mixin chamfer(
+  $cut-length,
+  $border-radius,
+  $color,
+  $border-width: 0,
+  $border-color: $color
+) {
+  display: inline-block;
   position: relative;
+  border-radius: #{$border-radius}px;
   background: linear-gradient(
     315deg,
     transparent #{list.nth($cuts, $cut-length)}px,
@@ -31,6 +39,7 @@ $cuts: 8, 16, 24, 32, 40, 48;
   );
   > div:first-of-type {
     position: absolute;
+    border-radius: #{$border-radius}px;
     background: linear-gradient(
       315deg,
       transparent #{list.nth($cuts, $cut-length)}px,
