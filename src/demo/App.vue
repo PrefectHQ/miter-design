@@ -40,8 +40,10 @@ export default class App extends Vue {}
   display: none;
 }
 .miter {
-  height: 36px;
-  width: 150px;
-  @include mixins.chamfer(1, 4, variables.$white, 1, variables.$primary);
+  height: 200px;
+  width: 300px;
+  @include mixins.miter-on-hover(4);
+  @include mixins.miter-border(1, pink);
+  @include mixins.miter-interactive;
 }
 </style>
