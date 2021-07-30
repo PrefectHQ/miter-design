@@ -2,7 +2,7 @@
 @use './variables';
 
 $cuts: 8, 16, 24, 32, 40, 48;
-$bottom: -50, -40, -30, -20, -20, -20;
+$bottom: -52, -42, -32, -22, -22, -22;
 $right: -12.5, -14.5, -16.5, -18.5, -10.5, -2.5;
 
 @mixin input-transition {
@@ -13,11 +13,10 @@ $right: -12.5, -14.5, -16.5, -18.5, -10.5, -2.5;
   transition: all 250ms;
 }
 
-@mixin miter($cut-length, $background-color: variables.$white) {
+@mixin miter($cut-length) {
   position: relative;
 
   > :first-child {
-    background-color: $background-color;
     clip-path: polygon(
       0 0,
       100% 0,

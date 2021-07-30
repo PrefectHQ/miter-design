@@ -4,16 +4,15 @@
 .card {
   @include mixins.input-transition;
   @include mixins.miter(2);
+  @include mixins.miter-border(1, variables.$grey-4, 4);
 
-  background-color: variables.$grey-4;
-  border-radius: 4px;
   display: block;
   height: min-content;
   padding: 1px;
   position: relative;
 
   > section {
-    @include mixins.miter(2, true);
+    @include mixins.miter(2);
     align-content: flex-start;
     background-color: variables.$white;
     border-radius: 3px;
