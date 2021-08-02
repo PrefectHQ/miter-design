@@ -101,8 +101,9 @@
   }
 
   &.outlined {
-    color: variables.$grey-1;
     background-color: variables.$grey-4;
+    color: variables.$grey-1;
+    transition: background-color 0s, clip-path 0s !important;
 
     &:active {
       background-color: transparent;
