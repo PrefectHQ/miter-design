@@ -2,7 +2,7 @@
 @use '../abstracts/mixins';
 
 .tag {
-  @include mixins.miter(1);
+  @include mixins.miter-original(1);
   border: none;
   border-radius: 3px;
   padding: 0;
@@ -51,7 +51,7 @@
     transition: background-color 0s, clip-path 0s !important;
 
     > div {
-      @include mixins.miter(1, true);
+      @include mixins.miter-original(1, true);
       position: relative;
       background-color: variables.$white;
 

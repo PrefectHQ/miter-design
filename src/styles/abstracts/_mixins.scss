@@ -13,6 +13,16 @@ $right: -12.5, -14.5, -16.5, -18.5, -10.5, -2.5;
   transition: all 250ms;
 }
 
+@mixin miter-original($i, $inner: false) {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - #{list.nth($cuts, $i)}px + #{if($inner, 0.5px, 0px)}),
+    calc(100% - #{list.nth($cuts, $i)}px + #{if($inner, 0.5px, 0px)}) 100%,
+    0 100%
+  );
+}
+
 @mixin miter($cut-length) {
   position: relative;
 
