@@ -6,11 +6,8 @@
     <RadioButtons class="mt-10" />
     <Checkboxes />
     <Links class="mt-10" />
-    <<<<<<< HEAD
     <Sliders class="mt-10" />
-    =======
     <Tag class="mt-10" />
-    >>>>>>> main
   </div>
 </template>
 
