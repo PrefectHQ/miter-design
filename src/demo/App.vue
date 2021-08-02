@@ -2,27 +2,39 @@
   <div class="pt-5 px-10 pb-10" v-cloak>
     <Cards />
     <Buttons class="mt-10" />
+    <Toggles class="mt-10" />
+    <RadioButtons class="mt-10" />
     <Checkboxes />
     <Links class="mt-10" />
+    <<<<<<< HEAD
     <Sliders class="mt-10" />
+    =======
+    <Tag class="mt-10" />
+    >>>>>>> main
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import Buttons from './sections/Buttons.vue'
+import Toggles from './sections/Toggles.vue'
 import Cards from './sections/Cards.vue'
 import Sliders from './sections/Sliders.vue'
+import RadioButtons from './sections/RadioButtons.vue'
 import Checkboxes from './sections/Checkboxes.vue'
 import Links from './sections/Links.vue'
+import Tag from './sections/Tag.vue'
 
 @Options({
   components: {
     Buttons,
     Cards,
     Sliders,
+    RadioButtons,
+    Links,
+    Toggles,
     Checkboxes,
-    Links
+    Tag
   }
 })
 export default class App extends Vue {}
