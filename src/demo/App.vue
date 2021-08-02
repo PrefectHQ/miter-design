@@ -1,7 +1,5 @@
 <template>
   <div class="pt-5 px-10 pb-10" v-cloak>
-    <div class="miter"><div>TEST</div></div>
-
     <Cards />
     <Buttons class="mt-10" />
     <RadioButtons class="mt-10" />
@@ -34,16 +32,7 @@ export default class App extends Vue {}
 </script>
 
 <style lang="scss">
-@use '../styles/abstracts/_mixins';
-@use '../styles/abstracts/variables';
 [v-cloak] {
   display: none;
-}
-.miter {
-  height: 200px;
-  width: 300px;
-  @include mixins.miter-on-hover(4);
-  @include mixins.miter-border(1, pink);
-  @include mixins.miter-interactive;
 }
 </style>
