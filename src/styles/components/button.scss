@@ -5,7 +5,7 @@
   @include mixins.input-transition;
 
   &:not(.active):not(.icon) {
-    @include mixins.miter(1);
+    @include mixins.miter-original(1);
   }
 
   background-color: transparent;
@@ -19,6 +19,10 @@
 
   &:focus-visible {
     outline: none;
+  }
+
+  &:not(.icon) > div {
+    @include mixins.miter-original(1);
   }
 
   > div {
@@ -64,6 +68,7 @@
 
   &.disabled {
     cursor: not-allowed;
+    background-color: variables.$disabled !important;
     color: variables.$grey-4 !important;
 
     &:not(.outlined) > div {
@@ -97,18 +102,31 @@
 
   &.outlined {
     color: variables.$grey-1;
-    transition: background-color 0s, clip-path 0s !important;
+    background-color: variables.$grey-4;
 
     &:active {
       background-color: transparent;
     }
 
     &:not(.active):not(.icon) {
-      @include mixins.miter-border(1, variables.$grey-4);
+      @include mixins.miter-original(1);
     }
 
     &.hovered > div {
       background-color: variables.$grey-5;
+    }
+
+    &:not(.icon) > div {
+      @include mixins.miter-original(1, true);
+    }
+
+    > div {
+      background-color: variables.$white;
+      height: calc(100% - 2px);
+
+      top: 0;
+      left: 1px;
+      width: calc(100% - 2px);
     }
   }
 }
