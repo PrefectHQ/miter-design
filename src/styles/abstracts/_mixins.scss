@@ -1,9 +1,15 @@
 @use "sass:list";
+@use "sass:map";
 @use './variables';
 
 $cuts: 8, 16, 24, 32, 40, 48;
-$bottom: -52, -42, -32, -22, -22, -22;
-$right: -12.5, -14.5, -16.5, -18.5, -10.5, -2.5;
+$bottom: 10, 18, 26, 34, 42, 50;
+$shadows: (
+  'sm': variables.$drop-shadow-sm,
+  'md': variables.$drop-shadow-md,
+  'lg': variables.$drop-shadow-lg,
+  'xl': variables.$drop-shadow-xl
+);
 
 @mixin input-transition {
   transition: all 75ms;
@@ -38,10 +44,10 @@ $right: -12.5, -14.5, -16.5, -18.5, -10.5, -2.5;
     width: 100%;
     &:after {
       content: '';
-      width: 2px;
+      width: 1px;
       height: 70px;
       bottom: #{list.nth($bottom, $cut-length)}px;
-      right: #{list.nth($right, $cut-length)}px;
+      right: 0px;
       position: absolute;
       border-color: inherit;
       border: inherit;
@@ -52,8 +58,8 @@ $right: -12.5, -14.5, -16.5, -18.5, -10.5, -2.5;
       margin-bottom: inherit;
       margin-left: inherit;
       margin-right: inherit;
-      transform: rotate(45deg);
-      transform-origin: top left;
+      transform: rotate(225deg);
+      transform-origin: bottom right;
     }
   }
 }
@@ -69,25 +75,23 @@ $right: -12.5, -14.5, -16.5, -18.5, -10.5, -2.5;
   }
 }
 
-@mixin miter-shadow($hard: false) {
-  filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.1))
-    drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.1));
-
-  @if $hard {
-    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2))
-      drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.2));
-  }
+@mixin miter-shadow($shadow: md) {
+  filter: #{map.get($shadows, $shadow)};
 }
 
-@mixin miter-interactive {
-  cursor: pointer;
-  transition: all 250ms;
+@mixin miter-interactive($shadow: md) {
+  &:not(.disabled) {
+    cursor: pointer;
+    transition: all 250ms;
 
-  &:hover,
-  &:focus {
-    margin-top: -4px;
-    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.1))
-      drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.1));
+    &:hover,
+    &:focus {
+      filter: #{map.get($shadows, $shadow)};
+      > :first-child {
+        margin-top: -4px;
+        margin-bottom: 4px;
+      }
+    }
   }
 }
 
@@ -115,10 +119,10 @@ $right: -12.5, -14.5, -16.5, -18.5, -10.5, -2.5;
       );
       &:after {
         content: '';
-        width: 2px;
+        width: 1px;
         height: 70px;
         bottom: #{list.nth($bottom, $cut-length)}px;
-        right: #{list.nth($right, $cut-length)}px;
+        right: 0px;
         position: absolute;
         border-color: inherit;
         border: inherit;
@@ -129,8 +133,8 @@ $right: -12.5, -14.5, -16.5, -18.5, -10.5, -2.5;
         margin-bottom: inherit;
         margin-left: inherit;
         margin-right: inherit;
-        transform: rotate(45deg);
-        transform-origin: top left;
+        transform: rotate(225deg);
+        transform-origin: bottom right;
       }
     }
   }
