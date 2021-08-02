@@ -1,6 +1,7 @@
 // I think we need to import global styles to make sure they're available to the packaged module
 // import '@/styles/main.scss'
 
+export { default as Avatar } from './Avatar/Avatar.vue'
 export { default as Button } from './Button/Button.vue'
 export { default as Card } from './Card/Card.vue'
 export { default as CardActions } from './Card/Actions/Actions.vue'

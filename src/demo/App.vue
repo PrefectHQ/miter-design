@@ -7,6 +7,7 @@
     <Checkboxes />
     <Links class="mt-10" />
     <Tag class="mt-10" />
+    <Avatar class="mt-10" />
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import Cards from './sections/Cards.vue'
 import RadioButtons from './sections/RadioButtons.vue'
 import Checkboxes from './sections/Checkboxes.vue'
 import Links from './sections/Links.vue'
+import Avatar from './sections/Avatar.vue'
 import Tag from './sections/Tag.vue'
 
 @Options({
@@ -26,6 +28,7 @@ import Tag from './sections/Tag.vue'
     Cards,
     RadioButtons,
     Links,
+    Avatar,
     Toggles,
     Checkboxes,
     Tag
