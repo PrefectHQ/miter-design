@@ -3,7 +3,7 @@
 
 .card {
   @include mixins.miter(2);
-  @include mixins.miter-border(1, variables.$grey-4, 4);
+  @include mixins.miter-border(2, 1, variables.$grey-4, 4);
 
   display: block;
   height: min-content;

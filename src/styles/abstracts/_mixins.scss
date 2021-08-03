@@ -3,7 +3,7 @@
 @use './variables';
 
 $cuts: 8, 16, 24, 32, 40, 48;
-$bottom: 10, 18, 26, 34, 42, 50;
+$bottom: 9, 17, 25, 33, 41, 49;
 $shadows: (
   'sm': variables.$drop-shadow-sm,
   'md': variables.$drop-shadow-md,
@@ -42,11 +42,23 @@ $shadows: (
     );
     height: 100%;
     width: 100%;
+  }
+}
+
+@mixin miter-border(
+  $cut-length,
+  $border-width: 0,
+  $border-color: transparent,
+  $border-radius: 4
+) {
+  > :first-child {
+    border: #{$border-width}px solid $border-color;
+    border-radius: #{$border-radius}px;
     &:after {
       content: '';
       width: 1px;
       height: 70px;
-      bottom: #{list.nth($bottom, $cut-length)}px;
+      bottom: calc(#{list.nth($bottom, $cut-length)}px + #{$border-width}px);
       right: 0px;
       position: absolute;
       border-color: inherit;
@@ -61,17 +73,6 @@ $shadows: (
       transform: rotate(225deg);
       transform-origin: bottom right;
     }
-  }
-}
-
-@mixin miter-border(
-  $border-width: 1,
-  $border-color: transparent,
-  $border-radius: 4
-) {
-  > :first-child {
-    border: #{$border-width}px solid $border-color;
-    border-radius: #{$border-radius}px;
   }
 }
 
