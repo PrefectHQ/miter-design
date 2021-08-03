@@ -8,7 +8,7 @@
         :key="key"
         class="mr-4 icon-container"
       >
-        <h5 class="font-weight-light text-truncate mb-2">{{ glyph.glyph }}</h5>
+        <h6 class="font-weight-light text-truncate mb-2">{{ key }}</h6>
         <i class="pi pi-3x" :class="'pi-' + glyph.glyph" />
         <!-- <hr class="text--grey-5" />
         <div class="text-left">
