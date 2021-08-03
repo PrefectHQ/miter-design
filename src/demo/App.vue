@@ -8,6 +8,7 @@
     <Links class="mt-10" />
     <Tag class="mt-10" />
     <Avatar class="mt-10" />
+    <Lists class="mt-10" />
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import Checkboxes from './sections/Checkboxes.vue'
 import Links from './sections/Links.vue'
 import Avatar from './sections/Avatar.vue'
 import Tag from './sections/Tag.vue'
+import Lists from './sections/Lists.vue'
 
 @Options({
   components: {
@@ -31,7 +33,8 @@ import Tag from './sections/Tag.vue'
     Avatar,
     Toggles,
     Checkboxes,
-    Tag
+    Tag,
+    Lists
   }
 })
 export default class App extends Vue {}
