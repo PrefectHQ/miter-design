@@ -8,8 +8,8 @@
         :key="key"
         class="mr-4 icon-container"
       >
-        <h6 class="font-weight-light text-truncate mb-2">{{ key }}</h6>
         <i class="pi pi-3x" :class="'pi-' + glyph.glyph" />
+        <h6 class="font-weight-light text-truncate mt-2">{{ key }}</h6>
         <!-- <hr class="text--grey-5" />
         <div class="text-left">
           <code>{{ glyph.glyph }}</code>
@@ -58,7 +58,8 @@ export default class App extends Vue {
 .icon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
-  grid-gap: 16px;
+  column-gap: 32px;
+  row-gap: 64px;
   justify-content: center;
   padding: initial;
 }
@@ -66,7 +67,6 @@ export default class App extends Vue {
 .icon-container {
   display: flex;
   flex-direction: column;
-  height: 150px;
   text-align: center;
   justify-content: center;
 
