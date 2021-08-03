@@ -1,11 +1,6 @@
 <template>
-  <div class="pt-5 px-10 pb-10" v-cloak>
-    <div>
-      <router-link class="mr-4" to="/">Components</router-link>
-      <router-link to="/icons">Icons</router-link>
-    </div>
-
-    <router-view />
+  <div class="mt-5 pb-10" v-cloak>
+    <h1>Icons</h1>
   </div>
 </template>
 
