@@ -5,7 +5,7 @@ test('list contains placeholder + 2 options when nothing is passed in', () => {
   const wrapper = mount(List)
 
   const list = wrapper.get('select')
-  const options = list.get('option')
+  const options = list.findAll('option')
   expect(options).toHaveLength(3)
 })
 
