@@ -4,32 +4,31 @@
     <List
       class="my-2"
       name="list-without-icon"
-      label="i"
       placeholder="Pick something!"
       title="Available Options"
       :options="options"
+      v-model="selected1"
     >
       <span>No Icon</span>
     </List>
     <List
       class="my-2"
       name="list-with-icon"
-      label="i"
-      icon="true"
+      icon
       placeholder="Pick something!"
       title="Available Options"
       :options="options"
+      v-model="selected2"
     >
       <span>With Icon</span>
     </List>
     <List
       class="my-2"
       name="list-disabled"
-      label="i"
       placeholder="Pick something!"
       title="Available Options"
       :options="options"
-      disabled="true"
+      disabled
     >
       <span>Disabled</span>
     </List>
@@ -45,6 +44,8 @@ export default defineComponent({
   components: { List },
   data() {
     return {
+      selected1: '',
+      selected2: '',
       options: ['First', 'Second', 'Third']
     }
   }

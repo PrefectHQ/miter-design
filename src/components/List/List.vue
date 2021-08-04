@@ -1,15 +1,22 @@
 <template>
-  <label :for="label"><slot /></label>
-  <div class="list" :class="classList">
-    <select :name="label" :id="label" :disabled="disabled">
-      <option hidden disabled selected value>{{ placeholder }}</option>
-      <optgroup :label="title">
-        <option v-for="(option, i) in options" :key="i" :value="option">
-          <i v-if="icon" class="pi pi-fire pi-2x"></i>
-          {{ option }}
-        </option>
-      </optgroup>
-    </select>
+  <div>
+    <label :for="label"><slot /></label>
+    <div class="list" :class="classList">
+      <select
+        :name="label"
+        :id="label"
+        :disabled="disabled"
+        @input="$emit('update:modelValue', value)"
+      >
+        <option hidden disabled selected value>{{ placeholder }}</option>
+        <optgroup :label="title">
+          <option v-for="(option, i) in options" :key="i" :value="option">
+            <i v-if="icon" class="pi pi-fire pi-2x"></i>
+            {{ option }}
+          </option>
+        </optgroup>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -18,6 +25,11 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'List',
+  emits: {
+    'update:modelValue'(...args: any[]) {
+      return { ...args }
+    }
+  },
   props: {
     disabled: {
       type: Boolean,
@@ -42,6 +54,10 @@ export default defineComponent({
     icon: {
       type: Boolean,
       default: false
+    },
+    value: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -57,6 +73,14 @@ export default defineComponent({
         ...(this.hovered ? ['hovered'] : []),
         ...(this.active ? ['hovered'] : [])
       ]
+    },
+    value_: {
+      get(): String {
+        return this.value
+      },
+      set() {
+        this.$emit('update:modelValue', this.value)
+      }
     }
   }
 })
