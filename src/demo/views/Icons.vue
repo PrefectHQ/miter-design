@@ -153,8 +153,7 @@ export default class App extends Vue {
   }
 
   async mounted() {
-    const path = '../../assets/fonts/fonts/prefect-icons.svg?raw'
-    const svg = await import(path)
+    const svg = await import('../../assets/fonts/fonts/prefect-icons.svg?raw')
 
     const parser = new DOMParser()
     const vDOM = parser.parseFromString(svg.default, 'image/svg+xml')
