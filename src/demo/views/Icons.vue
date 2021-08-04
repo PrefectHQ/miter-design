@@ -7,16 +7,12 @@
       <input v-model="search" class="icon-search ml-1" placeholder="Search" />
     </div>
 
-    <div
-      class="mt-5 icon-grid"
-      :class="{ overlay: selected }"
-      @click="selected = null"
-    >
+    <div class="mt-5 icon-grid" :class="{ overlay: selected }">
       <div
         v-for="[key, glyph] in filteredGlyphs"
         :key="key"
         class="mr-4 icon-container"
-        @click.stop="selected = selected ? null : { key: key, glyph: glyph }"
+        @click.stop="selected = { key: key, glyph: glyph }"
       >
         <i class="pi pi-3x" :class="'pi-' + glyph.glyph" />
         <h6 class="font-weight-light text-truncate mt-2">{{ key }}</h6>
@@ -31,14 +27,15 @@
       </h3>
     </div>
 
-    <div
-      v-if="selected"
-      tabindex="0"
-      class="icon-overlay pa-2 text-center"
-      @blur="selected = null"
-    >
+    <div v-if="selected" tabindex="0" class="icon-overlay pa-2 text-center">
       <h2 class="font-weight-light text-truncate">{{ selected.key }}</h2>
-      <i class="pi" :class="iconClass" :style="iconStyle" />
+
+      <div
+        class="pa-4 d-flex align-center justify-space-around text-center"
+        style="min-height: 204px"
+      >
+        <i class="pi" :class="iconClass" :style="iconStyle" />
+      </div>
 
       <div class="mt-2">
         Size:
@@ -64,8 +61,13 @@
         </code>
 
         <div class="mt-2 text-left">Inline:</div>
+        <!-- Ignoring this so we get correct formatting in the output without using a <pre> tag -->
+        <!-- prettier-ignore -->
         <code style="display: block">
-          {{`<i class="pi pi-${selected.glyph.glyph}" />`}}
+          {{`<i
+            class="pi pi-${selected.glyph.glyph}
+              ${sizeOptions.get(selectedSize)}"
+          />`}}
         </code>
       </div>
     </div>
@@ -97,7 +99,7 @@ export default class App extends Vue {
     ['10x', 'pi-10x']
   ])
 
-  selectedColor: string = 'Primary 5'
+  selectedColor: string = 'Grey 2'
   colorOptions: Map<string, string> = new Map([
     ['Error', '#fb4e4e'],
     ['Warning', '#f6a609'],
