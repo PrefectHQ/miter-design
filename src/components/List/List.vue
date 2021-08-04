@@ -1,14 +1,16 @@
 <template>
   <label :for="label"><slot /></label>
-  <select :name="label" :id="label">
-    <option hidden disabled selected value>{{ placeholder }}</option>
-    <optgroup :label="title">
-      <option v-for="(option, i) in options" :key="i" :value="option">
-        <i v-if="icon" class="pi pi-fire pi-2x"></i>
-        {{ option }}
-      </option>
-    </optgroup>
-  </select>
+  <div class="list" :class="classList">
+    <select :name="label" :id="label" :disabled="disabled">
+      <option hidden disabled selected value>{{ placeholder }}</option>
+      <optgroup :label="title">
+        <option v-for="(option, i) in options" :key="i" :value="option">
+          <i v-if="icon" class="pi pi-fire pi-2x"></i>
+          {{ option }}
+        </option>
+      </optgroup>
+    </select>
+  </div>
 </template>
 
 <script lang="ts">
@@ -40,6 +42,21 @@ export default defineComponent({
     icon: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      hovered: false,
+      active: false
+    }
+  },
+  computed: {
+    classList(): string[] {
+      return [
+        ...(this.disabled ? ['disabled'] : []),
+        ...(this.hovered ? ['hovered'] : []),
+        ...(this.active ? ['hovered'] : [])
+      ]
     }
   }
 })

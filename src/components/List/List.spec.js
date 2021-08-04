@@ -22,3 +22,19 @@ test('option contains icon if defined', () => {
   const list = wrapper.get('select')
   expect(list.find('i').exists()).toBe(true)
 })
+
+test('adds the disabled attribute when disabled:true is passed as a prop', () => {
+  const wrapper = mount(List, { props: { disabled: true } })
+
+  const list = wrapper.get('select')
+
+  expect(list.attributes('disabled')).toBeDefined()
+})
+
+test("doesn't pass the disabled attribute when disabled:false is passed as a prop", () => {
+  const wrapper = mount(List, { props: { disabled: false } })
+
+  const list = wrapper.get('select')
+
+  expect(list.attributes('disabled')).toBeUndefined()
+})

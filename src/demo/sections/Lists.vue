@@ -9,7 +9,29 @@
       title="Available Options"
       :options="options"
     >
-      <span>{{ state }}</span>
+      <span>No Icon</span>
+    </List>
+    <List
+      class="my-2"
+      name="list-with-icon"
+      label="i"
+      icon="true"
+      placeholder="Pick something!"
+      title="Available Options"
+      :options="options"
+    >
+      <span>With Icon</span>
+    </List>
+    <List
+      class="my-2"
+      name="list-disabled"
+      label="i"
+      placeholder="Pick something!"
+      title="Available Options"
+      :options="options"
+      disabled="true"
+    >
+      <span>Disabled</span>
     </List>
   </div>
 </template>
