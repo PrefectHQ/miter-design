@@ -1,22 +1,20 @@
 <template>
   <div>
-    <label :for="label"><slot /></label>
-    <div class="list" :class="classList">
-      <select
-        :name="label"
-        :id="label"
-        :disabled="disabled"
-        @input="$emit('update:modelValue', value)"
-      >
-        <option hidden disabled selected value>{{ placeholder }}</option>
-        <optgroup :label="title">
-          <option v-for="(option, i) in options" :key="i" :value="option">
-            <i v-if="icon" class="pi pi-fire pi-2x"></i>
-            {{ option }}
-          </option>
-        </optgroup>
-      </select>
-    </div>
+    <label class="list" :class="classList" :disabled="disabled">
+      <span v-for="(option, i) in options" :key="i">
+        <input
+          type="radio"
+          :disabled="disabled"
+          :name="label"
+          :value="option"
+          :checked="checked"
+          v-model="value_"
+          @input="$emit('update:modelValue', value_)"
+        />
+        <i v-if="icon" class="pi pi-fire pi-2x"></i>
+        {{ option }}
+      </span>
+    </label>
   </div>
 </template>
 
