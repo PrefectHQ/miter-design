@@ -8,6 +8,8 @@
     </div>
 
     <div class="mt-5 icon-grid" :class="{ overlay: selected }">
+      <div v-if="selected" class="overlay" @click="selected = null" />
+
       <div
         v-for="[key, glyph] in filteredGlyphs"
         :key="key"
@@ -27,7 +29,7 @@
       </h3>
     </div>
 
-    <div v-if="selected" tabindex="0" class="icon-overlay pa-2 text-center">
+    <div v-if="selected" tabindex="0" class="icon-overlay pa-4 text-center">
       <h2 class="font-weight-light text-truncate">{{ selected.key }}</h2>
 
       <div
@@ -77,7 +79,13 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 
-@Options({})
+@Options({
+  watch: {
+    search() {
+      this.selected = null
+    }
+  }
+})
 export default class App extends Vue {
   glyphs: Map<string, any> = new Map()
   search: string = ''
@@ -179,9 +187,18 @@ export default class App extends Vue {
   row-gap: 64px;
   justify-content: center;
   padding: initial;
+  position: relative;
 
   &.overlay {
     filter: blur(4px);
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 
