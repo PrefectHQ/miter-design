@@ -1,0 +1,118 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+.wrapper {
+  font-family: variables.$font--primary;
+  * {
+    cursor: pointer;
+  }
+  .picker {
+    height: 58px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    border: 1px solid pink;
+    padding-left: 32px;
+    color: variables.$grey-4;
+    font-size: 16px;
+    white-space: nowrap;
+    span {
+      width: 275px;
+    }
+    &::after {
+      content: '';
+      border: 1px solid variables.$grey-1;
+      transform: rotate(45deg);
+      height: 8px;
+      width: 8px;
+      display: inline-block;
+      border-top: none;
+      border-left: none;
+    }
+    &.disabled {
+      background-color: variables.$grey-5;
+      cursor: not-allowed;
+      color: variables.$inactive !important;
+      &::after {
+        border-color: variables.$grey-4;
+      }
+    }
+    &.active {
+      border-color: variables.$primary;
+    }
+  }
+
+  .list {
+    @include mixins.input-transition;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    border: 1px solid pink;
+    position: absolute;
+    background: variables.$white;
+    .title {
+      align-items: center;
+      cursor: default;
+      display: flex;
+      height: 58px;
+      border-bottom: 1px solid variables.$grey-6;
+      padding-left: 32px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: variables.$grey-4;
+    }
+    &.hidden {
+      @include mixins.input-transition;
+      visibility: hidden;
+    }
+  }
+
+  .option {
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    height: 58px;
+    line-height: 20px;
+    &:not(:last-child) {
+      border-bottom: 1px solid variables.$grey-6;
+    }
+    label {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      span {
+        padding-left: 32px;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    input {
+      margin-left: 6px;
+      position: absolute;
+      height: 0;
+      width: 0;
+    }
+    input:checked ~ label {
+      background-color: variables.$primary;
+      color: variables.$white;
+      span {
+        width: 275px;
+      }
+      &::after {
+        content: '';
+        border: 1px solid variables.$white;
+        transform: rotate(45deg);
+        height: 18px;
+        width: 8px;
+        display: inline-block;
+        border-top: none;
+        border-left: none;
+        margin-top: 18px;
+        margin-left: 30px;
+      }
+    }
+    i {
+      color: variables.$grey-4;
+    }
+  }
+}

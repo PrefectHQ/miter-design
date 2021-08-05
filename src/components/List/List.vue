@@ -1,20 +1,30 @@
 <template>
-  <div>
-    <label class="list" :class="classList" :disabled="disabled">
-      <span v-for="(option, i) in options" :key="i">
+  <div class="wrapper">
+    <div
+      class="picker"
+      :class="pickerClassList"
+      @click="!disabled ? (active = !active) : null"
+    >
+      <span>{{ value || placeholder }}</span>
+    </div>
+    <div class="list" :class="listClassList">
+      <div class="title">{{ title }}</div>
+      <div class="option" v-for="(option, i) in options" :key="i">
         <input
           type="radio"
           :disabled="disabled"
+          :id="i"
           :name="label"
           :value="option"
           :checked="checked"
           v-model="value_"
           @input="$emit('update:modelValue', value_)"
         />
-        <i v-if="icon" class="pi pi-fire pi-2x"></i>
-        {{ option }}
-      </span>
-    </label>
+        <label :for="i">
+          <span><i v-if="icon" class="pi pi-fire pi-2x"></i> {{ option }}</span>
+        </label>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -69,11 +79,18 @@ export default defineComponent({
     }
   },
   computed: {
-    classList(): string[] {
+    pickerClassList(): string[] {
       return [
         ...(this.disabled ? ['disabled'] : []),
         ...(this.hovered ? ['hovered'] : []),
-        ...(this.active ? ['hovered'] : [])
+        ...(this.active ? ['active'] : [])
+      ]
+    },
+    listClassList(): string[] {
+      return [
+        ...(this.disabled ? ['disabled'] : []),
+        ...(this.hovered ? ['hovered'] : []),
+        ...(!this.active ? ['hidden'] : [])
       ]
     },
     value_: {
@@ -84,6 +101,41 @@ export default defineComponent({
         this.$emit('update:modelValue', this.value)
       }
     }
+  },
+  methods: {
+    handleMouseEnter(): void {
+      if (this.disabled) return
+      this.hovered = true
+    },
+
+    handleMouseLeave(): void {
+      this.hovered = false
+      this.active = false
+    },
+
+    handleMouseDown(): void {
+      if (this.disabled) return
+      this.active = true
+    },
+
+    handleMouseUp(): void {
+      if (this.disabled) return
+      this.active = false
+    },
+
+    handleFocus(): void {
+      if (this.disabled) return
+      this.hovered = true
+    },
+
+    handleBlur(): void {
+      this.hovered = false
+      this.active = false
+    }
   }
 })
 </script>
+
+<style lang="scss" scoped>
+@use '../../styles/components/list';
+</style>
