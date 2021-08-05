@@ -16,7 +16,7 @@
       :outlined="outlined"
     >
       <span v-if="tagStyles[1] == style">
-        <i class="pi pi-fire pi-1x"></i>
+        <i class="pi pi-Fire pi-1x"></i>
 
         tag
       </span>

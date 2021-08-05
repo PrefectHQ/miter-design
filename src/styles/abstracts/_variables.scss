@@ -85,6 +85,6 @@ $colors: (
 
 :root {
   @each $key, $color in $colors {
-    // --#{$key}: #{$color};
+    --#{"" + $key}: #{$color};
   }
 }
