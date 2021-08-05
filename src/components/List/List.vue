@@ -33,6 +33,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    checked: {
+      type: Boolean,
+      default: false
+    },
     label: {
       type: String,
       default: 'list'

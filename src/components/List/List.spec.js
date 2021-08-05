@@ -32,26 +32,22 @@ describe('disabled state', () => {
     expect(list.attributes('disabled')).toBeDefined()
   })
 
-  test("doesn't pass the disabled attribute when disabled:false is passed as a prop", () => {
+  test('sets disabled to false when disabled:false is passed as a prop', () => {
     const wrapper = mount(List, { props: { disabled: false } })
 
     const list = wrapper.get('.list')
 
-    expect(list.attributes('disabled')).toBeUndefined()
+    expect(list.attributes('disabled')).toContain('false')
   })
 })
-describe('data passing', () => {
-  test('emit selected option', async () => {
-    const wrapper = mount(List)
-    const list = wrapper.get('.list')
-    await list.setValue('Option 2')
-    expect(wrapper.emitted('update:modelValue')[0][0]).toEqual('Option 2')
+test('emit selected option', async () => {
+  const wrapper = mount(List, {
+    props: {
+      value: 'Option 1'
+    }
   })
-
-  test('updating prop also changes value', async () => {
-    const wrapper = mount(List)
-    await wrapper.setProps({ value: 'New Option' })
-    const input = wrapper.get('.list')
-    expect(input.attributes('value')).toEqual('New Option')
-  })
+  const option = wrapper.get('input[type="radio"]')
+  option.element.selected = true
+  await option.trigger('change')
+  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual('Option 1')
 })
