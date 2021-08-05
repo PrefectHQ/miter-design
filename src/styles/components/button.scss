@@ -5,7 +5,7 @@
   @include mixins.input-transition;
 
   &:not(.active):not(.icon) {
-    @include mixins.miter(1);
+    @include mixins.miter-original(1);
   }
 
   background-color: transparent;
@@ -22,7 +22,7 @@
   }
 
   &:not(.icon) > div {
-    @include mixins.miter(1);
+    @include mixins.miter-original(1);
   }
 
   > div {
@@ -110,7 +110,7 @@
     }
 
     &:not(.active):not(.icon) {
-      @include mixins.miter(1);
+      @include mixins.miter-original(1);
     }
 
     &.hovered > div {
@@ -118,7 +118,7 @@
     }
 
     &:not(.icon) > div {
-      @include mixins.miter(1, true);
+      @include mixins.miter-original(1, true);
     }
 
     > div {

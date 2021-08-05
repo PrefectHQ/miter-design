@@ -1,9 +1,25 @@
 @use "sass:list";
+@use "sass:map";
 @use './variables';
 
 $cuts: 8, 16, 24, 32, 40, 48;
+$bottom: 9, 17, 25, 33, 41, 49;
+$shadows: (
+  'sm': variables.$drop-shadow-sm,
+  'md': variables.$drop-shadow-md,
+  'lg': variables.$drop-shadow-lg,
+  'xl': variables.$drop-shadow-xl
+);
 
-@mixin miter($i, $inner: false) {
+@mixin input-transition {
+  transition: all 75ms;
+}
+
+@mixin input-transition-long {
+  transition: all 250ms;
+}
+
+@mixin miter-original($i, $inner: false) {
   clip-path: polygon(
     0 0,
     100% 0,
@@ -13,10 +29,110 @@ $cuts: 8, 16, 24, 32, 40, 48;
   );
 }
 
-@mixin input-transition {
-  transition: all 75ms;
+@mixin miter($cut-length) {
+  position: relative;
+
+  > :first-child {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - #{list.nth($cuts, $cut-length)}px),
+      calc(100% - #{list.nth($cuts, $cut-length)}px) 100%,
+      0 100%
+    );
+    height: 100%;
+    width: 100%;
+  }
 }
 
-@mixin input-transition-long {
-  transition: all 250ms;
+@mixin miter-border(
+  $cut-length,
+  $border-width: 0,
+  $border-color: transparent,
+  $border-radius: 4
+) {
+  > :first-child {
+    border: #{$border-width}px solid $border-color;
+    border-radius: #{$border-radius}px;
+    &:after {
+      content: '';
+      width: 1px;
+      height: 70px;
+      bottom: calc(#{list.nth($bottom, $cut-length)}px + #{$border-width}px);
+      right: 0px;
+      position: absolute;
+      border-color: inherit;
+      border: inherit;
+      border-right: none;
+      border-bottom: none;
+      border-top: none;
+      margin-top: inherit;
+      margin-bottom: inherit;
+      margin-left: inherit;
+      margin-right: inherit;
+      transform: rotate(225deg);
+      transform-origin: bottom right;
+    }
+  }
+}
+
+@mixin miter-shadow($shadow: md) {
+  filter: #{map.get($shadows, $shadow)};
+}
+
+@mixin miter-interactive($shadow: md) {
+  &:not(.disabled) {
+    cursor: pointer;
+    transition: all 250ms;
+
+    &:hover,
+    &:focus {
+      filter: #{map.get($shadows, $shadow)};
+    }
+  }
+}
+
+@mixin miter-on-hover($cut-length, $background-color: variables.$white) {
+  position: relative;
+  > :first-child {
+    background-color: $background-color;
+    transition: clip-path 250ms;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
+    height: 100%;
+    width: 100%;
+    &:after {
+      content: '';
+      height: 0;
+      width: 0;
+      transition: all 250ms;
+    }
+    &:hover {
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - #{list.nth($cuts, $cut-length)}px),
+        calc(100% - #{list.nth($cuts, $cut-length)}px) 100%,
+        0 100%
+      );
+      &:after {
+        content: '';
+        width: 1px;
+        height: 70px;
+        bottom: #{list.nth($bottom, $cut-length)}px;
+        right: 0px;
+        position: absolute;
+        border-color: inherit;
+        border: inherit;
+        border-right: none;
+        border-bottom: none;
+        border-top: none;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        margin-left: inherit;
+        margin-right: inherit;
+        transform: rotate(225deg);
+        transform-origin: bottom right;
+      }
+    }
+  }
 }
