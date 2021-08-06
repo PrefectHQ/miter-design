@@ -47,7 +47,8 @@
     "vue": "^3.0.5",
     "vue-class-component": "^8.0.0-0",
     "vue-loader": "^16.2.0",
-    "vue-property-decorator": "^9.1.2"
+    "vue-property-decorator": "^9.1.2",
+    "vue-router": "^4.0.10"
   },
   "peerDependencies": {
     "vue": "^3.0.5"

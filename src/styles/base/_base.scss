@@ -73,7 +73,8 @@ a {
   cursor: pointer;
   text-decoration: underline;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: variables.$primary-100 !important;
   }
 

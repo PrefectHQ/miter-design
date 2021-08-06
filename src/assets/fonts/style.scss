@@ -1,0 +1,1983 @@
+@import 'variables';
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?xezr7n')
+      format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?xezr7n')
+      format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?xezr7n##{$icomoon-font-family}')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^='pi-'],
+[class*=' pi-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pi-362 {
+  &:before {
+    content: $pi-362;
+  }
+}
+.pi-Add-Layer {
+  &:before {
+    content: $pi-Add-Layer;
+  }
+}
+.pi-Add-Pin {
+  &:before {
+    content: $pi-Add-Pin;
+  }
+}
+.pi-Add {
+  &:before {
+    content: $pi-Add;
+  }
+}
+.pi-Alert-Crossed {
+  &:before {
+    content: $pi-Alert-Crossed;
+  }
+}
+.pi-Alert-Ringing {
+  &:before {
+    content: $pi-Alert-Ringing;
+  }
+}
+.pi-Alert {
+  &:before {
+    content: $pi-Alert;
+  }
+}
+.pi-Arrow {
+  &:before {
+    content: $pi-Arrow;
+  }
+}
+.pi-Audio-Jacks {
+  &:before {
+    content: $pi-Audio-Jacks;
+  }
+}
+.pi-Ballpen {
+  &:before {
+    content: $pi-Ballpen;
+  }
+}
+.pi-Book {
+  &:before {
+    content: $pi-Book;
+  }
+}
+.pi-Bookmark-in-a-Box {
+  &:before {
+    content: $pi-Bookmark-in-a-Box;
+  }
+}
+.pi-Bookmark {
+  &:before {
+    content: $pi-Bookmark;
+  }
+}
+.pi-Box-Download {
+  &:before {
+    content: $pi-Box-Download;
+  }
+}
+.pi-Box-Upload {
+  &:before {
+    content: $pi-Box-Upload;
+  }
+}
+.pi-Box {
+  &:before {
+    content: $pi-Box;
+  }
+}
+.pi-Boxes {
+  &:before {
+    content: $pi-Boxes;
+  }
+}
+.pi-Brightness-Full {
+  &:before {
+    content: $pi-Brightness-Full;
+  }
+}
+.pi-Brightness-Half {
+  &:before {
+    content: $pi-Brightness-Half;
+  }
+}
+.pi-Brightness-Low {
+  &:before {
+    content: $pi-Brightness-Low;
+  }
+}
+.pi-Brightness-Question {
+  &:before {
+    content: $pi-Brightness-Question;
+  }
+}
+.pi-Brightness-Warning {
+  &:before {
+    content: $pi-Brightness-Warning;
+  }
+}
+.pi-Bug-Check {
+  &:before {
+    content: $pi-Bug-Check;
+  }
+}
+.pi-Bug-Crossed {
+  &:before {
+    content: $pi-Bug-Crossed;
+  }
+}
+.pi-Bug-Warning {
+  &:before {
+    content: $pi-Bug-Warning;
+  }
+}
+.pi-Bug-X {
+  &:before {
+    content: $pi-Bug-X;
+  }
+}
+.pi-Bug {
+  &:before {
+    content: $pi-Bug;
+  }
+}
+.pi-Calculator {
+  &:before {
+    content: $pi-Calculator;
+  }
+}
+.pi-CD-Warning {
+  &:before {
+    content: $pi-CD-Warning;
+  }
+}
+.pi-CD {
+  &:before {
+    content: $pi-CD;
+  }
+}
+.pi-Check-in-a-Circle {
+  &:before {
+    content: $pi-Check-in-a-Circle;
+  }
+}
+.pi-Checkmark {
+  &:before {
+    content: $pi-Checkmark;
+  }
+}
+.pi-Compass {
+  &:before {
+    content: $pi-Compass;
+  }
+}
+.pi-Dark {
+  &:before {
+    content: $pi-Dark;
+  }
+}
+.pi-Dashboard {
+  &:before {
+    content: $pi-Dashboard;
+  }
+}
+.pi-Delete-Forever {
+  &:before {
+    content: $pi-Delete-Forever;
+  }
+}
+.pi-Delete {
+  &:before {
+    content: $pi-Delete;
+  }
+}
+.pi-Divide {
+  &:before {
+    content: $pi-Divide;
+  }
+}
+.pi-Drag-Dots {
+  &:before {
+    content: $pi-Drag-Dots;
+  }
+}
+.pi-Drag-Lines {
+  &:before {
+    content: $pi-Drag-Lines;
+  }
+}
+.pi-Drop-Check {
+  &:before {
+    content: $pi-Drop-Check;
+  }
+}
+.pi-Drop-Crossed {
+  &:before {
+    content: $pi-Drop-Crossed;
+  }
+}
+.pi-Drop {
+  &:before {
+    content: $pi-Drop;
+  }
+}
+.pi-Earth {
+  &:before {
+    content: $pi-Earth;
+  }
+}
+.pi-Eye-Crossed {
+  &:before {
+    content: $pi-Eye-Crossed;
+  }
+}
+.pi-Eye-Minus {
+  &:before {
+    content: $pi-Eye-Minus;
+  }
+}
+.pi-Eye-Open {
+  &:before {
+    content: $pi-Eye-Open;
+  }
+}
+.pi-Eye-Plus {
+  &:before {
+    content: $pi-Eye-Plus;
+  }
+}
+.pi-Eye-Warning {
+  &:before {
+    content: $pi-Eye-Warning;
+  }
+}
+.pi-Face-ID {
+  &:before {
+    content: $pi-Face-ID;
+  }
+}
+.pi-Filters-Horizontal {
+  &:before {
+    content: $pi-Filters-Horizontal;
+  }
+}
+.pi-Filters-Vertical {
+  &:before {
+    content: $pi-Filters-Vertical;
+  }
+}
+.pi-Fingerprint-ID {
+  &:before {
+    content: $pi-Fingerprint-ID;
+  }
+}
+.pi-Fire {
+  &:before {
+    content: $pi-Fire;
+  }
+}
+.pi-Flag-5 {
+  &:before {
+    content: $pi-Flag-5;
+  }
+}
+.pi-Flag-7 {
+  &:before {
+    content: $pi-Flag-7;
+  }
+}
+.pi-Focus {
+  &:before {
+    content: $pi-Focus;
+  }
+}
+.pi-Forbidden {
+  &:before {
+    content: $pi-Forbidden;
+  }
+}
+.pi-Globe {
+  &:before {
+    content: $pi-Globe;
+  }
+}
+.pi-Grid-11 {
+  &:before {
+    content: $pi-Grid-11;
+  }
+}
+.pi-Grid-13 {
+  &:before {
+    content: $pi-Grid-13;
+  }
+}
+.pi-Grid-15 {
+  &:before {
+    content: $pi-Grid-15;
+  }
+}
+.pi-Grid-17 {
+  &:before {
+    content: $pi-Grid-17;
+  }
+}
+.pi-Grid-19 {
+  &:before {
+    content: $pi-Grid-19;
+  }
+}
+.pi-Grid-Crossed {
+  &:before {
+    content: $pi-Grid-Crossed;
+  }
+}
+.pi-Grid-Round {
+  &:before {
+    content: $pi-Grid-Round;
+  }
+}
+.pi-Grid-Sharp {
+  &:before {
+    content: $pi-Grid-Sharp;
+  }
+}
+.pi-Grid-View {
+  &:before {
+    content: $pi-Grid-View;
+  }
+}
+.pi-Grid {
+  &:before {
+    content: $pi-Grid;
+  }
+}
+.pi-Hamburger-Menu {
+  &:before {
+    content: $pi-Hamburger-Menu;
+  }
+}
+.pi-Hashtag {
+  &:before {
+    content: $pi-Hashtag;
+  }
+}
+.pi-Home {
+  &:before {
+    content: $pi-Home;
+  }
+}
+.pi-Info-i {
+  &:before {
+    content: $pi-Info-i;
+  }
+}
+.pi-Info-Question-Mark {
+  &:before {
+    content: $pi-Info-Question-Mark;
+  }
+}
+.pi-Info {
+  &:before {
+    content: $pi-Info;
+  }
+}
+.pi-Key {
+  &:before {
+    content: $pi-Key;
+  }
+}
+.pi-Label {
+  &:before {
+    content: $pi-Label;
+  }
+}
+.pi-Layers-Inverted {
+  &:before {
+    content: $pi-Layers-Inverted;
+  }
+}
+.pi-Layers {
+  &:before {
+    content: $pi-Layers;
+  }
+}
+.pi-Like {
+  &:before {
+    content: $pi-Like;
+  }
+}
+.pi-List-In-a-Box-Round {
+  &:before {
+    content: $pi-List-In-a-Box-Round;
+  }
+}
+.pi-List-In-a-Box-Sharp {
+  &:before {
+    content: $pi-List-In-a-Box-Sharp;
+  }
+}
+.pi-List-Round {
+  &:before {
+    content: $pi-List-Round;
+  }
+}
+.pi-List-Sharp {
+  &:before {
+    content: $pi-List-Sharp;
+  }
+}
+.pi-Loader {
+  &:before {
+    content: $pi-Loader;
+  }
+}
+.pi-Lock {
+  &:before {
+    content: $pi-Lock;
+  }
+}
+.pi-Map {
+  &:before {
+    content: $pi-Map;
+  }
+}
+.pi-Microphone-Crossed {
+  &:before {
+    content: $pi-Microphone-Crossed;
+  }
+}
+.pi-Microphone {
+  &:before {
+    content: $pi-Microphone;
+  }
+}
+.pi-Minus {
+  &:before {
+    content: $pi-Minus;
+  }
+}
+.pi-More-Horizontal-5 {
+  &:before {
+    content: $pi-More-Horizontal-5;
+  }
+}
+.pi-More-Horizontal-7 {
+  &:before {
+    content: $pi-More-Horizontal-7;
+  }
+}
+.pi-More-Plus {
+  &:before {
+    content: $pi-More-Plus;
+  }
+}
+.pi-More-Vertical-5 {
+  &:before {
+    content: $pi-More-Vertical-5;
+  }
+}
+.pi-More-Vertical-7 {
+  &:before {
+    content: $pi-More-Vertical-7;
+  }
+}
+.pi-Numeric-Keypad {
+  &:before {
+    content: $pi-Numeric-Keypad;
+  }
+}
+.pi-Pen-5 {
+  &:before {
+    content: $pi-Pen-5;
+  }
+}
+.pi-Pen-7 {
+  &:before {
+    content: $pi-Pen-7;
+  }
+}
+.pi-Pen-Crossed {
+  &:before {
+    content: $pi-Pen-Crossed;
+  }
+}
+.pi-Pin-Check {
+  &:before {
+    content: $pi-Pin-Check;
+  }
+}
+.pi-Pin-Crossed {
+  &:before {
+    content: $pi-Pin-Crossed;
+  }
+}
+.pi-Pin {
+  &:before {
+    content: $pi-Pin;
+  }
+}
+.pi-Pin-1 {
+  &:before {
+    content: $pi-Pin-1;
+  }
+}
+.pi-Plus-in-a-box {
+  &:before {
+    content: $pi-Plus-in-a-box;
+  }
+}
+.pi-Plus {
+  &:before {
+    content: $pi-Plus;
+  }
+}
+.pi-Radar-5 {
+  &:before {
+    content: $pi-Radar-5;
+  }
+}
+.pi-Radar-7 {
+  &:before {
+    content: $pi-Radar-7;
+  }
+}
+.pi-RSS {
+  &:before {
+    content: $pi-RSS;
+  }
+}
+.pi-Sand-Clock {
+  &:before {
+    content: $pi-Sand-Clock;
+  }
+}
+.pi-Search-Map {
+  &:before {
+    content: $pi-Search-Map;
+  }
+}
+.pi-Search {
+  &:before {
+    content: $pi-Search;
+  }
+}
+.pi-Select-All {
+  &:before {
+    content: $pi-Select-All;
+  }
+}
+.pi-Send-to {
+  &:before {
+    content: $pi-Send-to;
+  }
+}
+.pi-Settings {
+  &:before {
+    content: $pi-Settings;
+  }
+}
+.pi-Share {
+  &:before {
+    content: $pi-Share;
+  }
+}
+.pi-Shield-Question {
+  &:before {
+    content: $pi-Shield-Question;
+  }
+}
+.pi-Shield-Warning {
+  &:before {
+    content: $pi-Shield-Warning;
+  }
+}
+.pi-Shield-with-Check-5 {
+  &:before {
+    content: $pi-Shield-with-Check-5;
+  }
+}
+.pi-Shield-with-Check-7 {
+  &:before {
+    content: $pi-Shield-with-Check-7;
+  }
+}
+.pi-Shield-with-X-5 {
+  &:before {
+    content: $pi-Shield-with-X-5;
+  }
+}
+.pi-Shield-with-X-7 {
+  &:before {
+    content: $pi-Shield-with-X-7;
+  }
+}
+.pi-Shield {
+  &:before {
+    content: $pi-Shield;
+  }
+}
+.pi-Shut-Down {
+  &:before {
+    content: $pi-Shut-Down;
+  }
+}
+.pi-Split-View {
+  &:before {
+    content: $pi-Split-View;
+  }
+}
+.pi-Star {
+  &:before {
+    content: $pi-Star;
+  }
+}
+.pi-Stop {
+  &:before {
+    content: $pi-Stop;
+  }
+}
+.pi-Tag {
+  &:before {
+    content: $pi-Tag;
+  }
+}
+.pi-Target-5 {
+  &:before {
+    content: $pi-Target-5;
+  }
+}
+.pi-Target-7 {
+  &:before {
+    content: $pi-Target-7;
+  }
+}
+.pi-Target-Crossed {
+  &:before {
+    content: $pi-Target-Crossed;
+  }
+}
+.pi-Target {
+  &:before {
+    content: $pi-Target;
+  }
+}
+.pi-Three-Stars {
+  &:before {
+    content: $pi-Three-Stars;
+  }
+}
+.pi-Triangle-Down {
+  &:before {
+    content: $pi-Triangle-Down;
+  }
+}
+.pi-Triangle-Up {
+  &:before {
+    content: $pi-Triangle-Up;
+  }
+}
+.pi-Two-Radars-Crossed {
+  &:before {
+    content: $pi-Two-Radars-Crossed;
+  }
+}
+.pi-Two-Radars {
+  &:before {
+    content: $pi-Two-Radars;
+  }
+}
+.pi-Unlike {
+  &:before {
+    content: $pi-Unlike;
+  }
+}
+.pi-Unlock {
+  &:before {
+    content: $pi-Unlock;
+  }
+}
+.pi-Vertical-Split-Left {
+  &:before {
+    content: $pi-Vertical-Split-Left;
+  }
+}
+.pi-Vertical-Split-Right {
+  &:before {
+    content: $pi-Vertical-Split-Right;
+  }
+}
+.pi-Warning-Triangle {
+  &:before {
+    content: $pi-Warning-Triangle;
+  }
+}
+.pi-Warning {
+  &:before {
+    content: $pi-Warning;
+  }
+}
+.pi-X-in-a-Circle {
+  &:before {
+    content: $pi-X-in-a-Circle;
+  }
+}
+.pi-X {
+  &:before {
+    content: $pi-X;
+  }
+}
+.pi-Zoom-In {
+  &:before {
+    content: $pi-Zoom-In;
+  }
+}
+.pi-Zoom-Out {
+  &:before {
+    content: $pi-Zoom-Out;
+  }
+}
+.pi-Add-Alarm {
+  &:before {
+    content: $pi-Add-Alarm;
+  }
+}
+.pi-Alarm-Check {
+  &:before {
+    content: $pi-Alarm-Check;
+  }
+}
+.pi-Alarm-Settings {
+  &:before {
+    content: $pi-Alarm-Settings;
+  }
+}
+.pi-Alarm-X {
+  &:before {
+    content: $pi-Alarm-X;
+  }
+}
+.pi-Alarm {
+  &:before {
+    content: $pi-Alarm;
+  }
+}
+.pi-Calendar-Add-Event {
+  &:before {
+    content: $pi-Calendar-Add-Event;
+  }
+}
+.pi-Calendar-Check {
+  &:before {
+    content: $pi-Calendar-Check;
+  }
+}
+.pi-Calendar-Event {
+  &:before {
+    content: $pi-Calendar-Event;
+  }
+}
+.pi-Calendar-Text {
+  &:before {
+    content: $pi-Calendar-Text;
+  }
+}
+.pi-Calendar-X {
+  &:before {
+    content: $pi-Calendar-X;
+  }
+}
+.pi-Calendar {
+  &:before {
+    content: $pi-Calendar;
+  }
+}
+.pi-Clock {
+  &:before {
+    content: $pi-Clock;
+  }
+}
+.pi-Stopwatch-Crossed {
+  &:before {
+    content: $pi-Stopwatch-Crossed;
+  }
+}
+.pi-Stopwatch {
+  &:before {
+    content: $pi-Stopwatch;
+  }
+}
+.pi-Add-Camera {
+  &:before {
+    content: $pi-Add-Camera;
+  }
+}
+.pi-Add-Image {
+  &:before {
+    content: $pi-Add-Image;
+  }
+}
+.pi-Add-to-Playlist {
+  &:before {
+    content: $pi-Add-to-Playlist;
+  }
+}
+.pi-Added-to-Playlist {
+  &:before {
+    content: $pi-Added-to-Playlist;
+  }
+}
+.pi-Auto-White-Balance {
+  &:before {
+    content: $pi-Auto-White-Balance;
+  }
+}
+.pi-Brush {
+  &:before {
+    content: $pi-Brush;
+  }
+}
+.pi-Burst-Mode {
+  &:before {
+    content: $pi-Burst-Mode;
+  }
+}
+.pi-Camera-Crossed {
+  &:before {
+    content: $pi-Camera-Crossed;
+  }
+}
+.pi-Camera-Roll {
+  &:before {
+    content: $pi-Camera-Roll;
+  }
+}
+.pi-Camera-Vintage {
+  &:before {
+    content: $pi-Camera-Vintage;
+  }
+}
+.pi-Camera {
+  &:before {
+    content: $pi-Camera;
+  }
+}
+.pi-Camera-1 {
+  &:before {
+    content: $pi-Camera-1;
+  }
+}
+.pi-Circle-Selection {
+  &:before {
+    content: $pi-Circle-Selection;
+  }
+}
+.pi-Clapboard-Check {
+  &:before {
+    content: $pi-Clapboard-Check;
+  }
+}
+.pi-Clapboard-Crossed {
+  &:before {
+    content: $pi-Clapboard-Crossed;
+  }
+}
+.pi-Clapboard-Download {
+  &:before {
+    content: $pi-Clapboard-Download;
+  }
+}
+.pi-Clapboard-Upload {
+  &:before {
+    content: $pi-Clapboard-Upload;
+  }
+}
+.pi-Clapboard-Warning {
+  &:before {
+    content: $pi-Clapboard-Warning;
+  }
+}
+.pi-Clapboard-X {
+  &:before {
+    content: $pi-Clapboard-X;
+  }
+}
+.pi-Clapboard {
+  &:before {
+    content: $pi-Clapboard;
+  }
+}
+.pi-Cloudy-White-Balance {
+  &:before {
+    content: $pi-Cloudy-White-Balance;
+  }
+}
+.pi-Collapse {
+  &:before {
+    content: $pi-Collapse;
+  }
+}
+.pi-Color-Palette {
+  &:before {
+    content: $pi-Color-Palette;
+  }
+}
+.pi-Color-Picker {
+  &:before {
+    content: $pi-Color-Picker;
+  }
+}
+.pi-Crop {
+  &:before {
+    content: $pi-Crop;
+  }
+}
+.pi-Double-Note {
+  &:before {
+    content: $pi-Double-Note;
+  }
+}
+.pi-Expand {
+  &:before {
+    content: $pi-Expand;
+  }
+}
+.pi-Fast-Backward {
+  &:before {
+    content: $pi-Fast-Backward;
+  }
+}
+.pi-Fast-Forward {
+  &:before {
+    content: $pi-Fast-Forward;
+  }
+}
+.pi-Film-Check {
+  &:before {
+    content: $pi-Film-Check;
+  }
+}
+.pi-Film-Download {
+  &:before {
+    content: $pi-Film-Download;
+  }
+}
+.pi-Film-Lock {
+  &:before {
+    content: $pi-Film-Lock;
+  }
+}
+.pi-Film-Play {
+  &:before {
+    content: $pi-Film-Play;
+  }
+}
+.pi-Film-Question {
+  &:before {
+    content: $pi-Film-Question;
+  }
+}
+.pi-Film-Upload {
+  &:before {
+    content: $pi-Film-Upload;
+  }
+}
+.pi-Film-Warning {
+  &:before {
+    content: $pi-Film-Warning;
+  }
+}
+.pi-Film-X {
+  &:before {
+    content: $pi-Film-X;
+  }
+}
+.pi-Film {
+  &:before {
+    content: $pi-Film;
+  }
+}
+.pi-Flash-Drive {
+  &:before {
+    content: $pi-Flash-Drive;
+  }
+}
+.pi-Headphones {
+  &:before {
+    content: $pi-Headphones;
+  }
+}
+.pi-Headset-Crossed {
+  &:before {
+    content: $pi-Headset-Crossed;
+  }
+}
+.pi-Headset {
+  &:before {
+    content: $pi-Headset;
+  }
+}
+.pi-Image {
+  &:before {
+    content: $pi-Image;
+  }
+}
+.pi-Incandescent-White-Balance {
+  &:before {
+    content: $pi-Incandescent-White-Balance;
+  }
+}
+.pi-Iridescent-White-Balance {
+  &:before {
+    content: $pi-Iridescent-White-Balance;
+  }
+}
+.pi-Layers-Crossed {
+  &:before {
+    content: $pi-Layers-Crossed;
+  }
+}
+.pi-Layers1 {
+  &:before {
+    content: $pi-Layers1;
+  }
+}
+.pi-Macro {
+  &:before {
+    content: $pi-Macro;
+  }
+}
+.pi-Music-Playlist {
+  &:before {
+    content: $pi-Music-Playlist;
+  }
+}
+.pi-Note {
+  &:before {
+    content: $pi-Note;
+  }
+}
+.pi-Panorama-Horizontal {
+  &:before {
+    content: $pi-Panorama-Horizontal;
+  }
+}
+.pi-Panorama-Vertical {
+  &:before {
+    content: $pi-Panorama-Vertical;
+  }
+}
+.pi-Panorama-Wide-Angle {
+  &:before {
+    content: $pi-Panorama-Wide-Angle;
+  }
+}
+.pi-Pause {
+  &:before {
+    content: $pi-Pause;
+  }
+}
+.pi-Picture-Frame {
+  &:before {
+    content: $pi-Picture-Frame;
+  }
+}
+.pi-Play-Playlist {
+  &:before {
+    content: $pi-Play-Playlist;
+  }
+}
+.pi-Play {
+  &:before {
+    content: $pi-Play;
+  }
+}
+.pi-Record {
+  &:before {
+    content: $pi-Record;
+  }
+}
+.pi-Rectangle-Selection {
+  &:before {
+    content: $pi-Rectangle-Selection;
+  }
+}
+.pi-Resize {
+  &:before {
+    content: $pi-Resize;
+  }
+}
+.pi-Save {
+  &:before {
+    content: $pi-Save;
+  }
+}
+.pi-Scissors {
+  &:before {
+    content: $pi-Scissors;
+  }
+}
+.pi-Shutter {
+  &:before {
+    content: $pi-Shutter;
+  }
+}
+.pi-Skip-Next {
+  &:before {
+    content: $pi-Skip-Next;
+  }
+}
+.pi-Skip-Previous {
+  &:before {
+    content: $pi-Skip-Previous;
+  }
+}
+.pi-Speaker-9 {
+  &:before {
+    content: $pi-Speaker-9;
+  }
+}
+.pi-Speaker-11 {
+  &:before {
+    content: $pi-Speaker-11;
+  }
+}
+.pi-Speaker-13 {
+  &:before {
+    content: $pi-Speaker-13;
+  }
+}
+.pi-Speaker-15 {
+  &:before {
+    content: $pi-Speaker-15;
+  }
+}
+.pi-Speaker {
+  &:before {
+    content: $pi-Speaker;
+  }
+}
+.pi-Stop1 {
+  &:before {
+    content: $pi-Stop1;
+  }
+}
+.pi-Sunny-White-Balance {
+  &:before {
+    content: $pi-Sunny-White-Balance;
+  }
+}
+.pi-Switch-Camera {
+  &:before {
+    content: $pi-Switch-Camera;
+  }
+}
+.pi-Switch-Video {
+  &:before {
+    content: $pi-Switch-Video;
+  }
+}
+.pi-Texture {
+  &:before {
+    content: $pi-Texture;
+  }
+}
+.pi-Timelapse {
+  &:before {
+    content: $pi-Timelapse;
+  }
+}
+.pi-USB {
+  &:before {
+    content: $pi-USB;
+  }
+}
+.pi-Vector-Curve {
+  &:before {
+    content: $pi-Vector-Curve;
+  }
+}
+.pi-Vector-Selection {
+  &:before {
+    content: $pi-Vector-Selection;
+  }
+}
+.pi-Vignette {
+  &:before {
+    content: $pi-Vignette;
+  }
+}
+.pi-Add-Document {
+  &:before {
+    content: $pi-Add-Document;
+  }
+}
+.pi-Add-Folder {
+  &:before {
+    content: $pi-Add-Folder;
+  }
+}
+.pi-Bookmark-Folder {
+  &:before {
+    content: $pi-Bookmark-Folder;
+  }
+}
+.pi-Close-Folder {
+  &:before {
+    content: $pi-Close-Folder;
+  }
+}
+.pi-Document-with-Lines {
+  &:before {
+    content: $pi-Document-with-Lines;
+  }
+}
+.pi-Document {
+  &:before {
+    content: $pi-Document;
+  }
+}
+.pi-Download-Document {
+  &:before {
+    content: $pi-Download-Document;
+  }
+}
+.pi-Download {
+  &:before {
+    content: $pi-Download;
+  }
+}
+.pi-Folder {
+  &:before {
+    content: $pi-Folder;
+  }
+}
+.pi-Open-Folder-Add {
+  &:before {
+    content: $pi-Open-Folder-Add;
+  }
+}
+.pi-Open-Folder {
+  &:before {
+    content: $pi-Open-Folder;
+  }
+}
+.pi-Search-Document {
+  &:before {
+    content: $pi-Search-Document;
+  }
+}
+.pi-Star-Folder {
+  &:before {
+    content: $pi-Star-Folder;
+  }
+}
+.pi-Upload-Document {
+  &:before {
+    content: $pi-Upload-Document;
+  }
+}
+.pi-Upload {
+  &:before {
+    content: $pi-Upload;
+  }
+}
+.pi-Align {
+  &:before {
+    content: $pi-Align;
+  }
+}
+.pi-Bold {
+  &:before {
+    content: $pi-Bold;
+  }
+}
+.pi-Bullet-Points-Dots {
+  &:before {
+    content: $pi-Bullet-Points-Dots;
+  }
+}
+.pi-Bullet-Points-Numbers {
+  &:before {
+    content: $pi-Bullet-Points-Numbers;
+  }
+}
+.pi-Central-Align {
+  &:before {
+    content: $pi-Central-Align;
+  }
+}
+.pi-Clear-Formatting {
+  &:before {
+    content: $pi-Clear-Formatting;
+  }
+}
+.pi-Double-Check {
+  &:before {
+    content: $pi-Double-Check;
+  }
+}
+.pi-Flip-to-Back {
+  &:before {
+    content: $pi-Flip-to-Back;
+  }
+}
+.pi-Flip-to-Front {
+  &:before {
+    content: $pi-Flip-to-Front;
+  }
+}
+.pi-Indent-Text-Left {
+  &:before {
+    content: $pi-Indent-Text-Left;
+  }
+}
+.pi-Indent-Text-Right {
+  &:before {
+    content: $pi-Indent-Text-Right;
+  }
+}
+.pi-Italic-Align {
+  &:before {
+    content: $pi-Italic-Align;
+  }
+}
+.pi-Italic {
+  &:before {
+    content: $pi-Italic;
+  }
+}
+.pi-Left-Align {
+  &:before {
+    content: $pi-Left-Align;
+  }
+}
+.pi-Letter-Check {
+  &:before {
+    content: $pi-Letter-Check;
+  }
+}
+.pi-Letter-Color {
+  &:before {
+    content: $pi-Letter-Color;
+  }
+}
+.pi-Move-Paragraph-Left {
+  &:before {
+    content: $pi-Move-Paragraph-Left;
+  }
+}
+.pi-Move-Paragraph-Right {
+  &:before {
+    content: $pi-Move-Paragraph-Right;
+  }
+}
+.pi-Notepad-Check {
+  &:before {
+    content: $pi-Notepad-Check;
+  }
+}
+.pi-Notepad-Crossed {
+  &:before {
+    content: $pi-Notepad-Crossed;
+  }
+}
+.pi-Notepad-X {
+  &:before {
+    content: $pi-Notepad-X;
+  }
+}
+.pi-Notepad {
+  &:before {
+    content: $pi-Notepad;
+  }
+}
+.pi-Paragraph {
+  &:before {
+    content: $pi-Paragraph;
+  }
+}
+.pi-Quote {
+  &:before {
+    content: $pi-Quote;
+  }
+}
+.pi-Right-Align {
+  &:before {
+    content: $pi-Right-Align;
+  }
+}
+.pi-Special-Characters {
+  &:before {
+    content: $pi-Special-Characters;
+  }
+}
+.pi-Table-27 {
+  &:before {
+    content: $pi-Table-27;
+  }
+}
+.pi-Table-29 {
+  &:before {
+    content: $pi-Table-29;
+  }
+}
+.pi-Table-31 {
+  &:before {
+    content: $pi-Table-31;
+  }
+}
+.pi-Table-33 {
+  &:before {
+    content: $pi-Table-33;
+  }
+}
+.pi-Table-35 {
+  &:before {
+    content: $pi-Table-35;
+  }
+}
+.pi-Table-37 {
+  &:before {
+    content: $pi-Table-37;
+  }
+}
+.pi-Table-39 {
+  &:before {
+    content: $pi-Table-39;
+  }
+}
+.pi-Table-41 {
+  &:before {
+    content: $pi-Table-41;
+  }
+}
+.pi-Table-43 {
+  &:before {
+    content: $pi-Table-43;
+  }
+}
+.pi-Table-45 {
+  &:before {
+    content: $pi-Table-45;
+  }
+}
+.pi-Table-47 {
+  &:before {
+    content: $pi-Table-47;
+  }
+}
+.pi-Table-49 {
+  &:before {
+    content: $pi-Table-49;
+  }
+}
+.pi-Table-51 {
+  &:before {
+    content: $pi-Table-51;
+  }
+}
+.pi-Text-Color {
+  &:before {
+    content: $pi-Text-Color;
+  }
+}
+.pi-Text-Crossed {
+  &:before {
+    content: $pi-Text-Crossed;
+  }
+}
+.pi-Text-Fill {
+  &:before {
+    content: $pi-Text-Fill;
+  }
+}
+.pi-Text-Size {
+  &:before {
+    content: $pi-Text-Size;
+  }
+}
+.pi-Underline {
+  &:before {
+    content: $pi-Underline;
+  }
+}
+.pi-Arrow-Bottom-Left {
+  &:before {
+    content: $pi-Arrow-Bottom-Left;
+  }
+}
+.pi-Arrow-Bottom-Right {
+  &:before {
+    content: $pi-Arrow-Bottom-Right;
+  }
+}
+.pi-Arrow-Down-In-a-Circle {
+  &:before {
+    content: $pi-Arrow-Down-In-a-Circle;
+  }
+}
+.pi-Arrow-Down-with-Line {
+  &:before {
+    content: $pi-Arrow-Down-with-Line;
+  }
+}
+.pi-Arrow-Down {
+  &:before {
+    content: $pi-Arrow-Down;
+  }
+}
+.pi-Arrow-in-Box-Down {
+  &:before {
+    content: $pi-Arrow-in-Box-Down;
+  }
+}
+.pi-Arrow-in-Box-Left {
+  &:before {
+    content: $pi-Arrow-in-Box-Left;
+  }
+}
+.pi-Arrow-in-Box-Right {
+  &:before {
+    content: $pi-Arrow-in-Box-Right;
+  }
+}
+.pi-Arrow-in-Box-Up {
+  &:before {
+    content: $pi-Arrow-in-Box-Up;
+  }
+}
+.pi-Arrow-Left {
+  &:before {
+    content: $pi-Arrow-Left;
+  }
+}
+.pi-Arrow-Right {
+  &:before {
+    content: $pi-Arrow-Right;
+  }
+}
+.pi-Arrow-Up-In-a-Circle {
+  &:before {
+    content: $pi-Arrow-Up-In-a-Circle;
+  }
+}
+.pi-Arrow-Up-with-Line {
+  &:before {
+    content: $pi-Arrow-Up-with-Line;
+  }
+}
+.pi-Arrow-Up {
+  &:before {
+    content: $pi-Arrow-Up;
+  }
+}
+.pi-Arrows-Horizontal {
+  &:before {
+    content: $pi-Arrows-Horizontal;
+  }
+}
+.pi-Arrows-Vertical {
+  &:before {
+    content: $pi-Arrows-Vertical;
+  }
+}
+.pi-Backward {
+  &:before {
+    content: $pi-Backward;
+  }
+}
+.pi-Broken-Arrow-Down-Left {
+  &:before {
+    content: $pi-Broken-Arrow-Down-Left;
+  }
+}
+.pi-Broken-Arrow-Down-Right {
+  &:before {
+    content: $pi-Broken-Arrow-Down-Right;
+  }
+}
+.pi-Broken-Arrow-Up {
+  &:before {
+    content: $pi-Broken-Arrow-Up;
+  }
+}
+.pi-Code-Arrows {
+  &:before {
+    content: $pi-Code-Arrows;
+  }
+}
+.pi-Crossed-Arrows {
+  &:before {
+    content: $pi-Crossed-Arrows;
+  }
+}
+.pi-Diagonal-Arrows-5 {
+  &:before {
+    content: $pi-Diagonal-Arrows-5;
+  }
+}
+.pi-Diagonal-Arrows-7 {
+  &:before {
+    content: $pi-Diagonal-Arrows-7;
+  }
+}
+.pi-Download-Arrow {
+  &:before {
+    content: $pi-Download-Arrow;
+  }
+}
+.pi-Expand-Rotated {
+  &:before {
+    content: $pi-Expand-Rotated;
+  }
+}
+.pi-Expand1 {
+  &:before {
+    content: $pi-Expand1;
+  }
+}
+.pi-Forward {
+  &:before {
+    content: $pi-Forward;
+  }
+}
+.pi-Full-Arrow-Down {
+  &:before {
+    content: $pi-Full-Arrow-Down;
+  }
+}
+.pi-Full-Arrow-Left {
+  &:before {
+    content: $pi-Full-Arrow-Left;
+  }
+}
+.pi-Full-Arrow-Right {
+  &:before {
+    content: $pi-Full-Arrow-Right;
+  }
+}
+.pi-Full-Arrow-Up {
+  &:before {
+    content: $pi-Full-Arrow-Up;
+  }
+}
+.pi-High-Priority {
+  &:before {
+    content: $pi-High-Priority;
+  }
+}
+.pi-Joining-Arrows-5 {
+  &:before {
+    content: $pi-Joining-Arrows-5;
+  }
+}
+.pi-Joining-Arrows-7 {
+  &:before {
+    content: $pi-Joining-Arrows-7;
+  }
+}
+.pi-Loading-5 {
+  &:before {
+    content: $pi-Loading-5;
+  }
+}
+.pi-Loading-7 {
+  &:before {
+    content: $pi-Loading-7;
+  }
+}
+.pi-Low-Priority {
+  &:before {
+    content: $pi-Low-Priority;
+  }
+}
+.pi-Move {
+  &:before {
+    content: $pi-Move;
+  }
+}
+.pi-Redo {
+  &:before {
+    content: $pi-Redo;
+  }
+}
+.pi-Refresh-5 {
+  &:before {
+    content: $pi-Refresh-5;
+  }
+}
+.pi-Refresh-7 {
+  &:before {
+    content: $pi-Refresh-7;
+  }
+}
+.pi-Refresh-Rectangular {
+  &:before {
+    content: $pi-Refresh-Rectangular;
+  }
+}
+.pi-Separating-Arrows {
+  &:before {
+    content: $pi-Separating-Arrows;
+  }
+}
+.pi-Small-Arrow-Down {
+  &:before {
+    content: $pi-Small-Arrow-Down;
+  }
+}
+.pi-Small-Arrow-Up {
+  &:before {
+    content: $pi-Small-Arrow-Up;
+  }
+}
+.pi-Small-Arrows-Joining {
+  &:before {
+    content: $pi-Small-Arrows-Joining;
+  }
+}
+.pi-Small-Arrows-Separating {
+  &:before {
+    content: $pi-Small-Arrows-Separating;
+  }
+}
+.pi-Swap-Calls-Arrows {
+  &:before {
+    content: $pi-Swap-Calls-Arrows;
+  }
+}
+.pi-Undo {
+  &:before {
+    content: $pi-Undo;
+  }
+}
+.pi-Upload-Arrow {
+  &:before {
+    content: $pi-Upload-Arrow;
+  }
+}
+.pi-Wrap-Text-Down {
+  &:before {
+    content: $pi-Wrap-Text-Down;
+  }
+}
+.pi-Wrap-Text-Up {
+  &:before {
+    content: $pi-Wrap-Text-Up;
+  }
+}
+.pi-Zoom-Map-Out {
+  &:before {
+    content: $pi-Zoom-Map-Out;
+  }
+}
+.pi-Add-Cart {
+  &:before {
+    content: $pi-Add-Cart;
+  }
+}
+.pi-ATM-Dollar {
+  &:before {
+    content: $pi-ATM-Dollar;
+  }
+}
+.pi-ATM {
+  &:before {
+    content: $pi-ATM;
+  }
+}
+.pi-Bag-of-Cash {
+  &:before {
+    content: $pi-Bag-of-Cash;
+  }
+}
+.pi-Bank {
+  &:before {
+    content: $pi-Bank;
+  }
+}
+.pi-Bar-Graph {
+  &:before {
+    content: $pi-Bar-Graph;
+  }
+}
+.pi-Chart-Arrow-Down {
+  &:before {
+    content: $pi-Chart-Arrow-Down;
+  }
+}
+.pi-Chart-Arrow-Up {
+  &:before {
+    content: $pi-Chart-Arrow-Up;
+  }
+}
+.pi-Chart-Arrow {
+  &:before {
+    content: $pi-Chart-Arrow;
+  }
+}
+.pi-Credit-Card {
+  &:before {
+    content: $pi-Credit-Card;
+  }
+}
+.pi-Discount {
+  &:before {
+    content: $pi-Discount;
+  }
+}
+.pi-Dollar-Coin {
+  &:before {
+    content: $pi-Dollar-Coin;
+  }
+}
+.pi-Dollar-Crossed {
+  &:before {
+    content: $pi-Dollar-Crossed;
+  }
+}
+.pi-Dollar {
+  &:before {
+    content: $pi-Dollar;
+  }
+}
+.pi-Euro {
+  &:before {
+    content: $pi-Euro;
+  }
+}
+.pi-Pie-Chart {
+  &:before {
+    content: $pi-Pie-Chart;
+  }
+}
+.pi-Pound {
+  &:before {
+    content: $pi-Pound;
+  }
+}
+.pi-Safe {
+  &:before {
+    content: $pi-Safe;
+  }
+}
+.pi-Shopping-Cart-5 {
+  &:before {
+    content: $pi-Shopping-Cart-5;
+  }
+}
+.pi-Shopping-Cart-7 {
+  &:before {
+    content: $pi-Shopping-Cart-7;
+  }
+}
+.pi-Stock-Chart {
+  &:before {
+    content: $pi-Stock-Chart;
+  }
+}
+.pi-Suitcase {
+  &:before {
+    content: $pi-Suitcase;
+  }
+}
+.pi-Tag-with-Heart {
+  &:before {
+    content: $pi-Tag-with-Heart;
+  }
+}
+.pi-Wallet {
+  &:before {
+    content: $pi-Wallet;
+  }
+}
+.pi-Yen {
+  &:before {
+    content: $pi-Yen;
+  }
+}
+
+.pi-lg {
+  font-size: 1.33333em !important;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.pi-xs {
+  font-size: 0.75em !important;
+}
+
+.pi-sm {
+  font-size: 0.875em !important;
+}
+
+.pi-1x {
+  font-size: 1em !important;
+}
+
+.pi-2x {
+  font-size: 2em !important;
+}
+
+.pi-3x {
+  font-size: 3em !important;
+}
+
+.pi-4x {
+  font-size: 4em !important;
+}
+
+.pi-5x {
+  font-size: 5em !important;
+}
+
+.pi-6x {
+  font-size: 6em !important;
+}
+
+.pi-7x {
+  font-size: 7em !important;
+}
+
+.pi-8x {
+  font-size: 8em !important;
+}
+
+.pi-9x {
+  font-size: 9em;
+}
+
+.pi-10x {
+  font-size: 10em !important;
+}
+
+.pi-fw {
+  display: inline-block;
+  height: 1em;
+  text-align: center;
+  vertical-align: -0.25em;
+  width: 1.25em;
+}

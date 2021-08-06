@@ -5,9 +5,11 @@ import '@/styles/main.scss'
 
 import App from './App.vue'
 import MiterDesign from '@/entry.esm'
+import router from './plugins/router'
 
 const app = createApp(App)
 app.use(MiterDesign)
+app.use(router)
 
 app.config.performance = true
 
