@@ -4,12 +4,22 @@
       class="picker"
       :class="pickerClassList"
       @click="!disabled ? (active = !active) : null"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      tabindex="0"
     >
       <span>{{ value || placeholder }}</span>
     </div>
     <div class="list" :class="listClassList">
       <div class="title">{{ title }}</div>
-      <div class="option" v-for="(option, i) in options" :key="i">
+      <div
+        class="option"
+        v-for="(option, i) in options"
+        :key="i"
+        :tabindex="i"
+        @focus="handleFocus"
+        @blur="handleBlur"
+      >
         <input
           type="radio"
           :disabled="disabled"
@@ -18,7 +28,7 @@
           :value="option"
           :checked="checked"
           v-model="value_"
-          @input="$emit('update:modelValue', value_)"
+          @input="emit(option)"
         />
         <label :for="i">
           <span><i v-if="icon" class="pi pi-fire pi-2x"></i> {{ option }}</span>
@@ -103,6 +113,10 @@ export default defineComponent({
     }
   },
   methods: {
+    emit(option): void {
+      console.log(this.value, option)
+      this.$emit('update:modelValue', this.value_)
+    },
     handleMouseEnter(): void {
       if (this.disabled) return
       this.hovered = true

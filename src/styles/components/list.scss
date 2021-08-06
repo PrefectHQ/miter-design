@@ -30,7 +30,7 @@
     }
     &.disabled {
       background-color: variables.$grey-5;
-      cursor: not-allowed;
+      cursor: not-allowed !important;
       color: variables.$inactive !important;
       &::after {
         border-color: variables.$grey-4;
