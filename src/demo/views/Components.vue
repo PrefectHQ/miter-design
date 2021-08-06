@@ -2,6 +2,7 @@
   <div class="mt-5 pb-10" v-cloak>
     <h1>Components</h1>
     <Cards />
+    <Popups />
     <Buttons class="mt-10" />
     <Toggles class="mt-10" />
     <RadioButtons class="mt-10" />
@@ -22,11 +23,13 @@ import Checkboxes from '../sections/Checkboxes.vue'
 import Links from '../sections/Links.vue'
 import Avatar from '../sections/Avatar.vue'
 import Tag from '../sections/Tag.vue'
+import Popups from '../sections/Popups.vue'
 
 @Options({
   components: {
     Buttons,
     Cards,
+    Popups,
     RadioButtons,
     Links,
     Avatar,
