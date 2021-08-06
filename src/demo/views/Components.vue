@@ -7,6 +7,7 @@
     <Toggles class="mt-10" />
     <RadioButtons class="mt-10" />
     <Checkboxes />
+    <Sliders class="mt-10" />
     <Links class="mt-10" />
     <Tag class="mt-10" />
     <Avatar class="mt-10" />
@@ -24,6 +25,7 @@ import Links from '../sections/Links.vue'
 import Avatar from '../sections/Avatar.vue'
 import Tag from '../sections/Tag.vue'
 import Popups from '../sections/Popups.vue'
+import Sliders from '../sections/Sliders.vue'
 
 @Options({
   components: {
@@ -34,6 +36,7 @@ import Popups from '../sections/Popups.vue'
     Links,
     Avatar,
     Toggles,
+    Sliders,
     Checkboxes,
     Tag
   }
