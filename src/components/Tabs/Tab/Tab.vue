@@ -38,7 +38,7 @@ export default defineComponent({
   },
   data() {
     return {
-      focused: false,
+      focused: false as boolean,
       hovered: false
     }
   },
