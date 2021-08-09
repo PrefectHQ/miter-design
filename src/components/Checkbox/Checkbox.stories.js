@@ -2,7 +2,13 @@ import Checkbox from './Checkbox.vue'
 
 export default {
   title: 'Miter Design/Checkbox',
-  component: Checkbox
+  component: Checkbox,
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/HJgj2eHBaqt1SAYruZNjQQ/Prefect?node-id=488%3A1087'
+    }
+  }
 }
 
 const Template = (args) => ({
