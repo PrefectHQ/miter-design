@@ -20,10 +20,12 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.14.5",
     "@babel/preset-typescript": "^7.12.7",
-    "@storybook/addon-actions": "^6.4.0-alpha.28",
-    "@storybook/addon-essentials": "^6.4.0-alpha.28",
-    "@storybook/addon-links": "^6.4.0-alpha.28",
-    "@storybook/vue3": "^6.4.0-alpha.28",
+    "@storybook/addon-a11y": "^6.3.7",
+    "@storybook/addon-actions": "^6.3.6",
+    "@storybook/addon-docs": "^6.3.6",
+    "@storybook/addon-essentials": "^6.3.6",
+    "@storybook/addon-links": "^6.3.6",
+    "@storybook/vue3": "^6.3.6",
     "@types/jest": "^24.0.19",
     "@types/sass-loader": "^8.0.2",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
@@ -45,6 +47,7 @@
     "eslint": "^7.20.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.6.0",
+    "html-webpack-plugin": ">=5.0.0",
     "prettier": "^2.2.1",
     "sass": "^1.35.2",
     "storybook-builder-vite": "^0.0.12",
@@ -62,6 +65,5 @@
     "vue": "^3.0.5"
   },
   "sideEffects": false,
-  "style": "./dist/style.css",
-  "dependencies": {}
+  "style": "./dist/style.css"
 }
