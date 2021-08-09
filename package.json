@@ -25,6 +25,7 @@
     "@storybook/addon-docs": "^6.3.6",
     "@storybook/addon-essentials": "^6.3.6",
     "@storybook/addon-links": "^6.3.6",
+    "@storybook/theming": "^6.3.7",
     "@storybook/vue3": "^6.3.6",
     "@types/jest": "^24.0.19",
     "@types/sass-loader": "^8.0.2",
