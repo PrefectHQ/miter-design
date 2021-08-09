@@ -3,7 +3,8 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials', // This is still using webpack which is causing this build to fail
-    '@storybook/addon-a11y'
+    '@storybook/addon-a11y',
+    'storybook-addon-designs'
   ],
   core: {
     builder: 'storybook-builder-vite'
