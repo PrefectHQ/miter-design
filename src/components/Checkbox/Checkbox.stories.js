@@ -1,7 +1,7 @@
 import Checkbox from './Checkbox.vue'
 
 export default {
-  title: 'Checkbox',
+  title: 'Miter Design/Checkbox',
   component: Checkbox
 }
 
