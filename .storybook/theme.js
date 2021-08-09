@@ -4,5 +4,5 @@ export default create({
   base: 'light',
   brandTitle: 'Miter Design',
   brandUrl: 'https://github.com/PrefectHQ/miter-design',
-  brandImage: '../public/logo.png'
+  brandImage: '/logo.png'
 })

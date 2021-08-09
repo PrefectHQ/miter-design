@@ -9,7 +9,7 @@
     "test:unit:watch": "vue-cli-service test:unit --watch",
     "lint": "vue-cli-service lint",
     "dev": "vite build --watch",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "BROWSER=none start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "main": "./dist/miter-design.umd.js",
