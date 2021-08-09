@@ -40,19 +40,19 @@ Disabled.args = {
 export const DefaultIcon = Template.bind({})
 DefaultIcon.args = {
   icon: true,
-  content: '<i class="pi pi-Fire pi-2x" />'
+  content: '<i class="pi pi-Bug pi-2x" />'
 }
 
 export const PrimaryIcon = Template.bind({})
 PrimaryIcon.args = {
   icon: true,
   color: 'primary',
-  content: '<i class="pi pi-Fire pi-2x" />'
+  content: '<i class="pi pi-Bug pi-2x" />'
 }
 
 export const DisabledIcon = Template.bind({})
 DisabledIcon.args = {
   icon: true,
   disabled: true,
-  content: '<i class="pi pi-Fire pi-2x" />'
+  content: '<i class="pi pi-Bug pi-2x" />'
 }
