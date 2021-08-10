@@ -1,25 +1,23 @@
 <template>
   <div class="card">
-    <div>
-      <header v-if="$slots.header">
-        <slot name="header" />
-      </header>
+    <header v-if="$slots.header">
+      <slot name="header" />
+    </header>
+    <section>
+      <aside v-if="$slots.aside" class="mr-4">
+        <slot name="aside" />
+      </aside>
+
       <section>
-        <aside v-if="$slots.aside" class="mr-4">
-          <slot name="aside" />
-        </aside>
+        <article v-if="$slots.default" :style="style">
+          <slot />
+        </article>
 
-        <section>
-          <article v-if="$slots.default" :style="style">
-            <slot />
-          </article>
-
-          <footer v-if="$slots.actions">
-            <slot name="actions" />
-          </footer>
-        </section>
+        <footer v-if="$slots.actions">
+          <slot name="actions" />
+        </footer>
       </section>
-    </div>
+    </section>
   </div>
 </template>
 
