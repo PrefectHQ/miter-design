@@ -30,7 +30,10 @@ class Props {
   width = prop<string>({ default: null })
 }
 
-@Options({})
+// This alias is needed because vue-class-component isn't yet compatible with storybook
+// See https://github.com/storybookjs/storybook/issues/14052#issuecomment-797512590 for details
+const Component = Options
+@Component({})
 export default class Card extends Vue.with(Props) {
   style = computed(() => {
     return {
