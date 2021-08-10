@@ -3,7 +3,7 @@
 @use './variables';
 
 $cuts: 8, 16, 24, 32, 40, 48;
-$bottom: 9, 17, 25, 33, 41, 49;
+$bottom: 6, 17, 25, 33, 41, 49;
 $shadows: (
   'sm': variables.$drop-shadow-sm,
   'md': variables.$drop-shadow-md,
