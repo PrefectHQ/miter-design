@@ -1,7 +1,6 @@
 <template>
   <div class="d-flex">
     <Card
-      :key="index"
       class="mr-4 mt-4 d-inline-block"
       :class="card.cardClass"
       :height="card.height"
@@ -92,6 +91,10 @@ interface event {
 export default defineComponent({
   name: 'Slider',
   props: {
+    card: {
+      type: Object,
+      required: true
+    },
     disabled: {
       type: Boolean,
       default: false
