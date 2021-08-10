@@ -36,7 +36,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-, "src/components/Card/Actions/Actions.spec.js"  ],
+  ],
   "exclude": [
     "node_modules"
   ]
