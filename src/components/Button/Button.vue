@@ -12,11 +12,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <div>
-      <span data-test="default">
-        <slot />
-      </span>
-    </div>
+    <span data-test="default"><slot /></span>
   </button>
 </template>
 

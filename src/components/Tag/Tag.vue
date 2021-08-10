@@ -1,8 +1,8 @@
 <template>
   <div class="tag" :class="classList">
-    <div data-test="default">
+    <span data-test="default">
       <slot />
-    </div>
+    </span>
   </div>
 </template>
 
