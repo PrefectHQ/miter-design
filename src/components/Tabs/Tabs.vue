@@ -13,29 +13,32 @@ export default defineComponent({
   name: 'Tabs',
   components: { Tab },
   props: {
-    modelValue: [String, Number],
+    modelValue: {
+      type: [String, Number],
+      default: 0
+    },
+    value: {
+      type: [String, Number],
+      default: 0
+    },
     color: { type: String, default: () => 'primary' },
     outlined: Boolean,
     dense: Boolean
   },
   emits: {
-    'update:modelValue'(e: string | number | undefined) {
-      return !!e
+    'update:modelValue'(...args: any[]) {
+      return { ...args }
     }
   },
-  computed: {
-    value: {
-      get(): string | number | undefined {
-        return this.modelValue
-      },
-      set(value: string | number | undefined) {
-        this.$emit('update:modelValue', value)
-      }
+  data() {
+    return {
+      value_: this.value || this.modelValue
     }
   },
   methods: {
     handleTabClick(e: Event, ...args: any[]): Event {
-      this.value = args[0]
+      this.value_ = args[0]
+      this.$emit('update:modelValue', this.value_)
       return e
     }
   },
@@ -48,7 +51,7 @@ export default defineComponent({
     >[][]
 
     const activeIndex = slottedItems?.findIndex(
-      (ti) => ti.props?.href == this.value
+      (ti) => ti.props?.href == this.value_
     )
 
     const computedProps = [
@@ -73,7 +76,7 @@ export default defineComponent({
               ti,
               mergeProps(
                 {
-                  active: this.value == ti.props?.href,
+                  active: this.value_ == ti.props?.href,
                   class: computedProps,
                   onClick: onClick
                 },
@@ -87,16 +90,16 @@ export default defineComponent({
       children = [
         [
           h('div', {
-            class: ['slider', `tab-${activeIndex}-active`]
+            class: ['slider', `tab-${this.value_}-active`]
           })
         ],
         Array.from({ length: 2 }).map((elem, i) => {
           return h(
             Tab,
             mergeProps({
-              href: i + 1,
+              href: i,
               onClick: onClick,
-              active: this.value == i + 1
+              active: this.value_ == i
             }),
             () => `Tab ${i + 1}`
           )

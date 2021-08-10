@@ -9,12 +9,12 @@
     <div class="container">
       <Tabs v-model="tab" class="mt-5" :dense="dense">
         <Tab href="1">
-          <i class="material-icons mr-1">favorite</i>
+          <i class="pi pi-Earth pi-lg mr-1" />
           Tab 1
         </Tab>
-        <Tab href="2"> <i class="material-icons mr-1">language</i>Tab 2 </Tab>
-        <Tab href="3"> <i class="material-icons mr-1">savings</i>Tab 3 </Tab>
-        <Tab href="4"> <i class="material-icons mr-1">timeline</i>Tab 4 </Tab>
+        <Tab href="2"> <i class="pi pi-Tag-with-Heart pi-lg mr-1" />Tab 2 </Tab>
+        <Tab href="3"> <i class="pi pi-Bug-Warning pi-lg mr-1" />Tab 3 </Tab>
+        <Tab href="4"> <i class="pi pi-Compass pi-lg mr-1" />Tab 4 </Tab>
       </Tabs>
 
       <div class="pr-4 py-2">
