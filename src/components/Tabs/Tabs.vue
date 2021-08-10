@@ -65,11 +65,6 @@ export default defineComponent({
 
     if (slottedItems) {
       children = [
-        [
-          h('div', {
-            class: ['slider', `tab-${activeIndex}-active`]
-          })
-        ],
         slottedItems?.map(
           (ti: RendererNode | RendererElement | { [key: string]: any }) => {
             return h(
@@ -88,11 +83,6 @@ export default defineComponent({
       ]
     } else {
       children = [
-        [
-          h('div', {
-            class: ['slider', `tab-${this.value_}-active`]
-          })
-        ],
         Array.from({ length: 2 }).map((elem, i) => {
           return h(
             Tab,
@@ -110,7 +100,7 @@ export default defineComponent({
     return h(
       'div',
       {
-        class: ['tabs-container', `tab-${this.value_}-active`, ...computedProps]
+        class: ['tabs-container', `tab-${activeIndex}-active`, ...computedProps]
       },
       children
     )

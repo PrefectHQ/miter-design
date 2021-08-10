@@ -79,12 +79,12 @@ button.tab {
 
   background-color: transparent;
   border: none;
-  // border-bottom: 2px solid variables.$grey-4;
+  border-bottom: 2px solid variables.$grey-4;
   height: max-content;
-  margin-bottom: -1px;
   cursor: pointer;
   font-size: 15px;
   padding: 0;
+  transition: color 200ms ease-in;
   width: $width;
 
   &.hover,
@@ -92,10 +92,12 @@ button.tab {
   &:focus,
   &.focus {
     background-color: variables.$grey-3;
+    outline: none;
   }
 
   &.focused {
     background-color: variables.$grey-4;
+    border-color: variables.$grey-2;
   }
 
   &.disabled {
@@ -103,10 +105,19 @@ button.tab {
     cursor: not-allowed;
   }
 
+  &.active {
+    color: variables.$primary;
+  }
+
   > div {
     padding: 12px 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

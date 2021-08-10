@@ -77,7 +77,6 @@
   $left-margin: -24px;
   $miter-width: 16px;
 
-  border-bottom: 2px solid variables.$grey-4;
   overflow-x: auto;
   white-space: nowrap;
   position: relative;
@@ -93,26 +92,31 @@
   /* End hide scrollbars */
 
   &::after {
+    border-bottom: 2px solid variables.$primary;
     bottom: 0;
     content: '';
+    height: 0;
     left: 0;
     position: absolute;
-    border-bottom: 2px solid variables.$primary;
-    transition: all 150ms ease-in-out;
+    transition: all 200ms ease-out;
     width: $width;
   }
+
+  // &::before {
+  //   border-bottom: 2px solid variables.$grey-4;
+  //   content: '';
+  //   width: max-content;
+  //   height: 0;
+  //   left: 0;
+  //   position: absolute;
+  //   bottom: 0;
+  // }
 
   @for $i from 0 through 100 {
     &.tab-#{$i}-active {
       &::after {
         left: calc(#{$i} * #{$width});
-        // border-radius: 3px 3px 0 #{if($i != 0, 0, 3px)};
       }
-
-      // &::before {
-      //   left: calc(#{$i} * #{$width} - #{$miter-width} + 3px);
-      //   width: if($i != 0, $miter-width, 0px) !important;
-      // }
     }
   }
 }
