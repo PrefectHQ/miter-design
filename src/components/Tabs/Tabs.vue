@@ -107,7 +107,13 @@ export default defineComponent({
       ]
     }
 
-    return h('div', { class: ['tabs-container', ...computedProps] }, children)
+    return h(
+      'div',
+      {
+        class: ['tabs-container', `tab-${this.value_}-active`, ...computedProps]
+      },
+      children
+    )
   }
 })
 </script>

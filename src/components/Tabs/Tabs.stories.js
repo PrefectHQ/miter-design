@@ -22,11 +22,15 @@ const Template = (args) => ({
     const val = reactive(args.modelValue)
     return { ...args, val }
   },
-  template: `<Tabs v-model="val" v-bind="args" />
+  template: `<Tabs v-model="val" v-bind="args" >
+    ${args.content ? args.content : ''}
+  </Tabs>
   `
 })
 
 export const Default = Template.bind({})
 Default.args = {
-  modelValue: 0
+  modelValue: 0,
+  content:
+    '<Tab href="0">Tab 1</Tab><Tab href="1">Tab with a really long title</Tab>'
 }
