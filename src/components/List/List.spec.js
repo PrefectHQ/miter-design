@@ -5,7 +5,7 @@ test('list contains 2 options when nothing is passed in', () => {
   const wrapper = mount(List)
 
   const list = wrapper.get('.list')
-  const options = list.findAll('input[type="radio"]')
+  const options = list.findAll('.option')
   expect(options).toHaveLength(2)
 })
 describe('icons', () => {
@@ -24,20 +24,20 @@ describe('icons', () => {
   })
 })
 describe('disabled state', () => {
-  test('adds the disabled attribute when disabled:true is passed as a prop', () => {
+  test('adds the disabled class when disabled:true is passed as a prop', () => {
     const wrapper = mount(List, { props: { disabled: true } })
 
     const list = wrapper.get('.list')
 
-    expect(list.attributes('disabled')).toBeDefined()
+    expect(list.classes('disabled')).toBe(true)
   })
 
-  test('sets disabled to false when disabled:false is passed as a prop', () => {
+  test('does not add disabled class when disabled:false is passed as a prop', () => {
     const wrapper = mount(List, { props: { disabled: false } })
 
     const list = wrapper.get('.list')
 
-    expect(list.attributes('disabled')).toContain('false')
+    expect(list.classes('disabled')).toBe(false)
   })
 })
 test('emit selected option', async () => {
@@ -46,8 +46,8 @@ test('emit selected option', async () => {
       value: 'Option 1'
     }
   })
-  const option = wrapper.get('input[type="radio"]')
+  const option = wrapper.get('.option')
   option.element.selected = true
-  await option.trigger('change')
+  await option.trigger('click')
   expect(wrapper.emitted('update:modelValue')[0][0]).toEqual('Option 1')
 })

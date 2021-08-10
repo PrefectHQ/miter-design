@@ -2,10 +2,15 @@
 @use '../abstracts/mixins';
 .wrapper {
   font-family: variables.$font--primary;
-  * {
-    cursor: pointer;
+  &:focus-visible {
+    outline: none !important;
+    .picker:not(.disabled) {
+      border: 1px solid variables.$primary;
+    }
   }
+
   .picker {
+    cursor: pointer;
     height: 58px;
     width: 350px;
     display: flex;
@@ -17,6 +22,9 @@
     white-space: nowrap;
     span {
       width: 275px;
+    }
+    &.selected {
+      color: variables.$text--primary;
     }
     &::after {
       content: '';
@@ -37,7 +45,7 @@
       }
     }
     &.active {
-      border-color: variables.$primary;
+      border: 1px solid variables.$primary;
     }
   }
 
@@ -51,7 +59,6 @@
     background: variables.$white;
     .title {
       align-items: center;
-      cursor: default;
       display: flex;
       height: 58px;
       border-bottom: 1px solid variables.$grey-6;
@@ -68,30 +75,16 @@
 
   .option {
     align-items: center;
+    cursor: pointer;
     display: flex;
     font-size: 16px;
     height: 58px;
     line-height: 20px;
+    padding-left: 32px;
     &:not(:last-child) {
       border-bottom: 1px solid variables.$grey-6;
     }
-    label {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      span {
-        padding-left: 32px;
-        display: flex;
-        align-items: center;
-      }
-    }
 
-    input {
-      margin-left: 6px;
-      position: absolute;
-      height: 0;
-      width: 0;
-    }
     input:checked ~ label {
       background-color: variables.$primary;
       color: variables.$white;

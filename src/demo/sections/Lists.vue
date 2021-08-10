@@ -3,7 +3,7 @@
     <h3>Lists</h3>
     <div class="d-flex">
       <List
-        class="my-2 pr-2"
+        class="my-2 mr-2"
         name="list-without-icon"
         placeholder="Pick something!"
         title="Available Options"
@@ -12,7 +12,7 @@
       >
       </List>
       <List
-        class="my-2 pr-2"
+        class="my-2 mr-2"
         name="list-with-icon"
         icon
         title="Available Options"

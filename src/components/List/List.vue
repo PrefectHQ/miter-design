@@ -1,38 +1,24 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" tabindex="0" @focus="handleFocus" @blur="handleBlur">
     <div
       class="picker"
       :class="pickerClassList"
       @click="!disabled ? (active = !active) : null"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      tabindex="0"
     >
-      <span>{{ value || placeholder }}</span>
+      <span
+        ><i v-if="icon && selected.length > 0" class="pi pi-fire pi-1x"></i
+        >{{ selected || placeholder }}</span
+      >
     </div>
     <div class="list" :class="listClassList">
       <div class="title">{{ title }}</div>
       <div
-        class="option"
-        v-for="(option, i) in options"
+        v-for="(option, i) of options"
         :key="i"
-        :tabindex="i"
-        @focus="handleFocus"
-        @blur="handleBlur"
+        @click="choose(option)"
+        class="option"
       >
-        <input
-          type="radio"
-          :disabled="disabled"
-          :id="i"
-          :name="label"
-          :value="option"
-          :checked="checked"
-          v-model="value_"
-          @input="emit(option)"
-        />
-        <label :for="i">
-          <span><i v-if="icon" class="pi pi-fire pi-2x"></i> {{ option }}</span>
-        </label>
+        <span><i v-if="icon" class="pi pi-fire pi-1x"></i> {{ option }}</span>
       </div>
     </div>
   </div>
@@ -85,7 +71,8 @@ export default defineComponent({
   data() {
     return {
       hovered: false,
-      active: false
+      active: false,
+      selected: ''
     }
   },
   computed: {
@@ -93,7 +80,8 @@ export default defineComponent({
       return [
         ...(this.disabled ? ['disabled'] : []),
         ...(this.hovered ? ['hovered'] : []),
-        ...(this.active ? ['active'] : [])
+        ...(this.active ? ['active'] : []),
+        ...(this.selected.length > 0 ? ['selected'] : [])
       ]
     },
     listClassList(): string[] {
@@ -102,20 +90,12 @@ export default defineComponent({
         ...(this.hovered ? ['hovered'] : []),
         ...(!this.active ? ['hidden'] : [])
       ]
-    },
-    value_: {
-      get(): String {
-        return this.value
-      },
-      set() {
-        this.$emit('update:modelValue', this.value)
-      }
     }
   },
   methods: {
-    emit(option): void {
-      console.log(this.value, option)
-      this.$emit('update:modelValue', this.value_)
+    choose(option: string): void {
+      this.selected = option
+      this.$emit('update:modelValue', this.selected)
     },
     handleMouseEnter(): void {
       if (this.disabled) return
