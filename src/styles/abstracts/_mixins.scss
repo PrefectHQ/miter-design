@@ -1,9 +1,25 @@
 @use "sass:list";
+@use "sass:map";
+@use "sass:math";
 @use './variables';
 
 $cuts: 8, 16, 24, 32, 40, 48;
+$shadows: (
+  'sm': variables.$drop-shadow-sm,
+  'md': variables.$drop-shadow-md,
+  'lg': variables.$drop-shadow-lg,
+  'xl': variables.$drop-shadow-xl
+);
 
-@mixin miter($i, $inner: false) {
+@mixin input-transition {
+  transition: all 75ms;
+}
+
+@mixin input-transition-long {
+  transition: all 250ms;
+}
+
+@mixin miter-original($i, $inner: false) {
   clip-path: polygon(
     0 0,
     100% 0,
@@ -13,10 +29,96 @@ $cuts: 8, 16, 24, 32, 40, 48;
   );
 }
 
-@mixin input-transition {
-  transition: all 75ms;
+@mixin miter($cut-length) {
+  position: relative;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - #{list.nth($cuts, $cut-length)}px),
+    calc(100% - #{list.nth($cuts, $cut-length)}px) 100%,
+    0 100%
+  );
 }
 
-@mixin input-transition-long {
-  transition: all 250ms;
+@mixin miter-border(
+  $cut-length,
+  $border-width: 0,
+  $border-color: transparent,
+  $border-radius: 4
+) {
+  border: #{$border-width}px solid $border-color;
+  border-radius: #{$border-radius}px;
+  &:after {
+    $cut: list.nth($cuts, $cut-length);
+    $hypotenuse: math.hypot($cut, $cut);
+    content: '';
+    height: #{$hypotenuse}px;
+    width: 0;
+    bottom: -#{$border-width}px;
+    right: #{$cut - ($border-width)}px;
+    position: absolute;
+    border-color: inherit;
+    border: inherit;
+    border-right: none;
+    border-bottom: none;
+    border-top: none;
+    transform: rotate(45deg);
+    transform-origin: bottom;
+  }
+}
+
+@mixin miter-shadow($shadow: md) {
+  filter: #{map.get($shadows, $shadow)};
+}
+
+@mixin miter-interactive($shadow: md) {
+  &:not(.disabled) {
+    cursor: pointer;
+    transition: all 250ms;
+    &:hover,
+    &:focus {
+      filter: #{map.get($shadows, $shadow)};
+    }
+  }
+}
+
+@mixin miter-on-hover($cut-length, $background-color: variables.$white) {
+  position: relative;
+  background-color: $background-color;
+  transition: clip-path 250ms;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
+  height: 100%;
+  width: 100%;
+  &:after {
+    content: '';
+    height: 0;
+    width: 0;
+    transition: all 250ms;
+  }
+  &:hover {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - #{list.nth($cuts, $cut-length)}px),
+      calc(100% - #{list.nth($cuts, $cut-length)}px) 100%,
+      0 100%
+    );
+    &:after {
+      $cut: list.nth($cuts, $cut-length);
+      $hypotenuse: math.hypot($cut, $cut);
+      content: '';
+      height: #{$hypotenuse}px;
+      width: 0;
+      bottom: -#{$border-width}px;
+      right: #{$cut - ($border-width)}px;
+      position: absolute;
+      border-color: inherit;
+      border: inherit;
+      border-right: none;
+      border-bottom: none;
+      border-top: none;
+      transform: rotate(45deg);
+      transform-origin: bottom;
+    }
+  }
 }

@@ -1,23 +1,21 @@
 <template>
-  <button
-    class="cursor-pointer button"
-    :class="classList"
-    :disabled="disabled"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
-    @mousedown="handleMouseDown"
-    @mouseup="handleMouseUp"
-    @keydown.enter.space="handleKeydown"
-    @keyup.enter.space="handleKeyup"
-    @focus="handleFocus"
-    @blur="handleBlur"
-  >
-    <div>
-      <span data-test="default">
-        <slot />
-      </span>
-    </div>
-  </button>
+  <span :class="active && 'shadowWrapper'">
+    <button
+      class="cursor-pointer button"
+      :class="classList"
+      :disabled="disabled"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+      @mousedown="handleMouseDown"
+      @mouseup="handleMouseUp"
+      @keydown.enter.space="handleKeydown"
+      @keyup.enter.space="handleKeyup"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    >
+      <span data-test="default"><slot /></span>
+    </button>
+  </span>
 </template>
 
 <script lang="ts">

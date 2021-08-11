@@ -1,24 +1,26 @@
 <template>
-  <div class="card">
-    <header v-if="$slots.header">
-      <slot name="header" />
-    </header>
-    <section>
-      <aside v-if="$slots.aside" class="mr-4">
-        <slot name="aside" />
-      </aside>
-
+  <span :class="shadow && 'shadowWrapper'">
+    <div class="card">
+      <header v-if="$slots.header">
+        <slot name="header" />
+      </header>
       <section>
-        <article v-if="$slots.default" :style="style">
-          <slot />
-        </article>
+        <aside v-if="$slots.aside" class="mr-4">
+          <slot name="aside" />
+        </aside>
 
-        <footer v-if="$slots.actions">
-          <slot name="actions" />
-        </footer>
+        <section>
+          <article v-if="$slots.default" :style="style">
+            <slot />
+          </article>
+
+          <footer v-if="$slots.actions">
+            <slot name="actions" />
+          </footer>
+        </section>
       </section>
-    </section>
-  </div>
+    </div>
+  </span>
 </template>
 
 <script lang="ts">
@@ -28,6 +30,7 @@ import { computed } from 'vue'
 class Props {
   height = prop<string>({ default: null })
   width = prop<string>({ default: null })
+  shadow = prop<boolean>({ default: false })
 }
 
 // This alias is needed because vue-class-component isn't yet compatible with storybook
