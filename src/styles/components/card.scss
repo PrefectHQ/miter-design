@@ -1,19 +1,19 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.card {
-  @include mixins.input-transition;
-  @include mixins.miter(2);
+.shadowWrapper {
+  @include mixins.miter-shadow;
+}
 
-  background-color: variables.$grey-4;
-  border-radius: 4px;
+.card {
+  @include mixins.miter(2);
+  @include mixins.miter-border(2, 1, variables.$grey-4, 4);
+
   display: block;
   height: min-content;
-  padding: 1px;
   position: relative;
 
   > section {
-    @include mixins.miter(2, true);
     align-content: flex-start;
     background-color: variables.$white;
     border-radius: 3px;
