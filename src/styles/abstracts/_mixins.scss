@@ -4,7 +4,6 @@
 @use './variables';
 
 $cuts: 8, 16, 24, 32, 40, 48;
-$bottom: 9, 17, 25, 33, 41, 49;
 $shadows: (
   'sm': variables.$drop-shadow-sm,
   'md': variables.$drop-shadow-md,
@@ -105,23 +104,21 @@ $shadows: (
       0 100%
     );
     &:after {
+      $cut: list.nth($cuts, $cut-length);
+      $hypotenuse: math.hypot($cut, $cut);
       content: '';
-      width: 1px;
-      height: 70px;
-      bottom: #{list.nth($bottom, $cut-length)}px;
-      right: 0px;
+      height: #{$hypotenuse}px;
+      width: 0;
+      bottom: -#{$border-width}px;
+      right: #{$cut - ($border-width)}px;
       position: absolute;
       border-color: inherit;
       border: inherit;
       border-right: none;
       border-bottom: none;
       border-top: none;
-      margin-top: inherit;
-      margin-bottom: inherit;
-      margin-left: inherit;
-      margin-right: inherit;
-      transform: rotate(225deg);
-      transform-origin: bottom right;
+      transform: rotate(45deg);
+      transform-origin: bottom;
     }
   }
 }
