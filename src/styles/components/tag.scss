@@ -13,9 +13,7 @@
   user-select: none;
   white-space: nowrap;
   cursor: default;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+  display: inline-block;
   overflow: hidden;
   height: 26px;
   cursor: default;
@@ -25,6 +23,13 @@
   color: variables.$text--white;
   padding-left: 23px;
   padding-right: 23px;
+  > span {
+    :first-child {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 
   &:focus-visible {
     outline: none;
