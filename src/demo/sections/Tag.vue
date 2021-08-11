@@ -6,6 +6,7 @@
     <div>
       <button @click="disabled = !disabled">disabled:{{ disabled }}</button>
       <button @click="outlined = !outlined">outlined:{{ outlined }}</button>
+      <button @click="shadow = !shadow">shadow:{{ shadow }}</button>
     </div>
     <Tag
       v-for="style in tagStyles"
@@ -14,6 +15,7 @@
       :color="style"
       :disabled="disabled"
       :outlined="outlined"
+      :shadow="shadow"
     >
       <span v-if="tagStyles[1] == style">
         <i class="pi pi-fire pi-1x"></i>
@@ -33,6 +35,7 @@ export default class Tag extends Vue {
   tagStyles = ['primary', 'error']
   disabled = false
   outlined = false
+  shadow = false
 
   mounted(): void {
     return

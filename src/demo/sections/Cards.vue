@@ -9,6 +9,7 @@
         :class="card.cardClass"
         :height="card.height"
         :width="card.width"
+        :shadow="card.shadow"
       >
         <template v-if="card.headerTag" v-slot:header>
           <component

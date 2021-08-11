@@ -1,6 +1,11 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
+.shadowWrapper {
+  @include mixins.miter-shadow;
+  filter: variables.$drop-shadow-md;
+}
+
 .button {
   @include mixins.input-transition;
 
@@ -41,10 +46,6 @@
       top: 50%;
       transform: translate(-50%, -50%);
     }
-  }
-
-  &.active {
-    @include mixins.miter-shadow;
   }
 
   &.disabled {

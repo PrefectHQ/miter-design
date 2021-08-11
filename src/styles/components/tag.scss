@@ -1,6 +1,10 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
+.shadowWrapper {
+  @include mixins.miter-shadow;
+}
+
 .tag {
   @include mixins.miter(1);
   border: none;
