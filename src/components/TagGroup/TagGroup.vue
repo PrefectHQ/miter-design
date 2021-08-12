@@ -15,11 +15,11 @@ export default defineComponent({
   components: { Tag },
   props: {
     modelValue: {
-      type: [String, Number],
+      type: [String, Number, Array],
       default: 0
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, Array],
       default: 0
     },
     multple: {
@@ -34,8 +34,7 @@ export default defineComponent({
   },
   data() {
     return {
-      value_: this.value || this.modelValue,
-      tagArr: [],
+      value_: this.multple ? [] : 0 || this.modelValue,
       outlined: true
     }
   },
@@ -43,20 +42,19 @@ export default defineComponent({
     handleTagClick($e: Event, ...args: any) {
       const value = args[0]?.value
       if (this.multple) {
-        let index = this.tagArr.indexOf(value)
+        let index = this.value_.indexOf(value)
         if (index === -1) {
-          this.tagArr.push(value)
-          $e.target.classList.add('outlined')
+          this.value_.push(value)
         } else {
-          this.tagArr.splice(index, 1)
-          $e.target.classList.remove('outlined')
+          this.value_.splice(index, 1)
         }
-        this.$emit('update:modelValue', [...new Set(this.tagArr)])
+        this.$emit('update:modelValue', [...new Set(this.value_)])
       } else {
         this.$emit('update:modelValue', value)
       }
     }
   },
+
   render() {
     const $slots = this.$slots.default?.()
     let children: VNode<
