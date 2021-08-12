@@ -5,7 +5,8 @@ import {
   mergeProps,
   VNode,
   RendererNode,
-  RendererElement
+  RendererElement,
+  resolveComponent
 } from 'vue'
 
 import Tag from '../Tag/Tag.vue'
@@ -71,6 +72,9 @@ export default defineComponent({
               tag,
               mergeProps(
                 {
+                  outlined: this.value_.includes(tag.props.value)
+                    ? false
+                    : true,
                   onClick: ($e: Event) =>
                     this.handleTagClick($e, { ...tag.props })
                 },
@@ -84,10 +88,10 @@ export default defineComponent({
       children = [
         Array.from({ length: 2 }).map((elem, i) => {
           return h(
-            Tag,
+            resolveComponent('Tag'),
             mergeProps({
               value: i,
-              onClick: onClick
+              onClick: ($e: Event) => this.handleTagClick($e, i)
             }),
             () => `Tag ${i + 1}`
           )
