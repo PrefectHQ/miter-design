@@ -1,24 +1,23 @@
 <template>
   <div>
-    <h3>TagGroup</h3>
+    <h3>Tag Group</h3>
+    v-model:{{ tagArr }}
 
-    <TagGroup v-model="tags">
-      <Tag v-for="tag in tags" :key="tag" class="mr-2">{{ tag }}</Tag>
+    <TagGroup v-model="tagArr" :multple="true">
+      <Tag value="1">One</Tag>
+      <Tag value="2">Two</Tag>
     </TagGroup>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
-
 @Options({})
 export default class TagGroup extends Vue {
-  tags = ['Work', 'Home Improvement', 'Vacation', 'Food']
-
+  tag = 1
+  tagArr = []
   mounted(): void {
     return
   }
 }
 </script>
-
-<style lang="scss" scoped></style>
