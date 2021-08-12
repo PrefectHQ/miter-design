@@ -42,9 +42,15 @@ export default defineComponent({
   methods: {
     handleTagClick($e: Event, ...args: any) {
       const value = args[0]?.value
-
       if (this.multple) {
-        this.tagArr.push(value)
+        let index = this.tagArr.indexOf(value)
+        if (index === -1) {
+          this.tagArr.push(value)
+          $e.target.classList.add('outlined')
+        } else {
+          this.tagArr.splice(index, 1)
+          $e.target.classList.remove('outlined')
+        }
         this.$emit('update:modelValue', [...new Set(this.tagArr)])
       } else {
         this.$emit('update:modelValue', value)
