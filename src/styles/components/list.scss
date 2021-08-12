@@ -2,67 +2,66 @@
 @use '../abstracts/mixins';
 .wrapper {
   font-family: variables.$font--primary;
+  &.active {
+    @include mixins.miter-shadow;
+  }
   &:focus-visible {
     outline: none !important;
-    .picker:not(.disabled) {
-      border: 1px solid variables.$primary;
-    }
   }
 
   .picker {
+    @include mixins.miter(2);
+    @include mixins.miter-border(2, 1, variables.$grey-4, 4);
+    background-color: variables.$white;
     cursor: pointer;
     height: 58px;
     width: 350px;
     display: flex;
     align-items: center;
-    border: 1px solid pink;
     padding-left: 32px;
     color: variables.$grey-4;
     font-size: 16px;
     white-space: nowrap;
+    z-index: 2;
     span {
       width: 275px;
     }
     &.selected {
       color: variables.$text--primary;
     }
-    &::after {
-      content: '';
-      border: 1px solid variables.$grey-1;
-      transform: rotate(45deg);
-      height: 8px;
-      width: 8px;
-      display: inline-block;
-      border-top: none;
-      border-left: none;
+    i {
+      color: variables.$grey-1;
     }
     &.disabled {
       background-color: variables.$grey-5;
       cursor: not-allowed !important;
       color: variables.$inactive !important;
-      &::after {
-        border-color: variables.$grey-4;
+      i {
+        color: variables.$inactive !important;
       }
     }
-    &.active {
-      border: 1px solid variables.$primary;
+    &.active,
+    &.hovered {
+      @include mixins.miter-border(2, 1, variables.$primary, 4);
     }
   }
 
   .list {
     @include mixins.input-transition;
+    @include mixins.miter(2);
     display: flex;
     flex-direction: column;
     width: 350px;
-    border: 1px solid pink;
     position: absolute;
     background: variables.$white;
+    margin-top: -16px;
     .title {
       align-items: center;
       display: flex;
       height: 58px;
       border-bottom: 1px solid variables.$grey-6;
       padding-left: 32px;
+      margin-top: 16px;
       text-transform: uppercase;
       font-weight: 700;
       color: variables.$grey-4;
@@ -84,28 +83,15 @@
     &:not(:last-child) {
       border-bottom: 1px solid variables.$grey-6;
     }
-
-    input:checked ~ label {
+    i {
+      color: variables.$grey-4;
+    }
+    &.selected {
       background-color: variables.$primary;
       color: variables.$white;
       span {
         width: 275px;
       }
-      &::after {
-        content: '';
-        border: 1px solid variables.$white;
-        transform: rotate(45deg);
-        height: 18px;
-        width: 8px;
-        display: inline-block;
-        border-top: none;
-        border-left: none;
-        margin-top: 18px;
-        margin-left: 30px;
-      }
-    }
-    i {
-      color: variables.$grey-4;
     }
   }
 }

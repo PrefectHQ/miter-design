@@ -1,14 +1,24 @@
 <template>
-  <div class="wrapper" tabindex="0" @focus="handleFocus" @blur="handleBlur">
+  <div
+    class="wrapper"
+    tabindex="0"
+    @focus="handleFocus"
+    @blur="handleBlur"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
+    @keydown.enter.space="handleKeydown"
+    :class="{ disabled: disabled, active: active }"
+  >
     <div
       class="picker"
       :class="pickerClassList"
       @click="!disabled ? (active = !active) : null"
     >
       <span
-        ><i v-if="icon && selected.length > 0" class="pi pi-fire pi-1x"></i
+        ><i v-if="icon && selected.length > 0" class="pi pi-Fire pi-1x"></i
         >{{ selected || placeholder }}</span
       >
+      <i class="pi pi-Arrow-Down pi-lg"></i>
     </div>
     <div class="list" :class="listClassList">
       <div class="title">{{ title }}</div>
@@ -17,8 +27,10 @@
         :key="i"
         @click="choose(option)"
         class="option"
+        :class="{ selected: option === selected }"
       >
-        <span><i v-if="icon" class="pi pi-fire pi-1x"></i> {{ option }}</span>
+        <span><i v-if="icon" class="pi pi-Fire pi-1x"></i> {{ option }}</span>
+        <i v-if="option === selected" class="pi pi-Checkmark pi-lg"></i>
       </div>
     </div>
   </div>
@@ -107,14 +119,9 @@ export default defineComponent({
       this.active = false
     },
 
-    handleMouseDown(): void {
+    handleKeydown(): void {
       if (this.disabled) return
-      this.active = true
-    },
-
-    handleMouseUp(): void {
-      if (this.disabled) return
-      this.active = false
+      this.active = !this.active
     },
 
     handleFocus(): void {
