@@ -1,28 +1,25 @@
 <template>
-  <button
-    class="cursor-pointer button"
-    :class="classList"
-    :disabled="disabled"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
-    @mousedown="handleMouseDown"
-    @mouseup="handleMouseUp"
-    @keydown.enter.space="handleKeydown"
-    @keyup.enter.space="handleKeyup"
-    @focus="handleFocus"
-    @blur="handleBlur"
-  >
-    <div>
-      <span data-test="default">
-        <slot />
-      </span>
-    </div>
-  </button>
+  <span :class="active && 'shadowWrapper'">
+    <button
+      class="cursor-pointer button"
+      :class="classList"
+      :disabled="disabled"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+      @mousedown="handleMouseDown"
+      @mouseup="handleMouseUp"
+      @keydown.enter.space="handleKeydown"
+      @keyup.enter.space="handleKeyup"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    >
+      <span data-test="default"><slot /></span>
+    </button>
+  </span>
 </template>
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-import { computed } from 'vue'
 
 class Props {
   color = prop<string>({ default: 'secondary' })
@@ -30,29 +27,30 @@ class Props {
   icon = prop<boolean>({ default: false })
 }
 
-@Options({})
+const Component = Options
+@Component({})
 export default class Button extends Vue.with(Props) {
   active: boolean = false
   hovered: boolean = false
 
-  classList = computed(() => {
+  get classList(): string[] {
     return [
       ...(this.disabled ? ['disabled'] : []),
       ...(this.hovered ? ['hovered'] : []),
       ...(this.active ? ['active'] : []),
       ...(this.icon ? ['icon'] : []),
-      this.color
+      ...[this.color]
     ]
-  })
+  }
 
   mounted(): void {
     return
   }
 
   /*
-  
+
     Start input methods
-  
+
   */
   handleMouseEnter(): void {
     if (this.disabled) return
@@ -93,9 +91,9 @@ export default class Button extends Vue.with(Props) {
     this.active = true
   }
   /*
-  
+
     End input methods
-  
+
   */
 }
 </script>

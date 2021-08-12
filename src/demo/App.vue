@@ -1,32 +1,18 @@
 <template>
   <div class="pt-5 px-10 pb-10" v-cloak>
-    <Cards />
-    <Buttons class="mt-10" />
-    <Checkboxes />
-    <Links class="mt-10" />
-    <Tag class="mt-10" />
-    <TagGroup class="mt-10" />
+    <div>
+      <router-link class="mr-4" to="/">Components</router-link>
+      <router-link to="/icons">Icons</router-link>
+    </div>
+
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import Buttons from './sections/Buttons.vue'
-import Cards from './sections/Cards.vue'
-import Checkboxes from './sections/Checkboxes.vue'
-import Links from './sections/Links.vue'
-import Tag from './sections/Tag.vue'
-import TagGroup from './sections/TagGroup.vue'
-@Options({
-  components: {
-    Buttons,
-    Cards,
-    Links,
-    Checkboxes,
-    Tag,
-    TagGroup
-  }
-})
+
+@Options({})
 export default class App extends Vue {}
 </script>
 

@@ -1,9 +1,9 @@
 <template>
-  <div class="tag" :class="classList">
-    <div data-test="default">
-      <slot />
+  <span :class="shadow && 'shadowWrapper'">
+    <div class="tag" :class="classList">
+      <span data-test="default"> <slot /></span>
     </div>
-  </div>
+  </span>
 </template>
 
 <script lang="ts">
@@ -13,6 +13,7 @@ class Props {
   color = prop<string>({})
   outlined = prop<boolean>({ default: false })
   disabled = prop<boolean>({ default: false })
+  shadow = prop<boolean>({ default: false })
 }
 
 @Options({})
