@@ -6,6 +6,7 @@
     </div>
 
     <router-view />
+    <div id="modal-area"></div>
   </div>
 </template>
 
