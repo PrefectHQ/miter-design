@@ -1,4 +1,19 @@
-.modal {
-    position: absolute;
-    top: 50; right: 20; bottom: 0; left: 50;
+@use '../abstracts/mixins';
+@use '../abstracts/variables';
+
+
+.modal-backdrop {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+      
+
+    .modal {
+        @include mixins.miter-border(2, 0, variables.$grey-4, 4);
+    }
 }
+

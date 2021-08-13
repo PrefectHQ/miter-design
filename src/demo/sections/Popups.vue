@@ -23,7 +23,7 @@ export default class Cards extends Vue {
       title: 'Popup',
       titleTag: 'h5',
       cardClass: ['text-center'],
-      height: '150px',
+      height: '250px',
       width: '250px',
       contentClass: ['my-auto'],
       content: 'Press Close',

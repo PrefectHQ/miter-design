@@ -2,83 +2,85 @@
   <div class="d-flex">
     <button @click="popUpClosed = false">Open Popup</button>
     <teleport to="body" :disabled="popUpClosed" v-if="!popUpClosed">
-      <Card
-        class="mr-4 mt-4 d-inline-block modal"
-        :class="card.cardClass"
-        :height="card.height"
-        :width="card.width"
-      >
-        <template v-if="card.headerTag" v-slot:header>
-          <component
-            :is="card.headerTag"
-            :class="card.headerClass"
-            :height="card.headerHeight"
-          >
-            {{ card.header }}
-          </component>
-        </template>
-
-        <component
-          v-if="card.overline"
-          :is="card.overlineTag || 'div'"
-          :class="card.overlineClass"
+      <div class="modal-backdrop">
+        <Card
+          class="modal"
+          :class="card.cardClass"
+          :height="card.height"
+          :width="card.width"
         >
-          {{ card.overline }}
-        </component>
-        <component
-          v-if="card.title"
-          :is="card.titleTag || 'div'"
-          :class="card.titleClass"
-        >
-          {{ card.title }}
-        </component>
-        <component
-          v-if="card.subtitle"
-          :is="card.subtitleTag || 'div'"
-          :class="card.subtitleClass"
-        >
-          {{ card.subtitle }}
-        </component>
-
-        <template v-if="card.asideTag" v-slot:aside>
-          <component
-            :is="card.asideTag || 'div'"
-            :class="card.asideClass"
-            :width="card.asideWidth"
-          >
-            {{ card.aside }}
-          </component>
-        </template>
-
-        <component
-          v-if="card.content"
-          :is="card.contentTag || 'div'"
-          :class="card.contentClass"
-        >
-          {{ card.content }}
-        </component>
-
-        <template v-slot:actions>
-          <component
-            v-if="card.actions"
-            :class="card.actionClass"
-            :is="'CardActions'"
-          >
+          <template v-if="card.headerTag" v-slot:header>
             <component
-              v-for="(action, index) in card.actions"
-              :key="index"
-              :is="action.tag"
-              class="mr-2"
-              :color="action.color"
-              :disabled="action.disabled"
-              :class="action.class"
-              @click="closePopUp"
+              :is="card.headerTag"
+              :class="card.headerClass"
+              :height="card.headerHeight"
             >
-              {{ action.text }}
+              {{ card.header }}
             </component>
+          </template>
+
+          <component
+            v-if="card.overline"
+            :is="card.overlineTag || 'div'"
+            :class="card.overlineClass"
+          >
+            {{ card.overline }}
           </component>
-        </template>
-      </Card>
+          <component
+            v-if="card.title"
+            :is="card.titleTag || 'div'"
+            :class="card.titleClass"
+          >
+            {{ card.title }}
+          </component>
+          <component
+            v-if="card.subtitle"
+            :is="card.subtitleTag || 'div'"
+            :class="card.subtitleClass"
+          >
+            {{ card.subtitle }}
+          </component>
+
+          <template v-if="card.asideTag" v-slot:aside>
+            <component
+              :is="card.asideTag || 'div'"
+              :class="card.asideClass"
+              :width="card.asideWidth"
+            >
+              {{ card.aside }}
+            </component>
+          </template>
+
+          <component
+            v-if="card.content"
+            :is="card.contentTag || 'div'"
+            :class="card.contentClass"
+          >
+            {{ card.content }}
+          </component>
+
+          <template v-slot:actions>
+            <component
+              v-if="card.actions"
+              :class="card.actionClass"
+              :is="'CardActions'"
+            >
+              <component
+                v-for="(action, index) in card.actions"
+                :key="index"
+                :is="action.tag"
+                class="mr-2"
+                :color="action.color"
+                :disabled="action.disabled"
+                :class="action.class"
+                @click="closePopUp"
+              >
+                {{ action.text }}
+              </component>
+            </component>
+          </template>
+        </Card>
+      </div>
     </teleport>
   </div>
 </template>
