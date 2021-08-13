@@ -4,32 +4,46 @@
     tabindex="0"
     @focus="handleFocus"
     @blur="handleBlur"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
+    @mouseenter="handleFocus"
+    @mouseleave="handleBlur"
     @keydown.enter.space="handleKeydown"
     :class="{ disabled: disabled, active: active }"
   >
     <div
       class="picker"
-      :class="pickerClassList"
+      :class="classList"
       @click="!disabled ? (active = !active) : null"
     >
       <span
-        ><i v-if="icon && selected.length > 0" class="pi pi-Fire pi-1x"></i
-        >{{ selected || placeholder }}</span
+        ><i
+          v-if="icon && selected.name?.length > 0"
+          :class="iconClass"
+          class="pi pi-1x mr-1"
+        ></i
+        >{{ selected.name || placeholder }}</span
       >
       <i class="pi pi-Arrow-Down pi-lg"></i>
     </div>
-    <div class="list" :class="listClassList">
+    <div class="list" v-show="active">
       <div class="title">{{ title }}</div>
       <div
-        v-for="(option, i) of options"
+        v-for="(option, i) of options_"
         :key="i"
         @click="choose(option)"
+        @mouseover="handleMouseEnterOption(options_[i])"
+        @mouseleave="handleMouseLeaveOption(option)"
+        @keydown.enter.space="choose(option)"
         class="option"
-        :class="{ selected: option === selected }"
+        :class="{
+          selected: option === selected,
+          hovered: options_[option.name].hover,
+          active: options_[option.name].active
+        }"
       >
-        <span><i v-if="icon" class="pi pi-Fire pi-1x"></i> {{ option }}</span>
+        <span
+          ><i v-if="icon" :class="iconClass" class="pi pi-1x mr-1"></i>
+          {{ option.name }}</span
+        >
         <i v-if="option === selected" class="pi pi-Checkmark pi-lg"></i>
       </div>
     </div>
@@ -51,14 +65,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    checked: {
-      type: Boolean,
-      default: false
-    },
-    label: {
-      type: String,
-      default: 'list'
-    },
     options: {
       type: Array,
       default: ['Option 1', 'Option 2']
@@ -72,51 +78,51 @@ export default defineComponent({
       default: 'Prefect Dropdown'
     },
     icon: {
-      type: Boolean,
-      default: false
-    },
-    value: {
       type: String,
       default: ''
     }
   },
   data() {
+    let options_ = {}
+    this.options.forEach((option) => {
+      options_[option] = { name: option, hover: false, active: false }
+    })
     return {
       hovered: false,
       active: false,
-      selected: ''
+      selected: '',
+      options_: options_
     }
   },
   computed: {
-    pickerClassList(): string[] {
+    classList(): string[] {
       return [
         ...(this.disabled ? ['disabled'] : []),
         ...(this.hovered ? ['hovered'] : []),
         ...(this.active ? ['active'] : []),
-        ...(this.selected.length > 0 ? ['selected'] : [])
+        ...(this.selected.name?.length > 0 ? ['selected'] : [])
       ]
     },
-    listClassList(): string[] {
-      return [
-        ...(this.disabled ? ['disabled'] : []),
-        ...(this.hovered ? ['hovered'] : []),
-        ...(!this.active ? ['hidden'] : [])
-      ]
+    iconClass(): string | null {
+      return this.icon.length > 0 ? `pi-${this.icon}` : null
     }
   },
   methods: {
     choose(option: string): void {
       this.selected = option
       this.$emit('update:modelValue', this.selected)
-    },
-    handleMouseEnter(): void {
-      if (this.disabled) return
-      this.hovered = true
+      this.active = false
     },
 
-    handleMouseLeave(): void {
-      this.hovered = false
-      this.active = false
+    handleMouseEnterOption(option): void {
+      if (this.disabled) return
+      this.options_[option.name].hover = true
+      this.options_[option.name].active = true
+    },
+
+    handleMouseLeaveOption(option): void {
+      this.options_[option.name].hover = false
+      this.options_[option.name].active = false
     },
 
     handleKeydown(): void {
@@ -131,7 +137,6 @@ export default defineComponent({
 
     handleBlur(): void {
       this.hovered = false
-      this.active = false
     }
   }
 })

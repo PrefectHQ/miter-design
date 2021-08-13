@@ -5,8 +5,6 @@
       <List
         class="my-2 mr-2"
         name="list-without-icon"
-        placeholder="Pick something!"
-        title="Available Options"
         :options="options"
         v-model="selected1"
       >
@@ -14,7 +12,8 @@
       <List
         class="my-2 mr-2"
         name="list-with-icon"
-        icon
+        icon="Face-ID"
+        placeholder="This list has icons!"
         title="Available Options"
         :options="options"
         v-model="selected2"
@@ -24,8 +23,6 @@
         class="my-2"
         name="list-disabled"
         placeholder="You cannot choose here"
-        title="Available Options"
-        :options="options"
         disabled
       >
       </List>
