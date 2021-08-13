@@ -6,22 +6,22 @@
 
     <h5 class="mt-5">Block</h5>
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
+      <!-- <span class="font-weight-light text-capitalize">{{ state }}:</span> -->
       <Button
         v-for="style in buttonStyles"
         :key="style"
-        class="ml-2 text-capitalize"
+        class="ml-2"
         :color="style"
         :disabled="state == 'disabled'"
         @click="handleClick"
       >
-        <span>{{ style }}</span>
+        <span>{{ style }}.................................</span>
       </Button>
     </div>
 
     <h5 class="mt-5">Icon</h5>
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
+      <!-- <span class="font-weight-light text-capitalize">{{ state }}:</span> -->
       <Button
         v-for="style in buttonStyles"
         :key="style"
@@ -59,5 +59,5 @@ export default class Buttons extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/components/button';
+// @use '@/styles/components/button';
 </style>

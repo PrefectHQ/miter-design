@@ -6,7 +6,8 @@
 }
 
 .tag {
-  @include mixins.miter(1);
+  @include mixins.miter;
+
   border: none;
   border-radius: 3px;
   padding: 0;
@@ -15,20 +16,17 @@
   cursor: default;
   display: inline-block;
   overflow: hidden;
-  height: 26px;
   cursor: default;
   font-size: 11px;
   vertical-align: middle;
   background-color: variables.$grey-2;
   color: variables.$text--white;
-  padding-left: 23px;
-  padding-right: 23px;
-  > span {
-    :first-child {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-    }
+
+  > :first-child {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    padding: 0 24px;
   }
 
   &:focus-visible {
@@ -38,8 +36,8 @@
   &.outlined {
     background-color: variables.$white;
     color: variables.$grey-2;
+    border: 1px solid variables.$grey-4;
     transition: background-color 0s, clip-path 0s !important;
-    @include mixins.miter-border(1, 1, variables.$grey-4);
   }
 
   @each $name, $color in variables.$colors {
@@ -48,7 +46,7 @@
       color: variables.$text--white;
 
       &.outlined {
-        @include mixins.miter-border(1, 1, $color);
+        border: 1px solid $color;
         color: $color;
         background-color: variables.$white;
       }
@@ -61,7 +59,11 @@
     color: variables.$grey-4 !important;
 
     &.outlined {
-      @include mixins.miter-border(1, 1, variables.$grey-4);
+      border: 1px solid variables.$grey-4;
     }
+  }
+
+  &.elevated {
+    @include mixins.miter-shadow;
   }
 }
