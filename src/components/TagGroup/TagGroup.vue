@@ -17,13 +17,13 @@ export default defineComponent({
   props: {
     modelValue: {
       type: [String, Number, Array],
-      default: 0
+      default: []
     },
     value: {
       type: [String, Number, Array],
       default: 0
     },
-    multple: {
+    multiple: {
       type: Boolean,
       default: false
     }
@@ -35,23 +35,34 @@ export default defineComponent({
   },
   data() {
     return {
-      value_: this.multple ? [] : 0 || this.modelValue,
+      value_: this.modelValue,
       outlined: true
     }
   },
   methods: {
-    handleTagClick($e: Event, ...args: any) {
+    handleTagClick($e: Event, ...args: []) {
       const value = args[0]?.value
-      if (this.multple) {
+
+      if (this.multiple) {
         let index = this.value_.indexOf(value)
         if (index === -1) {
           this.value_.push(value)
         } else {
           this.value_.splice(index, 1)
         }
-        this.$emit('update:modelValue', [...new Set(this.value_)])
+
+        this.$emit('update:modelValue', this.value_)
+
+        // this.$emit('update:modelValue', uniqueArray)
       } else {
-        this.$emit('update:modelValue', value)
+        let index = this.value_.indexOf(value)
+        if (index === -1) {
+          this.value_[0] = value
+        } else {
+          this.value_.splice(index, 1)
+        }
+
+        this.$emit('update:modelValue', this.value_)
       }
     }
   },
@@ -72,7 +83,8 @@ export default defineComponent({
               tag,
               mergeProps(
                 {
-                  outlined: this.value_.includes(tag.props.value)
+                  tabIndex: 0,
+                  outlined: this.value_.includes(tag.props?.value)
                     ? false
                     : true,
                   onClick: ($e: Event) =>
@@ -90,6 +102,7 @@ export default defineComponent({
           return h(
             resolveComponent('Tag'),
             mergeProps({
+              outlined: this.value_.includes(i),
               value: i,
               onClick: ($e: Event) => this.handleTagClick($e, i)
             }),
@@ -98,7 +111,7 @@ export default defineComponent({
         })
       ]
     }
-    return h('div', {}, children)
+    return h('div', { class: ['tag-group-container'] }, children)
   }
 })
 </script>
