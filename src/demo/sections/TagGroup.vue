@@ -4,8 +4,8 @@
     v-model:{{ tags }}
 
     <TagGroup v-model="tags" :multiple="true">
-      <Tag value="1" :color="'primary'">One</Tag>
-      <Tag value="2" :color="'error'">Two</Tag>
+      <Tag value="1" :color="'primary-101'">One</Tag>
+      <Tag value="2" :color="'primary-100'">Two</Tag>
     </TagGroup>
   </div>
 </template>
