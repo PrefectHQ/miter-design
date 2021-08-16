@@ -1,6 +1,10 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
+.shadowWrapper {
+  @include mixins.miter-shadow;
+}
+
 .card {
   @include mixins.miter(2);
   @include mixins.miter-border(2, 1, variables.$grey-4, 4);
@@ -9,7 +13,7 @@
   height: min-content;
   position: relative;
 
-  > div > section {
+  > section {
     align-content: flex-start;
     background-color: variables.$white;
     border-radius: 3px;

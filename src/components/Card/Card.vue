@@ -1,6 +1,6 @@
 <template>
-  <div class="card">
-    <div>
+  <span :class="shadow && 'shadowWrapper'">
+    <div class="card">
       <header v-if="$slots.header">
         <slot name="header" />
       </header>
@@ -20,7 +20,7 @@
         </section>
       </section>
     </div>
-  </div>
+  </span>
 </template>
 
 <script lang="ts">
@@ -30,9 +30,13 @@ import { computed } from 'vue'
 class Props {
   height = prop<string>({ default: null })
   width = prop<string>({ default: null })
+  shadow = prop<boolean>({ default: false })
 }
 
-@Options({})
+// This alias is needed because vue-class-component isn't yet compatible with storybook
+// See https://github.com/storybookjs/storybook/issues/14052#issuecomment-797512590 for details
+const Component = Options
+@Component({})
 export default class Card extends Vue.with(Props) {
   style = computed(() => {
     return {

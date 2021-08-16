@@ -1,9 +1,9 @@
 @use "sass:list";
 @use "sass:map";
+@use "sass:math";
 @use './variables';
 
 $cuts: 8, 16, 24, 32, 40, 48;
-$bottom: 6, 17, 25, 33, 41, 49;
 $shadows: (
   'sm': variables.$drop-shadow-sm,
   'md': variables.$drop-shadow-md,
@@ -31,18 +31,13 @@ $shadows: (
 
 @mixin miter($cut-length) {
   position: relative;
-
-  > :first-child {
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% calc(100% - #{list.nth($cuts, $cut-length)}px),
-      calc(100% - #{list.nth($cuts, $cut-length)}px) 100%,
-      0 100%
-    );
-    height: 100%;
-    width: 100%;
-  }
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - #{list.nth($cuts, $cut-length)}px),
+    calc(100% - #{list.nth($cuts, $cut-length)}px) 100%,
+    0 100%
+  );
 }
 
 @mixin miter-border(
@@ -51,28 +46,24 @@ $shadows: (
   $border-color: transparent,
   $border-radius: 4
 ) {
-  > :first-child {
-    border: #{$border-width}px solid $border-color;
-    border-radius: #{$border-radius}px;
-    &:after {
-      content: '';
-      width: 1px;
-      height: 70px;
-      bottom: calc(#{list.nth($bottom, $cut-length)}px + #{$border-width}px);
-      right: 0px;
-      position: absolute;
-      border-color: inherit;
-      border: inherit;
-      border-right: none;
-      border-bottom: none;
-      border-top: none;
-      margin-top: inherit;
-      margin-bottom: inherit;
-      margin-left: inherit;
-      margin-right: inherit;
-      transform: rotate(225deg);
-      transform-origin: bottom right;
-    }
+  border: #{$border-width}px solid $border-color;
+  border-radius: #{$border-radius}px;
+  &:after {
+    $cut: list.nth($cuts, $cut-length);
+    $hypotenuse: math.hypot($cut, $cut);
+    content: '';
+    height: #{$hypotenuse}px;
+    width: 0;
+    bottom: -#{$border-width}px;
+    right: #{$cut - ($border-width)}px;
+    position: absolute;
+    border-color: inherit;
+    border: inherit;
+    border-right: none;
+    border-bottom: none;
+    border-top: none;
+    transform: rotate(45deg);
+    transform-origin: bottom;
   }
 }
 
@@ -84,7 +75,6 @@ $shadows: (
   &:not(.disabled) {
     cursor: pointer;
     transition: all 250ms;
-
     &:hover,
     &:focus {
       filter: #{map.get($shadows, $shadow)};
@@ -94,45 +84,41 @@ $shadows: (
 
 @mixin miter-on-hover($cut-length, $background-color: variables.$white) {
   position: relative;
-  > :first-child {
-    background-color: $background-color;
-    transition: clip-path 250ms;
-    clip-path: polygon(0 0, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
-    height: 100%;
-    width: 100%;
+  background-color: $background-color;
+  transition: clip-path 250ms;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
+  height: 100%;
+  width: 100%;
+  &:after {
+    content: '';
+    height: 0;
+    width: 0;
+    transition: all 250ms;
+  }
+  &:hover {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - #{list.nth($cuts, $cut-length)}px),
+      calc(100% - #{list.nth($cuts, $cut-length)}px) 100%,
+      0 100%
+    );
     &:after {
+      $cut: list.nth($cuts, $cut-length);
+      $hypotenuse: math.hypot($cut, $cut);
       content: '';
-      height: 0;
+      height: #{$hypotenuse}px;
       width: 0;
-      transition: all 250ms;
-    }
-    &:hover {
-      clip-path: polygon(
-        0 0,
-        100% 0,
-        100% calc(100% - #{list.nth($cuts, $cut-length)}px),
-        calc(100% - #{list.nth($cuts, $cut-length)}px) 100%,
-        0 100%
-      );
-      &:after {
-        content: '';
-        width: 1px;
-        height: 70px;
-        bottom: #{list.nth($bottom, $cut-length)}px;
-        right: 0px;
-        position: absolute;
-        border-color: inherit;
-        border: inherit;
-        border-right: none;
-        border-bottom: none;
-        border-top: none;
-        margin-top: inherit;
-        margin-bottom: inherit;
-        margin-left: inherit;
-        margin-right: inherit;
-        transform: rotate(225deg);
-        transform-origin: bottom right;
-      }
+      bottom: -#{$border-width}px;
+      right: #{$cut - ($border-width)}px;
+      position: absolute;
+      border-color: inherit;
+      border: inherit;
+      border-right: none;
+      border-bottom: none;
+      border-top: none;
+      transform: rotate(45deg);
+      transform-origin: bottom;
     }
   }
 }
