@@ -52,18 +52,9 @@ export default defineComponent({
         this.value_.splice(index, 1)
       }
     },
-    handleTagClick($e: Event, ...args: []): Event {
-      if (!args[0]?.value) return
-
-      if (this.multiple) {
-        this.toggleClick(args[0]?.value)
-        this.$emit('update:modelValue', this.value_)
-      } else {
-        this.toggleClick(args[0]?.value)
-        this.$emit('update:modelValue', this.value_)
-      }
-
-      return $e
+    handleTagClick($e: Event, ...args: []) {
+      this.toggleClick(args[0]?.value)
+      this.$emit('update:modelValue', this.value_)
     }
   },
 

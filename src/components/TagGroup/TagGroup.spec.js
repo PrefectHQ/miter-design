@@ -70,7 +70,7 @@ describe('model', () => {
     const emit = wrapper.emitted('update:modelValue')
 
     expect(emit[0][0][0]).toEqual(0)
-    expect(emit[0][0][1]).toEqual(1)
+    expect(emit[1][0][1]).toEqual(1)
   })
 
   test('single', () => {
