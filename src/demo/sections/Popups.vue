@@ -24,9 +24,12 @@ export default class Cards extends Vue {
       titleTag: 'h6',
       cardClass: ['text-center'],
       height: '150px',
-      width: '150px',
+      width: '350px',
       actionClass: ['flex-column'],
-      actions: [{ tag: 'Button', color: 'primary', text: 'Close' }]
+      actions: [
+        { tag: 'Button', color: 'primary', text: 'Close' },
+        { tag: 'a', text: 'Skip for now' }
+      ]
     }
   ]
 

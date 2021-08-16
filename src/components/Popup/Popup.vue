@@ -70,6 +70,7 @@
                 :key="index"
                 :is="action.tag"
                 :color="action.color"
+                class="mt-2"
                 :disabled="action.disabled"
                 :class="action.class"
                 @click="closePopUp"
