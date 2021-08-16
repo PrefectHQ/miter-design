@@ -1,2 +1,3 @@
+- Add TagGroup component - [#24](https://github.com/PrefectHQ/miter-design/pull/24)
 - Update miter mixin to make it easier - [#23](https://github.com/PrefectHQ/miter-design/pull/23)
 - Add CHANGELOG.md - [#16](https://github.com/PrefectHQ/miter-design/pull/16)
