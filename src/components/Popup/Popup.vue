@@ -69,7 +69,6 @@
                 v-for="(action, index) in card.actions"
                 :key="index"
                 :is="action.tag"
-                class="mr-2"
                 :color="action.color"
                 :disabled="action.disabled"
                 :class="action.class"

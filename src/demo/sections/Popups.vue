@@ -20,13 +20,11 @@ import { Vue, Options } from 'vue-class-component'
 export default class Cards extends Vue {
   cards: {} = [
     {
-      title: 'Popup',
-      titleTag: 'h5',
+      title: 'Pop Up',
+      titleTag: 'h6',
       cardClass: ['text-center'],
-      height: '250px',
-      width: '250px',
-      contentClass: ['my-auto'],
-      content: 'Press Close',
+      height: '150px',
+      width: '150px',
       actionClass: ['flex-column'],
       actions: [{ tag: 'Button', color: 'primary', text: 'Close' }]
     }
