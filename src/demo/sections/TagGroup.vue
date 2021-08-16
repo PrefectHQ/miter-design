@@ -3,11 +3,9 @@
     <h3>Tag Group</h3>
     v-model:{{ tags }}
 
-    <TagGroup v-model="tags" :multiple="true">
-      <Tag value="1">One</Tag>
-      <Tag value="2">Two</Tag>
-      <Tag value="3">Three</Tag>
-      <Tag value="4">Four</Tag>
+    <TagGroup v-model="tags" :multple="true">
+      <Tag value="1" :color="'primary'">One</Tag>
+      <Tag value="2" :color="'error'">Two</Tag>
     </TagGroup>
 
     <!-- <TagGroup v-model="tags"> </TagGroup> -->

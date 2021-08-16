@@ -52,7 +52,7 @@ export default defineComponent({
         this.value_.splice(index, 1)
       }
     },
-    handleTagClick($e: Event, ...args: []) {
+    handleTagClick($e: Event, ...args: any) {
       this.toggleClick(args[0]?.value)
       this.$emit('update:modelValue', this.value_)
     }
@@ -93,6 +93,7 @@ export default defineComponent({
           return h(
             resolveComponent('Tag'),
             mergeProps({
+              tabIndex: 0,
               outlined: this.value_.includes(i),
               value: i,
               onClick: ($e: Event) => this.handleTagClick($e, i)
