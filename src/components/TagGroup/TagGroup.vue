@@ -16,7 +16,7 @@ export default defineComponent({
   components: { Tag },
   props: {
     modelValue: {
-      type: [String, Number, Array],
+      type: [Array],
       default: []
     },
     value: {
@@ -35,35 +35,35 @@ export default defineComponent({
   },
   data() {
     return {
-      value_: this.modelValue,
-      outlined: true
+      value_: this.modelValue
     }
   },
+
   methods: {
-    handleTagClick($e: Event, ...args: []) {
-      const value = args[0]?.value
+    toggleClick(val: string) {
+      let index = this.value_.indexOf(val)
+      if (index === -1) {
+        if (this.multiple) {
+          this.value_.push(val)
+        } else {
+          this.value_[0] = val
+        }
+      } else {
+        this.value_.splice(index, 1)
+      }
+    },
+    handleTagClick($e: Event, ...args: []): Event {
+      if (!args[0]?.value) return
 
       if (this.multiple) {
-        let index = this.value_.indexOf(value)
-        if (index === -1) {
-          this.value_.push(value)
-        } else {
-          this.value_.splice(index, 1)
-        }
-
+        this.toggleClick(args[0]?.value)
         this.$emit('update:modelValue', this.value_)
-
-        // this.$emit('update:modelValue', uniqueArray)
       } else {
-        let index = this.value_.indexOf(value)
-        if (index === -1) {
-          this.value_[0] = value
-        } else {
-          this.value_.splice(index, 1)
-        }
-
+        this.toggleClick(args[0]?.value)
         this.$emit('update:modelValue', this.value_)
       }
+
+      return $e
     }
   },
 

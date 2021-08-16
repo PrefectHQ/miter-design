@@ -51,7 +51,6 @@ describe('slots', () => {
 
 describe('model', () => {
   test('multiple', () => {
-    // props and slots
     const wrapper = factoryMount(
       { multiple: true },
       {
@@ -95,7 +94,6 @@ describe('model', () => {
   })
 })
 
-// note: this test doesn't seem like the best way to check the multiple prop - look at attribute?
 describe('props', () => {
   describe('multiple  prop', () => {
     test('multiple prop is false when not passed', () => {
