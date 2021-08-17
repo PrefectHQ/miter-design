@@ -15,6 +15,7 @@
         icon="Face-ID"
         placeholder="This list has icons!"
         title="Available Options"
+        search
         :options="options"
         v-model="selected2"
       >

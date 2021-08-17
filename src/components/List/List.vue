@@ -28,9 +28,16 @@
       <i class="pi pi-Arrow-Down pi-lg"></i>
     </div>
     <div class="list" v-show="active">
-      <div class="title" :class="{ collapsed: title === '' }">{{ title }}</div>
+      <div v-if="search" class="search"
+        ><i class="pi pi-Search pi-lg mr-1"></i
+        ><input
+          class="py-2"
+          placeholder="Search by name"
+          @input="runSearch($event.target.value)"
+      /></div>
+      <div v-if="title.length > 0" class="title">{{ title }}</div>
       <div
-        v-for="(option, i) in options"
+        v-for="(option, i) in filteredOptions"
         :key="i"
         @click="choose(option)"
         @mouseover="handleMouseEnterOption(i)"
@@ -84,6 +91,10 @@ export default defineComponent({
     icon: {
       type: String,
       default: ''
+    },
+    search: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -93,6 +104,7 @@ export default defineComponent({
       hovered: false,
       active: false,
       selected: '',
+      filteredOptions: this.options,
       hoveredStates
     }
   },
@@ -125,6 +137,12 @@ export default defineComponent({
       this.selected = option
       this.$emit('update:modelValue', this.selected)
       this.active = false
+    },
+
+    runSearch(searchValue: string): void {
+      this.filteredOptions = this.options.filter((option) =>
+        option.toLowerCase().includes(searchValue.toLowerCase())
+      )
     },
 
     handleMouseEnterOption(i: number): void {

@@ -57,20 +57,41 @@
     position: absolute;
     background: variables.$white;
     margin-top: -16px;
+    padding-top: 16px;
+    .search {
+      align-items: center;
+      display: flex;
+      height: 58px;
+      font-size: 16px;
+      border-bottom: 1px solid variables.$grey-6;
+      padding-left: 32px;
+      color: variables.$grey-4;
+      input {
+        width: 100%;
+        border: none;
+        font-family: variables.$font--primary;
+        &::placeholder {
+          color: variables.$grey-4;
+          font-family: variables.$font--primary;
+        }
+        &:focus,
+        &:focus-visible {
+          outline: none;
+        }
+      }
+      i {
+        color: variables.$grey-1;
+      }
+    }
     .title {
       align-items: center;
       display: flex;
       height: 58px;
       border-bottom: 1px solid variables.$grey-6;
       padding-left: 32px;
-      margin-top: 16px;
       text-transform: uppercase;
       font-weight: 700;
       color: variables.$grey-4;
-      &.collapsed {
-        height: 0px;
-        border-bottom: none;
-      }
     }
   }
 
