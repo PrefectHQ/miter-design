@@ -53,7 +53,8 @@ export default defineComponent({
       }
     },
     handleTagClick($e: Event, ...args: any) {
-      this.toggleClick(args[0]?.value || args[0])
+      const value = this.$slots.default?.() ? args[0]?.value : args[0]
+      this.toggleClick(value)
       this.$emit('update:modelValue', this.value_)
     }
   },
