@@ -17,7 +17,7 @@ describe('icons', () => {
   })
 
   test('option contains icon if defined', () => {
-    const wrapper = mount(List, { props: { icon: true } })
+    const wrapper = mount(List, { props: { icon: 'Fire' } })
 
     const list = wrapper.get('.list')
     expect(list.find('i').exists()).toBe(true)
@@ -27,17 +27,17 @@ describe('disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
     const wrapper = mount(List, { props: { disabled: true } })
 
-    const list = wrapper.get('.list')
+    const picker = wrapper.get('.picker')
 
-    expect(list.classes('disabled')).toBe(true)
+    expect(picker.classes('disabled')).toBe(true)
   })
 
   test('does not add disabled class when disabled:false is passed as a prop', () => {
     const wrapper = mount(List, { props: { disabled: false } })
 
-    const list = wrapper.get('.list')
+    const picker = wrapper.get('.picker')
 
-    expect(list.classes('disabled')).toBe(false)
+    expect(picker.classes('disabled')).toBe(false)
   })
 })
 test('emit selected option', async () => {
