@@ -7,6 +7,9 @@
     @mouseenter="handleFocus"
     @mouseleave="handleBlur"
     @keydown.enter.space="handleKeydown"
+    @keydown.esc="active = false"
+    @keydown.up.prevent="selectPrevious"
+    @keydown.down.prevent="selectNext"
     :class="{ disabled: disabled, active: active }"
   >
     <div
@@ -16,33 +19,34 @@
     >
       <span
         ><i
-          v-if="icon && selected.name?.length > 0"
+          v-if="icon && selected.length > 0"
           :class="iconClass"
           class="pi pi-1x mr-1"
         ></i
-        >{{ selected.name || placeholder }}</span
+        >{{ selected || placeholder }}</span
       >
       <i class="pi pi-Arrow-Down pi-lg"></i>
     </div>
     <div class="list" v-show="active">
       <div class="title">{{ title }}</div>
       <div
-        v-for="(option, i) of options_"
+        v-for="(option, i) in options"
         :key="i"
         @click="choose(option)"
-        @mouseover="handleMouseEnterOption(options_[i])"
-        @mouseleave="handleMouseLeaveOption(option)"
+        @mouseover="handleMouseEnterOption(i)"
+        @mouseleave="handleMouseLeaveOption(i)"
         @keydown.enter.space="choose(option)"
+        @keydown.up.prevent="selectPrevious"
+        @keydown.down.prevent="selectNext"
         class="option"
         :class="{
           selected: option === selected,
-          hovered: options_[option.name].hover,
-          active: options_[option.name].active
+          hovered: hoveredStates[i]
         }"
       >
         <span
           ><i v-if="icon" :class="iconClass" class="pi pi-1x mr-1"></i>
-          {{ option.name }}</span
+          {{ option }}</span
         >
         <i v-if="option === selected" class="pi pi-Checkmark pi-lg"></i>
       </div>
@@ -83,15 +87,13 @@ export default defineComponent({
     }
   },
   data() {
-    let options_ = {}
-    this.options.forEach((option) => {
-      options_[option] = { name: option, hover: false, active: false }
-    })
+    let hoveredStates: boolean[] = []
+    this.options.forEach(() => hoveredStates.push(false))
     return {
       hovered: false,
       active: false,
       selected: '',
-      options_: options_
+      hoveredStates
     }
   },
   computed: {
@@ -100,11 +102,22 @@ export default defineComponent({
         ...(this.disabled ? ['disabled'] : []),
         ...(this.hovered ? ['hovered'] : []),
         ...(this.active ? ['active'] : []),
-        ...(this.selected.name?.length > 0 ? ['selected'] : [])
+        ...(this.selected.length > 0 ? ['selected'] : [])
       ]
     },
     iconClass(): string | null {
       return this.icon.length > 0 ? `pi-${this.icon}` : null
+    },
+    activeOption(): number {
+      return this.hoveredStates.indexOf(true)
+    },
+    prevOption(): number {
+      const next = this.activeOption - 1
+      return next >= 0 ? next : -1
+    },
+    nextOption(): number {
+      const next = this.activeOption + 1
+      return next <= this.options.length - 1 ? next : -1
     }
   },
   methods: {
@@ -114,20 +127,46 @@ export default defineComponent({
       this.active = false
     },
 
-    handleMouseEnterOption(option): void {
+    handleMouseEnterOption(i: number): void {
       if (this.disabled) return
-      this.options_[option.name].hover = true
-      this.options_[option.name].active = true
+      this.hoveredStates[i] = true
     },
 
-    handleMouseLeaveOption(option): void {
-      this.options_[option.name].hover = false
-      this.options_[option.name].active = false
+    handleMouseLeaveOption(i: number): void {
+      this.hoveredStates[i] = false
     },
 
     handleKeydown(): void {
       if (this.disabled) return
+      if (this.active) {
+        this.choose(this.options[this.hoveredStates.indexOf(true)])
+        return
+      }
       this.active = !this.active
+      if (this.active && this.selected.length > 0) {
+        const index = this.options.indexOf(this.selected)
+        this.hoveredStates[index] = true
+      } else {
+        this.hoveredStates[0] = true
+      }
+    },
+
+    selectPrevious(): void {
+      const current = this.activeOption
+      const next = this.prevOption
+      if (next !== -1) {
+        this.hoveredStates[current] = false
+        this.hoveredStates[next] = true
+      }
+    },
+
+    selectNext(): void {
+      const current = this.activeOption
+      const next = this.nextOption
+      if (next !== -1) {
+        this.hoveredStates[current] = false
+        this.hoveredStates[next] = true
+      }
     },
 
     handleFocus(): void {
