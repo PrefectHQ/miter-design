@@ -2,11 +2,13 @@
 @use '../abstracts/mixins';
 .wrapper {
   font-family: variables.$font--primary;
+  outline: none; //needed for removing safari focus ring
   &.active {
     @include mixins.miter-shadow;
   }
+  &:focus,
   &:focus-visible {
-    outline: none !important;
+    outline: none !important; // also needed for focus rings
   }
 
   .picker {
