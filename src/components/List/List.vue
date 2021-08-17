@@ -28,7 +28,7 @@
       <i class="pi pi-Arrow-Down pi-lg"></i>
     </div>
     <div class="list" v-show="active">
-      <div class="title">{{ title }}</div>
+      <div class="title" :class="{ collapsed: title === '' }">{{ title }}</div>
       <div
         v-for="(option, i) in options"
         :key="i"
@@ -79,7 +79,7 @@ export default defineComponent({
     },
     title: {
       type: String,
-      default: 'Prefect Dropdown'
+      default: ''
     },
     icon: {
       type: String,

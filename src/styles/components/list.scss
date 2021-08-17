@@ -67,6 +67,10 @@
       text-transform: uppercase;
       font-weight: 700;
       color: variables.$grey-4;
+      &.collapsed {
+        height: 0px;
+        border-bottom: none;
+      }
     }
   }
 
