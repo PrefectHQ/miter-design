@@ -79,7 +79,7 @@ export default defineComponent({
     },
     options: {
       type: Array,
-      default: ['Option 1', 'Option 2']
+      default: () => ['Option 1', 'Option 2']
     },
     placeholder: {
       type: String,
