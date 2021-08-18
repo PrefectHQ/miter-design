@@ -1,43 +1,43 @@
 <template>
   <div>
-    <h3>Lists</h3>
+    <h3>Selects</h3>
     <div class="d-flex">
-      <List
+      <Select
         class="my-2 mr-2"
-        name="list-without-icon"
+        name="without-icon"
         :options="options"
         v-model="selected1"
       >
-      </List>
-      <List
+      </Select>
+      <Select
         class="my-2 mr-2"
-        name="list-with-icon"
+        name="with-icon"
         icon="Face-ID"
-        placeholder="This list has icons!"
+        placeholder="This one has icons!"
         title="Available Options"
         search
         :options="options"
         v-model="selected2"
       >
-      </List>
-      <List
+      </Select>
+      <Select
         class="my-2"
-        name="list-disabled"
+        name="disabled"
         placeholder="You cannot choose here"
         disabled
       >
-      </List>
+      </Select>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import List from '@/components/List/List.vue'
+import Select from '@/components/Select/Select.vue'
 
 export default defineComponent({
-  name: 'Lists',
-  components: { List },
+  name: 'Selects',
+  components: { Select },
   data() {
     return {
       selected1: '',

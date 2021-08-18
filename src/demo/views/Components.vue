@@ -10,7 +10,7 @@
     <Links class="mt-10" />
     <Tag class="mt-10" />
     <Avatar class="mt-10" />
-    <Lists class="mt-10" />
+    <Selects class="mt-10" />
   </div>
 </template>
 
@@ -25,7 +25,7 @@ import Links from '../sections/Links.vue'
 import Avatar from '../sections/Avatar.vue'
 import Tag from '../sections/Tag.vue'
 import Sliders from '../sections/Sliders.vue'
-import Lists from '../sections/Lists.vue'
+import Selects from '../sections/Selects.vue'
 
 @Options({
   components: {
@@ -38,7 +38,7 @@ import Lists from '../sections/Lists.vue'
     Sliders,
     Checkboxes,
     Tag,
-    Lists
+    Selects
   }
 })
 export default class App extends Vue {}

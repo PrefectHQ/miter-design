@@ -65,7 +65,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'List',
+  name: 'Select',
   emits: {
     'update:modelValue'(...args: any[]) {
       return { ...args }
@@ -206,5 +206,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use '../../styles/components/list';
+@use '../../styles/components/select';
 </style>

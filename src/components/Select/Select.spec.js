@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils'
-import List from './List.vue'
+import Select from './Select.vue'
 
-test('list contains 2 options when nothing is passed in', () => {
-  const wrapper = mount(List)
+test('select component contains 2 options when nothing is passed in', () => {
+  const wrapper = mount(Select)
 
   const list = wrapper.get('.list')
   const options = list.findAll('.option')
@@ -10,14 +10,14 @@ test('list contains 2 options when nothing is passed in', () => {
 })
 describe('icons', () => {
   test('option does not contain icon by default', () => {
-    const wrapper = mount(List)
+    const wrapper = mount(Select)
 
     const list = wrapper.get('.list')
     expect(list.find('i').exists()).toBe(false)
   })
 
   test('option contains icon if defined', () => {
-    const wrapper = mount(List, { props: { icon: 'Fire' } })
+    const wrapper = mount(Select, { props: { icon: 'Fire' } })
 
     const list = wrapper.get('.list')
     expect(list.find('i').exists()).toBe(true)
@@ -25,7 +25,7 @@ describe('icons', () => {
 })
 describe('disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
-    const wrapper = mount(List, { props: { disabled: true } })
+    const wrapper = mount(Select, { props: { disabled: true } })
 
     const picker = wrapper.get('.picker')
 
@@ -33,7 +33,7 @@ describe('disabled state', () => {
   })
 
   test('does not add disabled class when disabled:false is passed as a prop', () => {
-    const wrapper = mount(List, { props: { disabled: false } })
+    const wrapper = mount(Select, { props: { disabled: false } })
 
     const picker = wrapper.get('.picker')
 
@@ -41,7 +41,7 @@ describe('disabled state', () => {
   })
 })
 test('emit selected option', async () => {
-  const wrapper = mount(List, {
+  const wrapper = mount(Select, {
     props: {
       value: 'Option 1'
     }
