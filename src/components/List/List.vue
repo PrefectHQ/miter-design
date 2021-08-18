@@ -5,7 +5,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
     @mouseenter="handleFocus"
-    @mouseleave="handleBlur"
+    @mouseleave="handleMouseOut"
     @keydown.enter.space="handleKeydown"
     @keydown.esc="active = false"
     @keydown.up.prevent="selectPrevious"
@@ -193,6 +193,11 @@ export default defineComponent({
     },
 
     handleBlur(): void {
+      this.hovered = false
+      this.active = false
+    },
+
+    handleMouseOut(): void {
       this.hovered = false
     }
   }
