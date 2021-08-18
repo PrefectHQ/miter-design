@@ -112,7 +112,11 @@ export default defineComponent({
 </script>
 
 <style>
-.tag-container {
-  outline-offset: -3px;
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    .tag-container {
+      outline-offset: -3px;
+    }
+  }
 }
 </style>
