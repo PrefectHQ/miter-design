@@ -2,7 +2,7 @@
   <div class="d-flex">
     <button @click="popUpClosed = false">Open Popup</button>
     <teleport to="body" :disabled="popUpClosed" v-if="!popUpClosed">
-      <div class="modal-backdrop">
+      <div class="modal-backdrop" @click.self="closePopUp">
         <Card
           class="modal"
           :class="card.cardClass"
