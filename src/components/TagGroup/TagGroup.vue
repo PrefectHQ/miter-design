@@ -76,6 +76,7 @@ export default defineComponent({
               mergeProps(
                 {
                   tabIndex: 0,
+                  class: { 'tag-container': true },
                   outlined: this.value_.includes(tag.props?.value)
                     ? false
                     : true,
@@ -95,6 +96,7 @@ export default defineComponent({
             resolveComponent('Tag'),
             mergeProps({
               tabIndex: 0,
+              class: { 'tag-container': true },
               outlined: this.value_.includes(i) ? false : true,
               value: i,
               onClick: ($e: Event) => this.handleTagClick($e, i)
@@ -108,3 +110,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+.tag-container {
+  outline-offset: -3px;
+}
+</style>
