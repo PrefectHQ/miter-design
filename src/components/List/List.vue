@@ -3,7 +3,7 @@
     class="wrapper"
     tabindex="0"
     @focus="handleFocus"
-    @blur="handleBlur"
+    @blur="handleBlur($event)"
     @mouseenter="handleFocus"
     @mouseleave="handleMouseOut"
     @keydown.enter.space="handleKeydown"
@@ -192,7 +192,8 @@ export default defineComponent({
       this.hovered = true
     },
 
-    handleBlur(): void {
+    handleBlur(event): void {
+      if (event.relatedTarget?.tagName === 'INPUT') return
       this.hovered = false
       this.active = false
     },
