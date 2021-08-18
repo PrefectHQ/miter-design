@@ -33,7 +33,8 @@
         ><input
           class="py-2"
           placeholder="Search by name"
-          @input="runSearch($event.target.value)"
+          v-model="searchTerm"
+          @input="runSearch(searchTerm)"
       /></div>
       <div v-if="title.length > 0" class="title">{{ title }}</div>
       <div
@@ -104,6 +105,7 @@ export default defineComponent({
       hovered: false,
       active: false,
       selected: '',
+      searchTerm: '',
       filteredOptions: this.options,
       hoveredStates
     }
@@ -132,6 +134,12 @@ export default defineComponent({
       return next <= this.options.length - 1 ? next : -1
     }
   },
+  watch: {
+    active(): void {
+      this.searchTerm = ''
+      this.filteredOptions = this.options
+    }
+  },
   methods: {
     choose(option: string): void {
       this.selected = option
@@ -157,8 +165,13 @@ export default defineComponent({
     handleKeydown(): void {
       if (this.disabled) return
       if (this.active) {
-        this.choose(this.options[this.hoveredStates.indexOf(true)])
-        return
+        if (this.options[this.hoveredStates.indexOf(true)]) {
+          this.choose(this.options[this.hoveredStates.indexOf(true)])
+          return
+        } else {
+          this.active = !this.active
+          return
+        }
       }
       this.active = !this.active
       if (this.active && this.selected.length > 0) {
