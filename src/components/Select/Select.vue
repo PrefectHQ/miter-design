@@ -35,6 +35,7 @@
           placeholder="Search by name"
           v-model="searchTerm"
           @input="runSearch(searchTerm)"
+          @blur="handleBlur($event)"
       /></div>
       <div v-if="title.length > 0" class="title">{{ title }}</div>
       <div
@@ -206,7 +207,11 @@ export default defineComponent({
     },
 
     handleBlur(event): void {
-      if (event.relatedTarget?.tagName === 'INPUT') return
+      if (
+        event.relatedTarget?.tagName === 'INPUT' ||
+        event.relatedTarget?.classList.contains('active')
+      )
+        return
       this.hovered = false
       this.active = false
     },
