@@ -1,6 +1,11 @@
 <template>
-  <div ref="modal" class="modal-backdrop" @click.self="closePopUp">
-    <div v-if="$slots.content" class="modal">
+  <div
+    ref="modal"
+    class="modal-backdrop"
+    @click.self="closePopUp"
+    :style="position"
+  >
+    <div v-if="$slots.content" :class="positionClass">
       <slot name="content" />
     </div>
   </div>
@@ -33,6 +38,11 @@ export default defineComponent({
     value: {
       type: Boolean,
       required: false
+    },
+    placement: {
+      type: String,
+      required: false,
+      default: 'center'
     }
   },
   emits: ['close'],
@@ -42,8 +52,21 @@ export default defineComponent({
     }
   },
   computed: {
+    position(): any {
+      return {
+        '--position-place': `${this.placement}`
+      }
+    },
+    positionClass(): string {
+      const pos =
+        this.placement == 'flex-start'
+          ? 'mt-2 ml-2'
+          : this.placement == 'flex-end'
+          ? 'mb-2 mr-2'
+          : ''
+      return pos
+    },
     popupOpen(): boolean {
-      console.log('open', this.modelValue)
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
     },
     classList(): any {

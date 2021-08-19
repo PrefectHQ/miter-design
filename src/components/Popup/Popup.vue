@@ -54,11 +54,15 @@ export default defineComponent({
   },
   computed: {
     popupOpen(): boolean {
-      console.log('open', this.modelValue)
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
     },
     classList(): any {
       return this.disabled ? ['disabled'] : this.active ? ['active'] : []
+    },
+    position(): any {
+      return {
+        '--position-place': 'center'
+      }
     }
   },
   methods: {

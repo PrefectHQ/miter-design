@@ -23,4 +23,5 @@ test('teleports to app', async () => {
   const modal = wrapper.findComponent(Popcontent)
   console.log('modal', modal.html())
   expect(modal.html()).toContain('Main Content')
+  
 })
