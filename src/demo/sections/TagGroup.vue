@@ -15,7 +15,7 @@
 import { Vue, Options } from 'vue-class-component'
 @Options({})
 export default class TagGroup extends Vue {
-  tags = []
+  tags = ['1']
   multiple = false
   mounted(): void {
     return
