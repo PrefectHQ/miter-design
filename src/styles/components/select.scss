@@ -58,13 +58,22 @@
     background: variables.$white;
     margin-top: -16px;
     padding-top: 16px;
-    .search {
+    > * {
       align-items: center;
       display: flex;
       height: 58px;
-      font-size: 16px;
-      border-bottom: 1px solid variables.$grey-6;
       padding-left: 32px;
+      &:not(:last-child) {
+        border-bottom: 1px solid variables.$grey-6;
+      }
+      &:first-child {
+        height: 74px;
+        margin-top: -16px;
+        padding-top: 16px;
+      }
+    }
+    .search {
+      font-size: 16px;
       color: variables.$grey-4;
       input {
         width: 100%;
@@ -84,45 +93,29 @@
       }
     }
     .title {
-      align-items: center;
-      display: flex;
-      height: 58px;
-      border-bottom: 1px solid variables.$grey-6;
-      padding-left: 32px;
       text-transform: uppercase;
       font-weight: 700;
       color: variables.$grey-4;
     }
-  }
-
-  .option {
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    font-size: 16px;
-    height: 58px;
-    line-height: 20px;
-    padding-left: 32px;
-    &:not(:last-child) {
-      border-bottom: 1px solid variables.$grey-6;
-    }
-    i {
-      color: variables.$grey-4;
-    }
-    &.hovered {
-      background-color: variables.$grey-7;
-    }
-    &.active {
-      border: 1px solid variables.$primary;
-    }
-    &.selected {
-      background-color: variables.$primary;
-      color: variables.$white;
-      span {
-        width: 275px;
-      }
+    .option {
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 20px;
       i {
+        color: variables.$grey-4;
+      }
+      &.hovered {
+        background-color: variables.$grey-7;
+      }
+      &.selected {
+        background-color: variables.$primary;
         color: variables.$white;
+        span {
+          width: 275px;
+        }
+        i {
+          color: variables.$white;
+        }
       }
     }
   }
