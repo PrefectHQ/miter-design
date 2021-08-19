@@ -41,7 +41,7 @@
         v-for="(option, i) in filteredOptions"
         :key="i"
         @click="choose(option)"
-        @mouseover="handleMouseEnterOption(i)"
+        @mouseenter="handleMouseEnterOption(i)"
         @mouseleave="handleMouseLeaveOption(i)"
         @keydown.enter.space="choose(option)"
         @keydown.up.prevent="selectPrevious"
