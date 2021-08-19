@@ -46,6 +46,10 @@
     &.hovered {
       @include mixins.miter-border(2, 1, variables.$primary, 4);
     }
+    &.active i {
+      @include mixins.input-transition;
+      transform: rotate(180deg);
+    }
   }
 
   .list {
