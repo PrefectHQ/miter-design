@@ -5,7 +5,7 @@
   @include mixins.miter-shadow;
 }
 
-.tag {
+.tag-wrapper {
   @include mixins.miter;
 
   border: none;
@@ -15,55 +15,63 @@
   white-space: nowrap;
   cursor: default;
   display: inline-block;
-  overflow: hidden;
   cursor: default;
-  font-size: 11px;
+  font-size: 14px;
   vertical-align: middle;
-  background-color: variables.$grey-2;
   color: variables.$text--white;
 
-  > :first-child {
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    padding: 0 24px;
+  &.elevated {
+    @include mixins.miter-shadow;
   }
 
   &:focus-visible {
     outline: none;
   }
 
-  &.outlined {
+  .tag {
+    align-items: center;
+    background-color: variables.$grey-2;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    display: inline-flex;
+    justify-content: center;
+    padding: 4px 24px;
+  }
+
+  &.outlined > .tag {
     background-color: variables.$white;
     color: variables.$grey-2;
     border: 1px solid variables.$grey-4;
     transition: background-color 0s, clip-path 0s !important;
   }
 
+  &.disabled {
+    cursor: not-allowed;
+    color: variables.$grey-4 !important;
+
+    > .tag {
+      background-color: variables.$disabled !important;
+    }
+
+    &.outlined > .tag {
+      border-color: variables.$grey-4 !important;
+      color: inherit !important;
+    }
+  }
+
   @each $name, $color in variables.$colors {
     &.#{'' + $name} {
-      background-color: $color;
       color: variables.$text--white;
 
-      &.outlined {
-        border: 1px solid $color;
+      > .tag {
+        background-color: $color;
+      }
+
+      &.outlined > .tag {
+        border-color: $color;
         color: $color;
         background-color: variables.$white;
       }
     }
-  }
-
-  &.disabled {
-    cursor: not-allowed;
-    background-color: variables.$disabled !important;
-    color: variables.$grey-4 !important;
-
-    &.outlined {
-      border: 1px solid variables.$grey-4;
-    }
-  }
-
-  &.elevated {
-    @include mixins.miter-shadow;
   }
 }

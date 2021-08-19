@@ -1,6 +1,6 @@
 <template>
-  <div class="tag" :class="classList">
-    <span data-test="default"> <slot /></span>
+  <div class="tag-wrapper" :class="classList">
+    <span class="tag" data-test="default"> <slot /></span>
   </div>
 </template>
 

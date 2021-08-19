@@ -32,6 +32,11 @@ Primary.args = {
   color: 'primary'
 }
 
+export const Outlined = Template.bind({})
+Outlined.args = {
+  color: 'outlined'
+}
+
 export const Disabled = Template.bind({})
 Disabled.args = {
   disabled: true
