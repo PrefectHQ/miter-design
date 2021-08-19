@@ -17,7 +17,7 @@ export default defineComponent({
   props: {
     modelValue: {
       type: [Array],
-      default: []
+      default: () => []
     },
     value: {
       type: [String, Number, Array],
@@ -115,7 +115,7 @@ export default defineComponent({
 @media not all and (min-resolution: 0.001dpcm) {
   @supports (-webkit-appearance: none) and (stroke-color: transparent) {
     .tag-container {
-      outline-offset: -3px;
+      outline: none;
     }
   }
 }

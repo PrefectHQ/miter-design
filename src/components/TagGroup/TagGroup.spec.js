@@ -140,6 +140,6 @@ describe('model', () => {
     const emit = wrapper.emitted('update:modelValue')
 
     expect(emit).toHaveLength(1)
-    expect(emit[0][0][0]).toEqual(1)
+    expect(emit[0][0][0]).toEqual(0)
   })
 })
