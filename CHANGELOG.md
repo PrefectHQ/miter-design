@@ -1,2 +1,3 @@
+- Select component - [#25](https://github.com/PrefectHQ/miter-design/pull/25)
 - Update miter mixin to make it easier - [#23](https://github.com/PrefectHQ/miter-design/pull/23)
 - Add CHANGELOG.md - [#16](https://github.com/PrefectHQ/miter-design/pull/16)
