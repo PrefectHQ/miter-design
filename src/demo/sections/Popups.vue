@@ -2,7 +2,7 @@
   <div>
     <h3 class="mb-2">Popup</h3>
     <div class="d-flex">
-      <Popup v-model="value">
+      <Popup v-model="value" position="center">
         <template v-slot:activate>
           <Button color="primary" @click="openPopup"
             >Open Popup</Button
@@ -15,7 +15,7 @@
             :width="card.width"
           >
             <template v-if="card.titleTag" v-slot:header>
-              <component class="mt-2" :is="card.titleTag">
+              <component class="mt-3" :is="card.titleTag">
                 {{ card.title }}
               </component>
             </template>

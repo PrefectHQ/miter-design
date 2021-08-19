@@ -16,12 +16,11 @@ afterEach(() => {
 })
 
 test('teleports to app', async () => {
-  const wrapper = mount(Popup, {props: {modelValue: true}, slots: {
+  const wrapper = mount(Popup, {props: {modelValue: true, position: 'flex-start'}, slots: {
     content: '<div>Main Content</div>'
   }})
 
   const modal = wrapper.findComponent(Popcontent)
-  console.log('modal', modal.html())
   expect(modal.html()).toContain('Main Content')
   
 })

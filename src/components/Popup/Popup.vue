@@ -4,7 +4,7 @@
       <slot name="activate" />
     </div>
     <teleport to="#app" :disabled="!popupOpen" v-if="popupOpen">
-      <Popcontent @close="closePopUp"
+      <Popcontent @close="closePopUp" :placement="position"
         ><template v-slot:content
           ><div v-if="$slots.content" class="modal">
             <slot name="content" /> </div></template
@@ -41,6 +41,11 @@ export default defineComponent({
     value: {
       type: Boolean,
       required: false
+    },
+    position: {
+      type: String,
+      required: false,
+      default: 'center'
     }
   },
   emits: ['update:modelValue'],
@@ -58,11 +63,6 @@ export default defineComponent({
     },
     classList(): any {
       return this.disabled ? ['disabled'] : this.active ? ['active'] : []
-    },
-    position(): any {
-      return {
-        '--position-place': 'center'
-      }
     }
   },
   methods: {
