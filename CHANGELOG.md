@@ -1,2 +1,3 @@
+- Fix miter mixin for specific browsers - [#27](https://github.com/PrefectHQ/miter-design/pull/27)
 - Update miter mixin to make it easier - [#23](https://github.com/PrefectHQ/miter-design/pull/23)
 - Add CHANGELOG.md - [#16](https://github.com/PrefectHQ/miter-design/pull/16)
