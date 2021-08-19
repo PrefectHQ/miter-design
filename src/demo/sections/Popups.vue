@@ -1,13 +1,36 @@
 <template>
   <div>
-    <h3>Popup</h3>
+    <h3 class="mb-2">Popup</h3>
     <div class="d-flex">
-      <Popup
-        v-for="(card, index) in cards"
-        :key="index"
-        :card="card"
-        class="mr-4 mt-4 d-inline-block"
-      >
+      <Popup v-model="value">
+        <template v-slot:activate>
+          <Button color="primary" @click="openPopup"
+            >Open Popup</Button
+          ></template
+        >
+        <template v-slot:content>
+          <Card
+            :class="card.cardClass"
+            :height="card.height"
+            :width="card.width"
+          >
+            <template v-if="card.titleTag" v-slot:header>
+              <component class="mt-2" :is="card.titleTag">
+                {{ card.title }}
+              </component>
+            </template>
+            <template>
+              <component :is="card.contentTag || 'div'">
+                {{ card.content }}
+              </component>
+            </template>
+            <template v-slot:actions>
+              <component :is="'CardActions'" class="flex-column">
+                <Button @click="closePopup" color="primary">Close</Button>
+              </component>
+            </template>
+          </Card>
+        </template>
       </Popup>
     </div>
   </div>
@@ -17,29 +40,24 @@
 import { Vue, Options } from 'vue-class-component'
 
 @Options({})
-export default class Cards extends Vue {
-  cards: {} = [
-    {
-      title: 'Pop Up',
-      titleTag: 'h6',
-      cardClass: ['text-center'],
-      height: '150px',
-      width: '350px',
-      actionClass: ['flex-column'],
-      actions: [
-        { tag: 'Button', color: 'primary', text: 'Close' },
-        { tag: 'a', text: 'Skip for now' }
-      ]
-    }
-  ]
+export default class Popup extends Vue {
+  card: {} = {
+    title: 'Pop Up',
+    titleTag: 'h6',
+    cardClass: ['text-center'],
+    height: '150px',
+    width: '150px'
+  }
+  value = true
 
   mounted(): void {
     return
   }
-
-  handleClick(): void {
-    // eslint-disable-next-line no-console
-    console.log('clicked!')
+  openPopup(): void {
+    this.value = true
+  }
+  closePopup(): void {
+    this.value = false
   }
 }
 </script>

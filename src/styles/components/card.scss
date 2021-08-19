@@ -10,6 +10,7 @@
   @include mixins.miter-border(2, 1, variables.$grey-4, 4);
 
   display: block;
+  background-color: variables.$white;
   height: min-content;
   position: relative;
 

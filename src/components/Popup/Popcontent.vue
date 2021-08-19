@@ -1,21 +1,13 @@
 <template>
-  <div class="d-flex">
-    <div v-if="$slots.activate">
-      <slot name="activate" />
+  <div ref="modal" class="modal-backdrop" @click.self="closePopUp">
+    <div v-if="$slots.content" class="modal">
+      <slot name="content" />
     </div>
-    <teleport to="#app" :disabled="!popupOpen" v-if="popupOpen">
-      <Popcontent @close="closePopUp"
-        ><template v-slot:content
-          ><div v-if="$slots.content" class="modal">
-            <slot name="content" /> </div></template
-      ></Popcontent>
-    </teleport>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Popcontent from './Popcontent.vue'
 
 interface event {
   target: {
@@ -24,7 +16,7 @@ interface event {
 }
 
 export default defineComponent({
-  name: 'Popup',
+  name: 'Popcontent',
   props: {
     disabled: {
       type: Boolean,
@@ -43,10 +35,7 @@ export default defineComponent({
       required: false
     }
   },
-  emits: ['update:modelValue'],
-  components: {
-    Popcontent
-  },
+  emits: ['close'],
   data() {
     return {
       active: false as boolean
@@ -63,7 +52,7 @@ export default defineComponent({
   },
   methods: {
     closePopUp() {
-      this.$emit('update:modelValue', false)
+      this.$emit('close', false)
     }
   }
 })
