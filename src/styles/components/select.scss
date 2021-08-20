@@ -54,14 +54,25 @@
 
   .list {
     @include mixins.input-transition;
-    @include mixins.miter(2);
     display: flex;
     flex-direction: column;
     width: 350px;
     position: absolute;
     background: variables.$white;
-    margin-top: -16px;
-    padding-top: 16px;
+
+    &:not(.openUp) {
+      @include mixins.miter(2);
+      margin-top: -16px;
+      padding-top: 16px;
+      &:first-child {
+        height: 74px;
+        margin-top: -16px;
+        padding-top: 16px;
+      }
+    }
+    &.openUp {
+      bottom: 58px;
+    }
     > * {
       align-items: center;
       display: flex;
@@ -69,11 +80,6 @@
       padding-left: 32px;
       &:not(:last-child) {
         border-bottom: 1px solid variables.$grey-6;
-      }
-      &:first-child {
-        height: 74px;
-        margin-top: -16px;
-        padding-top: 16px;
       }
     }
     .search {

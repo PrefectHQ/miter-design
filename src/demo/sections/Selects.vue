@@ -16,6 +16,7 @@
         placeholder="This one has icons!"
         title="Available Options"
         search
+        openUp
         :options="options"
         v-model="selected2"
       >

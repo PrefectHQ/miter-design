@@ -27,7 +27,7 @@
       >
       <i class="pi pi-Arrow-Down pi-lg"></i>
     </div>
-    <div class="list" v-show="active">
+    <div class="list" v-show="active" :class="{ openUp: openUp }">
       <div v-if="search" class="search"
         ><i class="pi pi-Search pi-lg mr-1"></i
         ><input
@@ -95,6 +95,10 @@ export default defineComponent({
       default: ''
     },
     search: {
+      type: Boolean,
+      default: false
+    },
+    openUp: {
       type: Boolean,
       default: false
     }
