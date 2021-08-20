@@ -2,45 +2,21 @@
   <div>
     <h3 class="mb-2">Popup</h3>
     <div class="d-flex">
-      <Popup v-model="value" position="flex-end">
+      <Popup v-model="value" position="center" title="Pop Up">
         <template v-slot:activate>
-          <Button color="primary" @click="openPopup"
-            >Open Popup</Button
-          ></template
-        >
+          <Button color="primary" @click="openPopup"> Open Popup </Button>
+        </template>
         <template v-slot:content>
-          <Card
-            :class="card.cardClass"
-            :height="card.height"
-            :width="card.width"
-          >
-            <template v-if="card.titleTag" v-slot:header>
-              <component class="mt-4" :is="card.titleTag">
-                {{ card.title }}
-                <span
-                  :style="{
-                    position: 'absolute',
-                    right: '38px',
-                    top: '38px',
-                    cursor: 'pointer'
-                  }"
-                  @click="closePopup"
-                >
-                  <i class="pi pi-X mr-1"></i>
-                </span>
-              </component>
-            </template>
-            <template>
-              <component :is="card.contentTag || 'div'">
-                {{ card.content }}
-              </component>
-            </template>
-            <template v-slot:actions>
-              <component :is="'CardActions'" class="flex-column">
-                <Button @click="closePopup" color="primary">Close</Button>
-              </component>
-            </template>
-          </Card>
+          <component :is="card.contentTag || 'div'">
+            {{ card.content }}
+          </component>
+        </template>
+        <template v-slot:action>
+          <component :is="'CardActions'">
+            <div :class="['text-center']" class="mt-4">
+              <Button color="primary">Action</Button>
+            </div>
+          </component>
         </template>
       </Popup>
     </div>
@@ -56,9 +32,7 @@ export default class Popup extends Vue {
     title: 'Pop Up',
     titleTag: 'h6',
     cardClass: ['text-center'],
-    content: 'centered',
-    height: '150px',
-    width: '150px'
+    content: 'This is a pop up'
   }
   value = true
 

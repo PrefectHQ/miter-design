@@ -4,10 +4,13 @@
       <slot name="activate" />
     </div>
     <teleport to="#app" :disabled="!popupOpen" v-if="popupOpen">
-      <PopupContent @close="closePopUp" :placement="position">
+      <PopupContent @close="closePopUp" :placement="position" :title="title">
         <template v-slot:content>
-          <div v-if="$slots.content" class="modal">
+          <div v-if="$slots.content">
             <slot name="content" />
+          </div>
+          <div v-if="$slots.action">
+            <slot name="action" />
           </div>
         </template>
       </PopupContent>
@@ -34,6 +37,10 @@ export default defineComponent({
       type: String,
       required: false,
       default: 'center'
+    },
+    title: {
+      type: String,
+      required: false
     }
   },
   emits: ['update:modelValue'],

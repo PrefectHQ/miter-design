@@ -5,10 +5,32 @@
       class="modal-backdrop"
       @click.self="closePopUp"
       :style="position"
-    >
-      <div v-if="$slots.content" :class="positionClass">
-        <slot name="content" />
-      </div>
+      ><Card :class="positionClass" :height="height" :width="width">
+        <component :is="'h6'">
+          {{ title }}
+          <span
+            :style="{
+              position: 'absolute',
+              right: '35px',
+              top: '35px',
+              cursor: 'pointer'
+            }"
+            @click="closePopUp"
+          >
+            <i class="pi pi-X mr-1"></i>
+          </span>
+        </component>
+
+        <div v-if="$slots.content">
+          <slot name="content" />
+        </div>
+
+        <template v-slot:actions>
+          <div v-if="$slots.action" :class="['flex-column']">
+            <slot name="action" />
+          </div>
+        </template>
+      </Card>
     </div>
   </div>
 </template>
@@ -33,10 +55,22 @@ export default defineComponent({
       type: Boolean,
       required: false
     },
+    height: {
+      type: String,
+      default: '220px'
+    },
+    width: {
+      type: String,
+      default: '300px'
+    },
     placement: {
       type: String,
       required: false,
       default: 'center'
+    },
+    title: {
+      type: String,
+      required: false
     }
   },
   emits: ['close'],
@@ -74,4 +108,5 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '../../styles/components/popup';
+@use '../../styles/components/card';
 </style>
