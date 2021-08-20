@@ -102,31 +102,31 @@
         color: variables.$grey-1;
       }
     }
-    .title {
-      text-transform: uppercase;
-      font-weight: 700;
-      color: variables.$grey-4;
+  }
+}
+.title {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: variables.$grey-4;
+}
+.option {
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  i {
+    color: variables.$grey-4;
+  }
+  &.hovered {
+    background-color: variables.$grey-7;
+  }
+  &.selected {
+    background-color: variables.$primary;
+    color: variables.$white;
+    span {
+      width: 275px;
     }
-    .option {
-      cursor: pointer;
-      font-size: 16px;
-      line-height: 20px;
-      i {
-        color: variables.$grey-4;
-      }
-      &.hovered {
-        background-color: variables.$grey-7;
-      }
-      &.selected {
-        background-color: variables.$primary;
-        color: variables.$white;
-        span {
-          width: 275px;
-        }
-        i {
-          color: variables.$white;
-        }
-      }
+    i {
+      color: variables.$white;
     }
   }
 }

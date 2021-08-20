@@ -59,14 +59,22 @@
         >
         <i v-if="option === selected" class="pi pi-Checkmark pi-lg"></i>
       </div>
+      <Option
+        v-for="(option, i) in testOptions"
+        :key="i"
+        :value="option"
+        icon="Fire"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Option from './Option.vue'
 
 export default defineComponent({
+  components: { Option },
   name: 'Select',
   emits: {
     'update:modelValue'(...args: any[]) {
@@ -77,6 +85,10 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false
+    },
+    testOptions: {
+      type: Array,
+      default: () => ['1', '2']
     },
     options: {
       type: Array,
