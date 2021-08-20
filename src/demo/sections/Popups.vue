@@ -2,20 +2,28 @@
   <div>
     <h3 class="mb-2">Popup</h3>
     <div class="d-flex">
-      <Popup v-model="value" position="center" title="Pop Up">
+      <Popup
+        v-for="popup in popups"
+        :key="popup"
+        v-model="popup.value"
+        :position="popup.position"
+        :title="popup.title"
+        :height="popup.height"
+        :width="popup.width"
+      >
         <template v-slot:activate>
-          <Button color="primary" @click="openPopup"> Open Popup </Button>
+          <Button color="primary" @click="openPopup(popup)">
+            Open {{ popup.position }} Popup
+          </Button>
         </template>
         <template v-slot:content>
-          <component :is="card.contentTag || 'div'">
-            {{ card.content }}
+          <component :is="'div'">
+            {{ popup.content }}
           </component>
         </template>
         <template v-slot:actions>
-          <component :is="'CardActions'">
-            <div :class="['text-center']" class="mt-4">
-              <Button color="primary">Action</Button>
-            </div>
+          <component :is="'Actions'">
+            <Button color="primary">Action</Button>
           </component>
         </template>
       </Popup>
@@ -28,23 +36,36 @@ import { Vue, Options } from 'vue-class-component'
 
 @Options({})
 export default class Popup extends Vue {
-  card: {} = {
-    title: 'Pop Up',
-    titleTag: 'h6',
-    cardClass: ['text-center'],
-    content: 'This is a pop up'
-  }
+  popups: {} = [
+    {
+      content: 'This is a pop up',
+      height: '341px',
+      width: '730px',
+      position: 'center',
+      title: 'Center Pop Up',
+      value: false
+    },
+    {
+      content: 'This is another pop up',
+      height: '269px',
+      width: '350px',
+      position: 'flex-end',
+      title: 'Flex End Pop Up',
+      value: false
+    }
+  ]
+
   value = true
 
   mounted(): void {
     return
   }
-  openPopup(): void {
-    this.value = true
+  openPopup(popup: { value: Boolean }): void {
+    popup.value = true
   }
-  closePopup(): void {
-    this.value = false
-  }
+  // closePopup(popup: { value: Boolean }): void {
+  //   popup.value = true
+  // }
 }
 </script>
 

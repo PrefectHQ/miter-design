@@ -6,26 +6,18 @@
       @click.self="closePopUp"
       :style="position"
       ><Card :class="positionClass" :height="height" :width="width">
-        <component :is="'h6'" class="mb-4">
+        <h4 class="h4-bottom">
           {{ title }}
-          <span
-            :style="{
-              position: 'absolute',
-              right: '35px',
-              top: '35px',
-              cursor: 'pointer'
-            }"
-            @click="closePopUp"
-          >
+          <span class="close-icon" @click="closePopUp">
             <i class="pi pi-X mr-1"></i>
           </span>
-        </component>
+        </h4>
 
         <div v-if="$slots.content">
           <slot name="content" />
         </div>
         <template v-slot:actions>
-          <div v-if="$slots.actions" class="mt-8">
+          <div v-if="$slots.actions">
             <slot name="actions" />
           </div>
         </template>
@@ -56,11 +48,11 @@ export default defineComponent({
     },
     height: {
       type: String,
-      default: '160px'
+      default: '269px'
     },
     width: {
       type: String,
-      default: '300px'
+      default: '350px'
     },
     placement: {
       type: String,
