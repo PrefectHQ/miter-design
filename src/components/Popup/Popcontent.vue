@@ -1,10 +1,5 @@
 <template>
-  <div
-    ref="modal"
-    class="modal-backdrop"
-    @click.self="closePopUp"
-    :style="position"
-  >
+  <div class="modal-backdrop" @click.self="closePopUp" :style="position">
     <div v-if="$slots.content" :class="positionClass">
       <slot name="content" />
     </div>
@@ -23,14 +18,6 @@ interface event {
 export default defineComponent({
   name: 'Popcontent',
   props: {
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    readonly: {
-      type: Boolean,
-      default: false
-    },
     modelValue: {
       type: Boolean,
       required: false
@@ -68,9 +55,6 @@ export default defineComponent({
     },
     popupOpen(): boolean {
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
-    },
-    classList(): any {
-      return this.disabled ? ['disabled'] : this.active ? ['active'] : []
     }
   },
   methods: {
@@ -83,5 +67,4 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '../../styles/components/popup';
-@use '../../styles/components/card';
 </style>
