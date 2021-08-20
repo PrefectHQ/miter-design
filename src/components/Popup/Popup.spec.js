@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import Popup from './Popup.vue'
 import PopupContent from './PopupContent.vue'
+import Card from '../Card/Card.vue'
 
 
 beforeEach(() => {
@@ -17,16 +18,24 @@ afterEach(() => {
 
 test('loads PopupContent component when modelValue/v-model is true', () => {
   const wrapper = mount(Popup, {props: {modelValue: true, position: 'flex-start'}, slots: {
-    content: '<div>Main Content</div>'
-  }})
+    content: '<div>Main Content</div>'}, global: {
+      components: {
+        Card: Card
+      }
+    }
+  })
   const modal = wrapper.findComponent(PopupContent)
   expect(modal.exists()).toBe(true)
 })
 
 test('does not load PopUpContent component when modelValue/v-model is false', () => {
   const wrapper = mount(Popup, {props: {modelValue: false, position: 'flex-start'}, slots: {
-    content: '<div>Main Content</div>'
-  }})
+    content: '<div>Main Content</div>'}, global: {
+      components: {
+        Card: Card
+      }
+    }
+  })
   const modal = wrapper.findComponent(PopupContent)
   expect(modal.exists()).toBe(false)
 })
@@ -34,6 +43,10 @@ test('does not load PopUpContent component when modelValue/v-model is false', ()
 test('loads the activate slot', () => {
   const wrapper = mount(Popup, {props: {modelValue: true, position: 'flex-start'}, slots: {
     content: '<div>Main Content</div>' , activate: '<button id="test-button">Test</button>'
+  }, global: {
+    components: {
+      Card: Card
+    }
   }})
   expect(wrapper.get('#test-button').text()).toEqual('Test')
 })
@@ -41,6 +54,10 @@ test('loads the activate slot', () => {
 test('loads the content slot', () => {
   const wrapper = mount(Popup, {props: {modelValue: true, position: 'flex-start'}, slots: {
     content: '<div>Main Content</div>' , activate: '<button id="test-button">Test</button>'
+  }, global: {
+    components: {
+      Card: Card
+    }
   }})
   const modal = wrapper.findComponent(PopupContent)
   expect(modal.html()).toContain('Main Content')
@@ -49,6 +66,10 @@ test('loads the content slot', () => {
 test('emits close and update:modelValue as false when the background is clicked', async () => {
   const wrapper = mount(Popup, {props: {modelValue: true, position: 'flex-start'}, slots: {
     content: '<div>Main Content</div>' , activate: '<button id="test-button">Test</button>'
+  }, global: {
+    components: {
+      Card: Card
+    }
   }})
   const modal = wrapper.findComponent(PopupContent)
   const divOne = modal.get('#backdrop')
@@ -65,6 +86,10 @@ test('passes popup position', () => {
   const position = 'flex-start'
   const wrapper = mount(Popup, {props: {modelValue: true, position}, slots: {
     content: '<div>Main Content</div>' , activate: '<button id="test-button">Test</button>'
+  }, global: {
+    components: {
+      Card: Card
+    }
   }})
   const modal = wrapper.findComponent(PopupContent)
   const divOne = modal.get('#backdrop')
