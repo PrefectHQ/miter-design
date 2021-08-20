@@ -2,7 +2,7 @@
   <div>
     <h3 class="mb-2">Popup</h3>
     <div class="d-flex">
-      <Popup v-model="value" position="flex-start">
+      <Popup v-model="value" position="flex-end">
         <template v-slot:activate>
           <Button color="primary" @click="openPopup"
             >Open Popup</Button
