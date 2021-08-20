@@ -2,7 +2,7 @@
   <div>
     <h3 class="mb-2">Popup</h3>
     <div class="d-flex">
-      <Popup v-model="value" position="center">
+      <Popup v-model="value" position="flex-start">
         <template v-slot:activate>
           <Button color="primary" @click="openPopup"
             >Open Popup</Button
@@ -45,6 +45,7 @@ export default class Popup extends Vue {
     title: 'Pop Up',
     titleTag: 'h6',
     cardClass: ['text-center'],
+    content: 'centered',
     height: '150px',
     width: '150px'
   }

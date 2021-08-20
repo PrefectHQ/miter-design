@@ -1,7 +1,14 @@
 <template>
-  <div class="modal-backdrop" @click.self="closePopUp" :style="position">
-    <div v-if="$slots.content" :class="positionClass">
-      <slot name="content" />
+  <div>
+    <div
+      id="backdrop"
+      class="modal-backdrop"
+      @click.self="closePopUp"
+      :style="position"
+    >
+      <div v-if="$slots.content" :class="positionClass">
+        <slot name="content" />
+      </div>
     </div>
   </div>
 </template>

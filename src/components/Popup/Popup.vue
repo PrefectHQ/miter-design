@@ -4,20 +4,20 @@
       <slot name="activate" />
     </div>
     <teleport to="#app" :disabled="!popupOpen" v-if="popupOpen">
-      <Popcontent @close="closePopUp" :placement="position">
+      <PopupContent @close="closePopUp" :placement="position">
         <template v-slot:content>
           <div v-if="$slots.content" class="modal">
             <slot name="content" />
           </div>
         </template>
-      </Popcontent>
+      </PopupContent>
     </teleport>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Popcontent from './Popcontent.vue'
+import PopupContent from './PopupContent.vue'
 
 export default defineComponent({
   name: 'Popup',
@@ -39,7 +39,7 @@ export default defineComponent({
   emits: ['update:modelValue'],
   //Using Popcontent compoenent to facilitate testing
   components: {
-    Popcontent
+    PopupContent
   },
   data() {
     return {
