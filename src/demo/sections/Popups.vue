@@ -15,8 +15,19 @@
             :width="card.width"
           >
             <template v-if="card.titleTag" v-slot:header>
-              <component class="mt-3" :is="card.titleTag">
+              <component class="mt-4" :is="card.titleTag">
                 {{ card.title }}
+                <span
+                  :style="{
+                    position: 'absolute',
+                    right: '38px',
+                    top: '38px',
+                    cursor: 'pointer'
+                  }"
+                  @click="closePopup"
+                >
+                  <i class="pi pi-X mr-1"></i>
+                </span>
               </component>
             </template>
             <template>
