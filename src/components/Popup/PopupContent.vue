@@ -79,9 +79,9 @@ export default defineComponent({
     positionClass(): string {
       const pos =
         this.placement == 'flex-start'
-          ? 'mt-2 ml-2'
+          ? 'mt-4 ml-4'
           : this.placement == 'flex-end'
-          ? 'mb-2 mr-2'
+          ? 'mb-4 mr-4'
           : ''
       return pos
     },
