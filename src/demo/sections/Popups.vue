@@ -11,7 +11,7 @@
             {{ card.content }}
           </component>
         </template>
-        <template v-slot:action>
+        <template v-slot:actions>
           <component :is="'CardActions'">
             <div :class="['text-center']" class="mt-4">
               <Button color="primary">Action</Button>

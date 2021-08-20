@@ -9,8 +9,8 @@
           <div v-if="$slots.content">
             <slot name="content" />
           </div>
-          <div v-if="$slots.action">
-            <slot name="action" />
+          <div v-if="$slots.actions">
+            <slot name="actions" />
           </div>
         </template>
       </PopupContent>

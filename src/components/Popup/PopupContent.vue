@@ -6,7 +6,7 @@
       @click.self="closePopUp"
       :style="position"
       ><Card :class="positionClass" :height="height" :width="width">
-        <component :is="'h6'">
+        <component :is="'h6'" class="mb-4">
           {{ title }}
           <span
             :style="{
@@ -24,10 +24,9 @@
         <div v-if="$slots.content">
           <slot name="content" />
         </div>
-
         <template v-slot:actions>
-          <div v-if="$slots.action" :class="['flex-column']">
-            <slot name="action" />
+          <div v-if="$slots.actions" class="mt-8">
+            <slot name="actions" />
           </div>
         </template>
       </Card>
@@ -57,7 +56,7 @@ export default defineComponent({
     },
     height: {
       type: String,
-      default: '220px'
+      default: '160px'
     },
     width: {
       type: String,
