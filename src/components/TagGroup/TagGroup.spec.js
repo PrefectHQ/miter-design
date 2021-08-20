@@ -136,10 +136,11 @@ describe('model', () => {
     const tags = container.findAll('.tag')
 
     await tags[0].trigger('click')
+    const one = wrapper.emitted('update:modelValue')
+    expect(one[0][0][0]).toEqual(0)
 
-    const emit = wrapper.emitted('update:modelValue')
-
-    expect(emit).toHaveLength(1)
-    expect(emit[0][0][0]).toEqual(0)
+    await tags[1].trigger('click')
+    const two = wrapper.emitted('update:modelValue')
+    expect(two[0][0][0]).toEqual(1)
   })
 })

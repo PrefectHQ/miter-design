@@ -76,7 +76,8 @@ export default defineComponent({
               mergeProps(
                 {
                   tabIndex: 0,
-                  class: { 'tag-container': true },
+                  class: ['tag-container'],
+                  hovered: true,
                   outlined: this.value_.includes(tag.props?.value)
                     ? false
                     : true,
@@ -96,7 +97,8 @@ export default defineComponent({
             resolveComponent('Tag'),
             mergeProps({
               tabIndex: 0,
-              class: { 'tag-container': true },
+              hovered: true,
+              class: ['tag-container'],
               outlined: this.value_.includes(i) ? false : true,
               value: i,
               onClick: ($e: Event) => this.handleTagClick($e, i)

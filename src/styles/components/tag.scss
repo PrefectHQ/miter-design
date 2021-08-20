@@ -31,6 +31,10 @@
     }
   }
 
+  &.hovered {
+    cursor: pointer;
+  }
+
   &:focus-visible {
     outline: none;
   }
@@ -40,17 +44,31 @@
     color: variables.$grey-2;
     transition: background-color 0s, clip-path 0s !important;
     @include mixins.miter-border(1, 1, variables.$grey-4);
+
+    &.hovered:hover {
+      background-color: variables.$grey-5;
+    }
   }
 
   @each $name, $color in variables.$colors {
     &.#{'' + $name} {
       background-color: $color;
       color: variables.$text--white;
+      @include mixins.miter-border(1, 1, $color);
+
+      &:not(.outlined) {
+        &.hovered:hover {
+          filter: brightness(0.9);
+        }
+      }
 
       &.outlined {
-        @include mixins.miter-border(1, 1, $color);
         color: $color;
         background-color: variables.$white;
+
+        &.hovered:hover {
+          background-color: variables.$grey-5;
+        }
       }
     }
   }

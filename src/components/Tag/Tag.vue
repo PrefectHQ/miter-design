@@ -14,6 +14,7 @@ class Props {
   outlined = prop<boolean>({ default: false })
   disabled = prop<boolean>({ default: false })
   shadow = prop<boolean>({ default: false })
+  hovered = prop<boolean>({ default: false })
 }
 
 @Options({})
@@ -22,6 +23,7 @@ export default class Tag extends Vue.with(Props) {
     return [
       ...(this.disabled ? ['disabled'] : []),
       ...(this.outlined ? ['outlined'] : []),
+      ...(this.hovered ? ['hovered'] : []),
       this.color
     ]
   }
