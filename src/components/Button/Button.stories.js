@@ -10,7 +10,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HJgj2eHBaqt1SAYruZNjQQ/Prefect?node-id=557%3A627'
+      url: 'https://www.figma.com/file/HJgj2eHBaqt1SAYruZNjQQ/Prefect?node-id=1080%3A4414'
     }
   }
 }
@@ -30,6 +30,11 @@ export const Default = Template.bind({})
 export const Primary = Template.bind({})
 Primary.args = {
   color: 'primary'
+}
+
+export const Outlined = Template.bind({})
+Outlined.args = {
+  color: 'outlined'
 }
 
 export const Disabled = Template.bind({})
