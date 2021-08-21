@@ -20,7 +20,7 @@ describe('slots', () => {
     const wrapper = factoryMount()
 
     const container = wrapper.get('.tag-group-container')
-    const tags = container.findAll('.tag')
+    const tags = container.findAll('.tag-wrapper')
 
     expect(tags).toHaveLength(2)
     expect(tags[0].text()).toBe('Tag 1')
@@ -36,7 +36,7 @@ describe('slots', () => {
     )
 
     const container = wrapper.get('.tag-group-container')
-    const tags = container.findAll('.tag')
+    const tags = container.findAll('.tag-wrapper')
 
     expect(tags[0].text()).toBe('One')
     expect(tags[1].text()).toBe('Two')
@@ -55,7 +55,7 @@ describe('props', () => {
       }
     )
     const container = wrapper.get('.tag-group-container')
-    const tags = container.findAll('.tag')
+    const tags = container.findAll('.tag-wrapper')
     expect(tags[0].classes()).toContain('outlined')
     expect(tags[1].classes()).toContain('outlined')
   })
@@ -71,7 +71,7 @@ describe('props', () => {
       }
     )
     const container = wrapper.get('.tag-group-container')
-    const tags = container.findAll('.tag')
+    const tags = container.findAll('.tag-wrapper')
 
     await tags[0].trigger('click')
     await tags[1].trigger('click')
@@ -109,7 +109,7 @@ describe('model', () => {
     )
 
     const container = wrapper.get('.tag-group-container')
-    const tags = container.findAll('.tag')
+    const tags = container.findAll('.tag-wrapper')
 
     await tags[0].trigger('click')
     await tags[1].trigger('click')
@@ -133,7 +133,7 @@ describe('model', () => {
     )
 
     const container = wrapper.get('.tag-group-container')
-    const tags = container.findAll('.tag')
+    const tags = container.findAll('.tag-wrapper')
 
     await tags[0].trigger('click')
     const one = wrapper.emitted('update:modelValue')

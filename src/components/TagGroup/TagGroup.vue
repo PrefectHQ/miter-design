@@ -76,7 +76,6 @@ export default defineComponent({
               mergeProps(
                 {
                   tabIndex: 0,
-                  class: ['tag-container'],
                   hovered: true,
                   outlined: this.value_.includes(tag.props?.value)
                     ? false
@@ -98,7 +97,6 @@ export default defineComponent({
             mergeProps({
               tabIndex: 0,
               hovered: true,
-              class: ['tag-container'],
               outlined: this.value_.includes(i) ? false : true,
               value: i,
               onClick: ($e: Event) => this.handleTagClick($e, i)
@@ -112,13 +110,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style>
-@media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-    .tag-container {
-      outline: none;
-    }
-  }
-}
-</style>

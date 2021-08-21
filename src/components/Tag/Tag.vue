@@ -1,9 +1,7 @@
 <template>
-  <span :class="shadow && 'shadowWrapper'">
-    <div class="tag" :class="classList">
-      <span data-test="default"> <slot /></span>
-    </div>
-  </span>
+  <div class="tag-wrapper" :class="classList">
+    <span class="tag" data-test="default"> <slot /></span>
+  </div>
 </template>
 
 <script lang="ts">
@@ -15,6 +13,7 @@ class Props {
   disabled = prop<boolean>({ default: false })
   shadow = prop<boolean>({ default: false })
   hovered = prop<boolean>({ default: false })
+  elevated = prop<boolean>({ default: false })
 }
 
 @Options({})
@@ -24,6 +23,7 @@ export default class Tag extends Vue.with(Props) {
       ...(this.disabled ? ['disabled'] : []),
       ...(this.outlined ? ['outlined'] : []),
       ...(this.hovered ? ['hovered'] : []),
+      ...(this.elevated ? ['elevated'] : []),
       this.color
     ]
   }

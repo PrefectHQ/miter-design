@@ -20,9 +20,7 @@ describe('color prop', () => {
       props: { color: 'primary' }
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).toContain('primary')
+    expect(wrapper.classes()).toContain('primary')
   })
 
   test('check if the computed style contains the color prop if updated', async () => {
@@ -38,8 +36,7 @@ describe('color prop', () => {
       props: {}
     })
 
-    const tag = wrapper.get('.tag')
-    expect(tag.classes()).not.toContain('primary')
+    expect(wrapper.classes()).not.toContain('primary')
   })
 })
 
@@ -51,9 +48,7 @@ describe('disabled prop', () => {
       }
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).toContain('disabled')
+    expect(wrapper.classes()).toContain('disabled')
   })
 
   test('check if the computed style contains the disabled prop if updated', async () => {
@@ -69,9 +64,7 @@ describe('disabled prop', () => {
       props: {}
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).not.toContain('disabled')
+    expect(wrapper.classes()).not.toContain('disabled')
   })
 })
 
@@ -83,9 +76,7 @@ describe('outlined prop', () => {
       }
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).toContain('outlined')
+    expect(wrapper.classes()).toContain('outlined')
   })
 
   test('check if the computed style contains the outline prop if updated', async () => {
@@ -101,9 +92,7 @@ describe('outlined prop', () => {
       props: {}
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).not.toContain('outlined')
+    expect(wrapper.classes()).not.toContain('outlined')
   })
 })
 
@@ -115,9 +104,7 @@ describe('hovered prop', () => {
       }
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).toContain('hovered')
+    expect(wrapper.classes()).toContain('hovered')
   })
 
   test('check if the computed style contains the hovered prop if updated', async () => {
@@ -133,8 +120,6 @@ describe('hovered prop', () => {
       props: {}
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).not.toContain('hovered')
+    expect(wrapper.classes()).not.toContain('hovered')
   })
 })
