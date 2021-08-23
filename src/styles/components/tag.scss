@@ -46,8 +46,9 @@
       transition: background-color 0s, clip-path 0s !important;
     }
 
-    &.hovered:hover > .tag {
-      background-color: variables.$grey-5;
+    &.hovered:hover,
+    &.hovered:focus > .tag {
+      filter: brightness(0.98);
     }
   }
 
@@ -74,21 +75,16 @@
       }
 
       &:not(.outlined) {
-        &.hovered:hover {
+        &.hovered:hover,
+        &.hovered:focus {
           filter: brightness(0.9);
         }
       }
 
-      &.outlined {
-        > .tag {
-          border-color: $color;
-          color: $color;
-          background-color: variables.$white;
-        }
-
-        &.hovered:hover > .tag {
-          background-color: variables.$grey-5;
-        }
+      &.outlined > .tag {
+        border-color: $color;
+        color: $color;
+        background-color: variables.$white;
       }
     }
   }
