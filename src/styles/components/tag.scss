@@ -76,7 +76,8 @@
 
       &:not(.outlined) {
         &.hovered:hover,
-        &.hovered:focus {
+        &.hovered:focus,
+        &.hovered:active {
           filter: brightness(0.9);
         }
       }
