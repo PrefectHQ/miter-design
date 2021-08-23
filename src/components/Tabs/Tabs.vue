@@ -32,7 +32,9 @@ export default defineComponent({
   data() {
     return {
       value_: this.value || this.modelValue,
-      tabsContainer: null
+      tabsContainer: null,
+      showLeft: false,
+      showRight: false
     }
   },
   methods: {
@@ -50,9 +52,31 @@ export default defineComponent({
 
       return e
     },
-    onScroll(e: Event) {
-      console.log(e)
+    handleOverflowUpdate(target: HTMLDivElement) {
+      this.showLeft = target.scrollLeft > 0
+      this.showRight =
+        target.scrollLeft + target.clientWidth < target.scrollWidth
+    },
+    scrollLeft() {
+      const target = this.$refs['tabs-container'] as HTMLDivElement
+      this.$refs['tabs-container'].scroll({
+        left: target.scrollLeft - target.clientWidth,
+        behavior: 'smooth'
+      })
+    },
+    scrollRight() {
+      const target = this.$refs['tabs-container'] as HTMLDivElement
+      this.$refs['tabs-container'].scroll({
+        left: target.scrollLeft + target.clientWidth,
+        behavior: 'smooth'
+      })
     }
+  },
+  updated() {
+    this.handleOverflowUpdate(this.$refs['tabs-container'] as HTMLDivElement)
+  },
+  mounted() {
+    this.handleOverflowUpdate(this.$refs['tabs-container'] as HTMLDivElement)
   },
   render() {
     const slottedItems = this.$slots.default?.()
@@ -108,48 +132,57 @@ export default defineComponent({
       ]
     }
 
-    return h(
+    const tabsContainer = h(
+      'div',
+      {
+        ref: 'tabs-container',
+        class: [
+          'tabs-container',
+          `tab-${activeIndex}-active`,
+          ...computedProps
+        ],
+        onscroll: (e: Event) => {
+          const target = e?.target as HTMLDivElement
+          if (!target) return
+          this.handleOverflowUpdate(target)
+        }
+      },
+      children
+    )
+
+    let leftArrow, rightArrow
+    if (this.showLeft)
+      leftArrow = h(
+        'button',
+        { class: ['overflow-button', 'left'], onClick: this.scrollLeft },
+        [h('i', { class: ['pi', 'pi-Arrow-Left', 'pi-lg'] })]
+      )
+
+    if (this.showRight)
+      rightArrow = h(
+        'button',
+        { class: ['overflow-button', 'right'], onClick: this.scrollRight },
+        [h('i', { class: ['pi', 'pi-Arrow-Right', 'pi-lg'] })]
+      )
+
+    const borderContainer = h(
+      'div',
+      {
+        class: ['border-container']
+      },
+
+      [rightArrow, tabsContainer, leftArrow]
+    )
+
+    const wrapper = h(
       'div',
       {
         class: ['component-wrapper']
-        // onscroll: ($event: Event) => console.log('clicked', $event.target)
       },
-      [
-        h(
-          'div',
-          {
-            class: ['border-container']
-            // onscroll: ($event: Event) => console.log('clicked', $event.target)
-          },
-
-          [
-            [
-              h('button', { class: ['overflow-button'] }, [
-                h('i', { class: ['pi', 'pi-Arrow-Left', 'pi-lg'] })
-              ])
-            ],
-            h(
-              'div',
-              {
-                class: [
-                  'tabs-container',
-                  `tab-${activeIndex}-active`,
-                  ...computedProps
-                ]
-                // onscroll: ($event: Event) =>
-                //   console.log('clicked', $event.target)
-              },
-              children
-            ),
-            [
-              h('button', { class: ['overflow-button'] }, [
-                h('i', { class: ['pi', 'pi-Arrow-Right', 'pi-lg'] })
-              ])
-            ]
-          ]
-        )
-      ]
+      [borderContainer]
     )
+
+    return wrapper
   }
 })
 </script>

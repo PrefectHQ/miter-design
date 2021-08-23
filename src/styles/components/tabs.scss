@@ -48,11 +48,11 @@
     transition: all 150ms;
     z-index: 1;
 
-    &:first-of-type {
+    &.left {
       left: 0;
     }
 
-    &:last-of-type {
+    &.right {
       @include mixins.miter-clip(2, 2);
       right: 0;
     }
@@ -72,6 +72,7 @@
     height: 100%;
     margin-right: 16px;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
 
     position: relative;
 
