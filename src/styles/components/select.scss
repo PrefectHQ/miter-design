@@ -32,6 +32,7 @@
       color: variables.$text--primary;
     }
     i {
+      @include mixins.input-transition;
       color: variables.$grey-1;
     }
     &.disabled {
@@ -64,11 +65,6 @@
       @include mixins.miter(2);
       margin-top: -16px;
       padding-top: 16px;
-      &:first-child {
-        height: 74px;
-        margin-top: -16px;
-        padding-top: 16px;
-      }
     }
     &.openUp {
       bottom: 58px;
@@ -113,6 +109,11 @@
   cursor: pointer;
   font-size: 16px;
   line-height: 20px;
+  &:first-of-type {
+    height: 74px;
+    margin-top: -16px;
+    padding-top: 16px;
+  }
   i {
     color: variables.$grey-4;
   }

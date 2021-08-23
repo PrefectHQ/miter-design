@@ -1,5 +1,6 @@
 <template>
   <div
+    tabindex="0"
     @click="choose"
     @mouseenter="handleFocus"
     @mouseleave="handleBlur"
@@ -26,8 +27,8 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'Option',
   emits: {
-    'update:modelValue'(...args: any[]) {
-      return { ...args }
+    click(e: Event, ...args: any[]) {
+      return { e, ...args }
     }
   },
   props: {
@@ -38,11 +39,14 @@ export default defineComponent({
     icon: {
       type: String,
       default: ''
+    },
+    selected: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      selected: false,
       hovered: false
     }
   },
@@ -52,9 +56,9 @@ export default defineComponent({
     }
   },
   methods: {
-    choose(): void {
-      this.selected = true
-      this.$emit('update:modelValue', this.value)
+    choose(e: Event): Event {
+      this.$emit('click', e, this.value)
+      return e
     },
 
     handleFocus(): void {

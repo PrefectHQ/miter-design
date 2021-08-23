@@ -17,14 +17,7 @@
       :class="classList"
       @click="!disabled ? (active = !active) : null"
     >
-      <span
-        ><i
-          v-if="icon && selected.length > 0"
-          :class="iconClass"
-          class="pi pi-1x mr-1"
-        ></i
-        >{{ selected || placeholder }}</span
-      >
+      <span>{{ selected || placeholder }}</span>
       <i class="pi pi-Arrow-Down pi-lg"></i>
     </div>
     <div class="list" v-show="active" :class="{ openUp: openUp }">
@@ -37,44 +30,15 @@
           @input="runSearch(searchTerm)"
           @blur="handleBlur($event)"
       /></div>
-      <div v-if="title.length > 0" class="title">{{ title }}</div>
-      <div
-        v-for="(option, i) in filteredOptions"
-        :key="i"
-        @click="choose(option)"
-        @mouseenter="handleMouseEnterOption(i)"
-        @mouseleave="handleMouseLeaveOption(i)"
-        @keydown.enter.space="choose(option)"
-        @keydown.up.prevent="selectPrevious"
-        @keydown.down.prevent="selectNext"
-        class="option"
-        :class="{
-          selected: option === selected,
-          hovered: hoveredStates[i]
-        }"
-      >
-        <span
-          ><i v-if="icon" :class="iconClass" class="pi pi-1x mr-1"></i>
-          {{ option }}</span
-        >
-        <i v-if="option === selected" class="pi pi-Checkmark pi-lg"></i>
-      </div>
-      <Option
-        v-for="(option, i) in testOptions"
-        :key="i"
-        :value="option"
-        icon="Fire"
-      />
+      <slot />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Option from './Option.vue'
 
 export default defineComponent({
-  components: { Option },
   name: 'Select',
   emits: {
     'update:modelValue'(...args: any[]) {
@@ -86,10 +50,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    testOptions: {
-      type: Array,
-      default: () => ['1', '2']
-    },
     options: {
       type: Array,
       default: () => ['Option 1', 'Option 2']
@@ -97,14 +57,6 @@ export default defineComponent({
     placeholder: {
       type: String,
       default: 'Choose an Option'
-    },
-    title: {
-      type: String,
-      default: ''
-    },
-    icon: {
-      type: String,
-      default: ''
     },
     search: {
       type: Boolean,
@@ -116,15 +68,12 @@ export default defineComponent({
     }
   },
   data() {
-    let hoveredStates: boolean[] = []
-    this.options.forEach(() => hoveredStates.push(false))
     return {
       hovered: false,
       active: false,
       selected: '',
       searchTerm: '',
-      filteredOptions: this.options,
-      hoveredStates
+      filteredOptions: this.options
     }
   },
   computed: {
@@ -136,11 +85,8 @@ export default defineComponent({
         ...(this.selected.length > 0 ? ['selected'] : [])
       ]
     },
-    iconClass(): string | null {
-      return this.icon.length > 0 ? `pi-${this.icon}` : null
-    },
     activeOption(): number {
-      return this.hoveredStates.indexOf(true)
+      return 0
     },
     prevOption(): number {
       const next = this.activeOption - 1
@@ -168,15 +114,6 @@ export default defineComponent({
       this.filteredOptions = this.options.filter((option) =>
         option.toLowerCase().includes(searchValue.toLowerCase())
       )
-    },
-
-    handleMouseEnterOption(i: number): void {
-      if (this.disabled) return
-      this.hoveredStates[i] = true
-    },
-
-    handleMouseLeaveOption(i: number): void {
-      this.hoveredStates[i] = false
     },
 
     handleKeydown(): void {
