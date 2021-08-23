@@ -32,13 +32,23 @@ export default defineComponent({
   },
   data() {
     return {
-      value_: this.value || this.modelValue
+      value_: this.value || this.modelValue,
+      tabsContainer: null
     }
   },
   methods: {
     handleTabClick(e: Event, ...args: any[]): Event {
       this.value_ = args[0]
       this.$emit('update:modelValue', this.value_)
+
+      const target: HTMLDivElement = e.target as HTMLDivElement
+      // TODO: Polyfill this for Safari, since scrollIntoViewOptions aren't supported in Safari
+      target?.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest'
+      })
+
       return e
     }
   },
@@ -100,9 +110,25 @@ export default defineComponent({
     return h(
       'div',
       {
-        class: ['tabs-container', `tab-${activeIndex}-active`, ...computedProps]
+        class: ['component-wrapper']
       },
-      children
+      [
+        h(
+          'div',
+          { class: ['border-container'] },
+          h(
+            'div',
+            {
+              class: [
+                'tabs-container',
+                `tab-${activeIndex}-active`,
+                ...computedProps
+              ]
+            },
+            children
+          )
+        )
+      ]
     )
   }
 })
