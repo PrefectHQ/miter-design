@@ -5,6 +5,14 @@
   @include mixins.miter-shadow;
 }
 
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    .tag-wrapper {
+      outline: none;
+    }
+  }
+}
+
 .tag-wrapper {
   @include mixins.miter;
 
