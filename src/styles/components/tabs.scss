@@ -27,7 +27,7 @@
   .border-container {
     // Adding this gives consistent spacing for the miter cut
     border-right: 2px solid transparent;
-    border-bottom: 0px solid transparent;
+    border-bottom: 2px solid variables.$grey-4;
     position: relative;
     width: 100%;
 
@@ -40,9 +40,12 @@
   .tabs-container {
     @include hide-scrollbars;
 
+    // This is used to offset the bottom border of the container element
+    bottom: -2px;
     height: 100%;
     overflow: hidden;
     overflow-x: auto;
+
     position: relative;
 
     &::after {
