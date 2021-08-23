@@ -56,6 +56,15 @@ export default defineComponent({
 
       return e
     },
+    handleTabFocus(e: Event, ...args: any[]) {
+      const target: HTMLDivElement = e.target as HTMLDivElement
+      // TODO: Polyfill this for Safari, since scrollIntoViewOptions aren't supported in Safari
+      target?.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest'
+      })
+    },
     handleOverflowUpdate(target: HTMLDivElement) {
       this.showLeft = target.scrollLeft > 0
       this.showRight =
@@ -110,7 +119,8 @@ export default defineComponent({
                 {
                   active: this.value_ == ti.props?.href,
                   class: computedProps,
-                  onClick: onClick
+                  onClick: onClick,
+                  onfocus: this.handleTabFocus
                 },
                 { ...ti.props }
               )
@@ -124,9 +134,10 @@ export default defineComponent({
           return h(
             Tab,
             mergeProps({
+              active: this.value_ == i,
               href: i,
               onClick: onClick,
-              active: this.value_ == i
+              onfocus: this.handleTabFocus
             }),
             () => `Tab ${i + 1}`
           )
@@ -138,6 +149,7 @@ export default defineComponent({
       'div',
       {
         ref: 'tabsContainer',
+        tabindex: -1,
         class: [
           'tabs-container',
           `tab-${activeIndex}-active`,
@@ -159,7 +171,8 @@ export default defineComponent({
         {
           'aria-label': 'Arrow Left',
           class: ['overflow-button', 'left'],
-          onClick: this.scrollLeft
+          onClick: this.scrollLeft,
+          tabindex: -1
         },
         [h('i', { class: ['pi', 'pi-Arrow-Left', 'pi-lg'] })]
       )
@@ -170,7 +183,8 @@ export default defineComponent({
         {
           'aria-label': 'Arrow Right',
           class: ['overflow-button', 'right'],
-          onClick: this.scrollRight
+          onClick: this.scrollRight,
+          tabindex: -1
         },
         [h('i', { class: ['pi', 'pi-Arrow-Right', 'pi-lg'] })]
       )
