@@ -1,6 +1,6 @@
 <template>
   <button
-    class="cursor-pointer button"
+    class="cursor-pointer button miter"
     :class="classList"
     :disabled="disabled"
     @mouseenter="handleMouseEnter"
@@ -12,11 +12,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <div>
-      <span data-test="default">
-        <slot />
-      </span>
-    </div>
+    <span data-test="default"><slot /></span>
   </button>
 </template>
 

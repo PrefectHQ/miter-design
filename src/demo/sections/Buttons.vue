@@ -10,7 +10,7 @@
       <Button
         v-for="style in buttonStyles"
         :key="style"
-        class="ml-2 text-capitalize"
+        class="ml-2"
         :color="style"
         :disabled="state == 'disabled'"
         @click="handleClick"
@@ -59,5 +59,5 @@ export default class Buttons extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/components/button';
+// @use '@/styles/components/button';
 </style>
