@@ -49,6 +49,9 @@ export default defineComponent({
       })
 
       return e
+    },
+    onScroll(e: Event) {
+      console.log(e)
     }
   },
   render() {
@@ -109,22 +112,41 @@ export default defineComponent({
       'div',
       {
         class: ['component-wrapper']
+        // onscroll: ($event: Event) => console.log('clicked', $event.target)
       },
       [
         h(
           'div',
-          { class: ['border-container'] },
-          h(
-            'div',
-            {
-              class: [
-                'tabs-container',
-                `tab-${activeIndex}-active`,
-                ...computedProps
-              ]
-            },
-            children
-          )
+          {
+            class: ['border-container']
+            // onscroll: ($event: Event) => console.log('clicked', $event.target)
+          },
+
+          [
+            [
+              h('button', { class: ['overflow-button'] }, [
+                h('i', { class: ['pi', 'pi-Arrow-Left', 'pi-lg'] })
+              ])
+            ],
+            h(
+              'div',
+              {
+                class: [
+                  'tabs-container',
+                  `tab-${activeIndex}-active`,
+                  ...computedProps
+                ]
+                // onscroll: ($event: Event) =>
+                //   console.log('clicked', $event.target)
+              },
+              children
+            ),
+            [
+              h('button', { class: ['overflow-button'] }, [
+                h('i', { class: ['pi', 'pi-Arrow-Right', 'pi-lg'] })
+              ])
+            ]
+          ]
         )
       ]
     )

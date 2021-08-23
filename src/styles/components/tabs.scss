@@ -36,6 +36,34 @@
     }
   }
 
+  .overflow-button {
+    background-color: variables.$white;
+
+    border: none;
+    cursor: pointer;
+    height: calc(100% - 2px);
+    padding: 4px;
+    position: absolute;
+    top: 2px;
+    transition: all 150ms;
+    z-index: 1;
+
+    &:first-of-type {
+      left: 0;
+    }
+
+    &:last-of-type {
+      @include mixins.miter-clip(2, 2);
+      right: 0;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: variables.$grey-3;
+      outline: none;
+    }
+  }
+
   .tabs-container {
     @include hide-scrollbars;
 
