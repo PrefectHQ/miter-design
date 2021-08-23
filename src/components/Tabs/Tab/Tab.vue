@@ -3,6 +3,7 @@
     class="tab"
     :class="classes"
     :disabled="disabled"
+    :title="title"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousedown="handleMouseDown"
@@ -12,9 +13,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <div>
-      <slot> Tab </slot>
-    </div>
+    <slot> Tab </slot>
   </button>
 </template>
 
@@ -41,7 +40,8 @@ export default defineComponent({
   data() {
     return {
       focused: false as boolean,
-      hovered: false
+      hovered: false,
+      title: null
     }
   },
   computed: {
@@ -53,6 +53,13 @@ export default defineComponent({
         ...(this.disabled ? ['disabled'] : [])
       ]
     }
+  },
+  mounted() {
+    // TODO: This could probably be improved but doesn't preclude consumers from setting aria attributes explicitly
+    // This sets the button title to the first text node we find in the default slot
+    const children = this.$slots?.default?.()
+    const child = children?.find((child) => child?.el?.nodeName == '#text')
+    this.title = child?.el?.textContent
   },
   methods: {
     handleMouseDown(): void {

@@ -3,7 +3,7 @@
     <h3>Tabs</h3>
 
     <div class="container">
-      <Tabs v-model="tab" class="mt-5" :dense="dense">
+      <Tabs v-model="tab" class="mt-5">
         <Tab href="1">
           <i class="pi pi-Earth pi-lg mr-1" />
           Tab 1

@@ -29,7 +29,6 @@
     border-right: 2px solid transparent;
     border-bottom: 2px solid variables.$grey-4;
     position: relative;
-    width: 100%;
 
     // This is necessary because the miter mixin inherits the entire border property but we want only the bottom border
     &:after {

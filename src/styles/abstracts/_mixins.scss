@@ -19,6 +19,12 @@ $shadows: (
   transition: all 250ms;
 }
 
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @mixin miter-original($i, $inner: false) {
   clip-path: polygon(
     0 0,
