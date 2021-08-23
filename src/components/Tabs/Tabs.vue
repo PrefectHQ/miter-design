@@ -156,14 +156,22 @@ export default defineComponent({
     if (this.showLeft)
       leftArrow = h(
         'button',
-        { class: ['overflow-button', 'left'], onClick: this.scrollLeft },
+        {
+          'aria-label': 'Arrow Left',
+          class: ['overflow-button', 'left'],
+          onClick: this.scrollLeft
+        },
         [h('i', { class: ['pi', 'pi-Arrow-Left', 'pi-lg'] })]
       )
 
     if (this.showRight)
       rightArrow = h(
         'button',
-        { class: ['overflow-button', 'right'], onClick: this.scrollRight },
+        {
+          'aria-label': 'Arrow Right',
+          class: ['overflow-button', 'right'],
+          onClick: this.scrollRight
+        },
         [h('i', { class: ['pi', 'pi-Arrow-Right', 'pi-lg'] })]
       )
 

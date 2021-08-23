@@ -53,8 +53,8 @@ Overflow.args = {
   content: () => {
     const icons = [
       'Earth',
-      'Heart',
-      'Warning',
+      'Tag-with-Heart',
+      'Bug-Warning',
       'Compass',
       'Book',
       'Bug',
