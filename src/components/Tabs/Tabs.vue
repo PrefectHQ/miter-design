@@ -5,7 +5,8 @@ import {
   mergeProps,
   VNode,
   RendererNode,
-  RendererElement
+  RendererElement,
+  ref
 } from 'vue'
 import Tab from './Tab/Tab.vue'
 
@@ -32,10 +33,13 @@ export default defineComponent({
   data() {
     return {
       value_: this.value || this.modelValue,
-      tabsContainer: null,
       showLeft: false,
       showRight: false
     }
+  },
+  setup() {
+    const tabsContainer = ref<HTMLDivElement>()
+    return { tabsContainer }
   },
   methods: {
     handleTabClick(e: Event, ...args: any[]): Event {
@@ -58,25 +62,23 @@ export default defineComponent({
         target.scrollLeft + target.clientWidth < target.scrollWidth
     },
     scrollLeft() {
-      const target = this.$refs['tabs-container'] as HTMLDivElement
-      this.$refs['tabs-container'].scroll({
-        left: target.scrollLeft - target.clientWidth,
+      this.tabsContainer?.scroll({
+        left: this.tabsContainer.scrollLeft - this.tabsContainer.clientWidth,
         behavior: 'smooth'
       })
     },
     scrollRight() {
-      const target = this.$refs['tabs-container'] as HTMLDivElement
-      this.$refs['tabs-container'].scroll({
-        left: target.scrollLeft + target.clientWidth,
+      this.tabsContainer?.scroll({
+        left: this.tabsContainer.scrollLeft + this.tabsContainer.clientWidth,
         behavior: 'smooth'
       })
     }
   },
   updated() {
-    this.handleOverflowUpdate(this.$refs['tabs-container'] as HTMLDivElement)
+    this.handleOverflowUpdate(this.tabsContainer!)
   },
   mounted() {
-    this.handleOverflowUpdate(this.$refs['tabs-container'] as HTMLDivElement)
+    this.handleOverflowUpdate(this.tabsContainer!)
   },
   render() {
     const slottedItems = this.$slots.default?.()
@@ -135,7 +137,7 @@ export default defineComponent({
     const tabsContainer = h(
       'div',
       {
-        ref: 'tabs-container',
+        ref: 'tabsContainer',
         class: [
           'tabs-container',
           `tab-${activeIndex}-active`,
