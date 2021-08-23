@@ -22,8 +22,7 @@ export default defineComponent({
       default: 0
     },
     color: { type: String, default: () => 'primary' },
-    outlined: Boolean,
-    dense: Boolean
+    outlined: Boolean
   },
   emits: {
     'update:modelValue'(...args: any[]) {
@@ -66,8 +65,7 @@ export default defineComponent({
 
     const computedProps = [
       ...(this.color ? [this.color] : []),
-      ...(this.outlined ? ['outlined'] : []),
-      ...(this.dense ? ['dense'] : [])
+      ...(this.outlined ? ['outlined'] : [])
     ]
 
     const onClick = ($e: Event, ...args: any): Event =>
