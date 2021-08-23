@@ -59,7 +59,7 @@ export default defineComponent({
     // This sets the button title to the first text node we find in the default slot
     const children = this.$slots?.default?.()
     const child = children?.find((child) => child?.el?.nodeName == '#text')
-    this.title = child?.el?.textContent
+    this.title = child?.el?.textContent?.trim()
   },
   methods: {
     handleMouseDown(): void {
