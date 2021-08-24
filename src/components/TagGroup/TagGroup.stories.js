@@ -1,4 +1,4 @@
-import TagGroup from './TagGroup.vue';
+import TagGroup from './TagGroup.vue'
 import Tag from '../Tag/Tag.vue'
 import { reactive } from 'vue'
 import { withDesign } from 'storybook-addon-designs'
@@ -13,8 +13,7 @@ export default {
       url: 'https://www.figma.com/file/HJgj2eHBaqt1SAYruZNjQQ/Prefect?node-id=1080%3A4411'
     }
   }
-};
-
+}
 
 const Template = (args) => ({
   components: { TagGroup, Tag },
@@ -28,23 +27,30 @@ const Template = (args) => ({
   `
 })
 
+export const Mandatory = Template.bind({})
+Mandatory.args = {
+  modelValue: ['0'],
+  mandatory: true,
+  content:
+    '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-101">Tag 2</Tag> <Tag value="2">Tag 3</Tag>'
+}
+
 export const Single = Template.bind({})
 Single.args = {
-  modelValue: ["0"],
+  modelValue: ['0'],
   content:
     '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-101">Tag 2</Tag>'
 }
 
 export const Multiple = Template.bind({})
 Multiple.args = {
-  modelValue: ["0", "1"],
-  multiple: true, 
+  modelValue: ['0', '1'],
+  multiple: true,
   content:
     '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-101">Tag 2</Tag> <Tag value="2">Tag 3</Tag>'
 }
 
-
 export const Default = Template.bind({})
 Default.args = {
-  modelValue: [0],
+  modelValue: [0]
 }
