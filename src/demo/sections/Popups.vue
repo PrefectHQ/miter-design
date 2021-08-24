@@ -23,7 +23,7 @@
         </template>
         <template v-slot:actions>
           <component :is="'Actions'">
-            <Button color="primary">Action</Button>
+            <Button @click="actionClicked" color="primary">Action</Button>
           </component>
         </template>
       </Popup>
@@ -63,9 +63,9 @@ export default class Popup extends Vue {
   openPopup(popup: { value: Boolean }): void {
     popup.value = true
   }
-  // closePopup(popup: { value: Boolean }): void {
-  //   popup.value = true
-  // }
+  actionClicked(): void {
+    console.log('pop up action button clicked')
+  }
 }
 </script>
 
