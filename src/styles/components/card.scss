@@ -6,15 +6,19 @@
 }
 
 .card {
-  @include mixins.miter(2);
-  @include mixins.miter-border(2, 1, variables.$grey-4, 4);
+  @include mixins.miter(2, 1);
+
+  > div {
+    border: 1px solid variables.$grey-4;
+    border-radius: 4px;
+  }
 
   display: block;
   background-color: variables.$white;
   height: min-content;
   position: relative;
 
-  > section {
+  > div > section {
     align-content: flex-start;
     background-color: variables.$white;
     border-radius: 3px;

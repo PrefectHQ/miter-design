@@ -1,6 +1,6 @@
 <template>
-  <span :class="shadow && 'shadowWrapper'">
-    <div class="card">
+  <div class="card">
+    <div>
       <header v-if="$slots.header">
         <slot name="header" />
       </header>
@@ -20,7 +20,7 @@
         </section>
       </section>
     </div>
-  </span>
+  </div>
 </template>
 
 <script lang="ts">
