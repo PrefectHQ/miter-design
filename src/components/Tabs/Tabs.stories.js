@@ -36,7 +36,7 @@ const Template = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-  modelValue: 0,
+  modelValue: 1,
   content: `
 <Tab href="1">
   <i class="pi pi-Earth pi-lg mr-1" />
