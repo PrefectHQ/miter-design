@@ -1,2 +1,3 @@
+- Add a pop up component - [#30](https://github.com/PrefectHQ/miter-design/pull/30)
 - Update miter mixin to make it easier - [#23](https://github.com/PrefectHQ/miter-design/pull/23)
 - Add CHANGELOG.md - [#16](https://github.com/PrefectHQ/miter-design/pull/16)
