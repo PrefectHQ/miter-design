@@ -5,7 +5,8 @@
       class="modal-backdrop"
       @click.self="closePopUp"
       :style="position"
-      ><Card :class="positionClass" :height="height" :width="width">
+    >
+      <Card :class="positionClass" :height="height" :width="width">
         <h4 class="h4-bottom">
           {{ title }}
           <span class="close-icon" @click="closePopUp">
@@ -28,12 +29,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
-interface event {
-  target: {
-    value: string
-  }
-}
 
 export default defineComponent({
   name: 'Popcontent',
