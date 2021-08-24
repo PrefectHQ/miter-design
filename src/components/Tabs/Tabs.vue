@@ -111,22 +111,27 @@ export default defineComponent({
 
     if (slottedItems) {
       children = [
-        slottedItems?.map(
-          (ti: RendererNode | RendererElement | { [key: string]: any }) => {
-            return h(
-              ti,
-              mergeProps(
-                {
-                  active: this.value_ == ti.props?.href,
-                  class: computedProps,
-                  onClick: onClick,
-                  onfocus: this.handleTabFocus
-                },
-                { ...ti.props }
+        slottedItems
+          ?.filter(
+            (ti: RendererNode | RendererElement | { [key: string]: any }) =>
+              ti.type.name == 'Tab'
+          )
+          .map(
+            (ti: RendererNode | RendererElement | { [key: string]: any }) => {
+              return h(
+                ti,
+                mergeProps(
+                  {
+                    active: this.value_ == ti.props?.href,
+                    class: computedProps,
+                    onClick: onClick,
+                    onfocus: this.handleTabFocus
+                  },
+                  { ...ti.props }
+                )
               )
-            )
-          }
-        )
+            }
+          )
       ]
     } else {
       children = [
