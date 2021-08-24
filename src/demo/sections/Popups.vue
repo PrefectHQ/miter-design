@@ -12,7 +12,7 @@
         :width="popup.width"
       >
         <template v-slot:activate>
-          <Button color="primary" @click="openPopup(popup)">
+          <Button color="primary" @click="openPopup(popup)" class="ml-1">
             Open {{ popup.position }} Popup
           </Button>
         </template>

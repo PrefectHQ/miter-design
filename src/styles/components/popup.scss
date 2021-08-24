@@ -9,11 +9,6 @@
     display: flex;
     align-items: var(--position-place);
     justify-content: var(--position-place);
-    
-
-    .modal {
-        @include mixins.miter-border(2, 0, variables.$grey-4, 4);
-    }
 }
 
 .close-icon {
