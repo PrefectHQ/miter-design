@@ -3,6 +3,8 @@ import { h } from 'vue'
 import Tabs from './Tabs.vue'
 import Tab from './Tab/Tab.vue'
 
+window.HTMLElement.prototype.scrollIntoView = jest.fn()
+
 const factoryMount = (props = {}, slots = {}) => {
   return mount(Tabs, {
     props: {
