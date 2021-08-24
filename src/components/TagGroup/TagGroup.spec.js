@@ -94,6 +94,52 @@ describe('props', () => {
       expect(wrapper.props().multiple).toBe(true)
     })
   })
+
+  test('mandatory prop is true when passed and tags are not able to be unselected', async () => {
+    const wrapper = factoryMount(
+      { mandatory: true },
+      {
+        default: () =>
+          ['one', 'two'].map((t, i) => {
+            return h(Tag, { value: i }, () => t)
+          })
+      }
+    )
+    const container = wrapper.get('.tag-group-container')
+    const tags = container.findAll('.tag-wrapper')
+
+    await tags[0].trigger('click')
+    await tags[0].trigger('click')
+
+    const emit = wrapper.emitted('update:modelValue')
+
+    expect(emit[0][0]).toHaveLength(1)
+    expect(emit[0][0][0]).toEqual(0)
+    expect(wrapper.props().mandatory).toBe(true)
+  })
+
+  test('mandatory prop is false when not passed and tags are able to be unselected', async () => {
+    const wrapper = factoryMount(
+      {},
+      {
+        default: () =>
+          ['one', 'two'].map((t, i) => {
+            return h(Tag, { value: i }, () => t)
+          })
+      }
+    )
+    const container = wrapper.get('.tag-group-container')
+    const tags = container.findAll('.tag-wrapper')
+
+    await tags[0].trigger('click')
+    await tags[0].trigger('click')
+
+    const emit = wrapper.emitted('update:modelValue')
+
+    expect(emit[0][0]).toHaveLength(0)
+    expect(emit[0][0]).toEqual([])
+    expect(wrapper.props().mandatory).toBe(false)
+  })
 })
 
 describe('model', () => {

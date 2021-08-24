@@ -26,6 +26,10 @@ export default defineComponent({
     multiple: {
       type: Boolean,
       default: false
+    },
+    mandatory: {
+      type: Boolean,
+      default: false
     }
   },
   emits: {
@@ -48,7 +52,7 @@ export default defineComponent({
         } else {
           this.value_[0] = val
         }
-      } else {
+      } else if (!this.mandatory) {
         this.value_.splice(index, 1)
       }
     },
