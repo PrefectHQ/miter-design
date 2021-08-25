@@ -2,34 +2,38 @@
   <div>
     <h3>Selects</h3>
     <div class="d-flex">
-      <Select
+      <!-- <Select
         class="my-2 mr-2"
         name="without-icon"
         :options="options"
         v-model="selected1"
       >
         <Option v-for="(option, i) in options" :key="i" :value="option" />
-      </Select>
+      </Select> -->
       <Select
         class="my-2 mr-2"
         name="with-icon"
-        icon="Face-ID"
         placeholder="This one has icons!"
         search
         openUp
         :options="options"
         v-model="selected2"
       >
-        <Title title="Available Options" />
-
-        <Option
-          v-for="(option, i) in options"
-          :key="i"
-          :value="option"
-          icon="Fire"
-        />
-        <Title title="More Options" />
-        <Option value="Another" />
+        <OptionGroup label="V-For Options">
+          <Option
+            v-for="(option, i) in options"
+            :key="i"
+            :value="option"
+            icon="Fire"
+          />
+        </OptionGroup>
+        <OptionGroup label="Single Options">
+          <Option value="1" /><Option value="2" /><Option value="3" />
+        </OptionGroup>
+        <OptionGroup label="Disabled Option" disabled>
+          <Option value="no click" />
+        </OptionGroup>
+        <OptionGroup label="No Options Here" />
       </Select>
       <Select
         class="my-2"
@@ -45,12 +49,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Select from '@/components/Select/Select.vue'
-import Title from '@/components/Select/Title.vue'
+import OptionGroup from '@/components/Select/OptionGroup.vue'
 import Option from '@/components/Select/Option.vue'
 
 export default defineComponent({
   name: 'Selects',
-  components: { Select, Title, Option },
+  components: { Select, OptionGroup, Option },
   data() {
     return {
       selected1: '',

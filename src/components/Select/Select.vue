@@ -104,12 +104,6 @@ export default defineComponent({
     }
   },
   methods: {
-    choose(option: string): void {
-      this.selected = option
-      this.$emit('update:modelValue', this.selected)
-      this.active = false
-    },
-
     runSearch(searchValue: string): void {
       this.filteredOptions = this.options.filter((option) =>
         option.toLowerCase().includes(searchValue.toLowerCase())
@@ -160,6 +154,7 @@ export default defineComponent({
     },
 
     handleBlur(event): void {
+      console.log(event)
       if (
         event.relatedTarget?.tagName === 'INPUT' ||
         event.relatedTarget?.classList.contains('active')

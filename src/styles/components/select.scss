@@ -130,4 +130,8 @@
       color: variables.$white;
     }
   }
+  &.disabled {
+    color: variables.$grey-4;
+    pointer-events: none;
+  }
 }

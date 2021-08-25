@@ -1,6 +1,5 @@
 <template>
   <div
-    tabindex="0"
     @click="choose"
     @mouseenter="handleFocus"
     @mouseleave="handleBlur"
@@ -43,6 +42,10 @@ export default defineComponent({
     selected: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -57,11 +60,13 @@ export default defineComponent({
   },
   methods: {
     choose(e: Event): Event {
+      console.log('click option', e)
       this.$emit('click', e, this.value)
       return e
     },
 
     handleFocus(): void {
+      if (this.disabled) return
       this.hovered = true
     },
 
