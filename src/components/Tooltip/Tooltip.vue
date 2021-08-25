@@ -1,9 +1,9 @@
 <template>
   <div class="tooltip-box">
-    <slot />
     <div class="tooltip">
       <span class="text">{{ text }}</span>
     </div>
+    <slot />
   </div>
 </template>
 
@@ -30,6 +30,12 @@ export default defineComponent({
 })
 </script>
 
+<style lang="scss" scoped>
+@use '../../styles/components/tooltip';
+</style>
+
+<!-- 
+
 <style scoped>
 .tooltip-box {
   position: relative;
@@ -41,35 +47,49 @@ export default defineComponent({
 }
 
 .tooltip {
-  color: #ffffff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 2px;
-
-  /* width: 120px; */
   width: 83px;
+  height: 34px;
+
+  color: black;
+  position: absolute;
+  bottom: 100%;
+
+  padding: 5px 0;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.7s;
+  background: #090422;
+  color: #ffffff;
+
   bottom: 100%;
   left: 50%;
-  margin-left: -40px;
-  margin-bottom: 7px;
+  transform: translate(-50%, -15%);
 
   opacity: 0;
   transition: opacity 0.7s;
 
-  position: absolute;
-  z-index: 1;
-
-  background: #090422;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .text::after {
-  content: ' ';
+  content: '';
   position: absolute;
+
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #090422;
   top: 100%;
   left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #090422 transparent transparent transparent;
+
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
 }
 </style>
+-->
