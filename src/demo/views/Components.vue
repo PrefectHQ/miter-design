@@ -10,6 +10,7 @@
     <Links class="mt-10" />
     <Tag class="mt-10" />
     <Avatar class="mt-10" />
+    <Tooltip class="mt-10" />
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import Links from '../sections/Links.vue'
 import Avatar from '../sections/Avatar.vue'
 import Tag from '../sections/Tag.vue'
 import Sliders from '../sections/Sliders.vue'
+import Tooltip from '../sections/Tooltip.vue'
 
 @Options({
   components: {
@@ -35,7 +37,8 @@ import Sliders from '../sections/Sliders.vue'
     Toggles,
     Sliders,
     Checkboxes,
-    Tag
+    Tag,
+    Tooltip
   }
 })
 export default class App extends Vue {}
