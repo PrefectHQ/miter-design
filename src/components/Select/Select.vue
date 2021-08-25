@@ -1,3 +1,207 @@
+<script lang="ts">
+import {
+  h,
+  defineComponent,
+  mergeProps,
+  VNode,
+  RendererNode,
+  RendererElement,
+  ref
+} from 'vue'
+import Option from './Option.vue'
+import OptionGroup from './OptionGroup.vue'
+
+export default defineComponent({
+  name: 'Select',
+  components: { Option, OptionGroup },
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    placeholder: {
+      type: String,
+      default: 'Choose an Option'
+    },
+    search: {
+      type: Boolean,
+      default: false
+    },
+    openUp: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      hovered: false,
+      active: false,
+      selected: '',
+      searchTerm: '',
+      filteredOptions: this.options
+    }
+  },
+  methods: {
+    handleOptionClick(e: Event, ...args: any[]): Event {
+      console.log('click optiongroup', e, args)
+      this.value_ = args[0]
+      this.$emit('update.modelValue', this.value_)
+      return e
+    },
+    handleFocus(): void {
+      if (this.disabled) return
+      this.hovered = true
+    },
+
+    handleBlur(event: Event): void {
+      console.log(event.relatedTarget)
+      if (
+        event.relatedTarget?.tagName === 'INPUT' ||
+        event.relatedTarget?.classList.contains('active')
+      )
+        return
+      this.hovered = false
+      this.active = false
+    },
+
+    handleMouseLeave(): void {
+      this.hovered = false
+    },
+    handleKeydown(event: Event): void {
+      event.preventDefault()
+      if (event.key === 'Enter' || event.code === 'Space') {
+        if (this.disabled) return
+        if (this.active) {
+          if (this.options[this.hoveredStates.indexOf(true)]) {
+            this.choose(this.options[this.hoveredStates.indexOf(true)])
+            return
+          } else {
+            this.active = !this.active
+            return
+          }
+        }
+        this.active = !this.active
+        if (this.active && this.selected.length > 0) {
+          const index = this.options.indexOf(this.selected)
+          this.hoveredStates[index] = true
+        } else {
+          this.hoveredStates[0] = true
+        }
+      } else if (event.key === 'Escape') {
+        this.active = false
+      } else if (event.key === 'ArrowUp') {
+        // selectPrevious
+      } else if (event.key === 'ArrowDown') {
+        //selectNext
+      }
+    },
+    runSearch(searchValue: string): void {
+      console.log('search')
+      this.filteredOptions = this.options.filter((option) =>
+        option.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    }
+  },
+  render() {
+    const slottedItems = this.$slots.default?.()
+    let children: VNode<
+      RendererNode,
+      RendererElement,
+      { [key: string]: any }
+    >[][]
+
+    const pickerProps = [
+      ...(this.disabled ? ['disabled'] : []),
+      ...(this.hovered ? ['hovered'] : []),
+      ...(this.active ? ['active'] : []),
+      ...(this.selected.length > 0 ? ['selected'] : [])
+    ]
+
+    if (slottedItems) {
+      console.log("we've got slots!", this.$slots.default?.())
+      children = [
+        slottedItems?.map(
+          (ti: RendererNode | RendererElement | { [key: string]: any }) => {
+            return h(
+              ti,
+              mergeProps(
+                {
+                  //selected: this.value_ == ti.props?.value,
+                  //disabled: this.disabled,
+                  //class: computedProps,
+                  //onClick: this.handleOptionClick
+                },
+                { ...ti.props }
+              )
+            )
+          }
+        )
+      ]
+    }
+
+    //const heading = h('div', { class: ['title'] }, [this.label])
+    // return [heading, children]
+
+    const searchBar = h('div', { class: 'search' }, [
+      h('i', { class: ['pi', 'pi-Search', 'pi-lg', 'mr-1'] }),
+      h(
+        'input',
+        mergeProps({
+          class: 'py-2',
+          placeholder: 'Search by name',
+          onClick: this.handleBlur,
+          onInput: this.runSearch
+        })
+      )
+    ])
+
+    const listContainer = h(
+      'div',
+      { class: ['list', this.openUp && 'openUp'], disabled: this.disabled },
+      [this.search && searchBar, children]
+    )
+
+    const picker = h(
+      'div',
+      mergeProps({
+        class: ['picker', ...pickerProps]
+      }),
+      [
+        h('span', this.selected || this.placeholder),
+        h('i', { class: ['pi', 'pi-Arrow-Down', 'pi-lg'] })
+      ]
+    )
+    const wrapper = h(
+      'div',
+      mergeProps({
+        class: [
+          'wrapper',
+          this.disabled && 'disabled',
+          this.active && 'active'
+        ],
+        tabindex: 0,
+        onFocus: this.handleFocus,
+        onBlur: this.handleBlur,
+        onMouseenter: this.handleFocus,
+        onMouseleave: this.handleMouseLeave,
+        onKeydown: this.handleKeydown,
+        onClick: () => {
+          !this.disabled ? (this.active = !this.active) : null
+        }
+      }),
+      [picker, this.active && listContainer]
+    )
+
+    return wrapper
+  }
+})
+</script>
+
+<style lang="scss" scoped>
+@use '../../styles/components/select';
+</style>
+
+<!--
 <template>
   <div
     class="wrapper"
@@ -174,3 +378,4 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '../../styles/components/select';
 </style>
+-->
