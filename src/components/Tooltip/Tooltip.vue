@@ -1,5 +1,5 @@
 <template>
-  <div class="tooltip-box">
+  <div class="tooltip-box" :class="classList">
     <div class="tooltip">
       <span class="text">{{ text }}</span>
     </div>
@@ -18,7 +18,16 @@ export default defineComponent({
       default: () => ''
     },
     right: {
-      type: Boolean
+      type: Boolean,
+      default: () => false
+    },
+    left: {
+      type: Boolean,
+      default: () => false
+    },
+    bottom: {
+      type: Boolean,
+      default: () => false
     }
   },
   data() {
@@ -26,7 +35,12 @@ export default defineComponent({
   },
   computed: {
     classList(): string[] {
-      return []
+      const styles = [
+        ...(this.right ? ['right'] : []),
+        ...(this.left ? ['left'] : []),
+        ...(this.bottom ? ['bottom'] : [])
+      ]
+      return styles.length > 0 ? styles : ['top']
     }
   },
   methods: {}
