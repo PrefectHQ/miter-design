@@ -1,7 +1,6 @@
 .tooltip-box {
   position: relative;
   display: inline-block;
-  border: solid green;
 
   &:hover .tooltip {
     opacity: 1;
@@ -31,7 +30,7 @@
     // bottom: 50%;
     // left: 100%;
     // transform: translateY(50%);
-    // margin-left: 10px;
+    // margin-left: 20px;
 
     // Left
     // bottom: 50%;
@@ -52,18 +51,42 @@
     align-items: center;
   }
 
-  //   .text::after {
-  //     content: '';
-  //     position: absolute;
+  .text::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
 
-  //     width: 0;
-  //     height: 0;
-  //     border-left: 5px solid transparent;
-  //     border-right: 5px solid transparent;
-  //     border-top: 5px solid #090422;
+    // Left
+    // border-top: 5px solid transparent;
+    // border-bottom: 5px solid transparent;
+    // border-left: 5px solid #090422;
+    // bottom: 50%;
+    // left: 100%;
+    // transform: translateY(50%);
 
-  //     top: 100%;
-  //     left: 50%;
-  //     transform: translate(-50%, -25%);
-  //   }
+    // Right
+    // border-top: 5px solid transparent;
+    // border-bottom: 5px solid transparent;
+    // border-right: 5px solid #090422;
+    // bottom: 50%;
+    // right: 100%;
+    // transform: translateY(50%);
+
+    // Top
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #090422;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+
+    // Bottom
+    // border-left: 5px solid transparent;
+    // border-right: 5px solid transparent;
+    // border-bottom: 5px solid #090422;
+    // bottom: 100%;
+    // left: 50%;
+    // transform: translate(-50%, 25%);
+  }
 }
