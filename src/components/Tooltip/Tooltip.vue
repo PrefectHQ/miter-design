@@ -15,7 +15,10 @@ export default defineComponent({
   props: {
     text: {
       type: String,
-      required: true
+      default: () => ''
+    },
+    right: {
+      type: Boolean
     }
   },
   data() {

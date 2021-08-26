@@ -7,9 +7,8 @@
   }
 
   .tooltip {
-    width: 83px;
-    height: 34px;
-
+    min-width: 83px;
+    min-height: 34px;
     color: black;
     position: absolute;
     bottom: 100%;
@@ -24,7 +23,9 @@
     // Top
     bottom: 100%;
     left: 50%;
-    transform: translate(-50%, -25%);
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+    margin-bottom: 7px;
 
     // Right
     // bottom: 50%;
@@ -42,13 +43,11 @@
     // top: 100%;
     // left: 50%;
     // transform: translate(-50%, 25%);
+    // margin-top: 7px;
 
     opacity: 0;
     transition: opacity 0.7s;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
   }
 
   .text::after {
