@@ -1,10 +1,10 @@
 import { App } from 'vue'
 
-declare module '@vue/runtime-core' {
-  export interface ToastInstance {
-    add: (text: string) => any
-  }
+export interface ToastInstance {
+  add: (text: string) => any
+}
 
+declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
     $toast: ToastInstance
   }
