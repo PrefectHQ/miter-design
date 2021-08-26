@@ -1,6 +1,5 @@
 import Popup from './Popup.vue'
 import PopupContent from './PopupContent.vue'
-import Card from '../Card/Card.vue'
 import { reactive } from 'vue'
 import Button from '../Button/Button.vue'
 // import { withDesign } from 'storybook-addon-designs'
@@ -8,32 +7,27 @@ import Button from '../Button/Button.vue'
 export default {
   title: 'Miter Design/Popup',
   component: Popup,
-  args: {
-      activate: Button, 
-      content: `<PopupContent>{{Card}}</PopupContent>`
-  },
 //   decorators: [withDesign],
   parameters: {
     design: {
       type: 'figma',
       url: 'https://www.figma.com/file/HJgj2eHBaqt1SAYruZNjQQ/Prefect?node-id=1080%3A1557'
     }
-  }
+  },
 }
 
 const Template = (args) => ({
-  components: { Popup },
+  components: { Popup, Button, PopupContent },
   setup() {
+    const val = reactive(args.modelValue)
     const el = document.createElement('div')
     el.id = 'app'
     document.body.appendChild(el)
-    return { args }
+    return { args, val }
   },
-  template: `<Popup v-model="modelValue" v-bind="args">{{activate}}
+  template: `<Popup v-model="val" v-bind="args"><template v-slot:activate>${args.activate}</template><template v-if="args.popupContent" v-slot:content>${args.popupContent}</template>
   </Popup>
-  `,
-  activate: Button,
-  popupContent: `<PopupContent v-bind="args" v-model="modelValue">{{test}}</PopupContent>`
+  `
 })
 
 export const Center = Template.bind({})
@@ -41,7 +35,8 @@ Center.args = {
   modelValue: true,
   position: 'center',
   title: 'Pop Up',
-  activate: Button,
+  activate: `<Button v-bind="args" color="primary">Button</Button>`,
+  popupContent: `<PopupContent v-bind="args"><template v-slot:content>Pop Up Content</template></PopupContent>`,
 }
 
 export const FlexEnd = Template.bind({})
@@ -49,24 +44,5 @@ FlexEnd.args = {
   modelValue: true,
   position: 'flex-end',
   title: 'Pop Up',
+  activate: `<Button v-bind="args" color="primary">Button</Button>`,
 }
-
-// export const Single = Template.bind({})
-// Single.args = {
-//   modelValue: ['0'],
-//   content:
-//     '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-101">Tag 2</Tag>'
-// }
-
-// export const Multiple = Template.bind({})
-// Multiple.args = {
-//   modelValue: ['0', '1'],
-//   multiple: true,
-//   content:
-//     '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-101">Tag 2</Tag> <Tag value="2">Tag 3</Tag>'
-// }
-
-// export const Default = Template.bind({})
-// Default.args = {
-//   modelValue: [0]
-// }
