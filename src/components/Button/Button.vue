@@ -1,6 +1,6 @@
 <template>
   <button
-    class="cursor-pointer button"
+    class="cursor-pointer button miter"
     :class="classList"
     :disabled="disabled"
     @mouseenter="handleMouseEnter"
@@ -12,11 +12,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <div>
-      <span data-test="default">
-        <slot />
-      </span>
-    </div>
+    <span data-test="default"><slot /></span>
   </button>
 </template>
 
@@ -29,7 +25,8 @@ class Props {
   icon = prop<boolean>({ default: false })
 }
 
-@Options({})
+const Component = Options
+@Component({})
 export default class Button extends Vue.with(Props) {
   active: boolean = false
   hovered: boolean = false

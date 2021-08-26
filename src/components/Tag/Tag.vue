@@ -1,8 +1,6 @@
 <template>
-  <div class="tag" :class="classList">
-    <div data-test="default">
-      <slot />
-    </div>
+  <div class="tag-wrapper" :class="classList">
+    <span class="tag" data-test="default"> <slot /></span>
   </div>
 </template>
 
@@ -13,6 +11,7 @@ class Props {
   color = prop<string>({})
   outlined = prop<boolean>({ default: false })
   disabled = prop<boolean>({ default: false })
+  elevated = prop<boolean>({ default: false })
 }
 
 @Options({})
@@ -21,6 +20,7 @@ export default class Tag extends Vue.with(Props) {
     return [
       ...(this.disabled ? ['disabled'] : []),
       ...(this.outlined ? ['outlined'] : []),
+      ...(this.elevated ? ['elevated'] : []),
       this.color
     ]
   }
