@@ -20,9 +20,7 @@ describe('color prop', () => {
       props: { color: 'primary' }
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).toContain('primary')
+    expect(wrapper.classes()).toContain('primary')
   })
 
   test('check if the computed style contains the color prop if updated', async () => {
@@ -38,8 +36,7 @@ describe('color prop', () => {
       props: {}
     })
 
-    const tag = wrapper.get('.tag')
-    expect(tag.classes()).not.toContain('primary')
+    expect(wrapper.classes()).not.toContain('primary')
   })
 })
 
@@ -51,9 +48,7 @@ describe('disabled prop', () => {
       }
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).toContain('disabled')
+    expect(wrapper.classes()).toContain('disabled')
   })
 
   test('check if the computed style contains the disabled prop if updated', async () => {
@@ -69,9 +64,7 @@ describe('disabled prop', () => {
       props: {}
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).not.toContain('disabled')
+    expect(wrapper.classes()).not.toContain('disabled')
   })
 })
 
@@ -83,9 +76,7 @@ describe('outlined prop', () => {
       }
     })
 
-    const tag = wrapper.get('.tag')
-
-    expect(tag.classes()).toContain('outlined')
+    expect(wrapper.classes()).toContain('outlined')
   })
 
   test('check if the computed style contains the outline prop if updated', async () => {
@@ -101,8 +92,34 @@ describe('outlined prop', () => {
       props: {}
     })
 
-    const tag = wrapper.get('.tag')
+    expect(wrapper.classes()).not.toContain('outlined')
+  })
+})
 
-    expect(tag.classes()).not.toContain('outlined')
+describe('hovered prop', () => {
+  test('adds the hovered class when hovered:true is passed as a prop', () => {
+    const wrapper = mount(Tag, {
+      props: {
+        hovered: true
+      }
+    })
+
+    expect(wrapper.classes()).toContain('hovered')
+  })
+
+  test('check if the computed style contains the hovered prop if updated', async () => {
+    const wrapper = mount(Tag, {
+      props: { hovered: false }
+    })
+    await wrapper.setProps({ hovered: true })
+    expect(wrapper.vm.classList).toContain('hovered')
+  })
+
+  test("doesn't pass the hovered class when hovered is not passed as a prop", () => {
+    const wrapper = mount(Tag, {
+      props: {}
+    })
+
+    expect(wrapper.classes()).not.toContain('hovered')
   })
 })
