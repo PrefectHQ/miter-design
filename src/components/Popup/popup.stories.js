@@ -2,12 +2,11 @@ import Popup from './Popup.vue'
 import PopupContent from './PopupContent.vue'
 import { reactive } from 'vue'
 import Button from '../Button/Button.vue'
-// import { withDesign } from 'storybook-addon-designs'
+
 
 export default {
   title: 'Miter Design/Popup',
   component: Popup,
-//   decorators: [withDesign],
   parameters: {
     design: {
       type: 'figma',
@@ -19,6 +18,7 @@ export default {
 const Template = (args) => ({
   components: { Popup, Button, PopupContent },
   setup() {
+    // Reactive isn't working - leaving for now but to re-visit when time
     const val = reactive(args.modelValue)
     const el = document.createElement('div')
     el.id = 'app'
