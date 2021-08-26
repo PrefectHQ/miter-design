@@ -60,7 +60,6 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue'],
-  //Using Popcontent compoenent to facilitate testing
   components: {
     PopupContent
   },
