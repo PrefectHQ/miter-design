@@ -13,4 +13,4 @@ export { default as RadioButton } from './Radio/RadioButton.vue'
 export { default as Tag } from './Tag/Tag.vue'
 export { default as Checkbox } from './Checkbox/Checkbox.vue'
 export { default as Popup} from './Popup/Popup.vue'
-
+export { default as TagGroup } from './TagGroup/TagGroup.vue'
