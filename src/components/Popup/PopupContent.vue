@@ -29,9 +29,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Card from '../Card/Card.vue'
 
 export default defineComponent({
   name: 'Popcontent',
+  components: {
+    Card
+  },
   props: {
     modelValue: {
       type: Boolean,
