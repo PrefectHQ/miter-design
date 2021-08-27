@@ -1,4 +1,4 @@
-- Add TagGroup component - [#24](https://github.com/PrefectHQ/miter-design/pull/24)
+- Add TagGroup component - [#29](https://github.com/PrefectHQ/miter-design/pull/29)
 - Add storybook build command - [#28](https://github.com/PrefectHQ/miter-design/pull/28)
 - Fix miter mixin for specific browsers - [#27](https://github.com/PrefectHQ/miter-design/pull/27)
 - Update miter mixin to make it easier - [#23](https://github.com/PrefectHQ/miter-design/pull/23)
