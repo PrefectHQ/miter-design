@@ -48,9 +48,8 @@ export default defineComponent({
   },
   methods: {
     handleOptionClick(e: Event, ...args: any[]): Event {
-      console.log('click select', e, args)
       this.selected = args[0]
-      this.$emit('update.modelValue', this.selected)
+      this.$emit('update:modelValue', this.selected)
       return e
     },
     handleFocus(): void {
@@ -59,7 +58,6 @@ export default defineComponent({
     },
 
     handleBlur(event: Event): void {
-      console.log(event.relatedTarget)
       if (
         event.relatedTarget?.tagName === 'INPUT' ||
         event.relatedTarget?.classList.contains('active')
@@ -94,7 +92,6 @@ export default defineComponent({
       }
     },
     runSearch(searchValue: string): void {
-      console.log('search')
       this.filteredOptions = this.options.filter((option) =>
         option.toLowerCase().includes(searchValue.toLowerCase())
       )
@@ -118,29 +115,10 @@ export default defineComponent({
     ]
 
     if (slottedItems) {
-      console.log("we've got slots!", this.$slots.default?.())
-
-      // slottedItems.forEach(item => {
-      //   if (item.type?.name === 'Option') {
-      //         valueList.push(item.props?.value)
-      //         children.push(h(
-      //           item,
-      //           mergeProps(
-      //             {
-      //               selected: this.selected == item.props?.value,
-      //               onClick: this.handleOptionClick
-      //             },
-      //             { ...item.props }
-      //           )
-      //         ))
-      //       }
-      // })
-
       temp = [
         slottedItems?.map(
           (ti: RendererNode | RendererElement | { [key: string]: any }) => {
             if (ti.type.name === 'Option') {
-              valueList.push(ti.props?.value)
               return h(
                 ti,
                 mergeProps(
@@ -152,14 +130,61 @@ export default defineComponent({
                 )
               )
             } else if (ti.type.name === 'OptionGroup') {
-              //
+              const innerSlot = h(ti)
+              const innerOptions = innerSlot.children?.default?.()
+              // this will either be Option(s) or Symbol(Fragment)
+              const options = [
+                innerOptions?.map(
+                  (
+                    ti: RendererNode | RendererElement | { [key: string]: any }
+                  ) => {
+                    if (ti.type.name === 'Option') {
+                      console.log(ti)
+                      return h(
+                        ti,
+                        mergeProps(
+                          {
+                            selected: this.selected == ti.props?.value,
+                            onClick: this.handleOptionClick
+                          },
+                          { ...ti.props }
+                        )
+                      )
+                    } else {
+                      const options = ti.children?.map(
+                        (
+                          node:
+                            | RendererNode
+                            | RendererElement
+                            | { [key: string]: any }
+                        ) => {
+                          return h(
+                            node,
+                            mergeProps(
+                              {
+                                selected: this.selected == node.props?.value,
+                                onClick: this.handleOptionClick
+                              },
+                              { ...node.props }
+                            )
+                          )
+                        }
+                      )
+                      return [...options]
+                    }
+                  }
+                )
+              ]
+              return [
+                h('div', { class: ['title'] }, ti.props.label),
+                ...options
+              ]
             } else {
               //ti.type === Symbol(Fragment) => v-for of options, not in group
               const options = ti.children?.map(
                 (
                   node: RendererNode | RendererElement | { [key: string]: any }
                 ) => {
-                  valueList.push(node.props?.value)
                   return h(
                     node,
                     mergeProps(
@@ -172,19 +197,13 @@ export default defineComponent({
                   )
                 }
               )
-              console.log(options)
               return [...options]
             }
-
-            return h('span')
           }
         )
       ]
     }
     children = temp.flat()
-
-    //const heading = h('div', { class: ['title'] }, [this.label])
-    // return [heading, children]
 
     const searchBar = h('div', { class: 'search' }, [
       h('i', { class: ['pi', 'pi-Search', 'pi-lg', 'mr-1'] }),

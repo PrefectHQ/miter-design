@@ -9,7 +9,8 @@
     class="option"
     :class="{
       selected: selected,
-      hovered: hovered
+      hovered: hovered,
+      disabled: disabled
     }"
   >
     <span
@@ -60,7 +61,6 @@ export default defineComponent({
   },
   methods: {
     choose(e: Event): Event {
-      console.log('click option', e)
       this.$emit('click', e, this.value)
       return e
     },

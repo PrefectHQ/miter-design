@@ -30,9 +30,10 @@
         <OptionGroup label="Single Options">
           <Option value="1" /><Option value="2" /><Option value="3" />
         </OptionGroup>
-        <OptionGroup label="Disabled Option" disabled>
+        <OptionGroup label="Disabled Group" disabled>
           <Option value="no click" />
         </OptionGroup>
+        <Option value="4" /><Option value="5" disabled />
         <OptionGroup label="No Options Here" />
       </Select>
       <Select
