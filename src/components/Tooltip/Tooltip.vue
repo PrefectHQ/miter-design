@@ -30,9 +30,6 @@ export default defineComponent({
       default: () => false
     }
   },
-  data() {
-    return {}
-  },
   computed: {
     classList(): string[] {
       const styles = [
