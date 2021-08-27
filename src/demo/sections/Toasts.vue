@@ -24,8 +24,6 @@ export default defineComponent({
   },
   methods: {
     addToast() {
-      console.log()
-      console.log()
       this.toasts.push(this.$toast.add('some text'))
     },
     removeToasts() {
