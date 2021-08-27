@@ -4,14 +4,26 @@
     <button @click="left = !left">left: {{ left }}</button>
     <button @click="bottom = !bottom">bottom: {{ bottom }}</button>
 
-    <div class="center">
-      <Tooltip :right="right" :left="left" :bottom="bottom">
+    <div class="mt-8 d-flex align-center">
+      <Tooltip :right="right" :left="left" :bottom="bottom" class="mr-2">
+        <template #text> button </template>
+        <template #default>
+          <Button color="primary">Button</Button>
+        </template>
+      </Tooltip>
+
+      <Tooltip :right="right" :left="left" :bottom="bottom" class="mr-2">
         <template #text>
           <div> <span class="highlight">Tool</span>tip </div>
         </template>
         <template #default>
-          <Tag color="primary-101">Hi Hello</Tag>
+          <i class="pi pi-Info-Question-Mark pi-3x" />
         </template>
+      </Tooltip>
+
+      <Tooltip :right="right" :left="left" :bottom="bottom">
+        <template #text> text </template>
+        <template #default> Text </template>
       </Tooltip>
     </div>
   </div>
@@ -31,11 +43,6 @@ export default defineComponent({
 })
 </script>
 <style>
-.center {
-  margin-left: 300px;
-  margin-top: 100px;
-}
-
 .highlight {
   color: yellow;
   text-decoration: underline;
