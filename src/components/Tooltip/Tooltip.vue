@@ -1,7 +1,9 @@
 <template>
   <div class="tooltip-box" :class="classList">
     <div class="tooltip">
-      <span class="text">{{ text }}</span>
+      <div class="text">
+        <slot name="text">Text</slot>
+      </div>
     </div>
     <slot />
   </div>
@@ -13,10 +15,6 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'Tooltip',
   props: {
-    text: {
-      type: String,
-      default: () => ''
-    },
     right: {
       type: Boolean,
       default: () => false
@@ -42,8 +40,7 @@ export default defineComponent({
       ]
       return styles.length > 0 ? styles : ['top']
     }
-  },
-  methods: {}
+  }
 })
 </script>
 

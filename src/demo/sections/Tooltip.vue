@@ -5,9 +5,13 @@
     <button @click="bottom = !bottom">bottom: {{ bottom }}</button>
 
     <div class="center">
-      <Tooltip text="Tooltip" :right="right" :left="left" :bottom="bottom">
-        <!-- <button>Hover Over Me!</button> -->
-        <i class="pi pi-Info-Question-Mark pi-3x" />
+      <Tooltip :right="right" :left="left" :bottom="bottom">
+        <template #text>
+          <div> <span class="highlight">Tool</span>tip </div>
+        </template>
+        <template #default>
+          <Tag color="primary-101">Hi Hello</Tag>
+        </template>
       </Tooltip>
     </div>
   </div>
@@ -28,7 +32,12 @@ export default defineComponent({
 </script>
 <style>
 .center {
-  margin-left: 100px;
-  margin-top: 50px;
+  margin-left: 300px;
+  margin-top: 100px;
+}
+
+.highlight {
+  color: yellow;
+  text-decoration: underline;
 }
 </style>
