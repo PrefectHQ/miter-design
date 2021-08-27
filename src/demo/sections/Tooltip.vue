@@ -5,7 +5,7 @@
     <button @click="bottom = !bottom">bottom: {{ bottom }}</button>
 
     <div class="mt-5">
-      <Tooltip :right="right" :left="left" :bottom="bottom" class="mr-2">
+      <Tooltip :right="right" :left="left" :bottom="bottom">
         <template #text> <span class="highlight">Tooltip</span> </template>
         <template #default>
           <Tag>Tag</Tag>
