@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Tooltip from './Tooltip.vue'
 
-// slot
 test('displays text in the text slot', () => {
   const text = 'Hello!'
   const wrapper = mount(Tooltip, {
@@ -50,4 +49,70 @@ test('displays el in the default slot', () => {
   expect(tooltip.html()).toContain(el)
 })
 
-// props
+describe('right prop', () => {
+  test('passes the right prop as a class when passed', () => {
+    const wrapper = mount(Tooltip, {
+      props: { right: true }
+    })
+
+    expect(wrapper.classes()).toContain('right')
+  })
+
+  test('does not pass the right prop when no right prop is provided', () => {
+    const wrapper = mount(Tooltip, {
+      props: {}
+    })
+    expect(wrapper.classes()).not.toContain('right')
+  })
+})
+
+describe('left prop', () => {
+  test('passes the left prop as a class when passed', () => {
+    const wrapper = mount(Tooltip, {
+      props: { left: true }
+    })
+
+    expect(wrapper.classes()).toContain('left')
+  })
+
+  test('does not pass the left prop when no left prop is provided', () => {
+    const wrapper = mount(Tooltip, {
+      props: {}
+    })
+    expect(wrapper.classes()).not.toContain('left')
+  })
+})
+
+describe('top prop', () => {
+  test('passes the top prop as a class when no other prop is passed', () => {
+    const wrapper = mount(Tooltip, {
+      props: {}
+    })
+
+    expect(wrapper.classes()).toContain('top')
+  })
+
+  test('does not pass the top prop when another prop is passed', () => {
+    const wrapper = mount(Tooltip, {
+      props: { bottom: true }
+    })
+    expect(wrapper.classes()).not.toContain('top')
+  })
+})
+
+describe('bottom prop', () => {
+  test('passes the bottom prop as a class when passed', () => {
+    const wrapper = mount(Tooltip, {
+      props: { bottom: true }
+    })
+
+    expect(wrapper.classes()).toContain('bottom')
+  })
+
+  test('does not pass the bottom prop when no left prop is provided', () => {
+    const wrapper = mount(Tooltip, {
+      props: {}
+    })
+    expect(wrapper.classes()).not.toContain('bottom')
+  })
+})
