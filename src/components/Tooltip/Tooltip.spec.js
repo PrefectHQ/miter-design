@@ -13,19 +13,7 @@ test('displays text in the text slot', () => {
   expect(tooltip.text()).toBe(text)
 })
 
-test('displays html in the text slot', () => {
-  const el = '<div>text</div>'
-  const wrapper = mount(Tooltip, {
-    slots: {
-      text: el
-    }
-  })
-
-  const tooltip = wrapper.get('[data-test="text"]').find('div')
-  expect(tooltip.html()).toContain(el)
-})
-
-test('displays html in the default slot', () => {
+test('displays text in the default slot', () => {
   const el = '<button>button</button>'
   const wrapper = mount(Tooltip, {
     slots: {
