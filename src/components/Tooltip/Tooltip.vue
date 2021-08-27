@@ -1,11 +1,13 @@
 <template>
   <div class="tooltip-box" :class="classList">
     <div class="tooltip">
-      <div class="text">
+      <div class="text" data-test="text">
         <slot name="text">Text</slot>
       </div>
     </div>
-    <slot />
+    <div data-test="default">
+      <slot />
+    </div>
   </div>
 </template>
 
