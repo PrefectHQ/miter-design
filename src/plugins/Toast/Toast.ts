@@ -1,28 +1,13 @@
-import { App, createApp, VNode, RendererNode, RendererElement } from 'vue'
+import { App, createApp } from 'vue'
 import Toast from '@/components/Toast/Toast.vue'
 import ToastContainer from '@/components/Toast/ToastContainer.vue'
 import { mount } from './mount-component'
-import { ToastInstance } from './main'
-
-// export interface NodeInstance {
-//   vNode: VNode<
-//     RendererNode,
-//     RendererElement,
-//     {
-//       [key: string]: any
-//     }
-//   >
-//   destroy: () => void
-//   el: any
-// }
-
-// export interface ToastInstance {
-//   add: (text: string) => NodeInstance
-// }
 
 declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
-    $toast: ToastInstance
+    $toast: {
+      add: (text: string) => any
+    }
   }
 }
 
@@ -48,11 +33,7 @@ export default {
 
     toastApp.mount(mountPoint)
 
-    console.log(toastApp)
-    // const nodes: { [key: string]: Node } = {}
-
     app.config.globalProperties.$toast = {
-      nodes: [],
       add(text: string) {
         return mount(
           Toast,
@@ -60,6 +41,6 @@ export default {
           toastApp._container?.querySelector('.toast-container')
         )
       }
-    } as ToastInstance
+    }
   }
 }

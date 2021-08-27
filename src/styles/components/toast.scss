@@ -1,12 +1,20 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
 .toast {
+  background-color: variables.$primary-100;
+  color: variables.$white;
   padding: 12px 24px;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px;
 }
 
 .toast-container {
-  height: 100vh;
-  left: 0;
-  position: fixed;
-  top: 0;
+  bottom: 0;
   pointer-events: none;
-  width: 100vw;
+  position: fixed;
+  right: 0;
 }
