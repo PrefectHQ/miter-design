@@ -6,7 +6,7 @@
       </div>
     </div>
     <div data-test="default">
-      <slot />
+      <slot>Tooltip</slot>
     </div>
   </div>
 </template>

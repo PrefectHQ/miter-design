@@ -1,6 +1,7 @@
 .tooltip-box {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 
   &:hover .tooltip {
     opacity: 1;
