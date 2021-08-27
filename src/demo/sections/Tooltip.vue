@@ -4,26 +4,12 @@
     <button @click="left = !left">left: {{ left }}</button>
     <button @click="bottom = !bottom">bottom: {{ bottom }}</button>
 
-    <div class="mt-8 d-flex align-center">
+    <div class="mt-5">
       <Tooltip :right="right" :left="left" :bottom="bottom" class="mr-2">
-        <template #text> button </template>
+        <template #text> <span class="highlight">button</span> </template>
         <template #default>
-          <Button color="primary">Button</Button>
+          <Tag>Tag</Tag>
         </template>
-      </Tooltip>
-
-      <Tooltip :right="right" :left="left" :bottom="bottom" class="mr-2">
-        <template #text>
-          <div> <span class="highlight">Tool</span>tip </div>
-        </template>
-        <template #default>
-          <i class="pi pi-Info-Question-Mark pi-3x" />
-        </template>
-      </Tooltip>
-
-      <Tooltip :right="right" :left="left" :bottom="bottom">
-        <template #text> text </template>
-        <template #default> Text </template>
       </Tooltip>
     </div>
   </div>
