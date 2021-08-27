@@ -1,8 +1,6 @@
 <template>
   <div ref="container" class="toast-container">
-    <!-- <Toast v-for="toast in toasts" :key="toast.id">
-      {{ toast.text }}
-    </Toast> -->
+    <slot />
   </div>
 </template>
 

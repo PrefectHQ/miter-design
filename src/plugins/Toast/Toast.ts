@@ -1,11 +1,20 @@
-import { App, createApp, VNode } from 'vue'
+import { App, createApp, VNode, RendererNode, RendererElement } from 'vue'
 import Toast from '@/components/Toast/Toast.vue'
 import ToastContainer from '@/components/Toast/ToastContainer.vue'
 import { mount } from './mount-component'
 
 export interface ToastInstance {
-  add: (text: string) => any
-  remove: (id: string) => void
+  add: (text: string) => {
+    vNode: VNode<
+      RendererNode,
+      RendererElement,
+      {
+        [key: string]: any
+      }
+    >
+    destroy: () => void
+    el: any
+  }
 }
 
 declare module '@vue/runtime-core' {
@@ -36,23 +45,17 @@ export default {
 
     toastApp.mount(mountPoint)
 
+    console.log(toastApp)
     // const nodes: { [key: string]: Node } = {}
 
     app.config.globalProperties.$toast = {
+      nodes: [],
       add(text: string) {
-        // toastApp._instance.render(h) {
-        //   hel
-        // },
-        const c = mount(Toast)
-        console.log(c)
-        return c
-      },
-      remove(id: string) {
-        // const child = nodes[id]
-        // console.log(nodes, child)
-        // if (!child)
-        //   throw new Error("Couldn't remove toast; element does not exist.")
-        // toastApp._container?.removeChild(nodes[id])
+        return mount(
+          Toast,
+          {},
+          toastApp._container?.querySelector('.toast-container')
+        )
       }
     } as ToastInstance
   }

@@ -1,11 +1,12 @@
-import { render, h, VNode, ComponentOptions, Component } from 'vue'
+import { App, render, h, VNode, ComponentOptions, Component } from 'vue'
 
 const createElement = () =>
   typeof document !== 'undefined' && document.createElement('div')
 
 export const mount = (
   component: Component,
-  { props, children, element, app }: ComponentOptions = {}
+  { props, children, element, app }: ComponentOptions = {},
+  container: Element | null | undefined
 ) => {
   let el = element ? element : createElement()
 
@@ -13,14 +14,22 @@ export const mount = (
   if (app && app._context) {
     vNode.appContext = app._context
   }
-  document.body.appendChild(el)
 
   render(vNode, el)
+
+  if (container) {
+    container.appendChild(el)
+  } else document.body.appendChild(el)
 
   const destroy = () => {
     if (el) {
       render(null, el)
     }
+
+    if (container) {
+      container.removeChild(el)
+    } else document.body.removeChild(el)
+
     // For GC purposes
     el = null
     vNode = null

@@ -3,7 +3,7 @@
     <h3>Toasts</h3>
     <div class="my-2">
       <Button color="primary" @click="addToast">Add toast</Button>
-      <Button @click="removeToast">Remove toast</Button>
+      <Button @click="removeToasts">Remove toasts</Button>
       <Toast />
     </div>
   </div>
@@ -17,15 +17,19 @@ export default defineComponent({
   name: 'Toasts',
   components: { Toast },
   data() {
-    return {}
+    return {
+      toasts: []
+    }
   },
   methods: {
     addToast() {
       console.log()
-      console.log(this.$toast.add('some text'))
+      console.log()
+      this.toasts.push(this.$toast.add('some text'))
     },
-    removeToast() {
-      this.$toast.remove('1')
+    removeToasts() {
+      this.toasts.forEach((toast) => toast.destroy())
+      // this.$toast.remove('1')
     }
   }
 })
