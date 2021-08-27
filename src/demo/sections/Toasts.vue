@@ -12,13 +12,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Toast from '@/components/Toast/Toast.vue'
+import { NodeInstance } from '@/plugins/Toast/main'
 
 export default defineComponent({
   name: 'Toasts',
   components: { Toast },
   data() {
     return {
-      toasts: []
+      toasts: [] as Array<NodeInstance>
     }
   },
   methods: {
@@ -29,7 +30,6 @@ export default defineComponent({
     },
     removeToasts() {
       this.toasts.forEach((toast) => toast.destroy())
-      // this.$toast.remove('1')
     }
   }
 })
