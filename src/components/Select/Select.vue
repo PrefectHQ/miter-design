@@ -14,6 +14,11 @@ import OptionGroup from './OptionGroup.vue'
 export default defineComponent({
   name: 'Select',
   components: { Option, OptionGroup },
+  emits: {
+    'update:modelValue'(...args: any[]) {
+      return { ...args }
+    }
+  },
   props: {
     disabled: {
       type: Boolean,
@@ -43,9 +48,9 @@ export default defineComponent({
   },
   methods: {
     handleOptionClick(e: Event, ...args: any[]): Event {
-      console.log('click optiongroup', e, args)
-      this.value_ = args[0]
-      this.$emit('update.modelValue', this.value_)
+      console.log('click select', e, args)
+      this.selected = args[0]
+      this.$emit('update.modelValue', this.selected)
       return e
     },
     handleFocus(): void {
@@ -72,27 +77,20 @@ export default defineComponent({
       if (event.key === 'Enter' || event.code === 'Space') {
         if (this.disabled) return
         if (this.active) {
-          if (this.options[this.hoveredStates.indexOf(true)]) {
-            this.choose(this.options[this.hoveredStates.indexOf(true)])
-            return
-          } else {
-            this.active = !this.active
-            return
-          }
+          // choose highlighted option, else close
         }
         this.active = !this.active
         if (this.active && this.selected.length > 0) {
-          const index = this.options.indexOf(this.selected)
-          this.hoveredStates[index] = true
+          // hover goes to selected option
         } else {
-          this.hoveredStates[0] = true
+          // hover goes to first option
         }
       } else if (event.key === 'Escape') {
         this.active = false
       } else if (event.key === 'ArrowUp') {
         // selectPrevious
       } else if (event.key === 'ArrowDown') {
-        //selectNext
+        // selectNext
       }
     },
     runSearch(searchValue: string): void {
@@ -104,11 +102,13 @@ export default defineComponent({
   },
   render() {
     const slottedItems = this.$slots.default?.()
+    let temp = []
     let children: VNode<
       RendererNode,
       RendererElement,
       { [key: string]: any }
     >[][]
+    let valueList: string[] = []
 
     const pickerProps = [
       ...(this.disabled ? ['disabled'] : []),
@@ -119,25 +119,69 @@ export default defineComponent({
 
     if (slottedItems) {
       console.log("we've got slots!", this.$slots.default?.())
-      children = [
+
+      // slottedItems.forEach(item => {
+      //   if (item.type?.name === 'Option') {
+      //         valueList.push(item.props?.value)
+      //         children.push(h(
+      //           item,
+      //           mergeProps(
+      //             {
+      //               selected: this.selected == item.props?.value,
+      //               onClick: this.handleOptionClick
+      //             },
+      //             { ...item.props }
+      //           )
+      //         ))
+      //       }
+      // })
+
+      temp = [
         slottedItems?.map(
           (ti: RendererNode | RendererElement | { [key: string]: any }) => {
-            return h(
-              ti,
-              mergeProps(
-                {
-                  //selected: this.value_ == ti.props?.value,
-                  //disabled: this.disabled,
-                  //class: computedProps,
-                  //onClick: this.handleOptionClick
-                },
-                { ...ti.props }
+            if (ti.type.name === 'Option') {
+              valueList.push(ti.props?.value)
+              return h(
+                ti,
+                mergeProps(
+                  {
+                    selected: this.selected == ti.props?.value,
+                    onClick: this.handleOptionClick
+                  },
+                  { ...ti.props }
+                )
               )
-            )
+            } else if (ti.type.name === 'OptionGroup') {
+              //
+            } else {
+              //ti.type === Symbol(Fragment) => v-for of options, not in group
+              const options = ti.children?.map(
+                (
+                  node: RendererNode | RendererElement | { [key: string]: any }
+                ) => {
+                  valueList.push(node.props?.value)
+                  return h(
+                    node,
+                    mergeProps(
+                      {
+                        selected: this.selected == node.props?.value,
+                        onClick: this.handleOptionClick
+                      },
+                      { ...node.props }
+                    )
+                  )
+                }
+              )
+              console.log(options)
+              return [...options]
+            }
+
+            return h('span')
           }
         )
       ]
     }
+    children = temp.flat()
 
     //const heading = h('div', { class: ['title'] }, [this.label])
     // return [heading, children]
