@@ -13,7 +13,7 @@ test('displays text in the text slot', () => {
   expect(tooltip.text()).toBe(text)
 })
 
-test('displays el in the text slot', () => {
+test('displays html in the text slot', () => {
   const el = '<div>text</div>'
   const wrapper = mount(Tooltip, {
     slots: {
@@ -25,19 +25,7 @@ test('displays el in the text slot', () => {
   expect(tooltip.html()).toContain(el)
 })
 
-test('displays text in the default slot', () => {
-  const text = 'Hello!'
-  const wrapper = mount(Tooltip, {
-    slots: {
-      default: text
-    }
-  })
-
-  const tooltip = wrapper.get('[data-test="default"]')
-  expect(tooltip.text()).toBe(text)
-})
-
-test('displays el in the default slot', () => {
+test('displays html in the default slot', () => {
   const el = '<button>button</button>'
   const wrapper = mount(Tooltip, {
     slots: {
@@ -50,7 +38,7 @@ test('displays el in the default slot', () => {
 })
 
 describe('right prop', () => {
-  test('passes the right prop as a class when passed', () => {
+  test('passes the right prop as a class when true', () => {
     const wrapper = mount(Tooltip, {
       props: { right: true }
     })
@@ -58,7 +46,7 @@ describe('right prop', () => {
     expect(wrapper.classes()).toContain('right')
   })
 
-  test('does not pass the right prop when no right prop is provided', () => {
+  test('does not pass the right prop when false', () => {
     const wrapper = mount(Tooltip, {
       props: {}
     })
@@ -67,7 +55,7 @@ describe('right prop', () => {
 })
 
 describe('left prop', () => {
-  test('passes the left prop as a class when passed', () => {
+  test('passes the left prop as a class when true', () => {
     const wrapper = mount(Tooltip, {
       props: { left: true }
     })
@@ -75,7 +63,7 @@ describe('left prop', () => {
     expect(wrapper.classes()).toContain('left')
   })
 
-  test('does not pass the left prop when no left prop is provided', () => {
+  test('does not pass the left prop when false', () => {
     const wrapper = mount(Tooltip, {
       props: {}
     })
@@ -101,7 +89,7 @@ describe('top prop', () => {
 })
 
 describe('bottom prop', () => {
-  test('passes the bottom prop as a class when passed', () => {
+  test('passes the bottom prop as a class when true', () => {
     const wrapper = mount(Tooltip, {
       props: { bottom: true }
     })
@@ -109,7 +97,7 @@ describe('bottom prop', () => {
     expect(wrapper.classes()).toContain('bottom')
   })
 
-  test('does not pass the bottom prop when no left prop is provided', () => {
+  test('does not pass the bottom prop when false', () => {
     const wrapper = mount(Tooltip, {
       props: {}
     })
