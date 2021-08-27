@@ -6,7 +6,7 @@
 
     <div class="mt-5">
       <Tooltip :right="right" :left="left" :bottom="bottom" class="mr-2">
-        <template #text> <span class="highlight">button</span> </template>
+        <template #text> <span class="highlight">Tooltip</span> </template>
         <template #default>
           <Tag>Tag</Tag>
         </template>
