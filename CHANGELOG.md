@@ -1,3 +1,4 @@
+- Add Tooltip component - [#34](https://github.com/PrefectHQ/miter-design/pull/34)
 - Add TagGroup component - [#29](https://github.com/PrefectHQ/miter-design/pull/29)
 - Add storybook build command - [#28](https://github.com/PrefectHQ/miter-design/pull/28)
 - Fix miter mixin for specific browsers - [#27](https://github.com/PrefectHQ/miter-design/pull/27)
