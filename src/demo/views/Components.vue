@@ -10,6 +10,7 @@
     <Links class="mt-10" />
     <TabSection class="mt-10" />
     <Tag class="mt-10" />
+    <TagGroup class="mt-10" />
     <Avatar class="mt-10" />
   </div>
 </template>
@@ -24,6 +25,7 @@ import Checkboxes from '../sections/Checkboxes.vue'
 import Links from '../sections/Links.vue'
 import Avatar from '../sections/Avatar.vue'
 import TabSection from '../sections/TabSection.vue'
+import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
 import Sliders from '../sections/Sliders.vue'
 
@@ -38,7 +40,8 @@ import Sliders from '../sections/Sliders.vue'
     Sliders,
     Checkboxes,
     TabSection,
-    Tag
+    Tag,
+    TagGroup
   }
 })
 export default class App extends Vue {}
