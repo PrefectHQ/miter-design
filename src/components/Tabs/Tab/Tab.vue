@@ -55,7 +55,6 @@ export default defineComponent({
     }
   },
   mounted() {
-    // TODO: This throws warnings because we're accessing the slot method outside a render function. I'm not sure another way to programmatically grab the content of the slot unfortunately.
     // TODO: This could probably be improved but doesn't preclude consumers from setting aria attributes explicitly
     // This sets the button title to the first text node we find in the default slot
     const children = this.$slots?.default?.()
