@@ -150,6 +150,8 @@ $shadows: (
       border-width: #{$border-width + $border-width * 0.25}px;
       transform: rotate(45deg);
       transform-origin: bottom;
+      user-select: none;
+      -webkit-user-select: none;
     }
   }
 }

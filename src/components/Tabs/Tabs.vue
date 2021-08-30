@@ -199,8 +199,7 @@ export default defineComponent({
       {
         class: ['border-container']
       },
-
-      [rightArrow, tabsContainer, leftArrow]
+      [leftArrow, tabsContainer, rightArrow]
     )
 
     const wrapper = h(
