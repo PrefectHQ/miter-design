@@ -1,3 +1,4 @@
+- Add Slider story - [#31](https://github.com/PrefectHQ/miter-design/pull/31)
 - Add Avatar storybook - [#35](https://github.com/PrefectHQ/miter-design/pull/35)
 - Add Tag storybook - [#32](https://github.com/PrefectHQ/miter-design/pull/32)
 - Add TagGroup component - [#24](https://github.com/PrefectHQ/miter-design/pull/24)
