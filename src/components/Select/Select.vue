@@ -105,7 +105,6 @@ export default defineComponent({
       RendererElement,
       { [key: string]: any }
     >[][]
-    let valueList: string[] = []
 
     const pickerProps = [
       ...(this.disabled ? ['disabled'] : []),
@@ -139,11 +138,11 @@ export default defineComponent({
                     ti: RendererNode | RendererElement | { [key: string]: any }
                   ) => {
                     if (ti.type.name === 'Option') {
-                      console.log(ti)
                       return h(
                         ti,
                         mergeProps(
                           {
+                            disabled: innerSlot.props?.disabled,
                             selected: this.selected == ti.props?.value,
                             onClick: this.handleOptionClick
                           },
@@ -162,6 +161,7 @@ export default defineComponent({
                             node,
                             mergeProps(
                               {
+                                disabled: innerSlot.props?.disabled,
                                 selected: this.selected == node.props?.value,
                                 onClick: this.handleOptionClick
                               },
@@ -203,7 +203,7 @@ export default defineComponent({
         )
       ]
     }
-    children = temp.flat()
+    children = temp.flat(4)
 
     const searchBar = h('div', { class: 'search' }, [
       h('i', { class: ['pi', 'pi-Search', 'pi-lg', 'mr-1'] }),
