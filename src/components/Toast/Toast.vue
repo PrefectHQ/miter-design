@@ -27,7 +27,6 @@ export default class Toast extends Vue.with(Props) {
   }
 
   remove() {
-    console.log(this.$root, this.$root?.$el)
     this.$root?.$el.remove(this.$root?.$el)
   }
 
