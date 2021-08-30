@@ -21,10 +21,6 @@ export const mount = (
       render(null, el)
     }
 
-    if (container) {
-      container.removeChild(vNode.el)
-    } else document.body.removeChild(vNode.el)
-
     // For GC purposes
     el = null
     vNode = null

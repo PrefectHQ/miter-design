@@ -23,10 +23,10 @@ export default defineComponent({
   methods: {
     addToast() {
       this.toasts.push(this.$toast.add(new Date().toString()))
-      console.log(this.toasts)
     },
     removeToasts() {
       this.toasts.forEach((toast) => {
+        console.log(toast)
         toast.destroy()
       })
       this.toasts = []
