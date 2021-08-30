@@ -21,9 +21,7 @@ export default defineComponent({
     value: {
       type: [String, Number],
       default: 0
-    },
-    color: { type: String, default: () => 'primary' },
-    outlined: Boolean
+    }
   },
   emits: {
     'update:modelValue'(...args: any[]) {
@@ -101,10 +99,7 @@ export default defineComponent({
       (ti) => ti.props?.href == this.value_
     )
 
-    const computedProps = [
-      ...(this.color ? [this.color] : []),
-      ...(this.outlined ? ['outlined'] : [])
-    ]
+    const computedProps: string[] = []
 
     const onClick = ($e: Event, ...args: any): Event =>
       this.handleTabClick($e, ...args)
