@@ -8,7 +8,9 @@
           <i class="pi pi-Earth pi-lg mr-1" />
           Tab 1
         </Tab>
-        <Tab href="2"> <i class="pi pi-Tag-with-Heart pi-lg mr-1" />Tab 2 </Tab>
+        <Tab href="2" disabled>
+          <i class="pi pi-Tag-with-Heart pi-lg mr-1" />Tab 2
+        </Tab>
         <Tab href="3"> <i class="pi pi-Bug-Warning pi-lg mr-1" />Tab 3 </Tab>
         <Tab href="4"> <i class="pi pi-Compass pi-lg mr-1" />Tab 4 </Tab>
       </Tabs>

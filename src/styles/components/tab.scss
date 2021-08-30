@@ -19,8 +19,6 @@ button.tab {
   width: $width;
 
   &.hover,
-  &:hover,
-  &:focus,
   &.focus {
     background-color: variables.$grey-3;
     border-color: variables.$grey-2;
@@ -33,7 +31,7 @@ button.tab {
   }
 
   &.disabled {
-    color: variables.$disabled;
+    color: variables.$inactive;
     cursor: not-allowed;
   }
 
