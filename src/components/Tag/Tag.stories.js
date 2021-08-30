@@ -41,3 +41,9 @@ export const Disabled = Template.bind({})
 Disabled.args = {
     disabled: true
 }
+
+export const Elevated = Template.bind({}) 
+Elevated.args = {
+    elevated: true,
+    color: 'primary'
+}
