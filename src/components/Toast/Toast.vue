@@ -1,7 +1,7 @@
 <template>
-  <div class="toast-wrapper" :class="classList">
-    <div class="toast" data-test="default">
-      <slot>Sample toast message</slot>
+  <div class="toast" :class="classList">
+    <div>
+      <slot>{{ text }}</slot>
       <Button class="ml-2" @click="remove">Close</Button>
     </div>
   </div>
@@ -13,6 +13,7 @@ import Button from '@/components/Button/Button.vue'
 
 class Props {
   color = prop<string>({})
+  text = prop<string>({})
 }
 
 @Options({

@@ -22,7 +22,7 @@ export default defineComponent({
   },
   methods: {
     addToast() {
-      this.toasts.push(this.$toast.add('some text'))
+      this.toasts.push(this.$toast.add(new Date().toString()))
       console.log(this.toasts)
     },
     removeToasts() {

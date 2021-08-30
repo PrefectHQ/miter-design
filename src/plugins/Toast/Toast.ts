@@ -37,7 +37,11 @@ export default {
       add(text: string) {
         return mount(
           Toast,
-          {},
+          {
+            props: {
+              text: text
+            }
+          },
           toastApp._container?.querySelector('.toast-container')
         )
       }
