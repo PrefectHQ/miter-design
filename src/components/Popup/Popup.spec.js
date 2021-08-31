@@ -7,7 +7,7 @@ import Card from '../Card/Card.vue'
 beforeEach(() => {
   // create teleport target
   const el = document.createElement('div')
-  el.id = 'app'
+  el.id = 'pop'
   document.body.appendChild(el)
 })
 
@@ -80,6 +80,19 @@ test('emits close and update:modelValue as false when the background is clicked'
   const outerCloseEvent = wrapper.emitted('update:modelValue')
   expect(outerCloseEvent).toHaveLength(1)
   expect(outerCloseEvent[0]).toEqual([false])
+})
+
+test('passes popup placement', () => {
+  const wrapper = mount(Popup, {props: {modelValue: true, position: 'flex-start', teleportTo: '#pop'}, slots: {
+    content: '<div>Main Content</div>'}, global: {
+      components: {
+        Card: Card
+      }
+    }
+  })
+  expect(wrapper.props().teleportTo).toBe('#pop')
+  const modal = wrapper.findComponent(PopupContent)
+  expect(modal.exists()).toBe(true)
 })
 
 test('passes popup position', () => {
