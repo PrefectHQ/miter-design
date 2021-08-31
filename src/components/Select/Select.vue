@@ -72,7 +72,6 @@ export default defineComponent({
     },
 
     handleBlur(event: FocusEvent | PointerEvent): void {
-      console.log(event)
       if (
         event.relatedTarget?.tagName === 'INPUT' ||
         event.relatedTarget?.classList.contains('active')
@@ -98,20 +97,74 @@ export default defineComponent({
           })
         }
         this.active = !this.active
-        if (this.active && this.selected.length > 0) {
-          // hover goes to selected option
-          this.filteredOptions.forEach((option) => {
-            if (option.el?.classList?.contains('selected')) {
-              option.el.classList.add('hovered')
-            }
-          })
-        }
       } else if (event.key === 'Escape') {
         this.active = false
       } else if (event.key === 'ArrowUp') {
-        // selectPrevious
+        event.preventDefault()
+        let currentFound = false
+        let nextSelected = false
+        for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
+          if (
+            this.filteredOptions[i].type?.name === 'Option' &&
+            !this.filteredOptions[i].el?.classList?.contains('disabled') &&
+            currentFound
+          ) {
+            this.filteredOptions[i].el?.classList.add('hovered')
+            nextSelected = true
+            break
+          }
+          if (
+            this.filteredOptions[i].el?.classList?.contains('hovered') &&
+            !currentFound
+          ) {
+            this.filteredOptions[i].el?.classList.remove('hovered')
+            currentFound = true
+          }
+        }
+        if (!nextSelected) {
+          for (let i = 0; i < this.filteredOptions.length; i++) {
+            if (
+              this.filteredOptions[i].type?.name === 'Option' &&
+              !this.filteredOptions[i].el?.classList?.contains('disabled')
+            ) {
+              this.filteredOptions[i].el?.classList.add('hovered')
+              break
+            }
+          }
+        }
       } else if (event.key === 'ArrowDown') {
-        // selectNext
+        event.preventDefault()
+        let currentFound = false
+        let nextSelected = false
+        for (let i = 0; i < this.filteredOptions.length; i++) {
+          if (
+            this.filteredOptions[i].type?.name === 'Option' &&
+            !this.filteredOptions[i].el?.classList?.contains('disabled') &&
+            currentFound
+          ) {
+            this.filteredOptions[i].el?.classList.add('hovered')
+            nextSelected = true
+            break
+          }
+          if (
+            this.filteredOptions[i].el?.classList?.contains('hovered') &&
+            !currentFound
+          ) {
+            this.filteredOptions[i].el?.classList.remove('hovered')
+            currentFound = true
+          }
+        }
+        if (!nextSelected) {
+          for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
+            if (
+              this.filteredOptions[i].type?.name === 'Option' &&
+              !this.filteredOptions[i].el?.classList?.contains('disabled')
+            ) {
+              this.filteredOptions[i].el?.classList.add('hovered')
+              break
+            }
+          }
+        }
       }
     },
     runSearch(searchValue: InputEvent): void {
