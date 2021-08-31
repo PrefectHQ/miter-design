@@ -2,14 +2,14 @@
   <div>
     <h3>Selects</h3>
     <div class="d-flex">
-      <!-- <Select
+      <Select
         class="my-2 mr-2"
         name="without-icon"
         :options="options"
         v-model="selected1"
       >
         <Option v-for="(option, i) in options" :key="i" :value="option" />
-      </Select> -->
+      </Select>
       <Select
         class="my-2 mr-2"
         name="with-icon"
@@ -34,7 +34,6 @@
           <Option value="no click" />
         </OptionGroup>
         <Option value="4" /><Option value="5" disabled />
-        <OptionGroup label="No Options Here" />
       </Select>
       <Select
         class="my-2"

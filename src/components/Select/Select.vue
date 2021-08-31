@@ -5,8 +5,7 @@ import {
   mergeProps,
   VNode,
   RendererNode,
-  RendererElement,
-  ref
+  RendererElement
 } from 'vue'
 import Option from './Option.vue'
 import OptionGroup from './OptionGroup.vue'
@@ -43,7 +42,14 @@ export default defineComponent({
       active: false,
       selected: '',
       searchTerm: '',
-      filteredOptions: this.options
+      allOptions: [],
+      filteredOptions: []
+    }
+  },
+  watch: {
+    active(): void {
+      this.searchTerm = ''
+      this.filteredOptions = this.allOptions
     }
   },
   methods: {
@@ -71,17 +77,26 @@ export default defineComponent({
       this.hovered = false
     },
     handleKeydown(event: Event): void {
-      event.preventDefault()
       if (event.key === 'Enter' || event.code === 'Space') {
+        event.preventDefault()
         if (this.disabled) return
         if (this.active) {
           // choose highlighted option, else close
+          this.filteredOptions.forEach((option) => {
+            console.log(option)
+            if (option.el.classList.contains('hovered')) {
+              this.handleOptionClick(event, option.props.value)
+            }
+          })
         }
         this.active = !this.active
         if (this.active && this.selected.length > 0) {
           // hover goes to selected option
-        } else {
-          // hover goes to first option
+          this.filteredOptions.forEach((option) => {
+            if (option.el?.classList?.contains('selected')) {
+              option.el.classList.add('hovered')
+            }
+          })
         }
       } else if (event.key === 'Escape') {
         this.active = false
@@ -91,10 +106,19 @@ export default defineComponent({
         // selectNext
       }
     },
-    runSearch(searchValue: string): void {
-      this.filteredOptions = this.options.filter((option) =>
-        option.toLowerCase().includes(searchValue.toLowerCase())
-      )
+    runSearch(searchValue: InputEvent): void {
+      searchValue.data == ''
+        ? (this.filteredOptions = this.allOptions)
+        : (this.filteredOptions = [])
+      this.allOptions.forEach((option) => {
+        if (
+          option.type === 'div' ||
+          option.props?.value
+            .toLowerCase()
+            .includes(searchValue.target?.value?.toString().toLowerCase())
+        )
+          this.filteredOptions.push(option)
+      })
     }
   },
   render() {
@@ -204,6 +228,7 @@ export default defineComponent({
       ]
     }
     children = temp.flat(4)
+    this.allOptions = [...children]
 
     const searchBar = h('div', { class: 'search' }, [
       h('i', { class: ['pi', 'pi-Search', 'pi-lg', 'mr-1'] }),
@@ -221,7 +246,7 @@ export default defineComponent({
     const listContainer = h(
       'div',
       { class: ['list', this.openUp && 'openUp'], disabled: this.disabled },
-      [this.search && searchBar, children]
+      [this.search && searchBar, this.filteredOptions]
     )
 
     const picker = h(
