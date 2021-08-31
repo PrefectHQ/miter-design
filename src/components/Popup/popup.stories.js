@@ -19,7 +19,6 @@ const Template = (args) => ({
   setup() {
     const val = ref(args.val)
     const el = document.createElement('div')
-    el.id = 'app'
     document.body.appendChild(el)
     return { args, val }
   },
