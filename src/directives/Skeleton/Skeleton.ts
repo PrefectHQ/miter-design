@@ -1,6 +1,5 @@
 // Is this the correct way to apply this style? I'm trying to avoid a global import since that seems inappropriate
 import '@/styles/components/skeleton-loader.scss'
-import { BindingMetadata } from '@vue/compiler-core'
 import { DirectiveBinding, ObjectDirective, VNode } from '@vue/runtime-dom'
 
 // Using any bindings for these elements so typescript doesn't throw errors when we attempt to set disabled on non-input elements
