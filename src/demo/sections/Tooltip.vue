@@ -1,17 +1,6 @@
 <template>
   <div>
-    <button @click="right = !right">right: {{ right }}</button>
-    <button @click="left = !left">left: {{ left }}</button>
-    <button @click="bottom = !bottom">bottom: {{ bottom }}</button>
-
-    <div class="mt-5">
-      <Tooltip :right="right" :left="left" :bottom="bottom">
-        <template #text> <span class="highlight">Tooltip</span> </template>
-        <template #default>
-          <Tag>Tag</Tag>
-        </template>
-      </Tooltip>
-    </div>
+    <Button v-tooltip="'I am tooltip'"> Button </Button>
   </div>
 </template>
 
