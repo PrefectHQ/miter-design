@@ -9,9 +9,9 @@
       <Card :class="positionClass" :height="height" :width="width">
         <h4 class="h4-bottom">
           {{ title }}
-          <span class="close-icon" @click="closePopUp">
+          <button class="close-icon" @click="closePopUp">
             <i class="pi pi-X mr-1"></i>
-          </span>
+          </button>
         </h4>
 
         <div v-if="$slots.content">
