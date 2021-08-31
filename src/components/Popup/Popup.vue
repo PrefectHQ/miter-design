@@ -3,7 +3,7 @@
     <div v-if="$slots.activate">
       <slot name="activate" />
     </div>
-    <teleport to="body" :disabled="!popupOpen" v-if="popupOpen">
+    <teleport :to="placement" :disabled="!popupOpen" v-if="popupOpen">
       <PopupContent
         @close="closePopUp"
         :placement="position"
@@ -36,6 +36,11 @@ export default defineComponent({
     modelValue: {
       type: Boolean,
       required: false
+    },
+    placement: {
+      type: String,
+      required: false,
+      default: 'body'
     },
     value: {
       type: Boolean,

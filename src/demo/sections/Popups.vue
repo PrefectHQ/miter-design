@@ -5,6 +5,7 @@
       <Popup
         v-for="popup in popups"
         :key="popup"
+        placement="#app"
         v-model="popup.value"
         :position="popup.position"
         :title="popup.title"
