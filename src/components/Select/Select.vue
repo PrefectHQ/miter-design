@@ -42,8 +42,16 @@ export default defineComponent({
       active: false,
       selected: '',
       searchTerm: '',
-      allOptions: [],
-      filteredOptions: []
+      allOptions: [] as VNode<
+        RendererNode,
+        RendererElement,
+        { [key: string]: any }
+      >[],
+      filteredOptions: [] as VNode<
+        RendererNode,
+        RendererElement,
+        { [key: string]: any }
+      >[]
     }
   },
   watch: {
@@ -63,7 +71,8 @@ export default defineComponent({
       this.hovered = true
     },
 
-    handleBlur(event: Event): void {
+    handleBlur(event: FocusEvent | PointerEvent): void {
+      console.log(event)
       if (
         event.relatedTarget?.tagName === 'INPUT' ||
         event.relatedTarget?.classList.contains('active')
@@ -76,14 +85,13 @@ export default defineComponent({
     handleMouseLeave(): void {
       this.hovered = false
     },
-    handleKeydown(event: Event): void {
+    handleKeydown(event: KeyboardEvent): void {
       if (event.key === 'Enter' || event.code === 'Space') {
         event.preventDefault()
         if (this.disabled) return
         if (this.active) {
           // choose highlighted option, else close
           this.filteredOptions.forEach((option) => {
-            console.log(option)
             if (option.el.classList.contains('hovered')) {
               this.handleOptionClick(event, option.props.value)
             }
@@ -123,12 +131,9 @@ export default defineComponent({
   },
   render() {
     const slottedItems = this.$slots.default?.()
-    let temp = []
-    let children: VNode<
-      RendererNode,
-      RendererElement,
-      { [key: string]: any }
-    >[][]
+    let temp: VNode<RendererNode, RendererElement, { [key: string]: any }>[] =
+      []
+    let children: VNode<RendererNode, RendererElement, { [key: string]: any }>[]
 
     const pickerProps = [
       ...(this.disabled ? ['disabled'] : []),
