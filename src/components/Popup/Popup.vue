@@ -3,7 +3,7 @@
     <div v-if="$slots.activate">
       <slot name="activate" />
     </div>
-    <teleport to="#app" :disabled="!popupOpen" v-if="popupOpen">
+    <teleport to="body" :disabled="!popupOpen" v-if="popupOpen">
       <PopupContent
         @close="closePopUp"
         :placement="position"
