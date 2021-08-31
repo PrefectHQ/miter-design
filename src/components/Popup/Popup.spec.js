@@ -82,7 +82,7 @@ test('emits close and update:modelValue as false when the background is clicked'
   expect(outerCloseEvent[0]).toEqual([false])
 })
 
-test('passes popup placement', () => {
+test('passes popup teleport placement and attaches to element if it exists', () => {
   const wrapper = mount(Popup, {props: {modelValue: true, position: 'flex-start', teleportTo: '#pop'}, slots: {
     content: '<div>Main Content</div>'}, global: {
       components: {
@@ -91,8 +91,23 @@ test('passes popup placement', () => {
     }
   })
   expect(wrapper.props().teleportTo).toBe('#pop')
+  console.log(wrapper)
   const modal = wrapper.findComponent(PopupContent)
   expect(modal.exists()).toBe(true)
+})
+
+test('passes popup teleport placement and does not attach if no element with correct id', () => {
+  const wrapper = mount(Popup, {props: {modelValue: true, position: 'flex-start', teleportTo: '#poppy'}, slots: {
+    content: '<div>Main Content</div>'}, global: {
+      components: {
+        Card: Card
+      }
+    }
+  })
+  expect(wrapper.props().teleportTo).toBe('#poppy')
+  console.log(wrapper)
+  const modal = wrapper.findComponent(PopupContent)
+  expect(modal.exists()).toBe(false)
 })
 
 test('passes popup position', () => {
