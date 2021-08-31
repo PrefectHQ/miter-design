@@ -120,7 +120,6 @@ test('passes popup title', () => {
     }
   }})
   const modal = wrapper.findComponent(PopupContent)
-  console.log(modal.find('h4'))
   expect(modal.find('h4').text()).toContain(title)
 })
 
