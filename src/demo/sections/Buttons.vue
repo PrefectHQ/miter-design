@@ -6,9 +6,9 @@
 
     <h5 class="mt-5">Block</h5>
 
-    <Button class="my-4" @click="skeletonLoader = !skeletonLoader"
-      >Toggle loader</Button
-    >
+    <Button class="my-4" @click="skeletonLoader = !skeletonLoader">
+      Toggle loader
+    </Button>
 
     <div v-for="state in states" :key="state" class="my-2">
       <span class="font-weight-light text-capitalize">{{ state }}:</span>
