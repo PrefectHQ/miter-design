@@ -2,12 +2,13 @@
 import '@/styles/components/skeleton-loader.scss'
 import { BindingMetadata } from '@vue/compiler-core'
 
-const applySkeletonClass = (el: Element) => {
+// Using any bindings for these elements so typescript doesn't throw errors when we attempt to set disabled on non-input elements
+const applySkeletonClass = (el: any) => {
   el.classList.add('skeleton-loader')
   el.disabled = true
 }
 
-const removeSkeletonClass = (el: Element) => {
+const removeSkeletonClass = (el: any) => {
   el.classList.remove('skeleton-loader')
   el.disabled = false
 }
