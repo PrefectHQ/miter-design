@@ -18,6 +18,20 @@
     cursor: pointer;
     border-style: none;
     background: transparent;
+  &.hover,
+  &:hover,
+  &:focus,
+  &.focus {
+    border-radius: 4px;
+    background-color: variables.$grey-3;
+    outline: none;
+  }
+
+  &.focused {
+    border-radius: 4px;
+    background-color: variables.$grey-3;
+    outline: none;
+  }
 }
 
 .h4-bottom {

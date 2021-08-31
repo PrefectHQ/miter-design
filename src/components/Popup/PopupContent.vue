@@ -9,8 +9,21 @@
       <Card :class="positionClass" :height="height" :width="width">
         <h4 class="h4-bottom">
           {{ title }}
-          <button class="close-icon" @click="closePopUp">
-            <i class="pi pi-X mr-1"></i>
+          <button
+            icon
+            class="close-icon"
+            :classes="classes"
+            @click="closePopUp"
+            @mouseenter="handleMouseEnter"
+            @mouseleave="handleMouseLeave"
+            @mousedown="handleMouseDown"
+            @mouseup="handleMouseUp"
+            @keydown.enter.space="handleKeydown"
+            @keyup.enter.space="handleKeyup"
+            @focus="handleFocus"
+            @blur="handleBlur"
+          >
+            <i class="pi pi-X"></i>
           </button>
         </h4>
 
@@ -66,10 +79,19 @@ export default defineComponent({
   emits: ['close'],
   data() {
     return {
-      active: false as boolean
+      active: false as boolean,
+      hovered: false as boolean,
+      focused: false as boolean
     }
   },
   computed: {
+    classes(): string[] {
+      return [
+        ...(this.active ? ['active'] : []),
+        ...(this.hovered ? ['hovered'] : []),
+        ...(this.focused ? ['focused'] : [])
+      ]
+    },
     position(): any {
       return {
         '--position-place': `${this.placement}`
@@ -91,6 +113,23 @@ export default defineComponent({
   methods: {
     closePopUp() {
       this.$emit('close', false)
+    },
+    handleMouseEnter(): void {
+      this.hovered = true
+    },
+    handleMouseLeave(): void {
+      this.hovered = false
+      this.focused = false
+    },
+    handleFocus(): void {
+      this.hovered = true
+    },
+    handleBlur(): void {
+      this.hovered = false
+      this.focused = false
+    },
+    handleKeydown(): void {
+      this.focused = true
     }
   }
 })
