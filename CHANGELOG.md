@@ -1,3 +1,4 @@
+- Add Skeleton directive - [#37](https://github.com/PrefectHQ/miter-design/pull/37)
 - Add Tabs component - [#14](https://github.com/PrefectHQ/miter-design/pull/14)
 - Add Slider story - [#31](https://github.com/PrefectHQ/miter-design/pull/31)
 - Add Avatar storybook - [#35](https://github.com/PrefectHQ/miter-design/pull/35)
