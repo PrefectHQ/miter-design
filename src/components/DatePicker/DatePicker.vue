@@ -29,7 +29,10 @@
             .reverse()"
           :key="day"
           class="day previous-month"
-          :class="'day-' + getDayOfTheWeekPreviousMonth(day)"
+          :class="{
+            ['day-' + getDayOfTheWeekPreviousMonth(day)]: true,
+            'current-day': isCurrentDay(day, previousMonth)
+          }"
         >
           {{ day }}
         </div>
@@ -38,7 +41,10 @@
           v-for="day in daysInMonth"
           :key="day"
           class="day"
-          :class="'day-' + getDayOfTheWeek(day)"
+          :class="{
+            ['day-' + getDayOfTheWeek(day)]: true,
+            'current-day': isCurrentDay(day, month)
+          }"
         >
           {{ day }}
         </div>
@@ -47,7 +53,10 @@
           v-for="day in 6 - getDayOfTheWeek(daysInMonth)"
           :key="day"
           class="day next-month"
-          :class="'day-' + getDayOfTheWeekNextMonth(day)"
+          :class="{
+            ['day-' + getDayOfTheWeekNextMonth(day)]: true,
+            'current-day': isCurrentDay(day, nextMonth)
+          }"
         >
           {{ day }}
         </div>
@@ -138,6 +147,10 @@ export default class DatePicker extends Vue.with(Props) {
   decrementMonth() {
     this.date = new Date(this.year, this.month - 1)
     this.monthDirection = -1
+  }
+
+  isCurrentDay(date: number, month: number): boolean {
+    return this.today.getMonth() == month && this.today.getDate() == date
   }
 
   getDayOfTheWeek(day: number): number {

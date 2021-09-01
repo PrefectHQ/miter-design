@@ -96,10 +96,18 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
       background-color: variables.$grey-3;
     }
 
+    &.current-day {
+      border: 2px solid variables.$primary;
+    }
+
     &.next-month,
     &.previous-month {
       background-color: variables.$grey-3;
       color: variables.$text--secondary;
+
+      &.current-day {
+        border: 2px solid variables.$grey-4;
+      }
     }
   }
 
