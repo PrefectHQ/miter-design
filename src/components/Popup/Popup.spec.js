@@ -164,19 +164,3 @@ test('passes popup height and width', () => {
   expect(cardProps.height).toBe('200px')
   expect(cardProps.width).toBe('300px')
 })
-
-test('uses default popup height and width if non passed', () => {
-  const title = 'My Pop Up'
-  const wrapper = mount(Popup, {props: {modelValue: true, title}, slots: {
-    content: '<div>Main Content</div>' , activate: '<button id="test-button">Test</button>'
-  }, global: {
-    components: {
-      Card: Card
-    }
-  }})
-  const modal = wrapper.findComponent(PopupContent)
-  const card = modal.findComponent(Card)
-  const cardProps = card.props()
-  expect(cardProps.height).toBe('269px')
-  expect(cardProps.width).toBe('350px')
-})
