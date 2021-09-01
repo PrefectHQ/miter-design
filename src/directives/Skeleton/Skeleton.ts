@@ -6,12 +6,16 @@ const skeletonClass = 'skeleton-loader'
 // Using any bindings for these elements so typescript doesn't throw errors when we attempt to set disabled on non-input elements
 export const applyClass = (el: any) => {
   el.classList.add(skeletonClass)
-  el.disabled = true
+  if ('disabled' in el) el.disabled = true
+  el.ariaBusy = true
+  el.ariaHidden = true
 }
 
 export const removeClass = (el: any) => {
   el.classList.remove(skeletonClass)
-  el.disabled = false
+  if ('disabled' in el) el.disabled = false
+  el.ariaBusy = false
+  el.ariaHidden = false
 }
 
 export const SkeletonDirective: ObjectDirective = {
