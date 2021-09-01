@@ -61,7 +61,8 @@ export default defineComponent({
   },
   methods: {
     choose(e: Event): Event {
-      this.$emit('click', e, this.value)
+      console.log(this.value, this.icon)
+      this.$emit('click', e, this.value, this.icon)
       return e
     },
 

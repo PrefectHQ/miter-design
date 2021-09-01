@@ -40,6 +40,7 @@ export default defineComponent({
     return {
       hovered: false,
       active: false,
+      icon: '',
       selected: '',
       searchTerm: '',
       allOptions: [] as VNode<
@@ -63,6 +64,7 @@ export default defineComponent({
   methods: {
     handleOptionClick(e: Event, ...args: any[]): Event {
       this.selected = args[0]
+      this.icon = args[1]
       this.$emit('update:modelValue', this.selected)
       return e
     },
@@ -316,7 +318,12 @@ export default defineComponent({
         class: ['picker', ...pickerProps]
       }),
       [
-        h('span', this.selected || this.placeholder),
+        h('span', [
+          this.icon.length > 0
+            ? h('i', { class: ['pi', `pi-${this.icon}`, 'pi-1x', 'pr-1'] })
+            : null,
+          this.selected || this.placeholder
+        ]),
         h('i', { class: ['pi', 'pi-Arrow-Down', 'pi-lg'] })
       ]
     )

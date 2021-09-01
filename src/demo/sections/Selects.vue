@@ -13,7 +13,7 @@
       <Select
         class="my-2 mr-2"
         name="with-icon"
-        placeholder="This one has icons!"
+        placeholder="This one has props!"
         search
         openUp
         :options="options"
