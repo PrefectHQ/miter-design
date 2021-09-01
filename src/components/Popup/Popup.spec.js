@@ -180,5 +180,3 @@ test('uses default popup height and width if non passed', () => {
   expect(cardProps.height).toBe('269px')
   expect(cardProps.width).toBe('350px')
 })
-
-  
