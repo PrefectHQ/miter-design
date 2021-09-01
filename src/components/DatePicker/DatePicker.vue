@@ -12,6 +12,17 @@
     <div> Year: {{ year }} </div>
 
     <div class="days-grid">
+      <div class="days-header-grid">
+        <div
+          v-for="(n, i) in 7"
+          class="day-header"
+          :class="'day-' + getDayOfTheWeek(i)"
+          :key="i"
+        >
+          {{ getDisplayDay(i) }}
+        </div>
+      </div>
+
       <div
         v-for="day in daysInMonth"
         :key="day"
@@ -58,6 +69,11 @@ export default class DatePicker extends Vue.with(Props) {
       'December'
     ]
     return months[this.month]
+  }
+
+  getDisplayDay(day: number): string {
+    const days: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    return days[day]
   }
 
   get year(): number {

@@ -11,16 +11,26 @@ $days-of-the-week: (
   6: Sat
 );
 
+$grid-template-columns: [Sun-start] 1fr [Sun-end] [Mon-start] 1fr [Mon-end]
+  [Tue-start] 1fr [Tue-end] [Wed-start] 1fr [Wed-end] [Thu-start] 1fr [Thu-end]
+  [Fri-start] 1fr [Fri-end] [Sat-start] 1fr [Sat-end];
+$grid-template-areas: 'Sun Mon Tue Wed Thu Fri Sat';
+
+.days-header-grid {
+  display: grid;
+  grid-template-columns: $grid-template-columns;
+  grid-template-rows: repeat(1);
+  grid-template-areas: $grid-template-areas;
+  grid-column: h;
+}
+
 .days-grid {
   display: grid;
-  grid-template-columns: [Sun-start] 1fr [Sun-end] [Mon-start] 1fr [Mon-end] [Tue-start] 1fr [Tue-end] [Wed-start] 1fr [Wed-end] [Thu-start] 1fr [Thu-end] [Fri-start] 1fr [Fri-end] [Sat-start] 1fr [Sat-end];
+  grid-template-columns: $grid-template-columns;
   grid-template-rows: auto;
   grid-template-areas:
-    'Sun Mon Tue Wed Thu Fri Sat'
-    'Sun Mon Tue Wed Thu Fri Sat'
-    'Sun Mon Tue Wed Thu Fri Sat'
-    'Sun Mon Tue Wed Thu Fri Sat'
-    'Sun Mon Tue Wed Thu Fri Sat';
+    'h h h h h h h'
+    $grid-template-areas;
 
   .day {
     display: inline-block;
@@ -33,11 +43,18 @@ $days-of-the-week: (
     &:focus {
       background-color: variables.$grey-3;
     }
+  }
 
-    @each $num, $day in $days-of-the-week {
-      &.day-#{$num} {
-        grid-column: $day;
-      }
+  .day-header {
+    display: inline-block;
+    color: variables.$text--primary;
+    user-select: none;
+  }
+
+  @each $num, $day in $days-of-the-week {
+    .day.day-#{$num},
+    .day-header.day-#{num} {
+      grid-column: $day;
     }
   }
 }
