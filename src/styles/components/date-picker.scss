@@ -17,6 +17,7 @@
   justify-content: space-between;
   padding: 0 4px;
   text-transform: uppercase;
+  margin-bottom: 20px;
 
   .month-button {
     background-color: transparent;
@@ -89,7 +90,7 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
 
   .day-header {
     color: variables.$text--secondary;
-    margin: 8px auto;
+    font-weight: normal;
   }
 
   @each $num, $day in $days-of-the-week {
