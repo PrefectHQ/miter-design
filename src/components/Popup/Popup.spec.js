@@ -91,7 +91,6 @@ test('passes popup teleport placement and attaches to element if it exists', () 
     }
   })
   expect(wrapper.props().teleportTo).toBe('#pop')
-  console.log(wrapper)
   const modal = wrapper.findComponent(PopupContent)
   expect(modal.exists()).toBe(true)
 })
@@ -105,7 +104,6 @@ test('passes popup teleport placement and does not attach if no element with cor
     }
   })
   expect(wrapper.props().teleportTo).toBe('#poppy')
-  console.log(wrapper)
   const modal = wrapper.findComponent(PopupContent)
   expect(modal.exists()).toBe(false)
 })
