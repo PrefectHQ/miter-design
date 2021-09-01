@@ -8,7 +8,9 @@
     <Checkboxes />
     <Sliders class="mt-10" />
     <Links class="mt-10" />
+    <TabSection class="mt-10" />
     <Tag class="mt-10" />
+    <TagGroup class="mt-10" />
     <Avatar class="mt-10" />
     <Selects class="mt-10" />
   </div>
@@ -23,6 +25,8 @@ import RadioButtons from '../sections/RadioButtons.vue'
 import Checkboxes from '../sections/Checkboxes.vue'
 import Links from '../sections/Links.vue'
 import Avatar from '../sections/Avatar.vue'
+import TabSection from '../sections/TabSection.vue'
+import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
 import Sliders from '../sections/Sliders.vue'
 import Selects from '../sections/Selects.vue'
@@ -37,8 +41,11 @@ import Selects from '../sections/Selects.vue'
     Toggles,
     Sliders,
     Checkboxes,
+    Selects,
+    TabSection,
     Tag,
-    Selects
+    TagGroup
+
   }
 })
 export default class App extends Vue {}

@@ -1,35 +1,48 @@
 <template>
-  <span :class="shadow && 'shadowWrapper'">
-    <div class="tag" :class="classList">
-      <span data-test="default"> <slot /></span>
-    </div>
-  </span>
+  <div class="tag-wrapper" :class="classList">
+    <span class="tag" data-test="default"> <slot /></span>
+  </div>
 </template>
 
 <script lang="ts">
-import { Vue, Options, prop } from 'vue-class-component'
+import { defineComponent } from 'vue'
 
-class Props {
-  color = prop<string>({})
-  outlined = prop<boolean>({ default: false })
-  disabled = prop<boolean>({ default: false })
-  shadow = prop<boolean>({ default: false })
-}
-
-@Options({})
-export default class Tag extends Vue.with(Props) {
-  get classList() {
-    return [
-      ...(this.disabled ? ['disabled'] : []),
-      ...(this.outlined ? ['outlined'] : []),
-      this.color
-    ]
+export default defineComponent({
+  name: 'Tag',
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    outlined: {
+      type: Boolean,
+      default: false
+    },
+    elevated: {
+      type: Boolean,
+      default: false
+    },
+    hovered: {
+      type: Boolean,
+      default: false
+    },
+    color: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    classList(): string[] {
+      return [
+        ...(this.disabled ? ['disabled'] : []),
+        ...(this.outlined ? ['outlined'] : []),
+        ...(this.hovered ? ['hovered'] : []),
+        ...(this.elevated ? ['elevated'] : []),
+        this.color
+      ]
+    }
   }
-
-  mounted(): void {
-    return
-  }
-}
+})
 </script>
 
 <style lang="scss" scoped>

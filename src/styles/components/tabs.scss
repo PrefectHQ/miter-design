@@ -1,0 +1,110 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+@mixin hide-scrollbars {
+  /* Hide scrollbars */
+  scrollbar-width: none; // Edge
+  -ms-overflow-style: none; // Firefox
+
+  // Chrome, Safari
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  /* End hide scrollbars */
+}
+
+.component-wrapper {
+  @include mixins.miter(2, 2);
+  @include hide-scrollbars;
+
+  $width: 227px;
+  $left-margin: -24px;
+  $miter-width: 16px;
+
+  overflow: hidden;
+  white-space: nowrap;
+
+  .border-container {
+    // Adding this gives consistent spacing for the miter cut
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid variables.$grey-4;
+    position: relative;
+
+    // This is necessary because the miter mixin inherits the entire border property but we want only the bottom border
+    &:after {
+      border-left: 4px solid variables.$grey-4;
+    }
+  }
+
+  .overflow-button {
+    background-color: variables.$white;
+
+    border: none;
+    cursor: pointer;
+    height: calc(100% - 2px);
+    padding: 4px;
+    position: absolute;
+    top: 2px;
+    transition: all 150ms;
+    z-index: 1;
+
+    &.left {
+      left: 0;
+    }
+
+    &.right {
+      @include mixins.miter-clip(2, 2);
+      right: 0;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: variables.$grey-4;
+      outline: none;
+    }
+  }
+
+  .tabs-container {
+    @include hide-scrollbars;
+
+    // This is used to offset the bottom border of the container element
+    bottom: -2px;
+    height: 100%;
+    margin-right: 16px;
+    outline: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    position: relative;
+
+    &::after {
+      border-bottom: 2px solid variables.$primary;
+      bottom: 0;
+      content: '';
+      height: 0;
+      left: 0;
+      position: absolute;
+      transition: all 200ms ease-out;
+      width: $width;
+      box-sizing: border-box;
+    }
+
+    &::before {
+      border-bottom: 2px solid variables.$grey-4;
+      content: '';
+      width: max-content;
+      height: 0;
+      left: 0;
+      position: absolute;
+      bottom: 0;
+      box-sizing: border-box;
+    }
+
+    @for $i from 0 through 100 {
+      &.tab-#{$i}-active {
+        &::after {
+          left: calc(#{$i} * #{$width});
+        }
+      }
+    }
+  }
+}

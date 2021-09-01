@@ -19,6 +19,12 @@ $shadows: (
   transition: all 250ms;
 }
 
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @mixin miter-original($i, $inner: false) {
   clip-path: polygon(
     0 0,
@@ -29,96 +35,123 @@ $shadows: (
   );
 }
 
-@mixin miter($cut-length) {
-  position: relative;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - #{list.nth($cuts, $cut-length)}px),
-    calc(100% - #{list.nth($cuts, $cut-length)}px) 100%,
-    0 100%
-  );
-}
-
-@mixin miter-border(
-  $cut-length,
-  $border-width: 0,
-  $border-color: transparent,
-  $border-radius: 4
-) {
-  border: #{$border-width}px solid $border-color;
-  border-radius: #{$border-radius}px;
-  &:after {
-    $cut: list.nth($cuts, $cut-length);
-    $hypotenuse: math.hypot($cut, $cut);
-    content: '';
-    height: #{$hypotenuse}px;
-    width: 0;
-    bottom: -#{$border-width}px;
-    right: #{$cut - ($border-width)}px;
-    position: absolute;
-    border-color: inherit;
-    border: inherit;
-    border-right: none;
-    border-bottom: none;
-    border-top: none;
-    transform: rotate(45deg);
-    transform-origin: bottom;
-  }
-}
-
-@mixin miter-shadow($shadow: md) {
+@mixin miter-shadow($shadow: 'md') {
   filter: #{map.get($shadows, $shadow)};
 }
 
-@mixin miter-interactive($shadow: md) {
-  &:not(.disabled) {
-    cursor: pointer;
-    transition: all 250ms;
-    &:hover,
-    &:focus {
-      filter: #{map.get($shadows, $shadow)};
+@mixin firefox-only {
+  @at-root {
+    @-moz-document url-prefix() {
+      & {
+        @content;
+      }
     }
   }
 }
 
-@mixin miter-on-hover($cut-length, $background-color: variables.$white) {
-  position: relative;
-  background-color: $background-color;
-  transition: clip-path 250ms;
-  clip-path: polygon(0 0, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
-  height: 100%;
-  width: 100%;
-  &:after {
-    content: '';
-    height: 0;
-    width: 0;
-    transition: all 250ms;
+@mixin safari-only {
+  @media not all and (min-resolution: 0.001dpcm) {
+    & {
+      @content;
+    }
   }
-  &:hover {
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% calc(100% - #{list.nth($cuts, $cut-length)}px),
-      calc(100% - #{list.nth($cuts, $cut-length)}px) 100%,
-      0 100%
-    );
+}
+
+@mixin edge-only {
+  @supports (-ms-ime-align: auto) {
+    & {
+      @content;
+    }
+  }
+}
+
+@mixin miter-clip($cut-length: 1, $border-width: 1) {
+  $cut: list.nth($cuts, $cut-length);
+  $hypotenuse: math.ceil(
+    math.hypot($cut + $border-width * 0.25, $cut + $border-width * 0.25)
+  );
+
+  --end: 100%;
+
+  @include firefox-only {
+    --end: calc(100% + 0.5px);
+  }
+
+  @include safari-only {
+    --end: calc(100% + 0.5px);
+  }
+
+  $end: var(--end);
+
+  $miter-x: calc(#{$end} - #{$cut}px);
+  $miter-y: calc(#{$end} - #{$cut}px);
+  $polygon: polygon(
+    $miter-x $end,
+    $end $miter-y,
+    $end 0,
+    0 0,
+    0 $end,
+    $miter-x $end
+  );
+
+  clip-path: stroke-box $polygon;
+  -webkit-clip-path: $polygon;
+}
+
+@mixin miter($cut-length: 1, $border-width: 1) {
+  $cut: list.nth($cuts, $cut-length);
+  $hypotenuse: math.ceil(
+    math.hypot($cut + $border-width * 0.25, $cut + $border-width * 0.25)
+  );
+
+  --end: 100%;
+
+  @include firefox-only {
+    --end: calc(100% + 0.5px);
+  }
+
+  @include safari-only {
+    --end: calc(100% + 0.5px);
+  }
+
+  $end: var(--end);
+
+  $miter-x: calc(#{$end} - #{$cut}px);
+  $miter-y: calc(#{$end} - #{$cut}px);
+  $polygon: polygon(
+    $miter-x $end,
+    $end $miter-y,
+    $end 0,
+    0 0,
+    0 $end,
+    $miter-x $end
+  );
+
+  > :first-child {
+    clip-path: stroke-box $polygon;
+    -webkit-clip-path: $polygon;
+    position: relative;
+
     &:after {
-      $cut: list.nth($cuts, $cut-length);
-      $hypotenuse: math.hypot($cut, $cut);
       content: '';
       height: #{$hypotenuse}px;
       width: 0;
-      bottom: -#{$border-width}px;
-      right: #{$cut - ($border-width)}px;
+      padding: 0;
+      right: #{$cut - $border-width - $border-width * 0.25}px;
+      bottom: -#{$border-width + $border-width * 0.25}px;
       position: absolute;
       border-color: inherit;
       border: inherit;
-      border-right: none;
       border-bottom: none;
+      border-right: none;
       border-top: none;
+
+      // Increasing the border width of this slightly gives a more consistent look on the diagonal
+      border-width: #{$border-width + $border-width * 0.25}px;
       transform: rotate(45deg);
       transform-origin: bottom;
+      user-select: none;
+      -webkit-user-select: none;
     }
   }
 }

@@ -5,8 +5,17 @@
   @include mixins.miter-shadow;
 }
 
-.tag {
-  @include mixins.miter(1);
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    .tag-wrapper {
+      outline: none;
+    }
+  }
+}
+
+.tag-wrapper {
+  @include mixins.miter;
+
   border: none;
   border-radius: 3px;
   padding: 0;
@@ -14,54 +23,78 @@
   white-space: nowrap;
   cursor: default;
   display: inline-block;
-  overflow: hidden;
-  height: 26px;
   cursor: default;
-  font-size: 11px;
+  font-size: 14px;
   vertical-align: middle;
-  background-color: variables.$grey-2;
   color: variables.$text--white;
-  padding-left: 23px;
-  padding-right: 23px;
-  > span {
-    :first-child {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-    }
+
+  &.elevated {
+    @include mixins.miter-shadow;
   }
 
-  &:focus-visible {
-    outline: none;
+  &.hovered:hover {
+    cursor: pointer;
+  }
+
+  .tag {
+    align-items: center;
+    background-color: variables.$grey-2;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    display: inline-flex;
+    justify-content: center;
+    padding: 4px 24px;
   }
 
   &.outlined {
-    background-color: variables.$white;
-    color: variables.$grey-2;
-    transition: background-color 0s, clip-path 0s !important;
-    @include mixins.miter-border(1, 1, variables.$grey-4);
-  }
+    > .tag {
+      background-color: variables.$white;
+      color: variables.$grey-2;
+      border: 1px solid variables.$grey-4;
+      transition: background-color 0s, clip-path 0s !important;
+    }
 
-  @each $name, $color in variables.$colors {
-    &.#{'' + $name} {
-      background-color: $color;
-      color: variables.$text--white;
-
-      &.outlined {
-        @include mixins.miter-border(1, 1, $color);
-        color: $color;
-        background-color: variables.$white;
-      }
+    &.hovered:hover,
+    &.hovered:focus > .tag {
+      filter: brightness(0.98);
     }
   }
 
   &.disabled {
     cursor: not-allowed;
-    background-color: variables.$disabled !important;
     color: variables.$grey-4 !important;
 
-    &.outlined {
-      @include mixins.miter-border(1, 1, variables.$grey-4);
+    > .tag {
+      background-color: variables.$disabled !important;
+    }
+
+    &.outlined > .tag {
+      border-color: variables.$grey-4 !important;
+      color: inherit !important;
+    }
+  }
+
+  @each $name, $color in variables.$colors {
+    &.#{'' + $name} {
+      color: variables.$text--white;
+
+      > .tag {
+        background-color: $color;
+      }
+
+      &:not(.outlined) {
+        &.hovered:hover,
+        &.hovered:focus,
+        &.hovered:active {
+          filter: brightness(0.9);
+        }
+      }
+
+      &.outlined > .tag {
+        border-color: $color;
+        color: $color;
+        background-color: variables.$white;
+      }
     }
   }
 }

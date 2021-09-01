@@ -1,87 +1,104 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
-
-.shadowWrapper {
-  @include mixins.miter-shadow;
-  filter: variables.$drop-shadow-md;
-}
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
 
 .button {
   @include mixins.input-transition;
 
   &:not(.icon) {
-    @include mixins.miter(1);
+    @include mixins.miter;
   }
 
-  background-color: transparent;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  height: 36px;
-  line-height: 36px;
   padding: 0;
-  user-select: none;
+  background: none;
+  border: none;
+
+  > :first-child {
+    border: none;
+    border-radius: 4px;
+    display: block;
+    font-size: 14px;
+    height: auto;
+    padding: 12px 24px;
+    user-select: none;
+    -webkit-background-clip: padding-box;
+  }
+
+  @include mixins.input-transition;
+
+  border: none;
+  border-radius: 4px;
+  background: none;
+  padding: 0;
+
+  &.active {
+    @include mixins.miter-shadow;
+  }
+
   &:focus-visible {
     outline: none;
   }
 
-  @include mixins.input-transition;
-  border-radius: 4px;
-  padding-left: 32px;
-  padding-right: 32px;
-  position: relative;
-  margin-right: 4px;
-  &.icon {
+  &.icon > span {
     border-radius: 50%;
     height: 60px;
     line-height: 60px;
     overflow: hidden;
+    padding: 0;
     width: 60px;
-    &.outlined {
-      border: 1px solid variables.$grey-4;
-    }
-    i {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  &.disabled {
-    cursor: not-allowed;
-    color: variables.$grey-4 !important;
-    &:not(.outlined) {
-      background-color: variables.$grey-3 !important;
-    }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &.primary {
     color: variables.$text--white;
-    background-color: variables.$primary-100;
-    &.hovered {
+
+    > :first-child {
+      background-color: variables.$primary-100;
+    }
+
+    &.hovered > :first-child {
       background-color: variables.$primary-101;
     }
   }
 
   &.secondary {
     color: variables.$grey-1;
-    background-color: variables.$grey-3;
-    &.hovered {
+
+    > :first-child {
+      background-color: variables.$grey-3;
+    }
+
+    &.hovered > :first-child {
       background-color: variables.$grey-4;
     }
   }
 
   &.outlined {
     color: variables.$grey-1;
-    &:active {
+
+    > :first-child {
+      border: 1px solid variables.$grey-4;
+    }
+
+    &.active > :first-child {
       background-color: transparent;
     }
-    &:not(.icon) {
-      @include mixins.miter-border(1, 1, variables.$grey-4);
-    }
-    &.hovered {
+
+    &.hovered > :first-child {
       background-color: variables.$grey-5;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    color: variables.$grey-4 !important;
+
+    &:not(.outlined) > :first-child {
+      background-color: variables.$grey-3 !important;
     }
   }
 }
