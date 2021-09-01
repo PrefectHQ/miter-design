@@ -43,6 +43,11 @@ $grid-template-areas: 'Sun Mon Tue Wed Thu Fri Sat';
     &:focus {
       background-color: variables.$grey-3;
     }
+
+    &.next-month,
+    &.previous-month {
+      color: variables.$text--secondary;
+    }
   }
 
   .day-header {

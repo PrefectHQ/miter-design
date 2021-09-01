@@ -24,10 +24,30 @@
       </div>
 
       <div
+        v-for="day in Array.from({ length: getDayOfTheWeek(1) })
+          .map((e, i) => daysInPreviousMonth - i)
+          .reverse()"
+        :key="day"
+        class="day previous-month"
+        :class="'day-' + getDayOfTheWeekPreviousMonth(day)"
+      >
+        {{ day }}
+      </div>
+
+      <div
         v-for="day in daysInMonth"
         :key="day"
         class="day"
         :class="'day-' + getDayOfTheWeek(day)"
+      >
+        {{ day }}
+      </div>
+
+      <div
+        v-for="day in 6 - getDayOfTheWeek(daysInMonth)"
+        :key="day"
+        class="day next-month"
+        :class="'day-' + getDayOfTheWeekNextMonth(day)"
       >
         {{ day }}
       </div>
@@ -51,6 +71,22 @@ export default class DatePicker extends Vue.with(Props) {
 
   get month(): number {
     return new Date(this.date).getMonth()
+  }
+
+  get previousMonthDate(): Date {
+    return new Date(this.year, this.month - 1)
+  }
+
+  get previousMonth(): number {
+    return this.previousMonthDate.getMonth()
+  }
+
+  get nextMonthDate(): Date {
+    return new Date(this.year, this.month + 1)
+  }
+
+  get nextMonth(): number {
+    return this.nextMonthDate.getMonth()
   }
 
   get displayMonth(): string {
@@ -84,6 +120,14 @@ export default class DatePicker extends Vue.with(Props) {
     return 32 - new Date(this.year, this.month, 32).getDate()
   }
 
+  get daysInNextMonth(): number {
+    return 32 - new Date(this.year, this.nextMonth, 32).getDate()
+  }
+
+  get daysInPreviousMonth(): number {
+    return 32 - new Date(this.year, this.previousMonth, 32).getDate()
+  }
+
   incrementMonth() {
     this.date = new Date(this.year, this.month + 1)
   }
@@ -94,6 +138,22 @@ export default class DatePicker extends Vue.with(Props) {
 
   getDayOfTheWeek(day: number): number {
     return new Date(this.year, this.month, day).getDay()
+  }
+
+  getDayOfTheWeekPreviousMonth(day: number): number {
+    return new Date(
+      this.previousMonthDate.getFullYear(),
+      this.previousMonth,
+      day
+    ).getDay()
+  }
+
+  getDayOfTheWeekNextMonth(day: number): number {
+    return new Date(
+      this.nextMonthDate.getFullYear(),
+      this.nextMonth,
+      day
+    ).getDay()
   }
 }
 </script>
