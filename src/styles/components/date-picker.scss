@@ -2,14 +2,21 @@
 // @use '../abstracts/mixins';
 
 .calendar {
+  font-family: variables.$font--secondary;
+  font-size: 11px;
+  font-weight: bold;
   max-width: 600px;
+  min-width: 280px;
+  width: min-content;
 }
 
 .calendar-header {
-  display: flex;
   align-items: center;
+  display: flex;
+  font-size: 15px;
   justify-content: space-between;
-  margin-bottom: 16px;
+  padding: 0 24px;
+  text-transform: uppercase;
 
   .month-button {
     background-color: transparent;
@@ -19,44 +26,55 @@
 }
 
 $days-of-the-week: (
-  0: Sun,
-  1: Mon,
-  2: Tue,
-  3: Wed,
-  4: Thu,
-  5: Fri,
-  6: Sat
+  0: Su,
+  1: Mo,
+  2: Tu,
+  3: We,
+  4: Th,
+  5: Fr,
+  6: Sa
 );
 
-$grid-template-columns: [Sun-start] 1fr [Sun-end] [Mon-start] 1fr [Mon-end]
-  [Tue-start] 1fr [Tue-end] [Wed-start] 1fr [Wed-end] [Thu-start] 1fr [Thu-end]
-  [Fri-start] 1fr [Fri-end] [Sat-start] 1fr [Sat-end];
-$grid-template-areas: 'Sun Mon Tue Wed Thu Fri Sat';
+$grid-template-columns: [Su-start] 40px [Su-end] [Mo-start] 40px [Mo-end]
+  [Tu-start] 40px [Tu-end] [We-start] 40px [We-end] [Th-start] 40px [Th-end]
+  [Fr-start] 40px [Fr-end] [Sa-start] 40px [Sa-end];
+$grid-template-areas: 'Su Mo Tu We Th Fr Sa';
 
-.days-header-grid {
-  display: grid;
-  grid-template-columns: $grid-template-columns;
-  grid-template-rows: repeat(1);
-  grid-template-areas: $grid-template-areas;
-  grid-column: h;
-  margin-bottom: 16px;
-}
-
+.days-header-grid,
 .days-grid {
   display: grid;
   grid-template-columns: $grid-template-columns;
-  grid-template-rows: auto;
+  row-gap: 6px;
+  column-gap: 6px;
+}
+
+.days-header-grid {
+  grid-template-areas: $grid-template-areas;
+  grid-column: h;
+}
+
+.days-grid {
   grid-template-areas:
     'h h h h h h h'
     $grid-template-areas;
 
-  .day {
-    display: inline-block;
+  .day,
+  .day-header {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: variables.$white;
-    color: variables.$text--primary;
-    cursor: pointer;
     user-select: none;
     text-align: center;
+    margin: auto;
+    height: 40px;
+    width: 40px;
+  }
+
+  .day {
+    color: variables.$text--primary;
+    cursor: pointer;
 
     &:hover,
     &:focus {
@@ -70,10 +88,8 @@ $grid-template-areas: 'Sun Mon Tue Wed Thu Fri Sat';
   }
 
   .day-header {
-    display: inline-block;
     color: variables.$text--secondary;
-    user-select: none;
-    text-align: center;
+    margin: 8px auto;
   }
 
   @each $num, $day in $days-of-the-week {

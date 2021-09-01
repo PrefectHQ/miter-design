@@ -107,7 +107,7 @@ export default class DatePicker extends Vue.with(Props) {
   }
 
   getDisplayDay(day: number): string {
-    const days: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    const days: string[] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
     return days[day]
   }
 
