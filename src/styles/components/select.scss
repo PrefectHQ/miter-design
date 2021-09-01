@@ -1,6 +1,7 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 .wrapper {
+  @include mixins.miter(2, 1);
   font-family: variables.$font--primary;
   outline: none; //needed for removing safari focus ring
   &.active {
@@ -12,9 +13,8 @@
   }
 
   .picker {
-    @include mixins.miter(2);
-    @include mixins.miter-border(2, 1, variables.$grey-4, 4);
     background-color: variables.$white;
+    border: 1px solid variables.$grey-4;
     cursor: pointer;
     height: 58px;
     width: 350px;
@@ -45,7 +45,7 @@
     }
     &.active,
     &.hovered {
-      @include mixins.miter-border(2, 1, variables.$primary, 4);
+      border: 1px solid variables.$primary;
     }
     &.active i {
       @include mixins.input-transition;
@@ -55,6 +55,7 @@
 
   .list {
     @include mixins.input-transition;
+
     display: flex;
     flex-direction: column;
     width: 350px;
@@ -62,9 +63,12 @@
     background: variables.$white;
 
     &:not(.openUp) {
-      @include mixins.miter(2);
+      @include mixins.miter-clip(2, 1);
       margin-top: -16px;
       padding-top: 16px;
+      > * &:last-child {
+        @include mixins.miter-clip(2, 1);
+      }
     }
     &.openUp {
       bottom: 58px;
