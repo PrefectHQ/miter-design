@@ -1,6 +1,23 @@
 @use '../abstracts/variables';
 // @use '../abstracts/mixins';
 
+.calendar {
+  max-width: 600px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  .month-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+}
+
 $days-of-the-week: (
   0: Sun,
   1: Mon,
@@ -22,6 +39,7 @@ $grid-template-areas: 'Sun Mon Tue Wed Thu Fri Sat';
   grid-template-rows: repeat(1);
   grid-template-areas: $grid-template-areas;
   grid-column: h;
+  margin-bottom: 16px;
 }
 
 .days-grid {
@@ -38,6 +56,7 @@ $grid-template-areas: 'Sun Mon Tue Wed Thu Fri Sat';
     color: variables.$text--primary;
     cursor: pointer;
     user-select: none;
+    text-align: center;
 
     &:hover,
     &:focus {
@@ -52,8 +71,9 @@ $grid-template-areas: 'Sun Mon Tue Wed Thu Fri Sat';
 
   .day-header {
     display: inline-block;
-    color: variables.$text--primary;
+    color: variables.$text--secondary;
     user-select: none;
+    text-align: center;
   }
 
   @each $num, $day in $days-of-the-week {

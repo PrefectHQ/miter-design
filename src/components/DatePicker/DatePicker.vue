@@ -1,15 +1,14 @@
 <template>
-  <div>
-    <div> Date: {{ date }} </div>
-    <div> Today: {{ today }} </div>
-    <div> Display Month: {{ displayMonth }} </div>
-    <div>
-      <span class="mr-2 cursor-pointer pa-2" @click="decrementMonth">-</span>
-      Month: {{ month }}
-      <span class="ml-2 cursor-pointer pa-2" @click="incrementMonth">+</span>
+  <div class="calendar">
+    <div class="calendar-header">
+      <button class="month-button cursor-pointer" @click="decrementMonth">
+        <i class="pi pi-Arrow-Left" />
+      </button>
+      <div class="month-title">{{ displayMonth }} {{ year }}</div>
+      <button class="month-button cursor-pointer" @click="incrementMonth">
+        <i class="pi pi-Arrow-Right" />
+      </button>
     </div>
-    <div> Days in Month: {{ daysInMonth }} </div>
-    <div> Year: {{ year }} </div>
 
     <div class="days-grid">
       <div class="days-header-grid">
