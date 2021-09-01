@@ -10,6 +10,17 @@
     </div>
     <div> Days in Month: {{ daysInMonth }} </div>
     <div> Year: {{ year }} </div>
+
+    <div class="days-grid">
+      <div
+        v-for="day in daysInMonth"
+        :key="day"
+        class="day"
+        :class="'day-' + getDayOfTheWeek(day)"
+      >
+        {{ day }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -63,6 +74,10 @@ export default class DatePicker extends Vue.with(Props) {
 
   decrementMonth() {
     this.date = new Date(this.year, this.month - 1)
+  }
+
+  getDayOfTheWeek(day: number): number {
+    return new Date(this.year, this.month, day).getDay()
   }
 }
 </script>

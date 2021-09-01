@@ -1,0 +1,43 @@
+@use '../abstracts/variables';
+// @use '../abstracts/mixins';
+
+$days-of-the-week: (
+  0: Sun,
+  1: Mon,
+  2: Tue,
+  3: Wed,
+  4: Thu,
+  5: Fri,
+  6: Sat
+);
+
+.days-grid {
+  display: grid;
+  grid-template-columns: [Sun-start] 1fr [Sun-end] [Mon-start] 1fr [Mon-end] [Tue-start] 1fr [Tue-end] [Wed-start] 1fr [Wed-end] [Thu-start] 1fr [Thu-end] [Fri-start] 1fr [Fri-end] [Sat-start] 1fr [Sat-end];
+  grid-template-rows: auto;
+  grid-template-areas:
+    'Sun Mon Tue Wed Thu Fri Sat'
+    'Sun Mon Tue Wed Thu Fri Sat'
+    'Sun Mon Tue Wed Thu Fri Sat'
+    'Sun Mon Tue Wed Thu Fri Sat'
+    'Sun Mon Tue Wed Thu Fri Sat';
+
+  .day {
+    display: inline-block;
+    background-color: variables.$white;
+    color: variables.$text--primary;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover,
+    &:focus {
+      background-color: variables.$grey-3;
+    }
+
+    @each $num, $day in $days-of-the-week {
+      &.day-#{$num} {
+        grid-column: $day;
+      }
+    }
+  }
+}
