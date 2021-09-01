@@ -1,36 +1,51 @@
 import { mount } from '@vue/test-utils'
 import Select from './Select.vue'
+import Option from './Option.vue'
+import { h } from 'vue'
 
-test('select component contains 2 options when nothing is passed in', () => {
-  const wrapper = mount(Select)
+const factoryMount = (props = {}, slots = {}) => {
+  return mount(Select, {
+    props: {
+      ...props
+    },
+    slots: {
+      ...slots
+    }
+  })
+}
+
+test('options passed in slots are displayed in component', async () => {
+  const optionValues = ['First', 'Second', 'Third']
+  const wrapper = factoryMount(
+    {},
+    {
+      default: () => [
+        h(Option, { value: 'First' }),
+        h(Option, { value: 'Second' }),
+        h(Option, { value: 'Third' })
+      ]
+    }
+  )
+  const picker = wrapper.get('.picker')
+  await picker.trigger('click')
 
   const list = wrapper.get('.list')
   const options = list.findAll('.option')
-  expect(options).toHaveLength(2)
-})
-
-test('options passed as props are displayed in component', () => {
-  const optionProp = ['First', 'Second', 'Third']
-  const wrapper = mount(Select, { props: { options: optionProp } })
-
-  const list = wrapper.get('.list')
-  const options = list.findAll('.option')
-  options.forEach((option, i) => expect(option.text()).toBe(optionProp[i]))
+  expect(options).toHaveLength(3)
+  options.forEach((option, i) => expect(option.text()).toBe(optionValues[i]))
 })
 
 describe('icons', () => {
-  test('option does not contain icon by default', () => {
-    const wrapper = mount(Select)
-
-    const list = wrapper.get('.list')
-    expect(list.find('i').exists()).toBe(false)
+  test('option does not contain icon by default', async () => {
+    const option = mount(Option, { props: { value: 'First' } })
+    expect(option.find('i').exists()).toBe(false)
   })
 
-  test('option contains icon if defined', () => {
-    const wrapper = mount(Select, { props: { icon: 'Fire' } })
-
-    const list = wrapper.get('.list')
-    expect(list.find('i').exists()).toBe(true)
+  test('option contains icon if defined', async () => {
+    const option = mount(Option, {
+      props: { value: 'First', icon: 'Fire' }
+    })
+    expect(option.find('i').exists()).toBe(true)
   })
 })
 describe('disabled state', () => {
@@ -51,13 +66,18 @@ describe('disabled state', () => {
   })
 })
 describe('hover state', () => {
-  const wrapper = mount(Select)
+  const wrapper = factoryMount(
+    {},
+    { default: () => [h(Option, { value: 'First' })] }
+  )
   const picker = wrapper.get('.picker')
-  const option = wrapper.get('.option')
 
   test('mouseenter adds the hovered class and mouseleave removes the hovered class', async () => {
     await wrapper.trigger('mouseenter')
     expect(picker.classes()).toContain('hovered')
+
+    await picker.trigger('click')
+    const option = wrapper.get('.option')
 
     await option.trigger('mouseenter')
     expect(option.classes()).toContain('hovered')
@@ -77,8 +97,11 @@ describe('hover state', () => {
     expect(picker.classes()).not.toContain('hovered')
   })
 
-  test('keydown.down adds the hovered class to the first option', async () => {
-    await picker.trigger('keydown', { key: 'Down' })
+  test('arrow key adds the hovered class to option', async () => {
+    await wrapper.trigger('keydown', { key: 'Enter' })
+    const option = wrapper.get('.option')
+
+    await wrapper.trigger('keydown', { key: 'ArrowDown' })
     expect(option.classes()).toContain('hovered')
   })
 })
@@ -95,7 +118,7 @@ describe('active state', () => {
     expect(picker.classes()).not.toContain('active')
   })
 
-  test('keydown.enter adds the active class and keydown.enter removes the active class', async () => {
+  test('keydown.enter adds and removes the active class', async () => {
     await wrapper.trigger('keydown', { key: 'Enter' })
     expect(picker.classes()).toContain('active')
 
@@ -105,28 +128,28 @@ describe('active state', () => {
 
   test('keydown.esc removes the active class', async () => {
     await wrapper.trigger('keydown', { key: 'Enter' })
-    expect(picker.classes()).toContain('active')
-
-    await wrapper.trigger('keydown', { key: 'Esc' })
+    await wrapper.trigger('keydown', { key: 'Escape' })
     expect(picker.classes()).not.toContain('active')
   })
 
-  test('keydown.space adds the active class and keydown.space removes the active class', async () => {
-    await wrapper.trigger('keydown', { key: 'Space' })
+  test('keydown.space adds and removes the active class', async () => {
+    await wrapper.trigger('keydown', { code: 'Space' })
     expect(picker.classes()).toContain('active')
 
-    await wrapper.trigger('keydown', { key: 'Space' })
+    await wrapper.trigger('keydown', { code: 'Space' })
     expect(picker.classes()).not.toContain('active')
   })
 })
 test('emit selected option', async () => {
-  const wrapper = mount(Select, {
-    props: {
-      value: 'Option 1'
-    }
-  })
+  const wrapper = factoryMount(
+    {},
+    { default: () => [h(Option, { value: 'First' })] }
+  )
+  const picker = wrapper.get('.picker')
+  await picker.trigger('click')
+
   const option = wrapper.get('.option')
   option.element.selected = true
   await option.trigger('click')
-  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual('Option 1')
+  expect(wrapper.emitted('update:modelValue')[0][0]).toEqual('First')
 })
