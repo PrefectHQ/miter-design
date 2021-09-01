@@ -17,7 +17,7 @@
   justify-content: space-between;
   padding: 0 4px;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 
   .month-button {
     background-color: transparent;
@@ -96,6 +96,7 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
 
     &.next-month,
     &.previous-month {
+      background-color: variables.$grey-3;
       color: variables.$text--secondary;
     }
   }
