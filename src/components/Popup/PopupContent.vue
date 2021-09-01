@@ -59,12 +59,10 @@ export default defineComponent({
       required: false
     },
     height: {
-      type: String,
-      default: '269px'
+      type: String
     },
     width: {
-      type: String,
-      default: '350px'
+      type: String
     },
     placement: {
       type: String,
