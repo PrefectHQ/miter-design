@@ -71,7 +71,7 @@ export default defineComponent({
       this.hovered = true
     },
 
-    handleBlur(event: FocusEvent | PointerEvent): void {
+    handleBlur(event: FocusEvent): void {
       if (
         event.relatedTarget?.tagName === 'INPUT' ||
         event.relatedTarget?.classList.contains('active')
@@ -295,7 +295,10 @@ export default defineComponent({
         mergeProps({
           class: 'py-2',
           placeholder: 'Search by name',
-          onClick: this.handleBlur,
+          onClick: (event: Event) => {
+            event.stopPropagation()
+          },
+          onBlur: this.handleBlur,
           onInput: this.runSearch
         })
       )
