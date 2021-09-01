@@ -21,8 +21,20 @@
 
   .month-button {
     background-color: transparent;
+    border-radius: 8px;
     border: none;
     outline: none;
+    transition: all 100ms;
+    padding: 4px;
+
+    &:hover,
+    &:focus {
+      background-color: variables.$grey-3;
+    }
+
+    &:active {
+      background-color: variables.$grey-4;
+    }
   }
 }
 
