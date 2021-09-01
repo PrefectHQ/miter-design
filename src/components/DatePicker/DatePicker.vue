@@ -10,47 +10,49 @@
       </button>
     </div>
 
-    <div class="days-grid">
-      <div class="days-header-grid">
+    <transition :name="monthDirection == 1 ? 'slide' : 'slide-reverse'">
+      <div class="days-grid" :key="month">
+        <div class="days-header-grid">
+          <div
+            v-for="(n, i) in 7"
+            class="day-header"
+            :class="'day-' + getDayOfTheWeek(i)"
+            :key="i"
+          >
+            {{ getDisplayDay(i) }}
+          </div>
+        </div>
+
         <div
-          v-for="(n, i) in 7"
-          class="day-header"
-          :class="'day-' + getDayOfTheWeek(i)"
-          :key="i"
+          v-for="day in Array.from({ length: getDayOfTheWeek(1) })
+            .map((e, i) => daysInPreviousMonth - i)
+            .reverse()"
+          :key="day"
+          class="day previous-month"
+          :class="'day-' + getDayOfTheWeekPreviousMonth(day)"
         >
-          {{ getDisplayDay(i) }}
+          {{ day }}
+        </div>
+
+        <div
+          v-for="day in daysInMonth"
+          :key="day"
+          class="day"
+          :class="'day-' + getDayOfTheWeek(day)"
+        >
+          {{ day }}
+        </div>
+
+        <div
+          v-for="day in 6 - getDayOfTheWeek(daysInMonth)"
+          :key="day"
+          class="day next-month"
+          :class="'day-' + getDayOfTheWeekNextMonth(day)"
+        >
+          {{ day }}
         </div>
       </div>
-
-      <div
-        v-for="day in Array.from({ length: getDayOfTheWeek(1) })
-          .map((e, i) => daysInPreviousMonth - i)
-          .reverse()"
-        :key="day"
-        class="day previous-month"
-        :class="'day-' + getDayOfTheWeekPreviousMonth(day)"
-      >
-        {{ day }}
-      </div>
-
-      <div
-        v-for="day in daysInMonth"
-        :key="day"
-        class="day"
-        :class="'day-' + getDayOfTheWeek(day)"
-      >
-        {{ day }}
-      </div>
-
-      <div
-        v-for="day in 6 - getDayOfTheWeek(daysInMonth)"
-        :key="day"
-        class="day next-month"
-        :class="'day-' + getDayOfTheWeekNextMonth(day)"
-      >
-        {{ day }}
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -62,7 +64,8 @@ class Props {}
 const Component = Options
 @Component({})
 export default class DatePicker extends Vue.with(Props) {
-  date = new Date()
+  date: Date = new Date()
+  monthDirection: number = 0
 
   get today(): Date {
     return new Date()
@@ -129,10 +132,12 @@ export default class DatePicker extends Vue.with(Props) {
 
   incrementMonth() {
     this.date = new Date(this.year, this.month + 1)
+    this.monthDirection = 1
   }
 
   decrementMonth() {
     this.date = new Date(this.year, this.month - 1)
+    this.monthDirection = -1
   }
 
   getDayOfTheWeek(day: number): number {

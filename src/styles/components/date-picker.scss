@@ -7,6 +7,8 @@
   font-weight: bold;
   max-width: 600px;
   min-width: 280px;
+  overflow: hidden !important;
+  position: relative;
   width: min-content;
 }
 
@@ -111,5 +113,49 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
     .day-header.day-#{num} {
       grid-column: $day;
     }
+  }
+}
+
+$duration: 350ms;
+
+.slide-reverse-enter-active,
+.slide-reverse-leave-active,
+.slide-enter-active,
+.slide-leave-active {
+  position: relative;
+}
+
+.slide-reverse-enter-active {
+  animation: slide-out $duration;
+}
+.slide-reverse-leave-active {
+  animation: slide-in $duration reverse;
+  position: absolute;
+}
+
+.slide-enter-active {
+  animation: slide-in $duration;
+}
+
+.slide-leave-active {
+  animation: slide-out $duration reverse;
+  position: absolute;
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translate(-200%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translate(200%);
+  }
+  100% {
+    transform: translate(0);
   }
 }
