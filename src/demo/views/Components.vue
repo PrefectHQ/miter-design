@@ -13,6 +13,7 @@
     <Tag class="mt-10" />
     <TagGroup class="mt-10" />
     <Avatar class="mt-10" />
+    <Selects class="mt-10" />
   </div>
 </template>
 
@@ -30,6 +31,7 @@ import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
 import Popups from '../sections/Popups.vue'
 import Sliders from '../sections/Sliders.vue'
+import Selects from '../sections/Selects.vue'
 
 @Options({
   components: {
@@ -42,9 +44,11 @@ import Sliders from '../sections/Sliders.vue'
     Toggles,
     Sliders,
     Checkboxes,
+    Selects,
     TabSection,
     Tag,
     TagGroup
+
   }
 })
 export default class App extends Vue {}
