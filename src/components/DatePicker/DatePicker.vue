@@ -1,5 +1,11 @@
 <template>
-  <div class="calendar">
+  <div
+    class="calendar"
+    @keyup.right="incrementMonth"
+    @keyup.left="decrementMonth"
+    tabindex="0"
+    ref="calendar"
+  >
     <div class="calendar-header">
       <button
         class="month-button cursor-pointer"
@@ -21,7 +27,16 @@
 
       <div class="month-title ml-2"> {{ displayMonth }} {{ year }} </div>
 
-      <a v-if="showToday" class="today-link" @click="resetDate">Today</a>
+      <a
+        v-if="showToday"
+        class="today-link"
+        role="button"
+        tabindex="0"
+        @click="resetDate"
+        @keyup.enter.space="resetDate"
+      >
+        Today
+      </a>
     </div>
 
     <transition :name="monthDirection == 1 ? 'slide' : 'slide-reverse'">
@@ -219,11 +234,17 @@ export default class DatePicker extends Vue.with(Props) {
   incrementMonth() {
     this.date = new Date(this.year, this.month + 1)
     this.monthDirection = 1
+    this.$nextTick(() => {
+      ;(this.$refs.calendar as HTMLDivElement).focus()
+    })
   }
 
   decrementMonth() {
     this.date = new Date(this.year, this.month - 1)
     this.monthDirection = -1
+    this.$nextTick(() => {
+      ;(this.$refs.calendar as HTMLDivElement).focus()
+    })
   }
 
   isToday(date: number, month: number, year: number): boolean {

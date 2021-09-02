@@ -10,6 +10,12 @@
   overflow: hidden !important;
   position: relative;
   width: min-content;
+
+  &:focus,
+  &:focus-within {
+    outline: none;
+    border: 0;
+  }
 }
 
 .calendar-header {
@@ -80,6 +86,12 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
   grid-template-areas:
     'h h h h h h h'
     $grid-template-areas;
+
+  &:focus,
+  &:focus-within {
+    outline: none;
+    border: 0;
+  }
 
   .day,
   .day-header {
