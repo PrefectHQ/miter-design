@@ -63,6 +63,7 @@ export default defineComponent({
   },
   methods: {
     handleOptionClick(e: Event, ...args: any[]): Event {
+      if (e.target?.classList?.contains('disabled')) return e
       this.selected = args[0]
       this.icon = args[1]
       this.$emit('update:modelValue', this.selected)

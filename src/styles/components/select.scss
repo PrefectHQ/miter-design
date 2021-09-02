@@ -137,6 +137,6 @@
   }
   &.disabled {
     color: variables.$grey-4;
-    pointer-events: none;
+    cursor: not-allowed !important;
   }
 }
