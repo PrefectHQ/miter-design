@@ -33,6 +33,7 @@
             ['day-' + getDayOfTheWeekPreviousMonth(day)]: true,
             today: isToday(day, previousMonth, previousMonthYear)
           }"
+          @click="selectDate(day, previousMonth, previousMonthYear)"
         >
           {{ day }}
         </button>
@@ -46,7 +47,7 @@
             today: isToday(day, month, year),
             'selected-day': isSelectedDay(day, month, year)
           }"
-          @click="selectDate(day)"
+          @click="selectDate(day, month, year)"
         >
           {{ day }}
         </button>
@@ -59,6 +60,7 @@
             ['day-' + getDayOfTheWeekNextMonth(day)]: true,
             today: isToday(day, nextMonth, nextMonthYear)
           }"
+          @click="selectDate(day, nextMonth, nextMonthYear)"
         >
           {{ day }}
         </button>
@@ -230,8 +232,8 @@ export default class DatePicker extends Vue.with(Props) {
     ).getDay()
   }
 
-  selectDate(date: number) {
-    this.value_ = new Date(this.year, this.month, date)
+  selectDate(date: number, month: number, year: number) {
+    this.value_ = new Date(year, month, date)
   }
 }
 </script>

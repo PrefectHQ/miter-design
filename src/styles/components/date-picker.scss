@@ -113,6 +113,11 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
       background-color: variables.$grey-3;
       color: variables.$text--secondary;
 
+      &:hover,
+      &:focus {
+        color: variables.$text--primary;
+      }
+
       &.current-day {
         border: 2px solid variables.$grey-4;
       }
