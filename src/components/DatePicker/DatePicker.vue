@@ -71,7 +71,14 @@
 import { Vue, Options, prop } from 'vue-class-component'
 
 class Props {
+  /**
+   * A reactive native JS DateTime Object (only the date portion is reactive)
+   * @model
+   */
   modelValue = prop<Date>({ required: false })
+  /**
+   * A native JS DateTime Object used to set the default value for the component
+   */
   value = prop<Date>({ required: false })
 }
 
@@ -89,6 +96,13 @@ const Component = Options
     }
   }
 })
+
+/**
+ * The DatePicker is meant to present a unified cross-browser date picking component, replacing native browser date pickers
+ * which vary drastically browser to browser.
+ *
+ * @displayName DatePicker
+ */
 export default class DatePicker extends Vue.with(Props) {
   value_: Date = this.modelValue
     ? new Date(this.modelValue)

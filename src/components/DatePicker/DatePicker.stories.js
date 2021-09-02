@@ -8,6 +8,11 @@ export default {
     design: {
       type: 'figma',
       url: 'https://www.figma.com/file/HJgj2eHBaqt1SAYruZNjQQ/Prefect?node-id=1080%3A4350'
+    },
+    controls: {
+      matchers: {
+        date: /modelValue$/
+      }
     }
   }
 }
@@ -17,7 +22,10 @@ const Template = (args) => ({
   setup() {
     return { args }
   },
-  template: '<DatePicker />'
+  template: '<DatePicker v-model="args.modelValue" />'
 })
 
 export const Default = Template.bind({})
+Default.args = {
+  modelValue: new Date()
+}
