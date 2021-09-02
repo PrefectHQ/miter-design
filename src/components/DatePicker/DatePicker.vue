@@ -218,7 +218,6 @@ export default class DatePicker extends Vue.with(Props) {
 
   selectDate(date: number) {
     this.value_ = new Date(this.year, this.month, date)
-    console.log(date, this.value_)
   }
 }
 </script>
