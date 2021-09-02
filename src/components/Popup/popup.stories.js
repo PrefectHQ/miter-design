@@ -41,5 +41,6 @@ FlexEnd.args = {
   val: true,
   position: 'flex-end',
   title: 'Pop Up',
+  width: '180px',
   activate: `<Button v-bind="args" color="primary" @click="val = true">Button</Button>`
 }
