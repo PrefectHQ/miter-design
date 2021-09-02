@@ -19,6 +19,7 @@
     :disabled="disabled || readonly"
     :value="internalValue"
     @input="handleInput"
+    :classes="classList"
   />
 </template>
 
