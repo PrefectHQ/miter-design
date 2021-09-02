@@ -234,7 +234,7 @@ export default class DatePicker extends Vue.with(Props) {
   incrementMonth(focus?: boolean) {
     this.date = new Date(this.year, this.month + 1)
     this.monthDirection = 1
-    console.log(focus)
+
     if (focus) {
       this.$nextTick(() => {
         ;(this.$refs.calendar as HTMLDivElement).focus()
