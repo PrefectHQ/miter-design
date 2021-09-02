@@ -1,8 +1,8 @@
 <template>
   <div
     class="calendar"
-    @keyup.right="incrementMonth"
-    @keyup.left="decrementMonth"
+    @keyup.right="() => incrementMonth(true)"
+    @keyup.left="() => decrementMonth(true)"
     tabindex="0"
     ref="calendar"
   >
@@ -11,7 +11,7 @@
         class="month-button cursor-pointer"
         aria-label="Previous month"
         title="Previous month"
-        @click="decrementMonth"
+        @click="() => decrementMonth()"
       >
         <i class="pi pi-Arrow-Left" />
       </button>
@@ -20,7 +20,7 @@
         class="month-button cursor-pointer"
         aria-label="Next month"
         title="Next month"
-        @click="incrementMonth"
+        @click="() => incrementMonth()"
       >
         <i class="pi pi-Arrow-Right" />
       </button>
@@ -231,20 +231,26 @@ export default class DatePicker extends Vue.with(Props) {
     this.date = new Date(this.today)
   }
 
-  incrementMonth() {
+  incrementMonth(focus?: boolean) {
     this.date = new Date(this.year, this.month + 1)
     this.monthDirection = 1
-    this.$nextTick(() => {
-      ;(this.$refs.calendar as HTMLDivElement).focus()
-    })
+    console.log(focus)
+    if (focus) {
+      this.$nextTick(() => {
+        ;(this.$refs.calendar as HTMLDivElement).focus()
+      })
+    }
   }
 
-  decrementMonth() {
+  decrementMonth(focus?: boolean) {
     this.date = new Date(this.year, this.month - 1)
     this.monthDirection = -1
-    this.$nextTick(() => {
-      ;(this.$refs.calendar as HTMLDivElement).focus()
-    })
+
+    if (focus) {
+      this.$nextTick(() => {
+        ;(this.$refs.calendar as HTMLDivElement).focus()
+      })
+    }
   }
 
   isToday(date: number, month: number, year: number): boolean {
