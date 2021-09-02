@@ -155,3 +155,53 @@ $shadows: (
     }
   }
 }
+
+@mixin skeleton-loader {
+  overflow: hidden;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 2;
+  }
+
+  &::before {
+    background-color: variables.$grey-6;
+  }
+
+  &::after {
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(#fff, 0) 0,
+      rgba(#fff, 0.2) 20%,
+      rgba(#fff, 0.5) 60%,
+      rgba(#fff, 0)
+    );
+  }
+
+  &::after {
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(#fff, 0) 0,
+      rgba(#fff, 0.2) 20%,
+      rgba(#fff, 0.5) 60%,
+      rgba(#fff, 0)
+    );
+    animation: skeleton-loader-animation 2s cubic-bezier(0, 0.35, 1, 0.35)
+      infinite;
+  }
+}
+
+@keyframes skeleton-loader-animation {
+  100% {
+    transform: translateX(100%);
+  }
+}

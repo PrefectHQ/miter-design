@@ -1,7 +1,86 @@
 <template>
   <div>
     <h3>Cards</h3>
-    <div class="d-flex">
+    <Button class="my-4" @click="skeletonLoader = !skeletonLoader">
+      Toggle loader
+    </Button>
+
+    <div class="d-flex card-section">
+      <Card width="400px" height="500px" class="mr-4 mt-4 d-inline-block">
+        <div>
+          <h2 v-skeleton="skeletonLoader">Overflow content</h2>
+
+          <div
+            v-skeleton="skeletonLoader"
+            style="min-height: 24px"
+            class="mt-2"
+          >
+            <div v-if="!skeletonLoader">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <br />
+              Suspendisse sit amet sagittis erat, vel lacinia felis. Curabitur
+              blandit accumsan scelerisque. In id facilisis sapien. Proin
+              malesuada eros nec tempor faucibus. Suspendisse vel vestibulum
+              tortor, vitae convallis elit. Nam non dolor gravida, tempor nunc
+              vitae, maximus velit. Maecenas consequat ante nunc, posuere cursus
+              est congue quis. Morbi at convallis nunc. Maecenas tempus ex at
+              hendrerit commodo. Duis urna elit, auctor vitae purus in,
+              hendrerit volutpat justo. Mauris ac leo placerat, fermentum justo
+              a, cursus nibh. Phasellus in elementum quam. Ut non facilisis
+              augue, nec suscipit quam. Integer dignissim lobortis ligula, in
+              pellentesque leo euismod eget. Aenean sodales sodales sem non
+              fermentum. Duis posuere pretium ante, vel faucibus odio eleifend
+              sit amet.
+            </div>
+          </div>
+
+          <div
+            v-skeleton="skeletonLoader"
+            style="min-height: 24px"
+            class="mt-2"
+          >
+            <div v-if="!skeletonLoader">
+              Aliquam nec convallis nunc. Sed efficitur consequat dolor,
+              condimentum hendrerit ante dignissim nec. Aliquam erat volutpat.
+              Aenean blandit lectus a dolor gravida condimentum. Aenean ac
+              lacinia libero, quis iaculis urna. Duis interdum dolor ligula, et
+              semper eros maximus nec. Maecenas maximus, ante sit amet
+              sollicitudin posuere, metus purus tristique ante, ac sollicitudin
+              ex magna ullamcorper sem. Quisque et dapibus nisi, ac iaculis ex.
+              Etiam eu nulla nec felis vulputate finibus sit amet eget mauris.
+              Nulla ornare ultrices ex sit amet lobortis. Morbi et varius nisi,
+              vel porttitor sapien. Integer quis diam neque. Nunc porttitor
+              auctor suscipit. Nullam ullamcorper lobortis massa. Etiam maximus,
+              lacus eget volutpat pharetra, risus neque rutrum erat, dapibus
+              varius sem quam vitae lorem. Pellentesque habitant morbi tristique
+              senectus et netus et malesuada fames ac turpis egestas. Nulla sem
+              ex, fermentum non elit et, pellentesque aliquet felis. Nunc vitae
+              eros id ipsum laoreet pulvinar ac nec ex. Vestibulum tincidunt
+              nunc sapien. Proin laoreet tempus ex sit amet convallis. Nullam
+              pellentesque nisl sit amet magna rhoncus lobortis. Donec ex orci,
+              porta ut magna ullamcorper, suscipit mollis magna. Etiam at dolor
+              orci. Duis iaculis varius velit. Donec tempor leo eget aliquam
+              laoreet. Morbi ut fermentum nulla, vel tristique nisi. Phasellus
+              eget sapien nec elit dictum scelerisque.
+              <br />
+              Proin tempus nisl nec diam dapibus, sit amet facilisis risus
+              mattis. Aliquam erat volutpat. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Interdum et malesuada fames ac ante
+              ipsum primis in faucibus. Nullam vehicula tortor diam, nec porta
+              lacus dictum vitae. Nulla vel tellus magna. Nunc nisi lacus,
+              molestie eget sapien ac, ornare iaculis elit. Nulla volutpat
+              egestas felis vel hendrerit.
+            </div>
+          </div>
+        </div>
+      </Card>
+
       <Card
         v-for="(card, index) in cards"
         :key="index"
@@ -16,6 +95,7 @@
             :is="card.headerTag"
             :class="card.headerClass"
             :height="card.headerHeight"
+            v-skeleton="skeletonLoader"
           >
             {{ card.header }}
           </component>
@@ -25,6 +105,7 @@
           v-if="card.overline"
           :is="card.overlineTag || 'div'"
           :class="card.overlineClass"
+          v-skeleton="skeletonLoader"
         >
           {{ card.overline }}
         </component>
@@ -32,6 +113,7 @@
           v-if="card.title"
           :is="card.titleTag || 'div'"
           :class="card.titleClass"
+          v-skeleton="skeletonLoader"
         >
           {{ card.title }}
         </component>
@@ -39,6 +121,7 @@
           v-if="card.subtitle"
           :is="card.subtitleTag || 'div'"
           :class="card.subtitleClass"
+          v-skeleton="skeletonLoader"
         >
           {{ card.subtitle }}
         </component>
@@ -48,6 +131,7 @@
             :is="card.asideTag || 'div'"
             :class="card.asideClass"
             :width="card.asideWidth"
+            v-skeleton="skeletonLoader"
           >
             {{ card.aside }}
           </component>
@@ -57,6 +141,7 @@
           v-if="card.content"
           :is="card.contentTag || 'div'"
           :class="card.contentClass"
+          v-skeleton="skeletonLoader"
         >
           {{ card.content }}
         </component>
@@ -75,6 +160,7 @@
               :color="action.color"
               :disabled="action.disabled"
               :class="action.class"
+              v-skeleton="skeletonLoader"
             >
               {{ action.text }}
             </component>
@@ -158,6 +244,8 @@ export default class Cards extends Vue {
     }
   ]
 
+  skeletonLoader = false
+
   mounted(): void {
     return
   }
@@ -171,4 +259,10 @@ export default class Cards extends Vue {
 
 <style lang="scss" scoped>
 @use '@/styles/components/button';
+
+.card-section {
+  max-width: 100%;
+  overflow: auto;
+  padding: 32px 0;
+}
 </style>
