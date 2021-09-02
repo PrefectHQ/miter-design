@@ -2,6 +2,7 @@
   <div class="mt-5 pb-10" v-cloak>
     <h1>Components</h1>
     <Cards />
+    <Popups />
     <Buttons class="mt-10" />
     <Toggles class="mt-10" />
     <RadioButtons class="mt-10" />
@@ -28,6 +29,7 @@ import Avatar from '../sections/Avatar.vue'
 import TabSection from '../sections/TabSection.vue'
 import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
+import Popups from '../sections/Popups.vue'
 import Sliders from '../sections/Sliders.vue'
 import Selects from '../sections/Selects.vue'
 
@@ -35,6 +37,7 @@ import Selects from '../sections/Selects.vue'
   components: {
     Buttons,
     Cards,
+    Popups,
     RadioButtons,
     Links,
     Avatar,
