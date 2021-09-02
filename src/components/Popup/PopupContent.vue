@@ -2,15 +2,17 @@
   <div>
     <div
       id="backdrop"
+      @keydown="handleBackdropKeyDown"
       class="modal-backdrop"
       @click.self="closePopUp"
       :style="position"
     >
-      <Card :class="positionClass" :height="height" :width="width">
+      <Card role="dialog" aria-modal="true" ref="popUpContent" :class="positionClass" :height="height" :width="width">
         <h4 class="h4-bottom">
           {{ title }}
           <button
             icon
+            ref="popUpCloseButton"
             class="close-icon"
             :classes="classes"
             @click="closePopUp"
@@ -18,8 +20,6 @@
             @mouseleave="handleMouseLeave"
             @mousedown="handleMouseDown"
             @mouseup="handleMouseUp"
-            @keydown.enter.space="handleKeydown"
-            @keyup.enter.space="handleKeyup"
             @focus="handleFocus"
             @blur="handleBlur"
           >
@@ -43,6 +43,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Card from '../Card/Card.vue'
+
+interface event {
+    value: string
+    key: string
+    shiftKey: string
+    preventDefault: any
+}
 
 export default defineComponent({
   name: 'Popcontent',
@@ -108,7 +115,11 @@ export default defineComponent({
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
     }
   },
-  methods: {
+  mounted() {
+    this.$refs.popUpContent.$el.tabIndex = 0
+    this.$refs.popUpCloseButton.focus()
+  },
+  methods: {  
     closePopUp() {
       this.$emit('close', false)
     },
@@ -126,8 +137,23 @@ export default defineComponent({
       this.hovered = false
       this.focused = false
     },
-    handleKeydown(): void {
-      this.focused = true
+    handleBackdropKeyDown(evt:event):void {
+      if (evt.key === "Escape") {
+        // Pressing the ESC key closes the modal.
+        this.closePopUp()
+      } else if (evt.key === "Tab") {
+        // Pressing the Tab key traps the focus in the modal.
+        const modalNodes = this.$refs.popUpContent.$el.querySelectorAll("*")
+        const tabbable = Array.from(modalNodes).filter((n: any) => n.tabIndex >= 0)
+        let index = tabbable.indexOf(document.activeElement)
+        if (index === -1 && evt.shiftKey) {
+          index = 0;
+        }
+        index += tabbable.length + (evt.shiftKey ? -1 : 1);
+        index %= tabbable.length
+        tabbable[index].focus()
+        evt.preventDefault()
+      }
     }
   }
 })
