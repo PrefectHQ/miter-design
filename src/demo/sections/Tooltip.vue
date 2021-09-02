@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Button v-tooltip="'I am tooltip'"> Button </Button>
+    <Button v-tooltip:[position]="html"> Tag </Button>
   </div>
 </template>
 
@@ -10,9 +10,8 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   data() {
     return {
-      right: false,
-      left: false,
-      bottom: false
+      position: 'top',
+      html: `<div>some <span class="highlight">text</span></div>`
     }
   }
 })
@@ -20,6 +19,5 @@ export default defineComponent({
 <style>
 .highlight {
   color: yellow;
-  text-decoration: underline;
 }
 </style>

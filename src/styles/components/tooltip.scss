@@ -1,9 +1,8 @@
 $background: #090422;
 
 .tooltip-box {
-  position: relative;
   display: inline-block;
-
+  position: relative;
   &:hover .tooltip {
     opacity: 1;
   }
@@ -21,9 +20,13 @@ $background: #090422;
     min-width: 83px;
     min-height: 34px;
     z-index: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  .text::after {
+  .tooltip-inner::after {
     content: '';
     position: absolute;
     width: 0;
@@ -39,13 +42,31 @@ $background: #090422;
       margin-bottom: 13px;
     }
 
-    .text::after {
+    .tooltip-inner::after {
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
       border-top: 5px solid $background;
       top: 100%;
       left: 50%;
       transform: translate(-50%, -25%);
+    }
+  }
+
+  &.right {
+    .tooltip {
+      bottom: 50%;
+      left: 100%;
+      transform: translateY(50%);
+      margin-left: 13px;
+    }
+
+    .tooltip-inner::after {
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-right: 5px solid $background;
+      bottom: 50%;
+      right: 100%;
+      transform: translateY(50%);
     }
   }
 
@@ -58,7 +79,7 @@ $background: #090422;
       margin-top: 13px;
     }
 
-    .text::after {
+    .tooltip-inner::after {
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
       border-bottom: 5px solid $background;
@@ -67,24 +88,6 @@ $background: #090422;
       transform: translate(-50%, 25%);
     }
   }
-
-  &.right {
-    .tooltip {
-      bottom: 50%;
-      left: 100%;
-      transform: translateY(50%);
-      margin-left: 13px;
-    }
-    .text::after {
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid $background;
-      bottom: 50%;
-      right: 100%;
-      transform: translateY(50%);
-    }
-  }
-
   &.left {
     .tooltip {
       bottom: 50%;
@@ -92,7 +95,8 @@ $background: #090422;
       transform: translateY(50%);
       margin-right: 13px;
     }
-    .text::after {
+
+    .tooltip-inner::after {
       border-top: 5px solid transparent;
       border-bottom: 5px solid transparent;
       border-left: 5px solid $background;
@@ -102,3 +106,106 @@ $background: #090422;
     }
   }
 }
+
+// .tooltip-box {
+//   position: relative;
+//   display: inline-block;
+
+//   &:hover .tooltip {
+//     opacity: 1;
+//   }
+
+//   .tooltip {
+//     position: absolute;
+//     padding: 5px;
+//     border-radius: 4px;
+//     opacity: 0;
+//     transition: opacity 0.7s;
+//     background: $background;
+//     color: white;
+
+//     text-align: center;
+//     min-width: 83px;
+//     min-height: 34px;
+//     z-index: 1;
+//   }
+
+// .text::after {
+//   content: '';
+//   position: absolute;
+//   width: 0;
+//   height: 0;
+// }
+
+// &.top {
+// .tooltip {
+//   bottom: 100%;
+//   left: 50%;
+//   transform: translateY(-50%);
+//   transform: translateX(-50%);
+//   margin-bottom: 13px;
+// }
+
+// .text::after {
+//   border-left: 5px solid transparent;
+//   border-right: 5px solid transparent;
+//   border-top: 5px solid $background;
+//   top: 100%;
+//   left: 50%;
+//   transform: translate(-50%, -25%);
+// }
+// }
+
+// &.bottom {
+//   .tooltip {
+//     top: 100%;
+//     left: 50%;
+//     transform: translateY(-50%);
+//     transform: translateX(-50%);
+//     margin-top: 13px;
+//   }
+
+// .text::after {
+//   border-left: 5px solid transparent;
+//   border-right: 5px solid transparent;
+//   border-bottom: 5px solid $background;
+//   bottom: 100%;
+//   left: 50%;
+//   transform: translate(-50%, 25%);
+// }
+//   }
+
+//   &.right {
+// .tooltip {
+//   bottom: 50%;
+//   left: 100%;
+//   transform: translateY(50%);
+//   margin-left: 13px;
+// }
+// .text::after {
+//   border-top: 5px solid transparent;
+//   border-bottom: 5px solid transparent;
+//   border-right: 5px solid $background;
+//   bottom: 50%;
+//   right: 100%;
+//   transform: translateY(50%);
+// }
+//   }
+
+// &.left {
+//   .tooltip {
+//     bottom: 50%;
+//     right: 100%;
+//     transform: translateY(50%);
+//     margin-right: 13px;
+//   }
+// .text::after {
+//   border-top: 5px solid transparent;
+//   border-bottom: 5px solid transparent;
+//   border-left: 5px solid $background;
+//   bottom: 50%;
+//   left: 100%;
+//   transform: translateY(50%);
+// }
+//   }
+// }
