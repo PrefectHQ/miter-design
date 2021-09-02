@@ -110,12 +110,12 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
 
     &.next-month,
     &.previous-month {
-      background-color: variables.$grey-3;
-      color: variables.$text--secondary;
+      background-color: variables.$grey-5;
+      color: variables.$text--primary;
 
       &:hover,
       &:focus {
-        color: variables.$text--primary;
+        background-color: variables.$grey-4;
       }
 
       &.current-day {
@@ -125,7 +125,7 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
   }
 
   .day-header {
-    color: variables.$text--secondary;
+    color: variables.$grey-2;
     font-weight: normal;
   }
 

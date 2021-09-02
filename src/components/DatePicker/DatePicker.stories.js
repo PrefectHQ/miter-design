@@ -1,4 +1,5 @@
 import DatePicker from './DatePicker.vue'
+import { ref } from 'vue'
 import '@/styles/components/date-picker.scss'
 
 export default {
@@ -17,12 +18,14 @@ export default {
   }
 }
 
-const Template = (args) => ({
+const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
   components: { DatePicker },
   setup() {
-    return { args }
+    const modelValue = ref(args.modelValue)
+    return { ...args, modelValue }
   },
-  template: '<DatePicker v-model="args.modelValue" />'
+  template: '<DatePicker v-model="modelValue" />'
 })
 
 export const Default = Template.bind({})

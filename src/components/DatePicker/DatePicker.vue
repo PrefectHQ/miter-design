@@ -1,11 +1,21 @@
 <template>
   <div class="calendar">
     <div class="calendar-header">
-      <button class="month-button cursor-pointer" @click="decrementMonth">
+      <button
+        class="month-button cursor-pointer"
+        aria-label="Previous month"
+        title="Previous month"
+        @click="decrementMonth"
+      >
         <i class="pi pi-Arrow-Left" />
       </button>
       <div class="month-title">{{ displayMonth }} {{ year }}</div>
-      <button class="month-button cursor-pointer" @click="incrementMonth">
+      <button
+        class="month-button cursor-pointer"
+        aria-label="Next month"
+        title="Next month"
+        @click="incrementMonth"
+      >
         <i class="pi pi-Arrow-Right" />
       </button>
     </div>
@@ -233,6 +243,7 @@ export default class DatePicker extends Vue.with(Props) {
   }
 
   selectDate(date: number, month: number, year: number) {
+    this.monthDirection = month >= this.month && year >= this.year ? 1 : -1
     this.value_ = new Date(year, month, date)
   }
 }
