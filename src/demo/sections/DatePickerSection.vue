@@ -4,9 +4,11 @@
 
     <div class="my-4">
       <div class="mb-6">
-        <span class="font-weight-light">Bound value:</span>
-        {{ date.getDate() }} {{ displayMonth }}
-        {{ date.getFullYear() }}
+        Value:
+        <u
+          >{{ date.getDate() }} {{ displayMonth }}
+          {{ date.getFullYear() }}
+        </u>
       </div>
       <DatePicker v-model="date" />
     </div>
