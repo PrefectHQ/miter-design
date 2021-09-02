@@ -9,7 +9,7 @@
       >
         <i class="pi pi-Arrow-Left" />
       </button>
-      <div class="month-title">{{ displayMonth }} {{ year }}</div>
+
       <button
         class="month-button cursor-pointer"
         aria-label="Next month"
@@ -18,6 +18,10 @@
       >
         <i class="pi pi-Arrow-Right" />
       </button>
+
+      <div class="month-title ml-2"> {{ displayMonth }} {{ year }} </div>
+
+      <a v-if="showToday" class="today-link" @click="resetDate">Today</a>
     </div>
 
     <transition :name="monthDirection == 1 ? 'slide' : 'slide-reverse'">
@@ -194,6 +198,22 @@ export default class DatePicker extends Vue.with(Props) {
 
   get daysInPreviousMonth(): number {
     return 32 - new Date(this.year, this.previousMonth, 32).getDate()
+  }
+
+  get showToday(): boolean {
+    return this.month !== this.today.getMonth()
+  }
+
+  resetDate(): void {
+    const month = this.today.getMonth()
+    const year = this.today.getFullYear()
+    this.monthDirection =
+      (month >= this.month && year >= this.year) ||
+      (month < this.month && year > this.year)
+        ? 1
+        : -1
+
+    this.date = new Date(this.today)
   }
 
   incrementMonth() {

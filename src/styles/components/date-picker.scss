@@ -16,7 +16,7 @@
   align-items: center;
   display: flex;
   font-size: 15px;
-  justify-content: space-between;
+  justify-content: start;
   padding: 0 4px;
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -37,6 +37,14 @@
     &:active {
       background-color: variables.$grey-4;
     }
+  }
+
+  .month-title {
+    flex-grow: 1;
+  }
+
+  .today-link {
+    font-size: 11px;
   }
 }
 
