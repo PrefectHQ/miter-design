@@ -5,7 +5,7 @@ import { withDesign } from 'storybook-addon-designs'
 export default {
   title: 'Miter Design/Slider',
   component: Slider,
-  decorators: [withDesign],
+  decorators: [withDogs],
   parameters: {
     design: {
       type: 'figma',
