@@ -13,13 +13,15 @@ export const applyClass = (el: any) => {
 
 export const removeClass = (el: any) => {
   el.classList.remove(skeletonClass)
-  if ('disabled' in el) el.disabled = false
+  if ('disabled' in el) el.disabled = el.shouldDisable
+  delete el.shouldDisable
   el.ariaBusy = false
   el.ariaHidden = false
 }
 
 export const SkeletonDirective: ObjectDirective = {
   mounted(el: any, binding: DirectiveBinding, vNode: VNode) {
+    el.shouldDisable = el.disabled
     if (binding.value) applyClass(el)
   },
   updated(el: any, binding: DirectiveBinding, vNode: VNode) {
