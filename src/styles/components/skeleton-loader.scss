@@ -1,0 +1,14 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.skeleton-loader {
+  @include mixins.skeleton-loader;
+  @include mixins.miter;
+  cursor: wait !important;
+
+  > * {
+    border: none;
+    background-color: transparent !important;
+    pointer-events: none;
+  }
+}

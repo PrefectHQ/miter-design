@@ -2,16 +2,22 @@
   <div class="mt-5 pb-10" v-cloak>
     <h1>Components</h1>
     <Cards />
+    <Popups />
     <Buttons class="mt-10" />
     <Toggles class="mt-10" />
     <RadioButtons class="mt-10" />
     <Checkboxes />
     <Sliders class="mt-10" />
     <Links class="mt-10" />
+    <TabSection class="mt-10" />
     <Tag class="mt-10" />
     <TagGroup class="mt-10" />
     <Avatar class="mt-10" />
+    <<<<<<< HEAD
     <Tooltip class="mt-10" />
+    =======
+    <Selects class="mt-10" />
+    >>>>>>> 3868b7286356888d19881d4f44ecbb241949ecd3
   </div>
 </template>
 
@@ -24,21 +30,27 @@ import RadioButtons from '../sections/RadioButtons.vue'
 import Checkboxes from '../sections/Checkboxes.vue'
 import Links from '../sections/Links.vue'
 import Avatar from '../sections/Avatar.vue'
+import TabSection from '../sections/TabSection.vue'
 import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
+import Popups from '../sections/Popups.vue'
 import Sliders from '../sections/Sliders.vue'
 import Tooltip from '../sections/Tooltip.vue'
+import Selects from '../sections/Selects.vue'
 
 @Options({
   components: {
     Buttons,
     Cards,
+    Popups,
     RadioButtons,
     Links,
     Avatar,
     Toggles,
     Sliders,
     Checkboxes,
+    Selects,
+    TabSection,
     Tag,
     Tooltip,
     TagGroup

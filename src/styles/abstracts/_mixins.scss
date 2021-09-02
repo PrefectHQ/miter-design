@@ -19,6 +19,12 @@ $shadows: (
   transition: all 250ms;
 }
 
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @mixin miter-original($i, $inner: false) {
   clip-path: polygon(
     0 0,
@@ -57,6 +63,39 @@ $shadows: (
       @content;
     }
   }
+}
+
+@mixin miter-clip($cut-length: 1, $border-width: 1) {
+  $cut: list.nth($cuts, $cut-length);
+  $hypotenuse: math.ceil(
+    math.hypot($cut + $border-width * 0.25, $cut + $border-width * 0.25)
+  );
+
+  --end: 100%;
+
+  @include firefox-only {
+    --end: calc(100% + 0.5px);
+  }
+
+  @include safari-only {
+    --end: calc(100% + 0.5px);
+  }
+
+  $end: var(--end);
+
+  $miter-x: calc(#{$end} - #{$cut}px);
+  $miter-y: calc(#{$end} - #{$cut}px);
+  $polygon: polygon(
+    $miter-x $end,
+    $end $miter-y,
+    $end 0,
+    0 0,
+    0 $end,
+    $miter-x $end
+  );
+
+  clip-path: stroke-box $polygon;
+  -webkit-clip-path: $polygon;
 }
 
 @mixin miter($cut-length: 1, $border-width: 1) {
@@ -111,6 +150,58 @@ $shadows: (
       border-width: #{$border-width + $border-width * 0.25}px;
       transform: rotate(45deg);
       transform-origin: bottom;
+      user-select: none;
+      -webkit-user-select: none;
     }
+  }
+}
+
+@mixin skeleton-loader {
+  overflow: hidden;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 2;
+  }
+
+  &::before {
+    background-color: variables.$grey-6;
+  }
+
+  &::after {
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(#fff, 0) 0,
+      rgba(#fff, 0.2) 20%,
+      rgba(#fff, 0.5) 60%,
+      rgba(#fff, 0)
+    );
+  }
+
+  &::after {
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(#fff, 0) 0,
+      rgba(#fff, 0.2) 20%,
+      rgba(#fff, 0.5) 60%,
+      rgba(#fff, 0)
+    );
+    animation: skeleton-loader-animation 2s cubic-bezier(0, 0.35, 1, 0.35)
+      infinite;
+  }
+}
+
+@keyframes skeleton-loader-animation {
+  100% {
+    transform: translateX(100%);
   }
 }
