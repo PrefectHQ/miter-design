@@ -8,6 +8,17 @@
   >
   <input
     placeholder="Input"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
+    @mousedown="handleMouseDown"
+    @mouseup="handleMouseUp"
+    @keydown.enter.space="handleKeydown"
+    @keyup.enter.space="handleKeyup"
+    @focus="handleFocus"
+    @blur="handleBlur"
+    :disabled="disabled || readonly"
+    :value="internalValue"
+    @input="handleInput"
   />
 </template>
 

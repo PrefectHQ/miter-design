@@ -41,5 +41,5 @@ export default class Inputs extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/components/input';
+// @use '@/styles/components/input';
 </style>
