@@ -12,12 +12,14 @@
     <Tag class="mt-10" />
     <TagGroup class="mt-10" />
     <Avatar class="mt-10" />
+    <DatePickerSection class="mt-10" />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import Buttons from '../sections/Buttons.vue'
+import DatePickerSection from '../sections/DatePickerSection.vue'
 import Toggles from '../sections/Toggles.vue'
 import Cards from '../sections/Cards.vue'
 import RadioButtons from '../sections/RadioButtons.vue'
@@ -33,6 +35,7 @@ import Sliders from '../sections/Sliders.vue'
   components: {
     Buttons,
     Cards,
+    DatePickerSection,
     RadioButtons,
     Links,
     Avatar,
