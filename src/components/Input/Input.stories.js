@@ -1,8 +1,8 @@
-import Slider from './Slider.vue'
+import Input from './Input.vue'
 
 export default {
-  title: 'Miter Design/Slider',
-  component: Slider,
+  title: 'Miter Design/Input',
+  component: Input,
   parameters: {
     design: {
       type: 'figma',
@@ -12,20 +12,20 @@ export default {
 }
 
 const Template = (args, argTypes) => ({
-  components: { Slider },
+  components: { Input },
   data() {
-    return { value: '3',}
+    return { value: 'hello',}
   },
   setup() {
       return {args}
   },
-  template: `<Slider v-bind="args" v-model="value" />`
+  template: `<Input v-bind="args" v-model="value" />`
 })
 
 export const Default = Template.bind({})
 Default.args = {
     disabled: false,
-    label: "Slider label ",
+    label: "Input label ",
 }
 
 export const Disabled = Template.bind({})

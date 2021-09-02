@@ -7,17 +7,20 @@
     <RadioButtons class="mt-10" />
     <Checkboxes />
     <Sliders class="mt-10" />
+    <Inputs class="mt-10"/>
     <Links class="mt-10" />
     <TabSection class="mt-10" />
     <Tag class="mt-10" />
     <TagGroup class="mt-10" />
     <Avatar class="mt-10" />
+    <DatePickerSection class="mt-10" />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import Buttons from '../sections/Buttons.vue'
+import DatePickerSection from '../sections/DatePickerSection.vue'
 import Toggles from '../sections/Toggles.vue'
 import Cards from '../sections/Cards.vue'
 import RadioButtons from '../sections/RadioButtons.vue'
@@ -28,11 +31,13 @@ import TabSection from '../sections/TabSection.vue'
 import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
 import Sliders from '../sections/Sliders.vue'
+import Inputs from '../sections/Inputs.vue'
 
 @Options({
   components: {
     Buttons,
     Cards,
+    DatePickerSection,
     RadioButtons,
     Links,
     Avatar,
