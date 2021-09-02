@@ -7,6 +7,7 @@
     <RadioButtons class="mt-10" />
     <Checkboxes />
     <Sliders class="mt-10" />
+    <Inputs class="mt-10"/>
     <Links class="mt-10" />
     <TabSection class="mt-10" />
     <Tag class="mt-10" />
@@ -30,6 +31,7 @@ import TabSection from '../sections/TabSection.vue'
 import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
 import Sliders from '../sections/Sliders.vue'
+import Inputs from '../sections/Inputs.vue'
 
 @Options({
   components: {
