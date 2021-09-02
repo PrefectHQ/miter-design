@@ -78,6 +78,12 @@ const Component = Options
   watch: {
     date(val) {
       this.$emit('update:modelValue', val)
+    },
+    modelValue(val) {
+      this.date = new Date(val)
+    },
+    value(val) {
+      this.date = new Date(val)
     }
   }
 })
