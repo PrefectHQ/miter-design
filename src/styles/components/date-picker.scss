@@ -88,16 +88,24 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
   }
 
   .day {
+    border: none;
     color: variables.$text--primary;
     cursor: pointer;
+    font-weight: bold;
+    outline: none;
 
     &:hover,
     &:focus {
       background-color: variables.$grey-3;
     }
 
-    &.current-day {
+    &.today {
       border: 2px solid variables.$primary;
+    }
+
+    &.selected-day {
+      color: variables.$white;
+      background-color: variables.$primary;
     }
 
     &.next-month,

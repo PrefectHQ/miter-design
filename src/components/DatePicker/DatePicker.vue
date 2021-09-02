@@ -23,7 +23,7 @@
           </div>
         </div>
 
-        <div
+        <button
           v-for="day in Array.from({ length: getDayOfTheWeek(1) })
             .map((e, i) => daysInPreviousMonth - i)
             .reverse()"
@@ -31,35 +31,37 @@
           class="day previous-month"
           :class="{
             ['day-' + getDayOfTheWeekPreviousMonth(day)]: true,
-            'current-day': isCurrentDay(day, previousMonth)
+            today: isToday(day, previousMonth, previousMonthYear)
           }"
         >
           {{ day }}
-        </div>
+        </button>
 
-        <div
+        <button
           v-for="day in daysInMonth"
           :key="day"
           class="day"
           :class="{
             ['day-' + getDayOfTheWeek(day)]: true,
-            'current-day': isCurrentDay(day, month)
+            today: isToday(day, month, year),
+            'selected-day': isSelectedDay(day, month, year)
           }"
+          @click="selectDate(day)"
         >
           {{ day }}
-        </div>
+        </button>
 
-        <div
+        <button
           v-for="day in 6 - getDayOfTheWeek(daysInMonth)"
           :key="day"
           class="day next-month"
           :class="{
             ['day-' + getDayOfTheWeekNextMonth(day)]: true,
-            'current-day': isCurrentDay(day, nextMonth)
+            today: isToday(day, nextMonth, nextMonthYear)
           }"
         >
           {{ day }}
-        </div>
+        </button>
       </div>
     </transition>
   </div>
@@ -76,7 +78,7 @@ class Props {
 const Component = Options
 @Component({
   watch: {
-    date(val) {
+    value_(val) {
       this.$emit('update:modelValue', val)
     },
     modelValue(val) {
@@ -88,12 +90,13 @@ const Component = Options
   }
 })
 export default class DatePicker extends Vue.with(Props) {
-  date: Date = this.modelValue
+  value_: Date = this.modelValue
     ? new Date(this.modelValue)
     : this.value
     ? new Date(this.value)
     : new Date()
-  month: number = new Date(this.year, this.date.getMonth()).getMonth()
+
+  date: Date = new Date(this.value_)
   monthDirection: number = 0
 
   get today(): Date {
@@ -108,12 +111,20 @@ export default class DatePicker extends Vue.with(Props) {
     return this.previousMonthDate.getMonth()
   }
 
+  get previousMonthYear(): number {
+    return this.previousMonthDate.getFullYear()
+  }
+
   get nextMonthDate(): Date {
     return new Date(this.year, this.month + 1)
   }
 
   get nextMonth(): number {
     return this.nextMonthDate.getMonth()
+  }
+
+  get nextMonthYear(): number {
+    return this.nextMonthDate.getFullYear()
   }
 
   get displayMonth(): string {
@@ -139,6 +150,10 @@ export default class DatePicker extends Vue.with(Props) {
     return days[day]
   }
 
+  get month(): number {
+    return new Date(this.date).getMonth()
+  }
+
   get year(): number {
     return new Date(this.date).getFullYear()
   }
@@ -156,17 +171,29 @@ export default class DatePicker extends Vue.with(Props) {
   }
 
   incrementMonth() {
-    this.month = new Date(this.year, this.month + 1).getMonth()
+    this.date = new Date(this.year, this.month + 1)
     this.monthDirection = 1
   }
 
   decrementMonth() {
-    this.month = new Date(this.year, this.month - 1).getMonth()
+    this.date = new Date(this.year, this.month - 1)
     this.monthDirection = -1
   }
 
-  isCurrentDay(date: number, month: number): boolean {
-    return this.today.getMonth() == month && this.today.getDate() == date
+  isToday(date: number, month: number, year: number): boolean {
+    return (
+      this.today.getMonth() == month &&
+      this.today.getDate() == date &&
+      this.today.getFullYear() == year
+    )
+  }
+
+  isSelectedDay(date: number, month: number, year: number): boolean {
+    return (
+      this.value_.getMonth() == month &&
+      this.value_.getDate() == date &&
+      this.value_.getFullYear() == year
+    )
   }
 
   getDayOfTheWeek(day: number): number {
@@ -187,6 +214,11 @@ export default class DatePicker extends Vue.with(Props) {
       this.nextMonth,
       day
     ).getDay()
+  }
+
+  selectDate(date: number) {
+    this.value_ = new Date(this.year, this.month, date)
+    console.log(date, this.value_)
   }
 }
 </script>
