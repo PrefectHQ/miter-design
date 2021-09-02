@@ -66,22 +66,32 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component'
+import { Vue, Options, prop } from 'vue-class-component'
 
-class Props {}
+class Props {
+  modelValue = prop<Date>({ required: false })
+  value = prop<Date>({ required: false })
+}
 
 const Component = Options
-@Component({})
+@Component({
+  watch: {
+    date(val) {
+      this.$emit('update:modelValue', val)
+    }
+  }
+})
 export default class DatePicker extends Vue.with(Props) {
-  date: Date = new Date()
+  date: Date = this.modelValue
+    ? new Date(this.modelValue)
+    : this.value
+    ? new Date(this.value)
+    : new Date()
+  month: number = new Date(this.year, this.date.getMonth()).getMonth()
   monthDirection: number = 0
 
   get today(): Date {
     return new Date()
-  }
-
-  get month(): number {
-    return new Date(this.date).getMonth()
   }
 
   get previousMonthDate(): Date {
@@ -140,12 +150,12 @@ export default class DatePicker extends Vue.with(Props) {
   }
 
   incrementMonth() {
-    this.date = new Date(this.year, this.month + 1)
+    this.month = new Date(this.year, this.month + 1).getMonth()
     this.monthDirection = 1
   }
 
   decrementMonth() {
-    this.date = new Date(this.year, this.month - 1)
+    this.month = new Date(this.year, this.month - 1).getMonth()
     this.monthDirection = -1
   }
 
