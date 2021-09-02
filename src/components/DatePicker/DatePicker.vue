@@ -243,7 +243,11 @@ export default class DatePicker extends Vue.with(Props) {
   }
 
   selectDate(date: number, month: number, year: number) {
-    this.monthDirection = month >= this.month && year >= this.year ? 1 : -1
+    this.monthDirection =
+      (month >= this.month && year >= this.year) ||
+      (month < this.month && year > this.year)
+        ? 1
+        : -1
     this.value_ = new Date(year, month, date)
   }
 }
