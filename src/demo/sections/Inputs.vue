@@ -2,12 +2,10 @@
   <div>
     <h3>Input</h3>
     <div v-for="state in states" :key="state" class="my-2">
-      <span v-if="logVal" class="font-weight-light text-capitalize pr-2"
-        >{{ state.state }}:</span
-      >
       <Input
         v-model="state.val"
         :disabled="state.state == 'disabled'"
+        :label="state.state"
       />
     </div>
   </div>
@@ -41,5 +39,5 @@ export default class Inputs extends Vue {
 </script>
 
 <style lang="scss" scoped>
-// @use '@/styles/components/input';
+@use '@/styles/components/input';
 </style>

@@ -1,12 +1,13 @@
 <template>
   <label
     data-test="default"
-    class="slider-label"
+    class="input-label"
     v-if="!hideLabel"
     :for="label"
-    >{{ label }}</label
-  >
+    > {{label}}</label>
   <input
+    :id="label"
+    :type="inputType"
     placeholder="Input"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -20,6 +21,7 @@
     :value="internalValue"
     @input="handleInput"
     :classes="classList"
+    class="input"
   />
 </template>
 
@@ -44,6 +46,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    inputType: {
+        type: String,
+        default: 'text'
+    },
     modelValue: {
       type: String,
       required: false
@@ -54,7 +60,7 @@ export default defineComponent({
     },
     label: {
       type: String,
-      default: ''
+      required: false
     },
     hideLabel: {
       type: Boolean,
@@ -72,7 +78,7 @@ export default defineComponent({
       return this.disabled ? ['disabled'] : this.active ? ['active'] : []
     },
     internalValue(): string {
-      return this.value || this.modelValue || '0'
+      return this.value || this.modelValue || ''
     }
   },
   methods: {
@@ -114,5 +120,5 @@ export default defineComponent({
 
 
 <style lang="scss" scoped >
-@use '../../styles/components/slider';
+@use '../../styles/components/input';
 </style>

@@ -1,0 +1,21 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.input {
+    *, *:before, *:after {
+    box-sizing: border-box;
+  }
+  border:0; 
+  border-bottom:1px solid variables.$grey-7; 
+}
+
+.input-label {
+    display:block;
+    ::after {
+        content: none
+    }
+}
+
+label:after {
+    content: none;
+  }
