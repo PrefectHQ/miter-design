@@ -17,20 +17,17 @@
         @click.stop="selected = { key: key, glyph: glyph }"
       >
         <i class="pi pi-3x" :class="'pi-' + glyph.glyph" />
-        <h6 class="font-weight-light text-truncate mt-2">{{ key }}</h6>
+        <h6 class="text-truncate mt-2">{{ key }}</h6>
       </div>
 
-      <h3
-        v-if="filteredGlyphs.size === 0"
-        class="font-weight-light text-center"
-      >
+      <h3 v-if="filteredGlyphs.size === 0" class="text-center">
         <h1>(⋟﹏⋞)</h1>
         No icons found for '{{ search }}'
       </h3>
     </div>
 
     <div v-if="selected" tabindex="0" class="icon-overlay pa-4 text-center">
-      <h2 class="font-weight-light text-truncate">{{ selected.key }}</h2>
+      <h2 class="text-truncate">{{ selected.key }}</h2>
 
       <div
         class="pa-4 d-flex align-center justify-space-around text-center"

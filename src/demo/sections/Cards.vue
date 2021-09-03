@@ -209,7 +209,7 @@ export default class Cards extends Vue {
     {
       title: '85,103',
       titleTag: 'h3',
-      titleClass: ['mt-auto', 'font-weight-light'],
+      titleClass: ['mt-auto'],
       height: '250px',
       width: '300px',
       overline: 'Hello world',

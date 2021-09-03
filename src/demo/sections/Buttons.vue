@@ -11,7 +11,7 @@
     </Button>
 
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
+      <span class="text-capitalize">{{ state }}:</span>
       <Button
         v-for="style in buttonStyles"
         v-skeleton="skeletonLoader"
@@ -27,7 +27,7 @@
 
     <h5 class="mt-5">Icon</h5>
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
+      <span class="text-capitalize">{{ state }}:</span>
       <Button
         v-for="style in buttonStyles"
         :key="style"
