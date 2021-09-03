@@ -21,8 +21,8 @@ export default class Inputs extends Vue {
   minVal = 0 as number
   maxVal = 10 as number
   states = [
-    { state: 'default', val: 'hello' },
-    { state: 'disabled', val: 'hello again' }
+    { state: 'Default', val: 'hello' },
+    { state: 'Disabled', val: 'Hello again' }
   ]
 
   mounted(): void {
