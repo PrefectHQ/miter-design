@@ -20,7 +20,7 @@
     :disabled="disabled || readonly"
     :value="internalValue"
     @input="handleInput"
-    :classes="classList"
+    :class="classList"
     class="input"
   />
 </template>
@@ -98,6 +98,7 @@ export default defineComponent({
       this.active = true
     },
     handleMouseUp(): void {
+      if (this.disabled) return
       this.active = false
     },
     handleFocus(): void {
@@ -105,9 +106,11 @@ export default defineComponent({
       this.active = true
     },
     handleBlur(): void {
+      if (this.disabled) return
       this.active = false
     },
     handleKeyup(): void {
+      if (this.disabled) return
       this.active = false
     },
     handleKeydown(): void {

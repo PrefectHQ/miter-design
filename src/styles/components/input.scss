@@ -8,11 +8,7 @@
   border:0; 
   border-bottom:1px solid variables.$grey-7; 
 
-  &.hover,
-  &:hover,
-  &.active
-  &:focus,
-  &.focus 
+  &.active 
   {
     border:0; 
     border-bottom:1px solid variables.$primary; 
