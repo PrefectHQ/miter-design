@@ -11,6 +11,7 @@ body {
   font-size: 14px;
   letter-spacing: -0.41px;
   line-height: 24px;
+  font-weight: 400;
 }
 
 h1,
@@ -65,6 +66,18 @@ h6 {
 
 .font-weight-light {
   font-weight: 100;
+}
+
+.font-weight-regular {
+  font-weight: 400;
+}
+
+.font-weight-semibold {
+  font-weight: 600;
+}
+
+.font-weight-bold {
+  font-weight: 700;
 }
 
 .text-caption-1 {
