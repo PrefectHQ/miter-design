@@ -12,6 +12,7 @@
           {{ title }}
           <button
             icon
+            title="close pop up"
             ref="popUpCloseButton"
             class="close-icon"
             :classes="classes"
@@ -116,10 +117,15 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.$refs.popUpContent.$el.tabIndex = 0
-    this.$refs.popUpCloseButton.focus()
+    this.addFocus()
   },
-  methods: {  
+  methods: { 
+    addFocus() {
+      this.$nextTick(()=> {
+    this.$refs.popUpCloseButton.tabIndex = 0
+    this.$refs.popUpCloseButton.focus()
+    })
+    },
     closePopUp() {
       this.$emit('close', false)
     },
@@ -152,6 +158,7 @@ export default defineComponent({
         index += tabbable.length + (evt.shiftKey ? -1 : 1);
         index %= tabbable.length
         tabbable[index].focus()
+        tabbable[index].ariaHidden=true //do we need to reset this?
         evt.preventDefault()
       }
     }
