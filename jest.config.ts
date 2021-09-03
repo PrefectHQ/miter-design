@@ -13,6 +13,9 @@ const config: Config.InitialOptions = {
     '^.+\\.tsx?$': ['ts-jest', {}], // process `*.ts` files with ts-jest
     '.*\\.(vue)$': ['vue-jest', {}] // process `*.vue` files with vue-jest
   },
+  moduleNameMapper: {
+    '\\.(css|scss)$': '<rootDir>/tests/__mocks__/styleMock.js'
+  },
   testURL: 'http://localhost/',
   setupFiles: ['./tests/setupJest.js'],
   verbose: true

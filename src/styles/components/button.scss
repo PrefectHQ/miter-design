@@ -41,16 +41,20 @@
     outline: none;
   }
 
-  &.icon > span {
+  &.icon {
     border-radius: 50%;
-    height: 60px;
-    line-height: 60px;
-    overflow: hidden;
-    padding: 0;
-    width: 60px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+
+    & > span {
+      border-radius: 50%;
+      height: 60px;
+      line-height: 60px;
+      overflow: hidden;
+      padding: 0;
+      width: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &.primary {

@@ -1,0 +1,40 @@
+@use '../abstracts/mixins';
+@use '../abstracts/variables';
+
+.modal-backdrop {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 20;
+    background-color: variables.$popup-background;
+    display: flex;
+    align-items: var(--position-place);
+    justify-content: var(--position-place);
+}
+
+.close-icon {
+    position: absolute;
+    right: 35px;
+    top: 35px;
+    cursor: pointer;
+    border-style: none;
+    background: transparent;
+  &.hover,
+  &:hover,
+  &:focus,
+  &.focus {
+    border-radius: 4px;
+    background-color: variables.$grey-3;
+    outline: none;
+  }
+
+  &.focused {
+    border-radius: 4px;
+    background-color: variables.$grey-3;
+    outline: none;
+  }
+}
+
+.h4-bottom {
+    margin-bottom: 36px;
+}
+
