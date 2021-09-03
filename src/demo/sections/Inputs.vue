@@ -5,7 +5,7 @@
       <Input
         v-model="state.val"
         :disabled="state.state == 'disabled'"
-        :label="state.state"
+        :label="state.label"
       />
     </div>
   </div>
@@ -21,8 +21,8 @@ export default class Inputs extends Vue {
   minVal = 0 as number
   maxVal = 10 as number
   states = [
-    { state: 'Default', val: 'hello' },
-    { state: 'Disabled', val: 'Hello again' }
+    { state: 'default', val: 'hello', label: 'Default' },
+    { state: 'disabled', val: 'Hello again', label: 'Disabled' }
   ]
 
   mounted(): void {

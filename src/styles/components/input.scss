@@ -7,6 +7,21 @@
   }
   border:0; 
   border-bottom:1px solid variables.$grey-7; 
+
+  &.hover,
+  &:hover,
+  &.active
+  &:focus,
+  &.focus 
+  {
+    border:0; 
+    border-bottom:1px solid variables.$primary; 
+  }
+
+  &.disabled {
+    border-bottom:1px solid variables.$grey-7; 
+    cursor: not-allowed;
+ }
 }
 
 .input-label {
