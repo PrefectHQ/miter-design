@@ -213,7 +213,7 @@ export default class Cards extends Vue {
       height: '250px',
       width: '300px',
       overline: 'Hello world',
-      overlineClass: ['text-caption-1'],
+      overlineClass: ['caption'],
       subtitle: 'Tasks Pending',
       subtitleClass: ['mb-auto', 'text--primary-100'],
       actions: [
