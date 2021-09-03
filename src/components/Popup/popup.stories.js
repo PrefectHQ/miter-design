@@ -22,7 +22,7 @@ const Template = (args) => ({
     document.body.appendChild(el)
     return { args, val }
   },
-  template: `<Popup v-model="val" v-bind="args"><template v-slot:activate>${args.activate}</template><template v-if="args.popupContent" v-slot:content>${args.popupContent}</template>
+  template: `<Popup v-model="val" v-bind="args"><template v-slot:activate>${args.activate}</template><template v-if="args.popupContent" v-slot:content>${args.popupContent}</template><template v-if="args.popupActions" v-slot:actions>${args.popupActions}</template>
   </Popup>
   `
 })
@@ -32,8 +32,10 @@ Center.args = {
   val: true,
   position: 'center',
   title: 'Pop Up',
+  width: '180px',
   activate: `<Button v-bind="args" color="primary" @click="val = true">Button</Button>`,
-  popupContent: `<PopupContent v-bind="args" @close="val=false"><template v-slot:content>Pop Up Content</template></PopupContent>`,
+  popupContent: `<div>Pop Up Content</div>`,
+  popupActions: `<Button color="primary">Blank Button</Button>`
 }
 
 export const FlexEnd = Template.bind({})
