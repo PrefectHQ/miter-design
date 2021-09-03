@@ -199,7 +199,7 @@ export default class Cards extends Vue {
       contentClass: ['my-auto'],
       content: "See all the new features we've added in the tutorial.",
       asideTag: 'CardAside',
-      asideClass: ['grey-1'],
+      asideClass: ['black'],
       asideWidth: '175px',
       actions: [
         { tag: 'Button', color: 'primary', text: 'Primary' },
@@ -215,7 +215,7 @@ export default class Cards extends Vue {
       overline: 'Hello world',
       overlineClass: ['caption'],
       subtitle: 'Tasks Pending',
-      subtitleClass: ['mb-auto', 'text--primary-100'],
+      subtitleClass: ['mb-auto', 'text--primary-blue'],
       actions: [
         {
           tag: 'div',
@@ -226,7 +226,7 @@ export default class Cards extends Vue {
     },
     {
       headerTag: 'CardHeader',
-      headerClass: ['grey-1'],
+      headerClass: ['black'],
       headerHeight: '300px',
       title: 'Welcome to PREFECT',
       titleTag: 'h5',

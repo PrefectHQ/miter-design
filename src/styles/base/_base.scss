@@ -75,11 +75,11 @@ a {
 
   &:hover,
   &:focus {
-    color: variables.$primary-100 !important;
+    color: variables.$primary !important;
   }
 
   &.disabled {
-    color: variables.$grey-4 !important;
+    color: variables.$grey-20 !important;
     cursor: not-allowed;
   }
 }

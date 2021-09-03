@@ -15,7 +15,7 @@
 
   .picker {
     background-color: variables.$white;
-    border: 1px solid variables.$grey-4;
+    border: 1px solid variables.$grey-20;
     border-radius: 4px;
     cursor: pointer;
     height: 58px;
@@ -23,7 +23,7 @@
     display: flex;
     align-items: center;
     padding-left: 32px;
-    color: variables.$grey-4;
+    color: variables.$grey-20;
     font-size: 16px;
     white-space: nowrap;
     z-index: 2;
@@ -35,10 +35,10 @@
     }
     i {
       @include mixins.input-transition;
-      color: variables.$grey-1;
+      color: variables.$black;
     }
     &.disabled {
-      background-color: variables.$grey-5;
+      background-color: variables.$secondary-background;
       cursor: not-allowed !important;
       color: variables.$inactive !important;
       i {
@@ -84,18 +84,18 @@
       height: 58px;
       padding-left: 32px;
       &:not(:last-child) {
-        border-bottom: 1px solid variables.$grey-6;
+        border-bottom: 1px solid variables.$secondary-background;
       }
     }
     .search {
       font-size: 16px;
-      color: variables.$grey-4;
+      color: variables.$grey-20;
       input {
         width: 100%;
         border: none;
         font-family: variables.$font--primary;
         &::placeholder {
-          color: variables.$grey-4;
+          color: variables.$grey-20;
           font-family: variables.$font--primary;
         }
         &:focus,
@@ -104,7 +104,7 @@
         }
       }
       i {
-        color: variables.$grey-1;
+        color: variables.$black;
       }
     }
   }
@@ -112,7 +112,7 @@
 .title {
   text-transform: uppercase;
   font-weight: 700;
-  color: variables.$grey-4;
+  color: variables.$grey-20;
 }
 .option {
   cursor: pointer;
@@ -124,10 +124,10 @@
     padding-top: 16px;
   }
   i {
-    color: variables.$grey-4;
+    color: variables.$grey-20;
   }
   &.hovered {
-    background-color: variables.$grey-7;
+    background-color: variables.$secondary-background;
   }
   &.selected {
     background-color: variables.$primary;
@@ -140,7 +140,7 @@
     }
   }
   &.disabled {
-    color: variables.$grey-4;
+    color: variables.$inactive;
     cursor: not-allowed !important;
   }
 }

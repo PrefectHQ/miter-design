@@ -7,7 +7,7 @@ button.tab {
 
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid variables.$grey-4;
+  border-bottom: 2px solid variables.$grey-20;
   height: max-content;
   border-radius: 4px 4px 0 0;
   cursor: pointer;
@@ -22,19 +22,19 @@ button.tab {
   &:hover,
   &:focus,
   &.focus {
-    background-color: variables.$grey-3;
-    border-color: variables.$grey-2;
+    background-color: variables.$secondary-background;
+    border-color: variables.$grey-80;
     outline: none;
   }
 
   &.focused {
-    background-color: variables.$grey-4;
-    border-color: variables.$grey-2;
+    background-color: variables.$grey-20;
+    border-color: variables.$grey-80;
   }
 
   &.disabled {
     background-color: transparent;
-    border-color: variables.$grey-4;
+    border-color: variables.$grey-20;
     color: variables.$inactive;
     cursor: not-allowed;
   }

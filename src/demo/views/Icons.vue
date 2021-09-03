@@ -209,7 +209,7 @@ export default class App extends Vue {
   padding-top: 16px;
 
   &:hover {
-    background-color: variables.$grey-5;
+    background-color: variables.$secondary-background;
   }
 }
 
@@ -220,7 +220,7 @@ export default class App extends Vue {
 
 .icon-search {
   border: none;
-  border-bottom: 2px solid variables.$grey-5;
+  border-bottom: 2px solid variables.$secondary-background;
   font-size: 24px;
   font: 'prefect-icons' 'Barlow';
   letter-spacing: 0.24px;
@@ -236,13 +236,13 @@ export default class App extends Vue {
   }
 
   &:focus {
-    border-bottom: 2px solid variables.$primary-100;
+    border-bottom: 2px solid variables.$primary;
   }
 }
 
 hr {
   border: none;
-  border-top: 1px solid variables.$grey-4;
+  border-top: 1px solid variables.$grey-40;
   border-radius: 5px;
 }
 
@@ -258,7 +258,7 @@ hr {
 }
 
 code {
-  background-color: variables.$grey-2;
+  background-color: variables.$grey-80;
   border-radius: 4px;
   color: white;
   padding: 4px 12px;
