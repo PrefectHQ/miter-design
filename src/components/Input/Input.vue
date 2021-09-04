@@ -16,14 +16,14 @@
     @mouseleave="handleMouseLeave"
     @mousedown="handleMouseDown"
     @mouseup="handleMouseUp"
-    @keydown.enter.space="handleKeydown"
-    @keyup.enter.space="handleKeyup"
+    @keydown.enter="handleKeydown"
     @focus="handleFocus"
     @blur="handleBlur"
-    :disabled="disabled || readonly"
+    :disabled="disabled"
     :value="internalValue"
     @input="handleInput"
     class="input"
+    :class="classList"
   />
 </span>
 </div>
@@ -43,10 +43,6 @@ export default defineComponent({
   name: 'Input',
   props: {
     disabled: {
-      type: Boolean,
-      default: false
-    },
-    readonly: {
       type: Boolean,
       default: false
     },
@@ -96,30 +92,23 @@ export default defineComponent({
   },
   handleMouseLeave(): void {
     this.hovered = false
-    this.active = false
   },
   handleMouseDown(): void {
     if (this.disabled) return
     this.active = true
   },
-  handleMouseUp(): void {
-    if (this.disabled) return
-    this.active = false
-  },
   handleFocus(): void {
     if (this.disabled) return
     this.hovered = true
+    this.active = true
   },
   handleBlur(): void {
     this.hovered = false
     this.active = false
   },
-  handleKeyup(): void {
-    this.active = false
-  },
-  handleKeydown(): void {
+  handleKeydown(e:Event): void {
     if (this.disabled) return
-    this.active = true
+    e.target?.blur()
   }
   }
 })

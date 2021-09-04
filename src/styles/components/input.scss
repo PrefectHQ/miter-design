@@ -19,7 +19,8 @@
       cursor: not-allowed;
     }
 
-  &.hovered {
+  &.hovered
+  & :hover {
     background-color: variables.$input-background;
   }
  }
@@ -51,7 +52,9 @@
 
 .input {
   border:0;
-  background-color: transparent;
-  font-size: 15px;
-  line-height: 14px;
+&:focus {
+  border-color: transparent;
+  outline-style: none;
+  }
 }
+

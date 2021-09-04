@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="logVal">
     <h3>Input</h3>
     <div v-for="state in states" :key="state" class="my-2">
       <Input
