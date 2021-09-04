@@ -18,11 +18,16 @@
       opacity: 60%;
       cursor: not-allowed;
     }
- }
+  }
+
+  &.invalid {
+    border-bottom:1px solid variables.$error; 
+    }
 
  &.hovered {
   background-color: variables.$input-background
  }
+
 }
 
 .icon {
@@ -59,4 +64,5 @@
   background-color: variables.$input-background
   }
 }
+
 

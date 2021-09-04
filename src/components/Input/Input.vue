@@ -24,6 +24,9 @@
     @blur="handleBlur"
     :disabled="disabled"
     :value="internalValue"
+    :valid="valid"
+    :required="required"
+    @invalid.capture="handleInvalid"
     @input="handleInput"
     class="input"
     :class="classList"
@@ -68,18 +71,27 @@ export default defineComponent({
     hideLabel: {
       type: Boolean,
       default: false
+    },
+    valid: {
+      type: Boolean,
+      default: true
+    },
+    required: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:modelValue'],
   data() {
     return {
       active: false as boolean,
-      hovered: false as boolean
+      hovered: false as boolean,
+      invalid: !this.valid as boolean,
     }
   },
   computed: {
     classList(): any {
-      return this.disabled ? ['disabled'] : this.active ? ['active'] : this.hovered ? ['hovered'] : []
+      return this.disabled ? ['disabled'] : this.invalid ? ['invalid'] : this.active ? ['active'] : this.hovered ? ['hovered'] : []
     },
     internalValue(): string {
       return this.value || this.modelValue || ''
@@ -88,6 +100,9 @@ export default defineComponent({
   methods: {
   handleInput(e: event) {
     this.$emit('update:modelValue', e.target.value)
+  },
+  handleInvalid() {
+    this.invalid = true
   },
   handleMouseEnter(): void {
     if (this.disabled) return
@@ -105,12 +120,16 @@ export default defineComponent({
     this.hovered = true
     this.active = true
   },
-  handleBlur(): void {
+  handleBlur(e:Event): void {
+    const valid = e.target?.checkValidity()
+    this.invalid = !valid  
     this.hovered = false
     this.active = false
   },
   handleKeydown(e:Event): void {
     if (this.disabled) return
+    const valid = e.target?.checkValidity()
+    this.invalid = !valid  
     e.target?.blur()
   }
   }
