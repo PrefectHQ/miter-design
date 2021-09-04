@@ -6,7 +6,9 @@
         v-model="state.val"
         :disabled="state.state == 'disabled'"
         :label="state.label"
-      />
+      >
+      <i class="pi pi-Fire pi-2x"></i>
+      </Input>
     </div>
   </div>
 </template>

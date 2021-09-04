@@ -1,28 +1,57 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.input {
-    *, *:before, *:after {
-    box-sizing: border-box;
-  }
-  border:0; 
+.flexInput {
+  display: flex;
+  align-items: flex-end;
+  box-sizing: border-box;
+  padding-bottom: 7px;
   border-bottom:1px solid variables.$grey-7; 
 
-  &.active 
-  {
-    border:0; 
+  &.active {
     border-bottom:1px solid variables.$primary; 
   }
 
   &.disabled {
     border-bottom:1px solid variables.$grey-7; 
-    cursor: not-allowed;
+    *, *:before, *:after {
+      opacity: 60%;
+      cursor: not-allowed;
+    }
+
+  &.hovered {
+    background-color: variables.$input-background;
+  }
  }
 }
 
+.icon {
+  // *, *:before, *:after {
+  // }
+    align-items: center;
+    display: flex;
+    justify-items: flex-end;
+    margin-right: 12px;
+    height: 47px;
+}
+
+.input-text {
+    display: flex;
+    flex-direction: column;
+}
+
 .input-label {
-    display:block;
-    font-size: 11px;
-    //Had to add another black here - do we want to simplify?
-    color: variables.$text--black;
+  font-size: 11px;
+  line-height: 14px;
+  margin-bottom: 8px;
+  padding-left:2px;
+  justify-content: center;
+  opacity: 80%
+}
+
+.input {
+  border:0;
+  background-color: transparent;
+  font-size: 15px;
+  line-height: 14px;
 }

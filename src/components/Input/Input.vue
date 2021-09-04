@@ -1,9 +1,12 @@
 <template>
+<div :class="classList" class="flexInput">
+<span class="icon" data-test="icon"><slot /></span>
+<span class="input-text">
   <label
     data-test="default"
-    class="input-label"
     v-if="!hideLabel"
     :for="label"
+    class="input-label"
     > {{label}}</label>
   <input
     :id="label"
@@ -20,9 +23,10 @@
     :disabled="disabled || readonly"
     :value="internalValue"
     @input="handleInput"
-    :class="classList"
     class="input"
   />
+</span>
+</div>
 </template>
 
 
@@ -70,7 +74,8 @@ export default defineComponent({
   emits: ['update:modelValue'],
   data() {
     return {
-      active: false as boolean
+      active: false as boolean,
+      hovered: false as boolean
     }
   },
   computed: {
@@ -86,37 +91,36 @@ export default defineComponent({
       this.$emit('update:modelValue', e.target.value)
     },
     handleMouseEnter(): void {
-      if (this.disabled) return
-      this.active = true
-    },
-    handleMouseLeave(): void {
-      if (this.disabled) return
-      this.active = false
-    },
-    handleMouseDown(): void {
-      if (this.disabled) return
-      this.active = true
-    },
-    handleMouseUp(): void {
-      if (this.disabled) return
-      this.active = false
-    },
-    handleFocus(): void {
-      if (this.disabled) return
-      this.active = true
-    },
-    handleBlur(): void {
-      if (this.disabled) return
-      this.active = false
-    },
-    handleKeyup(): void {
-      if (this.disabled) return
-      this.active = false
-    },
-    handleKeydown(): void {
-      if (this.disabled) return
-      this.active = true
-    }
+    if (this.disabled) return
+    this.hovered = true
+  },
+  handleMouseLeave(): void {
+    this.hovered = false
+    this.active = false
+  },
+  handleMouseDown(): void {
+    if (this.disabled) return
+    this.active = true
+  },
+  handleMouseUp(): void {
+    if (this.disabled) return
+    this.active = false
+  },
+  handleFocus(): void {
+    if (this.disabled) return
+    this.hovered = true
+  },
+  handleBlur(): void {
+    this.hovered = false
+    this.active = false
+  },
+  handleKeyup(): void {
+    this.active = false
+  },
+  handleKeydown(): void {
+    if (this.disabled) return
+    this.active = true
+  }
   }
 })
 </script>
