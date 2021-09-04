@@ -1,5 +1,8 @@
 <template>
-<div :class="classList" class="flexInput">
+<div :class="classList" 
+  @mouseenter="handleMouseEnter"
+  @mouseleave="handleMouseLeave" 
+  class="flexInput">
 <span class="icon" data-test="icon"><slot /></span>
 <span class="input-text">
   <label
@@ -13,7 +16,7 @@
     :type="inputType"
     placeholder="Input"
     @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
+    @mouseleave="handleMouseLeave" 
     @mousedown="handleMouseDown"
     @mouseup="handleMouseUp"
     @keydown.enter="handleKeydown"
@@ -76,17 +79,17 @@ export default defineComponent({
   },
   computed: {
     classList(): any {
-      return this.disabled ? ['disabled'] : this.active ? ['active'] : []
+      return this.disabled ? ['disabled'] : this.active ? ['active'] : this.hovered ? ['hovered'] : []
     },
     internalValue(): string {
       return this.value || this.modelValue || ''
     }
   },
   methods: {
-    handleInput(e: event) {
-      this.$emit('update:modelValue', e.target.value)
-    },
-    handleMouseEnter(): void {
+  handleInput(e: event) {
+    this.$emit('update:modelValue', e.target.value)
+  },
+  handleMouseEnter(): void {
     if (this.disabled) return
     this.hovered = true
   },

@@ -18,11 +18,10 @@
       opacity: 60%;
       cursor: not-allowed;
     }
+ }
 
-  &.hovered
-  & :hover {
-    background-color: variables.$input-background;
-  }
+ &.hovered {
+  background-color: variables.$input-background
  }
 }
 
@@ -55,6 +54,9 @@
 &:focus {
   border-color: transparent;
   outline-style: none;
+  }
+&.hovered {
+  background-color: variables.$input-background
   }
 }
 
