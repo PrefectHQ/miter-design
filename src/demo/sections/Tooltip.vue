@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Button v-tooltip:[position]="html"> Tag </Button>
+    <Button v-tooltip:[position]="html"> Foo </Button>
   </div>
 </template>
 

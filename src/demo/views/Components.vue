@@ -13,11 +13,8 @@
     <Tag class="mt-10" />
     <TagGroup class="mt-10" />
     <Avatar class="mt-10" />
-    <<<<<<< HEAD
     <Tooltip class="mt-10" />
-    =======
     <Selects class="mt-10" />
-    >>>>>>> 3868b7286356888d19881d4f44ecbb241949ecd3
   </div>
 </template>
 

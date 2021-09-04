@@ -1,37 +1,42 @@
 import '@/styles/components/tooltip.scss'
-import { DirectiveBinding, ObjectDirective, VNode } from '@vue/runtime-dom'
+import { DirectiveBinding, ObjectDirective } from '@vue/runtime-dom'
+
+export const applyClass = (el: any, position: any) => {
+  if (!el.classList.contains('tooltip-box')) {
+    el.classList.add('tooltip-box')
+  }
+
+  const positions = ['top', 'right', 'bottom', 'left']
+  el.classList.add(positions.includes(position) ? position : positions[0])
+
+  el.setAttribute('aria-labelledby', 'tooltip-container')
+  el.setAttribute('tabindex', '1')
+}
 
 export const TooltipDirective: ObjectDirective = {
-  mounted(el: any, binding: DirectiveBinding, vNode: VNode) {
+  mounted(el: any, binding: DirectiveBinding) {
     const template = `
-      <div class="tooltip">
-        <div class="tooltip-inner">
+      <div role="tooltip" id="tooltip-container" class="tooltip">
+        <div class="tooltip-content">
         </div>
       </div>
       `
+    applyClass(el, binding.arg)
 
-    el.classList.add('tooltip-box')
-
-    // NOTE: Creates template and appends it below the current el
     const tooltipGenerator = window.document.createElement('div')
     tooltipGenerator.innerHTML = template.trim()
     const tooltipNode = tooltipGenerator.childNodes[0]
     el.appendChild(tooltipNode)
 
-    const position = binding.arg || 'top'
-    el.classList.add(position)
-
-    // NOTE: Text Content
-    const content = tooltipNode.querySelector('.tooltip-inner')
-    content.innerHTML = binding.value
+    const content = el.querySelector('.tooltip-content')
+    content.innerHTML = binding.value || 'text'
   },
-  updated(el: any, binding: DirectiveBinding, vNode: VNode) {
-    el.classList.add('tooltip-box')
-
-    const position = binding.arg || 'top'
-    el.classList.add(position)
+  updated(el: any, binding: DirectiveBinding) {
+    applyClass(el, binding.arg)
   },
-  unmounted(el: any, binding: DirectiveBinding, vNode: VNode) {}
+  unmounted(el: any, binding: DirectiveBinding) {
+    el.classList.remove('tooltip-box')
+  }
 }
 
 export default TooltipDirective
