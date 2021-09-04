@@ -121,16 +121,19 @@ export default defineComponent({
     this.active = true
   },
   handleBlur(e:Event): void {
-    const valid = e.target?.checkValidity()
-    this.invalid = !valid  
+    this.validate(e)
     this.hovered = false
     this.active = false
   },
   handleKeydown(e:Event): void {
     if (this.disabled) return
-    const valid = e.target?.checkValidity()
-    this.invalid = !valid  
+    this.validate(e)
     e.target?.blur()
+  },
+  validate(e:Event) {
+  const valid = e.target?.checkValidity()
+  this.rules()
+  this.invalid = !valid  
   }
   }
 })
