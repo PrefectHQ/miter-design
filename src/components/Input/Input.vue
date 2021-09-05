@@ -26,6 +26,9 @@
     :value="internalValue"
     :valid="valid"
     :required="required"
+    :pattern="pattern"
+    :maxlength="maxLength"
+    :minlength="minLength"
     @invalid.capture="handleInvalid"
     @input="handleInput"
     class="input"
@@ -79,9 +82,21 @@ export default defineComponent({
     required: {
       type: Boolean,
       default: false
+    },
+    maxLength: {
+      type: Number,
+      required: false
+    },
+    minLength: {
+      type: Number,
+      required: false
+    },
+    pattern: {
+      type: String,
+      required: false
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'invalid'],
   data() {
     return {
       active: false as boolean,
@@ -101,7 +116,8 @@ export default defineComponent({
   handleInput(e: event) {
     this.$emit('update:modelValue', e.target.value)
   },
-  handleInvalid() {
+  handleInvalid(e: Event) {
+    this.$emit('invalid', e.target?.validity)
     this.invalid = true
   },
   handleMouseEnter(): void {
@@ -132,7 +148,6 @@ export default defineComponent({
   },
   validate(e:Event) {
   const valid = e.target?.checkValidity()
-  this.rules()
   this.invalid = !valid  
   }
   }

@@ -6,6 +6,8 @@
         v-model="state.val"
         :disabled="state.state == 'disabled'"
         :label="state.label"
+        @invalid="handleInvalid"
+        required
       >
       <i class="pi pi-Fire pi-2x"></i>
       </Input>
@@ -37,6 +39,10 @@ export default class Inputs extends Vue {
     )
     return true
   })
+
+  handleInvalid(validityState: ValidityState){
+    console.log('validity', validityState)
+  }
 }
 </script>
 

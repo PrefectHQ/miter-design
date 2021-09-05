@@ -24,12 +24,19 @@ const Template = (args, argTypes) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-    disabled: false,
-    label: "Input label ",
+  disabled: false,
+  label: "Default",
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
-    disabled: true
+  disabled: true,
+  label: 'Disabled'
+}
+
+export const Error = Template.bind({})
+Error.args = {
+  valid: false,
+  label: 'Error'
 }
 
