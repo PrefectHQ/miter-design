@@ -37,7 +37,7 @@
 </span>
 <span v-if="!validityIcon" class="append" data-test="icon"><slot name="append" />
 </span>
-<span class="append" :class="classList" v-if="validityIcon">
+<span class="append" :class="classList" v-else>
   <i v-if="!invalid"  class="pi pi-Checkmark pi-2x"></i>
   <i v-if="invalid" class="pi pi-Warning pi-2x invalid"></i>
   </span>
