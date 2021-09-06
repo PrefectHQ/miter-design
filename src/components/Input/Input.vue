@@ -3,7 +3,7 @@
   @mouseenter="handleMouseEnter"
   @mouseleave="handleMouseLeave" 
   class="flexInput">
-<span class="icon" data-test="icon"><slot /></span>
+<span class="prepend" data-test="icon"><slot name="prepend" /></span>
 <span class="input-text">
   <label
     data-test="default"
@@ -35,6 +35,7 @@
     :class="classList"
   />
 </span>
+<span class="append" data-test="icon"><slot name="append" /></span><span v-if="validIcon"></span>
 </div>
 </template>
 
@@ -58,6 +59,10 @@ export default defineComponent({
     inputType: {
         type: String,
         default: 'text'
+    },
+    validIcon: {
+      type: Boolean,
+      default: false
     },
     modelValue: {
       type: String,

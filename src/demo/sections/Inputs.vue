@@ -8,8 +8,14 @@
         :label="state.label"
         @invalid="handleInvalid"
         required
+        valid-icon
       >
+      <template v-slot:prepend>
       <i class="pi pi-Fire pi-2x"></i>
+      </template>
+      <template v-slot:append>
+      <i class="pi pi-Checkmark pi-2x"></i>
+      </template>
       </Input>
     </div>
   </div>

@@ -31,7 +31,7 @@
 
 }
 
-.icon {
+.prepend {
   // *, *:before, *:after {
   // }
     align-items: center;
@@ -39,6 +39,16 @@
     justify-items: flex-end;
     margin-right: 12px;
     height: 47px;
+}
+
+.append {
+  // *, *:before, *:after {
+  // }
+    align-items: center;
+    display: flex;
+    justify-items: flex-end;
+    height: 47px;
+    margin-left: auto;
 }
 
 .input-text {
