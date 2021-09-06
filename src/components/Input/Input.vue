@@ -34,6 +34,7 @@
     class="input"
     :class="classList"
   />
+  
 </span>
 <span v-if="!validityIcon" class="append" data-test="icon"><slot name="append" />
 </span>

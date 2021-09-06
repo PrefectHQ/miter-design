@@ -77,6 +77,23 @@ Switch.args = {
   appendSlot: `<Toggle :style="{position: 'static'}" />`
 }
 
+export const disabledSwitch = Template.bind({})
+disabledSwitch.args = {
+  valid: true,
+  disabled: true,
+  prependSlot: `<i class="pi pi-Fire pi-2x"></i>`,
+  validityIcon: false,
+  appendSlot: `<Toggle :style="{position: 'static'}" :disabled="true" />`
+}
+
+export const DoubleIcon = Template.bind({})
+DoubleIcon.args = {
+  valid: true,
+  label: "2XIcon",
+  prependSlot: `<i class="pi pi-Fire pi-2x"></i><i class="pi pi-X pi-2x"></i>`,
+  validityIcon: true
+}
+
 
 
 
