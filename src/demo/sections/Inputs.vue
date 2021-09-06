@@ -9,6 +9,7 @@
         @invalid="handleInvalid"
         required
         :validityIcon ="true"
+        
       >
       <template v-slot:prepend>
       <i class="pi pi-Fire pi-2x"></i>

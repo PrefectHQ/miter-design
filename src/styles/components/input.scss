@@ -63,6 +63,9 @@
 .input-text {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    font-size: 15px;
+    height: 47px;
 }
 
 .input-label {
