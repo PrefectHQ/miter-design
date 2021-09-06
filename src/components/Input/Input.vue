@@ -34,7 +34,7 @@
     class="input"
     :class="classList"
   />
-  
+  <p v-if="subtitle" class="subtitle">{{subtitle}}</p>
 </span>
 <span v-if="!validityIcon" class="append" data-test="icon"><slot name="append" />
 </span>
@@ -61,6 +61,10 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false
+    },
+    subtitle: {
+      type: String,
+      default: ''
     },
     inputType: {
         type: String,

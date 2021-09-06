@@ -7,6 +7,7 @@
         :disabled="state.state == 'disabled'"
         :label="state.label"
         @invalid="handleInvalid"
+        :subtitle="state.subtitle"
         required
         :validityIcon ="false"
         
@@ -32,7 +33,7 @@ export default class Inputs extends Vue {
   minVal = 0 as number
   maxVal = 10 as number
   states = [
-    { state: 'default', val: 'hello', label: 'Default' },
+    { state: 'default', val: 'hello', label: 'Default', subtitle: 'default subtitle' },
     { state: 'disabled', val: 'Hello again', label: 'Disabled' }
   ]
 
