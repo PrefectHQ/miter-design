@@ -35,7 +35,12 @@
     :class="classList"
   />
 </span>
-<span class="append" data-test="icon"><slot name="append" /></span><span v-if="validIcon"></span>
+<span v-if="!validityIcon" class="append" data-test="icon"><slot name="append" />
+</span>
+<span class="append" :class="classList" v-if="validityIcon">
+  <i v-if="!invalid"  class="pi pi-Checkmark pi-2x"></i>
+  <i v-if="invalid" class="pi pi-Warning pi-2x invalid"></i>
+  </span>
 </div>
 </template>
 
@@ -60,7 +65,7 @@ export default defineComponent({
         type: String,
         default: 'text'
     },
-    validIcon: {
+    validityIcon: {
       type: Boolean,
       default: false
     },
@@ -115,11 +120,15 @@ export default defineComponent({
     },
     internalValue(): string {
       return this.value || this.modelValue || ''
+    },
+    iconClass(): any {
+      return this.invalid ? ['invalid']: ['valid']
     }
   },
   methods: {
-  handleInput(e: event) {
-    this.$emit('update:modelValue', e.target.value)
+  handleInput(e: Event) {
+    this.validate(e)
+    this.$emit('update:modelValue', e.target?.value)
   },
   handleInvalid(e: Event) {
     this.$emit('invalid', e.target?.validity)

@@ -42,13 +42,22 @@
 }
 
 .append {
-  // *, *:before, *:after {
-  // }
     align-items: center;
     display: flex;
     justify-items: flex-end;
     height: 47px;
     margin-left: auto;
+  &.active {
+    // *, *:before, *:after {
+    color: variables.$primary
+    // }
+  }
+
+  &.invalid {
+    *, *:before, *:after {
+    color: variables.$error
+    }
+}
 }
 
 .input-text {
