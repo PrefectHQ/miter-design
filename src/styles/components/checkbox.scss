@@ -27,7 +27,7 @@
     width: 28px;
     z-index: 1;
   }
-  .material-icons {
+  .pi-Checkmark {
     color: variables.$white;
     display: none;
   }
@@ -35,8 +35,9 @@
   > input:checked {
     ~ .box {
       background-color: variables.$primary;
-      .material-icons {
-        display: inline;
+      .pi-Checkmark {
+        display: block;
+        margin: 2px 0 0 -2px;
       }
     }
   }
