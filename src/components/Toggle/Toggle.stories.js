@@ -1,8 +1,8 @@
-import Checkbox from './Checkbox.vue'
+import ToggleSwitch from './ToggleSwitch.vue'
 
 export default {
-  title: 'Miter Design/Checkbox',
-  component: Checkbox,
+  title: 'Miter Design/ToggleSwitch',
+  component: ToggleSwitch,
   parameters: {
     design: {
       type: 'figma',
@@ -12,17 +12,17 @@ export default {
 }
 
 const Template = (args) => ({
-  components: { Checkbox },
+  components: { ToggleSwitch },
   setup() {
     return { args }
   },
-  template: '<Checkbox v-bind="args" >{{ args.content }}</Checkbox>'
+  template: '<ToggleSwitch v-bind="args" >{{ args.content }}</ToggleSwitch>'
 })
 
-export const Checked = Template.bind({})
-Checked.args = {
+export const Toggled = Template.bind({})
+Toggled.args = {
   value: true,
-  content: 'Checked'
+  content: 'Toggled'
 }
 
 export const Disabled = Template.bind({})
