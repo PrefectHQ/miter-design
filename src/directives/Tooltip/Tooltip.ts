@@ -10,7 +10,6 @@ export const applyClass = (el: any, position: any) => {
   el.classList.add(positions.includes(position) ? position : positions[0])
 
   el.setAttribute('aria-labelledby', 'tooltip-container')
-  el.setAttribute('tabindex', '1')
 }
 
 export const TooltipDirective: ObjectDirective = {
