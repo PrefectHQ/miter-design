@@ -32,43 +32,41 @@ import { Vue, Options, prop } from 'vue-class-component'
 class Props {
   disabled = prop<Boolean>({ default: false })
   readonly = prop<Boolean>({ default: false })
-  min = prop<number | string>({ default: null })
-  max = prop<number | string>({ default: null })
+  min = prop<number | string>({ default: -Infinity })
+  max = prop<number | string>({ default: Infinity })
   step = prop<number | string>({ default: 1 })
   placeholder = prop<string>({ required: false, default: null })
   required = prop<Boolean>({ default: false })
-  modelValue = prop<number | string>({ required: false, default: null })
-  value = prop<number | string>({ required: false, default: null })
+  modelValue = prop<number | string>({ required: false, default: 0 })
+  value = prop<number | string>({ required: false, default: 0 })
 }
 
 const Component = Options
 @Component({
-  emits: {
-    'update:modelValue'(val: string | number) {
-      return val
-    }
-  },
+  emits: ['update:modelValue'],
   watch: {
     value_(val) {
-      if (this.parsedValue > this.parsedMax) return (this.value_ = this.max_)
-      if (this.parsedValue < this.parsedMin) return (this.value_ = this.min_)
+      if (this.parsedValue > this.parsedMax)
+        return (this.value_ = this.parsedMax)
+      if (this.parsedValue < this.parsedMin)
+        return (this.value_ = this.parsedMin)
       this.$emit('update:modelValue', val)
     }
   }
 })
 export default class NumberInput extends Vue.with(Props) {
-  value_ = this.modelValue || this.value
+  value_ = this.modelValue || this.value || 0
 
   get classList(): string[] {
     return [...(this.disabled ? ['disabled'] : [])]
   }
 
   get min_(): string {
-    return typeof this.min == 'number' ? this.min.toString() : this.min
+    return typeof this.min !== 'string' ? this.min.toString() : this.min
   }
 
   get max_(): string {
-    return typeof this.max == 'number' ? this.max.toString() : this.max
+    return typeof this.max !== 'string' ? this.max.toString() : this.max
   }
   get step_(): string {
     return typeof this.step == 'number' ? this.step.toString() : this.step
