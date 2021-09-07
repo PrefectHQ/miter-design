@@ -70,21 +70,25 @@ $colors: (
   inactive: $inactive,
   disabled: $disabled,
   background: $background,
+  popup-background: $popup-background,
   white: $white,
-  primary: $primary,
+  black: $black,
   error: $error,
   warning: $warning,
   success: $success,
+  primary: $primary,
   primary-hover: $primary-hover,
   primary-pressed: $primary-pressed,
   secondary-background: $secondary-background,
+  secondary-hover: $secondary-hover,
+  secondary-pressed: $secondary-pressed,
+  grey-80: $grey-80,
+  grey-40: $grey-40,
+  grey-20: $grey-20,
   blue-80: $blue-80,
   blue-40: $blue-40,
   blue-20: $blue-20,
-  blue-5: $blue-5,
-  black: $black,
-  grey-80: $grey-80,
-  grey-40: $grey-40
+  blue-5: $blue-5
 );
 
 :root {
