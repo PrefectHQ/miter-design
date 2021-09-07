@@ -92,6 +92,9 @@
 &.hovered {
   background-color: variables.$input-background
   }
+&.disabled {
+  background-color: transparent;
+}
 }
 
 .subtitle {
