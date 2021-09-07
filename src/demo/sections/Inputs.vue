@@ -16,7 +16,7 @@
       <i class="pi pi-Fire pi-2x"></i>
       </template>
       <template v-slot:append>
-        <ToggleSwitch />
+        <ToggleSwitch :style="{position: 'static'}" />
       </template>
       </Input>
     </div>
@@ -33,7 +33,7 @@ export default class Inputs extends Vue {
   minVal = 0 as number
   maxVal = 10 as number
   states = [
-    { state: 'default', val: 'hello', label: 'Default', subtitle: 'default subtitle' },
+    { state: 'default', val: 'Hello', subtitle: 'Default subtitle' },
     { state: 'disabled', val: 'Hello again', label: 'Disabled' }
   ]
 

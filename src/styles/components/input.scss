@@ -71,14 +71,15 @@
 .input-label {
   font-size: 11px;
   line-height: 14px;
-  margin-bottom: 8px;
   padding-left:2px;
+  margin-bottom: 4px;;
   justify-content: center;
   opacity: 80%
 }
 
 .input {
   border:0;
+  line-height: 20px;
 &:focus {
   border-color: transparent;
   outline-style: none;
@@ -90,9 +91,11 @@
 
 .subtitle {
   font-size: 11px;
-  padding: 0;
-  margin:0;
+  line-height: 14px;
   opacity: 60%;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 2px;
 }
 
 
