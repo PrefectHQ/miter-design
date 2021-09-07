@@ -65,6 +65,7 @@ NoLabelOrIcon.args = {
 export const NoValidityIcon = Template.bind({})
 NoValidityIcon.args = {
   valid: true,
+  label: 'Test Label',
   prependSlot: `<i class="pi pi-Fire pi-2x"></i>`,
   validityIcon: false,
 }
@@ -74,6 +75,7 @@ Switch.args = {
   valid: true,
   prependSlot: `<i class="pi pi-Fire pi-2x"></i>`,
   validityIcon: false,
+  label: 'Switch',
   appendSlot: `<Toggle :style="{position: 'static'}" />`
 }
 

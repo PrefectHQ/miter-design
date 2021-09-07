@@ -13,7 +13,7 @@
         
       >
       <template v-slot:prepend>
-      <i class="pi pi-Fire pi-2x"></i>
+      <i class="pi pi-Search pi-2x"></i>
       </template>
       <template v-slot:append>
         <ToggleSwitch :style="{position: 'static'}" />
