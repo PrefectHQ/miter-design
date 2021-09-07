@@ -27,6 +27,51 @@ $text-alignments: 'left', 'center', 'right', 'end', 'justify', 'start',
   }
 }
 
+$borders: (
+  't': (
+    'top-left',
+    'top-right'
+  ),
+  'b': (
+    'bottom-right',
+    'bottom-left'
+  ),
+  'r': (
+    'top-right',
+    'bottom-right'
+  ),
+  'l': (
+    'top-left',
+    'bottom-left'
+  ),
+  'tl': (
+    'top-left'
+  ),
+  'tr': (
+    'top-right'
+  ),
+  'bl': (
+    'bottom-left'
+  ),
+  'br': (
+    'bottom-right'
+  )
+);
+
+@for $i from 0 through 10 {
+  .border-#{$i} {
+    border-radius: #{$i}px;
+  }
+  @each $abbreviation, $properties in $borders {
+    $selector: #{$abbreviation}-#{$i};
+    .border-#{$selector} {
+      @each $property in $properties {
+        border-#{$property}-radius: #{$i}px;
+      }
+    }
+  }
+}
+
 .d-inline {
   display: inline !important;
 }
