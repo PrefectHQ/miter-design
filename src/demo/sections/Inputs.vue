@@ -9,14 +9,14 @@
         @invalid="handleInvalid"
         :subtitle="state.subtitle"
         required
-        :validityIcon ="false"
+        :validityIcon="false"
         
       >
       <template v-slot:prepend>
       <i class="pi pi-Search pi-2x"></i>
       </template>
       <template v-slot:append>
-        <ToggleSwitch :style="{position: 'static'}" />
+        <ToggleSwitch :disabled="state.state == 'disabled'" />
       </template>
       </Input>
     </div>

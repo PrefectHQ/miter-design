@@ -103,6 +103,13 @@ Subtitle.args = {
   subtitle: 'Input subtitle'
 }
 
+export const AppendText = Template.bind({})
+AppendText.args = {
+  prependSlot: `<i class="pi pi-Fire pi-2x"></i>`,
+  subtitle: 'Input subtitle',
+  appendSlot: `<span>Info</span>`
+}
+
 
 
 
