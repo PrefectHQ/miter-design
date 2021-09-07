@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>Tooltip</h3>
     <Button v-tooltip:[position]="html"> Foo </Button>
   </div>
 </template>
