@@ -15,7 +15,7 @@ export default {
 const Template = (args, argTypes) => ({
   components: { Input, Toggle },
   data() {
-    return { value: 'hello',}
+    return { value: '',}
   },
   setup() {
       return {args}
@@ -92,6 +92,13 @@ DoubleIcon.args = {
   label: "2XIcon",
   prependSlot: `<i class="pi pi-Fire pi-2x"></i><i class="pi pi-X pi-2x"></i>`,
   validityIcon: true
+}
+
+export const Subtitle = Template.bind({})
+Subtitle.args = {
+  prependSlot: `<i class="pi pi-Fire pi-2x"></i>`,
+  validityIcon: true,
+  subtitle: 'Input subtitle'
 }
 
 
