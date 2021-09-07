@@ -4,12 +4,35 @@
 .number-input-wrapper {
   @include mixins.miter;
 
+  display: inline-block;
   padding: 0;
+
+  &.disabled {
+    cursor: not-allowed;
+
+    > div {
+      background-color: variables.$disabled !important;
+      border-color: variables.$grey-4 !important;
+      cursor: not-allowed;
+    }
+
+    input[type='number'] {
+      cursor: not-allowed;
+    }
+
+    .spin-button-container {
+      pointer-events: none;
+
+      .spin-button {
+        color: variables.$grey-4;
+      }
+    }
+  }
 
   > div {
     border: 1px solid variables.$grey-4;
     border-radius: 5px;
-    display: inline-flex;
+    display: flex;
     padding: 0;
     margin: 0;
     outline: none;
@@ -24,6 +47,7 @@
 
   .spin-button-container {
     margin-right: 4px;
+
     .spin-button {
       background-color: transparent;
       border: none;
@@ -51,6 +75,7 @@
     height: 100%;
     outline: none;
     padding: 8px;
+    flex-grow: 1;
 
     -moz-appearance: textfield;
     appearance: textfield;
@@ -60,6 +85,10 @@
     &::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
+    }
+
+    &:disabled {
+      background-color: transparent;
     }
   }
 }

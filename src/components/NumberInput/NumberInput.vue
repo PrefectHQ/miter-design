@@ -1,5 +1,5 @@
 <template>
-  <div class="number-input-wrapper">
+  <div class="number-input-wrapper" :class="classList">
     <div>
       <input
         v-model="value_"
@@ -58,6 +58,10 @@ const Component = Options
 })
 export default class NumberInput extends Vue.with(Props) {
   value_ = this.modelValue || this.value
+
+  get classList(): string[] {
+    return [...(this.disabled ? ['disabled'] : [])]
+  }
 
   get min_(): string {
     return typeof this.min == 'number' ? this.min.toString() : this.min
