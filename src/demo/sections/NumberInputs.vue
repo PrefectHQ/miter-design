@@ -9,15 +9,22 @@
         Max:
         <input v-model="max" type="number" />
       </div>
-      <div class="my-1"
-        >Step: <input v-model="step" type="number" min="0" />
+      <div class="my-1">
+        Step: <input v-model="step" type="number" min="0" />
       </div>
       <div class="my-1">
         <label for="disabled-number-input">Disabled: </label>
         <input id="disabled-number-input" type="checkbox" v-model="disabled" />
       </div>
+      <h4 class="my-1">{{ value }}</h4>
       <div>
-        <NumberInput :disabled="disabled" :min="min" :max="max" :step="step" />
+        <NumberInput
+          v-model="value"
+          :disabled="disabled"
+          :min="min"
+          :max="max"
+          :step="step"
+        />
       </div>
     </div>
   </div>
@@ -36,7 +43,8 @@ export default defineComponent({
       disabled: false,
       min: '-100',
       max: '100',
-      step: '1'
+      step: '1',
+      value: 0
     }
   }
 })

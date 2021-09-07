@@ -13,6 +13,15 @@
         :required="required"
         @keypress="handleKeyPress"
       />
+
+      <span class="spin-button-container">
+        <button class="spin-button spin-button-up" @click="incrementValue">
+          <i class="pi pi-Arrow-Up pi-sm" />
+        </button>
+        <button class="spin-button spin-button-down" @click="decrementValue">
+          <i class="pi pi-Arrow-Down pi-sm" />
+        </button>
+      </span>
     </div>
   </div>
 </template>
@@ -34,6 +43,11 @@ class Props {
 
 const Component = Options
 @Component({
+  emits: {
+    'update:modelValue'(val: string | number) {
+      return val
+    }
+  },
   watch: {
     value_(val) {
       if (this.parsedValue > this.parsedMax) return (this.value_ = this.max_)
@@ -64,10 +78,22 @@ export default class NumberInput extends Vue.with(Props) {
     return typeof this.min == 'string' ? parseFloat(this.min) : this.min
   }
 
+  get parsedStep(): number {
+    return typeof this.step == 'string' ? parseFloat(this.step) : this.step
+  }
+
   get parsedValue(): number {
     return typeof this.value_ == 'string'
       ? parseFloat(this.value_)
       : this.value_
+  }
+
+  incrementValue(): void {
+    this.value_ = this.parsedValue + this.parsedStep
+  }
+
+  decrementValue(): void {
+    this.value_ = this.parsedValue - this.parsedStep
   }
 
   handleKeyPress(e: KeyboardEvent) {

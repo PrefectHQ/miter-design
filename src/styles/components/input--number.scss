@@ -9,7 +9,7 @@
   > div {
     border: 1px solid variables.$grey-4;
     border-radius: 5px;
-    display: inline-block;
+    display: inline-flex;
     padding: 0;
     margin: 0;
     outline: none;
@@ -19,6 +19,28 @@
     &:focus-within,
     &:hover {
       border-color: variables.$primary;
+    }
+  }
+
+  .spin-button-container {
+    margin-right: 4px;
+    .spin-button {
+      background-color: transparent;
+      border: none;
+      border-radius: 4px;
+      padding: 0 1px;
+      cursor: pointer;
+      display: block;
+      outline: none;
+
+      &:hover,
+      &:focus {
+        background-color: variables.$grey-3;
+      }
+
+      &:active {
+        background-color: variables.$grey-4;
+      }
     }
   }
 
