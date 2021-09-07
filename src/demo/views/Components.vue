@@ -12,6 +12,7 @@
     <Tag class="mt-10" />
     <TagGroup class="mt-10" />
     <Avatar class="mt-10" />
+    <NumberInputs class="mt-10" />
     <DatePickerSection class="mt-10" />
   </div>
 </template>
@@ -30,6 +31,7 @@ import TabSection from '../sections/TabSection.vue'
 import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
 import Sliders from '../sections/Sliders.vue'
+import NumberInputs from '../sections/NumberInputs.vue'
 
 @Options({
   components: {
@@ -44,7 +46,8 @@ import Sliders from '../sections/Sliders.vue'
     Checkboxes,
     TabSection,
     Tag,
-    TagGroup
+    TagGroup,
+    NumberInputs
   }
 })
 export default class App extends Vue {}
