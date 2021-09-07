@@ -3,16 +3,17 @@
   @mouseenter="handleMouseEnter"
   @mouseleave="handleMouseLeave" 
   class="flexInput">
-<span class="prepend" data-test="icon"><slot name="prepend" /></span>
+<span class="prepend" data-test="prepend"><slot name="prepend" /></span>
 <span class="input-text">
   <label
-    data-test="default"
+    data-test="label"
     v-if="!hideLabel"
     :for="label"
     class="input-label"
     > {{label}}</label>
   <input
     :id="label"
+    data-test="default"
     :type="inputType"
     placeholder="Input"
     @mouseenter="handleMouseEnter"
@@ -34,9 +35,9 @@
     class="input"
     :class="classList"
   />
-  <p v-if="subtitle" class="subtitle">{{subtitle}}</p>
+  <p v-if="subtitle" data-test="subtitle" class="subtitle">{{subtitle}}</p>
 </span>
-<span v-if="!validityIcon" class="append" data-test="icon"><slot name="append" />
+<span v-if="!validityIcon" class="append" data-test="append"><slot name="append" />
 </span>
 <span class="append" :class="classList" v-else>
   <i v-if="!invalid"  class="pi pi-Checkmark pi-2x"></i>
