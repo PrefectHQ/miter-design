@@ -1,0 +1,33 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.number-input-wrapper {
+  @include mixins.miter;
+
+  padding: 0;
+
+  > div {
+    border: 1px solid variables.$grey-4;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    transition: all 150ms;
+
+    &:focus,
+    &:focus-within,
+    &:hover {
+      border-color: variables.$primary;
+    }
+  }
+
+  input {
+    border: none;
+    border-radius: 4px;
+    display: block;
+    height: 100%;
+    outline: none;
+    padding: 8px;
+  }
+}
