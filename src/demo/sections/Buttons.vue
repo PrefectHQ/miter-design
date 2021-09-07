@@ -2,7 +2,7 @@
   <div>
     <h3>Buttons</h3>
 
-    <div class="my-1 text--grey-40">(hover for active)</div>
+    <div class="my-1 text--secondary">(hover for active)</div>
 
     <h5 class="mt-5">Block</h5>
 
