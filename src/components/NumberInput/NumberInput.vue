@@ -72,6 +72,7 @@ export default class NumberInput extends Vue.with(Props) {
 
   handleKeyPress(e: KeyboardEvent) {
     // Prevent non-numeric key presses
+    // Note: this is necessary because not all browsers respect type=number inputs (looking at you firefox)
     if (!/[\-0-9]/i.test(e.key)) {
       return e.preventDefault()
     }
