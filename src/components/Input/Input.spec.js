@@ -10,7 +10,6 @@ describe('Slots', () => {
   })
 
   const icon = wrapper.get('[data-test="prepend"]')
-  console.log(icon.html())
   expect(icon.html()).toBe(`<span class="prepend" data-test="prepend"><i class="pi pi-Search pi-2x"></i></span>`)
 })
 
@@ -34,7 +33,6 @@ describe('Props', () => {
     }
   })
   const label = wrapper.get('[data-test="label"]')
-  console.log('label', label)
   expect(label.text()).toBe('Default')
 })
 
@@ -45,9 +43,54 @@ test('displays subtitle', () => {
     }
   })
   const subtitle = wrapper.get('[data-test="subtitle"]')
-  console.log('sub', subtitle)
   expect(subtitle.text()).toBe('Sub')
 })
+
+test('passes valid state', () => {
+  const wrapper = mount(Input, {
+    props: {
+      valid: false
+    }
+  })
+  const input = wrapper.get('[data-test="default"]')
+  expect(input.attributes('valid')).toBe("false")
+})
+
+test('passes maxLength', () => {
+  const wrapper = mount(Input, {
+    props: {
+      maxLength: 5,
+      modelValue: 'Test'
+    }
+  })
+  const input = wrapper.get('[data-test="default"]')
+  expect(input.attributes('maxlength')).toBe("5")
+  expect(input.attributes('valid')).toBe('true')
+})
+
+test('passes minlength', () => {
+  const wrapper = mount(Input, {
+    props: {
+      minLength: 2,
+      modelValue: 'Test'
+    }
+  })
+  const input = wrapper.get('[data-test="default"]')
+  expect(input.attributes('minlength')).toBe("2")
+})
+})
+
+describe('Emits Input', () => {
+  test('emits value', async() => {
+    const wrapper = mount(Input, {
+      props: {
+        modelValue: 'At'
+      }
+    })
+    const input = wrapper.get('input')
+    await input.setValue('Test again')
+    expect(wrapper.emitted('update:modelValue')[0][0]).toBe('Test again')
+  })
 })
 
 describe('disabled state', () => {
