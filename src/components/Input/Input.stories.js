@@ -58,8 +58,7 @@ NoLabel.args = {
 export const NoLabelOrIcon = Template.bind({})
 NoLabelOrIcon.args = {
   valid: true,
-  hideLabel: true,
-  prependSlot: `<i class="pi pi-Fire pi-2x"></i>`
+  hideLabel: true
 }
 
 export const NoValidityIcon = Template.bind({})
