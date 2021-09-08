@@ -15,10 +15,10 @@ export default {
 const Template = (args, argTypes) => ({
   components: { Input, Toggle },
   data() {
-    return { value: '',}
+    return { value: '' }
   },
   setup() {
-      return {args}
+    return { args }
   },
   template: `<Input v-bind="args" v-model="value"><template v-if="args.prependSlot" v-slot:prepend>${args.prependSlot}</template><template v-if="args.appendSlot" v-slot:append>${args.appendSlot}</template></Input>`
 })
@@ -26,7 +26,7 @@ const Template = (args, argTypes) => ({
 export const Default = Template.bind({})
 Default.args = {
   disabled: false,
-  label: "Default",
+  label: 'Default',
   validityIcon: true,
   prependSlot: `<i class="pi pi-Fire pi-2x"></i>`
 }
@@ -66,7 +66,7 @@ NoValidityIcon.args = {
   valid: true,
   label: 'Test Label',
   prependSlot: `<i class="pi pi-Fire pi-2x"></i>`,
-  validityIcon: false,
+  validityIcon: false
 }
 
 export const Switch = Template.bind({})
@@ -90,7 +90,7 @@ DisabledSwitch.args = {
 export const DoubleIcon = Template.bind({})
 DoubleIcon.args = {
   valid: true,
-  label: "2XIcon",
+  label: '2XIcon',
   prependSlot: `<i class="pi pi-Fire pi-2x"></i><i class="pi pi-X pi-2x"></i>`,
   validityIcon: true
 }
@@ -108,7 +108,3 @@ AppendText.args = {
   subtitle: 'Input subtitle',
   appendSlot: `<span>Info</span>`
 }
-
-
-
-
