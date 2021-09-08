@@ -78,8 +78,8 @@ Switch.args = {
   appendSlot: `<Toggle :style="{position: 'static'}" />`
 }
 
-export const disabledSwitch = Template.bind({})
-disabledSwitch.args = {
+export const DisabledSwitch = Template.bind({})
+DisabledSwitch.args = {
   valid: true,
   disabled: true,
   prependSlot: `<i class="pi pi-Fire pi-2x"></i>`,
