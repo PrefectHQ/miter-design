@@ -78,6 +78,18 @@ test('passes minlength', () => {
   const input = wrapper.get('[data-test="default"]')
   expect(input.attributes('minlength')).toBe("2")
 })
+
+test('passes pattern', () => {
+  const wrapper = mount(Input, {
+    props: {
+      pattern: '/',
+      modelValue: 'Test'
+    }
+  })
+  const input = wrapper.get('[data-test="default"]')
+  expect(input.attributes('pattern')).toBe('/')
+})
+
 })
 
 describe('Emits Input', () => {
@@ -90,6 +102,36 @@ describe('Emits Input', () => {
     const input = wrapper.get('input')
     await input.setValue('Test again')
     expect(wrapper.emitted('update:modelValue')[0][0]).toBe('Test again')
+  })
+})
+
+describe('active state', () => {
+  const wrapper = mount(Input, {
+    props: {
+    modelValue: 'Input'
+  }})
+  const input = wrapper.get('input')
+
+  test('mousedown adds the active class', async () => {
+    await input.trigger('mousedown')
+    expect(input.classes()).toContain('active')
+  })
+
+  test('keydown.enter adds the active class', async () => {
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(input.classes()).toContain('active')
+  })
+
+  test('keydown.space adds the active class', async () => {
+    await input.trigger('keydown', { key: 'Space' })
+    expect(input.classes()).toContain('active')
+  })
+
+  test('blur removes the active class', async () => {
+    await input.trigger('mousedown')
+    expect(input.classes()).toContain('active')
+    await input.trigger('blur')
+    expect(input.classes()).not.toContain('active')
   })
 })
 
@@ -128,4 +170,17 @@ describe('error state', () => {
     const inputElement = wrapper.get('input')
     expect(inputElement.classes()).toContain('invalid')
   })
+  
+    test('emits invalid', async() => {
+      const wrapper = mount(Input, {
+        props: {
+          modelValue: 'At',
+          required: true
+        }
+      })
+      const input = wrapper.get('input')
+      await input.setValue('')
+      expect(input.classes()).toContain('invalid')
+      expect(wrapper.emitted('invalid')[0][0]).toBeTruthy()
+    })
 })
