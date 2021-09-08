@@ -3,7 +3,7 @@
     <h3>Toggle Switches</h3>
 
     <h5 class="mt-5">Toggle</h5>
-    <div v-for="state in states" :key="state" class="my-2">
+    <div v-for="state in states" :key="state" class="my-2 d-flex">
       <span class="font-weight-light text-capitalize">{{ state.state }}:</span>
       <ToggleSwitch
         :disabled="state.state == 'disabled'"
