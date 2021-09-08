@@ -1,3 +1,4 @@
+- Add focus trap to the pop up - [#42](https://github.com/PrefectHQ/miter-design/pull/42)
 - Add a pop up component - [#30](https://github.com/PrefectHQ/miter-design/pull/30)
 - Add Tabs component - [#14](https://github.com/PrefectHQ/miter-design/pull/14)
 - Add Slider story - [#31](https://github.com/PrefectHQ/miter-design/pull/31)
