@@ -1,3 +1,4 @@
+- Remove absolute positioning from checkbox and toggle - [#45](https://github.com/PrefectHQ/miter-design/pull/45)
 - Add Radio and Toggle stories - [#41](https://github.com/PrefectHQ/miter-design/pull/41)
 - Add Skeleton directive - [#37](https://github.com/PrefectHQ/miter-design/pull/37)
 - Add a pop up component - [#30](https://github.com/PrefectHQ/miter-design/pull/30)
