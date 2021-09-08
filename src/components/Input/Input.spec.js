@@ -116,3 +116,16 @@ describe('disabled state', () => {
       expect(inputElement.attributes('disabled')).toBeDefined()
     })
 })
+
+describe('error state', () => {
+  test('adds the error class when valid:false is passed as a prop', () => {
+    const wrapper = mount(Input, {
+      props: {
+        valid: false,
+        modelValue: '3'
+      }
+    })
+    const inputElement = wrapper.get('input')
+    expect(inputElement.classes()).toContain('invalid')
+  })
+})
