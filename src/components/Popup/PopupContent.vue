@@ -7,7 +7,14 @@
       @click.self="closePopUp"
       :style="position"
     >
-      <Card role="dialog" aria-modal="true" ref="popUpContent" :class="positionClass" :height="height" :width="width">
+      <Card
+        role="dialog"
+        aria-modal="true"
+        ref="popUpContent"
+        :class="positionClass"
+        :height="height"
+        :width="width"
+      >
         <h4 class="h4-bottom">
           {{ title }}
           <button
@@ -46,10 +53,10 @@ import { defineComponent } from 'vue'
 import Card from '../Card/Card.vue'
 
 interface event {
-    value: string
-    key: string
-    shiftKey: string
-    preventDefault: any
+  value: string
+  key: string
+  shiftKey: string
+  preventDefault: any
 }
 
 export default defineComponent({
@@ -119,12 +126,12 @@ export default defineComponent({
   mounted() {
     this.addFocus()
   },
-  methods: { 
+  methods: {
     addFocus() {
-      this.$nextTick(()=> {
-    this.$refs.popUpCloseButton.tabIndex = 0
-    this.$refs.popUpCloseButton.focus()
-    })
+      this.$nextTick(() => {
+        this.$refs.popUpCloseButton.tabIndex = 0
+        this.$refs.popUpCloseButton.focus()
+      })
     },
     closePopUp() {
       this.$emit('close', false)
@@ -143,22 +150,24 @@ export default defineComponent({
       this.hovered = false
       this.focused = false
     },
-    handleBackdropKeyDown(evt:event):void {
-      if (evt.key === "Escape") {
+    handleBackdropKeyDown(evt: event): void {
+      if (evt.key === 'Escape') {
         // Pressing the ESC key closes the modal.
         this.closePopUp()
-      } else if (evt.key === "Tab") {
+      } else if (evt.key === 'Tab') {
         // Pressing the Tab key traps the focus in the modal.
-        const modalNodes = this.$refs.popUpContent.$el.querySelectorAll("*")
-        const tabbable = Array.from(modalNodes).filter((n: any) => n.tabIndex >= 0)
+        const modalNodes = this.$refs.popUpContent.$el.querySelectorAll('*')
+        const tabbable = Array.from(modalNodes).filter(
+          (n: any) => n.tabIndex >= 0
+        )
         let index = tabbable.indexOf(document.activeElement)
         if (index === -1 && evt.shiftKey) {
-          index = 0;
+          index = 0
         }
-        index += tabbable.length + (evt.shiftKey ? -1 : 1);
+        index += tabbable.length + (evt.shiftKey ? -1 : 1)
         index %= tabbable.length
         tabbable[index].focus()
-        tabbable[index].ariaHidden=true //do we need to reset this?
+        tabbable[index].ariaHidden = true //do we need to reset this?
         evt.preventDefault()
       }
     }
