@@ -3,8 +3,8 @@
     ref="tooltipRef"
     role="tooltip"
     id="tooltip-container"
-    :style="positionStyles"
     class="tooltip"
+    :style="allPositions"
     :class="position"
   >
     <div class="tooltip-content" v-html="content"></div>
@@ -35,42 +35,30 @@ export default defineComponent({
     }
   },
   computed: {
-    positionStyles(): Object {
+    allPositions(): Object {
       if (this.position == 'top') {
-        return {
-          top:
-            this.parentOffSet.offsetTop - this.parentOffSet.offsetHeight + 'px',
-          left: this.parentOffSet.offsetLeft + 'px'
-        }
+        return this.parentOffSet.top
       }
 
       if (this.position == 'right') {
-        return {
-          top: this.parentOffSet.offsetTop + 'px',
-          left:
-            this.parentOffSet.offsetLeft +
-            this.parentOffSet.offsetWidth +
-            10 +
-            'px'
-        }
+        return this.parentOffSet.right
+      }
+
+      if (this.position == 'bottom') {
+        return this.parentOffSet.bottom
       }
 
       if (this.position == 'left') {
-        return {
-          top: this.parentOffSet.offsetTop + 'px',
-          left:
-            this.parentOffSet.offsetLeft -
-            this.parentOffSet.offsetWidth -
-            10 +
-            'px'
-        }
+        return this.parentOffSet.left
       }
 
       return {}
     }
   },
   methods: {},
-  mounted() {}
+  mounted() {
+    console.log(this.parentOffSet)
+  }
 })
 </script>
 

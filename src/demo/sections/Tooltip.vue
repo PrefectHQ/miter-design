@@ -1,12 +1,12 @@
 <template>
   <div>
     <!-- <h3>Tooltip</h3> -->
-    <Button
+    <Tag
       v-tooltip:[position]="html"
       style="margin-left: 200px; border: solid red"
     >
-      Foo
-    </Button>
+      sentence
+    </Tag>
   </div>
 </template>
 

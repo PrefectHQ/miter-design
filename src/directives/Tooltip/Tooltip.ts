@@ -17,16 +17,6 @@ export const mount = (
     vNode.appContext = app._context
   }
 
-  const destroy = () => {
-    if (el) {
-      render(null, el)
-    }
-
-    // For GC purposes
-    el = null
-    vNode = null
-  }
-
   render(vNode, el)
 
   if (!vNode.el) throw new Error("Couldn't attach vNode to the DOM.")
@@ -39,38 +29,57 @@ export const mount = (
     container.addEventListener('mouseleave', () => {
       vNode?.el.remove()
     })
+  } else {
+    document.body.appendChild(vNode.el)
   }
 
   // if (container) {
   //   container.appendChild(vNode.el)
   // } else document.body.appendChild(vNode.el)
 
-  return { vNode, destroy, el }
+  return { vNode, el }
 }
 
 export const TooltipDirective: ObjectDirective = {
   mounted(el: any, binding: DirectiveBinding) {
     el.style.display = 'inline-block'
 
-    const parentOffSet = {
-      offsetTop: el.offsetTop,
-      offsetHeight: el.offsetHeight,
-      offsetWidth: el.offsetWidth,
-      offsetLeft: el.offsetLeft
+    const body = document.body.getBoundingClientRect()
+    const currentEl = el.getBoundingClientRect()
+
+    const top = {
+      top: currentEl.top - body.top - el.clientHeight - 10 + 'px',
+      left: currentEl.left - body.left + 'px'
     }
 
-    const positions = ['top', 'right', 'bottom', 'left']
+    const right = {
+      top: currentEl.top - body.top + 3 + 'px',
+      left: currentEl.left - body.left + el.offsetWidth + 10 + 'px'
+    }
 
-    // const position = positions.includes(binding.arg)
-    //   ? binding.arg
-    //   : positions[0]
+    const bottom = {
+      top: currentEl.top - body.top + el.offsetHeight + 10 + 'px',
+      left: currentEl.left - body.left + 'px'
+    }
+
+    const left = {
+      top: currentEl.top - body.top + 'px',
+      left: currentEl.left - body.left - el.offsetWidth + 10 + 'px'
+    }
+
+    const parentOffSet = {
+      top,
+      right,
+      bottom,
+      left
+    }
 
     mount(
       Tooltip,
       {
         props: {
           content: binding.value,
-          position: positions[1],
+          position: binding.arg,
           parentOffSet
         }
       },
