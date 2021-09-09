@@ -1,0 +1,22 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  .textarea-wrapper {
+    @include mixins.miter(2, 1);
+    .textarea {
+      border: 1px solid #cecdd3;
+      width: auto;
+      border-radius: 4px;
+      padding: 8px 12px 4px 8px;
+      textarea {
+        width: 331px;
+        height: 117px;
+        padding: 8px;
+        border: none;
+      }
+    }
+  }
+}
