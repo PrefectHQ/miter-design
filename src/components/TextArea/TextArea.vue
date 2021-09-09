@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper">
-    <label :for="label" v-show="!hideLabel">{{ label }}</label>
-    <span v-if="subtitle">{{ subtitle }}</span>
+    <span class="label-wrapper">
+      <label :for="label" v-show="!hideLabel" class="title">{{ label }}</label>
+      <div v-if="subtitle" class="subtitle">{{ subtitle }}</div>
+    </span>
     <div
       class="textarea-wrapper"
       @mouseenter="handleMouseEnter"
@@ -28,7 +30,7 @@
         ></textarea>
       </div>
     </div>
-    <div class="error-msg" v-if="invalid">message</div>
+    <div class="error-msg" v-if="invalid">{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -80,6 +82,10 @@ export default defineComponent({
     },
     minLength: {
       type: Number,
+      required: false
+    },
+    errorMessage: {
+      type: String,
       required: false
     }
   },

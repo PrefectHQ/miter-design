@@ -4,6 +4,19 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  .label-wrapper {
+    padding-bottom: 16px;
+    .title {
+      color: variables.$black;
+      font-size: 15px;
+      padding-bottom: 0;
+    }
+    .subtitle {
+      color: variables.$grey-40;
+      font-size: 11px;
+      padding-bottom: 0;
+    }
+  }
   .textarea-wrapper {
     @include mixins.miter(2, 1);
     .textarea {
@@ -21,6 +34,14 @@
         &:focus-visible {
           outline: none !important; // needed for focus rings
         }
+        ::placeholder {
+          color: #a0a0a0; //variables.$text--placeholder;
+        }
+      }
+      &.hovered {
+        ::placeholder {
+          color: variables.$text--primary;
+        }
       }
       &.focused {
         border-color: variables.$primary;
@@ -36,5 +57,10 @@
         cursor: not-allowed !important;
       }
     }
+  }
+  .error-msg {
+    color: variables.$error;
+    font-size: 13px;
+    padding-top: 16px;
   }
 }
