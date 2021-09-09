@@ -1,40 +1,81 @@
-import '@/styles/components/tooltip.scss'
 import { DirectiveBinding, ObjectDirective } from '@vue/runtime-dom'
+import { render, h, VNode, ComponentOptions, Component } from 'vue'
+import Tooltip from '@/components/Tooltip/Tooltip.vue'
 
-export const applyClass = (el: any, position: any) => {
-  if (!el.classList.contains('tooltip-box')) {
-    el.classList.add('tooltip-box')
+const createElement = () =>
+  typeof document !== 'undefined' && document.createElement('div')
+
+export const mount = (
+  component: Component,
+  { props, children, element, app }: ComponentOptions = {},
+  container: Element
+) => {
+  let el = element ? element : createElement()
+
+  let vNode: VNode | null = h(component, props, children)
+  if (app && app._context) {
+    vNode.appContext = app._context
   }
 
-  const positions = ['top', 'right', 'bottom', 'left']
-  el.classList.add(positions.includes(position) ? position : positions[0])
+  const destroy = () => {
+    if (el) {
+      render(null, el)
+    }
 
-  el.setAttribute('aria-labelledby', 'tooltip-container')
+    // For GC purposes
+    el = null
+    vNode = null
+  }
+
+  render(vNode, el)
+
+  if (!vNode.el) throw new Error("Couldn't attach vNode to the DOM.")
+
+  if (container) {
+    container.addEventListener('mouseenter', () => {
+      container.appendChild(vNode?.el)
+    })
+
+    container.addEventListener('mouseleave', () => {
+      vNode?.el.remove()
+    })
+  }
+
+  // if (container) {
+  //   container.appendChild(vNode.el)
+  // } else document.body.appendChild(vNode.el)
+
+  return { vNode, destroy, el }
 }
 
 export const TooltipDirective: ObjectDirective = {
   mounted(el: any, binding: DirectiveBinding) {
-    const template = `
-      <div role="tooltip" id="tooltip-container" class="tooltip">
-        <div class="tooltip-content">
-        </div>
-      </div>
-      `
-    applyClass(el, binding.arg)
+    el.style.display = 'inline-block'
 
-    const tooltipGenerator = window.document.createElement('div')
-    tooltipGenerator.innerHTML = template.trim()
-    const tooltipNode = tooltipGenerator.childNodes[0]
-    el.appendChild(tooltipNode)
+    const parentOffSet = {
+      offsetTop: el.offsetTop,
+      offsetHeight: el.offsetHeight,
+      offsetWidth: el.offsetWidth,
+      offsetLeft: el.offsetLeft
+    }
 
-    const content = el.querySelector('.tooltip-content')
-    content.innerHTML = binding.value || 'text'
-  },
-  updated(el: any, binding: DirectiveBinding) {
-    applyClass(el, binding.arg)
-  },
-  unmounted(el: any, binding: DirectiveBinding) {
-    el.classList.remove('tooltip-box')
+    const positions = ['top', 'right', 'bottom', 'left']
+
+    // const position = positions.includes(binding.arg)
+    //   ? binding.arg
+    //   : positions[0]
+
+    mount(
+      Tooltip,
+      {
+        props: {
+          content: binding.value,
+          position: positions[1],
+          parentOffSet
+        }
+      },
+      el
+    )
   }
 }
 

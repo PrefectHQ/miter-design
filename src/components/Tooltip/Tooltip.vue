@@ -1,45 +1,76 @@
 <template>
-  <div class="tooltip-box" :class="classList">
-    <div class="tooltip">
-      <div class="text" data-test="text">
-        <slot name="text">Text</slot>
-      </div>
-    </div>
-    <div data-test="default">
-      <slot>Tooltip</slot>
-    </div>
+  <div
+    ref="tooltipRef"
+    role="tooltip"
+    id="tooltip-container"
+    :style="positionStyles"
+    class="tooltip"
+    :class="position"
+  >
+    <div class="tooltip-content" v-html="content"></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
 export default defineComponent({
   name: 'Tooltip',
   props: {
-    right: {
-      type: Boolean,
-      default: () => false
+    content: {
+      type: String,
+      default: () => 'text'
     },
-    left: {
-      type: Boolean,
-      default: () => false
+    position: {
+      type: String,
+      default: () => 'top'
     },
-    bottom: {
-      type: Boolean,
-      default: () => false
+    parentOffSet: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  data() {
+    return {
+      tooltipRef: null
     }
   },
   computed: {
-    classList(): string[] {
-      const styles = [
-        ...(this.right ? ['right'] : []),
-        ...(this.left ? ['left'] : []),
-        ...(this.bottom ? ['bottom'] : [])
-      ]
-      return styles.length > 0 ? styles : ['top']
+    positionStyles(): Object {
+      if (this.position == 'top') {
+        return {
+          top:
+            this.parentOffSet.offsetTop - this.parentOffSet.offsetHeight + 'px',
+          left: this.parentOffSet.offsetLeft + 'px'
+        }
+      }
+
+      if (this.position == 'right') {
+        return {
+          top: this.parentOffSet.offsetTop + 'px',
+          left:
+            this.parentOffSet.offsetLeft +
+            this.parentOffSet.offsetWidth +
+            10 +
+            'px'
+        }
+      }
+
+      if (this.position == 'left') {
+        return {
+          top: this.parentOffSet.offsetTop + 'px',
+          left:
+            this.parentOffSet.offsetLeft -
+            this.parentOffSet.offsetWidth -
+            10 +
+            'px'
+        }
+      }
+
+      return {}
     }
-  }
+  },
+  methods: {},
+  mounted() {}
 })
 </script>
 
