@@ -19,10 +19,11 @@
           {{ title }}
           <button
             icon
+            data-test="closeButton"
             title="close pop up"
             ref="popUpCloseButton"
             class="close-icon"
-            :classes="classes"
+            :class="classList"
             @click="closePopUp"
             @mouseenter="handleMouseEnter"
             @mouseleave="handleMouseLeave"
@@ -98,12 +99,8 @@ export default defineComponent({
     }
   },
   computed: {
-    classes(): string[] {
-      return [
-        ...(this.active ? ['active'] : []),
-        ...(this.hovered ? ['hovered'] : []),
-        ...(this.focused ? ['focused'] : [])
-      ]
+    classList(): string[] {
+      return this.active ? ['active'] : this.hovered ? ['hovered'] : this.focused ? ['focused'] : []
     },
     position(): any {
       return {
@@ -128,12 +125,15 @@ export default defineComponent({
   },
   methods: {
     addFocus() {
+      this.hovered = true
       this.$nextTick(() => {
         this.$refs.popUpCloseButton.tabIndex = 0
         this.$refs.popUpCloseButton.focus()
       })
+
     },
     closePopUp() {
+      
       this.$emit('close', false)
     },
     handleMouseEnter(): void {
@@ -151,10 +151,11 @@ export default defineComponent({
       this.focused = false
     },
     handleBackdropKeyDown(evt: event): void {
-      if (evt.key === 'Escape') {
+      
+      if (evt.key === 'Escape' || evt.key === 'escape') {
         // Pressing the ESC key closes the modal.
         this.closePopUp()
-      } else if (evt.key === 'Tab') {
+      } else if (evt.key === 'Tab' || evt.key === 'tab') {
         // Pressing the Tab key traps the focus in the modal.
         const modalNodes = this.$refs.popUpContent.$el.querySelectorAll('*')
         const tabbable = Array.from(modalNodes).filter(

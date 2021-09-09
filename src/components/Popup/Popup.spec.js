@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils'
 import Popup from './Popup.vue'
 import PopupContent from './PopupContent.vue'
 import Card from '../Card/Card.vue'
+import Button from '../Button/Button.vue'
 
 beforeEach(() => {
   // create teleport target
@@ -215,23 +216,51 @@ test('passes popup height and width', () => {
   expect(cardProps.width).toBe('300px')
 })
 
-test('traps focus in pop up', () => {
-  const title = 'My Pop Up'
-  const wrapper = mount(Popup, {
-    props: { modelValue: true, title, height: '200px', width: '300px' },
-    slots: {
-      content: '<div>Main Content</div>',
-      activate: '<button id="test-button">Test</button>'
-    },
-    global: {
-      components: {
-        Card: Card
+describe('focus trap', () => {
+  test('applies focus to close button on mount', async () => {
+    const wrapper = mount(Popup, {
+      attachTo: document.body,
+      props: { modelValue: true },
+      slots: {
+        content: '<div>Main Content</div>',
+        actions: '<Button id="pop-button">Pop Up Button</Button>',
+        activate: '<button id="test-button">Test</button>'
+      },
+      global: {
+        components: {
+          Button: Button
+        }
       }
-    }
+    })
+    const modal = wrapper.findComponent(PopupContent)
+    const close = modal.find('[data-test="closeButton"]')
+    await setTimeout(() => {}, 500)
+    expect(close.classes()).toContain('hovered')
   })
-  const modal = wrapper.findComponent(PopupContent)
-  const card = modal.findComponent(Card)
-  const cardProps = card.props()
-  expect(cardProps.height).toBe('200px')
-  expect(cardProps.width).toBe('300px')
+
+  test('closes pop up on escape', async () => {
+    const wrapper = mount(Popup, {
+      attachTo: document.body,
+      props: { modelValue: true },
+      slots: {
+        content: '<div>Main Content</div>',
+        actions: '<Button id="pop-button">Pop Up Button</Button>',
+        activate: '<button id="test-button">Test</button>'
+      },
+      global: {
+        components: {
+          Button: Button
+        }
+      }
+    })
+    const modal = wrapper.findComponent(PopupContent)
+    const backdrop = modal.find('#backdrop')
+    await backdrop.trigger('keydown.escape')
+    const closeEvent = modal.emitted('close')
+    expect(closeEvent).toHaveLength(1)
+    expect(closeEvent[0]).toEqual([false])
+    const outerCloseEvent = wrapper.emitted('update:modelValue')
+    expect(outerCloseEvent).toHaveLength(1)
+    expect(outerCloseEvent[0]).toEqual([false])
+  })
 })
