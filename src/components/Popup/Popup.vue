@@ -10,6 +10,7 @@
         :title="title"
         :height="height"
         :width="width"
+        :teleportTo="teleportTo"
       >
         <template v-slot:content>
           <div v-if="$slots.content">
