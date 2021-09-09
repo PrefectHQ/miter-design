@@ -1,4 +1,5 @@
 - Flesh out functional stylesheets - [#44](https://github.com/PrefectHQ/miter-design/pull/44)
+- Use design system icon for checkbox - [#46](https://github.com/PrefectHQ/miter-design/pull/46)
 - Remove absolute positioning from checkbox and toggle - [#45](https://github.com/PrefectHQ/miter-design/pull/45)
 - Add Radio and Toggle stories - [#41](https://github.com/PrefectHQ/miter-design/pull/41)
 - Add Skeleton directive - [#37](https://github.com/PrefectHQ/miter-design/pull/37)
