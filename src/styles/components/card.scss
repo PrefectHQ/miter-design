@@ -9,7 +9,7 @@
   @include mixins.miter(2, 1);
 
   > div {
-    border: 1px solid variables.$grey-4;
+    border: 1px solid variables.$grey-20;
     border-radius: 4px;
   }
 

@@ -1,3 +1,5 @@
+- Flesh out functional stylesheets - [#44](https://github.com/PrefectHQ/miter-design/pull/44)
+- Add focus trap to the pop up - [#42](https://github.com/PrefectHQ/miter-design/pull/42)
 - Use design system icon for checkbox - [#46](https://github.com/PrefectHQ/miter-design/pull/46)
 - Remove absolute positioning from checkbox and toggle - [#45](https://github.com/PrefectHQ/miter-design/pull/45)
 - Add Radio and Toggle stories - [#41](https://github.com/PrefectHQ/miter-design/pull/41)
