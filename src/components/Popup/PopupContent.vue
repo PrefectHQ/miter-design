@@ -100,7 +100,13 @@ export default defineComponent({
   },
   computed: {
     classList(): string[] {
-      return this.active ? ['active'] : this.hovered ? ['hovered'] : this.focused ? ['focused'] : []
+      return this.active
+        ? ['active']
+        : this.hovered
+        ? ['hovered']
+        : this.focused
+        ? ['focused']
+        : []
     },
     position(): any {
       return {
@@ -130,10 +136,8 @@ export default defineComponent({
         this.$refs.popUpCloseButton.tabIndex = 0
         this.$refs.popUpCloseButton.focus()
       })
-
     },
     closePopUp() {
-      
       this.$emit('close', false)
     },
     handleMouseEnter(): void {
@@ -151,7 +155,6 @@ export default defineComponent({
       this.focused = false
     },
     handleBackdropKeyDown(evt: event): void {
-      
       if (evt.key === 'Escape' || evt.key === 'escape') {
         // Pressing the ESC key closes the modal.
         this.closePopUp()
