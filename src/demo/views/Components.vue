@@ -2,6 +2,7 @@
   <div class="mt-5 pb-10" v-cloak>
     <h1>Components</h1>
     <Cards />
+    <Popups />
     <Buttons class="mt-10" />
     <Toggles class="mt-10" />
     <RadioButtons class="mt-10" />
@@ -14,6 +15,7 @@
     <Avatar class="mt-10" />
     <NumberInputs class="mt-10" />
     <DatePickerSection class="mt-10" />
+    <Selects class="mt-10" />
   </div>
 </template>
 
@@ -30,20 +32,24 @@ import Avatar from '../sections/Avatar.vue'
 import TabSection from '../sections/TabSection.vue'
 import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
+import Popups from '../sections/Popups.vue'
 import Sliders from '../sections/Sliders.vue'
 import NumberInputs from '../sections/NumberInputs.vue'
+import Selects from '../sections/Selects.vue'
 
 @Options({
   components: {
     Buttons,
     Cards,
     DatePickerSection,
+    Popups,
     RadioButtons,
     Links,
     Avatar,
     Toggles,
     Sliders,
     Checkboxes,
+    Selects,
     TabSection,
     Tag,
     TagGroup,

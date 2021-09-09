@@ -3,8 +3,8 @@
     <h3>Checkboxes</h3>
 
     <h5 class="mt-5">Checkbox</h5>
-    <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state.state }}:</span>
+    <div v-for="state in states" :key="state" class="my-2 d-flex">
+      <span class="text-capitalize">{{ state.state }}:</span>
       <Checkbox :disabled="state.state == 'disabled'" v-model="state.checked">
         <span>Label</span>
       </Checkbox>

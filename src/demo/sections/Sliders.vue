@@ -2,9 +2,7 @@
   <div>
     <h3>Slider</h3>
     <div v-for="state in states" :key="state" class="my-2">
-      <span v-if="logVal" class="font-weight-light text-capitalize pr-2"
-        >{{ state.state }}:</span
-      >
+      <span v-if="logVal" class="text-capitalize pr-2">{{ state.state }}:</span>
       <Slider
         v-model="state.val"
         :min="minVal"

@@ -27,12 +27,12 @@
   .border-container {
     // Adding this gives consistent spacing for the miter cut
     border-right: 2px solid transparent;
-    border-bottom: 2px solid variables.$grey-4;
+    border-bottom: 2px solid variables.$grey-20;
     position: relative;
 
     // This is necessary because the miter mixin inherits the entire border property but we want only the bottom border
     &:after {
-      border-left: 4px solid variables.$grey-4;
+      border-left: 4px solid variables.$grey-20;
     }
   }
 
@@ -59,7 +59,7 @@
 
     &:hover,
     &:focus {
-      background-color: variables.$grey-4;
+      background-color: variables.$grey-20;
       outline: none;
     }
   }
@@ -89,7 +89,7 @@
     }
 
     &::before {
-      border-bottom: 2px solid variables.$grey-4;
+      border-bottom: 2px solid variables.$grey-20;
       content: '';
       width: max-content;
       height: 0;

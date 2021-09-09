@@ -6,8 +6,8 @@
     <button @click="mandatory = !mandatory">mandatory: {{ mandatory }}</button>
 
     <TagGroup v-model="tags" :multiple="multiple" :mandatory="mandatory">
-      <Tag value="1" :color="'primary-101'">One</Tag>
-      <Tag value="2" :color="'primary-100'">Two</Tag>
+      <Tag value="1" :color="'primary-hover'">One</Tag>
+      <Tag value="2" :color="'primary'">Two</Tag>
     </TagGroup>
   </div>
 </template>
