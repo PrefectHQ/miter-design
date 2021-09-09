@@ -38,7 +38,7 @@
 
   .tag {
     align-items: center;
-    background-color: variables.$grey-2;
+    background-color: variables.$grey-80;
     border: 1px solid transparent;
     border-radius: 3px;
     display: inline-flex;
@@ -49,8 +49,8 @@
   &.outlined {
     > .tag {
       background-color: variables.$white;
-      color: variables.$grey-2;
-      border: 1px solid variables.$grey-4;
+      color: variables.$grey-80;
+      border: 1px solid variables.$grey-20;
       transition: background-color 0s, clip-path 0s !important;
     }
 
@@ -62,14 +62,14 @@
 
   &.disabled {
     cursor: not-allowed;
-    color: variables.$grey-4 !important;
+    color: variables.$grey-20 !important;
 
     > .tag {
       background-color: variables.$disabled !important;
     }
 
     &.outlined > .tag {
-      border-color: variables.$grey-4 !important;
+      border-color: variables.$grey-20 !important;
       color: inherit !important;
     }
   }

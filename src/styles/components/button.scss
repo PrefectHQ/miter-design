@@ -61,31 +61,31 @@
     color: variables.$text--white;
 
     > :first-child {
-      background-color: variables.$primary-100;
+      background-color: variables.$primary;
     }
 
     &.hovered > :first-child {
-      background-color: variables.$primary-101;
+      background-color: variables.$primary-hover;
     }
   }
 
   &.secondary {
-    color: variables.$grey-1;
+    color: variables.$black;
 
     > :first-child {
-      background-color: variables.$grey-3;
+      background-color: variables.$secondary-background;
     }
 
     &.hovered > :first-child {
-      background-color: variables.$grey-4;
+      background-color: variables.$secondary-hover;
     }
   }
 
   &.outlined {
-    color: variables.$grey-1;
+    color: variables.$black;
 
     > :first-child {
-      border: 1px solid variables.$grey-4;
+      border: 1px solid variables.$grey-20;
     }
 
     &.active > :first-child {
@@ -93,16 +93,16 @@
     }
 
     &.hovered > :first-child {
-      background-color: variables.$grey-5;
+      background-color: variables.$secondary-background;
     }
   }
 
   &.disabled {
     cursor: not-allowed;
-    color: variables.$grey-4 !important;
+    color: variables.$grey-20 !important;
 
     &:not(.outlined) > :first-child {
-      background-color: variables.$grey-3 !important;
+      background-color: variables.$secondary-background !important;
     }
   }
 }
