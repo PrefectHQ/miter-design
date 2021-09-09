@@ -37,11 +37,11 @@
 
     &:hover,
     &:focus {
-      background-color: variables.$grey-3;
+      background-color: variables.$grey-20;
     }
 
     &:active {
-      background-color: variables.$grey-4;
+      background-color: variables.$grey-40;
     }
   }
 
@@ -109,14 +109,14 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
 
   .day {
     border: none;
-    color: variables.$grey-1;
+    color: variables.$text--primary;
     cursor: pointer;
     font-weight: bold;
     outline: none;
 
     &:hover,
     &:focus {
-      background-color: variables.$grey-3;
+      background-color: variables.$grey-20;
     }
 
     &.today {
@@ -135,18 +135,18 @@ $grid-template-areas: 'Su Mo Tu We Th Fr Sa';
 
       &:hover,
       &:focus {
-        color: variables.$grey-1;
-        background-color: variables.$grey-3;
+        color: variables.$secondary-hover;
+        background-color: variables.$grey-20;
       }
 
       &.current-day {
-        border: 2px solid variables.$grey-4;
+        border: 2px solid variables.$grey-40;
       }
     }
   }
 
   .day-header {
-    color: variables.$grey-2;
+    color: variables.$text--secondary;
     font-weight: normal;
   }
 

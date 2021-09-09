@@ -12,7 +12,7 @@
 
     > div {
       background-color: variables.$disabled !important;
-      border-color: variables.$grey-4 !important;
+      border-color: variables.$grey-40 !important;
       cursor: not-allowed;
     }
 
@@ -24,13 +24,13 @@
       pointer-events: none;
 
       .spin-button {
-        color: variables.$grey-4;
+        color: variables.$grey-40;
       }
     }
   }
 
   > div {
-    border: 1px solid variables.$grey-4;
+    border: 1px solid variables.$grey-40;
     border-radius: 5px;
     display: flex;
     padding: 0;
@@ -59,11 +59,11 @@
 
       &:hover,
       &:focus {
-        background-color: variables.$grey-3;
+        background-color: variables.$grey-20;
       }
 
       &:active {
-        background-color: variables.$grey-4;
+        background-color: variables.$grey-40;
       }
     }
   }
