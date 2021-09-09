@@ -88,6 +88,10 @@ export default defineComponent({
     title: {
       type: String,
       required: false
+    },
+    teleportTo: {
+      type: String,
+      default: 'body'
     }
   },
   emits: ['close'],
@@ -155,23 +159,25 @@ export default defineComponent({
       this.focused = false
     },
     handleBackdropKeyDown(evt: event): void {
+      const modalNodes = this.$refs.popUpContent.$el.querySelectorAll('*')
+      const tabbable = Array.from(modalNodes).filter(
+        (n: any) => n.tabIndex >= 0
+      )
+      let index = tabbable.indexOf(document.activeElement)
+      const parent = document.querySelector(this.teleportTo)
+      const parentHidden = parent?.firstChild?.ariaHidden
       if (evt.key === 'Escape' || evt.key === 'escape') {
-        // Pressing the ESC key closes the modal.
+        // Pressing the ESC key resets ariaHidden and closes the modal.
+        parent.firstChild.ariaHidden = parentHidden
         this.closePopUp()
       } else if (evt.key === 'Tab' || evt.key === 'tab') {
+        document.querySelector(this.teleportTo)
+        //set aria hidden on non-popup element
+        parent.firstChild.ariaHidden = true
         // Pressing the Tab key traps the focus in the modal.
-        const modalNodes = this.$refs.popUpContent.$el.querySelectorAll('*')
-        const tabbable = Array.from(modalNodes).filter(
-          (n: any) => n.tabIndex >= 0
-        )
-        let index = tabbable.indexOf(document.activeElement)
-        if (index === -1 && evt.shiftKey) {
-          index = 0
-        }
-        index += tabbable.length + (evt.shiftKey ? -1 : 1)
+        index += tabbable.length + 1
         index %= tabbable.length
         tabbable[index].focus()
-        tabbable[index].ariaHidden = true //do we need to reset this?
         evt.preventDefault()
       }
     }
