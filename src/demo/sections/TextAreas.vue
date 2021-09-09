@@ -2,9 +2,16 @@
   <div>
     <h3>Text Areas</h3>
 
-    <div v-for="state in states" :key="state" class="my-2 d-flex">
-      <span class="font-weight-light text-capitalize">{{ state.state }}:</span>
-      <TextArea :disabled="state.state == 'disabled'" />
+    <div class="my-2 d-flex">
+      <TextArea
+        label="Text Area"
+        subtitle="Additional Info"
+        class="mr-2"
+        required
+        @invalid="handleInvalid"
+      />
+      <TextArea disabled hideLabel placeholder="can't write here" />
+      <textarea />
     </div>
   </div>
 </template>
@@ -16,9 +23,9 @@ import TextArea from '@/components/TextArea/TextArea.vue'
 export default defineComponent({
   name: 'TextAreas',
   components: { TextArea },
-  data() {
-    return {
-      states: [{ state: 'enabled' }, { state: 'disabled' }]
+  methods: {
+    handleInvalid(validityState: ValidityState) {
+      console.log('validity', validityState)
     }
   }
 })

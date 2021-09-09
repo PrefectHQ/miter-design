@@ -7,7 +7,7 @@
   .textarea-wrapper {
     @include mixins.miter(2, 1);
     .textarea {
-      border: 1px solid #cecdd3;
+      border: 1px solid variables.$grey-20;
       width: auto;
       border-radius: 4px;
       padding: 8px 12px 4px 8px;
@@ -16,6 +16,24 @@
         height: 117px;
         padding: 8px;
         border: none;
+        outline: none;
+        &:focus,
+        &:focus-visible {
+          outline: none !important; // needed for focus rings
+        }
+      }
+      &.focused {
+        border-color: variables.$primary;
+      }
+      &:invalid,
+      &.invalid {
+        border-color: variables.$error;
+      }
+    }
+    &.disabled {
+      * {
+        background-color: variables.$disabled;
+        cursor: not-allowed !important;
       }
     }
   }

@@ -1,21 +1,34 @@
 <template>
   <div class="wrapper">
-    <label :for="label" v-if="!hideLabel">{{ label }}</label>
+    <label :for="label" v-show="!hideLabel">{{ label }}</label>
     <span v-if="subtitle">{{ subtitle }}</span>
     <div
       class="textarea-wrapper"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
+      @mousedown="handleMouseDown"
+      @mouseup="handleMouseUp"
+      @focus="handleFocus"
+      :class="classList"
     >
-      <div class="textarea">
+      <div class="textarea" :class="classList">
         <textarea
           :id="label"
+          :disabled="disabled"
           :placeholder="placeholder"
+          :value="internalValue"
+          :valid="valid"
+          :required="required"
           :maxlength="maxLength"
           :minlength="minLength"
+          :class="classList"
+          @invalid.capture="handleInvalid"
+          @input="handleInput"
+          @blur="handleBlur"
         ></textarea>
       </div>
     </div>
+    <div class="error-msg" v-if="invalid">message</div>
   </div>
 </template>
 
@@ -33,6 +46,14 @@ export default defineComponent({
       type: String,
       default: ''
     },
+    modelValue: {
+      type: String,
+      required: false
+    },
+    value: {
+      type: String,
+      required: false
+    },
     label: {
       type: String,
       default: 'textarea'
@@ -45,6 +66,14 @@ export default defineComponent({
       type: String,
       default: 'Write here...'
     },
+    valid: {
+      type: Boolean,
+      default: true
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
     maxLength: {
       type: Number,
       required: false
@@ -54,9 +83,10 @@ export default defineComponent({
       required: false
     }
   },
+  emits: ['update:modelValue', 'invalid'],
   data() {
     return {
-      active: false as boolean,
+      focused: false as boolean,
       hovered: false as boolean,
       invalid: !this.valid as boolean
     }
@@ -67,20 +97,49 @@ export default defineComponent({
         ? ['disabled']
         : this.invalid
         ? ['invalid']
-        : this.active
-        ? ['active']
+        : this.focused
+        ? ['focused']
         : this.hovered
         ? ['hovered']
         : []
+    },
+    internalValue(): string {
+      return this.value || this.modelValue || ''
     }
   },
   methods: {
+    handleInput(e: Event) {
+      this.validate(e)
+      this.$emit('update:modelValue', e.target?.value)
+    },
+    handleInvalid(e: Event) {
+      this.$emit('invalid', e.target?.validity)
+      this.invalid = true
+    },
     handleMouseEnter(): void {
       if (this.disabled) return
       this.hovered = true
     },
     handleMouseLeave(): void {
       this.hovered = false
+    },
+    handleMouseDown(): void {
+      if (this.disabled) return
+      this.focused = true
+    },
+    handleFocus(): void {
+      if (this.disabled) return
+      this.hovered = true
+      this.focused = true
+    },
+    handleBlur(e: Event): void {
+      this.validate(e)
+      this.hovered = false
+      this.focused = false
+    },
+    validate(e: Event) {
+      const valid = e.target?.checkValidity()
+      this.invalid = !valid
     }
   }
 })
