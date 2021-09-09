@@ -234,6 +234,7 @@ describe('focus trap', () => {
     })
     const modal = wrapper.findComponent(PopupContent)
     const close = modal.find('[data-test="closeButton"]')
+    //Wait until component hovered class applied when focus is called on mount
     await setTimeout(() => {}, 500)
     expect(close.classes()).toContain('hovered')
   })
