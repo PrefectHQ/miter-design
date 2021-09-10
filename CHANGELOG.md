@@ -1,3 +1,4 @@
+- Update some stylesheet variables - [#47](https://github.com/PrefectHQ/miter-design/pull/47)
 - Flesh out functional stylesheets - [#44](https://github.com/PrefectHQ/miter-design/pull/44)
 - Add focus trap to the pop up - [#42](https://github.com/PrefectHQ/miter-design/pull/42)
 - Use design system icon for checkbox - [#46](https://github.com/PrefectHQ/miter-design/pull/46)
