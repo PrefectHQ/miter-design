@@ -1,3 +1,4 @@
+- Add Textarea component - [#48](https://github.com/PrefectHQ/miter-design/pull/48)
 - Flesh out functional stylesheets - [#44](https://github.com/PrefectHQ/miter-design/pull/44)
 - Add focus trap to the pop up - [#42](https://github.com/PrefectHQ/miter-design/pull/42)
 - Use design system icon for checkbox - [#46](https://github.com/PrefectHQ/miter-design/pull/46)
