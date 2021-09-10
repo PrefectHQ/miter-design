@@ -16,7 +16,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   data() {
     return {
-      position: 'bottom',
+      position: 'top',
       text: 'hello',
       html: `<div>some <span class="highlight">text</span></div>`
     }
