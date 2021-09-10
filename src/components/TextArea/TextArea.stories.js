@@ -19,7 +19,7 @@ const Template = (args) => ({
   setup() {
     return { args }
   },
-  template: `<div class="d-flex"><TextArea v-bind="args" v-model="value"><template v-if="args.errorMessage" v-slot:errorMessage>${args.errorMessage}</template></TextArea></div>`
+  template: `<TextArea v-bind="args" v-model="value"><template v-if="args.errorMessage" v-slot:errorMessage>${args.errorMessage}</template></TextArea>`
 })
 
 export const Default = Template.bind({})

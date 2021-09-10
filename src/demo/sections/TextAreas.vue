@@ -2,7 +2,7 @@
   <div>
     <h3>Text Areas</h3>
 
-    <div class="my-2 d-flex">
+    <div class="my-2">
       <TextArea
         label="Text Area"
         subtitle="Additional Info"

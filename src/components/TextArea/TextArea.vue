@@ -1,36 +1,40 @@
 <template>
-  <div class="wrapper">
-    <span class="label-wrapper">
-      <label :for="label" v-show="!hideLabel" class="title">{{ label }}</label>
-      <div v-if="subtitle" class="subtitle">{{ subtitle }}</div>
-    </span>
-    <div
-      class="textarea-wrapper"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
-      @mousedown="handleMouseDown"
-      @mouseup="handleMouseUp"
-      @focus="handleFocus"
-      :class="classList"
-    >
-      <div class="textarea" :class="classList">
-        <textarea
-          :id="label"
-          :disabled="disabled"
-          :placeholder="placeholder"
-          :value="internalValue"
-          :valid="valid"
-          :required="required"
-          :maxlength="maxLength"
-          :minlength="minLength"
-          :class="classList"
-          @invalid.capture="handleInvalid"
-          @input="handleInput"
-          @blur="handleBlur"
-        ></textarea>
+  <div class="d-flex">
+    <div class="wrapper">
+      <span class="label-wrapper">
+        <label :for="label" v-show="!hideLabel" class="title">{{
+          label
+        }}</label>
+        <div v-if="subtitle" class="subtitle">{{ subtitle }}</div>
+      </span>
+      <div
+        class="textarea-wrapper"
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handleMouseLeave"
+        @mousedown="handleMouseDown"
+        @mouseup="handleMouseUp"
+        @focus="handleFocus"
+        :class="classList"
+      >
+        <div class="textarea" :class="classList">
+          <textarea
+            :id="label"
+            :disabled="disabled"
+            :placeholder="placeholder"
+            :value="internalValue"
+            :valid="valid"
+            :required="required"
+            :maxlength="maxLength"
+            :minlength="minLength"
+            :class="classList"
+            @invalid.capture="handleInvalid"
+            @input="handleInput"
+            @blur="handleBlur"
+          ></textarea>
+        </div>
       </div>
+      <div class="error-msg" v-if="invalid"><slot name="errorMessage" /></div>
     </div>
-    <div class="error-msg" v-if="invalid"><slot name="errorMessage" /></div>
   </div>
 </template>
 
