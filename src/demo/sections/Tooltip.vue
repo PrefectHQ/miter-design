@@ -1,12 +1,12 @@
 <template>
   <div>
     <!-- <h3>Tooltip</h3> -->
-    <Tag
+    <Button
       v-tooltip:[position]="html"
       style="margin-left: 200px; border: solid red"
     >
-      sentence
-    </Tag>
+      Text
+    </Button>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   data() {
     return {
-      position: 'right',
+      position: 'bottom',
       text: 'hello',
       html: `<div>some <span class="highlight">text</span></div>`
     }

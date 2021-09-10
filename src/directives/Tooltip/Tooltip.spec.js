@@ -1,40 +1,43 @@
-import { mount } from '@vue/test-utils'
-import * as Module from './Tooltip.ts'
-const Tooltip = Module.TooltipDirective
+test('', () => {})
 
-const factoryMount = (position = '', text = '') => {
-  return mount(
-    { template: `<div v-tooltip:[position]="text">Foo</div>` },
-    {
-      data() {
-        return {
-          position,
-          text
-        }
-      },
-      global: {
-        directives: {
-          Tooltip: Tooltip
-        }
-      }
-    }
-  )
-}
+// import { mount } from '@vue/test-utils'
+// import * as Module from './Tooltip.ts'
+// const Tooltip = Module.TooltipDirective
 
-describe('arguments', () => {
-  test('displays text if passed', () => {
-    const wrapper = factoryMount('right', 'Hello')
-  })
+// const factoryMount = (position = '', text = '') => {
+//   return mount(
+//     { template: `<div v-tooltip:[position]="text">Foo</div>` },
+//     {
+//       data() {
+//         return {
+//           position,
+//           text
+//         }
+//       },
+//       global: {
+//         directives: {
+//           Tooltip: Tooltip
+//         }
+//       }
+//     }
+//   )
+// }
 
-  test('displays default text if not passed', () => {
-    const wrapper = factoryMount('right', '')
-  })
+// describe('arguments', () => {
+//   test('displays text if passed', () => {
+//     const wrapper = factoryMount('right', 'Hello')
+//     console.log(wrapper)
+//   })
 
-  test('current element has the right class if a position was passed', () => {
-    const wrapper = factoryMount('right')
-  })
+//   // test('displays default text if not passed', () => {
+//   //   const wrapper = factoryMount('right', '')
+//   // })
 
-  test('current element defaults to the top class if a position was not passed', () => {
-    const wrapper = factoryMount()
-  })
-})
+//   // test('current element has the right class if a position was passed', () => {
+//   //   const wrapper = factoryMount('right')
+//   // })
+
+//   // test('current element defaults to the top class if a position was not passed', () => {
+//   //   const wrapper = factoryMount()
+//   // })
+// })

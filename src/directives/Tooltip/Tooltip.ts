@@ -21,21 +21,21 @@ export const mount = (
 
   if (!vNode.el) throw new Error("Couldn't attach vNode to the DOM.")
 
-  if (container) {
-    container.addEventListener('mouseenter', () => {
-      container.appendChild(vNode?.el)
-    })
-
-    container.addEventListener('mouseleave', () => {
-      vNode?.el.remove()
-    })
-  } else {
-    document.body.appendChild(vNode.el)
-  }
-
   // if (container) {
-  //   container.appendChild(vNode.el)
-  // } else document.body.appendChild(vNode.el)
+  //   container.addEventListener('mouseenter', () => {
+  //     container.appendChild(vNode?.el?.parentElement)
+  //   })
+
+  //   container.addEventListener('mouseleave', () => {
+  //     vNode?.el?.parentElement.remove()
+  //   })
+  // } else {
+  //   document.body.appendChild(vNode?.el?.parentElement)
+  // }
+
+  if (container) {
+    container.appendChild(vNode.el)
+  } else document.body.appendChild(vNode.el)
 
   return { vNode, el }
 }
@@ -47,9 +47,11 @@ export const TooltipDirective: ObjectDirective = {
     const body = document.body.getBoundingClientRect()
     const currentEl = el.getBoundingClientRect()
 
+    // + el.offsetWidth / 2
     const top = {
       top: currentEl.top - body.top - el.clientHeight - 10 + 'px',
-      left: currentEl.left - body.left + 'px'
+      // left: currentEl.left - body.left + el.offsetWidth / 2 - tooltip.width / 2 + 'px'
+      left: currentEl.left - body.left + el.offsetWidth / 2 - 45 + 'px'
     }
 
     const right = {
@@ -67,20 +69,13 @@ export const TooltipDirective: ObjectDirective = {
       left: currentEl.left - body.left - el.offsetWidth + 10 + 'px'
     }
 
-    const parentOffSet = {
-      top,
-      right,
-      bottom,
-      left
-    }
-
     mount(
       Tooltip,
       {
         props: {
           content: binding.value,
           position: binding.arg,
-          parentOffSet
+          currentElRect: el.getBoundingClientRect()
         }
       },
       el

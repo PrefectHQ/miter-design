@@ -4,8 +4,8 @@
     role="tooltip"
     id="tooltip-container"
     class="tooltip"
-    :style="allPositions"
     :class="position"
+    :style="tooltipRefStyle"
   >
     <div class="tooltip-content" v-html="content"></div>
   </div>
@@ -24,40 +24,91 @@ export default defineComponent({
       type: String,
       default: () => 'top'
     },
-    parentOffSet: {
+    currentElRect: {
       type: Object,
       default: () => {}
     }
   },
   data() {
     return {
-      tooltipRef: null
+      tooltipRefStyle: {}
     }
   },
-  computed: {
-    allPositions(): Object {
+  computed: {},
+  methods: {
+    calculatePosition() {
+      if (!this.currentElRect && !this.$refs.tooltipRef) return {}
+
+      const tooltipRefRect = this.$refs.tooltipRef.getBoundingClientRect()
+      const bodyRect = document.body.getBoundingClientRect()
+
       if (this.position == 'top') {
-        return this.parentOffSet.top
+        return {
+          top:
+            this.currentElRect.top -
+            bodyRect.top -
+            this.currentElRect.height +
+            'px',
+          left:
+            this.currentElRect.left -
+            bodyRect.left +
+            this.currentElRect.width / 2 -
+            tooltipRefRect.width / 2 +
+            'px'
+        }
       }
 
       if (this.position == 'right') {
-        return this.parentOffSet.right
+        return {
+          top:
+            this.currentElRect.top -
+            bodyRect.top +
+            this.currentElRect.height / 2 -
+            tooltipRefRect.height / 2 +
+            'px',
+          left:
+            this.currentElRect.left -
+            bodyRect.left +
+            this.currentElRect.width +
+            'px'
+        }
       }
 
       if (this.position == 'bottom') {
-        return this.parentOffSet.bottom
+        return {
+          top:
+            this.currentElRect.top -
+            bodyRect.top +
+            this.currentElRect.height +
+            'px',
+          left:
+            this.currentElRect.left -
+            bodyRect.left +
+            this.currentElRect.width / 2 -
+            tooltipRefRect.width / 2 +
+            'px'
+        }
       }
 
       if (this.position == 'left') {
-        return this.parentOffSet.left
+        return {
+          top:
+            this.currentElRect.top -
+            bodyRect.top +
+            this.currentElRect.height / 2 -
+            tooltipRefRect.height / 2 +
+            'px',
+          left:
+            this.currentElRect.left -
+            bodyRect.left -
+            this.currentElRect.width +
+            'px'
+        }
       }
-
-      return {}
     }
   },
-  methods: {},
   mounted() {
-    console.log(this.parentOffSet)
+    this.tooltipRefStyle = this.calculatePosition()
   }
 })
 </script>
