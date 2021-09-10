@@ -45,6 +45,7 @@ Subtitle.args = {
 export const Error = Template.bind({})
 Error.args = {
   valid: false,
+  required: true,
   label: 'TextArea Error',
   errorMessage: "You've Made an Error!"
 }
