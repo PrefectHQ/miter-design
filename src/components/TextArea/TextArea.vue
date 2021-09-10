@@ -30,7 +30,7 @@
         ></textarea>
       </div>
     </div>
-    <div class="error-msg" v-if="invalid">{{ errorMessage }}</div>
+    <div class="error-msg" v-if="invalid"><slot name="errorMessage" /></div>
   </div>
 </template>
 
@@ -82,10 +82,6 @@ export default defineComponent({
     },
     minLength: {
       type: Number,
-      required: false
-    },
-    errorMessage: {
-      type: String,
       required: false
     }
   },

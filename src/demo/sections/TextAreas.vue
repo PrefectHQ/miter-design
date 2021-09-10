@@ -9,8 +9,9 @@
         class="mr-2"
         required
         @invalid="handleInvalid"
-        errorMessage="Error!"
-      />
+      >
+        <template v-slot:errorMessage>No!</template>
+      </TextArea>
       <TextArea disabled hideLabel placeholder="can't write here" />
     </div>
   </div>
