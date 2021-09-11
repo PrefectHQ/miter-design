@@ -1,6 +1,7 @@
 import { DirectiveBinding, ObjectDirective } from '@vue/runtime-dom'
 import { render, h, VNode, ComponentOptions, Component, nextTick } from 'vue'
-import Tooltip from '@/components/Tooltip/Tooltip.vue'
+// import  Tooltip  from '@/components/Tooltip/Tooltip.vue'
+import Tooltip from '../../components/Tooltip/Tooltip.vue'
 
 const createElement = () =>
   typeof document !== 'undefined' && document.createElement('div')
@@ -20,19 +21,19 @@ export const mount = (
 
   if (!vNode.el) throw new Error("Couldn't attach vNode to the DOM.")
 
-  // if (container) {
-  //   container.appendChild(vNode.el)
-  // } else document.body.appendChild(vNode.el)
-
   if (container) {
-    container.addEventListener('mouseenter', () => {
-      container.appendChild(vNode?.el)
-    })
+    container.appendChild(vNode.el?.parentElement)
+  } else document.body.appendChild(vNode.el?.parentElement)
 
-    // container.addEventListener('mouseleave', () => {
-    //   vNode?.el.remove()
-    // })
-  }
+  // if (container) {
+  //   container.addEventListener('mouseenter', () => {
+  //     container.appendChild(vNode?.el)
+  //   })
+
+  //   container.addEventListener('mouseleave', () => {
+  //     vNode?.el.remove()
+  //   })
+  // }
 }
 
 export const TooltipDirective: ObjectDirective = {
@@ -50,8 +51,6 @@ export const TooltipDirective: ObjectDirective = {
       },
       el
     )
-
-    nextTick(() => {})
   }
 }
 

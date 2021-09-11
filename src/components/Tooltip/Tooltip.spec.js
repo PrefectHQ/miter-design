@@ -29,15 +29,4 @@ describe('props', () => {
     const wrapper = factoryMount()
     expect(wrapper.classes()).toContain('top')
   })
-
-  test('parentOffset prop', () => {
-    const wrapper = factoryMount({
-      position: 'top',
-      parentOffSet: {
-        top: { top: 1, left: 2 }
-      }
-    })
-
-    console.log(wrapper.element.style)
-  })
 })

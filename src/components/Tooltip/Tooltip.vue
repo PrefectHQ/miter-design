@@ -42,10 +42,6 @@ export default defineComponent({
       const tooltipRefRect = this.$refs.tooltipRef.getBoundingClientRect()
       const bodyRect = document.body.getBoundingClientRect()
 
-      // console.log('currentElementRect', this.currentElRect)
-      // console.log('bodyRect', bodyRect)
-      // console.log('tooltipRect', tooltipRefRect)
-
       if (this.position == 'top') {
         return {
           top:
@@ -60,19 +56,6 @@ export default defineComponent({
             tooltipRefRect.width / 2 +
             'px'
         }
-        // return {
-        //   top:
-        //     this.currentElRect.top -
-        //     bodyRect.top -
-        //     this.currentElRect.height +
-        //     'px',
-        //   left:
-        //     this.currentElRect.left -
-        //     bodyRect.left +
-        //     this.currentElRect.width / 2 -
-        //     tooltipRefRect.width / 2 +
-        //     'px'
-        // }
       }
 
       if (this.position == 'right') {
@@ -126,12 +109,11 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.tooltipRefStyle = this.calculatePosition()
-
-    console.log('comp - tooltipRef ', this.$refs.tooltipRef)
-    console.log('comp - rect', this.$refs.tooltipRef.getBoundingClientRect())
-  },
-  updated() {}
+    this.$nextTick(() => {
+      this.tooltipRefStyle = this.calculatePosition()
+      console.log('comp - rect', this.$refs.tooltipRef.getBoundingClientRect())
+    })
+  }
 })
 </script>
 
