@@ -44,7 +44,7 @@ export const TooltipDirective: ObjectDirective = {
         )
       })
       el.addEventListener('mouseleave', () => {
-        document.getElementById('tooltip-container')?.remove()
+        document.getElementById('tooltip-container')?.parentElement?.remove()
       })
     }
   }
