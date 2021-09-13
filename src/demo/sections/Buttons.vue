@@ -38,7 +38,7 @@
         :disabled="state == 'disabled'"
         @click="handleClick"
       >
-        <i class="pi pi-Fire pi-2x"></i>
+        <i class="pi pi-fire-line pi-2x"></i>
       </Button>
     </div>
   </div>
