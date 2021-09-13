@@ -26,7 +26,7 @@ export const mount = (
 }
 
 export const TooltipDirective: ObjectDirective = {
-  mounted(el: any, binding: DirectiveBinding, vNode) {
+  mounted(el: any, binding: DirectiveBinding) {
     if (el) {
       el.style.display = 'inline-block'
       el.addEventListener('mouseenter', () => {

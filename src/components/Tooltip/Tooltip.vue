@@ -18,7 +18,7 @@ export default defineComponent({
   props: {
     content: {
       type: String,
-      default: () => ''
+      default: () => 'text'
     },
     position: {
       type: String,

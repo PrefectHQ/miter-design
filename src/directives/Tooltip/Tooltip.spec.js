@@ -21,15 +21,35 @@ const factoryMount = (position = '', text = '') => {
   )
 }
 
-describe('argument', () => {
-  test('displays text if passed', () => {
+describe('mounted hook', () => {
+  test('does not append component when mounted', () => {
+    const wrapper = factoryMount()
+    expect(wrapper.find('#tooltip-container').exists()).toBe(false)
+  })
+
+  test('appends the component on mouseenter', async () => {
+    const wrapper = factoryMount()
+    await wrapper.trigger('mouseenter')
+    expect(wrapper.find('#tooltip-container').exists()).toBe(true)
+  })
+
+  test('removes the component on mouseleave', async () => {
+    const wrapper = factoryMount()
+    await wrapper.trigger('mouseleave')
+    expect(wrapper.find('#tooltip-container').exists()).toBe(false)
+  })
+})
+
+describe('arguments', () => {
+  test('content is passed if provided', async () => {
     const wrapper = factoryMount('right', 'Hello')
-    console.log(wrapper.html())
+    await wrapper.trigger('mouseenter')
     expect(wrapper.find('.tooltip-content').text()).toBe('Hello')
   })
 
-  test('displays default text if not passed', () => {
-    const wrapper = factoryMount()
-    expect(wrapper.get('.tooltip-content').text()).toBe('')
+  test('position is passed if provided ', async () => {
+    const wrapper = factoryMount('right')
+    await wrapper.trigger('mouseenter')
+    expect(wrapper.find('#tooltip-container').classes()).toContain('right')
   })
 })
