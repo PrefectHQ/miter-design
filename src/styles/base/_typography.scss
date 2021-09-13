@@ -28,46 +28,25 @@ h6 {
 }
 
 h1,
-.display {
-  font-size: 40px;
+.header {
+  font-size: 24px;
   letter-spacing: 0.4px;
   line-height: 48px;
 }
 
 h2,
-.giant {
-  font-size: 34px;
+.subheader {
+  font-size: 20px;
   letter-spacing: 0.3px;
   line-height: 40px;
 }
 
 h3,
-.header {
-  font-size: 28px;
+.title {
+  font-size: 88px;
+  font-weight: 600;
   letter-spacing: 0.24px;
   line-height: 34px;
-}
-
-h4,
-.subheader {
-  font-size: 24px;
-  letter-spacing: 0.2px;
-  line-height: 28px;
-}
-
-h5,
-.lead {
-  color: variables.$grey-80;
-  font-size: 20px;
-  letter-spacing: 0.18px;
-  line-height: 24px;
-}
-
-h6 {
-  color: variables.$grey-80;
-  font-size: 16px;
-  letter-spacing: 0.4px;
-  line-height: 20px;
 }
 
 .font-weight-regular {
