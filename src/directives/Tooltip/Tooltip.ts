@@ -1,6 +1,5 @@
 import { DirectiveBinding, ObjectDirective } from '@vue/runtime-dom'
 import { render, h, VNode, ComponentOptions, Component, nextTick } from 'vue'
-// import  Tooltip  from '@/components/Tooltip/Tooltip.vue'
 import Tooltip from '../../components/Tooltip/Tooltip.vue'
 
 const createElement = () =>
@@ -24,33 +23,29 @@ export const mount = (
   if (container) {
     container.appendChild(vNode.el?.parentElement)
   } else document.body.appendChild(vNode.el?.parentElement)
-
-  // if (container) {
-  //   container.addEventListener('mouseenter', () => {
-  //     container.appendChild(vNode?.el)
-  //   })
-
-  //   container.addEventListener('mouseleave', () => {
-  //     vNode?.el.remove()
-  //   })
-  // }
 }
 
 export const TooltipDirective: ObjectDirective = {
-  mounted(el: any, binding: DirectiveBinding) {
-    el.style.display = 'inline-block'
-
-    mount(
-      Tooltip,
-      {
-        props: {
-          content: binding.value,
-          position: binding.arg,
-          currentElRect: el.getBoundingClientRect()
-        }
-      },
-      el
-    )
+  mounted(el: any, binding: DirectiveBinding, vNode) {
+    if (el) {
+      el.style.display = 'inline-block'
+      el.addEventListener('mouseenter', () => {
+        mount(
+          Tooltip,
+          {
+            props: {
+              content: binding.value,
+              position: binding.arg,
+              currentElRect: el.getBoundingClientRect()
+            }
+          },
+          el
+        )
+      })
+      el.addEventListener('mouseleave', () => {
+        document.getElementById('tooltip-container')?.remove()
+      })
+    }
   }
 }
 

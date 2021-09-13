@@ -18,7 +18,7 @@ export default defineComponent({
   props: {
     content: {
       type: String,
-      default: () => 'text'
+      default: () => ''
     },
     position: {
       type: String,
@@ -34,8 +34,12 @@ export default defineComponent({
       tooltipRefStyle: {}
     }
   },
-  computed: {},
   methods: {
+    getElement() {
+      this.$nextTick(() => {
+        this.tooltipRefStyle = this.calculatePosition()
+      })
+    },
     calculatePosition() {
       if (!this.currentElRect && !this.$refs.tooltipRef) return {}
 
@@ -70,6 +74,7 @@ export default defineComponent({
             this.currentElRect.left -
             bodyRect.left +
             this.currentElRect.width +
+            10 +
             'px'
         }
       }
@@ -102,17 +107,15 @@ export default defineComponent({
           left:
             this.currentElRect.left -
             bodyRect.left -
-            this.currentElRect.width +
+            this.currentElRect.width -
+            10 +
             'px'
         }
       }
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      this.tooltipRefStyle = this.calculatePosition()
-      console.log('comp - rect', this.$refs.tooltipRef.getBoundingClientRect())
-    })
+    this.getElement()
   }
 })
 </script>
