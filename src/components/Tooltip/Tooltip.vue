@@ -41,7 +41,7 @@ export default defineComponent({
       })
     },
     calculatePosition() {
-      if (!this.currentElRect && !this.$refs.tooltipRef) return {}
+      if (!this.currentElRect && !this.$refs.tooltipRef) return
 
       const tooltipRefRect = this.$refs.tooltipRef.getBoundingClientRect()
       const bodyRect = document.body.getBoundingClientRect()
@@ -51,7 +51,8 @@ export default defineComponent({
           top:
             this.currentElRect.top -
             bodyRect.top -
-            this.currentElRect.height +
+            this.currentElRect.height -
+            10 +
             'px',
           left:
             this.currentElRect.left -
