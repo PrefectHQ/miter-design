@@ -1,12 +1,7 @@
 <template>
   <div>
     <h3>Tooltip</h3>
-    <Button
-      v-tooltip:[position]="html"
-      style="margin-left: 200px; border: solid red"
-    >
-      Text
-    </Button>
+    <Button v-tooltip:[position]="html"> Text </Button>
   </div>
 </template>
 

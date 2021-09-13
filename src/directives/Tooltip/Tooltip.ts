@@ -1,5 +1,5 @@
 import { DirectiveBinding, ObjectDirective } from '@vue/runtime-dom'
-import { render, h, VNode, ComponentOptions, Component, nextTick } from 'vue'
+import { render, h, VNode, ComponentOptions, Component } from 'vue'
 import Tooltip from '../../components/Tooltip/Tooltip.vue'
 
 const createElement = () =>
@@ -29,6 +29,7 @@ export const TooltipDirective: ObjectDirective = {
   mounted(el: any, binding: DirectiveBinding) {
     if (el) {
       el.style.display = 'inline-block'
+      el.setAttribute('aria-labelledby', 'tooltip-container')
       el.addEventListener('mouseenter', () => {
         mount(
           Tooltip,
