@@ -3,15 +3,15 @@
 @font-face {
   font-family: '#{$prefect-font-family}';
   src:
-    url('#{$prefect-font-path}/#{$prefect-font-family}.ttf?79beww') format('truetype'),
-    url('#{$prefect-font-path}/#{$prefect-font-family}.woff?79beww') format('woff'),
-    url('#{$prefect-font-path}/#{$prefect-font-family}.svg?79beww##{$prefect-font-family}') format('svg');
+    url('#{$prefect-font-path}/#{$prefect-font-family}.ttf?vao027') format('truetype'),
+    url('#{$prefect-font-path}/#{$prefect-font-family}.woff?vao027') format('woff'),
+    url('#{$prefect-font-path}/#{$prefect-font-family}.svg?vao027##{$prefect-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-i {
+[class^="pi-"], [class*=" pi-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: '#{$prefect-font-family}' !important;
   speak: never;
@@ -24,68 +24,6 @@ i {
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.pi-lg {
-  font-size: 1.33333em !important;
-  line-height: 0.75em;
-  vertical-align: -0.0667em;
-}
-
-.pi-xs {
-  font-size: 0.75em !important;
-}
-
-.pi-sm {
-  font-size: 0.875em !important;
-}
-
-.pi-1x {
-  font-size: 1em !important;
-}
-
-.pi-2x {
-  font-size: 2em !important;
-}
-
-.pi-3x {
-  font-size: 3em !important;
-}
-
-.pi-4x {
-  font-size: 4em !important;
-}
-
-.pi-5x {
-  font-size: 5em !important;
-}
-
-.pi-6x {
-  font-size: 6em !important;
-}
-
-.pi-7x {
-  font-size: 7em !important;
-}
-
-.pi-8x {
-  font-size: 8em !important;
-}
-
-.pi-9x {
-  font-size: 9em;
-}
-
-.pi-10x {
-  font-size: 10em !important;
-}
-
-.pi-fw {
-  display: inline-block;
-  height: 1em;
-  text-align: center;
-  vertical-align: -0.25em;
-  width: 1.25em;
 }
 
 .pi-women-line {

@@ -292,7 +292,7 @@ export default defineComponent({
     this.allOptions = [...children]
 
     const searchBar = h('div', { class: 'search' }, [
-      h('i', { class: ['pi', 'pi-Search', 'pi-lg', 'mr-1'] }),
+      h('i', { class: ['pi', 'pi-search-line', 'mr-1'] }),
       h(
         'input',
         mergeProps({
@@ -325,7 +325,7 @@ export default defineComponent({
             : null,
           this.selected || this.placeholder
         ]),
-        h('i', { class: ['pi', 'pi-Arrow-Down', 'pi-lg'] })
+        h('i', { class: ['pi', 'pi-arrow-drop-down-line', 'pi-lg'] })
       ]
     )
     const wrapper = h(

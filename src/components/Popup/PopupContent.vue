@@ -32,7 +32,7 @@
             @focus="handleFocus"
             @blur="handleBlur"
           >
-            <i class="pi pi-X"></i>
+            <i class="pi pi-x"></i>
           </button>
         </h4>
 
