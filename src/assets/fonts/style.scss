@@ -3,9 +3,9 @@
 @font-face {
   font-family: '#{$prefect-font-family}';
   src:
-    url('#{$prefect-font-path}/#{$prefect-font-family}.ttf?vao027') format('truetype'),
-    url('#{$prefect-font-path}/#{$prefect-font-family}.woff?vao027') format('woff'),
-    url('#{$prefect-font-path}/#{$prefect-font-family}.svg?vao027##{$prefect-font-family}') format('svg');
+    url('#{$prefect-font-path}/#{$prefect-font-family}.ttf?8j3k0v') format('truetype'),
+    url('#{$prefect-font-path}/#{$prefect-font-family}.woff?8j3k0v') format('woff'),
+    url('#{$prefect-font-path}/#{$prefect-font-family}.svg?8j3k0v##{$prefect-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -26,6 +26,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.pi-flow-run {
+  &:before {
+    content: $pi-flow-run; 
+  }
+}
+.pi-flow {
+  &:before {
+    content: $pi-flow; 
+  }
+}
+.pi-task {
+  &:before {
+    content: $pi-task; 
+  }
+}
 .pi-women-line {
   &:before {
     content: $pi-women-line; 
