@@ -18,7 +18,7 @@
   }
   .box {
     background-color: variables.$white;
-    border: 1px solid variables.$grey-4;
+    border: 1px solid variables.$grey-20;
     border-radius: 4px;
     display: inline-block;
     height: 28px;
@@ -44,9 +44,9 @@
 
   &.disabled {
     cursor: not-allowed;
-    color: variables.$black-40 !important;
+    color: variables.$grey-20 !important;
     .box {
-      background-color: variables.$grey-4 !important;
+      background-color: variables.$grey-20 !important;
     }
   }
 
@@ -54,7 +54,7 @@
   &.hovered,
   &.active {
     .box {
-      background-color: variables.$grey-5;
+      background-color: variables.$secondary-background;
     }
   }
 }

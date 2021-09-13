@@ -26,7 +26,7 @@ import { Vue, Options } from 'vue-class-component'
 
 @Options({})
 export default class Avatar extends Vue {
-  backgroundColors = ['primary', 'error', 'primary-101']
+  backgroundColors = ['primary', 'error', 'primary-hover']
 
   mounted(): void {
     return
