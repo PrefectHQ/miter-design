@@ -36,36 +36,35 @@ const Template = (args, { argTypes }) => ({
   `
 })
 
-export const TagTooltip = Template.bind({})
-TagTooltip.storyName = 'Top/Default'
-TagTooltip.args = {
+export const TopTooltip = Template.bind({})
+TopTooltip.storyName = 'Top/Default'
+TopTooltip.args = {
   template: '<Tag v-tooltip:[args.position]="args.text">Tag</Tag>',
   text: 'Top',
   position: 'top'
 }
 
-export const ButtonTooltip = Template.bind({})
-ButtonTooltip.storyName = 'Right'
-ButtonTooltip.args = {
+export const RightTooltip = Template.bind({})
+RightTooltip.storyName = 'Right'
+RightTooltip.args = {
   template: '<Button v-tooltip:[args.position]="args.text">Button</Button>',
   text: 'Right',
   position: 'right'
 }
 
-export const DivTooltip = Template.bind({})
-DivTooltip.storyName = 'Bottom'
-DivTooltip.args = {
+export const BottomTooltip = Template.bind({})
+BottomTooltip.storyName = 'Bottom'
+BottomTooltip.args = {
   template:
     '<div v-tooltip:[args.position]="args.text" style="border: solid red">div</div>',
   text: '<strong>Bottom</strong>',
   position: 'bottom'
 }
 
-export const SpanTooltip = Template.bind({})
-SpanTooltip.storyName = 'Left'
-SpanTooltip.args = {
-  template:
-    '<span v-tooltip:[args.position]="args.text" style="border: solid blue">Left</span>',
+export const LeftTooltip = Template.bind({})
+LeftTooltip.storyName = 'Left'
+LeftTooltip.args = {
+  template: '<Tag v-tooltip:[args.position]="args.text">Left</Tag>',
   text: '<em>Left</em>',
   position: 'left'
 }
