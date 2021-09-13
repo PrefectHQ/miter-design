@@ -8,6 +8,7 @@
         subtitle="Additional Info"
         class="mr-2"
         required
+        v-model="value"
         @invalid="handleInvalid"
       >
         <template v-slot:errorMessage>No!</template>
@@ -24,6 +25,11 @@ import TextArea from '@/components/TextArea/TextArea.vue'
 export default defineComponent({
   name: 'TextAreas',
   components: { TextArea },
+  data() {
+    return {
+      value: ''
+    }
+  },
   methods: {
     handleInvalid(validityState: ValidityState) {
       console.log('validity', validityState)
