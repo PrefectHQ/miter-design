@@ -17,6 +17,10 @@ $background: #090422;
   align-items: center;
 }
 
+.tooltip-content {
+  font-size: 13px;
+}
+
 .tooltip-content::after {
   content: '';
   position: absolute;
