@@ -5,7 +5,8 @@ import {
   mergeProps,
   VNode,
   RendererNode,
-  RendererElement
+  RendererElement,
+  VNodeArrayChildren
 } from 'vue'
 import Option from './Option.vue'
 import OptionGroup from './OptionGroup.vue'
@@ -37,7 +38,7 @@ export default defineComponent({
     },
     modelValue: {
       type: String,
-      default: false
+      default: ''
     }
   },
   data() {
@@ -77,7 +78,8 @@ export default defineComponent({
   },
   methods: {
     handleOptionClick(e: Event, ...args: any[]): Event {
-      if (e.target?.classList?.contains('disabled')) return e
+      if ((e.target as HTMLDivElement)?.classList?.contains('disabled'))
+        return e
       this.selected = args[0]
       this.icon = args[1]
       this.$emit('update:modelValue', this.selected)
@@ -89,10 +91,8 @@ export default defineComponent({
     },
 
     handleBlur(event: FocusEvent): void {
-      if (
-        event.relatedTarget?.tagName === 'INPUT' ||
-        event.relatedTarget?.classList.contains('active')
-      )
+      const target = event.relatedTarget as HTMLDivElement
+      if (target?.tagName === 'INPUT' || target?.classList.contains('active'))
         return
       this.hovered = false
       this.active = false
@@ -108,8 +108,8 @@ export default defineComponent({
         if (this.active) {
           // choose highlighted option, else close
           this.filteredOptions.forEach((option) => {
-            if (option.el.classList.contains('hovered')) {
-              this.handleOptionClick(event, option.props.value)
+            if (option.el?.classList.contains('hovered')) {
+              this.handleOptionClick(event, option?.props?.value)
             }
           })
         }
@@ -121,30 +121,33 @@ export default defineComponent({
         let currentFound = false
         let nextSelected = false
         for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
+          const option = this.filteredOptions[i]
+          const type = (option.type as any)?.name
+          const optionClasses = option?.el?.classList
+
           if (
-            this.filteredOptions[i].type?.name === 'Option' &&
-            !this.filteredOptions[i].el?.classList?.contains('disabled') &&
+            type === 'Option' &&
+            !optionClasses?.contains('disabled') &&
             currentFound
           ) {
-            this.filteredOptions[i].el?.classList.add('hovered')
+            optionClasses.add('hovered')
             nextSelected = true
             break
           }
-          if (
-            this.filteredOptions[i].el?.classList?.contains('hovered') &&
-            !currentFound
-          ) {
-            this.filteredOptions[i].el?.classList.remove('hovered')
+          if (optionClasses?.contains('hovered') && !currentFound) {
+            optionClasses.remove('hovered')
             currentFound = true
           }
         }
+
         if (!nextSelected) {
           for (let i = 0; i < this.filteredOptions.length; i++) {
-            if (
-              this.filteredOptions[i].type?.name === 'Option' &&
-              !this.filteredOptions[i].el?.classList?.contains('disabled')
-            ) {
-              this.filteredOptions[i].el?.classList.add('hovered')
+            const option = this.filteredOptions[i]
+            const type = (option.type as any)?.name
+            const optionClasses = option?.el?.classList
+
+            if (type === 'Option' && !optionClasses?.contains('disabled')) {
+              optionClasses.add('hovered')
               break
             }
           }
@@ -154,30 +157,34 @@ export default defineComponent({
         let currentFound = false
         let nextSelected = false
         for (let i = 0; i < this.filteredOptions.length; i++) {
+          const option = this.filteredOptions[i]
+          const type = (option.type as any)?.name
+          const optionClasses = option?.el?.classList
+
           if (
-            this.filteredOptions[i].type?.name === 'Option' &&
-            !this.filteredOptions[i].el?.classList?.contains('disabled') &&
+            type === 'Option' &&
+            !optionClasses?.contains('disabled') &&
             currentFound
           ) {
-            this.filteredOptions[i].el?.classList.add('hovered')
+            optionClasses.add('hovered')
             nextSelected = true
             break
           }
-          if (
-            this.filteredOptions[i].el?.classList?.contains('hovered') &&
-            !currentFound
-          ) {
-            this.filteredOptions[i].el?.classList.remove('hovered')
+
+          if (optionClasses?.contains('hovered') && !currentFound) {
+            optionClasses.remove('hovered')
             currentFound = true
           }
         }
+
         if (!nextSelected) {
           for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
-            if (
-              this.filteredOptions[i].type?.name === 'Option' &&
-              !this.filteredOptions[i].el?.classList?.contains('disabled')
-            ) {
-              this.filteredOptions[i].el?.classList.add('hovered')
+            const option = this.filteredOptions[i]
+            const type = (option.type as any)?.name
+            const optionClasses = option?.el?.classList
+
+            if (type === 'Option' && !optionClasses?.contains('disabled')) {
+              optionClasses.add('hovered')
               break
             }
           }
@@ -193,7 +200,11 @@ export default defineComponent({
           option.type === 'div' ||
           option.props?.value
             .toLowerCase()
-            .includes(searchValue.target?.value?.toString().toLowerCase())
+            .includes(
+              (searchValue.target as HTMLInputElement)?.value
+                ?.toString()
+                .toLowerCase()
+            )
         )
           this.filteredOptions.push(option)
       })
@@ -228,6 +239,7 @@ export default defineComponent({
               )
             } else if (ti.type.name === 'OptionGroup') {
               const innerSlot = h(ti)
+              // @ts-ignore: Ignoring this because the typings seem to be incorrect (but the code works)
               const innerOptions = innerSlot.children?.default?.()
               // this will either be Option(s) or Symbol(Fragment)
               const options = [
