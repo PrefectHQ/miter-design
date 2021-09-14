@@ -15,6 +15,7 @@
     <Avatar class="mt-10" />
     <Tooltip class="mt-10" />
     <Selects class="mt-10" />
+    <TextAreas class="mt-10" />
   </div>
 </template>
 
@@ -34,6 +35,7 @@ import Popups from '../sections/Popups.vue'
 import Sliders from '../sections/Sliders.vue'
 import Tooltip from '../sections/Tooltip.vue'
 import Selects from '../sections/Selects.vue'
+import TextAreas from '../sections/TextAreas.vue'
 
 @Options({
   components: {
@@ -49,8 +51,9 @@ import Selects from '../sections/Selects.vue'
     Selects,
     TabSection,
     Tag,
-    Tooltip,
-    TagGroup
+    TagGroup,
+    TextAreas,
+    Tooltip
   }
 })
 export default class App extends Vue {}
