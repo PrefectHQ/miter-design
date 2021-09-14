@@ -123,22 +123,28 @@
     margin-top: -16px;
     padding-top: 16px;
   }
+
+  span {
+    width: 275px;
+  }
+
   i {
     color: variables.$grey-20;
   }
+
   &.hovered {
     background-color: variables.$secondary-background;
   }
+
   &.selected {
     background-color: variables.$primary;
     color: variables.$white;
-    span {
-      width: 275px;
-    }
+
     i {
       color: variables.$white;
     }
   }
+
   &.disabled {
     color: variables.$inactive;
     cursor: not-allowed !important;
