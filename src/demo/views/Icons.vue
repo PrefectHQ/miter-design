@@ -16,8 +16,12 @@
         class="mr-4 icon-container"
         @click.stop="selected = { key: key, glyph: glyph }"
       >
-        <i class="pi pi-3x" :class="'pi-' + glyph.glyph" />
-        <h6 class="text-truncate mt-2">{{ key }}</h6>
+        <i
+          class="pi pi-3x"
+          :class="'pi-' + glyph.glyph"
+          :data-glyph="glyph.glyph"
+        />
+        <div class="text-truncate mt-2">{{ key }}</div>
       </div>
 
       <h3 v-if="filteredGlyphs.size === 0" class="text-center">
@@ -27,7 +31,7 @@
     </div>
 
     <div v-if="selected" tabindex="0" class="icon-overlay pa-4 text-center">
-      <h2 class="text-truncate">{{ selected.key }}</h2>
+      <div class="text-truncate">{{ selected.key }}</div>
 
       <div
         class="pa-4 d-flex align-center justify-space-around text-center"
@@ -222,18 +226,12 @@ export default class App extends Vue {
   border: none;
   border-bottom: 2px solid variables.$secondary-background;
   font-size: 24px;
-  font: 'prefect-icons' 'Barlow';
   letter-spacing: 0.24px;
   line-height: 34px;
   outline: none;
   position: relative;
   transition: border-bottom 150ms;
   width: 100%;
-
-  ::placeholder {
-    color: blue;
-    font-family: 'prefect-icons' !important;
-  }
 
   &:focus {
     border-bottom: 2px solid variables.$primary;

@@ -24,7 +24,7 @@
             v-for="(option, i) in options"
             :key="i"
             :value="option"
-            icon="Fire"
+            icon="fire-line"
           />
         </OptionGroup>
         <OptionGroup label="Single Options">

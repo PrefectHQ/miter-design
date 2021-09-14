@@ -1,3 +1,4 @@
+- Update icons - [#50](https://github.com/PrefectHQ/miter-design/pull/50)
 - Add Textarea component - [#48](https://github.com/PrefectHQ/miter-design/pull/48)
 - Add Tooltip component - [#34](https://github.com/PrefectHQ/miter-design/pull/34)
 - Add TagGroup component - [#29](https://github.com/PrefectHQ/miter-design/pull/29)
