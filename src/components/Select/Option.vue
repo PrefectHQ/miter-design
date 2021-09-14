@@ -15,7 +15,7 @@
   >
     <span>
       <i v-if="icon" :class="iconClass" class="pi pi-1x mr-1"></i>
-      {{ value }}
+      <slot>{{ value }}</slot>
     </span>
     <i v-if="selected" class="pi pi-check-line pi-lg"></i>
   </div>
