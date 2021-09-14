@@ -8,7 +8,7 @@
   display: flex;
   align-items: flex-end;
   padding-bottom: 7px;
-  border-bottom:1px solid variables.$grey-7; 
+  border-bottom:1px solid variables.$secondary-hover; 
   width: 375px;
   padding-left: 8px;
   padding-right: 8px;
@@ -18,7 +18,7 @@
   }
 
   &.disabled {
-    border-bottom:1px solid variables.$grey-7; 
+    border-bottom:1px solid variables.$secondary-hover; 
     *, *:before, *:after {
       opacity: 60%;
       cursor: not-allowed;
