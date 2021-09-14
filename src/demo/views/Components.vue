@@ -14,6 +14,7 @@
     <TagGroup class="mt-10" />
     <Avatar class="mt-10" />
     <Selects class="mt-10" />
+    <Popover class="mt-10" />
   </div>
 </template>
 
@@ -32,7 +33,7 @@ import Tag from '../sections/Tag.vue'
 import Popups from '../sections/Popups.vue'
 import Sliders from '../sections/Sliders.vue'
 import Selects from '../sections/Selects.vue'
-
+import Popover from '../sections/Popover.vue'
 @Options({
   components: {
     Buttons,
@@ -47,8 +48,8 @@ import Selects from '../sections/Selects.vue'
     Selects,
     TabSection,
     Tag,
-    TagGroup
-
+    TagGroup,
+    Popover
   }
 })
 export default class App extends Vue {}
