@@ -34,6 +34,10 @@ export default defineComponent({
     openUp: {
       type: Boolean,
       default: false
+    },
+    modelValue: {
+      type: String,
+      default: false
     }
   },
   data() {
@@ -41,7 +45,7 @@ export default defineComponent({
       hovered: false,
       active: false,
       icon: '',
-      selected: '',
+      selected: this.modelValue,
       searchTerm: '',
       allOptions: [] as VNode<
         RendererNode,
@@ -59,6 +63,16 @@ export default defineComponent({
     active(): void {
       this.searchTerm = ''
       this.filteredOptions = this.allOptions
+    },
+    modelValue(val): void {
+      const selectedOption = this.allOptions.find(
+        (option) => option?.props?.value == val
+      )
+
+      if (selectedOption?.props) {
+        this.selected = selectedOption.props.value || ''
+        this.icon = selectedOption.props.icon || ''
+      }
     }
   },
   methods: {
@@ -187,8 +201,7 @@ export default defineComponent({
   },
   render() {
     const slottedItems = this.$slots.default?.()
-    let temp: VNode<RendererNode, RendererElement, { [key: string]: any }>[] =
-      []
+    let temp: any = []
     let children: VNode<RendererNode, RendererElement, { [key: string]: any }>[]
 
     const pickerProps = [
@@ -265,6 +278,8 @@ export default defineComponent({
                 ...options
               ]
             } else {
+              if (!Array.isArray(ti.children)) return
+
               //ti.type === Symbol(Fragment) => v-for of options, not in group
               const options = ti.children?.map(
                 (
@@ -313,19 +328,28 @@ export default defineComponent({
       [this.search && searchBar, this.filteredOptions]
     )
 
+    const activeSlot = this.$slots?.active?.()
+    const icon = children.find(
+      (option) => option?.props?.value == this.modelValue
+    )?.props?.icon
+
     const picker = h(
       'div',
       mergeProps({
         class: ['picker', ...pickerProps]
       }),
       [
-        h('span', [
-          this.icon.length > 0
-            ? h('i', { class: ['pi', `pi-${this.icon}`, 'pi-1x', 'pr-1'] })
-            : null,
-          this.selected || this.placeholder
-        ]),
-        h('i', { class: ['pi', 'pi-Arrow-Down', 'pi-lg'] })
+        activeSlot
+          ? h('span', [activeSlot])
+          : h('span', [
+              this.icon.length > 0 || icon
+                ? h('i', {
+                    class: ['pi', `pi-${this.icon || icon}`, 'pi-1x', 'pr-1']
+                  })
+                : null,
+              this.selected || this.placeholder
+            ]),
+        h('i', { class: ['pi', 'pi-arrow-drop-down-line', 'pi-lg'] })
       ]
     )
     const wrapper = h(
