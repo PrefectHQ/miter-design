@@ -1,4 +1,6 @@
 - Add Textarea component - [#48](https://github.com/PrefectHQ/miter-design/pull/48)
+- Add Tooltip component - [#34](https://github.com/PrefectHQ/miter-design/pull/34)
+- Add TagGroup component - [#29](https://github.com/PrefectHQ/miter-design/pull/29)
 - Fix typo in h3 size - [#49](https://github.com/PrefectHQ/miter-design/pull/49)
 - Update some stylesheet variables - [#47](https://github.com/PrefectHQ/miter-design/pull/47)
 - Flesh out functional stylesheets - [#44](https://github.com/PrefectHQ/miter-design/pull/44)
