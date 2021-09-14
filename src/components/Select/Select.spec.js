@@ -35,6 +35,23 @@ test('options passed in slots are displayed in component', async () => {
   options.forEach((option, i) => expect(option.text()).toBe(optionValues[i]))
 })
 
+test('the passed value is selected when the component is mounted', async () => {
+  const wrapper = factoryMount(
+    {
+      modelValue: 'Second'
+    },
+    {
+      default: () => [
+        h(Option, { value: 'First' }),
+        h(Option, { value: 'Second' }),
+        h(Option, { value: 'Third' })
+      ]
+    }
+  )
+  const picker = wrapper.get('.picker > span')
+  expect(picker.text()).toBe('Second')
+})
+
 test('displays text in the active slot', async () => {
   const text = 'Hello, world!'
   const wrapper = factoryMount(
@@ -51,8 +68,6 @@ test('displays text in the active slot', async () => {
     }
   )
   const picker = wrapper.get('.picker > span')
-  await picker.trigger('click')
-
   expect(picker.text()).toBe(text)
 })
 
