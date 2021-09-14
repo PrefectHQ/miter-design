@@ -2,7 +2,7 @@
   <div>
     <h3>Buttons</h3>
 
-    <div class="my-1 text--grey-4">(hover for active)</div>
+    <div class="my-1 text--secondary">(hover for active)</div>
 
     <h5 class="mt-5">Block</h5>
 
@@ -11,7 +11,7 @@
     </Button>
 
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
+      <span class="text-capitalize">{{ state }}:</span>
       <Button
         v-for="style in buttonStyles"
         v-skeleton="skeletonLoader"
@@ -27,7 +27,7 @@
 
     <h5 class="mt-5">Icon</h5>
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
+      <span class="text-capitalize">{{ state }}:</span>
       <Button
         v-for="style in buttonStyles"
         :key="style"
@@ -38,7 +38,7 @@
         :disabled="state == 'disabled'"
         @click="handleClick"
       >
-        <i class="pi pi-Fire pi-2x"></i>
+        <i class="pi pi-fire-line pi-2x"></i>
       </Button>
     </div>
   </div>

@@ -16,21 +16,22 @@
         class="mr-4 icon-container"
         @click.stop="selected = { key: key, glyph: glyph }"
       >
-        <i class="pi pi-3x" :class="'pi-' + glyph.glyph" />
-        <h6 class="font-weight-light text-truncate mt-2">{{ key }}</h6>
+        <i
+          class="pi pi-3x"
+          :class="'pi-' + glyph.glyph"
+          :data-glyph="glyph.glyph"
+        />
+        <div class="text-truncate mt-2">{{ key }}</div>
       </div>
 
-      <h3
-        v-if="filteredGlyphs.size === 0"
-        class="font-weight-light text-center"
-      >
+      <h3 v-if="filteredGlyphs.size === 0" class="text-center">
         <h1>(⋟﹏⋞)</h1>
         No icons found for '{{ search }}'
       </h3>
     </div>
 
     <div v-if="selected" tabindex="0" class="icon-overlay pa-4 text-center">
-      <h2 class="font-weight-light text-truncate">{{ selected.key }}</h2>
+      <div class="text-truncate">{{ selected.key }}</div>
 
       <div
         class="pa-4 d-flex align-center justify-space-around text-center"
@@ -212,7 +213,7 @@ export default class App extends Vue {
   padding-top: 16px;
 
   &:hover {
-    background-color: variables.$grey-5;
+    background-color: variables.$secondary-background;
   }
 }
 
@@ -223,9 +224,8 @@ export default class App extends Vue {
 
 .icon-search {
   border: none;
-  border-bottom: 2px solid variables.$grey-5;
+  border-bottom: 2px solid variables.$secondary-background;
   font-size: 24px;
-  font: 'prefect-icons' 'Barlow';
   letter-spacing: 0.24px;
   line-height: 34px;
   outline: none;
@@ -233,19 +233,14 @@ export default class App extends Vue {
   transition: border-bottom 150ms;
   width: 100%;
 
-  ::placeholder {
-    color: blue;
-    font-family: 'prefect-icons' !important;
-  }
-
   &:focus {
-    border-bottom: 2px solid variables.$primary-100;
+    border-bottom: 2px solid variables.$primary;
   }
 }
 
 hr {
   border: none;
-  border-top: 1px solid variables.$grey-4;
+  border-top: 1px solid variables.$grey-40;
   border-radius: 5px;
 }
 
@@ -261,7 +256,7 @@ hr {
 }
 
 code {
-  background-color: variables.$grey-2;
+  background-color: variables.$grey-80;
   border-radius: 4px;
   color: white;
   padding: 4px 12px;

@@ -1,36 +1,23 @@
 @use '../abstracts/variables';
 
-// TODO: Add the rest of the text and background color classes
-.text--primary-100 {
-  color: variables.$primary-100;
+.text--primary {
+  color: variables.$text--primary;
 }
 
-.text--grey-1 {
-  color: variables.$grey-1;
+.text--secondary {
+  color: variables.$text--secondary;
 }
 
-.text--grey-2 {
-  color: variables.$grey-2;
+.text--placeholder {
+  color: variables.$text--placeholder;
 }
 
-.text--grey-3 {
-  color: variables.$grey-3;
+.text--prefect {
+  color: variables.$primary;
 }
 
-.text--grey-4 {
-  color: variables.$grey-4;
-}
-
-.text--grey-5 {
-  color: variables.$grey-5;
-}
-
-.text--grey-6 {
-  color: variables.$grey-6;
-}
-
-.grey-1 {
-  background-color: variables.$grey-1;
+.text--black {
+  color: variables.$black;
 }
 
 .text--success {
@@ -43,4 +30,32 @@
 
 .text--white {
   color: variables.$text--white;
+}
+
+.bg--black {
+  background-color: variables.$black;
+}
+
+.bg--white {
+  background-color: variables.$white;
+}
+
+.bg--error {
+  background-color: variables.$error;
+}
+
+.bg--warning {
+  background-color: variables.$warning;
+}
+
+.bg--success {
+  background-color: variables.$success;
+}
+
+.bg--primary {
+  background-color: variables.$primary;
+}
+
+.bg--secondary {
+  background-color: variables.$secondary-background;
 }

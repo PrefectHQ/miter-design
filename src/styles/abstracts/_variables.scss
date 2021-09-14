@@ -43,29 +43,29 @@ $input-background: #f9f9fa;
 $popup-background: rgba(0, 0, 0, 0.75);
 
 $white: #ffffff;
-$primary: #024dfd;
+$black: #090422;
 $error: #fb4e4e;
 $warning: #f6a609;
 $success: #2ac769;
 
-$primary-101: #0035b0;
-$primary-100: #024dfd;
-$primary-80: #6680ee;
-$primary-60: #8a9df0;
-$primary-40: #acbbf3;
-$primary-20: #d0d8f5;
-$primary-10: #e3e7f7;
-$primary-5: #ebeef7;
+$primary: #024dfd;
+$primary-hover: #0035b0;
+$primary-pressed: #0a2053;
 
-$grey-1: #090422;
-$grey-2: #465968;
-$grey-3: #f7f7f8;
-$grey-4: #cecdd3;
-$grey-5: #f7f8fa;
-$grey-6: #ebeef7;
-$grey-7: #e8e8e8;
+$secondary-background: #f7f7f8;
+$secondary-hover: #e8e8e8;
+$secondary-pressed: #cecdd3;
 
-$black-40: #cacccf;
+$grey-80: #465968;
+$grey-40: #8ea0ae;
+$grey-20: #cacccf;
+$grey-10: #f4f5f7;
+
+$blue-80: #6680ee;
+$blue-40: #acbbf3;
+$blue-20: #ebeef7;
+$blue-10: #f9fafd;
+$blue-5: #fcfdfe;
 
 $colors: (
   text--primary: $text--primary,
@@ -75,25 +75,25 @@ $colors: (
   inactive: $inactive,
   disabled: $disabled,
   background: $background,
+  popup-background: $popup-background,
   white: $white,
-  primary: $primary,
+  black: $black,
   error: $error,
   warning: $warning,
   success: $success,
-  primary-101: $primary-101,
-  primary-100: $primary-100,
-  primary-80: $primary-80,
-  primary-60: $primary-60,
-  primary-40: $primary-40,
-  primary-20: $primary-20,
-  primary-10: $primary-10,
-  primary-5: $primary-5,
-  grey-1: $grey-1,
-  grey-2: $grey-2,
-  grey-3: $grey-3,
-  grey-4: $grey-4,
-  grey-5: $grey-5,
-  grey-6: $grey-6
+  primary: $primary,
+  primary-hover: $primary-hover,
+  primary-pressed: $primary-pressed,
+  secondary-background: $secondary-background,
+  secondary-hover: $secondary-hover,
+  secondary-pressed: $secondary-pressed,
+  grey-80: $grey-80,
+  grey-40: $grey-40,
+  grey-20: $grey-20,
+  blue-80: $blue-80,
+  blue-40: $blue-40,
+  blue-20: $blue-20,
+  blue-5: $blue-5
 );
 
 :root {

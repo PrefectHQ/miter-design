@@ -2,28 +2,37 @@
   <div>
     <div
       id="backdrop"
+      @keydown="handleBackdropKeyDown"
       class="modal-backdrop"
       @click.self="closePopUp"
       :style="position"
     >
-      <Card :class="positionClass" :height="height" :width="width">
+      <Card
+        role="dialog"
+        aria-modal="true"
+        ref="popUpContent"
+        :class="positionClass"
+        :height="height"
+        :width="width"
+      >
         <h4 class="h4-bottom">
           {{ title }}
           <button
             icon
+            data-test="closeButton"
+            title="close pop up"
+            ref="popUpCloseButton"
             class="close-icon"
-            :classes="classes"
+            :class="classList"
             @click="closePopUp"
             @mouseenter="handleMouseEnter"
             @mouseleave="handleMouseLeave"
             @mousedown="handleMouseDown"
             @mouseup="handleMouseUp"
-            @keydown.enter.space="handleKeydown"
-            @keyup.enter.space="handleKeyup"
             @focus="handleFocus"
             @blur="handleBlur"
           >
-            <i class="pi pi-X"></i>
+            <i class="pi pi-x"></i>
           </button>
         </h4>
 
@@ -43,6 +52,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Card from '../Card/Card.vue'
+
+interface event {
+  value: string
+  key: string
+  shiftKey: string
+  preventDefault: any
+}
 
 export default defineComponent({
   name: 'Popcontent',
@@ -72,6 +88,10 @@ export default defineComponent({
     title: {
       type: String,
       required: false
+    },
+    teleportTo: {
+      type: String,
+      default: 'body'
     }
   },
   emits: ['close'],
@@ -83,12 +103,14 @@ export default defineComponent({
     }
   },
   computed: {
-    classes(): string[] {
-      return [
-        ...(this.active ? ['active'] : []),
-        ...(this.hovered ? ['hovered'] : []),
-        ...(this.focused ? ['focused'] : [])
-      ]
+    classList(): string[] {
+      return this.active
+        ? ['active']
+        : this.hovered
+        ? ['hovered']
+        : this.focused
+        ? ['focused']
+        : []
     },
     position(): any {
       return {
@@ -108,7 +130,17 @@ export default defineComponent({
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
     }
   },
+  mounted() {
+    this.addFocus()
+  },
   methods: {
+    addFocus() {
+      this.hovered = true
+      this.$nextTick(() => {
+        this.$refs.popUpCloseButton.tabIndex = 0
+        this.$refs.popUpCloseButton.focus()
+      })
+    },
     closePopUp() {
       this.$emit('close', false)
     },
@@ -126,8 +158,28 @@ export default defineComponent({
       this.hovered = false
       this.focused = false
     },
-    handleKeydown(): void {
-      this.focused = true
+    handleBackdropKeyDown(evt: event): void {
+      const modalNodes = this.$refs.popUpContent.$el.querySelectorAll('*')
+      const tabbable = Array.from(modalNodes).filter(
+        (n: any) => n.tabIndex >= 0
+      )
+      let index = tabbable.indexOf(document.activeElement)
+      const parent = document.querySelector(this.teleportTo)
+      const parentHidden = parent?.firstChild?.ariaHidden
+      if (evt.key === 'Escape' || evt.key === 'escape') {
+        // Pressing the ESC key resets ariaHidden and closes the modal.
+        parent.firstChild.ariaHidden = parentHidden
+        this.closePopUp()
+      } else if (evt.key === 'Tab' || evt.key === 'tab') {
+        document.querySelector(this.teleportTo)
+        //set aria hidden on non-popup element
+        parent.firstChild.ariaHidden = true
+        // Pressing the Tab key traps the focus in the modal.
+        index += tabbable.length + 1
+        index %= tabbable.length
+        tabbable[index].focus()
+        evt.preventDefault()
+      }
     }
   }
 })
