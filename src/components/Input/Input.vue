@@ -1,69 +1,81 @@
 <template>
-  <div
-    :class="classList"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
-    @mouseup="handleMouseUp"
-    @mousedown="handleMouseDown"
-    @keydown.enter="handleKeydown"
-    @focus="handleFocus"
-    @blur="handleBlur"
-    class="flexInput"
-  >
-    <span class="prepend" data-test="prepend"><slot name="prepend" /></span>
-    <span class="input-text">
-      <label
-        data-test="label"
-        v-if="!hideLabel"
-        :for="label"
-        class="input-label"
-      >
-        {{ label }}</label
-      >
-      <input
-        :id="label"
-        data-test="default"
-        :type="inputType"
-        placeholder="Input"
-        @mouseenter="handleMouseEnter"
-        @mouseleave="handleMouseLeave"
-        @mousedown="handleMouseDown"
-        @mouseup="handleMouseUp"
-        @keydown.enter="handleKeydown"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        :disabled="disabled"
-        :value="internalValue"
-        :valid="valid"
-        :required="required"
-        :pattern="pattern"
-        :maxlength="maxLength"
-        :minlength="minLength"
-        @invalid.capture="handleInvalid"
-        @input="handleInput"
-        class="input"
-        :class="classList"
-      />
-      <p v-if="subtitle" data-test="subtitle" class="subtitle">{{
-        subtitle
-      }}</p>
-    </span>
-    <span v-if="!validityIcon" class="append" data-test="append"
-      ><slot name="append" />
-    </span>
-    <span class="append" :class="classList" v-else>
-      <i v-if="!invalid" class="pi pi-Checkmark pi-2x"></i>
-      <i v-if="invalid" class="pi pi-Warning pi-2x invalid"></i>
-    </span>
-  </div>
+  
+    <div
+      :class="classList"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+      @mouseup="handleMouseUp"
+      @mousedown="handleMouseDown"
+      @keydown.enter="handleKeydown"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      class="flexInput"
+    >
+      <span class="prepend" data-test="prepend"><slot name="prepend" /></span>
+      <span class="input-text">
+        <label
+          data-test="label"
+          v-if="!hideLabel"
+          :for="label"
+          class="input-label"
+        >
+          {{ label }}</label
+        >
+        <input
+          :id="label"
+          ref="inputbox"
+          data-test="default"
+          :type="inputType"
+          placeholder="Input"
+          @mouseenter="handleMouseEnter"
+          @mouseleave="handleMouseLeave"
+          @mousedown="handleMouseDown"
+          @mouseup="handleMouseUp"
+          @keydown.enter="handleKeydown"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          :disabled="disabled"
+          :value="internalValue"
+          :valid="valid"
+          :required="required"
+          :pattern="pattern"
+          :maxlength="maxLength"
+          :minlength="minLength"
+          @invalid.capture="handleInvalid"
+          @input="handleInput"
+          class="input"
+          :class="classList"
+        />
+        <p v-if="subtitle" data-test="subtitle" class="subtitle">{{
+          subtitle
+        }}</p>
+      </span>
+      <span v-if="!validityIcon" class="append" data-test="append"
+        ><slot name="append" />
+      </span>
+      <span class="append" :class="classList" v-else>
+        <i v-if="!invalid" class="pi pi-Checkmark pi-2x"></i>
+        <i v-if="invalid" class="pi pi-Warning pi-2x invalid"></i>
+      </span>
+    </div>
+  
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-interface event {
+interface Event {
   target: {
     value: string
+    validity: any
+    blur: any
+    checkValidity: any
+  }
+}
+
+interface $refs {
+  inputbox: {
+    focus: any
   }
 }
 
@@ -168,11 +180,13 @@ export default defineComponent({
     },
     handleMouseDown(): void {
       if (this.disabled) return
-      this.active = true
+      this.active=true
+      setTimeout(() => {
+        (this.$refs.inputbox as any).focus()
+      }, 100)
     },
     handleFocus(): void {
       if (this.disabled) return
-      this.hovered = true
       this.active = true
     },
     handleBlur(e: Event): void {
