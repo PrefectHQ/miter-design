@@ -48,3 +48,13 @@ test('displays text in the aside slot', () => {
   const card = wrapper.get('aside')
   expect(card.text()).toBe(text)
 })
+
+test('adds miter', () => {
+  const wrapper = mount(Card, {
+    props: {
+      miter: true
+    }
+  })
+
+  expect(wrapper.classes()).toContain('miter')
+})
