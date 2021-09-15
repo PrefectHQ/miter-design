@@ -114,23 +114,13 @@ describe('active state', () => {
   })
   const input = wrapper.get('input')
 
-  test('mousedown adds the active class', async () => {
-    await input.trigger('mousedown')
-    expect(input.classes()).toContain('active')
-  })
-
-  test('keydown.enter adds the active class', async () => {
-    await input.trigger('keydown', { key: 'Enter' })
-    expect(input.classes()).toContain('active')
-  })
-
-  test('keydown.space adds the active class', async () => {
-    await input.trigger('keydown', { key: 'Space' })
+  test('focus adds the active class', async () => {
+    await input.trigger('focus')
     expect(input.classes()).toContain('active')
   })
 
   test('blur removes the active class', async () => {
-    await input.trigger('mousedown')
+    await input.trigger('focus')
     expect(input.classes()).toContain('active')
     await input.trigger('blur')
     expect(input.classes()).not.toContain('active')
