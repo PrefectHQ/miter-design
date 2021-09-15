@@ -180,7 +180,6 @@ export default defineComponent({
     },
     handleMouseDown(): void {
       if (this.disabled) return
-      this.active=true
       setTimeout(() => {
         (this.$refs.inputbox as any).focus()
       }, 100)
