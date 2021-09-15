@@ -11,36 +11,37 @@
         role="dialog"
         aria-modal="true"
         ref="popUpContent"
+        class="popup"
         :class="positionClass"
         :height="height"
         :width="width"
       >
-        <h4 class="h4-bottom">
-          {{ title }}
-          <button
-            icon
-            data-test="closeButton"
-            title="close pop up"
-            ref="popUpCloseButton"
-            class="close-icon"
-            :class="classList"
-            @click="closePopUp"
-            @mouseenter="handleMouseEnter"
-            @mouseleave="handleMouseLeave"
-            @mousedown="handleMouseDown"
-            @mouseup="handleMouseUp"
-            @focus="handleFocus"
-            @blur="handleBlur"
-          >
-            <i class="pi pi-x"></i>
-          </button>
-        </h4>
+        <div class="pa-2">
+          <h4 class="h4-bottom">
+            {{ title }}
+            <button
+              icon
+              data-test="closeButton"
+              title="close pop up"
+              ref="popUpCloseButton"
+              class="close-icon"
+              :class="classList"
+              @click="closePopUp"
+              @mouseenter="handleMouseEnter"
+              @mouseleave="handleMouseLeave"
+              @focus="handleFocus"
+              @blur="handleBlur"
+            >
+              <i class="pi pi-x"></i>
+            </button>
+          </h4>
 
-        <div v-if="$slots.content">
-          <slot name="content" />
+          <div v-if="$slots.content">
+            <slot name="content" />
+          </div>
         </div>
         <template v-slot:actions>
-          <div v-if="$slots.actions">
+          <div v-if="$slots.actions" class="pa-2">
             <slot name="actions" />
           </div>
         </template>

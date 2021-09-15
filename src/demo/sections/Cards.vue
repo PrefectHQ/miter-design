@@ -7,7 +7,7 @@
 
     <div class="d-flex card-section">
       <Card width="400px" height="500px" class="mr-4 mt-4 d-inline-block">
-        <div>
+        <div class="pa-2">
           <h2 v-skeleton="skeletonLoader">Overflow content</h2>
 
           <div
@@ -89,6 +89,7 @@
         :height="card.height"
         :width="card.width"
         :shadow="card.shadow"
+        :miter="card.miter"
       >
         <template v-if="card.headerTag" v-slot:header>
           <component
@@ -183,9 +184,9 @@ export default class Cards extends Vue {
       cardClass: ['text-center'],
       height: '385px',
       width: '350px',
-      contentClass: ['my-auto'],
+      contentClass: ['my-auto', 'pa-2'],
       content: "See all the new features we've added in the tutorial.",
-      actionClass: ['flex-column'],
+      actionClass: ['flex-column', 'pa-2'],
       actions: [
         { tag: 'Button', color: 'primary', text: 'Primary' },
         { tag: 'a', text: 'Skip for now', class: ['my-2'] }
@@ -194,13 +195,15 @@ export default class Cards extends Vue {
     {
       title: 'Welcome to PREFECT',
       titleTag: 'h2',
+      titleClass: ['py-2'],
       height: '300px',
       width: '730px',
-      contentClass: ['my-auto'],
+      contentClass: ['my-auto', 'py-2'],
       content: "See all the new features we've added in the tutorial.",
       asideTag: 'CardAside',
       asideClass: ['bg--black'],
       asideWidth: '175px',
+      actionClass: ['py-2'],
       actions: [
         { tag: 'Button', color: 'primary', text: 'Primary' },
         { tag: 'a', text: 'Skip for now' }
@@ -209,13 +212,15 @@ export default class Cards extends Vue {
     {
       title: '85,103',
       titleTag: 'h3',
-      titleClass: ['mt-auto'],
+      titleClass: ['mt-auto', 'px-2'],
       height: '250px',
       width: '300px',
+      contentClass: ['pa-2'],
       overline: 'Hello world',
-      overlineClass: ['caption'],
+      overlineClass: ['caption', 'pa-2'],
       subtitle: 'Tasks Pending',
-      subtitleClass: ['mb-auto', 'text--prefect'],
+      subtitleClass: ['mb-auto', 'text--prefect', 'px-2'],
+      actionClass: ['pa-2'],
       actions: [
         {
           tag: 'div',
@@ -230,13 +235,15 @@ export default class Cards extends Vue {
       headerHeight: '300px',
       title: 'Welcome to PREFECT',
       titleTag: 'h5',
+      titleClass: ['pa-2'],
       height: '300px',
       width: '500px',
       subtitle: 'Secondary text',
-      subtitleClass: ['text--primary', 'mt-1'],
-      contentClass: ['my-auto'],
+      subtitleClass: ['text--primary', 'mt-1', 'pa-2'],
+      contentClass: ['my-auto', 'pa-2'],
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+      actionClass: ['pa-2'],
       actions: [
         { tag: 'Button', color: 'primary', text: 'Action 1' },
         { tag: 'Button', disabled: true, text: 'Action 2' }

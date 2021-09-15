@@ -10,7 +10,11 @@ $shadow-sizes: ('sm', 'md', 'lg', 'xl', '2xl');
 }
 
 .card {
-  @include mixins.miter(2, 1);
+  &.miter {
+    @include mixins.miter(2, 1);
+  }
+
+  border-radius: 4px;
 
   > div {
     border: 1px solid variables.$grey-20;
@@ -23,12 +27,12 @@ $shadow-sizes: ('sm', 'md', 'lg', 'xl', '2xl');
 
   > div > section {
     align-content: flex-start;
-    background-color: variables.$white;
+    background-color: inherit;
     border-radius: 3px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    padding: 32px;
+    padding: inherit;
 
     > section > article {
       align-content: flex-start;
