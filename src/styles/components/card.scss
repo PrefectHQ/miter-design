@@ -6,7 +6,9 @@
 }
 
 .card {
-  @include mixins.miter(2, 1);
+  &.miter {
+    @include mixins.miter(2, 1);
+  }
 
   > div {
     border: 1px solid variables.$grey-20;

@@ -89,6 +89,7 @@
         :height="card.height"
         :width="card.width"
         :shadow="card.shadow"
+        :miter="card.miter"
       >
         <template v-if="card.headerTag" v-slot:header>
           <component

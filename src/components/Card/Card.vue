@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" :class="miter ? 'miter' : ''">
     <div>
       <header v-if="$slots.header">
         <slot name="header" />
@@ -31,6 +31,7 @@ class Props {
   height = prop<string>({ default: null })
   width = prop<string>({ default: null })
   shadow = prop<boolean>({ default: false })
+  miter = prop<boolean>({ default: false })
 }
 
 // This alias is needed because vue-class-component isn't yet compatible with storybook
