@@ -34,6 +34,10 @@ $shadow-sizes: ('sm', 'md', 'lg', 'xl', '2xl');
     justify-content: flex-start;
     padding: inherit;
 
+    > section {
+      flex-grow: 1;
+    }
+
     > section > article {
       align-content: flex-start;
       display: flex;
