@@ -1,8 +1,12 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.shadowWrapper {
-  @include mixins.miter-shadow;
+$shadow-sizes: ('sm', 'md', 'lg', 'xl', '2xl');
+
+@each $size in $shadow-sizes {
+  .shadow-#{$size} {
+    @include mixins.drop-shadow(#{$size});
+  }
 }
 
 .card {

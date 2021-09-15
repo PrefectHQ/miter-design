@@ -2,7 +2,7 @@
 @use '../abstracts/mixins';
 
 .shadowWrapper {
-  @include mixins.miter-shadow;
+  @include mixins.drop-shadow;
 }
 
 @media not all and (min-resolution: 0.001dpcm) {
@@ -29,7 +29,7 @@
   color: variables.$text--white;
 
   &.elevated {
-    @include mixins.miter-shadow;
+    @include mixins.drop-shadow;
   }
 
   &.hovered:hover {

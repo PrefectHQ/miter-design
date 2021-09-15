@@ -25,6 +25,10 @@ $shadows: (
   white-space: nowrap;
 }
 
+@mixin drop-shadow($shadow: 'md') {
+  filter: #{map.get($shadows, $shadow)};
+}
+
 @mixin miter-original($i, $inner: false) {
   clip-path: polygon(
     0 0,
@@ -33,10 +37,6 @@ $shadows: (
     calc(100% - #{list.nth($cuts, $i)}px + #{if($inner, 0.5px, 0px)}) 100%,
     0 100%
   );
-}
-
-@mixin miter-shadow($shadow: 'md') {
-  filter: #{map.get($shadows, $shadow)};
 }
 
 @mixin firefox-only {

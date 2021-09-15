@@ -34,7 +34,7 @@
   padding: 0;
 
   &.active {
-    @include mixins.miter-shadow;
+    @include mixins.drop-shadow;
   }
 
   &:focus-visible {

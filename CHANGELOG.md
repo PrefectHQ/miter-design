@@ -1,3 +1,4 @@
+- Add drop shadow options to card - [#53](https://github.com/PrefectHQ/miter-design/pull/53)
 - Don't hard code card padding - [#56](https://github.com/PrefectHQ/miter-design/pull/56)
 - Don't hard code card background color - [#55](https://github.com/PrefectHQ/miter-design/pull/55)
 - Make miter a prop for Card component - [#54](https://github.com/PrefectHQ/miter-design/pull/54)
