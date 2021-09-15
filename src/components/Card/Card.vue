@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" :class="shadow ? 'shadow-' + shadow : ''">
     <div>
       <header v-if="$slots.header">
         <slot name="header" />
@@ -30,7 +30,7 @@ import { computed } from 'vue'
 class Props {
   height = prop<string>({ default: null })
   width = prop<string>({ default: null })
-  shadow = prop<boolean>({ default: false })
+  shadow = prop<string>({ default: null })
 }
 
 // This alias is needed because vue-class-component isn't yet compatible with storybook
