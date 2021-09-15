@@ -30,7 +30,7 @@
     }
 
  &.hovered {
-  background-color: variables.$input-background
+  background-color: variables.$background
  }
 
 }
@@ -90,7 +90,7 @@
   outline-style: none;
   }
 &.hovered {
-  background-color: variables.$input-background
+  background-color: variables.$background
   }
 &.disabled {
   background-color: transparent;
