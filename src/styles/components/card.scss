@@ -35,8 +35,10 @@
       border-radius: 3px;
       display: flex;
       flex-direction: row;
+      height: inherit;
       justify-content: flex-start;
       padding: inherit;
+      width: inherit;
 
       > aside {
         border-radius: inherit;
@@ -47,15 +49,13 @@
         flex-direction: column;
         flex-grow: 1;
         border-radius: inherit;
-        height: inherit;
-        width: inherit;
+        overflow: auto;
 
         > article {
           align-content: flex-start;
           display: flex;
           flex-direction: column;
           flex-grow: 1;
-          height: inherit;
           justify-content: flex-start;
           overflow: auto;
         }
