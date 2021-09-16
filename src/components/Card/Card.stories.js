@@ -18,7 +18,7 @@ const Template = (args) => ({
   setup() {
     return { args }
   },
-  template: '<Card v-bind="args" />'
+  template: '<Card v-bind="args"><h2>Title</h2> <div>Content</div></Card>'
 })
 
 export const Blank = Template.bind({})
@@ -26,4 +26,14 @@ Blank.args = {
   style: {
     width: '400px'
   }
+}
+
+export const Shadowed = Template.bind({})
+Shadowed.args = {
+  shadow: 'lg',
+  // style: {
+
+  // }
+  width: '400px',
+  height: '600px'
 }

@@ -1,5 +1,9 @@
 <template>
-  <div class="card" :class="{ ['shadow-' + shadow]: shadow, miter: miter }">
+  <div
+    class="card"
+    :class="{ ['shadow-' + shadow]: shadow, miter: miter }"
+    :style="style"
+  >
     <div>
       <header v-if="$slots.header">
         <slot name="header" />
@@ -10,7 +14,7 @@
         </aside>
 
         <section>
-          <article v-if="$slots.default" :style="style">
+          <article v-if="$slots.default">
             <slot />
           </article>
 
