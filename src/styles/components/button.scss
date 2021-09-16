@@ -6,7 +6,11 @@
 
 .button {
   @include mixins.input-transition;
-  @include mixins.miter;
+
+  &.miter {
+    @include mixins.miter;
+  }
+
   padding: 0;
   background: none;
   border: none;
@@ -78,13 +82,31 @@
     }
   }
 
+  &.icon {
+    > :first-child {
+      padding: 4px;
+      background: transparent;
+      color: variables.$grey-80;
+    }
+
+    &.hovered > :first-child {
+      background: variables.$secondary-hover;
+      border-color: variables.$secondary-pressed;
+    }
+
+    &.active > :first-child {
+      background: variables.$secondary-pressed;
+      border-color: variables.$secondary-pressed;
+    }
+  }
+
   &.disabled {
     cursor: not-allowed;
-    color: variables.$grey-20 !important;
 
-    &:not(.outlined) > :first-child {
+    > :first-child {
       border: none;
       background-color: variables.$secondary-background !important;
+      color: variables.$grey-20 !important;
     }
   }
 }

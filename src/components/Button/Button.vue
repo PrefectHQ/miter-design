@@ -1,6 +1,6 @@
 <template>
   <button
-    class="cursor-pointer button miter"
+    class="cursor-pointer button"
     :class="classList"
     :disabled="disabled"
     @mouseenter="handleMouseEnter"
@@ -12,7 +12,8 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <span data-test="default"><slot /></span>
+    <i v-if="icon" class="pi pi-sm" :class="iconClass"></i>
+    <span v-else data-test="default"><slot /></span>
   </button>
 </template>
 
@@ -20,6 +21,7 @@
 import { Vue, Options, prop } from 'vue-class-component'
 
 class Props {
+  icon = prop<string>({ default: '' })
   color = prop<string>({ default: 'secondary' })
   disabled = prop<boolean>({ default: false })
 }
@@ -32,6 +34,7 @@ export default class Button extends Vue.with(Props) {
 
   get classList(): string[] {
     return [
+      ...(this.icon.length > 0 ? ['icon'] : ['miter']),
       ...(this.disabled ? ['disabled'] : []),
       ...(this.hovered ? ['hovered'] : []),
       ...(this.active ? ['active'] : []),
@@ -41,6 +44,10 @@ export default class Button extends Vue.with(Props) {
 
   mounted(): void {
     return
+  }
+
+  get iconClass(): string | null {
+    return this.icon.length > 0 ? `pi-${this.icon}` : null
   }
 
   /*

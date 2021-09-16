@@ -40,6 +40,21 @@
         <span><i class="pi pi-filter-3-line pi-lg pr-1"></i>{{ style }}</span>
       </Button>
     </div>
+
+    <h5 class="mt-5">Icon Only</h5>
+    <div v-for="state in states" :key="state" class="my-2">
+      <span class="text-capitalize">{{ state }}:</span>
+      <Button
+        v-for="icon in icons"
+        :key="icon"
+        v-skeleton="skeletonLoader"
+        class="ml-2"
+        :disabled="state == 'disabled'"
+        :icon="icon"
+        @click="handleClick"
+      >
+      </Button>
+    </div>
   </div>
 </template>
 
@@ -51,7 +66,12 @@ export default class Buttons extends Vue {
   states = ['default', 'disabled']
 
   buttonStyles = ['primary', 'secondary', 'secondary light']
-  fabStyles = ['primary', 'secondary', 'outlined']
+  icons = [
+    'subtract-line',
+    'add-line',
+    'fullscreen-line',
+    'fullscreen-exit-line'
+  ]
 
   skeletonLoader = false
 
