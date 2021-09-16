@@ -5,7 +5,7 @@
       Toggle loader
     </Button>
 
-    <div class="card-section">
+    <div class="card-section pa-4">
       <Card
         width="400px"
         height="500px"
@@ -291,6 +291,5 @@ export default class Cards extends Vue {
   max-width: 100%;
   overflow: auto;
   display: flex;
-  padding: 32px 0;
 }
 </style>
