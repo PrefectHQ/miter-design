@@ -6,7 +6,12 @@
     </Button>
 
     <div class="d-flex card-section">
-      <Card width="400px" height="500px" class="mr-4 mt-4 d-inline-block">
+      <Card
+        width="400px"
+        height="500px"
+        class="mr-4 mt-4 d-inline-block"
+        shadow="sm"
+      >
         <div class="pa-2">
           <h2 v-skeleton="skeletonLoader">Overflow content</h2>
 
@@ -184,6 +189,7 @@ export default class Cards extends Vue {
       cardClass: ['text-center'],
       height: '385px',
       width: '350px',
+      shadow: 'md',
       contentClass: ['my-auto', 'pa-2'],
       content: "See all the new features we've added in the tutorial.",
       actionClass: ['flex-column', 'pa-2'],
@@ -198,6 +204,7 @@ export default class Cards extends Vue {
       titleClass: ['py-2'],
       height: '300px',
       width: '730px',
+      shadow: 'lg',
       contentClass: ['my-auto', 'py-2'],
       content: "See all the new features we've added in the tutorial.",
       asideTag: 'CardAside',
