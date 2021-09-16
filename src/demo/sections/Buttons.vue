@@ -65,7 +65,7 @@ import { Vue, Options } from 'vue-class-component'
 export default class Buttons extends Vue {
   states = ['default', 'disabled']
 
-  buttonStyles = ['primary', 'secondary', 'secondary light']
+  buttonStyles = ['primary', 'secondary', 'secondary light', 'alternate']
   icons = [
     'subtract-line',
     'add-line',

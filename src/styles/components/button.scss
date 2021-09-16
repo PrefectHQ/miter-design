@@ -82,6 +82,23 @@
     }
   }
 
+  &.alternate {
+    color: variables.$grey-80;
+
+    > :first-child {
+      background-color: variables.$grey-10;
+      border: 1px solid variables.$inactive;
+    }
+
+    &.hovered > :first-child {
+      border: 1px solid variables.$grey-80;
+    }
+
+    &.active > :first-child {
+      background-color: variables.$grey-20;
+    }
+  }
+
   &.icon {
     > :first-child {
       padding: 4px;

@@ -40,6 +40,11 @@ SecondaryLight.args = {
   color: 'secondary light'
 }
 
+export const Alternate = Template.bind({})
+Alternate.args = {
+  color: 'alternate'
+}
+
 export const Mitered = Template.bind({})
 Mitered.args = {
   miter: true
