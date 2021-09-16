@@ -5,8 +5,13 @@
       Toggle loader
     </Button>
 
-    <div class="d-flex card-section">
-      <Card width="400px" height="500px" class="mr-4 mt-4 d-inline-block">
+    <div class="card-section pa-4">
+      <Card
+        width="400px"
+        height="500px"
+        class="mr-4 mt-4 d-inline-block"
+        shadow="sm"
+      >
         <div class="pa-2">
           <h2 v-skeleton="skeletonLoader">Overflow content</h2>
 
@@ -79,6 +84,13 @@
             </div>
           </div>
         </div>
+
+        <template v-slot:actions>
+          <component :is="'CardActions'" class="pa-2">
+            <Button color="primary">Primary</Button>
+            <a class="ml-2">Skip for now</a>
+          </component>
+        </template>
       </Card>
 
       <Card
@@ -90,6 +102,8 @@
         :width="card.width"
         :shadow="card.shadow"
         :miter="card.miter"
+        :background-color="card.backgroundColor"
+        :outlined="card.outlined"
       >
         <template v-if="card.headerTag" v-slot:header>
           <component
@@ -182,8 +196,11 @@ export default class Cards extends Vue {
       title: 'Welcome to PREFECT',
       titleTag: 'h2',
       cardClass: ['text-center'],
+      backgroundColor: 'var(--background)',
       height: '385px',
       width: '350px',
+      shadow: 'md',
+      miter: true,
       contentClass: ['my-auto', 'pa-2'],
       content: "See all the new features we've added in the tutorial.",
       actionClass: ['flex-column', 'pa-2'],
@@ -198,6 +215,8 @@ export default class Cards extends Vue {
       titleClass: ['py-2'],
       height: '300px',
       width: '730px',
+      shadow: 'lg',
+      miter: true,
       contentClass: ['my-auto', 'py-2'],
       content: "See all the new features we've added in the tutorial.",
       asideTag: 'CardAside',
@@ -215,6 +234,7 @@ export default class Cards extends Vue {
       titleClass: ['mt-auto', 'px-2'],
       height: '250px',
       width: '300px',
+      outlined: true,
       contentClass: ['pa-2'],
       overline: 'Hello world',
       overlineClass: ['caption', 'pa-2'],
@@ -236,7 +256,7 @@ export default class Cards extends Vue {
       title: 'Welcome to PREFECT',
       titleTag: 'h5',
       titleClass: ['pa-2'],
-      height: '300px',
+      outlined: true,
       width: '500px',
       subtitle: 'Secondary text',
       subtitleClass: ['text--primary', 'mt-1', 'pa-2'],
@@ -270,6 +290,6 @@ export default class Cards extends Vue {
 .card-section {
   max-width: 100%;
   overflow: auto;
-  padding: 32px 0;
+  display: flex;
 }
 </style>
