@@ -4,8 +4,13 @@
 .container {
   @include mixins.miter(2, 1);
 
-  height: 132px;
-  width: 347px;
+  // height: 258.00048828125px;
+  // width: 263.7304992675781px;
+
+  border-radius: 4px;
+
+  // height: 132px;
+  // width: 347px;
   margin-top: 50px;
 
   display: block;
@@ -23,14 +28,33 @@
   margin: auto;
   position: absolute;
   display: block;
-  left: 0;
-  right: 0;
+
+  // note: bottom
   bottom: calc(100% - 7px);
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+
+  // note: top
+  top: calc(100% - 7px);
+  left: 50%;
+  transform: translate(-50%) rotate(225deg);
+
+  // note: right
+  // bottom: 80%;
+  // right: 100%;
+  // transform: translate(50%) rotate(315deg);
+
+  // note: left
+  // bottom: 80%;
+  // bottom: calc(100% - 25px);
+  // left: 97%;
+  // transform: rotate(130deg);
 
   width: 12px;
   height: 12px;
-  transform: rotate(45deg);
+
   border: 1px solid;
   border-color: variables.$grey-20 transparent transparent variables.$grey-20;
+  // border-color: red transparent transparent red;
   background-color: white;
 }

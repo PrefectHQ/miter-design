@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h3>Popover</h3>
-    <Button v-popover style="margin-top: 50px">Button</Button>
+  <div style="margin-left: 400px; margin-top: 200px">
+    <!-- <h3>Popover</h3> -->
+    <Button v-popover:[config] style="margin-top: 50px">Button</Button>
   </div>
 </template>
 
@@ -11,7 +11,17 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'Popover',
   data() {
-    return {}
+    return {
+      config: {
+        position: 'top',
+        label: 'Label'
+      }
+    }
+  },
+  methods: {
+    handleClick() {
+      console.log(true)
+    }
   }
 })
 </script>
