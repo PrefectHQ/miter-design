@@ -44,7 +44,7 @@
     <h5 class="mt-5">Icon Only</h5>
     <div v-for="state in states" :key="state" class="my-2">
       <span class="text-capitalize">{{ state }}:</span>
-      <Button
+      <IconButton
         v-for="icon in icons"
         :key="icon"
         v-skeleton="skeletonLoader"
@@ -53,15 +53,17 @@
         :icon="icon"
         @click="handleClick"
       >
-      </Button>
+      </IconButton>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
+import Button from '@/components/Button/Button.vue'
+import IconButton from '@/components/Button/IconButton.vue'
 
-@Options({})
+@Options({ components: { Button, IconButton } })
 export default class Buttons extends Vue {
   states = ['default', 'disabled']
 

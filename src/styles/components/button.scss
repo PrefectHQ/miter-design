@@ -99,10 +99,11 @@
     }
   }
 
-  &.icon {
+  &.icon-button {
     > :first-child {
       padding: 4px;
       background: transparent;
+      border: 1px solid variables.$inactive;
       color: variables.$grey-80;
     }
 
