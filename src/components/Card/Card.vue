@@ -1,10 +1,9 @@
 <template>
   <div
     class="card"
-    :class="{ ['shadow-' + shadow]: shadow, miter: miter }"
-    :style="style"
+    :class="{ ['drop-shadow-' + shadow]: shadow, miter: miter }"
   >
-    <div>
+    <div :style="style">
       <header v-if="$slots.header">
         <slot name="header" />
       </header>
@@ -29,11 +28,11 @@
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-import { computed } from 'vue'
 
 class Props {
-  height = prop<string>({ default: null })
-  width = prop<string>({ default: null })
+  backgroundColor = prop<string>({ default: null })
+  height = prop<string>({ default: 'inherit' })
+  width = prop<string>({ default: 'inherit' })
   shadow = prop<string>({ default: null })
   miter = prop<boolean>({ default: false, type: Boolean })
 }
@@ -43,12 +42,13 @@ class Props {
 const Component = Options
 @Component({})
 export default class Card extends Vue.with(Props) {
-  style = computed(() => {
+  get style(): { [key: string]: any } {
     return {
+      backgroundColor: this.backgroundColor,
       height: this.height,
       width: this.width
     }
-  })
+  }
 
   mounted(): void {
     return

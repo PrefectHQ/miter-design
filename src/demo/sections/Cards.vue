@@ -5,7 +5,7 @@
       Toggle loader
     </Button>
 
-    <div class="d-flex card-section">
+    <div class="card-section">
       <Card
         width="400px"
         height="500px"
@@ -84,6 +84,13 @@
             </div>
           </div>
         </div>
+
+        <template v-slot:actions>
+          <component :is="'CardActions'" class="pa-2">
+            <Button color="primary">Primary</Button>
+            <a class="ml-2">Skip for now</a>
+          </component>
+        </template>
       </Card>
 
       <Card
@@ -190,6 +197,7 @@ export default class Cards extends Vue {
       height: '385px',
       width: '350px',
       shadow: 'md',
+      miter: true,
       contentClass: ['my-auto', 'pa-2'],
       content: "See all the new features we've added in the tutorial.",
       actionClass: ['flex-column', 'pa-2'],
@@ -205,6 +213,7 @@ export default class Cards extends Vue {
       height: '300px',
       width: '730px',
       shadow: 'lg',
+      miter: true,
       contentClass: ['my-auto', 'py-2'],
       content: "See all the new features we've added in the tutorial.",
       asideTag: 'CardAside',
@@ -243,7 +252,7 @@ export default class Cards extends Vue {
       title: 'Welcome to PREFECT',
       titleTag: 'h5',
       titleClass: ['pa-2'],
-      height: '300px',
+      // height: '300px',
       width: '500px',
       subtitle: 'Secondary text',
       subtitleClass: ['text--primary', 'mt-1', 'pa-2'],
@@ -277,6 +286,7 @@ export default class Cards extends Vue {
 .card-section {
   max-width: 100%;
   overflow: auto;
+  display: flex;
   padding: 32px 0;
 }
 </style>
