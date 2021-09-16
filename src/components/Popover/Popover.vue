@@ -1,5 +1,6 @@
 <template>
   <div
+    id="tooltip-container"
     class="container"
     :class="position"
     ref="containerRef"

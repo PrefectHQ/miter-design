@@ -18,8 +18,7 @@ export default defineComponent({
         content: "<div style='color: red;'>div</div>"
       }
     }
-  },
-  methods: {}
+  }
 })
 </script>
 

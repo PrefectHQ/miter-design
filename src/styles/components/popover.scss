@@ -3,8 +3,6 @@
 
 .container {
   @include mixins.miter(2, 1);
-  // height: 132px;
-  // width: 347px;
 
   width: auto;
   height: auto;
