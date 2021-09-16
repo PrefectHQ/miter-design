@@ -49,7 +49,7 @@ describe('icon prop', () => {
 
   test('passes the icon prop as a class when passed', () => {
     const wrapper = mount(Button, {
-      props: { icon: true }
+      props: { icon: 'bug-2-line' }
     })
 
     const button = wrapper.get('button')
