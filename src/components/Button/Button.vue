@@ -22,7 +22,6 @@ import { Vue, Options, prop } from 'vue-class-component'
 class Props {
   color = prop<string>({ default: 'secondary' })
   disabled = prop<boolean>({ default: false })
-  icon = prop<boolean>({ default: false })
 }
 
 const Component = Options
@@ -36,7 +35,6 @@ export default class Button extends Vue.with(Props) {
       ...(this.disabled ? ['disabled'] : []),
       ...(this.hovered ? ['hovered'] : []),
       ...(this.active ? ['active'] : []),
-      ...(this.icon ? ['icon'] : []),
       ...[this.color]
     ]
   }

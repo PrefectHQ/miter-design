@@ -6,11 +6,7 @@
 
 .button {
   @include mixins.input-transition;
-
-  &:not(.icon) {
-    @include mixins.miter;
-  }
-
+  @include mixins.miter;
   padding: 0;
   background: none;
   border: none;
@@ -23,6 +19,7 @@
     height: auto;
     padding: 12px 24px;
     user-select: none;
+    background-clip: padding-box;
     -webkit-background-clip: padding-box;
   }
 
@@ -33,28 +30,8 @@
   background: none;
   padding: 0;
 
-  &.active {
-    @include mixins.drop-shadow;
-  }
-
   &:focus-visible {
     outline: none;
-  }
-
-  &.icon {
-    border-radius: 50%;
-
-    & > span {
-      border-radius: 50%;
-      height: 60px;
-      line-height: 60px;
-      overflow: hidden;
-      padding: 0;
-      width: 60px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
   }
 
   &.primary {
@@ -67,33 +44,37 @@
     &.hovered > :first-child {
       background-color: variables.$primary-hover;
     }
+
+    &.active > :first-child {
+      background-color: variables.$primary-pressed;
+    }
   }
 
   &.secondary {
-    color: variables.$black;
+    color: variables.$primary;
 
     > :first-child {
-      background-color: variables.$secondary-background;
+      background-color: variables.$white;
+      border: 1px solid variables.$inactive;
+    }
+
+    &.light {
+      color: variables.$grey-80;
+
+      > :first-child {
+        border: 1px solid variables.$blue-20;
+      }
     }
 
     &.hovered > :first-child {
-      background-color: variables.$secondary-hover;
-    }
-  }
-
-  &.outlined {
-    color: variables.$black;
-
-    > :first-child {
-      border: 1px solid variables.$grey-20;
+      border: 1px solid variables.$primary;
     }
 
-    &.active > :first-child {
-      background-color: transparent;
-    }
-
-    &.hovered > :first-child {
-      background-color: variables.$secondary-background;
+    &.active {
+      color: variables.$text--white;
+      > :first-child {
+        background-color: variables.$primary;
+      }
     }
   }
 
@@ -102,6 +83,7 @@
     color: variables.$grey-20 !important;
 
     &:not(.outlined) > :first-child {
+      border: none;
       background-color: variables.$secondary-background !important;
     }
   }

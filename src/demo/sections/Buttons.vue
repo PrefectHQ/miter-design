@@ -25,7 +25,7 @@
       </Button>
     </div>
 
-    <h5 class="mt-5">Icon</h5>
+    <h5 class="mt-5">With Icon</h5>
     <div v-for="state in states" :key="state" class="my-2">
       <span class="text-capitalize">{{ state }}:</span>
       <Button
@@ -34,11 +34,10 @@
         v-skeleton="skeletonLoader"
         class="ml-2"
         :color="style"
-        :icon="true"
         :disabled="state == 'disabled'"
         @click="handleClick"
       >
-        <i class="pi pi-fire-line pi-2x"></i>
+        <span><i class="pi pi-filter-3-line pi-lg pr-1"></i>{{ style }}</span>
       </Button>
     </div>
   </div>
@@ -51,7 +50,7 @@ import { Vue, Options } from 'vue-class-component'
 export default class Buttons extends Vue {
   states = ['default', 'disabled']
 
-  buttonStyles = ['primary', 'secondary', 'outlined']
+  buttonStyles = ['primary', 'secondary', 'secondary light']
   fabStyles = ['primary', 'secondary', 'outlined']
 
   skeletonLoader = false
