@@ -13,9 +13,14 @@
   position: relative;
   width: min-content;
 
+  &.outlined {
+    > div {
+      border: 1px solid variables.$grey-20;
+    }
+  }
+
   > div {
     background-color: variables.$white;
-    border: 1px solid variables.$grey-20;
     border-radius: 4px;
     display: flex;
     flex: 0 0 auto;

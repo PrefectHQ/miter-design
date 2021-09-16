@@ -1,7 +1,11 @@
 <template>
   <div
     class="card"
-    :class="{ ['drop-shadow-' + shadow]: shadow, miter: miter }"
+    :class="{
+      ['drop-shadow-' + shadow]: shadow,
+      miter: miter,
+      outlined: outlined
+    }"
   >
     <div :style="style">
       <header v-if="$slots.header">
@@ -33,6 +37,7 @@ class Props {
   backgroundColor = prop<string>({ default: null })
   height = prop<string>({ default: 'inherit' })
   width = prop<string>({ default: 'inherit' })
+  outlined = prop<boolean>({ default: true, type: Boolean })
   shadow = prop<string>({ default: null })
   miter = prop<boolean>({ default: false, type: Boolean })
 }
