@@ -102,6 +102,7 @@
         :width="card.width"
         :shadow="card.shadow"
         :miter="card.miter"
+        :background-color="card.backgroundColor"
       >
         <template v-if="card.headerTag" v-slot:header>
           <component
@@ -194,6 +195,7 @@ export default class Cards extends Vue {
       title: 'Welcome to PREFECT',
       titleTag: 'h2',
       cardClass: ['text-center'],
+      backgroundColor: 'var(--background)',
       height: '385px',
       width: '350px',
       shadow: 'md',
