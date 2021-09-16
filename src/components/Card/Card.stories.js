@@ -27,6 +27,7 @@ export const Blank = Template.bind({})
 Blank.args = {
   backgroundColor: 'var(--white)',
   shadow: '',
+  outlined: true,
   style: {
     width: '400px'
   }
@@ -37,6 +38,7 @@ Mitered.args = {
   backgroundColor: 'var(--white)',
   shadow: '',
   miter: true,
+  outlined: true,
   width: '400px',
   height: '800px'
 }
@@ -45,6 +47,7 @@ export const Shadowed = Template.bind({})
 Shadowed.args = {
   backgroundColor: 'var(--white)',
   shadow: 'lg',
+  outlined: false,
   style: {
     width: '400px',
     height: '600px'
@@ -55,6 +58,7 @@ export const Colored = Template.bind({})
 Colored.args = {
   backgroundColor: 'var(--background)',
   shadow: '',
+  outlined: true,
   width: '500px',
   height: '500px'
 }
@@ -63,6 +67,7 @@ export const Overflow = Template.bind({})
 Overflow.args = {
   backgroundColor: '#fff',
   shadow: '',
+  outlined: true,
   width: '500px',
   height: '500px',
   template: `<div class="pa-2">
