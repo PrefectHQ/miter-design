@@ -13,7 +13,7 @@ export default defineComponent({
   data() {
     return {
       config: {
-        position: 'left',
+        position: 'right',
         label: 'Label',
         content: "<div style='color: red;'>div</div>"
       }

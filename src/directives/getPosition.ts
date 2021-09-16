@@ -26,12 +26,7 @@ export function tooltipPosition(
   }
   if (position == 'right') {
     return {
-      top:
-        currentElRect.top -
-        bodyRect.top +
-        currentElRect.height / 2 -
-        tooltipRefRect.height / 2 +
-        'px',
+      top: currentElRect.top - bodyRect.top + 'px',
       left: currentElRect.left - bodyRect.left + currentElRect.width + 10 + 'px'
     }
   }
@@ -49,12 +44,7 @@ export function tooltipPosition(
 
   if (position == 'left') {
     return {
-      top:
-        currentElRect.top -
-        bodyRect.top +
-        currentElRect.height / 2 -
-        tooltipRefRect.height / 2 +
-        'px',
+      top: currentElRect.top - bodyRect.top + 'px',
       left: currentElRect.left - bodyRect.left - currentElRect.width - 10 + 'px'
     }
   }
