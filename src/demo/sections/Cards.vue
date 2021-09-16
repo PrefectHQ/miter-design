@@ -103,6 +103,7 @@
         :shadow="card.shadow"
         :miter="card.miter"
         :background-color="card.backgroundColor"
+        :outlined="card.outlined"
       >
         <template v-if="card.headerTag" v-slot:header>
           <component
@@ -233,6 +234,7 @@ export default class Cards extends Vue {
       titleClass: ['mt-auto', 'px-2'],
       height: '250px',
       width: '300px',
+      outlined: true,
       contentClass: ['pa-2'],
       overline: 'Hello world',
       overlineClass: ['caption', 'pa-2'],
@@ -254,7 +256,7 @@ export default class Cards extends Vue {
       title: 'Welcome to PREFECT',
       titleTag: 'h5',
       titleClass: ['pa-2'],
-      // height: '300px',
+      outlined: true,
       width: '500px',
       subtitle: 'Secondary text',
       subtitleClass: ['text--primary', 'mt-1', 'pa-2'],

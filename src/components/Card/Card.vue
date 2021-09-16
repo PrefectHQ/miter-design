@@ -37,7 +37,7 @@ class Props {
   backgroundColor = prop<string>({ default: null })
   height = prop<string>({ default: 'inherit' })
   width = prop<string>({ default: 'inherit' })
-  outlined = prop<boolean>({ default: true, type: Boolean })
+  outlined = prop<boolean>({ default: false, type: Boolean })
   shadow = prop<string>({ default: null })
   miter = prop<boolean>({ default: false, type: Boolean })
 }

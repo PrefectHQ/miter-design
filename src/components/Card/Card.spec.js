@@ -59,6 +59,18 @@ test('adds the miter class when prop is passed', () => {
   expect(wrapper.classes()).toContain('miter')
 })
 
+describe('outlined prop', () => {
+  test('adds the outlined class when prop is passed', () => {
+    const wrapper = mount(Card, {
+      props: {
+        outlined: true
+      }
+    })
+
+    expect(wrapper.classes()).toContain('outlined')
+  })
+})
+
 describe('background color prop', () => {
   test('adds css-defined background color', () => {
     const color = 'aliceblue'
