@@ -1,4 +1,5 @@
 import Button from './Button.vue'
+import IconButton from './IconButton.vue'
 import '@/styles/components/button.scss'
 
 export default {
@@ -55,13 +56,8 @@ Disabled.args = {
   disabled: true
 }
 
-export const DefaultIcon = Template.bind({})
-DefaultIcon.args = {
-  icon: 'bug-2-line'
-}
+export const DefaultIcon = () => <IconButton icon="bug-2-line"></IconButton>
 
-export const DisabledIcon = Template.bind({})
-DisabledIcon.args = {
-  icon: 'bug-2-line',
-  disabled: true
-}
+export const DisabledIcon = () => (
+  <IconButton icon="bug-2-line" disabled></IconButton>
+)
