@@ -7,7 +7,12 @@
     :class="position"
     :style="tooltipRefStyle"
   >
-    <div class="tooltip-content" v-html="content"></div>
+    <div class="tooltip-content" >
+     hello
+            <slot />
+          
+        
+    </div>
   </div>
 </template>
 
@@ -116,6 +121,7 @@ export default defineComponent({
     }
   },
   mounted() {
+    console.log(this.$slots)
     this.getElement()
   }
 })

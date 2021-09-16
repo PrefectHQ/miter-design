@@ -1,19 +1,24 @@
 <template>
   <div>
     <h3 style="margin-bottom: 10px">Tooltip</h3>
-    <Tag v-tooltip:[position]="html"> Text </Tag>
+    <Tag v-tooltip:[position]="val" Text > </Tag>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, shallowRef } from 'vue'
+import Simple from './simple.vue'
+
 
 export default defineComponent({
+  components: {
+    Simple
+  },
   data() {
     return {
       position: 'right',
       text: 'hello',
-      html: `<div>some <span class="highlight">text</span></div>`
+      val: Simple
     }
   }
 })
