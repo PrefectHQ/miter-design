@@ -25,16 +25,19 @@ const Template = (args) => ({
   </Button>`
 })
 
-export const Default = Template.bind({})
-
 export const Primary = Template.bind({})
 Primary.args = {
   color: 'primary'
 }
 
-export const Outlined = Template.bind({})
-Outlined.args = {
-  color: 'outlined'
+export const Secondary = Template.bind({})
+Secondary.args = {
+  color: 'secondary'
+}
+
+export const SecondaryLight = Template.bind({})
+SecondaryLight.args = {
+  color: 'secondary light'
 }
 
 export const Disabled = Template.bind({})
@@ -44,20 +47,11 @@ Disabled.args = {
 
 export const DefaultIcon = Template.bind({})
 DefaultIcon.args = {
-  icon: true,
-  content: '<i class="pi pi-bug-2-line pi-2x" />'
-}
-
-export const PrimaryIcon = Template.bind({})
-PrimaryIcon.args = {
-  icon: true,
-  color: 'primary',
-  content: '<i class="pi pi-bug-2-line pi-2x" />'
+  icon: 'bug-2-line'
 }
 
 export const DisabledIcon = Template.bind({})
 DisabledIcon.args = {
-  icon: true,
-  disabled: true,
-  content: '<i class="pi pi-bug-2-line pi-2x" />'
+  icon: 'bug-2-line',
+  disabled: true
 }
