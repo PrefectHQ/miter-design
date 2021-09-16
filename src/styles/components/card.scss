@@ -11,6 +11,10 @@
   > div {
     border: 1px solid variables.$grey-20;
     border-radius: 4px;
+
+    > header {
+      border-radius: inherit;
+    }
   }
 
   display: block;
@@ -25,6 +29,10 @@
     flex-direction: row;
     justify-content: flex-start;
     padding: inherit;
+
+    > aside {
+      border-radius: inherit;
+    }
 
     > section {
       flex-grow: 1;
