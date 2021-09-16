@@ -13,16 +13,13 @@ export default defineComponent({
   data() {
     return {
       config: {
-        position: 'top',
-        label: 'Label'
+        position: 'left',
+        label: 'Label',
+        content: "<div style='color: red;'>div</div>"
       }
     }
   },
-  methods: {
-    handleClick() {
-      console.log(true)
-    }
-  }
+  methods: {}
 })
 </script>
 

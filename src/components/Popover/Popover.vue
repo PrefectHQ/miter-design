@@ -6,13 +6,11 @@
     :style="tooltipPositionStyle"
   >
     <div class="content-container">
-      <header> Label</header>
+      <header v-html="label"> </header>
       <hr />
-      <section>
-        And here’s some amazing content. It’s very engaging. Right?
-      </section>
+      <section v-html="content"> </section>
     </div>
-    <div class="arrow" ref="arrowRef"></div>
+    <div class="arrow"></div>
   </div>
 </template>
 
@@ -51,7 +49,7 @@ export default defineComponent({
         const bodyRect = document.body.getBoundingClientRect()
 
         this.tooltipPositionStyle = tooltipPosition(
-          'top',
+          this.position,
           this.currentElRect,
           bodyRect,
           tooltipRect

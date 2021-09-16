@@ -6,13 +6,14 @@ export function tooltipPosition(
   bodyRect: object,
   tooltipRefRect: object
 ) {
+  if (!currentElRect && !tooltipRefRect) return {}
   if (position == 'top') {
     return {
       top:
         currentElRect.top -
         bodyRect.top -
         currentElRect.height -
-        tooltipRefRect.height -
+        tooltipRefRect.height +
         20 +
         'px',
       left:
@@ -31,12 +32,12 @@ export function tooltipPosition(
         currentElRect.height / 2 -
         tooltipRefRect.height / 2 +
         'px',
-      left: currentElRect.left + bodyRect.left + currentElRect.width + 20 + 'px'
+      left: currentElRect.left - bodyRect.left + currentElRect.width + 10 + 'px'
     }
   }
   if (position == 'bottom') {
     return {
-      top: currentElRect.top - bodyRect.top + 'px',
+      top: currentElRect.top - bodyRect.top + currentElRect.height + 10 + 'px',
       left:
         currentElRect.left -
         bodyRect.left +
@@ -45,6 +46,7 @@ export function tooltipPosition(
         'px'
     }
   }
+
   if (position == 'left') {
     return {
       top:
@@ -53,8 +55,7 @@ export function tooltipPosition(
         currentElRect.height / 2 -
         tooltipRefRect.height / 2 +
         'px',
-      left:
-        currentElRect.left - bodyRect.left - tooltipRefRect.width - 20 + 'px'
+      left: currentElRect.left - bodyRect.left - currentElRect.width - 10 + 'px'
     }
   }
 }
