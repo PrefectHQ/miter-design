@@ -36,6 +36,28 @@ describe('color prop', () => {
   })
 })
 
+describe('miter prop', () => {
+  test('defaults to rectangle when no miter prop is passed', () => {
+    const wrapper = mount(Button, {
+      props: {}
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).not.toContain('miter')
+  })
+
+  test('passes the miter prop as a class when passed', () => {
+    const wrapper = mount(Button, {
+      props: { miter: true }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).toContain('miter')
+  })
+})
+
 describe('icon prop', () => {
   test('defaults to the block button when no icon prop is passed', () => {
     const wrapper = mount(Button, {

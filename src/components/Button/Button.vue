@@ -22,6 +22,7 @@ import { Vue, Options, prop } from 'vue-class-component'
 
 class Props {
   icon = prop<string>({ default: '' })
+  miter = prop<boolean>({ default: false })
   color = prop<string>({ default: 'secondary' })
   disabled = prop<boolean>({ default: false })
 }
@@ -34,7 +35,8 @@ export default class Button extends Vue.with(Props) {
 
   get classList(): string[] {
     return [
-      ...(this.icon.length > 0 ? ['icon'] : ['miter']),
+      ...(this.icon.length > 0 ? ['icon'] : []),
+      ...(this.miter ? ['miter'] : []),
       ...(this.disabled ? ['disabled'] : []),
       ...(this.hovered ? ['hovered'] : []),
       ...(this.active ? ['active'] : []),

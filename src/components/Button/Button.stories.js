@@ -40,6 +40,11 @@ SecondaryLight.args = {
   color: 'secondary light'
 }
 
+export const Mitered = Template.bind({})
+Mitered.args = {
+  miter: true
+}
+
 export const Disabled = Template.bind({})
 Disabled.args = {
   disabled: true
