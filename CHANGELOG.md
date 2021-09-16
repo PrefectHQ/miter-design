@@ -1,4 +1,5 @@
 - Add stories for mitered and shadowed cards - [#59](https://github.com/PrefectHQ/miter-design/pull/59)
+- Enforce slot styling from card component - [#57](https://github.com/PrefectHQ/miter-design/pull/57)
 - Add drop shadow options to card - [#53](https://github.com/PrefectHQ/miter-design/pull/53)
 - Don't hard code card padding - [#56](https://github.com/PrefectHQ/miter-design/pull/56)
 - Don't hard code card background color - [#55](https://github.com/PrefectHQ/miter-design/pull/55)
