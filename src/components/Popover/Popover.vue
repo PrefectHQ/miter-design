@@ -1,6 +1,5 @@
 <template>
   <div
-    v-show="false"
     id="tooltip-container"
     class="container"
     :class="position"
