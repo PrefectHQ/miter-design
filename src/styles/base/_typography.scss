@@ -117,6 +117,7 @@ h3,
 
 .pi {
   font-size: 24px;
+  vertical-align: inherit !important;
 }
 
 .pi-lg {
@@ -165,7 +166,7 @@ h3,
 }
 
 .pi-9x {
-  font-size: 9em;
+  font-size: 9em !important;
 }
 
 .pi-10x {

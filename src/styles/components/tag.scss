@@ -24,12 +24,14 @@
 
     .tag {
       font-family: variables.$font--primary !important;
+      font-size: 13px;
       font-weight: 600;
+      line-height: 24px;
 
       i {
         color: variables.$grey-20;
         margin-right: 4px;
-        vertical-align: middle;
+        vertical-align: bottom !important;
       }
     }
 
