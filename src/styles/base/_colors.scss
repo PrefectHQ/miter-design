@@ -14,4 +14,8 @@
   .text--#{$key} {
     color: #{$color};
   }
+
+  .fill-#{$key} {
+    fill: #{$color};
+  }
 }
