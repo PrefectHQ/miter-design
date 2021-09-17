@@ -10,14 +10,13 @@
         :subtitle="state.subtitle"
         required
         :validityIcon="false"
-        
       >
-      <template v-slot:prepend>
-      <i class="pi pi-Search pi-2x"></i>
-      </template>
-      <template v-slot:append>
-        <ToggleSwitch :disabled="state.state == 'disabled'" />
-      </template>
+        <template v-slot:prepend>
+          <i class="pi pi-Search pi-2x"></i>
+        </template>
+        <template v-slot:append>
+          <ToggleSwitch :disabled="state.state == 'disabled'" />
+        </template>
       </Input>
     </div>
   </div>
@@ -48,7 +47,7 @@ export default class Inputs extends Vue {
     return true
   })
 
-  handleInvalid(validityState: ValidityState){
+  handleInvalid(validityState: ValidityState) {
     console.log('validity', validityState)
   }
 }
