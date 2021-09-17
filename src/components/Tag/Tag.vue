@@ -1,7 +1,7 @@
 <template>
   <div class="tag-wrapper" :class="classList">
     <span class="tag" data-test="default">
-      <i v-if="icon" class="pi pi-lg" :class="icon" />
+      <i v-if="icon" class="pi" :class="icon" />
       <slot />
     </span>
   </div>

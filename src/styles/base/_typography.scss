@@ -8,7 +8,7 @@
 body,
 .body {
   color: variables.$text--primary;
-  font-family: variables.$font--secondary !important;
+  font-family: variables.$font--primary !important;
   font-size: 16px;
   letter-spacing: -0.41px;
   line-height: 24px;
@@ -21,24 +21,30 @@ h3,
 h4,
 h5,
 h6 {
-  color: variables.$black;
+  color: variables.$text--primary;
   font-family: variables.$font--primary !important;
-  margin-block-start: 0.1em;
-  margin-block-end: 0.1em;
+}
+
+.font--primary {
+  font-family: variables.$font--primary !important;
+}
+
+.font--secondary {
+  font-family: variables.$font--secondary !important;
 }
 
 h1,
 .header {
   font-size: 24px;
   letter-spacing: 0.4px;
-  line-height: 48px;
+  line-height: 28px;
 }
 
 h2,
 .subheader {
   font-size: 20px;
   letter-spacing: 0.3px;
-  line-height: 40px;
+  line-height: 24px;
 }
 
 h3,
@@ -46,7 +52,7 @@ h3,
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 0.24px;
-  line-height: 34px;
+  line-height: 22px;
 }
 
 .font-weight-regular {
@@ -59,6 +65,11 @@ h3,
 
 .font-weight-bold {
   font-weight: 700;
+}
+
+.caption,
+.caption-small {
+  font-family: variables.$font--secondary;
 }
 
 .caption {
@@ -104,10 +115,14 @@ h3,
   text-decoration: line-through;
 }
 
+.pi {
+  font-size: 24px;
+  vertical-align: inherit !important;
+}
+
 .pi-lg {
-  font-size: 1.33333em !important;
-  line-height: 0.75em;
-  vertical-align: -0.0667em;
+  font-size: 1.25em !important;
+  line-height: 1.25em;
 }
 
 .pi-xs {
@@ -151,7 +166,7 @@ h3,
 }
 
 .pi-9x {
-  font-size: 9em;
+  font-size: 9em !important;
 }
 
 .pi-10x {
