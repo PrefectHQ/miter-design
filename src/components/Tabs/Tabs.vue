@@ -174,7 +174,7 @@ export default defineComponent({
           onClick: this.scrollLeft,
           tabindex: -1
         },
-        [h('i', { class: ['pi', 'pi-Arrow-Left', 'pi-lg'] })]
+        [h('i', { class: ['pi', 'pi-arrow-right-s-line', 'pi-lg'] })]
       )
 
     if (this.showRight)
@@ -186,7 +186,7 @@ export default defineComponent({
           onClick: this.scrollRight,
           tabindex: -1
         },
-        [h('i', { class: ['pi', 'pi-Arrow-Right', 'pi-lg'] })]
+        [h('i', { class: ['pi', 'pi-arrow-right-s-line', 'pi-lg'] })]
       )
 
     const borderContainer = h(
