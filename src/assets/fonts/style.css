@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'prefect-icons';
   src:
-    url('fonts/prefect-icons.ttf?8j3k0v') format('truetype'),
-    url('fonts/prefect-icons.woff?8j3k0v') format('woff'),
-    url('fonts/prefect-icons.svg?8j3k0v#prefect-icons') format('svg');
+    url('fonts/prefect-icons.ttf?fujx65') format('truetype'),
+    url('fonts/prefect-icons.woff?fujx65') format('woff'),
+    url('fonts/prefect-icons.svg?fujx65#prefect-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,45 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.pi-awaiting-retry:before {
+  content: "\f1e2";
+}
+.pi-cancelled:before {
+  content: "\f1e3";
+}
+.pi-completed:before {
+  content: "\f1e4";
+}
+.pi-crashed:before {
+  content: "\f1e5";
+}
+.pi-failed:before {
+  content: "\f1e6";
+}
+.pi-full-screen:before {
+  content: "\f1e7";
+}
+.pi-label:before {
+  content: "\f1e8";
+}
+.pi-pending:before {
+  content: "\f1e9";
+}
+.pi-prefect:before {
+  content: "\f1ea";
+}
+.pi-retrieved-cache:before {
+  content: "\f1eb";
+}
+.pi-retrying:before {
+  content: "\f1ec";
+}
+.pi-running:before {
+  content: "\f1ed";
+}
+.pi-scheduled:before {
+  content: "\f1ee";
+}
 .pi-flow-run:before {
   content: "\e900";
 }
