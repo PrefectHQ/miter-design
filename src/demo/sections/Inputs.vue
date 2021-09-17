@@ -1,7 +1,7 @@
 <template>
   <div v-if="logVal">
     <h3>Input</h3>
-    <div v-for="state in states" :key="state" class="my-2">
+    <div v-for="state in states" :key="state" class="my-2 setWidth">
       <Input
         v-model="state.val"
         :disabled="state.state == 'disabled'"
@@ -56,4 +56,7 @@ export default class Inputs extends Vue {
 
 <style lang="scss" scoped>
 @use '@/styles/components/input';
+.setWidth {
+  width: 375px;
+}
 </style>

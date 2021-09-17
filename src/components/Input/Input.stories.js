@@ -20,7 +20,7 @@ const Template = (args, argTypes) => ({
   setup() {
     return { args }
   },
-  template: `<Input v-bind="args" v-model="value"><template v-if="args.prependSlot" v-slot:prepend>${args.prependSlot}</template><template v-if="args.appendSlot" v-slot:append>${args.appendSlot}</template></Input>`
+  template: `<div style="width:375px"><Input v-bind="args" v-model="value"><template v-if="args.prependSlot" v-slot:prepend>${args.prependSlot}</template><template v-if="args.appendSlot" v-slot:append>${args.appendSlot}</template></Input></div>`
 })
 
 export const Default = Template.bind({})
