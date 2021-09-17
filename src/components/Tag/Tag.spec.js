@@ -116,6 +116,26 @@ describe('flat prop', () => {
   })
 })
 
+describe('icon prop', () => {
+  test('displays an icon when one is passed', () => {
+    const wrapper = mount(Tag, {
+      props: {
+        icon: 'pi-fire-line'
+      }
+    })
+
+    expect(wrapper.findAll('i').length).toEqual(1)
+  })
+
+  test("doesn't render an icon element when none is passed", () => {
+    const wrapper = mount(Tag, {
+      props: {}
+    })
+
+    expect(wrapper.findAll('i').length).toEqual(0)
+  })
+})
+
 describe('hovered prop', () => {
   test('adds the hovered class when hovered:true is passed as a prop', () => {
     const wrapper = mount(Tag, {
