@@ -1,6 +1,9 @@
 <template>
   <div class="tag-wrapper" :class="classList">
-    <span class="tag" data-test="default"> <slot /></span>
+    <span class="tag" data-test="default">
+      <i v-if="icon" class="pi pi-lg" :class="icon" />
+      <slot />
+    </span>
   </div>
 </template>
 
@@ -22,6 +25,14 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    flat: {
+      type: Boolean,
+      default: false
+    },
+    icon: {
+      type: String,
+      default: null
+    },
     hovered: {
       type: Boolean,
       default: false
@@ -38,6 +49,7 @@ export default defineComponent({
         ...(this.outlined ? ['outlined'] : []),
         ...(this.hovered ? ['hovered'] : []),
         ...(this.elevated ? ['elevated'] : []),
+        ...(this.flat ? ['flat'] : []),
         this.color
       ]
     }
