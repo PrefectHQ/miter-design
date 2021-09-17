@@ -96,6 +96,26 @@ describe('outlined prop', () => {
   })
 })
 
+describe('flat prop', () => {
+  test('adds the flat class when flat is passed as a prop', () => {
+    const wrapper = mount(Tag, {
+      props: {
+        flat: true
+      }
+    })
+
+    expect(wrapper.classes()).toContain('flat')
+  })
+
+  test("doesn't pass the outlined class when outlined is not passed as a prop", () => {
+    const wrapper = mount(Tag, {
+      props: {}
+    })
+
+    expect(wrapper.classes()).not.toContain('flat')
+  })
+})
+
 describe('hovered prop', () => {
   test('adds the hovered class when hovered:true is passed as a prop', () => {
     const wrapper = mount(Tag, {
