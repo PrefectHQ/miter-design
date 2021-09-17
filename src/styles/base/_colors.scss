@@ -1,61 +1,17 @@
 @use '../abstracts/variables';
 
-.text--primary {
-  color: variables.$text--primary;
+:root {
+  @each $key, $color in variables.$colors {
+    --#{"" + $key}: #{$color};
+  }
 }
 
-.text--secondary {
-  color: variables.$text--secondary;
-}
+@each $key, $color in variables.$colors {
+  .bg--#{$key} {
+    background-color: #{$color};
+  }
 
-.text--placeholder {
-  color: variables.$text--placeholder;
-}
-
-.text--prefect {
-  color: variables.$primary;
-}
-
-.text--black {
-  color: variables.$black;
-}
-
-.text--success {
-  color: variables.$success;
-}
-
-.text--error {
-  color: variables.$error;
-}
-
-.text--white {
-  color: variables.$text--white;
-}
-
-.bg--black {
-  background-color: variables.$black;
-}
-
-.bg--white {
-  background-color: variables.$white;
-}
-
-.bg--error {
-  background-color: variables.$error;
-}
-
-.bg--warning {
-  background-color: variables.$warning;
-}
-
-.bg--success {
-  background-color: variables.$success;
-}
-
-.bg--primary {
-  background-color: variables.$primary;
-}
-
-.bg--secondary {
-  background-color: variables.$secondary-background;
+  .text--#{$key} {
+    color: #{$color};
+  }
 }
