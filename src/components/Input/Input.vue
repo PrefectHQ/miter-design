@@ -4,11 +4,8 @@
       :class="classList"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
-      @mouseup="handleMouseUp"
       @mousedown="handleMouseDown"
       @keydown.enter="handleKeydown"
-      @focus="handleFocus"
-      @blur="handleBlur"
       class="flexInput"
     >
       <span class="prepend" data-test="prepend"><slot name="prepend" /></span>
@@ -30,7 +27,6 @@
           @mouseenter="handleMouseEnter"
           @mouseleave="handleMouseLeave"
           @mousedown="handleMouseDown"
-          @mouseup="handleMouseUp"
           @keydown.enter="handleKeydown"
           @focus="handleFocus"
           @blur="handleBlur"
