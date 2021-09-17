@@ -8,6 +8,7 @@
     <RadioButtons class="mt-10" />
     <Checkboxes />
     <Sliders class="mt-10" />
+    <Inputs class="mt-10" />
     <Links class="mt-10" />
     <TabSection class="mt-10" />
     <Tag class="mt-10" />
@@ -33,6 +34,7 @@ import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
 import Popups from '../sections/Popups.vue'
 import Sliders from '../sections/Sliders.vue'
+import Inputs from '../sections/Inputs.vue'
 import Tooltip from '../sections/Tooltip.vue'
 import Selects from '../sections/Selects.vue'
 import TextAreas from '../sections/TextAreas.vue'
@@ -41,6 +43,7 @@ import TextAreas from '../sections/TextAreas.vue'
   components: {
     Buttons,
     Cards,
+    Inputs,
     Popups,
     RadioButtons,
     Links,
