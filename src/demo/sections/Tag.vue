@@ -33,13 +33,9 @@
       :disabled="disabled"
       :outlined="outlined"
       :elevated="elevated"
+      icon="pi-label"
     >
-      <span v-if="tagStyles[1] == style">
-        <i class="pi pi-Fire pi-1x"></i>
-
-        tag
-      </span>
-      <span v-else>tag</span>
+      tag
     </Tag>
 
     <h4 class="mt-4">Flat</h4>

@@ -73,6 +73,11 @@
       display: inline-flex;
       justify-content: center;
       padding: 4px 24px;
+
+      i {
+        margin-right: 4px;
+        vertical-align: middle;
+      }
     }
 
     &.outlined {
