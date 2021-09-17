@@ -6,6 +6,7 @@
       miter: miter,
       outlined: outlined
     }"
+    :style="{ width: width }"
   >
     <div :style="style">
       <header v-if="$slots.header">
