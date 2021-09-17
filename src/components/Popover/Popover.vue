@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="false"
     id="tooltip-container"
     class="container"
     :class="position"
@@ -7,9 +8,16 @@
     :style="tooltipPositionStyle"
   >
     <div class="content-container">
-      <header v-html="label"> </header>
+      <header v-html="title"> </header>
+      <!-- <header>
+        <span
+          ><i class="pi pi-Calendar pi-sm" /> Flow Run Activity</span
+        ></header
+      > -->
       <hr />
-      <section v-html="content"> </section>
+      <section>
+        <slot>content</slot>
+      </section>
     </div>
     <div class="arrow"></div>
   </div>
@@ -22,20 +30,16 @@ export default defineComponent({
   name: 'Popover',
   props: {
     currentElRect: {
-      type: Object,
+      type: [Object, String],
       default: () => {}
-    },
-    content: {
-      type: String,
-      default: () => ''
     },
     position: {
       type: String,
       default: () => 'top'
     },
-    label: {
+    title: {
       type: String,
-      default: () => ''
+      default: () => 'title'
     }
   },
   data() {
@@ -45,17 +49,28 @@ export default defineComponent({
   },
   methods: {
     getPosition() {
-      this.$nextTick(() => {
-        const tooltipRect = this.$refs.containerRef.getBoundingClientRect()
-        const bodyRect = document.body.getBoundingClientRect()
+      if (document.querySelector(`#${this.currentElRect}`)) {
+        this.$nextTick(() => {
+          const tooltipRect = this.$refs.containerRef.getBoundingClientRect()
+          const bodyRect = document.body.getBoundingClientRect()
+          const currentElRect = document
+            .querySelector(`#${this.currentElRect}`)
+            ?.getBoundingClientRect()
 
-        this.tooltipPositionStyle = tooltipPosition(
-          this.position,
-          this.currentElRect,
-          bodyRect,
-          tooltipRect
+          document.querySelector(`#${this.currentElRect}`).style.display =
+            'inline-block'
+          this.tooltipPositionStyle = tooltipPosition(
+            this.position,
+            currentElRect,
+            bodyRect,
+            tooltipRect
+          )
+        })
+      } else {
+        throw new Error(
+          `Could not find element with the id of ${this.currentElRect}`
         )
-      })
+      }
     }
   },
   mounted() {

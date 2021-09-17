@@ -2,19 +2,29 @@
 @use '../abstracts/mixins';
 
 .container {
-  @include mixins.miter(2, 1);
+  @include mixins.miter(1, 1);
 
   width: auto;
   height: auto;
 
   display: block;
   position: absolute;
+  z-index: 2;
 }
 
 .content-container {
   border: 1px solid variables.$grey-20;
   border-radius: 4px;
-  padding: 20px;
+  padding: 10px;
+
+  header {
+    // font-size: 10px;
+  }
+
+  hr {
+    border: 1px solid #cecdd3;
+    margin: 5px -20px 14px;
+  }
 }
 
 .arrow {
@@ -49,16 +59,16 @@
 
 .right {
   .arrow {
-    bottom: 80%;
-    right: 100%;
+    bottom: 75%;
+    right: 99.5%;
     transform: translate(50%) rotate(315deg);
   }
 }
 
 .left {
   .arrow {
-    bottom: 80%;
+    bottom: 75%;
     left: calc(100% - 13px);
-    transform: translate(50%) rotate(130deg);
+    transform: translate(50%) rotate(135deg);
   }
 }
