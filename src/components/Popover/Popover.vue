@@ -70,22 +70,19 @@ export default defineComponent({
   emits: ['update:modelValue'],
   computed: {
     popoverOpen(): boolean {
-      console.log(this.$refs)
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
     }
   },
   watch: {
     popoverOpen(val) {
-      console.log('open called')
       if(val) this.getPosition()
     }
   },
   methods: {
     getPosition() {
-      console.log(this.$refs)
       if (document.querySelector(`#${this.currentElRect}`)) {
         this.$nextTick(() => {
-          const tooltipRect = this.$refs.containerRef.getBoundingClientRect()
+          const tooltipRect = this.$refs?.containerRef.getBoundingClientRect()
           const bodyRect = document.body.getBoundingClientRect()
           const currentElRect = document
             .querySelector(`#${this.currentElRect}`)
@@ -109,10 +106,6 @@ export default defineComponent({
     closePopUp() {
       this.$emit('update:modelValue', false)
     }
-  },
-  mounted() {
-    console.log('mounted')
-    // this.getPosition()
   }
 })
 </script>

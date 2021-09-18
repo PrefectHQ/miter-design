@@ -71,11 +71,9 @@ export default defineComponent({
       console.log('clicked on flow run num')
     },
     showPopover() {
-      console.log('hovering..')
       this.show = true
     },
     hidePopover() {
-      console.log('close')
       this.show=false
     }
   }
