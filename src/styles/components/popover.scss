@@ -3,7 +3,7 @@
 
 .container {
   @include mixins.miter(1, 1);
-
+  background-color: variables.$white;
   width: auto;
   height: auto;
 

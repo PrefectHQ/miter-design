@@ -17,9 +17,9 @@ export default {
   <div style="margin-left: 400px; margin-top: 200px">
     <!-- <h3>Popover</h3> -->
     <!-- <Button v-popover:[config] style="margin-top: 50px">Button</Button> -->
- <Popover v-model="show" currentElRect="popoverTarget" :position="position" :title="title">
+ <Popover v-model="show" currentElRect="popoverTarget" position="top" :title="title">
    <template v-slot:activate>
-    <Tag @mouseenter="showPopover"   id="popoverTarget">popover</Tag>
+    <Tag @mouseenter="showPopover" id="popoverTarget">popover</Tag>
     </template>
    
       <template #content>
