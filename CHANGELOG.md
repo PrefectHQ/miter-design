@@ -1,3 +1,4 @@
+- Add placeholder prop to Input - [#70](https://github.com/PrefectHQ/miter-design/pull/70)
 - Add breakpoints plugin - [#68](https://github.com/PrefectHQ/miter-design/pull/68)
 - Update tab component to match new dashboard designs and remove icon but - [#63](https://github.com/PrefectHQ/miter-design/pull/63)
 - Add input component - [#40](https://github.com/PrefectHQ/miter-design/pull/40)
