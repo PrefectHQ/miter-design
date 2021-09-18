@@ -1,37 +1,75 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.shadowWrapper {
-  @include mixins.miter-shadow;
-}
-
 .card {
-  @include mixins.miter(2, 1);
-
-  > div {
-    border: 1px solid variables.$grey-20;
-    border-radius: 4px;
+  &.miter {
+    @include mixins.miter(2, 1);
   }
 
+  border-radius: 4px;
   display: block;
+  flex: 0 0 auto;
   height: min-content;
   position: relative;
+  width: min-content;
 
-  > div > section {
-    align-content: flex-start;
+  &.outlined {
+    > div {
+      border: 1px solid variables.$grey-20;
+    }
+  }
+
+  > div {
     background-color: variables.$white;
-    border-radius: 3px;
+    border-radius: 4px;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 32px;
+    flex: 0 0 auto;
+    flex-direction: column;
+    padding-left: inherit;
+    padding-right: inherit;
+    padding-top: inherit;
+    padding-bottom: inherit;
+    overflow: hidden;
 
-    > section > article {
+    > header {
+      border-radius: inherit;
+    }
+
+    > section {
       align-content: flex-start;
+      background-color: inherit;
+      border-radius: 3px;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      height: inherit;
       justify-content: flex-start;
-      overflow: auto;
+      padding: inherit;
+      width: inherit;
+
+      > aside {
+        border-radius: inherit;
+      }
+
+      > section {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        border-radius: inherit;
+        overflow: auto;
+
+        > article {
+          align-content: flex-start;
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          justify-content: flex-start;
+          overflow: auto;
+        }
+
+        > * {
+          border-radius: inherit;
+        }
+      }
     }
   }
 }

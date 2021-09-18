@@ -48,3 +48,55 @@ test('displays text in the aside slot', () => {
   const card = wrapper.get('aside')
   expect(card.text()).toBe(text)
 })
+
+test('adds the miter class when prop is passed', () => {
+  const wrapper = mount(Card, {
+    props: {
+      miter: true
+    }
+  })
+
+  expect(wrapper.classes()).toContain('miter')
+})
+
+describe('outlined prop', () => {
+  test('adds the outlined class when prop is passed', () => {
+    const wrapper = mount(Card, {
+      props: {
+        outlined: true
+      }
+    })
+
+    expect(wrapper.classes()).toContain('outlined')
+  })
+})
+
+describe('background color prop', () => {
+  test('adds css-defined background color', () => {
+    const color = 'aliceblue'
+
+    const wrapper = mount(Card, {
+      props: {
+        backgroundColor: color
+      }
+    })
+
+    const internalAttributes = wrapper.get('div > div > div').attributes()
+
+    expect(internalAttributes.style).toContain(color)
+  })
+
+  test('adds hex background color', () => {
+    const color = '#000'
+
+    const wrapper = mount(Card, {
+      props: {
+        backgroundColor: color
+      }
+    })
+
+    const internalAttributes = wrapper.get('div > div > div').attributes()
+
+    expect(internalAttributes.style).toContain('rgb(0, 0, 0)')
+  })
+})

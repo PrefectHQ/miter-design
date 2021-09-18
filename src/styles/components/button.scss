@@ -11,6 +11,7 @@
     @include mixins.miter;
   }
 
+  font-family: variables.$font--secondary;
   padding: 0;
   background: none;
   border: none;
@@ -34,7 +35,7 @@
   padding: 0;
 
   &.active {
-    @include mixins.miter-shadow;
+    @include mixins.drop-shadow;
   }
 
   &:focus-visible {

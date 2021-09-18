@@ -17,7 +17,7 @@
       @focus="handleFocus"
       @blur="handleBlur"
     />
-    <span class="box"><i class="pi pi-Checkmark pi-2x" /></span>
+    <span class="box"><i class="pi pi-check-line pi-2x" /></span>
     <span data-test="default"><slot /></span>
   </label>
 </template>

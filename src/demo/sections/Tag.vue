@@ -2,11 +2,28 @@
   <div>
     <h3>Tags</h3>
 
-    <h6>Click to toggle props</h6>
+    <div class="caption-small mb-2">(Click to toggle props)</div>
     <div>
-      <button @click="disabled = !disabled">disabled:{{ disabled }}</button>
-      <button @click="outlined = !outlined">outlined:{{ outlined }}</button>
-      <button @click="elevated = !elevated">elevated:{{ elevated }}</button>
+      <Button
+        :color="disabled ? 'primary' : 'secondary'"
+        @click="disabled = !disabled"
+      >
+        Disabled
+      </Button>
+      <Button
+        class="ml-1"
+        :color="outlined ? 'primary' : 'secondary'"
+        @click="outlined = !outlined"
+      >
+        Outlined
+      </Button>
+      <Button
+        class="ml-1"
+        :color="elevated ? 'primary' : 'secondary'"
+        @click="elevated = !elevated"
+      >
+        Elevated
+      </Button>
     </div>
     <Tag
       v-for="style in tagStyles"
@@ -16,13 +33,25 @@
       :disabled="disabled"
       :outlined="outlined"
       :elevated="elevated"
+      icon="pi-label"
     >
-      <span v-if="tagStyles[1] == style">
-        <i class="pi pi-Fire pi-1x"></i>
+      tag
+    </Tag>
 
-        tag
-      </span>
-      <span v-else>tag</span>
+    <h4 class="mt-4">Flat</h4>
+    <Tag
+      v-for="(style, i) in flatTagStyles"
+      :key="i"
+      class="mr-2 mt-2"
+      :color="style.color"
+      :disabled="disabled"
+      :outlined="outlined"
+      :elevated="elevated"
+      :style="style.style"
+      flat
+      :icon="style.icon"
+    >
+      {{ style.text }}
     </Tag>
   </div>
 </template>
@@ -33,6 +62,18 @@ import { Vue, Options } from 'vue-class-component'
 @Options({})
 export default class Tag extends Vue {
   tagStyles = ['primary', 'error']
+  flatTagStyles = [
+    { text: 'Tag', icon: 'pi-label', color: null },
+    { text: 'ProductionDB', icon: 'pi-label', color: null },
+    {
+      text: 'A really really long tag with a title but text truncation',
+      icon: 'pi-fire-line',
+      color: 'error',
+      style: {
+        maxWidth: '200px'
+      }
+    }
+  ]
   disabled = false
   outlined = false
   elevated = false

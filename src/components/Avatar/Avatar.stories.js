@@ -41,5 +41,5 @@ Image.args = {
 export const Icon = Template.bind({})
 Icon.args = {
   color: 'error',
-  content: `<i class="pi pi-Fire pi-2x"></i>`
+  content: `<i class="pi pi-fire-line pi-2x"></i>`
 }

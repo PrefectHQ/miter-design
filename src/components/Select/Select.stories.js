@@ -74,5 +74,5 @@ DisabledOption.args = {
 export const Icon = Template.bind({})
 Icon.args = {
   content:
-    '<Option value="First" icon="Star" /><Option value="Second" icon="Face-ID" /><Option value="Third" icon="Bug" />'
+    '<Option value="First" icon="star-line" /><Option value="Second" icon="user-smile-line" /><Option value="Third" icon="bug-2-line" />'
 }

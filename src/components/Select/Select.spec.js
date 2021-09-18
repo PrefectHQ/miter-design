@@ -35,6 +35,42 @@ test('options passed in slots are displayed in component', async () => {
   options.forEach((option, i) => expect(option.text()).toBe(optionValues[i]))
 })
 
+test('the passed value is selected when the component is mounted', async () => {
+  const wrapper = factoryMount(
+    {
+      modelValue: 'Second'
+    },
+    {
+      default: () => [
+        h(Option, { value: 'First' }),
+        h(Option, { value: 'Second' }),
+        h(Option, { value: 'Third' })
+      ]
+    }
+  )
+  const picker = wrapper.get('.picker > span')
+  expect(picker.text()).toBe('Second')
+})
+
+test('displays text in the active slot', async () => {
+  const text = 'Hello, world!'
+  const wrapper = factoryMount(
+    {
+      modelValue: 'First'
+    },
+    {
+      active: text,
+      default: () => [
+        h(Option, { value: 'First' }),
+        h(Option, { value: 'Second' }),
+        h(Option, { value: 'Third' })
+      ]
+    }
+  )
+  const picker = wrapper.get('.picker > span')
+  expect(picker.text()).toBe(text)
+})
+
 describe('icons', () => {
   test('option does not contain icon by default', async () => {
     const option = mount(Option, { props: { value: 'First' } })
@@ -48,6 +84,7 @@ describe('icons', () => {
     expect(option.find('i').exists()).toBe(true)
   })
 })
+
 describe('disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
     const wrapper = mount(Select, { props: { disabled: true } })
@@ -65,6 +102,7 @@ describe('disabled state', () => {
     expect(picker.classes('disabled')).toBe(false)
   })
 })
+
 describe('hover state', () => {
   const wrapper = factoryMount(
     {},
@@ -140,6 +178,7 @@ describe('active state', () => {
     expect(picker.classes()).not.toContain('active')
   })
 })
+
 test('emit selected option', async () => {
   const wrapper = factoryMount(
     {},

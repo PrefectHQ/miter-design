@@ -26,6 +26,36 @@ $drop-shadow-lg: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.1))
   drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.05));
 $drop-shadow-xl: drop-shadow(0px 20px 25px rgba(0, 0, 0, 0.1))
   drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.04));
+$drop-shadow-2xl: drop-shadow(0px 25px 50px rgba(0, 0, 0, 0.25));
+
+$shadows: (
+  shadow-sm: $box-shadow-sm,
+  shadow-md: $box-shadow-md,
+  shadow-lg: $box-shadow-lg,
+  shadow-xl: $box-shadow-xl,
+  shadow-2xl: $box-shadow-2xl,
+  shadow-inset: $box-shadow-inset
+);
+
+$drop-shadows: (
+  drop-shadow-sm: $drop-shadow-sm,
+  drop-shadow-md: $drop-shadow-md,
+  drop-shadow-lg: $drop-shadow-lg,
+  drop-shadow-xl: $drop-shadow-xl,
+  drop-shadow-2xl: $drop-shadow-2xl
+);
+
+@each $key, $val in $shadows {
+  .#{$key} {
+    box-shadow: #{$val};
+  }
+}
+
+@each $key, $val in $drop-shadows {
+  .#{$key} {
+    filter: #{$val};
+  }
+}
 
 // Colors
 // We'll want to namespace these by theme later
@@ -92,9 +122,3 @@ $colors: (
   blue-20: $blue-20,
   blue-5: $blue-5
 );
-
-:root {
-  @each $key, $color in $colors {
-    --#{"" + $key}: #{$color};
-  }
-}
