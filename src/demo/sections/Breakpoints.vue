@@ -17,11 +17,11 @@
 
     <pre class="bg--grey-80 text--white px-2" style="border-radius: 8px">
     <code>
-{{`xs: 450,
-sm: 640,
-md: 1000,
-lg: 1250,
-xl: 1440`
+{{`xs: 450px,
+sm: 640px,
+md: 1024px,
+lg: 1280px,
+xl: 1440px`
 }}
     </code>
 </pre>
@@ -78,7 +78,7 @@ xl: 1440`
       >
         <div class="px-4 py-2">
           <h1>md</h1>
-          <h2>> 1000px</h2>
+          <h2>> 1024px</h2>
           <div class="text--blue-80 mt-2" v-html="content" />
         </div>
       </Card>
@@ -91,7 +91,7 @@ xl: 1440`
       >
         <div class="px-4 py-2">
           <h1>lg</h1>
-          <h2>> 1250px</h2>
+          <h2>> 1280px</h2>
           <div class="text--blue-80 mt-2" v-html="content" />
         </div>
       </Card>
