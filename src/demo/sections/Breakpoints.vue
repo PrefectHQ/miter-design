@@ -29,7 +29,7 @@ xl: 1440`
 
     <h4>Demo:</h4>
 
-    <div v-for="i in 1000" :key="i" class="d-flex">
+    <div class="d-flex">
       <Card
         v-if="noBreakpoints"
         width="200px"
