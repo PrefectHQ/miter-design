@@ -122,9 +122,3 @@ $colors: (
   blue-20: $blue-20,
   blue-5: $blue-5
 );
-
-:root {
-  @each $key, $color in $colors {
-    --#{"" + $key}: #{$color};
-  }
-}

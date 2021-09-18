@@ -1,6 +1,5 @@
 import Tag from './Tag.vue'
 
-
 export default {
   title: 'Miter Design/Tag',
   component: Tag,
@@ -29,21 +28,28 @@ export const Default = Template.bind({})
 
 export const Primary = Template.bind({})
 Primary.args = {
-    color: 'primary'
+  color: 'primary'
 }
 
-export const Outlined = Template.bind({}) 
+export const Outlined = Template.bind({})
 Outlined.args = {
-    outlined: true
+  outlined: true
 }
 
-export const Disabled = Template.bind({}) 
+export const Disabled = Template.bind({})
 Disabled.args = {
-    disabled: true
+  disabled: true
 }
 
-export const Elevated = Template.bind({}) 
+export const Elevated = Template.bind({})
 Elevated.args = {
-    elevated: true,
-    color: 'primary'
+  elevated: true,
+  color: 'primary'
+}
+
+export const Flat = Template.bind({})
+Flat.args = {
+  content: 'Tag',
+  icon: 'pi-label',
+  flat: true
 }

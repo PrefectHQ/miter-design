@@ -14,86 +14,124 @@
 }
 
 .tag-wrapper {
-  @include mixins.miter;
+  &.flat {
+    display: inline-block;
+    padding: 0;
 
-  border: none;
-  border-radius: 3px;
-  padding: 0;
-  user-select: none;
-  white-space: nowrap;
-  cursor: default;
-  display: inline-block;
-  cursor: default;
-  font-size: 14px;
-  vertical-align: middle;
-  color: variables.$text--white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-  &.elevated {
-    @include mixins.drop-shadow;
+    .tag {
+      font-family: variables.$font--primary !important;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 24px;
+
+      i {
+        color: variables.$grey-20;
+        margin-right: 4px;
+        vertical-align: bottom !important;
+      }
+    }
+
+    @each $name, $color in variables.$colors {
+      &.#{'' + $name} .tag {
+        i {
+          color: #{$color};
+        }
+      }
+    }
   }
 
-  &.hovered:hover {
-    cursor: pointer;
-  }
+  &:not(.flat) {
+    @include mixins.miter;
 
-  .tag {
-    align-items: center;
-    background-color: variables.$grey-80;
-    border: 1px solid transparent;
+    border: none;
     border-radius: 3px;
-    display: inline-flex;
-    justify-content: center;
-    padding: 4px 24px;
-  }
+    font-family: variables.$font--secondary;
+    padding: 0;
+    user-select: none;
+    white-space: nowrap;
+    cursor: default;
+    display: inline-block;
+    cursor: default;
+    font-size: 14px;
+    vertical-align: middle;
+    color: variables.$text--white;
 
-  &.outlined {
-    > .tag {
-      background-color: variables.$white;
-      color: variables.$grey-80;
-      border: 1px solid variables.$grey-20;
-      transition: background-color 0s, clip-path 0s !important;
+    &.elevated {
+      @include mixins.drop-shadow;
     }
 
-    &.hovered:hover,
-    &.hovered:focus > .tag {
-      filter: brightness(0.98);
-    }
-  }
-
-  &.disabled {
-    cursor: not-allowed;
-    color: variables.$grey-20 !important;
-
-    > .tag {
-      background-color: variables.$disabled !important;
+    &.hovered:hover {
+      cursor: pointer;
     }
 
-    &.outlined > .tag {
-      border-color: variables.$grey-20 !important;
-      color: inherit !important;
+    .tag {
+      align-items: center;
+      background-color: variables.$grey-80;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      display: inline-flex;
+      justify-content: center;
+      padding: 4px 24px;
+
+      i {
+        margin-right: 4px;
+        vertical-align: middle;
+      }
     }
-  }
 
-  @each $name, $color in variables.$colors {
-    &.#{'' + $name} {
-      color: variables.$text--white;
-
+    &.outlined {
       > .tag {
-        background-color: $color;
+        background-color: variables.$white;
+        color: variables.$grey-80;
+        border: 1px solid variables.$grey-20;
+        transition: background-color 0s, clip-path 0s !important;
       }
 
-      &:not(.outlined) {
-        &.hovered:hover,
-        &.hovered:focus,
-        &.hovered:active {
-          filter: brightness(0.9);
-        }
+      &.hovered:hover,
+      &.hovered:focus > .tag {
+        filter: brightness(0.98);
+      }
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      color: variables.$grey-20 !important;
+
+      > .tag {
+        background-color: variables.$disabled !important;
       }
 
       &.outlined > .tag {
-        border-color: $color;
-        color: $color;
-        background-color: variables.$white;
+        border-color: variables.$grey-20 !important;
+        color: inherit !important;
+      }
+    }
+
+    @each $name, $color in variables.$colors {
+      &.#{'' + $name} {
+        color: variables.$text--white;
+
+        > .tag {
+          background-color: $color;
+        }
+
+        &:not(.outlined) {
+          &.hovered:hover,
+          &.hovered:focus,
+          &.hovered:active {
+            filter: brightness(0.9);
+          }
+        }
+
+        &.outlined > .tag {
+          border-color: $color;
+          color: $color;
+          background-color: variables.$white;
+        }
       }
     }
   }

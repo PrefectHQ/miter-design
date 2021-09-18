@@ -3,9 +3,9 @@
 @font-face {
   font-family: '#{$prefect-font-family}';
   src:
-    url('#{$prefect-font-path}/#{$prefect-font-family}.ttf?8j3k0v') format('truetype'),
-    url('#{$prefect-font-path}/#{$prefect-font-family}.woff?8j3k0v') format('woff'),
-    url('#{$prefect-font-path}/#{$prefect-font-family}.svg?8j3k0v##{$prefect-font-family}') format('svg');
+    url('#{$prefect-font-path}/#{$prefect-font-family}.ttf?fujx65') format('truetype'),
+    url('#{$prefect-font-path}/#{$prefect-font-family}.woff?fujx65') format('woff'),
+    url('#{$prefect-font-path}/#{$prefect-font-family}.svg?fujx65##{$prefect-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -26,6 +26,71 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.pi-awaiting-retry {
+  &:before {
+    content: $pi-awaiting-retry; 
+  }
+}
+.pi-cancelled {
+  &:before {
+    content: $pi-cancelled; 
+  }
+}
+.pi-completed {
+  &:before {
+    content: $pi-completed; 
+  }
+}
+.pi-crashed {
+  &:before {
+    content: $pi-crashed; 
+  }
+}
+.pi-failed {
+  &:before {
+    content: $pi-failed; 
+  }
+}
+.pi-full-screen {
+  &:before {
+    content: $pi-full-screen; 
+  }
+}
+.pi-label {
+  &:before {
+    content: $pi-label; 
+  }
+}
+.pi-pending {
+  &:before {
+    content: $pi-pending; 
+  }
+}
+.pi-prefect {
+  &:before {
+    content: $pi-prefect; 
+  }
+}
+.pi-retrieved-cache {
+  &:before {
+    content: $pi-retrieved-cache; 
+  }
+}
+.pi-retrying {
+  &:before {
+    content: $pi-retrying; 
+  }
+}
+.pi-running {
+  &:before {
+    content: $pi-running; 
+  }
+}
+.pi-scheduled {
+  &:before {
+    content: $pi-scheduled; 
+  }
+}
 .pi-flow-run {
   &:before {
     content: $pi-flow-run; 
