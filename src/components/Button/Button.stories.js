@@ -17,47 +17,63 @@ export default {
 }
 
 const Template = (args) => ({
-  components: { Button },
+  components: { Button, IconButton },
   setup() {
     return { args }
   },
-  template: `<Button v-bind="args">
-    ${args.content}
-  </Button>`
+  template: `${args.template}`
 })
 
 export const Primary = Template.bind({})
 Primary.args = {
+  template: `<Button :color="args.color">{{args.content}}</Button>`,
   color: 'primary'
 }
 
 export const Secondary = Template.bind({})
 Secondary.args = {
+  template: `<Button :color="args.color">{{args.content}}</Button>`,
   color: 'secondary'
 }
 
 export const SecondaryLight = Template.bind({})
 SecondaryLight.args = {
+  template: `<Button :color="args.color">{{args.content}}</Button>`,
   color: 'secondary light'
 }
 
 export const Alternate = Template.bind({})
 Alternate.args = {
+  template: `<Button :color="args.color">{{args.content}}</Button>`,
   color: 'alternate'
 }
 
 export const Mitered = Template.bind({})
 Mitered.args = {
-  miter: true
+  template: `<Button :miter="args.mitered">{{args.content}}</Button>`,
+  mitered: true
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
+  template: `<Button :disabled="args.disabled">{{args.content}}</Button>`,
   disabled: true
 }
 
-export const DefaultIcon = () => <IconButton icon="bug-2-line"></IconButton>
+export const DefaultIcon = Template.bind({})
+DefaultIcon.args = {
+  template: `<IconButton></IconButton>`
+}
 
-export const DisabledIcon = () => (
-  <IconButton icon="bug-2-line" disabled></IconButton>
-)
+export const Icon = Template.bind({})
+Icon.args = {
+  template: `<IconButton :icon="args.icon">{{args.content}}</IconButton>`,
+  icon: 'subtract-line'
+}
+
+export const DisabledIcon = Template.bind({})
+DisabledIcon.args = {
+  template: `<IconButton :icon="args.icon" :disabled="args.disabled">{{args.content}}</IconButton>`,
+  icon: 'fullscreen-line',
+  disabled: true
+}
