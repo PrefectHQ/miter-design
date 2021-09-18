@@ -1,7 +1,7 @@
 <template>
   <div class="mt-5 pb-10" v-cloak>
     <h1>Components</h1>
-    <!-- <Cards />
+    <Cards />
     <Popups />
     <Buttons class="mt-10" />
     <Toggles class="mt-10" />
@@ -16,7 +16,7 @@
     <Avatar class="mt-10" />
     <Tooltip class="mt-10" />
     <Selects class="mt-10" />
-    <TextAreas class="mt-10" /> -->
+    <TextAreas class="mt-10" />
     <Breakpoints class="mt-10" />
   </div>
 </template>
