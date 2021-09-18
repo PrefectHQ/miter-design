@@ -13,12 +13,13 @@ button.tab {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid variables.$grey-20;
-  height: max-content;
   border-radius: 4px 4px 0 0;
+  color: variables.$grey-80;
   cursor: pointer;
   font-size: 18px;
+  font-weight: 600;
+  height: max-content;
   line-height: 24px;
-  color: variables.$grey-80;
   padding: 8px 8px;
   user-select: none;
   -webkit-user-select: none;
