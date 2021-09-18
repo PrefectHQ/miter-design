@@ -268,3 +268,17 @@ a {
     cursor: not-allowed;
   }
 }
+
+@media screen and (min-width: 450px) {
+  .breakpoint-none {
+    display: none !important;
+  }
+}
+
+@each $breakpoint, $value in variables.$breakpoints {
+  @media screen and (max-width: #{$value}) {
+    .breakpoint-#{$breakpoint} {
+      display: none !important;
+    }
+  }
+}

@@ -11,8 +11,8 @@ type Breakpoints = {
 const breakpoints = {
   xs: 450,
   sm: 640,
-  md: 1000,
-  lg: 1250,
+  md: 1024,
+  lg: 1280,
   xl: 1440
 }
 
@@ -47,15 +47,13 @@ const BreakpointPlugin: Plugin = {
         const previous = app.config.globalProperties.$breakpoints[key]
         const current = width > value
 
-        if (current !== previous) {
-          EventBus.dispatchEvent(
-            new CustomEvent<number>(k, {
-              detail: window.innerWidth
-            })
-          )
+        EventBus.dispatchEvent(
+          new CustomEvent<number>(k, {
+            detail: window.innerWidth
+          })
+        )
 
-          app.config.globalProperties.$breakpoints[key] = current
-        }
+        app.config.globalProperties.$breakpoints[key] = current
       })
     }
 
