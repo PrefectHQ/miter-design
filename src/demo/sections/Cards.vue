@@ -5,7 +5,7 @@
       Toggle loader
     </Button>
 
-    <div v-if="true" v-breakpoints="['lg']" class="card-section pa-4">
+    <div class="card-section pa-4">
       <Card
         width="400px"
         height="500px"

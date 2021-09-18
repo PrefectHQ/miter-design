@@ -1,6 +1,13 @@
-import { App, createApp } from 'vue'
+import { App, Plugin, reactive } from 'vue'
 import { DirectiveBinding, ObjectDirective, VNode } from '@vue/runtime-dom'
 
+type Breakpoints = {
+  xs: boolean
+  sm: boolean
+  md: boolean
+  lg: boolean
+  xl: boolean
+}
 const breakpoints = {
   xs: 450,
   sm: 640,
@@ -9,7 +16,13 @@ const breakpoints = {
   xl: 1440
 }
 
-const plugin = {
+declare module '@vue/runtime-core' {
+  export interface ComponentCustomProperties {
+    $breakpoints: Breakpoints
+  }
+}
+
+const BreakpointPlugin: Plugin = {
   install(app: App, options: any = {}) {
     const _breakpoints: { [key: string]: number } = {
       ...options,
@@ -18,13 +31,21 @@ const plugin = {
 
     const EventBus = new Comment('breakpoint-event-bus')
 
+    app.config.globalProperties.$breakpoints = reactive({
+      xs: false,
+      sm: false,
+      md: false,
+      lg: false,
+      xl: false
+    })
+
     const update = () => {
       const width = window.innerWidth
 
       Object.entries(_breakpoints).forEach(([key, value]) => {
         const k = `breakpoint-change-${key}`
-        const previous = app.config.globalProperties[k]
-        const current = width < value
+        const previous = app.config.globalProperties.$breakpoints[key]
+        const current = width > value
 
         if (current !== previous) {
           EventBus.dispatchEvent(
@@ -33,7 +54,7 @@ const plugin = {
             })
           )
 
-          app.config.globalProperties[k] = current
+          app.config.globalProperties.$breakpoints[key] = current
         }
       })
     }
@@ -60,7 +81,7 @@ const plugin = {
         }
       }) as EventListener
 
-    let ref: EventListener
+    let refElement: EventListener
     const updateListener = (
       el: any,
       binding: DirectiveBinding,
@@ -79,8 +100,8 @@ const plugin = {
 
       const placeholder = new Comment(' ')
       const k = `breakpoint-change-${key}`
-      ref = listener(el, binding, placeholder)
-      EventBus.addEventListener(k, ref)
+      refElement = listener(el, binding, placeholder)
+      EventBus.addEventListener(k, refElement)
     }
 
     app.directive('breakpoints', {
@@ -100,10 +121,10 @@ const plugin = {
       },
       beforeUnmount(el: any, binding: DirectiveBinding, vNode: VNode) {
         const key: string = binding.value
-        EventBus.removeEventListener(`breakpoint-change-${key}`, ref)
+        EventBus.removeEventListener(`breakpoint-change-${key}`, refElement)
       }
     })
   }
 }
 
-export default plugin
+export default BreakpointPlugin
