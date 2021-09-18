@@ -96,6 +96,46 @@ describe('outlined prop', () => {
   })
 })
 
+describe('flat prop', () => {
+  test('adds the flat class when flat is passed as a prop', () => {
+    const wrapper = mount(Tag, {
+      props: {
+        flat: true
+      }
+    })
+
+    expect(wrapper.classes()).toContain('flat')
+  })
+
+  test("doesn't pass the outlined class when outlined is not passed as a prop", () => {
+    const wrapper = mount(Tag, {
+      props: {}
+    })
+
+    expect(wrapper.classes()).not.toContain('flat')
+  })
+})
+
+describe('icon prop', () => {
+  test('displays an icon when one is passed', () => {
+    const wrapper = mount(Tag, {
+      props: {
+        icon: 'pi-fire-line'
+      }
+    })
+
+    expect(wrapper.findAll('i').length).toEqual(1)
+  })
+
+  test("doesn't render an icon element when none is passed", () => {
+    const wrapper = mount(Tag, {
+      props: {}
+    })
+
+    expect(wrapper.findAll('i').length).toEqual(0)
+  })
+})
+
 describe('hovered prop', () => {
   test('adds the hovered class when hovered:true is passed as a prop', () => {
     const wrapper = mount(Tag, {

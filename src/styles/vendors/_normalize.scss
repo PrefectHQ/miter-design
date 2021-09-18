@@ -42,6 +42,21 @@ h1 {
   margin: 0.67em 0;
 }
 
+/**
+ * Unsets user-agent font weight defaults
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: unset;
+  margin-block-start: unset;
+  margin-block-end: unset;
+}
+
 /* Grouping content
    ========================================================================== */
 
