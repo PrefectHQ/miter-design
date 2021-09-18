@@ -7,7 +7,6 @@
   display: inline-flex;
   font-size: 15px;
   line-height: 20px;
-  position: absolute;
 
   .label {
     margin-left: 64px;
@@ -24,7 +23,7 @@
     @include mixins.input-transition-long;
     display: inline-block;
     background: variables.$white;
-    border: 1px solid variables.$grey-4;
+    border: 1px solid variables.$grey-20;
     border-radius: 16px;
     margin-right: 12px;
     user-select: none;
@@ -38,7 +37,7 @@
       width: 24px;
       height: 24px;
       border-radius: 100%;
-      background: variables.$grey-4;
+      background: variables.$grey-20;
       top: 1px;
       left: 1px;
     }
@@ -59,7 +58,7 @@
       border-color: variables.$inactive;
       background-color: variables.$inactive;
       &:before {
-        background-color: variables.$grey-5;
+        background-color: variables.$secondary-background;
       }
     }
   }
@@ -68,7 +67,7 @@
     border-color: variables.$inactive;
     background-color: variables.$inactive;
     &:before {
-      background-color: variables.$grey-5;
+      background-color: variables.$secondary-background;
       transform: translateX(24px);
     }
   }
@@ -77,7 +76,7 @@
   &.hovered,
   &.active {
     .toggle-switch {
-      background-color: variables.$grey-5;
+      background-color: variables.$secondary-background;
     }
   }
 }

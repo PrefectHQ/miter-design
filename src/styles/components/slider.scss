@@ -2,20 +2,18 @@
 @use '../abstracts/mixins';
 
 @mixin slider-thumb($disabled, $active) {
-    border-radius: 50%;
-    border: solid 2px;
-    background-color: variables.$background;
-    @if($disabled) {
-        border-color: variables.$grey-7;
-    }
-    @else {
-        border-color: variables.$primary;
-    }
-    @if($active) {
-      border: 3px solid variables.$grey-4;
-      box-shadow: inset 0 0 0 2px variables.$primary;
+  border-radius: 50%;
+  border: solid 2px;
+  background-color: variables.$background;
+  @if ($disabled) {
+    border-color: variables.$secondary-hover;
+  } @else {
+    border-color: variables.$primary;
   }
-    
+  @if ($active) {
+    border: 3px solid variables.$grey-20;
+    box-shadow: inset 0 0 0 2px variables.$primary;
+  }
 }
 
 .slider-label {
@@ -25,75 +23,75 @@
 .slider {
   @include mixins.input-transition;
   width: 320px;
-  height: 4px; 
-  outline: none; 
+  height: 4px;
+  outline: none;
   cursor: pointer;
   -webkit-appearance: none;
-  background: linear-gradient(to right, variables.$primary var(--slider-val), variables.$grey-7 0);
-
+  background: linear-gradient(
+    to right,
+    variables.$primary var(--slider-val),
+    variables.$secondary-hover 0
+  );
 
   &::-webkit-slider-thumb {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
     height: 14px;
     width: 14px;
-  @include slider-thumb($disabled: false, $active: false)
-}
+    @include slider-thumb($disabled: false, $active: false);
+  }
 
   &::-moz-range-thumb {
     height: 10px;
     width: 10px;
-    @include slider-thumb($disabled: false, $active: false)
+    @include slider-thumb($disabled: false, $active: false);
   }
 
   &::-ms-thumb {
     height: 10px;
     width: 10px;
-    @include slider-thumb($disabled: false, $active: false)
-}
+    @include slider-thumb($disabled: false, $active: false);
+  }
 
   &.disabled {
-    background: variables.$grey-7;
+    background: variables.$secondary-hover;
     cursor: not-allowed;
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
-      @include slider-thumb($disabled: true, $active: false)
+      @include slider-thumb($disabled: true, $active: false);
     }
 
     &::-moz-range-thumb {
-      @include slider-thumb($disabled: true, $active: false)
-      }
-    
-    &::-ms-thumb {
-    @include slider-thumb($disabled: true, $active: false)
+      @include slider-thumb($disabled: true, $active: false);
     }
-  }  
+
+    &::-ms-thumb {
+      @include slider-thumb($disabled: true, $active: false);
+    }
+  }
 
   &.active {
-
     &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    @include slider-thumb($disabled: false, $active: true);
-    height: 20px;
-    width: 20px;
+      -webkit-appearance: none;
+      @include slider-thumb($disabled: false, $active: true);
+      height: 20px;
+      width: 20px;
     }
 
     &::-moz-range-thumb {
-    height: 14px;
-    width: 14px;
-    @include slider-thumb($disabled: false, $active: true);
-    border: 3px solid variables.$grey-4;
-    box-shadow: inset 0 0 0 2px variables.$primary;
+      height: 14px;
+      width: 14px;
+      @include slider-thumb($disabled: false, $active: true);
+      border: 3px solid variables.$grey-20;
+      box-shadow: inset 0 0 0 2px variables.$primary;
     }
-    
+
     &::-ms-thumb {
       height: 14px;
       width: 14px;
       @include slider-thumb($disabled: false, $active: true);
-      border: 3px solid variables.$grey-4;
+      border: 3px solid variables.$grey-20;
       box-shadow: inset 0 0 0 2px variables.$primary;
     }
-  }  
+  }
 }
-
-

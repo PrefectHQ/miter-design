@@ -2,16 +2,38 @@
   <div>
     <div
       id="backdrop"
+      @keydown="handleBackdropKeyDown"
       class="modal-backdrop"
       @click.self="closePopUp"
       :style="position"
     >
-      <Card :class="positionClass" :height="height" :width="width">
+      <Card
+        role="dialog"
+        aria-modal="true"
+        ref="popUpContent"
+        :class="positionClass"
+        :height="height"
+        :width="width"
+      >
         <h4 class="h4-bottom">
           {{ title }}
-          <span class="close-icon" @click="closePopUp">
-            <i class="pi pi-X mr-1"></i>
-          </span>
+          <button
+            icon
+            data-test="closeButton"
+            title="close pop up"
+            ref="popUpCloseButton"
+            class="close-icon"
+            :class="classList"
+            @click="closePopUp"
+            @mouseenter="handleMouseEnter"
+            @mouseleave="handleMouseLeave"
+            @mousedown="handleMouseDown"
+            @mouseup="handleMouseUp"
+            @focus="handleFocus"
+            @blur="handleBlur"
+          >
+            <i class="pi pi-X"></i>
+          </button>
         </h4>
 
         <div v-if="$slots.content">
@@ -29,9 +51,20 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Card from '../Card/Card.vue'
+
+interface event {
+  value: string
+  key: string
+  shiftKey: string
+  preventDefault: any
+}
 
 export default defineComponent({
   name: 'Popcontent',
+  components: {
+    Card
+  },
   props: {
     modelValue: {
       type: Boolean,
@@ -42,12 +75,10 @@ export default defineComponent({
       required: false
     },
     height: {
-      type: String,
-      default: '269px'
+      type: String
     },
     width: {
-      type: String,
-      default: '350px'
+      type: String
     },
     placement: {
       type: String,
@@ -57,15 +88,30 @@ export default defineComponent({
     title: {
       type: String,
       required: false
+    },
+    teleportTo: {
+      type: String,
+      default: 'body'
     }
   },
   emits: ['close'],
   data() {
     return {
-      active: false as boolean
+      active: false as boolean,
+      hovered: false as boolean,
+      focused: false as boolean
     }
   },
   computed: {
+    classList(): string[] {
+      return this.active
+        ? ['active']
+        : this.hovered
+        ? ['hovered']
+        : this.focused
+        ? ['focused']
+        : []
+    },
     position(): any {
       return {
         '--position-place': `${this.placement}`
@@ -84,9 +130,56 @@ export default defineComponent({
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
     }
   },
+  mounted() {
+    this.addFocus()
+  },
   methods: {
+    addFocus() {
+      this.hovered = true
+      this.$nextTick(() => {
+        this.$refs.popUpCloseButton.tabIndex = 0
+        this.$refs.popUpCloseButton.focus()
+      })
+    },
     closePopUp() {
       this.$emit('close', false)
+    },
+    handleMouseEnter(): void {
+      this.hovered = true
+    },
+    handleMouseLeave(): void {
+      this.hovered = false
+      this.focused = false
+    },
+    handleFocus(): void {
+      this.hovered = true
+    },
+    handleBlur(): void {
+      this.hovered = false
+      this.focused = false
+    },
+    handleBackdropKeyDown(evt: event): void {
+      const modalNodes = this.$refs.popUpContent.$el.querySelectorAll('*')
+      const tabbable = Array.from(modalNodes).filter(
+        (n: any) => n.tabIndex >= 0
+      )
+      let index = tabbable.indexOf(document.activeElement)
+      const parent = document.querySelector(this.teleportTo)
+      const parentHidden = parent?.firstChild?.ariaHidden
+      if (evt.key === 'Escape' || evt.key === 'escape') {
+        // Pressing the ESC key resets ariaHidden and closes the modal.
+        parent.firstChild.ariaHidden = parentHidden
+        this.closePopUp()
+      } else if (evt.key === 'Tab' || evt.key === 'tab') {
+        document.querySelector(this.teleportTo)
+        //set aria hidden on non-popup element
+        parent.firstChild.ariaHidden = true
+        // Pressing the Tab key traps the focus in the modal.
+        index += tabbable.length + 1
+        index %= tabbable.length
+        tabbable[index].focus()
+        evt.preventDefault()
+      }
     }
   }
 })

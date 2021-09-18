@@ -2,13 +2,19 @@
   <div>
     <h3>Buttons</h3>
 
-    <div class="my-1 text--grey-4">(hover for active)</div>
+    <div class="my-1 text--secondary">(hover for active)</div>
 
     <h5 class="mt-5">Block</h5>
+
+    <Button class="my-4" @click="skeletonLoader = !skeletonLoader">
+      Toggle loader
+    </Button>
+
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
+      <span class="text-capitalize">{{ state }}:</span>
       <Button
         v-for="style in buttonStyles"
+        v-skeleton="skeletonLoader"
         :key="style"
         class="ml-2"
         :color="style"
@@ -21,10 +27,11 @@
 
     <h5 class="mt-5">Icon</h5>
     <div v-for="state in states" :key="state" class="my-2">
-      <span class="font-weight-light text-capitalize">{{ state }}:</span>
+      <span class="text-capitalize">{{ state }}:</span>
       <Button
         v-for="style in buttonStyles"
         :key="style"
+        v-skeleton="skeletonLoader"
         class="ml-2"
         :color="style"
         :icon="true"
@@ -46,6 +53,8 @@ export default class Buttons extends Vue {
 
   buttonStyles = ['primary', 'secondary', 'outlined']
   fabStyles = ['primary', 'secondary', 'outlined']
+
+  skeletonLoader = false
 
   mounted(): void {
     return
