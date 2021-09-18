@@ -1,5 +1,10 @@
 <template>
-  <div
+  <div class="d-flex">
+    <div v-if="$slots.activate">
+      <slot name="activate" />
+    </div>
+    <teleport :to="teleportTo" :disabled="!popoverOpen" v-if="popoverOpen">
+    <div
     id="tooltip-container"
     class="container"
     :class="position"
@@ -15,10 +20,13 @@
       > -->
       <hr />
       <section>
-        <slot>content</slot>
+        <slot name=content></slot>
       </section>
     </div>
     <div class="arrow"></div>
+  </div>
+      
+    </teleport>
   </div>
 </template>
 
@@ -39,6 +47,19 @@ export default defineComponent({
     title: {
       type: String,
       default: () => 'title'
+    },
+    modelValue: {
+      type: Boolean,
+      required: false
+    },
+    teleportTo: {
+      type: String,
+      required: false,
+      default: 'body'
+    },
+    value: {
+      type: Boolean,
+      required: false
     }
   },
   data() {
@@ -46,8 +67,22 @@ export default defineComponent({
       tooltipPositionStyle: {}
     }
   },
+  emits: ['update:modelValue'],
+  computed: {
+    popoverOpen(): boolean {
+      console.log(this.$refs)
+      return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
+    }
+  },
+  watch: {
+    popoverOpen(val) {
+      console.log('open called')
+      if(val) this.getPosition()
+    }
+  },
   methods: {
     getPosition() {
+      console.log(this.$refs)
       if (document.querySelector(`#${this.currentElRect}`)) {
         this.$nextTick(() => {
           const tooltipRect = this.$refs.containerRef.getBoundingClientRect()
@@ -70,10 +105,14 @@ export default defineComponent({
           `Could not find element with the id of ${this.currentElRect}`
         )
       }
+    },
+    closePopUp() {
+      this.$emit('update:modelValue', false)
     }
   },
   mounted() {
-    this.getPosition()
+    console.log('mounted')
+    // this.getPosition()
   }
 })
 </script>

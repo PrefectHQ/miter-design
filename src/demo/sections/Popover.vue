@@ -17,11 +17,12 @@ export default {
   <div style="margin-left: 400px; margin-top: 200px">
     <!-- <h3>Popover</h3> -->
     <!-- <Button v-popover:[config] style="margin-top: 50px">Button</Button> -->
-    <Tag @mouseenter="showPopover" id="popoverTarget">popover</Tag>
-    {{ show }}
-    <Popover currentElRect="popoverTarget" :position="position" :title="title">
-      <template #default>
-        <!-- <button>click</button> -->
+ <Popover v-model="show" currentElRect="popoverTarget" :position="position" :title="title">
+   <template v-slot:activate>
+    <Tag @mouseenter="showPopover"   id="popoverTarget">popover</Tag>
+    </template>
+   
+      <template #content>
         <div>
           <div class="d-flex justify-space-between"
             ><span>Date:</span><span>Aug 1, 2021</span></div
@@ -37,6 +38,9 @@ export default {
           ><div class="d-flex justify-space-between"
             ><span>Lowest Range:</span><span>&gt;1d</span></div
           >
+        </div>
+        <div class="text-center">
+        <Button color="primary" @click="hidePopover">Close</Button>
         </div>
       </template>
     </Popover>
@@ -69,6 +73,10 @@ export default defineComponent({
     showPopover() {
       console.log('hovering..')
       this.show = true
+    },
+    hidePopover() {
+      console.log('close')
+      this.show=false
     }
   }
 })
