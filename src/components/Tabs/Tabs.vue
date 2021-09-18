@@ -174,7 +174,7 @@ export default defineComponent({
           onClick: this.scrollLeft,
           tabindex: -1
         },
-        [h('i', { class: ['pi', 'pi-arrow-right-s-line', 'pi-lg'] })]
+        [h('i', { class: ['pi', 'pi-arrow-left-s-line', 'pi-lg'] })]
       )
 
     if (this.showRight)
