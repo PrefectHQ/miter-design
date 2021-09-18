@@ -60,6 +60,17 @@ Disabled.args = {
   disabled: true
 }
 
+export const TextIcon = Template.bind({})
+TextIcon.args = {
+  template: `
+  <Button :icon="args.icon">
+   {{args.content}}
+  </Button>
+  `,
+  icon: 'fullscreen-line',
+  content: 'Primary'
+}
+
 export const DefaultIcon = Template.bind({})
 DefaultIcon.args = {
   template: `<IconButton></IconButton>`

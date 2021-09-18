@@ -41,9 +41,11 @@
 
   &.icon {
     [data-test='default'] {
-      vertical-align: middle;
+      display: inline-flex;
+      align-items: center;
+
       i {
-        margin-right: 5px;
+        margin-right: 10px;
       }
     }
   }
