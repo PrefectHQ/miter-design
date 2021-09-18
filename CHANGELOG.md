@@ -1,4 +1,5 @@
 - Update button styles - [#61](https://github.com/PrefectHQ/miter-design/pull/61)
+- Update tab component to match new dashboard designs and remove icon but - [#63](https://github.com/PrefectHQ/miter-design/pull/63)
 - Add input component - [#40](https://github.com/PrefectHQ/miter-design/pull/40)
 - Enforce slot styling from card component - [#57](https://github.com/PrefectHQ/miter-design/pull/57)
 - Add drop shadow options to card - [#53](https://github.com/PrefectHQ/miter-design/pull/53)
