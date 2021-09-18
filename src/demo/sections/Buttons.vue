@@ -29,15 +29,16 @@
     <div v-for="state in states" :key="state" class="my-2">
       <span class="text-capitalize">{{ state }}:</span>
       <Button
-        v-for="style in buttonStyles"
+        v-for="(style, index) in buttonStyles"
         :key="style"
         v-skeleton="skeletonLoader"
         class="ml-2"
         :color="style"
         :disabled="state == 'disabled'"
+        :icon="icons[index]"
         @click="handleClick"
       >
-        <span><i class="pi pi-filter-3-line pi-lg pr-1"></i>{{ style }}</span>
+        <span>{{ style }}</span>
       </Button>
     </div>
 

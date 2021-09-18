@@ -12,8 +12,10 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <i v-if="icon" class="pi pi-sm" :class="iconClass"></i>
-    <span v-else data-test="default"><slot /></span>
+    <span data-test="default">
+      <i v-if="icon" class="pi pi-sm" :class="iconClass"></i>
+      <slot />
+    </span>
   </button>
 </template>
 
