@@ -11,7 +11,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HJgj2eHBaqt1SAYruZNjQQ/Prefect?node-id=1080%3A993'
+      url: 'https://www.figma.com/file/JomY9jsgJdal9wfPBtpWkY/UI?node-id=234%3A12987'
     }
   }
 }
