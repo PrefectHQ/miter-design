@@ -15,14 +15,16 @@ export default {
 
 <template>
   <div style="margin-left: 400px; margin-top: 200px">
-    <!-- <h3>Popover</h3> -->
-    <!-- <Button v-popover:[config] style="margin-top: 50px">Button</Button> -->
- <Popover v-model="show" currentElRect="popoverTarget" position="top" :title="title">
+    <h3>Popover</h3>
+    <!-- <h5> Directive version</h5>
+    <Button v-popover:[config] style="margin-top: 50px">Button</Button> -->
+    <h5>Template/Teleport Version</h5>
+ <Popover v-model="show" position="top" target="opener" :title="title">
    <template v-slot:activate>
-    <Tag @mouseenter="showPopover" id="popoverTarget">popover</Tag>
+    <Tag id="opener" @mouseenter="open">popover</Tag>
     </template>
    
-      <template #content>
+      <template v-slot:content>
         <div>
           <div class="d-flex justify-space-between"
             ><span>Date:</span><span>Aug 1, 2021</span></div
@@ -39,8 +41,9 @@ export default {
             ><span>Lowest Range:</span><span>&gt;1d</span></div
           >
         </div>
-        <div class="text-center">
-        <Button color="primary" @click="hidePopover">Close</Button>
+        <div class="text-center mt-4">
+        <Button color="primary" @click="handleClick">Click</Button>
+        <Button color="primary" @click="close">Close</Button>
         </div>
       </template>
     </Popover>
@@ -58,23 +61,23 @@ export default defineComponent({
       position: 'left',
       title: 'title',
       show: false,
-      config: {
-        position: 'left',
-        title:
-          '<span><i class="pi pi-Calendar pi-2x" /> Flow Run Activity</span>',
-        content: Content
-      }
+      // config: {
+      //   position: 'left',
+      //   title:
+      //     '<span><i class="pi pi-Calendar pi-2x" /> Flow Run Activity</span>',
+      //   content: Content
+      // }
     }
   },
   methods: {
     handleClick() {
-      console.log('clicked on flow run num')
+      console.log('clicked popover')
     },
-    showPopover() {
+    open() {
       this.show = true
     },
-    hidePopover() {
-      this.show=false
+    close() {
+      this.show = false
     }
   }
 })

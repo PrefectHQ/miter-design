@@ -4,28 +4,36 @@
       <slot name="activate" />
     </div>
     <teleport :to="teleportTo" :disabled="!popoverOpen" v-if="popoverOpen">
-    <div
-    id="tooltip-container"
-    class="container"
-    :class="position"
-    ref="containerRef"
-    :style="tooltipPositionStyle"
-  >
-    <div class="content-container">
-      <header v-html="title"> </header>
-      <!-- <header>
+      <!-- <div
+      id="background"
+      @keydown="handleBackdropKeyDown"
+      @click.self="close"
+      class="backdrop"
+      > -->
+      <div
+        tabindex="0"
+        id="tooltip-container"
+        class="container"
+        @keydown="handleKeyDown"
+        :class="position"
+        ref="containerRef"
+        :style="tooltipPositionStyle"
+      >
+        <div class="content-container">
+          <header v-html="title"> </header>
+          <!-- <header>
         <span
           ><i class="pi pi-Calendar pi-sm" /> Flow Run Activity</span
         ></header
       > -->
-      <hr />
-      <section>
-        <slot name=content></slot>
-      </section>
-    </div>
-    <div class="arrow"></div>
-  </div>
-      
+          <hr />
+          <section>
+            <slot name="content"></slot>
+          </section>
+        </div>
+        <div class="arrow"></div>
+      </div>
+      <!-- </div>   -->
     </teleport>
   </div>
 </template>
@@ -36,7 +44,7 @@ import { tooltipPosition } from '../../directives/getPosition'
 export default defineComponent({
   name: 'Popover',
   props: {
-    currentElRect: {
+    target: {
       type: [Object, String],
       default: () => {}
     },
@@ -75,35 +83,72 @@ export default defineComponent({
   },
   watch: {
     popoverOpen(val) {
-      if(val) this.getPosition()
+      console.log('open', val)
+      if(val) {
+        this.getPosition()
+        this.addFocus()
+      }
     }
   },
   methods: {
     getPosition() {
-      if (document.querySelector(`#${this.currentElRect}`)) {
+      if (document.querySelector(`#${this.target}`)) {
         this.$nextTick(() => {
           const tooltipRect = this.$refs?.containerRef.getBoundingClientRect()
           const bodyRect = document.body.getBoundingClientRect()
-          const currentElRect = document
-            .querySelector(`#${this.currentElRect}`)
+          const target = document
+            .querySelector(`#${this.target}`)
             ?.getBoundingClientRect()
 
-          document.querySelector(`#${this.currentElRect}`).style.display =
+          document.querySelector(`#${this.target}`).style.display =
             'inline-block'
           this.tooltipPositionStyle = tooltipPosition(
             this.position,
-            currentElRect,
+            target,
             bodyRect,
             tooltipRect
           )
         })
       } else {
         throw new Error(
-          `Could not find element with the id of ${this.currentElRect}`
+          `Could not find element with the id of ${this.target}`
         )
       }
     },
-    closePopUp() {
+    addFocus() {
+      // this.hovered = true
+      this.$nextTick(() => {
+        console.log('ref', this.$refs.containerRef)
+        this.$refs.containerRef.focus()
+        // this.$refs.popUpCloseButton.focus()
+      })
+    },
+    handleKeyDown(evt: Event): void {
+      console.log(document.activeElement)
+      const modalNodes = this.$refs.containerRef.querySelectorAll('*')
+      const tabbable = Array.from(modalNodes).filter(
+        (n: any) => n.tabIndex >= 0
+      )
+      console.log('NODES', tabbable)
+      let index = tabbable.indexOf(document.activeElement)
+      if (evt.key === 'Escape' || evt.key === 'escape') {
+        // Pressing the ESC key resets ariaHidden and closes the popover.
+        this.close()
+      }
+       else if (evt.key === 'Tab' || evt.key === 'tab') {
+          if(index< tabbable.length -1) {
+      //   //set aria hidden on non-popup element
+      //   // Pressing the Tab key traps the focus in the modal.
+        index += 1
+        // index %= tabbable.length
+        console.log('index', index)
+        tabbable[index].focus()
+       evt.preventDefault()
+          }
+      }
+    },
+    close() {
+      console.log('close')
       this.$emit('update:modelValue', false)
     }
   }
@@ -112,4 +157,5 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '../../styles/components/popover';
+@use '../../styles/components/popup';
 </style>
