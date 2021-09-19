@@ -17,12 +17,14 @@
     <Tooltip class="mt-10" />
     <Selects class="mt-10" />
     <TextAreas class="mt-10" />
+    <Breakpoints class="mt-10" />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import Buttons from '../sections/Buttons.vue'
+import Breakpoints from '../sections/Breakpoints.vue'
 import Toggles from '../sections/Toggles.vue'
 import Cards from '../sections/Cards.vue'
 import RadioButtons from '../sections/RadioButtons.vue'
@@ -42,6 +44,7 @@ import TextAreas from '../sections/TextAreas.vue'
 @Options({
   components: {
     Buttons,
+    Breakpoints,
     Cards,
     Inputs,
     Popups,
