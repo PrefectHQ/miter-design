@@ -21,7 +21,7 @@ export default {
     <h5>Template/Teleport Version</h5>
  <Popover v-model="show" position="top" target="opener" :title="title">
    <template v-slot:activate>
-    <Tag id="opener" @mouseenter="open" @keydown.enter="open">popover</Tag>
+    <Tag tabindex=0 id="opener" @mouseenter="open" @keydown.enter="open">popover</Tag>
     </template>
    
       <template v-slot:content>
