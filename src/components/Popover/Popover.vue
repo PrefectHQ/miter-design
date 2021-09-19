@@ -4,12 +4,6 @@
       <slot name="activate" />
     </div>
     <teleport :to="teleportTo" :disabled="!popoverOpen" v-if="popoverOpen">
-      <!-- <div
-      id="background"
-      @keydown="handleBackdropKeyDown"
-      @click.self="close"
-      class="backdrop"
-      > -->
       <div
         tabindex="0"
         id="tooltip-container"
@@ -21,11 +15,6 @@
       >
         <div class="content-container">
           <header v-html="title"> </header>
-          <!-- <header>
-        <span
-          ><i class="pi pi-Calendar pi-sm" /> Flow Run Activity</span
-        ></header
-      > -->
           <hr />
           <section>
             <slot name="content"></slot>
@@ -33,7 +22,6 @@
         </div>
         <div class="arrow"></div>
       </div>
-      <!-- </div>   -->
     </teleport>
   </div>
 </template>
@@ -83,7 +71,6 @@ export default defineComponent({
   },
   watch: {
     popoverOpen(val) {
-      console.log('open', val)
       if(val) {
         this.getPosition()
         this.addFocus()
@@ -118,18 +105,15 @@ export default defineComponent({
     addFocus() {
       // this.hovered = true
       this.$nextTick(() => {
-        console.log('ref', this.$refs.containerRef)
         this.$refs.containerRef.focus()
         // this.$refs.popUpCloseButton.focus()
       })
     },
     handleKeyDown(evt: Event): void {
-      console.log(document.activeElement)
       const modalNodes = this.$refs.containerRef.querySelectorAll('*')
       const tabbable = Array.from(modalNodes).filter(
         (n: any) => n.tabIndex >= 0
       )
-      console.log('NODES', tabbable)
       let index = tabbable.indexOf(document.activeElement)
       if (evt.key === 'Escape' || evt.key === 'escape') {
         // Pressing the ESC key resets ariaHidden and closes the popover.
@@ -141,14 +125,12 @@ export default defineComponent({
       //   // Pressing the Tab key traps the focus in the modal.
         index += 1
         // index %= tabbable.length
-        console.log('index', index)
         tabbable[index].focus()
        evt.preventDefault()
           }
       }
     },
     close() {
-      console.log('close')
       this.$emit('update:modelValue', false)
     }
   }
@@ -157,5 +139,4 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '../../styles/components/popover';
-@use '../../styles/components/popup';
 </style>
