@@ -2,16 +2,6 @@ import { mount } from '@vue/test-utils'
 import Button from './Button.vue'
 import IconButton from './IconButton.vue'
 
-// Note: props - Button
-// icon
-// miter
-// color
-// disabled
-
-// Note: props - IconButton
-// icon
-// disabled
-
 test('displays text in the default slot', () => {
   const text = 'Hello!'
   const wrapper = mount(Button, {
