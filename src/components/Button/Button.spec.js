@@ -1,5 +1,16 @@
 import { mount } from '@vue/test-utils'
 import Button from './Button.vue'
+import IconButton from './IconButton.vue'
+
+// Note: props - Button
+// icon
+// miter
+// color
+// disabled
+
+// Note: props - IconButton
+// icon
+// disabled
 
 test('displays text in the default slot', () => {
   const text = 'Hello!'
@@ -59,6 +70,21 @@ describe('miter prop', () => {
 })
 
 describe('icon prop', () => {
+  test('displays the passed icon in the IconButton comp if passed', () => {
+    const wrapper = mount(IconButton, {
+      props: { icon: 'bug-2-line' }
+    })
+    expect(wrapper.get('i').classes()).toContain('pi-bug-2-line')
+  })
+
+  test('does not display an icon in the IconButton comp if not passed', () => {
+    const wrapper = mount(IconButton, {
+      props: {}
+    })
+
+    expect(wrapper.get('i').classes()).not.toContain('pi-bug-2-line')
+  })
+
   test('defaults to the block button when no icon prop is passed', () => {
     const wrapper = mount(Button, {
       props: {}
