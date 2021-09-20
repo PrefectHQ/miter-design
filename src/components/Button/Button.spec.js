@@ -69,22 +69,24 @@ describe('miter prop', () => {
   })
 })
 
-describe('icon prop', () => {
-  test('displays the passed icon in the IconButton comp if passed', () => {
+describe('IconButton - icon prop', () => {
+  test('displays the passed icon if passed', () => {
     const wrapper = mount(IconButton, {
       props: { icon: 'bug-2-line' }
     })
     expect(wrapper.get('i').classes()).toContain('pi-bug-2-line')
   })
 
-  test('does not display an icon in the IconButton comp if not passed', () => {
+  test('does not display an icon if not passed', () => {
     const wrapper = mount(IconButton, {
       props: {}
     })
 
     expect(wrapper.get('i').classes()).not.toContain('pi-bug-2-line')
   })
+})
 
+describe('Button - icon prop', () => {
   test('defaults to the block button when no icon prop is passed', () => {
     const wrapper = mount(Button, {
       props: {}
@@ -106,7 +108,45 @@ describe('icon prop', () => {
   })
 })
 
-describe('disabled state', () => {
+describe('IconButton - disabled state', () => {
+  test('adds the disabled class when disabled:true is passed as a prop', () => {
+    const wrapper = mount(IconButton, {
+      props: {
+        disabled: true
+      }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).toContain('disabled')
+  })
+
+  test('adds the disabled attribute when disabled:true is passed as a prop', () => {
+    const wrapper = mount(IconButton, {
+      props: {
+        disabled: true
+      }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.attributes('disabled')).toBeDefined()
+  })
+
+  test("doesn't pass the disabled attribute when disabled:false is passed as a prop", () => {
+    const wrapper = mount(IconButton, {
+      props: {
+        disabled: false
+      }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.attributes('disabled')).toBeUndefined()
+  })
+})
+
+describe('Button - disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
     const wrapper = mount(Button, {
       props: {
