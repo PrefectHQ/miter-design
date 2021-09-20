@@ -3,8 +3,10 @@
     <div v-if="$slots.activate">
       <slot name="activate" />
     </div>
-    <teleport :to="teleportTo" :disabled="!open" v-if="open">
+    <teleport :to="teleportTo">
       <div
+        v-if="open"
+        :disabled="!open"
         tabindex="0"
         id="tooltip-container"
         class="container"
@@ -73,20 +75,24 @@ export default defineComponent({
     open(val) {
       if (val) {
         this.getPosition()
-        this.addFocus()
       }
     }
+  },
+  mounted() {
+    console.log('value', this.value)
   },
   methods: {
     getPosition() {
       if (document.querySelector(`#${this.target}`)) {
         this.$nextTick(() => {
+          console.log('next tick get pos')
           const tooltipRect = this.$refs?.containerRef.getBoundingClientRect()
           const bodyRect = document.body.getBoundingClientRect()
           const target = document
             .querySelector(`#${this.target}`)
             ?.getBoundingClientRect()
 
+          console.log('currentEL', target)
           document.querySelector(`#${this.target}`).style.display =
             'inline-block'
           this.tooltipPositionStyle = tooltipPosition(
@@ -95,6 +101,7 @@ export default defineComponent({
             bodyRect,
             tooltipRect
           )
+          this.addFocus()
         })
       } else {
         throw new Error(`Could not find element with the id of ${this.target}`)
@@ -103,10 +110,14 @@ export default defineComponent({
     addFocus() {
       // this.hovered = true
       this.$nextTick(() => {
-        //this.$refs.containerRef.children[0].focus()  -> contentContainer
         this.$refs.containerRef.focus()
-        // this.$refs.popUpCloseButton.focus()
       })
+      // this.$nextTick(() => {
+
+      //   //this.$refs.containerRef.children[0].focus()  -> contentContainer
+      //   this.$refs.containerRef.focus()
+      //   // this.$refs.popUpCloseButton.focus()
+      // })
     },
     handleKeyDown(evt: Event): void {
       const modalNodes = this.$refs.containerRef.querySelectorAll('*')
