@@ -15,6 +15,30 @@ test('displays text in the default slot', () => {
   expect(button.text()).toBe(text)
 })
 
+describe('icon and text', () => {
+  test('displays icon prop with text if passed', () => {
+    const wrapper = mount(Button, {
+      props: { icon: 'bug-2-line' },
+      slots: { default: 'Foo' }
+    })
+    const button = wrapper.get('button')
+
+    expect(button.text()).toBe('Foo')
+    expect(button.classes()).toContain('icon')
+  })
+
+  test('does not display icon prop with text if not passed', () => {
+    const wrapper = mount(Button, {
+      props: {},
+      slots: { default: 'Foo' }
+    })
+    const button = wrapper.get('button')
+
+    expect(button.text()).toBe('Foo')
+    expect(button.classes()).not.toContain('icon')
+  })
+})
+
 describe('color prop', () => {
   test('defaults to the secondary color when no color prop is passed', () => {
     const wrapper = mount(Button, {
