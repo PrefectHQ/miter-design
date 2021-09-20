@@ -22,13 +22,13 @@
         ref="inputbox"
         data-test="default"
         :type="inputType"
-        placeholder="Input"
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
         @mousedown="handleMouseDown"
         @keydown.enter="handleKeydown"
         @focus="handleFocus"
         @blur="handleBlur"
+        :placeholder="placeholder"
         :disabled="disabled"
         :value="internalValue"
         :valid="valid"
@@ -111,6 +111,11 @@ export default defineComponent({
     valid: {
       type: Boolean,
       default: true
+    },
+    placeholder: {
+      type: String,
+      default: '',
+      required: false
     },
     required: {
       type: Boolean,
