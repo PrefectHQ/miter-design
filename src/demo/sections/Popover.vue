@@ -19,11 +19,13 @@ export default {
     <!-- <h5> Directive version</h5>
     <Button v-popover:[config] style="margin-top: 50px">Button</Button> -->
     <h5>Template/Teleport Version</h5>
- <Popover v-model="show" position="top" target="opener" :title="title">
-   <template v-slot:activate>
-    <Tag tabindex=0 id="opener" @mouseenter="open" @keydown.enter="open">popover</Tag>
-    </template>
-   
+    <Popover v-model="show" position="top" target="opener" :title="title">
+      <template v-slot:activate>
+        <Tag tabindex="0" id="opener" @mouseenter="open" @keydown.enter="open"
+          >popover</Tag
+        >
+      </template>
+
       <template v-slot:content>
         <div>
           <div class="d-flex justify-space-between"
@@ -42,8 +44,8 @@ export default {
           >
         </div>
         <div class="text-center mt-4">
-        <Button color="primary" @click="handleClick">Click</Button>
-        <Button color="primary" @click="close">Close</Button>
+          <Button color="primary" @click="handleClick">Click</Button>
+          <Button color="primary" @click="close">Close</Button>
         </div>
       </template>
     </Popover>
@@ -52,21 +54,15 @@ export default {
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Content from './Content.vue'
 import Popover from '@/components/Popover/Popover.vue'
 export default defineComponent({
-  components: { Content, Popover },
+  components: { Popover },
   data() {
     return {
-      position: 'left',
-      title: 'title',
-      show: false,
-      // config: {
-      //   position: 'left',
-      //   title:
-      //     '<span><i class="pi pi-Calendar pi-2x" /> Flow Run Activity</span>',
-      //   content: Content
-      // }
+      position: 'top',
+      title:
+        '<span><i class="pi pi-user-smile-line pi-lg"></i> Flow Run Duration </span>',
+      show: false
     }
   },
   methods: {

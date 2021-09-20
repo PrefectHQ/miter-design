@@ -18,7 +18,15 @@
   padding: 10px;
 
   header {
-    // font-size: 10px;
+    :first-child &:not(i) {
+      font-family: Barlow !important;
+      font-weight: 600;
+
+      :first-child::before {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+    }
   }
 
   hr {
