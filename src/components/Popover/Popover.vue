@@ -5,7 +5,8 @@
     </div>
     <teleport :to="teleportTo" :disabled="!popoverOpen" v-if="popoverOpen">
       <div
-        tabindex="0"
+        tabindex=0
+        @blur="handleBlur"
         id="tooltip-container"
         class="container"
         @keydown="handleKeyDown"
@@ -15,7 +16,7 @@
       >
         <div class="content-container">
           <header v-html="title"> </header>
-          <hr />
+          <hr class="break"/>
           <section>
             <slot name="content"></slot>
           </section>
@@ -103,10 +104,14 @@ export default defineComponent({
       }
     },
     addFocus() {
-      // this.hovered = true
+      
       this.$nextTick(() => {
         this.$refs.containerRef.focus()
-        // this.$refs.popUpCloseButton.focus()
+      //   const modalNodes = this.$refs.containerRef.querySelectorAll('*')
+      // const tabbable = Array.from(modalNodes).filter(
+      //   (n: any) => n.tabIndex >= 0
+      // )
+      // if(tabbable.length>0) tabbable[0].focus()
       })
     },
     handleKeyDown(evt: Event): void {
@@ -129,6 +134,9 @@ export default defineComponent({
        evt.preventDefault()
           }
       }
+    },
+    handleBlur(e:Event) {
+      console.log('blur', e)
     },
     close() {
       this.$emit('update:modelValue', false)
