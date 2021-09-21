@@ -1,5 +1,3 @@
-// Todo: put in the type for the object properties
-
 export function tooltipPosition(
   position: string,
   currentElRect: object,
@@ -14,49 +12,54 @@ export function tooltipPosition(
   if (!currentElRect && !tooltipRefRect) return {}
   if (position == 'top') {
     return {
-      top:
+      top: `${
         currentElRect.top -
         bodyRect.top -
         currentElRect.height -
         tooltipRefRect.height +
-        20 +
-        'px',
-      left:
+        arrow.height
+      }px`,
+      left: `${
         currentElRect.left -
         bodyRect.left +
         currentElRect.width / 2 -
-        tooltipRefRect.width / 2 +
-        'px'
+        tooltipRefRect.width / 2
+      }px`
     }
   }
   if (position == 'right') {
     return {
-      top: currentElRect.top - bodyRect.top - currentElRect.height + 'px',
-      left: currentElRect.left - bodyRect.left + currentElRect.width + 10 + 'px'
+      top: `${
+        currentElRect.top -
+        bodyRect.top -
+        0.25 * tooltipRefRect.height +
+        currentElRect.height / 2 +
+        arrow.height / 2
+      }px`,
+      left: `${
+        currentElRect.left - bodyRect.left + currentElRect.width + arrow.width
+      }px`
     }
   }
   if (position == 'bottom') {
     return {
-      top: currentElRect.top - bodyRect.top + currentElRect.height + 10 + 'px',
-      left:
+      top: `${
+        currentElRect.top -
+        bodyRect.top +
+        0.12 * tooltipRefRect.height +
+        currentElRect.height / 2 +
+        arrow.height / 2
+      }px`,
+      left: `${
         currentElRect.left -
         bodyRect.left +
         currentElRect.width / 2 -
-        tooltipRefRect.width / 2 +
-        'px'
+        tooltipRefRect.width / 2
+      }px`
     }
   }
 
   if (position == 'left') {
-    // return {
-    //   top:
-    //     currentElRect.offsetTop -
-    //     0.25 * tooltipRefRect.height +
-    //     currentElRect.offsetHeight / 2 +
-    //     'px',
-    //   left: currentElRect.offsetLeft - tooltipRefRect.width - 12 + 'px'
-    // }
-
     return {
       top: `${
         currentElRect.top -
