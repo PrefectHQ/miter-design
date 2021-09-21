@@ -139,4 +139,10 @@
       color: variables.$grey-20 !important;
     }
   }
+
+  &.rounded {
+    :first-child {
+      border-radius: 50%;
+    }
+  }
 }

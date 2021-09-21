@@ -22,6 +22,9 @@ import { Vue, Options, prop } from 'vue-class-component'
 class Props {
   icon = prop<string>({ default: '' })
   disabled = prop<boolean>({ default: false })
+  rounded = prop<boolean>({ default: false })
+  flat = prop<boolean>({ default: false })
+  color = prop<string>({ default: 'secondary' })
 }
 
 const Component = Options
@@ -34,7 +37,10 @@ export default class IconButton extends Vue.with(Props) {
     return [
       ...(this.disabled ? ['disabled'] : []),
       ...(this.hovered ? ['hovered'] : []),
-      ...(this.active ? ['active'] : [])
+      ...(this.active ? ['active'] : []),
+      ...(this.rounded ? ['rounded'] : []),
+      ...(this.flat ? ['flat'] : []),
+      ...[this.color]
     ]
   }
 
