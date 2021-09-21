@@ -32,8 +32,11 @@ Primary.args = {
 
 export const Secondary = Template.bind({})
 Secondary.args = {
-  template: `<Button :color="args.color">{{args.content}}</Button>`,
-  color: 'secondary'
+  template: `<Button :color="args.color" v-bind="args">{{args.content}}</Button>`,
+  color: 'secondary',
+  flat: false,
+  height: 'inherit',
+  width: 'inherit'
 }
 
 export const SecondaryLight = Template.bind({})
@@ -78,8 +81,9 @@ DefaultIcon.args = {
 
 export const Icon = Template.bind({})
 Icon.args = {
-  template: `<IconButton :icon="args.icon">{{args.content}}</IconButton>`,
-  icon: 'subtract-line'
+  template: `<IconButton :icon="args.icon" v-bind="args">{{args.content}}</IconButton>`,
+  icon: 'subtract-line',
+  color: ''
 }
 
 export const DisabledIcon = Template.bind({})
