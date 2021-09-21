@@ -3,6 +3,7 @@
     class="cursor-pointer button icon-button"
     :class="classList"
     :disabled="disabled"
+    :style="{ height: height, width: width }"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousedown="handleMouseDown"
