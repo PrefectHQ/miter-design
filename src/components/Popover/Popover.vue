@@ -63,23 +63,49 @@ export default defineComponent({
   },
   data() {
     return {
-      tooltipPositionStyle: {}
+      tooltipPositionStyle: {},
+      previouslyFocused: null as HTMLDivElement|null,
+      tabbable: []
     }
   },
   emits: ['update:modelValue'],
   computed: {
     open(): boolean {
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
+    },
+    activator(): HTMLDivElement|null {
+      return document.querySelector(`#${this.target}`)
     }
   },
   watch: {
     open(val) {
       if (val) {
+        this.setPreviouslyFocussed()
+        this.setTabbable()
         this.getPosition()
       }
     }
   },
   methods: {
+    setPreviouslyFocussed() {
+      this.previouslyFocused =
+      typeof document !== "undefined"
+        ? document.activeElement === document.body || document.querySelector(`#${this.target}`)
+          ? document.querySelector(`#${this.target}`)
+          : null
+        : document.activeElement
+    },
+    setTabbable() {
+      setTimeout(()=> {
+         const modalNodes = this.$refs.containerRef.querySelectorAll('*')
+      this.tabbable = Array.from(modalNodes).filter(
+        (n: any) => n.tabIndex >= 0
+      )
+      this.tabbable.forEach(n => {
+        n.addEventListener('blur', (e: Event)=> this.handleBlur(e))
+      })
+         },200)
+    },
     getPosition() {
       if (document.querySelector(`#${this.target}`)) {
         this.$nextTick(() => {
@@ -104,7 +130,6 @@ export default defineComponent({
       }
     },
     addFocus() {
-      
       this.$nextTick(() => {
         this.$refs.containerRef.focus()
       //   const modalNodes = this.$refs.containerRef.querySelectorAll('*')
@@ -121,30 +146,30 @@ export default defineComponent({
       // })
     },
     handleKeyDown(evt: Event): void {
-      const modalNodes = this.$refs.containerRef.querySelectorAll('*')
-      const tabbable = Array.from(modalNodes).filter(
-        (n: any) => n.tabIndex >= 0
-      )
-      let index = tabbable.indexOf(document.activeElement)
+      let index = this.tabbable.indexOf(document.activeElement)
       if (evt.key.toLowerCase() === 'escape') {
         // Pressing the ESC key resets ariaHidden and closes the popover.
         this.close()
       } else if (evt.key.toLowerCase() === 'tab') {
-        if (index < tabbable.length - 1) {
+        if (index < this.tabbable.length - 1) {
           //set aria hidden on non-popup element
           // Pressing the Tab key traps the focus in the modal.
           index += 1
           // index %= tabbable.length
-          tabbable[index].focus()
+          this.tabbable[index].focus()
           evt.preventDefault()
-        }
+        } else this.previouslyFocused.focus()
       }
     },
     handleBlur(e:Event) {
-      console.log('blur', e)
+      const target = e.relatedTarget as HTMLDivElement
+      if (!this.tabbable.includes(target) && this.open) {
+        this.close()
+      }
     },
     close() {
       this.$emit('update:modelValue', false)
+      this.previouslyFocused.focus()
     }
   }
 })

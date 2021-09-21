@@ -35,7 +35,7 @@
           >
         </div>
         <div class="text-center mt-4">
-          <Button color="primary" @click="handleClick">Click</Button>
+          <Button class="mr-1" color="primary" @click="handleClick">Click</Button>
           <Button color="primary" @click="close">Close</Button>
         </div>
       </template>
@@ -67,10 +67,12 @@ export default defineComponent({
     handleClick() {
       console.log('clicked popover')
     },
-    open() {
+    open(e: event) {
+      console.log('open in demo', e)
       this.show = true
     },
-    close() {
+    close(e: event) {
+      console.log('close in demo', e)
       this.show = false
     }
   }

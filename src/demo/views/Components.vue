@@ -3,6 +3,7 @@
     <h1>Components</h1>
     <Cards />
     <Popups />
+     <Popover class="mt-10" />
     <Buttons class="mt-10" />
     <Toggles class="mt-10" />
     <RadioButtons class="mt-10" />
@@ -16,7 +17,7 @@
     <Avatar class="mt-10" />
     <Tooltip class="mt-10" />
     <Selects class="mt-10" />
-    <Popover class="mt-10" />
+   
     <TextAreas class="mt-10" />
     <Breakpoints class="mt-10" />
   </div>
