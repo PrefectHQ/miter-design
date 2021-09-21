@@ -12,7 +12,11 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <i class="pi pi-sm" :class="iconClass"></i>
+    <i
+      class="pi pi-sm"
+      :class="iconClass"
+      :style="{ height: height, width: width }"
+    ></i>
   </button>
 </template>
 
@@ -25,6 +29,8 @@ class Props {
   rounded = prop<boolean>({ default: false })
   flat = prop<boolean>({ default: false })
   color = prop<string>({ default: '' })
+  height = prop<string>({ default: 'inherit' })
+  width = prop<string>({ default: 'inherit' })
 }
 
 const Component = Options

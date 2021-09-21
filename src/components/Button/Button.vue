@@ -12,7 +12,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <span data-test="default">
+    <span data-test="default" :style="{ height: height, width: width }">
       <i v-if="icon" class="pi pi-sm" :class="iconClass"></i>
       <slot />
     </span>
@@ -28,6 +28,8 @@ class Props {
   color = prop<string>({ default: 'secondary' })
   flat = prop<boolean>({ default: false })
   disabled = prop<boolean>({ default: false })
+  height = prop<string>({ default: 'inherit' })
+  width = prop<string>({ default: 'inherit' })
 }
 
 const Component = Options
