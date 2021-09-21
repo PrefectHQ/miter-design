@@ -1,5 +1,7 @@
 # Miter Design
 
+Make sure you have Node v16+ and npm v7+
+
 ## Project setup
 
 ```
