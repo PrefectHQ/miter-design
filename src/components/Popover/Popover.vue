@@ -18,7 +18,7 @@
       >
         <div class="content-container">
           <header v-html="title"> </header>
-          <hr class="break"/>
+          <hr class="break" />
           <section>
             <slot name="content"></slot>
           </section>
@@ -73,9 +73,9 @@ export default defineComponent({
     open(): boolean {
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
     },
-    activator(): HTMLDivElement|null {
-      return document.querySelector(`#${this.target}`)
-    }
+  },
+  mounted() {
+    document.querySelector(`#${this.target}`).tabIndex = 0
   },
   watch: {
     open(val) {
@@ -111,10 +111,7 @@ export default defineComponent({
         this.$nextTick(() => {
           const tooltipRect = this.$refs?.containerRef.getBoundingClientRect()
           const bodyRect = document.body.getBoundingClientRect()
-          const target = document
-            .querySelector(`#${this.target}`)
-            ?.getBoundingClientRect()
-
+          const target = document.querySelector(`#${this.target}`).getBoundingClientRect()
           document.querySelector(`#${this.target}`).style.display =
             'inline-block'
           this.tooltipPositionStyle = tooltipPosition(
@@ -132,30 +129,15 @@ export default defineComponent({
     addFocus() {
       this.$nextTick(() => {
         this.$refs.containerRef.focus()
-      //   const modalNodes = this.$refs.containerRef.querySelectorAll('*')
-      // const tabbable = Array.from(modalNodes).filter(
-      //   (n: any) => n.tabIndex >= 0
-      // )
-      // if(tabbable.length>0) tabbable[0].focus()
       })
-      // this.$nextTick(() => {
-
-      //   //this.$refs.containerRef.children[0].focus()  -> contentContainer
-      //   this.$refs.containerRef.focus()
-      //   // this.$refs.popUpCloseButton.focus()
-      // })
     },
     handleKeyDown(evt: Event): void {
       let index = this.tabbable.indexOf(document.activeElement)
       if (evt.key.toLowerCase() === 'escape') {
-        // Pressing the ESC key resets ariaHidden and closes the popover.
         this.close()
       } else if (evt.key.toLowerCase() === 'tab') {
         if (index < this.tabbable.length - 1) {
-          //set aria hidden on non-popup element
-          // Pressing the Tab key traps the focus in the modal.
           index += 1
-          // index %= tabbable.length
           this.tabbable[index].focus()
           evt.preventDefault()
         } else this.previouslyFocused.focus()
@@ -163,7 +145,7 @@ export default defineComponent({
     },
     handleBlur(e:Event) {
       const target = e.relatedTarget as HTMLDivElement
-      if (!this.tabbable.includes(target) && this.open) {
+      if (!this.tabbable.includes(target)) {
         this.close()
       }
     },

@@ -1,14 +1,14 @@
 <template>
   <div style="margin-left: 400px; margin-top: 200px">
     <h5>Template/Teleport Version</h5>
-    <Popover v-model="show" position="top" target="opener" :title="title">
+    <Popover v-model="show" position="right" target="opener" :title="title">
       <template v-slot:activate>
         <Card
           width="400px"
           height="500px"
           class="mr-4 mt-4 d-inline-block"
           shadow="sm"
-          tabindex="0"
+         
           id="opener"
           @mouseenter="open"
           @keydown.enter="open"
@@ -56,7 +56,7 @@ export default defineComponent({
       show: false,
 
       config: {
-        position: 'top',
+        position: 'right',
         content: 'content',
         title: 'Foo',
         show: false
@@ -68,11 +68,9 @@ export default defineComponent({
       console.log('clicked popover')
     },
     open(e: event) {
-      console.log('open in demo', e)
       this.show = true
     },
     close(e: event) {
-      console.log('close in demo', e)
       this.show = false
     }
   }
