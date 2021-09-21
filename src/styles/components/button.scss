@@ -149,4 +149,13 @@
       border-radius: 50%;
     }
   }
+
+  &.flat {
+    color: variables.$grey-80;
+
+    > :first-child {
+      background-color: initial;
+      border: 1px solid transparent;
+    }
+  }
 }
