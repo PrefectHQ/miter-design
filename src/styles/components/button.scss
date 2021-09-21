@@ -50,19 +50,42 @@
     }
   }
 
+  &.icon-button {
+    color: variables.$grey-80;
+
+    > :first-child {
+      padding: 4px;
+      background: transparent;
+      border: 1px solid variables.$inactive;
+    }
+
+    &.hovered > :first-child {
+      background: variables.$secondary-hover;
+      border-color: variables.$secondary-pressed;
+    }
+
+    &.active > :first-child {
+      background: variables.$secondary-pressed;
+      border-color: variables.$secondary-pressed;
+    }
+  }
+
   &.primary {
     color: variables.$text--white;
 
     > :first-child {
       background-color: variables.$primary;
+      border: 1px solid variables.$primary;
     }
 
     &.hovered > :first-child {
       background-color: variables.$primary-hover;
+      border: 1px solid variables.$primary-hover;
     }
 
     &.active > :first-child {
       background-color: variables.$primary-pressed;
+      border: 1px solid variables.$primary-pressed;
     }
   }
 
@@ -111,30 +134,11 @@
     }
   }
 
-  &.icon-button {
-    > :first-child {
-      padding: 4px;
-      background: transparent;
-      border: 1px solid variables.$inactive;
-      color: variables.$grey-80;
-    }
-
-    &.hovered > :first-child {
-      background: variables.$secondary-hover;
-      border-color: variables.$secondary-pressed;
-    }
-
-    &.active > :first-child {
-      background: variables.$secondary-pressed;
-      border-color: variables.$secondary-pressed;
-    }
-  }
-
   &.disabled {
     cursor: not-allowed;
 
     > :first-child {
-      border: none;
+      border: 1px solid variables.$secondary-background;
       background-color: variables.$secondary-background !important;
       color: variables.$grey-20 !important;
     }

@@ -24,7 +24,7 @@ class Props {
   disabled = prop<boolean>({ default: false })
   rounded = prop<boolean>({ default: false })
   flat = prop<boolean>({ default: false })
-  color = prop<string>({ default: 'secondary' })
+  color = prop<string>({ default: '' })
 }
 
 const Component = Options
