@@ -3,10 +3,12 @@
     <div v-if="$slots.activate">
       <slot name="activate" />
     </div>
-    <teleport :to="teleportTo" :disabled="!popoverOpen" v-if="popoverOpen">
+    <teleport :to="teleportTo">
       <div
-        tabindex=0
+        tabindex="0"
         @blur="handleBlur"
+        v-if="open"
+        :disabled="!open"
         id="tooltip-container"
         class="container"
         @keydown="handleKeyDown"
@@ -66,15 +68,14 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   computed: {
-    popoverOpen(): boolean {
+    open(): boolean {
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
     }
   },
   watch: {
-    popoverOpen(val) {
-      if(val) {
+    open(val) {
+      if (val) {
         this.getPosition()
-        this.addFocus()
       }
     }
   },
@@ -96,11 +97,10 @@ export default defineComponent({
             bodyRect,
             tooltipRect
           )
+          this.addFocus()
         })
       } else {
-        throw new Error(
-          `Could not find element with the id of ${this.target}`
-        )
+        throw new Error(`Could not find element with the id of ${this.target}`)
       }
     },
     addFocus() {
@@ -113,6 +113,12 @@ export default defineComponent({
       // )
       // if(tabbable.length>0) tabbable[0].focus()
       })
+      // this.$nextTick(() => {
+
+      //   //this.$refs.containerRef.children[0].focus()  -> contentContainer
+      //   this.$refs.containerRef.focus()
+      //   // this.$refs.popUpCloseButton.focus()
+      // })
     },
     handleKeyDown(evt: Event): void {
       const modalNodes = this.$refs.containerRef.querySelectorAll('*')
@@ -120,19 +126,18 @@ export default defineComponent({
         (n: any) => n.tabIndex >= 0
       )
       let index = tabbable.indexOf(document.activeElement)
-      if (evt.key === 'Escape' || evt.key === 'escape') {
+      if (evt.key.toLowerCase() === 'escape') {
         // Pressing the ESC key resets ariaHidden and closes the popover.
         this.close()
-      }
-       else if (evt.key === 'Tab' || evt.key === 'tab') {
-          if(index< tabbable.length -1) {
-      //   //set aria hidden on non-popup element
-      //   // Pressing the Tab key traps the focus in the modal.
-        index += 1
-        // index %= tabbable.length
-        tabbable[index].focus()
-       evt.preventDefault()
-          }
+      } else if (evt.key.toLowerCase() === 'tab') {
+        if (index < tabbable.length - 1) {
+          //set aria hidden on non-popup element
+          // Pressing the Tab key traps the focus in the modal.
+          index += 1
+          // index %= tabbable.length
+          tabbable[index].focus()
+          evt.preventDefault()
+        }
       }
     },
     handleBlur(e:Event) {
