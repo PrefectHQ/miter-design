@@ -1,20 +1,20 @@
 <template>
   <div style="margin-left: 400px; margin-top: 200px">
-    <!-- <div>
-      <h3>Popover</h3>
-      <h5> Directive version</h5>
-      <Button v-popover:[config] style="margin-top: 50px">Button</Button>
-    </div> -->
     <h5>Template/Teleport Version</h5>
-    <Popover v-model="show" position="bottom" target="opener" :title="title">
+    <Popover v-model="show" position="top" target="opener" :title="title">
       <template v-slot:activate>
-        <Button
+        <Card
+          width="400px"
+          height="500px"
+          class="mr-4 mt-4 d-inline-block"
+          shadow="sm"
           tabindex="0"
           id="opener"
           @mouseenter="open"
           @keydown.enter="open"
-          >popover</Button
         >
+          Hello
+        </Card>
       </template>
 
       <template v-slot:content>

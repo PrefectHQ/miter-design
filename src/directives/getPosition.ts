@@ -13,11 +13,7 @@ export function tooltipPosition(
   if (position == 'top') {
     return {
       top: `${
-        currentElRect.top -
-        bodyRect.top -
-        currentElRect.height -
-        tooltipRefRect.height +
-        arrow.height
+        currentElRect.top - bodyRect.top - tooltipRefRect.height - arrow.height
       }px`,
       left: `${
         currentElRect.left -
@@ -44,11 +40,7 @@ export function tooltipPosition(
   if (position == 'bottom') {
     return {
       top: `${
-        currentElRect.top -
-        bodyRect.top +
-        0.12 * tooltipRefRect.height +
-        currentElRect.height / 2 +
-        arrow.height / 2
+        currentElRect.top - bodyRect.top + currentElRect.height + arrow.height
       }px`,
       left: `${
         currentElRect.left -

@@ -78,21 +78,16 @@ export default defineComponent({
       }
     }
   },
-  mounted() {
-    console.log('value', this.value)
-  },
   methods: {
     getPosition() {
       if (document.querySelector(`#${this.target}`)) {
         this.$nextTick(() => {
-          console.log('next tick get pos')
           const tooltipRect = this.$refs?.containerRef.getBoundingClientRect()
           const bodyRect = document.body.getBoundingClientRect()
           const target = document
             .querySelector(`#${this.target}`)
             ?.getBoundingClientRect()
 
-          console.log('currentEL', target)
           document.querySelector(`#${this.target}`).style.display =
             'inline-block'
           this.tooltipPositionStyle = tooltipPosition(
