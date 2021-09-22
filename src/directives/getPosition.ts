@@ -1,6 +1,6 @@
 export function tooltipPosition(
   position: string,
-  currentElRect: object,
+  currentElRect: DOMRect | undefined,
   bodyRect: object,
   tooltipRefRect: object
 ) {

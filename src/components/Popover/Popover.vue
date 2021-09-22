@@ -31,7 +31,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { Vue } from 'vue-class-component'
 import { tooltipPosition } from '../../directives/getPosition'
+
+interface tooltipPositionStyleObject {
+  left?: string | undefined
+  top?: string | undefined
+}
+
 export default defineComponent({
   name: 'Popover',
   props: {
@@ -63,9 +70,9 @@ export default defineComponent({
   },
   data() {
     return {
-      tooltipPositionStyle: {},
+      tooltipPositionStyle: {} as tooltipPositionStyleObject | undefined,
       previouslyFocused: null as HTMLDivElement | null,
-      tabbable: []
+      tabbable: [] as Element[]
     }
   },
   emits: ['update:modelValue'],
@@ -100,7 +107,7 @@ export default defineComponent({
     },
     setTabbable() {
       setTimeout(() => {
-        const modalNodes = this.$refs.containerRef.querySelectorAll('*')
+        const modalNodes = (this.$refs.containerRef as HTMLElement).querySelectorAll('*')
         this.tabbable = Array.from(modalNodes).filter(
           (n: any) => n.tabIndex >= 0
         )
@@ -112,13 +119,11 @@ export default defineComponent({
     getPosition() {
       if (document.querySelector(`#${this.target}`)) {
         this.$nextTick(() => {
-          const tooltipRect = this.$refs?.containerRef.getBoundingClientRect()
+          const tooltipRect = (this.$refs?.containerRef as HTMLElement).getBoundingClientRect()
           const bodyRect = document.body.getBoundingClientRect()
-          const target = document
-            .querySelector(`#${this.target}`)
-            .getBoundingClientRect()
-          document.querySelector(`#${this.target}`).style.display =
-            'inline-block'
+          const target = document?.querySelector(`#${this.target}`)?.getBoundingClientRect()
+          const activator: HTMLElement | null = document.getElementById(this.target)
+          if(activator) activator.style.display = 'inline-block'
           this.tooltipPositionStyle = tooltipPosition(
             this.position,
             target,
@@ -133,22 +138,24 @@ export default defineComponent({
     },
     addFocus() {
       this.$nextTick(() => {
-        this.$refs.containerRef.focus()
+        (this.$refs.containerRef as HTMLElement).focus()
       })
     },
-    handleKeyDown(evt: Event): void {
+    handleKeyDown(evt: KeyboardEvent): void {
+      if (document.activeElement) {
       let index = this.tabbable.indexOf(document.activeElement)
       if (evt.key.toLowerCase() === 'escape') {
         this.close()
       } else if (evt.key.toLowerCase() === 'tab') {
         if (index < this.tabbable.length - 1) {
           index += 1
-          this.tabbable[index].focus()
+          (this.tabbable[index] as HTMLElement).focus()
           evt.preventDefault()
-        } else this.previouslyFocused.focus()
+        } else this.previouslyFocused?.focus()
+      }
       }
     },
-    handleBlur(e: Event) {
+    handleBlur(e: MouseEvent) {
       const target = e.relatedTarget as HTMLDivElement
       if (!this.tabbable.includes(target)) {
         this.close()
@@ -156,7 +163,7 @@ export default defineComponent({
     },
     close() {
       this.$emit('update:modelValue', false)
-      this.previouslyFocused.focus()
+      this.previouslyFocused?.focus()
     }
   }
 })
