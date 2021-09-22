@@ -7,7 +7,7 @@
 .button {
   @include mixins.input-transition;
 
-  &:not(.icon) {
+  &.miter {
     @include mixins.miter;
   }
 
@@ -17,13 +17,16 @@
   border: none;
 
   > :first-child {
+    align-items: center;
     border: none;
     border-radius: 4px;
-    display: block;
+    display: flex;
     font-size: 14px;
     height: auto;
+    justify-content: center;
     padding: 12px 24px;
     user-select: none;
+    background-clip: padding-box;
     -webkit-background-clip: padding-box;
   }
 
@@ -34,27 +37,38 @@
   background: none;
   padding: 0;
 
-  &.active {
-    @include mixins.drop-shadow;
-  }
-
   &:focus-visible {
     outline: none;
   }
 
   &.icon {
-    border-radius: 50%;
-
-    & > span {
-      border-radius: 50%;
-      height: 60px;
-      line-height: 60px;
-      overflow: hidden;
-      padding: 0;
-      width: 60px;
+    [data-test='default'] {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
+
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  &.icon-button {
+    color: variables.$grey-80;
+
+    > :first-child {
+      padding: 4px;
+      background: transparent;
+      border: 1px solid variables.$inactive;
+    }
+
+    &.hovered > :first-child {
+      background: variables.$secondary-hover;
+      border-color: variables.$secondary-pressed;
+    }
+
+    &.active > :first-child {
+      background: variables.$secondary-pressed;
+      border-color: variables.$secondary-pressed;
     }
   }
 
@@ -63,47 +77,87 @@
 
     > :first-child {
       background-color: variables.$primary;
+      border: 1px solid variables.$primary;
     }
 
     &.hovered > :first-child {
       background-color: variables.$primary-hover;
+      border: 1px solid variables.$primary-hover;
+    }
+
+    &.active > :first-child {
+      background-color: variables.$primary-pressed;
+      border: 1px solid variables.$primary-pressed;
     }
   }
 
   &.secondary {
-    color: variables.$black;
+    color: variables.$primary;
 
     > :first-child {
-      background-color: variables.$secondary-background;
+      background-color: variables.$white;
+      border: 1px solid variables.$inactive;
+    }
+
+    &.light {
+      color: variables.$grey-80;
+
+      > :first-child {
+        border: 1px solid variables.$blue-20;
+      }
     }
 
     &.hovered > :first-child {
-      background-color: variables.$secondary-hover;
+      border: 1px solid variables.$primary;
+    }
+
+    &.active {
+      color: variables.$text--white;
+      > :first-child {
+        background-color: variables.$primary;
+      }
     }
   }
 
-  &.outlined {
-    color: variables.$black;
+  &.alternate {
+    color: variables.$grey-80;
 
     > :first-child {
-      border: 1px solid variables.$grey-20;
-    }
-
-    &.active > :first-child {
-      background-color: transparent;
+      background-color: variables.$grey-10;
+      border: 1px solid variables.$inactive;
     }
 
     &.hovered > :first-child {
-      background-color: variables.$secondary-background;
+      border: 1px solid variables.$grey-80;
+    }
+
+    &.active > :first-child {
+      background-color: variables.$grey-20;
     }
   }
 
   &.disabled {
     cursor: not-allowed;
-    color: variables.$grey-20 !important;
 
-    &:not(.outlined) > :first-child {
+    > :first-child {
+      border: 1px solid variables.$secondary-background;
       background-color: variables.$secondary-background !important;
+      color: variables.$grey-20 !important;
+    }
+  }
+
+  &.rounded {
+    :first-child {
+      border-radius: 50%;
+    }
+  }
+
+  &.flat {
+    color: variables.$grey-80;
+
+    > :first-child {
+      background-color: initial;
+      border: 1px solid transparent;
     }
   }
 }

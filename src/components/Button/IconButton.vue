@@ -1,6 +1,6 @@
 <template>
   <button
-    class="cursor-pointer button"
+    class="cursor-pointer button icon-button"
     :class="classList"
     :disabled="disabled"
     :style="{ height: height, width: width }"
@@ -13,10 +13,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <span data-test="default" :style="{ height: height, width: width }">
-      <i v-if="icon" class="pi" :class="icon"></i>
-      <slot />
-    </span>
+    <i class="pi" :class="icon" :style="{ height: height, width: width }"></i>
   </button>
 </template>
 
@@ -25,27 +22,26 @@ import { Vue, Options, prop } from 'vue-class-component'
 
 class Props {
   icon = prop<string>({ default: '' })
-  miter = prop<boolean>({ default: false, type: Boolean })
-  color = prop<string>({ default: 'secondary' })
-  flat = prop<boolean>({ default: false, type: Boolean })
   disabled = prop<boolean>({ default: false, type: Boolean })
+  rounded = prop<boolean>({ default: false, type: Boolean })
+  flat = prop<boolean>({ default: false, type: Boolean })
+  color = prop<string>({ default: '' })
   height = prop<string>({ default: '' })
   width = prop<string>({ default: '' })
 }
 
 const Component = Options
 @Component({})
-export default class Button extends Vue.with(Props) {
+export default class IconButton extends Vue.with(Props) {
   active: boolean = false
   hovered: boolean = false
 
   get classList(): string[] {
     return [
-      ...(this.icon.length > 0 ? ['icon'] : []),
-      ...(this.miter ? ['miter'] : []),
       ...(this.disabled ? ['disabled'] : []),
       ...(this.hovered ? ['hovered'] : []),
       ...(this.active ? ['active'] : []),
+      ...(this.rounded ? ['rounded'] : []),
       ...(this.flat ? ['flat'] : []),
       ...[this.color]
     ]
