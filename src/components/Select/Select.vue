@@ -91,6 +91,7 @@ export default defineComponent({
     },
 
     handleBlur(event: FocusEvent): void {
+      //return
       const target = event.relatedTarget as HTMLDivElement
       if (target?.tagName === 'INPUT' || target?.classList.contains('active'))
         return
@@ -117,6 +118,7 @@ export default defineComponent({
       } else if (event.key === 'Escape') {
         this.active = false
       } else if (event.key === 'ArrowUp') {
+        if (!this.active) return
         event.preventDefault()
         let currentFound = false
         let nextSelected = false
@@ -153,6 +155,7 @@ export default defineComponent({
           }
         }
       } else if (event.key === 'ArrowDown') {
+        if (!this.active) return
         event.preventDefault()
         let currentFound = false
         let nextSelected = false
