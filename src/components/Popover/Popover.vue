@@ -20,7 +20,7 @@
           <header v-html="title"> </header>
           <hr class="break" />
           <section>
-            <slot name="content"></slot>
+            <slot></slot>
           </section>
         </div>
         <div class="arrow"></div>
@@ -36,8 +36,8 @@ export default defineComponent({
   name: 'Popover',
   props: {
     target: {
-      type: [Object, String],
-      default: () => {}
+      type: String,
+      required: true
     },
     position: {
       type: String,
@@ -64,7 +64,7 @@ export default defineComponent({
   data() {
     return {
       tooltipPositionStyle: {},
-      previouslyFocused: null as HTMLDivElement|null,
+      previouslyFocused: null as HTMLDivElement | null,
       tabbable: []
     }
   },
@@ -72,10 +72,13 @@ export default defineComponent({
   computed: {
     open(): boolean {
       return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
-    },
+    }
   },
   mounted() {
-    document.querySelector(`#${this.target}`).tabIndex = 0
+    setTimeout(() => {
+      const activator: HTMLElement | null = document.getElementById(this.target)
+      if (activator) activator.tabIndex = 0
+    }, 200)
   },
   watch: {
     open(val) {
@@ -88,30 +91,32 @@ export default defineComponent({
   },
   methods: {
     setPreviouslyFocussed() {
-      this.previouslyFocused =
-      typeof document !== "undefined"
-        ? document.activeElement === document.body || document.querySelector(`#${this.target}`)
-          ? document.querySelector(`#${this.target}`)
-          : null
-        : document.activeElement
+      if (typeof document !== 'undefined')
+        this.previouslyFocused =
+          document.activeElement === document.body ||
+          document.querySelector(`#${this.target}`)
+            ? document.querySelector(`#${this.target}`)
+            : null
     },
     setTabbable() {
-      setTimeout(()=> {
-         const modalNodes = this.$refs.containerRef.querySelectorAll('*')
-      this.tabbable = Array.from(modalNodes).filter(
-        (n: any) => n.tabIndex >= 0
-      )
-      this.tabbable.forEach(n => {
-        n.addEventListener('blur', (e: Event)=> this.handleBlur(e))
-      })
-         },200)
+      setTimeout(() => {
+        const modalNodes = this.$refs.containerRef.querySelectorAll('*')
+        this.tabbable = Array.from(modalNodes).filter(
+          (n: any) => n.tabIndex >= 0
+        )
+        this.tabbable.forEach((n) => {
+          n.addEventListener('blur', (e: Event) => this.handleBlur(e))
+        })
+      }, 200)
     },
     getPosition() {
       if (document.querySelector(`#${this.target}`)) {
         this.$nextTick(() => {
           const tooltipRect = this.$refs?.containerRef.getBoundingClientRect()
           const bodyRect = document.body.getBoundingClientRect()
-          const target = document.querySelector(`#${this.target}`).getBoundingClientRect()
+          const target = document
+            .querySelector(`#${this.target}`)
+            .getBoundingClientRect()
           document.querySelector(`#${this.target}`).style.display =
             'inline-block'
           this.tooltipPositionStyle = tooltipPosition(
@@ -143,7 +148,7 @@ export default defineComponent({
         } else this.previouslyFocused.focus()
       }
     },
-    handleBlur(e:Event) {
+    handleBlur(e: Event) {
       const target = e.relatedTarget as HTMLDivElement
       if (!this.tabbable.includes(target)) {
         this.close()

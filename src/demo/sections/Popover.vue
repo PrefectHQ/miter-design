@@ -1,23 +1,18 @@
 <template>
-  <div style="margin-left: 400px; margin-top: 200px">
+  <div>
     <h5>Template/Teleport Version</h5>
     <Popover v-model="show" position="right" target="opener" :title="title">
       <template v-slot:activate>
-        <Card
-          width="400px"
-          height="500px"
-          class="mr-4 mt-4 d-inline-block"
-          shadow="sm"
-         
-          id="opener"
+        <Button
           @mouseenter="open"
+          id="opener"
           @keydown.enter="open"
+          @mouseleave="close"
         >
-          Hello
-        </Card>
+          Popover
+        </Button>
       </template>
-
-      <template v-slot:content>
+      <template v-slot>
         <div>
           <div class="d-flex justify-space-between"
             ><span>Date:</span><span>Aug 1, 2021</span></div
@@ -35,7 +30,9 @@
           >
         </div>
         <div class="text-center mt-4">
-          <Button class="mr-1" color="primary" @click="handleClick">Click</Button>
+          <Button class="mr-1" color="primary" @click="handleClick"
+            >Click</Button
+          >
           <Button color="primary" @click="close">Close</Button>
         </div>
       </template>
@@ -53,24 +50,17 @@ export default defineComponent({
       position: 'top',
       title:
         '<span><i class="pi pi-user-smile-line pi-lg"></i> Flow Run Duration </span>',
-      show: false,
-
-      config: {
-        position: 'right',
-        content: 'content',
-        title: 'Foo',
-        show: false
-      }
+      show: false
     }
   },
   methods: {
     handleClick() {
       console.log('clicked popover')
     },
-    open(e: event) {
+    open() {
       this.show = true
     },
-    close(e: event) {
+    close() {
       this.show = false
     }
   }
