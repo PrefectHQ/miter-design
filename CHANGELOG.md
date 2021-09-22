@@ -1,4 +1,5 @@
 - Update button styles - [#61](https://github.com/PrefectHQ/miter-design/pull/61)
+- Add grey-30 variable, fix placeholder variable - [#73](https://github.com/PrefectHQ/miter-design/pull/73)
 - Add placeholder prop to Input - [#70](https://github.com/PrefectHQ/miter-design/pull/70)
 - Add breakpoints plugin - [#68](https://github.com/PrefectHQ/miter-design/pull/68)
 - Update tab component to match new dashboard designs and remove icon but - [#63](https://github.com/PrefectHQ/miter-design/pull/63)
