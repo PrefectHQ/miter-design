@@ -143,7 +143,7 @@ export default defineComponent({
         }
 
         if (!nextSelected) {
-          for (let i = 0; i < this.filteredOptions.length; i++) {
+          for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
             const option = this.filteredOptions[i]
             const type = (option.type as any)?.name
             const optionClasses = option?.el?.classList
@@ -181,7 +181,7 @@ export default defineComponent({
         }
 
         if (!nextSelected) {
-          for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
+          for (let i = 0; i < this.filteredOptions.length; i++) {
             const option = this.filteredOptions[i]
             const type = (option.type as any)?.name
             const optionClasses = option?.el?.classList
