@@ -70,10 +70,10 @@ export default class Buttons extends Vue {
 
   buttonStyles = ['primary', 'secondary', 'secondary light', 'alternate']
   icons = [
-    'subtract-line',
-    'add-line',
-    'fullscreen-line',
-    'fullscreen-exit-line'
+    'pi-subtract-line pi-sm',
+    'pi-add-line pi-sm',
+    'pi-fullscreen-line pi-sm',
+    'pi-fullscreen-exit-line pi-sm'
   ]
 
   skeletonLoader = false

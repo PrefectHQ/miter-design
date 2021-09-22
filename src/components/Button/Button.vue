@@ -14,7 +14,7 @@
     @blur="handleBlur"
   >
     <span data-test="default" :style="{ height: height, width: width }">
-      <i v-if="icon" class="pi pi-sm" :class="iconClass"></i>
+      <i v-if="icon" class="pi" :class="icon"></i>
       <slot />
     </span>
   </button>
@@ -25,10 +25,10 @@ import { Vue, Options, prop } from 'vue-class-component'
 
 class Props {
   icon = prop<string>({ default: '' })
-  miter = prop<boolean>({ default: false })
+  miter = prop<boolean>({ default: false, type: Boolean })
   color = prop<string>({ default: 'secondary' })
-  flat = prop<boolean>({ default: false })
-  disabled = prop<boolean>({ default: false })
+  flat = prop<boolean>({ default: false, type: Boolean })
+  disabled = prop<boolean>({ default: false, type: Boolean })
   height = prop<string>({ default: 'inherit' })
   width = prop<string>({ default: 'inherit' })
 }
@@ -53,10 +53,6 @@ export default class Button extends Vue.with(Props) {
 
   mounted(): void {
     return
-  }
-
-  get iconClass(): string | null {
-    return this.icon.length > 0 ? `pi-${this.icon}` : null
   }
 
   /*

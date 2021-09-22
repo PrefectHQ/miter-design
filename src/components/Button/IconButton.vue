@@ -13,11 +13,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
   >
-    <i
-      class="pi pi-sm"
-      :class="iconClass"
-      :style="{ height: height, width: width }"
-    ></i>
+    <i class="pi" :class="icon" :style="{ height: height, width: width }"></i>
   </button>
 </template>
 
@@ -26,9 +22,9 @@ import { Vue, Options, prop } from 'vue-class-component'
 
 class Props {
   icon = prop<string>({ default: '' })
-  disabled = prop<boolean>({ default: false })
-  rounded = prop<boolean>({ default: false })
-  flat = prop<boolean>({ default: false })
+  disabled = prop<boolean>({ default: false, type: Boolean })
+  rounded = prop<boolean>({ default: false, type: Boolean })
+  flat = prop<boolean>({ default: false, type: Boolean })
   color = prop<string>({ default: '' })
   height = prop<string>({ default: 'inherit' })
   width = prop<string>({ default: 'inherit' })
@@ -53,10 +49,6 @@ export default class IconButton extends Vue.with(Props) {
 
   mounted(): void {
     return
-  }
-
-  get iconClass(): string | null {
-    return this.icon.length > 0 ? `pi-${this.icon}` : null
   }
 
   /*
