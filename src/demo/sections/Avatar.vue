@@ -15,7 +15,7 @@
           src="https://images.ctfassets.net/gm98wzqotmnx/ZXkXAGWyYCBGhH4B1p123/6284ca02f0acee1644a3ed64d84432a7/marvin.png"
           alt="marvin"
         />
-        <i v-else class="pi pi-Fire pi-2x"></i>
+        <i v-else class="pi pi-fire-line pi-2x"></i>
       </Avatar>
     </div>
   </div>
@@ -26,7 +26,7 @@ import { Vue, Options } from 'vue-class-component'
 
 @Options({})
 export default class Avatar extends Vue {
-  backgroundColors = ['primary', 'error', 'primary-101']
+  backgroundColors = ['primary', 'error', 'primary-hover']
 
   mounted(): void {
     return

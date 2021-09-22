@@ -7,22 +7,22 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options, prop } from 'vue-class-component'
+import { defineComponent } from 'vue'
 
-class Props {
-  color = prop<string>({ default: 'primary' })
-}
-
-@Options({})
-export default class Avatar extends Vue.with(Props) {
-  get classList() {
-    return this.color
+export default defineComponent({
+  name: 'Avatar',
+  props: {
+    color: {
+      type: String,
+      default: 'primary'
+    }
+  },
+  computed: {
+    classList(): string {
+      return this.color
+    }
   }
-
-  mounted(): void {
-    return
-  }
-}
+})
 </script>
 
 <style lang="scss">

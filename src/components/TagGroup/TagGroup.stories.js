@@ -32,14 +32,14 @@ Mandatory.args = {
   modelValue: ['0'],
   mandatory: true,
   content:
-    '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-101">Tag 2</Tag> <Tag value="2">Tag 3</Tag>'
+    '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-hover">Tag 2</Tag> <Tag value="2">Tag 3</Tag>'
 }
 
 export const Single = Template.bind({})
 Single.args = {
   modelValue: ['0'],
   content:
-    '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-101">Tag 2</Tag>'
+    '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-hover">Tag 2</Tag>'
 }
 
 export const Multiple = Template.bind({})
@@ -47,7 +47,7 @@ Multiple.args = {
   modelValue: ['0', '1'],
   multiple: true,
   content:
-    '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-101">Tag 2</Tag> <Tag value="2">Tag 3</Tag>'
+    '<Tag value="0" color="primary">Tag 1</Tag> <Tag value="1" color="primary-hover">Tag 2</Tag> <Tag value="2">Tag 3</Tag>'
 }
 
 export const Default = Template.bind({})

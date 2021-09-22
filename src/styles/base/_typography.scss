@@ -5,12 +5,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+body,
+.body {
   color: variables.$text--primary;
-  font-family: variables.$font--secondary !important;
-  font-size: 14px;
+  font-family: variables.$font--primary !important;
+  font-size: 16px;
   letter-spacing: -0.41px;
   line-height: 24px;
+  font-weight: 400;
 }
 
 h1,
@@ -19,61 +21,64 @@ h3,
 h4,
 h5,
 h6 {
-  color: variables.$grey-1;
+  color: variables.$text--primary;
   font-family: variables.$font--primary !important;
-  margin-block-start: 0.1em;
-  margin-block-end: 0.1em;
 }
 
-h1 {
-  font-size: 40px;
-  letter-spacing: 0.4px;
-  line-height: 48px;
+.font--primary {
+  font-family: variables.$font--primary !important;
 }
 
-h2 {
-  font-size: 34px;
-  letter-spacing: 0.3px;
-  line-height: 40px;
+.font--secondary {
+  font-family: variables.$font--secondary !important;
 }
 
-h3 {
-  font-size: 28px;
-  letter-spacing: 0.24px;
-  line-height: 34px;
-}
-
-h4 {
+h1,
+.header {
   font-size: 24px;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.4px;
   line-height: 28px;
 }
 
-h5 {
-  color: variables.$grey-2;
+h2,
+.subheader {
   font-size: 20px;
-  letter-spacing: 0.18px;
+  letter-spacing: 0.3px;
   line-height: 24px;
 }
 
-h6 {
-  color: variables.$grey-2;
-  font-size: 16px;
-  letter-spacing: 0.4px;
-  line-height: 20px;
+h3,
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.24px;
+  line-height: 22px;
 }
 
-.font-weight-light {
-  font-weight: 100;
+.font-weight-regular {
+  font-weight: 400;
 }
 
-.text-caption-1 {
+.font-weight-semibold {
+  font-weight: 600;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+.caption,
+.caption-small {
+  font-family: variables.$font--secondary;
+}
+
+.caption {
   font-size: 13px;
   letter-spacing: -0.09px;
   line-height: 18px;
 }
 
-.text-caption-2 {
+.caption-small {
   font-size: 11px;
   letter-spacing: -0.09px;
   line-height: 15px;
@@ -91,4 +96,87 @@ h6 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.text-decoration-overline {
+  text-decoration: overline;
+}
+
+.text-decoration-underline {
+  text-decoration: underline;
+}
+
+.text-decoration-line-through,
+.text-decoration-strikethrough {
+  text-decoration: line-through;
+}
+
+.pi {
+  font-size: 24px;
+  vertical-align: inherit !important;
+}
+
+.pi-lg {
+  font-size: 1.25em !important;
+  line-height: 1.25em;
+}
+
+.pi-xs {
+  font-size: 0.75em !important;
+}
+
+.pi-sm {
+  font-size: 0.875em !important;
+}
+
+.pi-1x {
+  font-size: 1em !important;
+}
+
+.pi-2x {
+  font-size: 2em !important;
+}
+
+.pi-3x {
+  font-size: 3em !important;
+}
+
+.pi-4x {
+  font-size: 4em !important;
+}
+
+.pi-5x {
+  font-size: 5em !important;
+}
+
+.pi-6x {
+  font-size: 6em !important;
+}
+
+.pi-7x {
+  font-size: 7em !important;
+}
+
+.pi-8x {
+  font-size: 8em !important;
+}
+
+.pi-9x {
+  font-size: 9em !important;
+}
+
+.pi-10x {
+  font-size: 10em !important;
+}
+
+.pi-fw {
+  display: inline-block;
+  height: 1em;
+  text-align: center;
+  vertical-align: -0.25em;
+  width: 1.25em;
 }

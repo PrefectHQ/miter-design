@@ -1,0 +1,53 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+button.tab {
+  @include mixins.text-ellipsis;
+  $width: 227px;
+
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid variables.$grey-20;
+  border-radius: 4px 4px 0 0;
+  color: variables.$grey-80;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  height: max-content;
+  line-height: 24px;
+  padding: 8px 8px;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: color 200ms ease-in;
+  width: $width;
+
+  &.hover,
+  &:hover,
+  &:focus,
+  &.focus {
+    background-color: variables.$secondary-background;
+    border-color: variables.$grey-80;
+    outline: none;
+  }
+
+  &.focused {
+    background-color: variables.$grey-20;
+    border-color: variables.$grey-80;
+  }
+
+  &.disabled {
+    background-color: transparent;
+    border-color: variables.$grey-20;
+    color: variables.$inactive;
+    cursor: not-allowed;
+  }
+
+  &.active {
+    color: variables.$primary;
+  }
+}

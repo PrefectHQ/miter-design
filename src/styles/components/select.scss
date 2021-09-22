@@ -1,0 +1,152 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+.wrapper {
+  @include mixins.miter(2, 1);
+  font-family: variables.$font--primary;
+  outline: none; //needed for removing safari focus ring
+  position: relative;
+  &.active {
+    @include mixins.drop-shadow;
+  }
+  &:focus,
+  &:focus-visible {
+    outline: none !important; // also needed for focus rings
+  }
+
+  .picker {
+    background-color: variables.$white;
+    border: 1px solid variables.$grey-20;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 58px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    padding-left: 32px;
+    color: variables.$grey-20;
+    font-size: 16px;
+    white-space: nowrap;
+    z-index: 2;
+    span {
+      width: 275px;
+    }
+    &.selected {
+      color: variables.$text--primary;
+    }
+    i {
+      @include mixins.input-transition;
+      color: variables.$black;
+    }
+    &.disabled {
+      background-color: variables.$secondary-background;
+      cursor: not-allowed !important;
+      color: variables.$inactive !important;
+      i {
+        color: variables.$inactive !important;
+      }
+    }
+    &.active,
+    &.hovered {
+      border: 1px solid variables.$primary;
+    }
+    &.active i {
+      @include mixins.input-transition;
+      transform: rotate(180deg);
+    }
+  }
+
+  .list {
+    @include mixins.input-transition;
+
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    position: absolute;
+    background: variables.$white;
+
+    &:not(.openUp) {
+      @include mixins.miter-clip(2, 1);
+      margin-top: -16px;
+      padding-top: 16px;
+      border-bottom-left-radius: 4px;
+      > * &:last-child {
+        @include mixins.miter-clip(2, 1);
+      }
+    }
+    &.openUp {
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      bottom: 58px;
+    }
+    > * {
+      align-items: center;
+      display: flex;
+      height: 58px;
+      padding-left: 32px;
+      &:not(:last-child) {
+        border-bottom: 1px solid variables.$secondary-background;
+      }
+    }
+    .search {
+      font-size: 16px;
+      color: variables.$grey-20;
+      input {
+        width: 100%;
+        border: none;
+        font-family: variables.$font--primary;
+        &::placeholder {
+          color: variables.$grey-20;
+          font-family: variables.$font--primary;
+        }
+        &:focus,
+        &:focus-visible {
+          outline: none;
+        }
+      }
+      i {
+        color: variables.$black;
+      }
+    }
+  }
+}
+.title {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: variables.$grey-20;
+}
+.option {
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  &:first-of-type {
+    height: 74px;
+    margin-top: -16px;
+    padding-top: 16px;
+  }
+
+  span {
+    width: 275px;
+  }
+
+  i {
+    color: variables.$grey-20;
+  }
+
+  &.hovered {
+    background-color: variables.$secondary-background;
+  }
+
+  &.selected {
+    background-color: variables.$primary;
+    color: variables.$white;
+
+    i {
+      color: variables.$white;
+    }
+  }
+
+  &.disabled {
+    color: variables.$inactive;
+    cursor: not-allowed !important;
+  }
+}

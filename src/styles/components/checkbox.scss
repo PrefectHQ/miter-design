@@ -9,7 +9,6 @@
   display: inline-flex;
   font-size: 15px;
   line-height: 20px;
-  position: absolute;
 
   > input {
     margin-left: 6px;
@@ -19,7 +18,7 @@
   }
   .box {
     background-color: variables.$white;
-    border: 1px solid variables.$grey-4;
+    border: 1px solid variables.$grey-20;
     border-radius: 4px;
     display: inline-block;
     height: 28px;
@@ -28,7 +27,7 @@
     width: 28px;
     z-index: 1;
   }
-  .material-icons {
+  i {
     color: variables.$white;
     display: none;
   }
@@ -36,17 +35,18 @@
   > input:checked {
     ~ .box {
       background-color: variables.$primary;
-      .material-icons {
-        display: inline;
+      i {
+        display: block;
+        margin: -2px 0 0 -2px;
       }
     }
   }
 
   &.disabled {
     cursor: not-allowed;
-    color: variables.$black-40 !important;
+    color: variables.$grey-20 !important;
     .box {
-      background-color: variables.$grey-4 !important;
+      background-color: variables.$grey-20 !important;
     }
   }
 
@@ -54,7 +54,7 @@
   &.hovered,
   &.active {
     .box {
-      background-color: variables.$grey-5;
+      background-color: variables.$secondary-background;
     }
   }
 }

@@ -27,12 +27,73 @@ $text-alignments: 'left', 'center', 'right', 'end', 'justify', 'start',
   }
 }
 
+$borders: (
+  't': (
+    'top-left',
+    'top-right'
+  ),
+  'b': (
+    'bottom-right',
+    'bottom-left'
+  ),
+  'r': (
+    'top-right',
+    'bottom-right'
+  ),
+  'l': (
+    'top-left',
+    'bottom-left'
+  ),
+  'tl': (
+    'top-left'
+  ),
+  'tr': (
+    'top-right'
+  ),
+  'bl': (
+    'bottom-left'
+  ),
+  'br': (
+    'bottom-right'
+  )
+);
+
+@for $i from 0 through 10 {
+  .border-#{$i} {
+    border-radius: #{$i}px;
+  }
+  @each $abbreviation, $properties in $borders {
+    $selector: #{$abbreviation}-#{$i};
+    .border-#{$selector} {
+      @each $property in $properties {
+        border-#{$property}-radius: #{$i}px;
+      }
+    }
+  }
+}
+
+.d-inline {
+  display: inline !important;
+}
+
 .d-block {
   display: block !important;
 }
 
 .d-inline-block {
   display: inline-block !important;
+}
+
+.d-table {
+  display: table !important;
+}
+
+.d-table-cell {
+  display: table-cell !important;
+}
+
+.d-table-row {
+  display: table-row !important;
 }
 
 .d-flex {
@@ -44,12 +105,68 @@ $text-alignments: 'left', 'center', 'right', 'end', 'justify', 'start',
   flex-wrap: nowrap;
 }
 
+.d-grid {
+  display: grid !important;
+}
+
+.d-inline-grid {
+  display: inline-grid !important;
+}
+
+.d-none {
+  display: none;
+}
+
 .flex-row {
   flex-direction: row !important;
 }
 
+.flex-row-reverse {
+  flex-direction: row-reverse !important;
+}
+
 .flex-column {
   flex-direction: column !important;
+}
+
+.flex-column-reverse {
+  flex-direction: column-reverse !important;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-grow-0 {
+  flex-grow: 0;
+}
+
+.flex-shrink-1 {
+  flex-shrink: 1;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.align-start {
+  align-items: flex-start;
+}
+
+.align-end {
+  align-items: flex-end;
 }
 
 .align-center {
@@ -60,12 +177,80 @@ $text-alignments: 'left', 'center', 'right', 'end', 'justify', 'start',
   align-items: stretch;
 }
 
+.align-baseline {
+  align-items: baseline;
+}
+
 .justify-space-between {
   justify-content: space-between;
 }
 
 .justify-space-around {
   justify-content: space-around;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-space-evenly {
+  justify-content: space-evenly;
+}
+
+.align-content-start {
+  align-content: flex-start;
+}
+
+.align-content-end {
+  align-content: flex-end;
+}
+
+.align-content-center {
+  align-content: center;
+}
+
+.align-content-stretch {
+  align-content: stretch;
+}
+
+.align-content-space-between {
+  align-content: space-between;
+}
+
+.align-content-space-around {
+  align-content: space-around;
+}
+
+.align-self-start {
+  align-self: flex-start;
+}
+
+.align-self-end {
+  align-self: flex-end;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.align-self-stretch {
+  align-self: stretch;
+}
+
+.align-self-baseline {
+  align-self: baseline;
+}
+
+.align-self-auto {
+  align-self: auto;
 }
 
 a {
@@ -75,11 +260,25 @@ a {
 
   &:hover,
   &:focus {
-    color: variables.$primary-100 !important;
+    color: variables.$primary !important;
   }
 
   &.disabled {
-    color: variables.$grey-4 !important;
+    color: variables.$grey-20 !important;
     cursor: not-allowed;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .breakpoint-none {
+    display: none !important;
+  }
+}
+
+@each $breakpoint, $value in variables.$breakpoints {
+  @media screen and (max-width: #{$value}) {
+    .breakpoint-#{$breakpoint} {
+      display: none !important;
+    }
   }
 }

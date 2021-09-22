@@ -1,0 +1,97 @@
+@use '../abstracts/variables';
+
+@mixin hide-scrollbars {
+  /* Hide scrollbars */
+  scrollbar-width: none; // Edge
+  -ms-overflow-style: none; // Firefox
+
+  // Chrome, Safari
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  /* End hide scrollbars */
+}
+
+.component-wrapper {
+  @include hide-scrollbars;
+
+  $width: 227px;
+  $left-margin: -24px;
+
+  overflow: hidden;
+  white-space: nowrap;
+
+  .border-container {
+    border-bottom: 2px solid variables.$grey-20;
+    position: relative;
+  }
+
+  .overflow-button {
+    border: none;
+    cursor: pointer;
+    height: calc(100% - 2px);
+    padding: 4px;
+    position: absolute;
+    top: 2px;
+    transition: all 150ms;
+    z-index: 1;
+
+    &.left {
+      left: 0;
+    }
+
+    &.right {
+      right: 0;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: variables.$grey-20;
+      outline: none;
+    }
+  }
+
+  .tabs-container {
+    @include hide-scrollbars;
+
+    // This is used to offset the bottom border of the container element
+    bottom: -2px;
+    height: 100%;
+    margin-right: 30px;
+    outline: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    position: relative;
+
+    &::after {
+      border-bottom: 2px solid variables.$primary;
+      bottom: 0;
+      content: '';
+      height: 0;
+      left: 0;
+      position: absolute;
+      transition: all 250ms ease-in-out;
+      width: $width;
+      box-sizing: border-box;
+    }
+
+    &::before {
+      border-bottom: 2px solid variables.$grey-20;
+      content: '';
+      width: max-content;
+      height: 0;
+      left: 0;
+      position: absolute;
+      bottom: 0;
+      box-sizing: border-box;
+    }
+
+    @for $i from 0 through 100 {
+      &.tab-#{$i}-active {
+        &::after {
+          left: calc(#{$i} * #{$width});
+        }
+      }
+    }
+  }
+}

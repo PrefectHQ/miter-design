@@ -11,6 +11,7 @@
     @include mixins.miter;
   }
 
+  font-family: variables.$font--secondary;
   padding: 0;
   background: none;
   border: none;
@@ -34,54 +35,58 @@
   padding: 0;
 
   &.active {
-    @include mixins.miter-shadow;
+    @include mixins.drop-shadow;
   }
 
   &:focus-visible {
     outline: none;
   }
 
-  &.icon > span {
+  &.icon {
     border-radius: 50%;
-    height: 60px;
-    line-height: 60px;
-    overflow: hidden;
-    padding: 0;
-    width: 60px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+
+    & > span {
+      border-radius: 50%;
+      height: 60px;
+      line-height: 60px;
+      overflow: hidden;
+      padding: 0;
+      width: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &.primary {
     color: variables.$text--white;
 
     > :first-child {
-      background-color: variables.$primary-100;
+      background-color: variables.$primary;
     }
 
     &.hovered > :first-child {
-      background-color: variables.$primary-101;
+      background-color: variables.$primary-hover;
     }
   }
 
   &.secondary {
-    color: variables.$grey-1;
+    color: variables.$black;
 
     > :first-child {
-      background-color: variables.$grey-3;
+      background-color: variables.$secondary-background;
     }
 
     &.hovered > :first-child {
-      background-color: variables.$grey-4;
+      background-color: variables.$secondary-hover;
     }
   }
 
   &.outlined {
-    color: variables.$grey-1;
+    color: variables.$black;
 
     > :first-child {
-      border: 1px solid variables.$grey-4;
+      border: 1px solid variables.$grey-20;
     }
 
     &.active > :first-child {
@@ -89,16 +94,16 @@
     }
 
     &.hovered > :first-child {
-      background-color: variables.$grey-5;
+      background-color: variables.$secondary-background;
     }
   }
 
   &.disabled {
     cursor: not-allowed;
-    color: variables.$grey-4 !important;
+    color: variables.$grey-20 !important;
 
     &:not(.outlined) > :first-child {
-      background-color: variables.$grey-3 !important;
+      background-color: variables.$secondary-background !important;
     }
   }
 }
