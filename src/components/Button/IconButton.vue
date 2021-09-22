@@ -26,8 +26,8 @@ class Props {
   rounded = prop<boolean>({ default: false, type: Boolean })
   flat = prop<boolean>({ default: false, type: Boolean })
   color = prop<string>({ default: '' })
-  height = prop<string>({ default: 'inherit' })
-  width = prop<string>({ default: 'inherit' })
+  height = prop<string>({ default: '' })
+  width = prop<string>({ default: '' })
 }
 
 const Component = Options

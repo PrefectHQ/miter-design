@@ -29,8 +29,8 @@ class Props {
   color = prop<string>({ default: 'secondary' })
   flat = prop<boolean>({ default: false, type: Boolean })
   disabled = prop<boolean>({ default: false, type: Boolean })
-  height = prop<string>({ default: 'inherit' })
-  width = prop<string>({ default: 'inherit' })
+  height = prop<string>({ default: '' })
+  width = prop<string>({ default: '' })
 }
 
 const Component = Options
