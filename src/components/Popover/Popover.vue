@@ -116,7 +116,7 @@ export default defineComponent({
         this.tabbable.forEach((n) => {
           n.addEventListener('blur', (e: Event) => this.handleBlur(e))
         })
-      }, 200)
+      }, 300)
     },
     getPosition() {
       if (document.querySelector(`#${this.target}`)) {
