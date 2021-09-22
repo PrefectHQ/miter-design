@@ -2,7 +2,7 @@
 @use '../abstracts/mixins';
 
 .toast {
-  background-color: variables.$primary-100;
+  // background-color: variables.$primary-100;
   color: variables.$white;
   padding: 12px 24px;
   pointer-events: all;
