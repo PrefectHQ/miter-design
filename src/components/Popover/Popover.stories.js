@@ -23,26 +23,58 @@ const Template = (args) => ({
     document.body.appendChild(el)
     return { args, val }
   },
-  template: `<Popover class="ml-5" v-model="val" v-bind="args" currentElRect="popoverTarget"><template v-slot:activate>${args.activate}</template><template v-if="args.content" v-slot:content>${args.content}</template>
+  template: `<Popover class="ml-5" v-model="val" v-bind="args" ><template v-slot:activate>${args.activate}</template><template v-if="args.content" v-slot>${args.content}</template>
   </Popover>
   `
 })
 
-export const Center = Template.bind({})
-Center.args = {
+export const Top = Template.bind({})
+Top.args = {
   val: false,
   position: 'bottom',
   title: 'Pop Over',
-  currentElRect: 'popoverTarget',
-  activate: `<Button id="popoverTarget" v-bind="args" color="primary" @click="val=!val" >Button</Button>`,
+  target: 'opener',
+  activate: `<Button id="opener" v-bind="args" @click="val =!val" >Popover</Button>`,
   content: `<div>Popover Content</div>`
 }
 
-// export const FlexEnd = Template.bind({})
-// FlexEnd.args = {
-//   val: true,
-//   position: 'flex-end',
-//   title: 'Pop Up',
-//   width: '180px',
-//   activate: `<Button v-bind="args" color="primary" @click="val = true">Button</Button>`
-// }
+export const Right = Template.bind({})
+Right.args = {
+  val: false,
+  position: 'right',
+  title: 'Pop Over',
+  target: 'opener',
+  activate: `<Button id="opener" v-bind="args" @click="val =!val" >Popover</Button>`,
+  content: `<div>Popover Content</div>`
+}
+
+export const Left = Template.bind({})
+Left.args = {
+  val: false,
+  position: 'left',
+  title: 'Pop Over',
+  target: 'opener',
+  activate: `<Button id="opener" v-bind="args" @click="val =!val" >Popover</Button>`,
+  content: `<div>Popover Content</div>`
+}
+
+export const MouseOver = Template.bind({})
+MouseOver.args = {
+  val: false,
+  position: 'bottom',
+  title: 'Pop Over',
+  target: 'opener',
+  activate: `<Button id="opener" v-bind="args" @mouseenter="val = true" @mouseleave="val=false" >Popover</Button>`,
+  content: `<div>Popover Content</div>`
+}
+
+export const WithActions = Template.bind({})
+WithActions.args = {
+  val: false,
+  position: 'bottom',
+  title: 'Pop Over',
+  target: 'opener',
+  activate: `<Button id="opener" v-bind="args" @mouseenter="val = true" >Popover</Button>`,
+  content: `<div><div>Popover Content</div> <div class="mt-2" ><Button>Action</Button><Button @click="val=false" class="ml-2" >Close</Button></div></div>`
+}
+

@@ -107,7 +107,9 @@ export default defineComponent({
     },
     setTabbable() {
       setTimeout(() => {
-        const modalNodes = (this.$refs.containerRef as HTMLElement).querySelectorAll('*')
+        const modalNodes = (
+          this.$refs.containerRef as HTMLElement
+        ).querySelectorAll('*')
         this.tabbable = Array.from(modalNodes).filter(
           (n: any) => n.tabIndex >= 0
         )
@@ -119,11 +121,17 @@ export default defineComponent({
     getPosition() {
       if (document.querySelector(`#${this.target}`)) {
         this.$nextTick(() => {
-          const tooltipRect = (this.$refs?.containerRef as HTMLElement).getBoundingClientRect()
+          const tooltipRect = (
+            this.$refs?.containerRef as HTMLElement
+          ).getBoundingClientRect()
           const bodyRect = document.body.getBoundingClientRect()
-          const target = document?.querySelector(`#${this.target}`)?.getBoundingClientRect()
-          const activator: HTMLElement | null = document.getElementById(this.target)
-          if(activator) activator.style.display = 'inline-block'
+          const target = document
+            ?.querySelector(`#${this.target}`)
+            ?.getBoundingClientRect()
+          const activator: HTMLElement | null = document.getElementById(
+            this.target
+          )
+          if (activator) activator.style.display = 'inline-block'
           this.tooltipPositionStyle = tooltipPosition(
             this.position,
             target,
@@ -138,21 +146,20 @@ export default defineComponent({
     },
     addFocus() {
       this.$nextTick(() => {
-        (this.$refs.containerRef as HTMLElement).focus()
+        ;(this.$refs.containerRef as HTMLElement).focus()
       })
     },
     handleKeyDown(evt: KeyboardEvent): void {
       if (document.activeElement) {
-      let index = this.tabbable.indexOf(document.activeElement)
-      if (evt.key.toLowerCase() === 'escape') {
-        this.close()
-      } else if (evt.key.toLowerCase() === 'tab') {
-        if (index < this.tabbable.length - 1) {
-          index += 1
-          (this.tabbable[index] as HTMLElement).focus()
-          evt.preventDefault()
-        } else this.previouslyFocused?.focus()
-      }
+        let index = this.tabbable.indexOf(document.activeElement)
+        if (evt.key.toLowerCase() === 'escape') {
+          this.close()
+        } else if (evt.key.toLowerCase() === 'tab') {
+          if (index < this.tabbable.length - 1) {
+            index += 1(this.tabbable[index] as HTMLElement).focus()
+            evt.preventDefault()
+          } else this.previouslyFocused?.focus()
+        }
       }
     },
     handleBlur(e: MouseEvent) {

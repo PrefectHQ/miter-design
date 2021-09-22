@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5>Template/Teleport Version</h5>
+    <h3>Popover</h3>
     <Popover v-model="show" position="right" target="opener" :title="title">
       <template v-slot:activate>
         <Button
