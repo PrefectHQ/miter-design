@@ -3,37 +3,37 @@ interface bodyRectType {
   left: number
 }
 
-interface tooltipRefRectType {
+interface popoverRefRectType {
   height: number
   width: number
 }
 
-export function tooltipPosition(
+export function popoverPosition(
   position: string,
   currentElRect: DOMRect | undefined,
   bodyRect: bodyRectType,
-  tooltipRefRect: tooltipRefRectType
+  popoverRefRect: popoverRefRectType
 ) {
   const arrow = {
     height: 12,
     width: 12
   }
 
-  if (!currentElRect || !tooltipRefRect) return {}
+  if (!currentElRect || !popoverRefRect) return {}
   else {
     if (position == 'top') {
       return {
         top: `${
           currentElRect?.top -
           bodyRect?.top -
-          tooltipRefRect.height -
+          popoverRefRect.height -
           arrow.height
         }px`,
         left: `${
           currentElRect.left -
           bodyRect.left +
           currentElRect.width / 2 -
-          tooltipRefRect.width / 2
+          popoverRefRect.width / 2
         }px`
       }
     }
@@ -42,7 +42,7 @@ export function tooltipPosition(
         top: `${
           currentElRect.top -
           bodyRect.top -
-          0.25 * tooltipRefRect.height +
+          0.25 * popoverRefRect.height +
           currentElRect.height / 2 +
           arrow.height / 2
         }px`,
@@ -60,7 +60,7 @@ export function tooltipPosition(
           currentElRect.left -
           bodyRect.left +
           currentElRect.width / 2 -
-          tooltipRefRect.width / 2
+          popoverRefRect.width / 2
         }px`
       }
     }
@@ -70,12 +70,12 @@ export function tooltipPosition(
         top: `${
           currentElRect.top -
           bodyRect.top -
-          0.25 * tooltipRefRect.height +
+          0.25 * popoverRefRect.height +
           currentElRect.height / 2 +
           arrow.height / 2
         }px`,
 
-        left: `${currentElRect.left - tooltipRefRect.width - arrow.width}px`
+        left: `${currentElRect.left - popoverRefRect.width - arrow.width}px`
       }
     }
   }

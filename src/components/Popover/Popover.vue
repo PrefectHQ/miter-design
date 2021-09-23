@@ -11,12 +11,12 @@
             tabindex="0"
             @blur="handleBlur"
             :disabled="!open"
-            id="tooltip-container"
+            id="popover-container"
             class="container"
             @keydown="handleKeyDown"
             :class="position"
             ref="containerRef"
-            :style="tooltipPositionStyle"
+            :style="popoverPositionStyle"
           >
             <div class="content-container">
               <header v-html="title"> </header>
@@ -36,9 +36,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import PopoverContent from './PopoverContent.vue'
-import { tooltipPosition } from './getPosition'
+import { popoverPosition } from './getPosition'
 
-interface tooltipPositionStyleObject {
+interface popoverPositionStyleObject {
   left?: string | undefined
   top?: string | undefined
 }
@@ -81,7 +81,7 @@ export default defineComponent({
   },
   data() {
     return {
-      tooltipPositionStyle: {} as tooltipPositionStyleObject | undefined,
+      popoverPositionStyle: {} as popoverPositionStyleObject | undefined,
       previouslyFocused: null as HTMLDivElement | null,
       tabbable: [] as Element[]
     }
@@ -134,7 +134,7 @@ export default defineComponent({
     getPosition() {
       if (document.querySelector(`#${this.target}`)) {
         this.$nextTick(() => {
-          const tooltipRect = (
+          const popoverRect = (
             this.$refs?.containerRef as HTMLElement
           ).getBoundingClientRect()
           const bodyRect = document.body.getBoundingClientRect()
@@ -145,11 +145,11 @@ export default defineComponent({
             this.target
           )
           if (activator) activator.style.display = 'inline-block'
-          this.tooltipPositionStyle = tooltipPosition(
+          this.popoverPositionStyle = popoverPosition(
             this.position,
             target,
             bodyRect,
-            tooltipRect
+            popoverRect
           )
           this.addFocus()
         })
