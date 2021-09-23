@@ -33,7 +33,7 @@ export default defineComponent({
   },
   props: {
     value: {
-      type: String,
+      type: [String, Object],
       default: 'Option'
     },
     icon: {
