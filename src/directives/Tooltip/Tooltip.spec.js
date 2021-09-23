@@ -23,9 +23,15 @@ const factoryMount = (position = '', text = '') => {
   )
 }
 const waitNT = (ctx) => new Promise((resolve) => ctx.$nextTick(resolve))
-// Note: Failing..
+// note: Failing..
 describe('mounted hook', () => {
   test('mounting', async () => {
+    /*
+    note: 
+     similar to the example in the vue test docs of using attachTo -
+    creates a div and appends it the body then create our template using 
+    the directive and use attachTo to append to the newly created div 
+     */
     const App = {
       directives: {
         Tooltip: TooltipDirective
@@ -41,10 +47,13 @@ describe('mounted hook', () => {
     // wrapper.element.tagName => DIV
 
     const div = wrapper.find('div')
+    // note: if it does a  mouseenter, I would think it would mount the tooltip component
+    // note: (line 34 - tooltip.ts) and we would be able to do document.body.querySelector or something similar?
     await div.trigger('mouseenter')
     // await waitNT(wrapper.vm)
     console.log(wrapper)
   })
+
   // test('does not append component when mounted', () => {
   //   const wrapper = factoryMount()
   //   expect(wrapper.find('#tooltip-container').exists()).toBe(false)
@@ -61,7 +70,7 @@ describe('mounted hook', () => {
   // })
 })
 
-// NOTE: Failing
+// note: Failing
 describe('arguments', () => {
   // test('content is passed if provided', async () => {
   //   const wrapper = factoryMount('right', 'Hello')
