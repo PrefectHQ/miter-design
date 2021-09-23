@@ -73,6 +73,10 @@ export default defineComponent({
     value: {
       type: Boolean,
       required: false
+    },
+    hasActions: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -113,6 +117,7 @@ export default defineComponent({
             : null
     },
     setTabbable() {
+      if(this.$refs.containerRef && this.hasActions){
       setTimeout(() => {
         const modalNodes = (
           this.$refs.containerRef as HTMLElement
@@ -124,6 +129,7 @@ export default defineComponent({
           n.addEventListener('blur', (e: Event) => this.handleBlur(e))
         })
       }, 300)
+      }
     },
     getPosition() {
       if (document.querySelector(`#${this.target}`)) {
@@ -171,7 +177,7 @@ export default defineComponent({
         }
       }
     },
-    handleBlur(e: MouseEvent) {
+    handleBlur(e: any) {
       const target = e.relatedTarget as HTMLDivElement
       if (!this.tabbable.includes(target)) {
         this.close()
