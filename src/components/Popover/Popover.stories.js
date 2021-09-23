@@ -8,9 +8,8 @@ export default {
   component: Popover,
   parameters: {
     design: {
-      type: 'figma'
-      //NEEDS ADDING
-      //   url: 'https://www.figma.com/file/HJgj2eHBaqt1SAYruZNjQQ/Prefect?node-id=1080%3A1557'
+      type: 'figma',
+      url: 'https://www.figma.com/file/JomY9jsgJdal9wfPBtpWkY/UI?node-id=265%3A25655'
     }
   }
 }
