@@ -3,35 +3,39 @@
     <div v-if="$slots.activate">
       <slot name="activate" />
     </div>
-    <teleport :to="teleportTo">
-      <div
-        tabindex="0"
-        @blur="handleBlur"
-        v-if="open"
-        :disabled="!open"
-        id="tooltip-container"
-        class="container"
-        @keydown="handleKeyDown"
-        :class="position"
-        ref="containerRef"
-        :style="tooltipPositionStyle"
-      >
-        <div class="content-container">
-          <header v-html="title"> </header>
-          <hr class="break" />
-          <section>
-            <slot></slot>
-          </section>
-        </div>
-        <div class="arrow"></div>
-      </div>
+    <teleport v-if="open" :to="teleportTo">
+       <!-- PopoverContent to enable testing -->
+      <PopoverContent >
+        <template v-slot>
+          <div
+            tabindex="0"
+            @blur="handleBlur"
+            :disabled="!open"
+            id="tooltip-container"
+            class="container"
+            @keydown="handleKeyDown"
+            :class="position"
+            ref="containerRef"
+            :style="tooltipPositionStyle"
+          >
+            <div class="content-container">
+              <header v-html="title"> </header>
+              <hr class="break" />
+              <section>
+                <slot></slot>
+              </section>
+            </div>
+            <div class="arrow"></div>
+          </div>
+        </template>
+      </PopoverContent>
     </teleport>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Vue } from 'vue-class-component'
+import PopoverContent from './PopoverContent.vue'
 import { tooltipPosition } from '../../directives/getPosition'
 
 interface tooltipPositionStyleObject {
@@ -41,6 +45,9 @@ interface tooltipPositionStyleObject {
 
 export default defineComponent({
   name: 'Popover',
+  components: {
+    PopoverContent
+  },
   props: {
     target: {
       type: String,
@@ -151,12 +158,14 @@ export default defineComponent({
     },
     handleKeyDown(evt: KeyboardEvent): void {
       if (document.activeElement) {
-        let index = this.tabbable.indexOf(document.activeElement)
+        let index: number = this.tabbable.indexOf(document.activeElement)
         if (evt.key.toLowerCase() === 'escape') {
           this.close()
         } else if (evt.key.toLowerCase() === 'tab') {
           if (index < this.tabbable.length - 1) {
-            index += 1(this.tabbable[index] as HTMLElement).focus()
+            index+=1
+            //leading semicolon here so that TS/Vue does not think this line is part of index+=1
+            ;(this.tabbable[index] as HTMLElement).focus()
             evt.preventDefault()
           } else this.previouslyFocused?.focus()
         }
