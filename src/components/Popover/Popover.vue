@@ -4,8 +4,8 @@
       <slot name="activate" />
     </div>
     <teleport v-if="open" :to="teleportTo">
-       <!-- PopoverContent to enable testing -->
-      <PopoverContent >
+      <!-- PopoverContent to enable testing -->
+      <PopoverContent>
         <template v-slot>
           <div
             tabindex="0"
@@ -36,7 +36,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import PopoverContent from './PopoverContent.vue'
-import { tooltipPosition } from '../../directives/getPosition'
+import { tooltipPosition } from './getPosition'
 
 interface tooltipPositionStyleObject {
   left?: string | undefined
@@ -163,7 +163,7 @@ export default defineComponent({
           this.close()
         } else if (evt.key.toLowerCase() === 'tab') {
           if (index < this.tabbable.length - 1) {
-            index+=1
+            index += 1
             //leading semicolon here so that TS/Vue does not think this line is part of index+=1
             ;(this.tabbable[index] as HTMLElement).focus()
             evt.preventDefault()
