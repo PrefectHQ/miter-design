@@ -12,17 +12,23 @@
 </template>
 
 <script lang="ts">
+
+interface tooltipRefStyleObject {
+  left?: string | undefined
+  top?: string | undefined
+}
+
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'Tooltip',
   props: {
     content: {
       type: String,
-      default: () => 'text'
+      default: ''
     },
     position: {
       type: String,
-      default: () => 'top'
+      default: 'top'
     },
     currentElRect: {
       type: Object,
@@ -31,7 +37,7 @@ export default defineComponent({
   },
   data() {
     return {
-      tooltipRefStyle: {}
+      tooltipRefStyle: {} as tooltipRefStyleObject | undefined
     }
   },
   methods: {
@@ -41,9 +47,9 @@ export default defineComponent({
       })
     },
     calculatePosition() {
-      if (!this.currentElRect && !this.$refs.tooltipRef) return
+      if (!this.currentElRect || !this.$refs.tooltipRef) return
 
-      const tooltipRefRect = this.$refs.tooltipRef.getBoundingClientRect()
+      const tooltipRefRect = (this.$refs.tooltipRef as HTMLElement).getBoundingClientRect()
       const bodyRect = document.body.getBoundingClientRect()
 
       if (this.position == 'top') {
