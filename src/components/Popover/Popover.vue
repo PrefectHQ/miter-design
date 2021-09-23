@@ -117,7 +117,7 @@ export default defineComponent({
             : null
     },
     setTabbable() {
-      if(this.$refs.containerRef && this.hasActions){
+      if(this.hasActions){
       setTimeout(() => {
         const modalNodes = (
           this.$refs.containerRef as HTMLElement
