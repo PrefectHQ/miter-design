@@ -23,13 +23,13 @@
     width: 350px;
     display: flex;
     align-items: center;
-    padding-left: 32px;
+    padding-left: 21px;
     color: variables.$grey-20;
     font-size: 16px;
     white-space: nowrap;
     z-index: 2;
     span {
-      width: 275px;
+      width: 284px;
     }
     &.selected {
       color: variables.$text--primary;
@@ -84,7 +84,7 @@
       align-items: center;
       display: flex;
       height: 58px;
-      padding-left: 32px;
+      padding-left: 21px;
       &:not(:last-child) {
         border-bottom: 1px solid variables.$secondary-background;
       }

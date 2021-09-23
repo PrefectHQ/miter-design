@@ -364,7 +364,7 @@ export default defineComponent({
                 : null,
               this.selected || this.placeholder
             ]),
-        h('i', { class: ['pi', 'pi-arrow-drop-down-line', 'pi-lg'] })
+        h('i', { class: ['pi', 'pi-arrow-down-s-line', 'pi-lg'] })
       ]
     )
     const wrapper = h(
