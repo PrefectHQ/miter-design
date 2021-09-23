@@ -31,45 +31,35 @@ test('does not load component when modelValue/v-model is false', () => {
     props: { modelValue: false, position: 'top', target: 'opener' },
     slots: {
       default: '<div id="content" >Main Content</div>',
-      activator: `<button id="opener">Test</button>`
+      activate: `<button id="opener">Test</button>`
     }
   })
   const popupcontent = wrapper.findComponent(PopoverContent)
   expect(popupcontent.exists()).toBe(false)
 })
 
-// test('loads the activate slot', () => {
-//   const wrapper = mount(Popover, {
-//     props: { modelValue: true, position: 'top' },
-//     slots: {
-//       content: '<div>Main Content</div>',
-//       activate: '<button id="test-button">Test</button>'
-//     },
-//     global: {
-//       components: {
-//         Card: Card
-//       }
-//     }
-//   })
-//   expect(wrapper.get('#test-button').text()).toEqual('Test')
-// })
+test('loads the activate slot', () => {
+  const wrapper = mount(Popover, {
+    props: { modelValue: true, position: 'top', target: 'opener' },
+    slots: {
+      default: '<div id="content">Main Content</div>',
+      activate: `<button id="opener">Test</button>`
+    }
+  })
+  expect(wrapper.get('#opener').text()).toEqual('Test')
+})
 
-// test('loads the content slot', () => {
-//   const wrapper = mount(Popover, {
-//     props: { modelValue: true, position: 'top' },
-//     slots: {
-//       content: '<div>Main Content</div>',
-//       activate: '<button id="test-button">Test</button>'
-//     },
-//     global: {
-//       components: {
-//         Card: Card
-//       }
-//     }
-//   })
-//   const popupcontent = wrapper.findComponent(Popover)
-//   expect(popupcontent.html()).toContain('Main Content')
-// })
+test('loads the content slot', () => {
+  const wrapper = mount(Popover, {
+    props: { modelValue: true, position: 'top', target: 'opener' },
+    slots: {
+      default: '<div id="content" >Main Content</div>',
+      activate: `<button id="opener">Test</button>`
+    }
+  })
+  const popupcontent = wrapper.findComponent(PopoverContent)
+  expect(popupcontent.html()).toContain('Main Content')
+})
 
 // test('emits close and update:modelValue as false when the background is clicked', async () => {
 //   const wrapper = mount(Popover, {
