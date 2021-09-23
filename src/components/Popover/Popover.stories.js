@@ -72,6 +72,7 @@ WithActions.args = {
   val: false,
   position: 'bottom',
   title: 'Pop Over',
+  hasActions: true,
   target: 'opener',
   activate: `<Button id="opener" v-bind="args" @mouseenter="val = true" >Popover</Button>`,
   content: `<div><div>Popover Content</div> <div class="mt-2" ><Button>Action</Button><Button @click="val=false" class="ml-2" >Close</Button></div></div>`
