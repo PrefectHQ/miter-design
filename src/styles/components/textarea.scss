@@ -36,9 +36,10 @@
         &:focus-visible {
           outline: none !important; // needed for focus rings
         }
-        ::placeholder {
-          color: #a0a0a0; //variables.$text--placeholder;
-        }
+      }
+      ::placeholder,
+      ::-webkit-input-placeholder {
+        color: variables.$text--placeholder;
       }
       &.hovered {
         ::placeholder {
