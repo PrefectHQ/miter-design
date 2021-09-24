@@ -108,7 +108,7 @@ export default defineComponent({
     }
   },
   methods: {
-    setPreviouslyFocussed() {
+    setPreviouslyFocused() {
       if (typeof document !== 'undefined')
         this.previouslyFocused =
           document.activeElement === document.body ||
