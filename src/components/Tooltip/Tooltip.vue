@@ -12,7 +12,6 @@
 </template>
 
 <script lang="ts">
-
 interface tooltipRefStyleObject {
   left?: string | undefined
   top?: string | undefined
@@ -49,7 +48,9 @@ export default defineComponent({
     calculatePosition() {
       if (!this.currentElRect || !this.$refs.tooltipRef) return
 
-      const tooltipRefRect = (this.$refs.tooltipRef as HTMLElement).getBoundingClientRect()
+      const tooltipRefRect = (
+        this.$refs.tooltipRef as HTMLElement
+      ).getBoundingClientRect()
       const bodyRect = document.body.getBoundingClientRect()
 
       if (this.position == 'top') {

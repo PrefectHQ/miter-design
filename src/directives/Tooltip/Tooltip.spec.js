@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { mount, createLocalVue as CreateLocalVue } from '@vue/test-utils'
 import * as Module from './Tooltip.ts'
 const TooltipDirective = Module.TooltipDirective
 import Tooltip from '../../components/Tooltip/Tooltip.vue'
@@ -23,35 +23,36 @@ const factoryMount = (position = '', text = '') => {
   )
 }
 const waitNT = (ctx) => new Promise((resolve) => ctx.$nextTick(resolve))
-// note: Failing..
+const createContainer = (tag = 'div') => {
+  const container = document.createElement(tag)
+  document.body.appendChild(container)
+  return container
+}
+// note: Passing but don't know why?..
 describe('mounted hook', () => {
   test('mounting', async () => {
-    /*
-    note: 
-     similar to the example in the vue test docs of using attachTo -
-    creates a div and appends it the body then create our template using 
-    the directive and use attachTo to append to the newly created div 
-     */
     const App = {
       directives: {
         Tooltip: TooltipDirective
       },
-      template: `<div v-tooltip>Foo</div>`
+      template: '<div v-tooltip>tooltip</div>'
     }
 
-    const container = document.createElement('div')
-    document.body.appendChild(container)
     const wrapper = mount(App, {
-      attachTo: container
+      attachTo: createContainer()
     })
-    // wrapper.element.tagName => DIV
 
-    const div = wrapper.find('div')
-    // note: if it does a  mouseenter, I would think it would mount the tooltip component
-    // note: (line 34 - tooltip.ts) and we would be able to do document.body.querySelector or something similar?
-    await div.trigger('mouseenter')
-    // await waitNT(wrapper.vm)
-    console.log(wrapper)
+    expect(wrapper.vm).toBeDefined()
+    await waitNT(wrapper.vm)
+
+    expect(wrapper.element.tagName).toBe('DIV')
+    const $div = wrapper.find('div')
+    await $div.trigger('mouseenter')
+
+    const tooltipContainer = document.querySelector('#tooltip-container')
+
+    expect(tooltipContainer).not.toBe(null)
+    expect(tooltipContainer.classList.contains('tooltip')).toBe(true)
   })
 
   // test('does not append component when mounted', () => {
