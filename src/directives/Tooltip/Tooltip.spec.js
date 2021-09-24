@@ -1,28 +1,7 @@
-import { mount, createLocalVue as CreateLocalVue } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import * as Module from './Tooltip.ts'
 const TooltipDirective = Module.TooltipDirective
-import Tooltip from '../../components/Tooltip/Tooltip.vue'
-import { nextTick } from 'vue'
 
-const factoryMount = (position = '', text = '') => {
-  return mount(
-    { template: `<div v-tooltip:[position]="text">Foo</div>` },
-    {
-      data() {
-        return {
-          position,
-          text
-        }
-      },
-      global: {
-        directives: {
-          Tooltip: TooltipDirective
-        }
-      }
-    }
-  )
-}
-const waitNT = (ctx) => new Promise((resolve) => ctx.$nextTick(resolve))
 const createContainer = (tag = 'div') => {
   const container = document.createElement(tag)
   document.body.appendChild(container)
@@ -30,6 +9,19 @@ const createContainer = (tag = 'div') => {
 }
 // note: Passing but don't know why?
 describe('mounted hook', () => {
+  test('does not append component when mounted', () => {
+    const App = {
+      directives: {
+        Tooltip: TooltipDirective
+      },
+      template: '<div v-tooltip>tooltip</div>'
+    }
+    const wrapper = mount(App, {
+      attachTo: createContainer()
+    })
+    const tooltipContainer = document.querySelector('#tooltip-container')
+    expect(tooltipContainer).toBe(null)
+  })
   test('appends the component on mouseenter', async () => {
     const App = {
       directives: {
@@ -50,20 +42,20 @@ describe('mounted hook', () => {
     expect(tooltipContainer.classList.contains('tooltip')).toBe(true)
   })
 
-  // test('does not append component when mounted', () => {
-  //   const wrapper = factoryMount()
-  //   expect(wrapper.find('#tooltip-container').exists()).toBe(false)
-  // })
-  // test('appends the component on mouseenter', async () => {
-  //   const wrapper = factoryMount()
-  //   await wrapper.trigger('mouseenter')
-  //   expect(wrapper.find('#tooltip-container').exists()).toBe(true)
-  // })
-  // test('removes the component on mouseleave', async () => {
-  //   const wrapper = factoryMount()
-  //   await wrapper.trigger('mouseleave')
-  //   expect(wrapper.find('#tooltip-container').exists()).toBe(false)
-  // })
+  test('removes the component on mouseleave', async () => {
+    const App = {
+      directives: {
+        Tooltip: TooltipDirective
+      },
+      template: '<div v-tooltip>tooltip</div>'
+    }
+    const wrapper = mount(App, {
+      attachTo: createContainer()
+    })
+    await wrapper.trigger('mouseleave')
+    const tooltipContainer = document.querySelector('#tooltip-container')
+    expect(tooltipContainer).toBe(null)
+  })
 })
 
 // note: Failing
