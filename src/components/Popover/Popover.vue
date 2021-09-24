@@ -3,7 +3,7 @@
     <div v-if="$slots.activate">
       <slot name="activate" />
     </div>
-    <teleport v-if="open" :to="teleportTo">
+    <teleport v-if="open" :to="to">
       <!-- PopoverContent to enable testing -->
       <PopoverContent>
         <template v-slot>
@@ -65,7 +65,7 @@ export default defineComponent({
       type: Boolean,
       required: false
     },
-    teleportTo: {
+    to: {
       type: String,
       required: false,
       default: 'body'
@@ -74,7 +74,7 @@ export default defineComponent({
       type: Boolean,
       required: false
     },
-    hasActions: {
+    focusable: {
       type: Boolean,
       default: false
     }
@@ -117,7 +117,7 @@ export default defineComponent({
             : null
     },
     setTabbable() {
-      if(this.hasActions){
+      if(this.focusable){
       setTimeout(() => {
         const modalNodes = (
           this.$refs.containerRef as HTMLElement
