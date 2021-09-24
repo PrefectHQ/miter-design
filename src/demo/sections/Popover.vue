@@ -1,13 +1,15 @@
 <template>
   <div>
     <h3>Popover</h3>
-    <Popover v-model="show" position="right" target="opener" :title="title" :hasActions="true">
+    <Popover
+      v-model="show"
+      position="right"
+      target="opener"
+      :title="title"
+      :hasActions="true"
+    >
       <template v-slot:activate>
-        <Button
-          @mouseenter="open"
-          id="opener"
-          @keydown.enter="open"
-        >
+        <Button id="opener" @keydown.enter="open" @mouseenter="open">
           Popover
         </Button>
       </template>

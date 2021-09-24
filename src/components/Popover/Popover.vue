@@ -9,14 +9,14 @@
         <template v-slot>
           <div
             tabindex="0"
-            @blur="handleBlur"
             :disabled="!open"
             id="popover-container"
             class="container"
-            @keydown="handleKeyDown"
             :class="position"
             ref="containerRef"
             :style="popoverPositionStyle"
+            @blur="handleBlur"
+            @keydown="handleKeyDown"
           >
             <div class="content-container">
               <header v-html="title"> </header>
@@ -117,18 +117,18 @@ export default defineComponent({
             : null
     },
     setTabbable() {
-      if(this.focusable){
-      setTimeout(() => {
-        const modalNodes = (
-          this.$refs.containerRef as HTMLElement
-        ).querySelectorAll('*')
-        this.tabbable = Array.from(modalNodes).filter(
-          (n: any) => n.tabIndex >= 0
-        )
-        this.tabbable.forEach((n) => {
-          n.addEventListener('blur', (e: Event) => this.handleBlur(e))
-        })
-      }, 300)
+      if (this.focusable) {
+        setTimeout(() => {
+          const modalNodes = (
+            this.$refs.containerRef as HTMLElement
+          ).querySelectorAll('*')
+          this.tabbable = Array.from(modalNodes).filter(
+            (n: any) => n.tabIndex >= 0
+          )
+          this.tabbable.forEach((n) => {
+            n.addEventListener('blur', (e: Event) => this.handleBlur(e))
+          })
+        }, 300)
       }
     },
     getPosition() {
@@ -185,8 +185,8 @@ export default defineComponent({
     },
     close() {
       this.tabbable.forEach((n) => {
-          n.removeEventListener('blur', (e: Event) => this.handleBlur(e))
-        })
+        n.removeEventListener('blur', (e: Event) => this.handleBlur(e))
+      })
       this.$emit('update:modelValue', false)
       this.previouslyFocused?.focus()
     }
