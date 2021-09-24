@@ -20,7 +20,7 @@
 
   header {
     :first-child &:not(i) {
-      font-family: Barlow !important;
+      font-family: variables.$font--primary !important;
       font-weight: 600;
 
       :first-child::before {
