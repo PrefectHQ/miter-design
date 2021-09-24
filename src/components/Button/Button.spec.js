@@ -88,7 +88,7 @@ describe('IconButton - icon prop', () => {
     const wrapper = mount(IconButton, {
       props: { icon: 'bug-2-line' }
     })
-    expect(wrapper.get('i').classes()).toContain('pi-bug-2-line')
+    expect(wrapper.get('i').classes()).toContain('bug-2-line')
   })
 
   test('does not display an icon if not passed', () => {
@@ -96,7 +96,7 @@ describe('IconButton - icon prop', () => {
       props: {}
     })
 
-    expect(wrapper.get('i').classes()).not.toContain('pi-bug-2-line')
+    expect(wrapper.get('i').classes()).not.toContain('bug-2-line')
   })
 })
 

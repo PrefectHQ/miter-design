@@ -20,9 +20,7 @@ export const mount = (
 
   if (!vNode.el) throw new Error("Couldn't attach vNode to the DOM.")
 
-  if (container) {
-    container.appendChild(vNode.el?.parentElement)
-  } else document.body.appendChild(vNode.el?.parentElement)
+  document.body.appendChild(vNode.el?.parentElement)
 }
 
 export const TooltipDirective: ObjectDirective = {
