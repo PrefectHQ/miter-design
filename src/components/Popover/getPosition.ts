@@ -1,39 +1,39 @@
-interface bodyRectType {
+interface bodyRect {
   top: number
   left: number
 }
 
-interface popoverRefRectType {
+interface popoverRect {
   height: number
   width: number
 }
 
 export function popoverPosition(
   position: string,
-  currentElRect: DOMRect | undefined,
-  bodyRect: bodyRectType,
-  popoverRefRect: popoverRefRectType
+  current: DOMRect | undefined,
+  body: bodyRect,
+  popover: popoverRect
 ) {
   const arrow = {
     height: 12,
     width: 12
   }
 
-  if (!currentElRect || !popoverRefRect) return {}
+  if (!current || !popover) return {}
   else {
     if (position == 'top') {
       return {
         top: `${
-          currentElRect?.top -
-          bodyRect?.top -
-          popoverRefRect.height -
+          current?.top -
+          body?.top -
+          popover.height -
           arrow.height
         }px`,
         left: `${
-          currentElRect.left -
-          bodyRect.left +
-          currentElRect.width / 2 -
-          popoverRefRect.width / 2
+          current.left -
+          body.left +
+          current.width / 2 -
+          popover.width / 2
         }px`
       }
     }
@@ -41,14 +41,14 @@ export function popoverPosition(
     if (position == 'right') {
       return {
         top: `${
-          currentElRect.top -
-          bodyRect.top -
-          0.25 * popoverRefRect.height +
-          currentElRect.height / 2 +
+          current.top -
+          body.top -
+          0.25 * popover.height +
+          current.height / 2 +
           arrow.height / 2
         }px`,
         left: `${
-          currentElRect.left - bodyRect.left + currentElRect.width + arrow.width
+          current.left - body.left + current.width + arrow.width
         }px`
       }
     }
@@ -56,13 +56,13 @@ export function popoverPosition(
     if (position == 'bottom') {
       return {
         top: `${
-          currentElRect.top - bodyRect.top + currentElRect.height + arrow.height
+          current.top - body.top + current.height + arrow.height
         }px`,
         left: `${
-          currentElRect.left -
-          bodyRect.left +
-          currentElRect.width / 2 -
-          popoverRefRect.width / 2
+          current.left -
+          body.left +
+          current.width / 2 -
+          popover.width / 2
         }px`
       }
     }
@@ -70,14 +70,14 @@ export function popoverPosition(
     if (position == 'left') {
       return {
         top: `${
-          currentElRect.top -
-          bodyRect.top -
-          0.25 * popoverRefRect.height +
-          currentElRect.height / 2 +
+          current.top -
+          body.top -
+          0.25 * popover.height +
+          current.height / 2 +
           arrow.height / 2
         }px`,
 
-        left: `${currentElRect.left - popoverRefRect.width - arrow.width}px`
+        left: `${current.left - popover.width - arrow.width}px`
       }
     }
   }
