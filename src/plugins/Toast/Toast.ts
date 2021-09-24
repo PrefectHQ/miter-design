@@ -49,7 +49,7 @@ export default {
               color: options.color,
               timeout: options.timeout
             },
-            children: options.component ? [options.component] : null
+            children: options.component
           },
           toastApp._container?.querySelector('.toast-container')!
         )
