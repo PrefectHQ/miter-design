@@ -12,7 +12,6 @@ export default defineComponent({
   data() {
     return {
       position: 'right',
-      text: 'hello',
       html: `<div>some <span class="highlight">text</span></div>`
     }
   }
