@@ -76,6 +76,10 @@
   font-size: 15px;
   height: 40px;
   width: 100%;
+
+  input {
+    background-color: inherit;
+  }
 }
 
 .input-label {

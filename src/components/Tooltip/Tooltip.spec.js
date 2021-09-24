@@ -15,9 +15,9 @@ describe('props', () => {
     expect(wrapper.find('.tooltip-content').text()).toBe('hello')
   })
 
-  test('displays default text if content prop is not passed', () => {
+  test('displays empty string text if content prop is not passed', () => {
     const wrapper = factoryMount()
-    expect(wrapper.find('.tooltip-content').text()).toBe('text')
+    expect(wrapper.find('.tooltip-content').text()).toBe('')
   })
 
   test('position is passed', () => {
