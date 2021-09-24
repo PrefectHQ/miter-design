@@ -10,7 +10,8 @@ export default {
     design: {
       type: 'figma',
       url: 'https://www.figma.com/file/JomY9jsgJdal9wfPBtpWkY/UI?node-id=265%3A25655'
-    }
+    },
+    layout: 'centered'
   }
 }
 
@@ -30,7 +31,7 @@ const Template = (args) => ({
 export const Top = Template.bind({})
 Top.args = {
   val: false,
-  position: 'bottom',
+  position: 'top',
   title: 'Pop Over',
   target: 'opener',
   activate: `<Button id="opener" v-bind="args" @click="val =!val" >Popover</Button>`,
@@ -63,7 +64,7 @@ MouseOver.args = {
   position: 'bottom',
   title: 'Pop Over',
   target: 'opener',
-  activate: `<Button id="opener" v-bind="args" @mouseenter="val = true" @mouseleave="val=false" >Popover</Button>`,
+  activate: `<Button id="opener" v-bind="args" @mouseenter="val = true" @mouseleave="val=false">Popover</Button>`,
   content: `<div>Popover Content</div>`
 }
 
