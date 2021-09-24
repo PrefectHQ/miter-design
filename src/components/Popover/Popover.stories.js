@@ -58,6 +58,16 @@ Left.args = {
   content: `<div>Popover Content</div>`
 }
 
+export const Bottom = Template.bind({})
+Bottom.args = {
+  val: false,
+  position: 'bottom',
+  title: 'Pop Over',
+  target: 'opener',
+  activate: `<Button id="opener" v-bind="args" @click="val =!val" >Popover</Button>`,
+  content: `<div>Popover Content</div>`
+}
+
 export const MouseOver = Template.bind({})
 MouseOver.args = {
   val: false,
