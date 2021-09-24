@@ -184,6 +184,9 @@ export default defineComponent({
       }
     },
     close() {
+      this.tabbable.forEach((n) => {
+          n.removeEventListener('blur', (e: Event) => this.handleBlur(e))
+        })
       this.$emit('update:modelValue', false)
       this.previouslyFocused?.focus()
     }
