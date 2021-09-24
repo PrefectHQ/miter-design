@@ -31,6 +31,7 @@
           <Option
             v-for="(option, i) in items"
             :key="i"
+            :data="option"
             :value="option.label"
             icon="fire-line"
           ></Option>

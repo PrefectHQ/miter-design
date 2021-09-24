@@ -33,8 +33,12 @@ export default defineComponent({
   },
   props: {
     value: {
-      type: [String, Object],
+      type: String,
+      required: true,
       default: 'Option'
+    },
+    data: {
+      type: [String, Object]
     },
     icon: {
       type: String,
@@ -61,7 +65,7 @@ export default defineComponent({
   },
   methods: {
     choose(e: Event): Event {
-      this.$emit('click', e, this.value, this.icon)
+      this.$emit('click', e, this.value, this.icon, this.data)
       return e
     },
 

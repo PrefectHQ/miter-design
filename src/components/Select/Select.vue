@@ -5,8 +5,7 @@ import {
   mergeProps,
   VNode,
   RendererNode,
-  RendererElement,
-  VNodeArrayChildren
+  RendererElement
 } from 'vue'
 import Option from './Option.vue'
 import OptionGroup from './OptionGroup.vue'
@@ -37,7 +36,7 @@ export default defineComponent({
       default: false
     },
     modelValue: {
-      type: String,
+      type: [String, Object],
       default: ''
     }
   },
@@ -82,7 +81,7 @@ export default defineComponent({
         return e
       this.selected = args[0]
       this.icon = args[1]
-      this.$emit('update:modelValue', this.selected)
+      this.$emit('update:modelValue', this.selected, args[2])
       return e
     },
     handleFocus(): void {

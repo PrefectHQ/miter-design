@@ -192,3 +192,17 @@ test('emit selected option', async () => {
   await option.trigger('click')
   expect(wrapper.emitted('update:modelValue')[0][0]).toEqual('First')
 })
+
+test('include object data in emit', async () => {
+  const wrapper = factoryMount(
+    {},
+    { default: () => [h(Option, { value: 'First', data: { test: '123' } })] }
+  )
+  const picker = wrapper.get('.picker')
+  await picker.trigger('click')
+
+  const option = wrapper.get('.option')
+  option.element.selected = true
+  await option.trigger('click')
+  expect(wrapper.emitted('update:modelValue')[0][1]).toEqual({ test: '123' })
+})
