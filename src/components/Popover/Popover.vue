@@ -101,7 +101,7 @@ export default defineComponent({
   watch: {
     open(val) {
       if (val) {
-        this.setPreviouslyFocussed()
+        this.setPreviouslyFocused()
         this.setTabbable()
         this.getPosition()
       }
