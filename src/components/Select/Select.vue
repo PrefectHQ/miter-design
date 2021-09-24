@@ -16,6 +16,9 @@ export default defineComponent({
   emits: {
     'update:modelValue'(...args: any[]) {
       return { ...args }
+    },
+    change(...args: any[]) {
+      return { ...args }
     }
   },
   props: {
@@ -82,6 +85,7 @@ export default defineComponent({
       this.selected = args[0]
       this.icon = args[1]
       this.$emit('update:modelValue', this.selected, args[2])
+      this.$emit('change', this.selected, args[2])
       return e
     },
     handleFocus(): void {
@@ -392,6 +396,7 @@ export default defineComponent({
         onMouseenter: this.handleFocus,
         onMouseleave: this.handleMouseLeave,
         onKeydown: this.handleKeydown,
+        onChange: "$emit('change', this.selected, args[2])",
         onClick: () => {
           !this.disabled ? (this.active = !this.active) : null
         }
