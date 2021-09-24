@@ -2,14 +2,17 @@
 @use '../abstracts/mixins';
 
 .toast {
-  // background-color: variables.$primary-100;
   color: variables.$white;
-  padding: 12px 24px;
   pointer-events: all;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 16px;
+
+  .toast--content {
+    background-color: variables.$primary;
+    padding: 12px 24px;
+  }
 }
 
 .toast-container {
@@ -17,4 +20,5 @@
   pointer-events: none;
   position: fixed;
   right: 0;
+  z-index: 10;
 }

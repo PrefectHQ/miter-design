@@ -9,30 +9,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { Vue, Options } from 'vue-class-component'
 import Toast from '@/components/Toast/Toast.vue'
 
-export default defineComponent({
-  name: 'Toasts',
-  components: { Toast },
-  data() {
-    return {
-      toasts: [] as Array<typeof Toast>
-    }
-  },
-  methods: {
-    addToast() {
-      this.toasts.push(this.$toast.add(new Date().toString()))
-    },
-    removeToasts() {
-      this.toasts.forEach((toast) => {
-        console.log(toast)
-        toast.destroy()
-      })
-      this.toasts = []
-    }
+@Options({
+  components: {
+    Toast
   }
 })
+export default class Toasts extends Vue {
+  toasts: any[] = []
+
+  addToast() {
+    this.toasts.push(this.$toast.add({ content: new Date().toString() }))
+  }
+
+  removeToasts() {
+    this.toasts.forEach((toast) => {
+      toast.destroy()
+    })
+    this.toasts = []
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>

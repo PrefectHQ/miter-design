@@ -8,7 +8,7 @@ export const mount = (
   component: Component,
   { props, children, element, app }: ComponentOptions = {},
   container: Element
-) => {
+): MountedElement => {
   let el = element ? element : createElement()
 
   let vNode: VNode | null = h(component, props, children)
@@ -31,8 +31,8 @@ export const mount = (
   if (!vNode.el) throw new Error("Couldn't attach vNode to the DOM.")
 
   if (container) {
-    container.appendChild(vNode.el)
-  } else document.body.appendChild(vNode.el)
+    container.appendChild(vNode.el as HTMLElement)
+  } else document.body.appendChild(vNode.el as HTMLElement)
 
   return { vNode, destroy, el }
 }

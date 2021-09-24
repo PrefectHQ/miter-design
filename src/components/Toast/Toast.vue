@@ -1,24 +1,29 @@
 <template>
-  <div class="toast" :class="classList">
-    <div>
-      <slot>{{ text }}</slot>
-      <Button class="ml-2" @click="remove">Close</Button>
+  <Card miter class="toast" :class="classList">
+    <div class="toast--content">
+      <slot>{{ content }}</slot>
+      <Button v-if="dismissable" class="text--white ml-2" flat @click="remove">
+        Close
+      </Button>
     </div>
-  </div>
+  </Card>
 </template>
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
+import Card from '@/components/Card/Card.vue'
 import Button from '@/components/Button/Button.vue'
 
 class Props {
-  color = prop<string>({})
-  text = prop<string>({})
+  color = prop<string>({ default: 'primary' })
+  content = prop<string>({ required: false, default: '' })
+  dismissable = prop<boolean>({ default: true, type: Boolean })
 }
 
 @Options({
   components: {
-    Button
+    Button,
+    Card
   }
 })
 export default class Toast extends Vue.with(Props) {
