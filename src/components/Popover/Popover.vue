@@ -4,9 +4,7 @@
       <slot name="activate" />
     </div>
     <teleport v-if="open" :to="to">
-      <!-- PopoverContent to enable testing -->
       <PopoverContent>
-        <template v-slot>
           <div
             tabindex="0"
             :disabled="!open"
@@ -27,7 +25,6 @@
             </div>
             <div class="arrow"></div>
           </div>
-        </template>
       </PopoverContent>
     </teleport>
   </div>
