@@ -8,14 +8,14 @@
 
 @each $key, $color in variables.$colors {
   .bg--#{$key} {
-    background-color: #{$color};
+    background-color: #{$color} !important;
   }
 
   .text--#{$key} {
-    color: #{$color};
+    color: #{$color} !important;
   }
 
   .fill--#{$key} {
-    fill: #{$color};
+    fill: #{$color} !important;
   }
 }

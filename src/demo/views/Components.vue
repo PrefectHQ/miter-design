@@ -3,6 +3,7 @@
     <h1>Components</h1>
     <Cards />
     <Popups />
+    <Popover class="mt-10" />
     <Buttons class="mt-10" />
     <Toggles class="mt-10" />
     <RadioButtons class="mt-10" />
@@ -14,14 +15,11 @@
     <Tag class="mt-10" />
     <TagGroup class="mt-10" />
     <Avatar class="mt-10" />
-<<<<<<< HEAD
     <Toasts class="mt-10" />
-=======
     <Tooltip class="mt-10" />
     <Selects class="mt-10" />
     <TextAreas class="mt-10" />
     <Breakpoints class="mt-10" />
->>>>>>> 9a44e096d7af55aaec7af25989602ccb0dca7c81
   </div>
 </template>
 
@@ -40,14 +38,12 @@ import TagGroup from '../sections/TagGroup.vue'
 import Tag from '../sections/Tag.vue'
 import Popups from '../sections/Popups.vue'
 import Sliders from '../sections/Sliders.vue'
-<<<<<<< HEAD
 import Toasts from '../sections/Toasts.vue'
-=======
 import Inputs from '../sections/Inputs.vue'
 import Tooltip from '../sections/Tooltip.vue'
 import Selects from '../sections/Selects.vue'
+import Popover from '../sections/Popover.vue'
 import TextAreas from '../sections/TextAreas.vue'
->>>>>>> 9a44e096d7af55aaec7af25989602ccb0dca7c81
 
 @Options({
   components: {
@@ -66,12 +62,10 @@ import TextAreas from '../sections/TextAreas.vue'
     TabSection,
     Tag,
     TagGroup,
-<<<<<<< HEAD
-    Toasts
-=======
+    Toasts,
+    Popover,
     TextAreas,
     Tooltip
->>>>>>> 9a44e096d7af55aaec7af25989602ccb0dca7c81
   }
 })
 export default class App extends Vue {}
