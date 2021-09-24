@@ -1,3 +1,4 @@
+- Add popover component - [#67](https://github.com/PrefectHQ/miter-design/pull/67)
 - Update button styles - [#61](https://github.com/PrefectHQ/miter-design/pull/61)
 - Add grey-30 variable, fix placeholder variable - [#73](https://github.com/PrefectHQ/miter-design/pull/73)
 - Add placeholder prop to Input - [#70](https://github.com/PrefectHQ/miter-design/pull/70)
