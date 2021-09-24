@@ -25,12 +25,10 @@ export const mount = (
 
 export const TooltipDirective: ObjectDirective = {
   mounted(el: any, binding: DirectiveBinding) {
-    console.log('mounted directive')
     if (el) {
       el.style.display = 'inline-block'
       el.setAttribute('aria-labelledby', 'tooltip-container')
       el.addEventListener('mouseenter', () => {
-        console.log('mouseenter')
         mount(
           Tooltip,
           {

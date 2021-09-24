@@ -28,28 +28,23 @@ const createContainer = (tag = 'div') => {
   document.body.appendChild(container)
   return container
 }
-// note: Passing but don't know why?..
+// note: Passing but don't know why?
 describe('mounted hook', () => {
-  test('mounting', async () => {
+  test('appends the component on mouseenter', async () => {
     const App = {
       directives: {
         Tooltip: TooltipDirective
       },
       template: '<div v-tooltip>tooltip</div>'
     }
-
     const wrapper = mount(App, {
       attachTo: createContainer()
     })
 
-    expect(wrapper.vm).toBeDefined()
-    await waitNT(wrapper.vm)
-
-    expect(wrapper.element.tagName).toBe('DIV')
-    const $div = wrapper.find('div')
-    await $div.trigger('mouseenter')
-
+    await wrapper.trigger('mouseenter')
     const tooltipContainer = document.querySelector('#tooltip-container')
+    // tooltipContainer.classList -> {}
+    // tooltipContainer.classList.value -> tooltip
 
     expect(tooltipContainer).not.toBe(null)
     expect(tooltipContainer.classList.contains('tooltip')).toBe(true)
