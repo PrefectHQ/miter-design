@@ -12,6 +12,7 @@
       hovered: hovered,
       disabled: disabled
     }"
+    tabindex="0"
   >
     <span>
       <i v-if="icon" :class="iconClass" class="pi pi-1x mr-1"></i>

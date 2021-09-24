@@ -90,9 +90,12 @@ export default defineComponent({
     },
 
     handleBlur(event: FocusEvent): void {
-      //return
       const target = event.relatedTarget as HTMLDivElement
-      if (target?.tagName === 'INPUT' || target?.classList.contains('active'))
+      if (
+        target?.tagName === 'INPUT' ||
+        target?.classList.contains('active') ||
+        target?.classList.contains('option')
+      )
         return
       this.hovered = false
       this.active = false
@@ -109,7 +112,12 @@ export default defineComponent({
           // choose highlighted option, else close
           this.filteredOptions.forEach((option) => {
             if (option.el?.classList.contains('hovered')) {
-              this.handleOptionClick(event, option?.props?.value)
+              this.handleOptionClick(
+                event,
+                option?.props?.value,
+                option?.props?.icon || '',
+                option?.props?.data
+              )
             }
           })
         }
@@ -131,6 +139,7 @@ export default defineComponent({
             !optionClasses?.contains('disabled') &&
             currentFound
           ) {
+            option.el?.focus()
             optionClasses.add('hovered')
             nextSelected = true
             break
@@ -148,6 +157,7 @@ export default defineComponent({
             const optionClasses = option?.el?.classList
 
             if (type === 'Option' && !optionClasses?.contains('disabled')) {
+              option.el?.focus()
               optionClasses.add('hovered')
               break
             }
@@ -168,6 +178,7 @@ export default defineComponent({
             !optionClasses?.contains('disabled') &&
             currentFound
           ) {
+            option.el?.focus()
             optionClasses.add('hovered')
             nextSelected = true
             break
@@ -186,6 +197,7 @@ export default defineComponent({
             const optionClasses = option?.el?.classList
 
             if (type === 'Option' && !optionClasses?.contains('disabled')) {
+              option.el?.focus()
               optionClasses.add('hovered')
               break
             }
