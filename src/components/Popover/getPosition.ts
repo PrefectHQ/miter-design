@@ -37,6 +37,7 @@ export function popoverPosition(
         }px`
       }
     }
+    
     if (position == 'right') {
       return {
         top: `${
