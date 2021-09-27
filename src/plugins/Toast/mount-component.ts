@@ -11,7 +11,11 @@ export const mount = (
 ): MountedElement => {
   let el = element ? element : createElement()
 
-  let vNode: VNode | null = h(component, props, { default: () => h(children) })
+  let vNode: VNode | null = h(
+    component,
+    props,
+    children ? { default: () => h(children) } : children
+  )
   if (app && app._context) {
     vNode.appContext = app._context
   }

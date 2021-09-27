@@ -20,6 +20,16 @@
         Text
       </RadioButton>
 
+      <div>
+        <Checkbox v-model="dismissable">
+          <span>Dismissable</span>
+        </Checkbox>
+      </div>
+
+      <div class="my-2">
+        <Input v-model="timeout" placeholder="Timeout" style="width: 300px" />
+      </div>
+
       <Button color="primary" @click="addToast">Add toast</Button>
       <Button class="ml-2" @click="removeToasts">Remove toasts</Button>
     </div>
@@ -39,13 +49,16 @@ import Toast from '@/components/Toast/Toast.vue'
 export default class Toasts extends Vue {
   toasts: any[] = []
   content: string = 'text'
+  dismissable: boolean = true
+  timeout: string | number = '5000'
 
   addToast() {
     this.toasts.push(
       this.$toast.add({
         component: this.content == 'component' ? ToastComponentExample : null,
         content: new Date().toString(),
-        dismissable: false
+        dismissable: this.dismissable,
+        timeout: this.timeout
       })
     )
   }
