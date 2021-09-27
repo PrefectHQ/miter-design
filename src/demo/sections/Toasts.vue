@@ -2,37 +2,28 @@
   <div>
     <h3>Toasts</h3>
     <div class="my-2">
-      <RadioButton
-        v-model="content"
-        class="my-2"
-        name="button-group"
-        value="component"
-      >
-        Component
-      </RadioButton>
-
-      <RadioButton
-        v-model="content"
-        class="my-2"
-        name="button-group"
-        value="text"
-      >
-        Text
-      </RadioButton>
-
       <div>
         <Checkbox v-model="dismissable">
           <span>Dismissable</span>
         </Checkbox>
       </div>
 
-      <Select v-model="type" class="my-2">
-        Type:
+      <div class="my-2">
+        Inner:
+        <Select v-model="content">
+          <Option value="Text">Text</Option>
+          <Option value="Component">Component</Option>
+        </Select>
+      </div>
 
-        <Option>None</Option>
-        <Option value="error">Error</Option>
-        <Option value="success">Success</Option>
-      </Select>
+      <div class="my-2">
+        Type:
+        <Select v-model="type">
+          <Option>None</Option>
+          <Option value="error">Error</Option>
+          <Option value="success">Success</Option>
+        </Select>
+      </div>
 
       <div class="my-2">
         <Input v-model="timeout" placeholder="Timeout" style="width: 300px" />
