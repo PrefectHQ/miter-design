@@ -1,13 +1,6 @@
 <template>
-  <Card
-    miter
-    class="toast"
-    :key="0"
-    :class="classList"
-    @mouseenter="clearTimeout"
-    @mouseleave="setTimeout"
-  >
-    <div class="toast--content d-flex align-center">
+  <Card miter class="toast" @mouseenter="clearTimeout" @mouseleave="setTimeout">
+    <div class="toast--content d-flex align-center" :class="classList_">
       <i v-if="icon_" class="pi pi-2x mr-1" :class="icon_" />
       <slot>{{ content }}</slot>
       <IconButton
@@ -34,8 +27,13 @@ const iconMap: { [key: string]: string } = {
   error: 'pi-error-warning-line'
 }
 
+const colorMap: { [key: string]: string } = {
+  success: 'bg--success',
+  error: 'bg--error'
+}
+
 class Props {
-  color = prop<string>({ default: 'primary' })
+  classList = prop<[]>({ default: [], required: false })
   content = prop<string>({ required: false, default: '' })
   dismissable = prop<boolean>({ default: true, type: Boolean })
   icon = prop<string>({ default: null, required: false })
@@ -52,12 +50,16 @@ class Props {
 export default class Toast extends Vue.with(Props) {
   timeout_: ReturnType<typeof setInterval> | null = null
 
-  get classList() {
-    return [this.color]
+  get classList_() {
+    return [this.color, ...this.classList]
   }
 
   get icon_(): string {
     return this.icon ? this.icon : iconMap[this.type]
+  }
+
+  get color(): string {
+    return colorMap[this.type]
   }
 
   remove() {

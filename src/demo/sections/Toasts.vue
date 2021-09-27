@@ -27,6 +27,7 @@
       </div>
 
       <Select v-model="type">
+        <Option>None</Option>
         <Option value="error">Error</Option>
         <Option value="success">Success</Option>
       </Select>
