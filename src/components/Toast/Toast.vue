@@ -41,7 +41,8 @@ class Props {
   type = prop<string>({ required: false, default: null })
 }
 
-@Options({
+const Component = Options
+@Component({
   components: {
     IconButton,
     Card
@@ -78,6 +79,7 @@ export default class Toast extends Vue.with(Props) {
   }
 
   mounted() {
+    console.log('mounted', this)
     if (this.timeout) {
       this.setTimeout()
     }

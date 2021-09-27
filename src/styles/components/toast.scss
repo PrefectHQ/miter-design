@@ -13,12 +13,12 @@
 
   .toast--content {
     background-color: variables.$primary;
-    padding: 12px 24px;
+    padding: 12px;
   }
 
   .toast--close-button {
     position: relative;
-    left: 15px;
+    left: 8px;
   }
 }
 
