@@ -36,11 +36,11 @@ export default {
     app.config.globalProperties.$toast = {
       /**
        * Adds a new toast to the global interface - if a component is passed, the content string will be ignored
-       * @param options: { component: Component, content: string, color: string, timeout: string }
+       * @param options: { component: Component, content: string, color: string, timeout: number }
        * @returns VNode, destroy, el
        */
       add(options: ToastOptions = {}): MountedElement {
-        return mount(
+        const { vNode, destroy, el } = mount(
           Toast,
           {
             props: {
@@ -53,6 +53,10 @@ export default {
           },
           toastApp._container?.querySelector('.toast-container')!
         )
+
+        if (options.timeout) setTimeout(destroy, options.timeout)
+
+        return { vNode, destroy, el }
       }
     }
   }

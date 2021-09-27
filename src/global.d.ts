@@ -8,6 +8,6 @@ type ToastOptions = {
   component?: Component
   content?: string
   color?: string
-  timeout?: string
+  timeout?: number
   dismissable?: boolean
 }
