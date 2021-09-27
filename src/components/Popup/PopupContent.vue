@@ -32,7 +32,7 @@
               @focus="handleFocus"
               @blur="handleBlur"
             >
-              <i class="pi pi-close-line"></i>
+              <i class="pi pi-cross-line"></i>
             </button>
           </h4>
 
@@ -90,7 +90,7 @@ export default defineComponent({
       type: String,
       required: false
     },
-    teleportTo: {
+    to: {
       type: String,
       default: 'body'
     }
@@ -138,8 +138,8 @@ export default defineComponent({
     addFocus() {
       this.hovered = true
       this.$nextTick(() => {
-        this.$refs.popUpCloseButton.tabIndex = 0
-        this.$refs.popUpCloseButton.focus()
+        if(this.$refs.popUpCloseButton) (this.$refs.popUpCloseButton as HTMLElement).tabIndex = 0
+        (this.$refs.popUpCloseButton as HTMLElement).focus()
       })
     },
     closePopUp() {
@@ -165,14 +165,14 @@ export default defineComponent({
         (n: any) => n.tabIndex >= 0
       )
       let index = tabbable.indexOf(document.activeElement)
-      const parent = document.querySelector(this.teleportTo)
+      const parent = document.querySelector(this.to)
       const parentHidden = parent?.firstChild?.ariaHidden
       if (evt.key === 'Escape' || evt.key === 'escape') {
         // Pressing the ESC key resets ariaHidden and closes the modal.
         parent.firstChild.ariaHidden = parentHidden
         this.closePopUp()
       } else if (evt.key === 'Tab' || evt.key === 'tab') {
-        document.querySelector(this.teleportTo)
+        document.querySelector(this.to)
         //set aria hidden on non-popup element
         parent.firstChild.ariaHidden = true
         // Pressing the Tab key traps the focus in the modal.
