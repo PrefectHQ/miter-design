@@ -78,10 +78,13 @@ export default class Toast extends Vue.with(Props) {
   }
 
   mounted() {
-    console.log(this)
     if (this.timeout) {
       this.setTimeout()
     }
+  }
+
+  unmounted() {
+    this.clearTimeout()
   }
 }
 </script>

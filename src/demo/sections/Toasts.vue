@@ -26,7 +26,9 @@
         </Checkbox>
       </div>
 
-      <Select v-model="type">
+      <Select v-model="type" class="my-2">
+        Type:
+
         <Option>None</Option>
         <Option value="error">Error</Option>
         <Option value="success">Success</Option>
