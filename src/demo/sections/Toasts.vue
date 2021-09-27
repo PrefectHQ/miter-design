@@ -26,6 +26,11 @@
         </Checkbox>
       </div>
 
+      <Select v-model="type">
+        <Option value="error">Error</Option>
+        <Option value="success">Success</Option>
+      </Select>
+
       <div class="my-2">
         <Input v-model="timeout" placeholder="Timeout" style="width: 300px" />
       </div>
@@ -51,6 +56,8 @@ export default class Toasts extends Vue {
   content: string = 'text'
   dismissable: boolean = true
   timeout: string | number = '5000'
+  showToast: boolean = true
+  type: string = 'success'
 
   addToast() {
     this.toasts.push(
@@ -58,16 +65,19 @@ export default class Toasts extends Vue {
         component: this.content == 'component' ? ToastComponentExample : null,
         content: new Date().toString(),
         dismissable: this.dismissable,
-        timeout: this.timeout
+        timeout: this.timeout ? this.timeout : null,
+        type: this.type
       })
     )
   }
 
   removeToasts() {
     this.toasts.forEach((toast) => {
-      toast.destroy()
+      toast.remove()
     })
-    this.toasts = []
+
+    // Either of these methods can be used to remove toasts
+    // this.$toast.removeAll()
   }
 }
 </script>

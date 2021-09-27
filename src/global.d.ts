@@ -1,7 +1,5 @@
 type MountedElement = {
-  vNode: VNode
-  destroy: any
-  el: Element
+  remove: any
 }
 
 type ToastOptions = {

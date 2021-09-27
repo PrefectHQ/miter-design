@@ -1,7 +1,5 @@
-import { App, createApp, Component } from 'vue'
-import Toast from '@/components/Toast/Toast.vue'
+import { App, createApp } from 'vue'
 import ToastContainer from '@/components/Toast/ToastContainer.vue'
-import { mount } from './mount-component'
 
 declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
@@ -31,32 +29,20 @@ export default {
 
     const toastApp = createApp(ToastContainer)
 
-    toastApp.mount(mountPoint)
+    const toastContainer: any = toastApp.mount(mountPoint)
 
     app.config.globalProperties.$toast = {
       /**
        * Adds a new toast to the global interface - if a component is passed, the content string will be ignored
        * @param options: { component: Component, content: string, color: string, timeout: number }
-       * @returns VNode, destroy, el
+       * @returns remove
        */
       add(options: ToastOptions = {}): MountedElement {
-        const { vNode, destroy, el } = mount(
-          Toast,
-          {
-            props: {
-              content: options.component ? null : options.content,
-              dismissable: options.dismissable,
-              color: options.color,
-              timeout: options.timeout
-            },
-            children: options.component
-          },
-          toastApp._container?.querySelector('.toast-container')!
-        )
+        return { remove: toastContainer.add(options) }
+      },
 
-        if (options.timeout) setTimeout(destroy, options.timeout)
-
-        return { vNode, destroy, el }
+      removeAll(): void {
+        toastContainer.removeAll()
       }
     }
   }
