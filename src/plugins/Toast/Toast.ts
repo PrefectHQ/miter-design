@@ -31,7 +31,7 @@ export default {
 
     const toastContainer: any = toastApp.mount(mountPoint)
 
-    app.config.globalProperties.$toast = {
+    const Toast = {
       /**
        * Adds a new toast to the global interface - if a component is passed, the content string will be ignored
        * @param options: { component: Component, content: string, color: string, timeout: number }
@@ -45,5 +45,9 @@ export default {
         toastContainer.removeAll()
       }
     }
+
+    app.config.globalProperties.$toast = Toast
+
+    app.provide('$toast', Toast)
   }
 }
