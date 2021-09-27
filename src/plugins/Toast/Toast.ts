@@ -1,4 +1,4 @@
-import { App, createApp } from 'vue'
+import { App, createApp, InjectionKey, inject } from 'vue'
 import ToastContainer from '@/components/Toast/ToastContainer.vue'
 
 declare module '@vue/runtime-core' {
@@ -8,8 +8,11 @@ declare module '@vue/runtime-core' {
     }
   }
 }
+export interface ToastPlugin {
+  install(app: App): void
+}
 
-export const injectionKey = Symbol('toast')
+export const injectionKey: InjectionKey<ToastPlugin> = Symbol('toast')
 
 export default {
   install: (app: App, options: any = {}) => {
@@ -49,5 +52,7 @@ export default {
     app.config.globalProperties.$toast = Toast
 
     app.provide('$toast', Toast)
+
+    inject('$toast', Toast)
   }
 }

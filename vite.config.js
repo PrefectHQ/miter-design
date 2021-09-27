@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import typescript from 'rollup-plugin-typescript2'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
@@ -21,7 +22,21 @@ export default defineConfig({
       plugins: []
     }
   },
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    typescript({
+      check: false,
+      tsconfig: resolve(__dirname, 'tsconfig.json'),
+      tsconfigOverride: {
+        compilerOptions: {
+          sourceMap: true,
+          declaration: true,
+          declarationMap: true
+        },
+        exclude: ['**/demo']
+      }
+    })
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')

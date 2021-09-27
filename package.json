@@ -15,8 +15,10 @@
   "main": "./dist/miter-design.umd.js",
   "module": "./dist/miter-design.es.js",
   "files": [
-    "dist/*"
+    "dist/*",
+    "src/**/*.vue"
   ],
+  "types": "./dist/entry.d.ts",
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.14.5",
     "@babel/preset-typescript": "^7.12.7",
@@ -52,6 +54,7 @@
     "eslint-plugin-vue": "^7.6.0",
     "html-webpack-plugin": "^5.3.2",
     "prettier": "^2.2.1",
+    "rollup-plugin-typescript2": "^0.30.0",
     "sass": "^1.35.2",
     "storybook-addon-designs": "^6.0.1",
     "storybook-builder-vite": "^0.0.12",
