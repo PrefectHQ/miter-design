@@ -49,7 +49,7 @@ export default class Toasts extends Vue {
   toasts: any[] = []
   content: string = 'text'
   dismissable: boolean = true
-  timeout: string | number = '5000'
+  timeout: string = '5000'
   showToast: boolean = true
   type: string = 'success'
 
@@ -59,7 +59,7 @@ export default class Toasts extends Vue {
         component: this.content == 'component' ? ToastComponentExample : null,
         content: new Date().toString(),
         dismissable: this.dismissable,
-        timeout: this.timeout ? this.timeout : null,
+        timeout: this.timeout ? parseInt(this.timeout) : undefined,
         type: this.type
       })
     )
