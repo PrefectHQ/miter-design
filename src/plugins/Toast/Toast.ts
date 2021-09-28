@@ -1,4 +1,4 @@
-import { App, createApp, InjectionKey, inject } from 'vue'
+import { App, createApp, InjectionKey, Component } from 'vue'
 import ToastContainer from '@/components/Toast/ToastContainer.vue'
 
 declare module '@vue/runtime-core' {
@@ -7,6 +7,19 @@ declare module '@vue/runtime-core' {
       add: (options: ToastOptions) => MountedElement
     }
   }
+}
+
+export type MountedElement = {
+  remove(): any
+}
+
+type ToastOptions = {
+  component?: Component
+  content?: string
+  timeout?: number
+  dismissable?: boolean
+  type?: string
+  classList?: string[]
 }
 
 export type Toast = {
@@ -57,7 +70,5 @@ export default {
     app.config.globalProperties.$toast = Toast
 
     app.provide('$toast', Toast)
-
-    inject('$toast', Toast)
   }
 }

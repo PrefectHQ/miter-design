@@ -7,15 +7,15 @@
 }
 
 @each $key, $color in variables.$colors {
-  .bg--#{$key} {
+  .bg--#{'' + $key} {
     background-color: #{$color} !important;
   }
 
-  .text--#{$key} {
+  .text--#{'' + $key} {
     color: #{$color} !important;
   }
 
-  .fill--#{$key} {
+  .fill--#{'' + $key} {
     fill: #{$color} !important;
   }
 }
