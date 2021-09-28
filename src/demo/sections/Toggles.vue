@@ -5,23 +5,20 @@
     <h5 class="mt-5">Toggle</h5>
     <div v-for="state in states" :key="state" class="my-2 d-flex">
       <span class="text-capitalize">{{ state.state }}:</span>
-      <ToggleSwitch
-        :disabled="state.state == 'disabled'"
-        v-model="state.checked"
-      >
+      <Toggle :disabled="state.state == 'disabled'" v-model="state.checked">
         <span>Label</span>
-      </ToggleSwitch>
+      </Toggle>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ToggleSwitch from '@/components/Toggle/ToggleSwitch.vue'
+import Toggle from '@/components/Toggle/Toggle.vue'
 
 export default defineComponent({
   name: 'Toggles',
-  components: { ToggleSwitch },
+  components: { Toggle },
   data() {
     return {
       states: [

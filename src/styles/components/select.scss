@@ -71,7 +71,7 @@
       margin-top: -16px;
       padding-top: 16px;
       border-bottom-left-radius: 4px;
-      > * &:last-child {
+      * &:last-child {
         @include mixins.miter-clip(2, 1);
       }
     }
@@ -80,7 +80,8 @@
       border-top-right-radius: 4px;
       bottom: 58px;
     }
-    > * {
+
+    * {
       align-items: center;
       display: flex;
       height: 58px;

@@ -6,22 +6,17 @@
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-import { computed, ComputedRef } from 'vue'
 
 class Props {
   width = prop<string>({ default: null })
 }
 
 @Options({})
-export default class Aside extends Vue.with(Props) {
-  style: ComputedRef<{ [key: string]: string }> = computed(() => {
+export default class CardAside extends Vue.with(Props) {
+  get style(): { [key: string]: any } {
     return {
       width: this.width
     }
-  })
-
-  mounted(): void {
-    return
   }
 }
 </script>

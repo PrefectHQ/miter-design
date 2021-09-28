@@ -1,5 +1,5 @@
 import { App, Plugin, reactive } from 'vue'
-import { DirectiveBinding, ObjectDirective, VNode } from '@vue/runtime-dom'
+import { DirectiveBinding, VNode } from '@vue/runtime-dom'
 
 type Breakpoints = {
   xs: boolean

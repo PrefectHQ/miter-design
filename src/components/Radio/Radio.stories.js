@@ -1,8 +1,8 @@
-import RadioButton from './RadioButton.vue'
+import Radio from './Radio.vue'
 
 export default {
-  title: 'Miter Design/RadioButton',
-  component: RadioButton,
+  title: 'Miter Design/Radio',
+  component: Radio,
   parameters: {
     design: {
       type: 'figma',
@@ -12,11 +12,11 @@ export default {
 }
 
 const Template = (args) => ({
-  components: { RadioButton },
+  components: { Radio },
   setup() {
     return { args }
   },
-  template: '<RadioButton v-bind="args" >{{ args.content }}</RadioButton>'
+  template: '<Radio v-bind="args" >{{ args.content }}</Radio>'
 })
 
 export const Active = Template.bind({})

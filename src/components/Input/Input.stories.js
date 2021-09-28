@@ -1,5 +1,5 @@
 import Input from './Input.vue'
-import Toggle from '../Toggle/ToggleSwitch.vue'
+import Toggle from '../Toggle/Toggle.vue'
 
 export default {
   title: 'Miter Design/Input',

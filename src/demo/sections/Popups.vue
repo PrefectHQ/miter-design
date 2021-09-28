@@ -37,7 +37,7 @@ import { Vue, Options } from 'vue-class-component'
 
 @Options({})
 export default class Popup extends Vue {
-  popups: {} = [
+  popups: { [key: string]: any } = [
     {
       content: 'This is a pop up',
       height: '341px',
