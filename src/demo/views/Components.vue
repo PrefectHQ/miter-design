@@ -1,6 +1,7 @@
 <template>
   <div class="mt-5 pb-10" v-cloak>
     <h1>Components</h1>
+    <Loader class="mt-10"/>
     <Avatar class="mt-10" />
     <Breakpoints class="mt-10" />
     <Buttons class="mt-10" />
@@ -44,6 +45,7 @@ import TagGroup from '../sections/TagGroup.vue'
 import TextAreas from '../sections/TextAreas.vue'
 import Toasts from '../sections/Toasts.vue'
 import Tooltip from '../sections/Tooltip.vue'
+import Loader from '../sections/Loader.vue'
 
 @Options({
   components: {
@@ -65,7 +67,8 @@ import Tooltip from '../sections/Tooltip.vue'
     TagGroup,
     TextAreas,
     Toasts,
-    Tooltip
+    Tooltip,
+    Loader
   }
 })
 export default class App extends Vue {}
