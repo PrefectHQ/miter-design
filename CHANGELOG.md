@@ -1,3 +1,4 @@
+- Resolve sundry bugs in select element ([#71](https://github.com/PrefectHQ/miter-design/issues/71)) - [#76](https://github.com/PrefectHQ/miter-design/pull/76)
 - Update popup close button and improve typing on popup - [#78](https://github.com/PrefectHQ/miter-design/pull/78)
 - Fix issue with input background color - [#75](https://github.com/PrefectHQ/miter-design/pull/75)
 - Add popover component - [#67](https://github.com/PrefectHQ/miter-design/pull/67)
