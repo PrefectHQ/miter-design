@@ -1,3 +1,4 @@
+- Add loader component - [#79](https://github.com/PrefectHQ/miter-design/pull/79)
 - Fix issue with input background color - [#75](https://github.com/PrefectHQ/miter-design/pull/75)
 - Add popover component - [#67](https://github.com/PrefectHQ/miter-design/pull/67)
 - Update button styles - [#61](https://github.com/PrefectHQ/miter-design/pull/61)
