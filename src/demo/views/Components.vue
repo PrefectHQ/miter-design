@@ -21,13 +21,6 @@
     <TextAreas class="mt-10" />
     <Toasts class="mt-10" />
     <Tooltip class="mt-10" />
-
-    <!-- 
-  
-    
-    
-    
-     -->
   </div>
 </template>
 

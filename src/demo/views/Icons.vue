@@ -96,7 +96,9 @@ export default class App extends Vue {
   sizeOptions: Map<string, string> = new Map([
     ['xs', 'pi-xs'],
     ['sm', 'pi-sm'],
+    ['default', ''],
     ['lg', 'pi-lg'],
+    ['1x', 'pi-1x'],
     ['2x', 'pi-2x'],
     ['3x', 'pi-3x'],
     ['4x', 'pi-4x'],
