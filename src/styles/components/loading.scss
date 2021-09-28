@@ -1,0 +1,5 @@
+@use '../abstracts/variables';
+
+.loading-logo {
+  stroke: variables.$primary
+}

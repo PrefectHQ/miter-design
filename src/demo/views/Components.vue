@@ -1,7 +1,8 @@
 <template>
   <div class="mt-5 pb-10" v-cloak>
     <h1>Components</h1>
-    <Cards />
+    <Loading class="mt-10"/>
+    <Cards class="mt-10"/>
     <Popups />
     <Popover class="mt-10" />
     <Buttons class="mt-10" />
@@ -43,6 +44,7 @@ import Tooltip from '../sections/Tooltip.vue'
 import Selects from '../sections/Selects.vue'
 import Popover from '../sections/Popover.vue'
 import TextAreas from '../sections/TextAreas.vue'
+import Loading from '../sections/Loading.vue'
 
 @Options({
   components: {
@@ -63,7 +65,8 @@ import TextAreas from '../sections/TextAreas.vue'
     TagGroup,
     Popover,
     TextAreas,
-    Tooltip
+    Tooltip,
+    Loading
   }
 })
 export default class App extends Vue {}
