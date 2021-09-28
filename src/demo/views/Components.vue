@@ -75,7 +75,7 @@ import Loader from '../sections/Loader.vue'
     TextAreas,
     Toasts,
     Tooltip,
-    Loader,
+    Loader
   }
 })
 export default class App extends Vue {}
