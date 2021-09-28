@@ -56,7 +56,8 @@ export default class Toasts extends Vue {
   addToast() {
     this.toasts.push(
       this.$toast.add({
-        component: this.content == 'component' ? ToastComponentExample : null,
+        component:
+          this.content == 'Component' ? ToastComponentExample : undefined,
         content: new Date().toString(),
         dismissable: this.dismissable,
         timeout: this.timeout ? parseInt(this.timeout) : undefined,
