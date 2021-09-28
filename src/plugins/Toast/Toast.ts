@@ -8,6 +8,11 @@ declare module '@vue/runtime-core' {
     }
   }
 }
+
+export type Toast = {
+  add: (options: ToastOptions) => MountedElement
+}
+
 export interface ToastPlugin {
   install(app: App): void
 }
