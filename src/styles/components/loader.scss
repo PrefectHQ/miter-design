@@ -1,0 +1,55 @@
+@use '../abstracts/variables';
+
+.loader {
+  --loader-size: 50px;
+  --loader-stroke-width: 10px;
+  --loader-notch: calc(100% - var(--loader-stroke-width));
+  --loader-inner-notch: calc(100% - var(--loader-stroke-width) * 1.5);
+  
+  width: var(--loader-size);
+  height: var(--loader-size);
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(
+              0 0, 
+              100% 0, 
+              100% var(--loader-stroke-width), 
+              var(--loader-stroke-width) var(--loader-stroke-width), 
+              var(--loader-stroke-width) var(--loader-notch), 
+              var(--loader-inner-notch) var(--loader-notch), 
+              var(--loader-notch) var(--loader-inner-notch), 
+              var(--loader-notch) var(--loader-stroke-width), 
+              100% var(--loader-stroke-width), 
+              100% var(--loader-notch), 
+              var(--loader-notch) 100%, 
+              0 100%
+            );
+  
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: conic-gradient(variables.$primary, #fff);
+    width: 150%;
+    height: 150%;
+    left: -25%;
+    top: -25%;
+    animation: loader-spin 2s linear infinite;
+  }
+}
+
+.fade-loader-enter-active,
+.fade-loader-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-loader-enter-from,
+.fade-loader-leave-to {
+  opacity: 0;
+}
+
+@keyframes loader-spin { 
+  100% {
+    transform: rotate(360deg); 
+  } 
+}
