@@ -1,1 +1,2 @@
-export { default as breakpoints } from '@/plugins/Breakpoints/Breakpoints'
+export { default as ToastPlugin } from './Toast/Toast'
+export { default as breakpoints } from './Breakpoints/Breakpoints'

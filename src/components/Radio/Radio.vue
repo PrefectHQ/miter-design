@@ -1,49 +1,57 @@
 <template>
-  <label
-    class="toggle ml-2"
-    :class="classList"
-    :disabled="disabled"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
-    @mousedown="handleMouseDown"
-    @mouseup="handleMouseUp"
-  >
-    <input
-      type="checkbox"
+  <div class="wrapper">
+    <label
+      class="radio ml-2"
+      :class="classList"
       :disabled="disabled"
-      v-model="value_"
-      :value="value_"
-      @input="$emit('update:modelValue', $event.target.checked)"
-      @focus="handleFocus"
-      @blur="handleBlur"
-    />
-    <span class="toggle-switch"></span>
-    <span class="label" data-test="default"><slot /></span>
-  </label>
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+      @mousedown="handleMouseDown"
+      @mouseup="handleMouseUp"
+    >
+      <input
+        type="radio"
+        :disabled="disabled"
+        :name="name"
+        :value="value"
+        :checked="checked"
+        v-model="value_"
+        @input="$emit('update:modelValue', value_)"
+        @focus="handleFocus"
+        @blur="handleBlur"
+      />
+      <span class="radio-button"></span>
+      <span data-test="default"><slot /></span>
+    </label>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'ToggleSwitch',
+  name: 'Radio',
   emits: {
     'update:modelValue'(...args: any[]) {
       return { ...args }
     }
   },
   props: {
+    checked: {
+      type: Boolean,
+      default: false
+    },
     disabled: {
       type: Boolean,
       default: false
     },
-    modelValue: {
-      type: Boolean,
-      default: false
-    },
     value: {
-      type: Boolean,
-      default: false
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      default: 'button-group'
     }
   },
   data() {
@@ -61,11 +69,11 @@ export default defineComponent({
       ]
     },
     value_: {
-      get(): boolean {
-        return this.value || this.modelValue
+      get(): String {
+        return this.value
       },
-      set(val: boolean) {
-        this.$emit('update:modelValue', val)
+      set() {
+        this.$emit('update:modelValue', this.value)
       }
     }
   },
@@ -104,5 +112,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use '../../styles/components/toggle';
+@use '../../styles/components/radio';
 </style>

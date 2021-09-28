@@ -1,0 +1,53 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.toast {
+  color: variables.$white;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px;
+  transform: translate(0);
+  transition: all 150ms;
+
+  .toast--content {
+    background-color: variables.$primary;
+    padding: 12px;
+  }
+
+  .toast--close-button {
+    position: relative;
+    left: 8px;
+  }
+}
+
+.toast-container {
+  align-items: flex-end;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
+  position: fixed;
+  right: 0;
+  z-index: 10;
+}
+
+.slide-leave-active {
+  animation: slide 0.15s reverse ease-in-out forwards;
+}
+
+.slide-enter-active {
+  animation: slide 0.15s ease-in-out forwards;
+}
+
+@keyframes slide {
+  from {
+    transform: translate(100%);
+  }
+  to {
+    transform: translate(0);
+  }
+}

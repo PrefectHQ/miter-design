@@ -15,7 +15,7 @@
           <i class="pi pi-Search pi-2x"></i>
         </template>
         <template v-slot:append>
-          <ToggleSwitch :disabled="state.state == 'disabled'" />
+          <Toggle :disabled="state.state == 'disabled'" />
         </template>
       </Input>
     </div>

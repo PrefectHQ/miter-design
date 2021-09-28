@@ -1,8 +1,8 @@
-import ToggleSwitch from './ToggleSwitch.vue'
+import Toggle from './Toggle.vue'
 
 export default {
-  title: 'Miter Design/ToggleSwitch',
-  component: ToggleSwitch,
+  title: 'Miter Design/Toggle',
+  component: Toggle,
   parameters: {
     design: {
       type: 'figma',
@@ -12,11 +12,11 @@ export default {
 }
 
 const Template = (args) => ({
-  components: { ToggleSwitch },
+  components: { Toggle },
   setup() {
     return { args }
   },
-  template: '<ToggleSwitch v-bind="args" >{{ args.content }}</ToggleSwitch>'
+  template: '<Toggle v-bind="args" >{{ args.content }}</Toggle>'
 })
 
 export const Toggled = Template.bind({})

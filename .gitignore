@@ -2,7 +2,7 @@
 node_modules
 /dist
 /storybook-static
-
+*.tgz
 
 # local env files
 .env.local
