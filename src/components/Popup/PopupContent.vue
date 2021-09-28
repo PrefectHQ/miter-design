@@ -32,7 +32,7 @@
               @focus="handleFocus"
               @blur="handleBlur"
             >
-              <i class="pi pi-x"></i>
+              <i class="pi pi-close-line"></i>
             </button>
           </h4>
 
@@ -90,7 +90,7 @@ export default defineComponent({
       type: String,
       required: false
     },
-    teleportTo: {
+    to: {
       type: String,
       default: 'body'
     }
@@ -138,8 +138,8 @@ export default defineComponent({
     addFocus() {
       this.hovered = true
       this.$nextTick(() => {
-        this.$refs.popUpCloseButton.tabIndex = 0
-        this.$refs.popUpCloseButton.focus()
+        (this.$refs.popUpCloseButton as HTMLElement).tabIndex = 0
+        ;(this.$refs.popUpCloseButton as HTMLElement).focus()
       })
     },
     closePopUp() {
@@ -160,25 +160,24 @@ export default defineComponent({
       this.focused = false
     },
     handleBackdropKeyDown(evt: event): void {
-      const modalNodes = this.$refs.popUpContent.$el.querySelectorAll('*')
+      const modalNodes = (this.$refs.popUpContent as Card).$el.querySelectorAll('*')
       const tabbable = Array.from(modalNodes).filter(
         (n: any) => n.tabIndex >= 0
       )
       let index = tabbable.indexOf(document.activeElement)
-      const parent = document.querySelector(this.teleportTo)
-      const parentHidden = parent?.firstChild?.ariaHidden
+      const parent = document.querySelector(this.to)
+      const parentHidden = (parent?.firstChild as any)?.ariaHidden
       if (evt.key === 'Escape' || evt.key === 'escape') {
         // Pressing the ESC key resets ariaHidden and closes the modal.
-        parent.firstChild.ariaHidden = parentHidden
+        (parent?.firstChild as any).ariaHidden= parentHidden
         this.closePopUp()
       } else if (evt.key === 'Tab' || evt.key === 'tab') {
-        document.querySelector(this.teleportTo)
         //set aria hidden on non-popup element
-        parent.firstChild.ariaHidden = true
+        (parent?.firstChild as any).ariaHidden = true
         // Pressing the Tab key traps the focus in the modal.
         index += tabbable.length + 1
         index %= tabbable.length
-        tabbable[index].focus()
+        ;(tabbable[index] as HTMLElement).focus()
         evt.preventDefault()
       }
     }

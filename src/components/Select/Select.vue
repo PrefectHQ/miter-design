@@ -5,8 +5,7 @@ import {
   mergeProps,
   VNode,
   RendererNode,
-  RendererElement,
-  VNodeArrayChildren
+  RendererElement
 } from 'vue'
 import Option from './Option.vue'
 import OptionGroup from './OptionGroup.vue'
@@ -16,6 +15,9 @@ export default defineComponent({
   components: { Option, OptionGroup },
   emits: {
     'update:modelValue'(...args: any[]) {
+      return { ...args }
+    },
+    change(...args: any[]) {
       return { ...args }
     }
   },
@@ -37,7 +39,7 @@ export default defineComponent({
       default: false
     },
     modelValue: {
-      type: String,
+      type: [String, Object],
       default: ''
     }
   },
@@ -82,7 +84,8 @@ export default defineComponent({
         return e
       this.selected = args[0]
       this.icon = args[1]
-      this.$emit('update:modelValue', this.selected)
+      this.$emit('update:modelValue', this.selected, args[2])
+      this.$emit('change', this.selected, args[2])
       return e
     },
     handleFocus(): void {
@@ -92,7 +95,11 @@ export default defineComponent({
 
     handleBlur(event: FocusEvent): void {
       const target = event.relatedTarget as HTMLDivElement
-      if (target?.tagName === 'INPUT' || target?.classList.contains('active'))
+      if (
+        target?.tagName === 'INPUT' ||
+        target?.classList.contains('active') ||
+        target?.classList.contains('option')
+      )
         return
       this.hovered = false
       this.active = false
@@ -109,7 +116,12 @@ export default defineComponent({
           // choose highlighted option, else close
           this.filteredOptions.forEach((option) => {
             if (option.el?.classList.contains('hovered')) {
-              this.handleOptionClick(event, option?.props?.value)
+              this.handleOptionClick(
+                event,
+                option?.props?.value,
+                option?.props?.icon || '',
+                option?.props?.data
+              )
             }
           })
         }
@@ -117,6 +129,7 @@ export default defineComponent({
       } else if (event.key === 'Escape') {
         this.active = false
       } else if (event.key === 'ArrowUp') {
+        if (!this.active) return
         event.preventDefault()
         let currentFound = false
         let nextSelected = false
@@ -130,47 +143,11 @@ export default defineComponent({
             !optionClasses?.contains('disabled') &&
             currentFound
           ) {
+            option.el?.focus()
             optionClasses.add('hovered')
             nextSelected = true
             break
           }
-          if (optionClasses?.contains('hovered') && !currentFound) {
-            optionClasses.remove('hovered')
-            currentFound = true
-          }
-        }
-
-        if (!nextSelected) {
-          for (let i = 0; i < this.filteredOptions.length; i++) {
-            const option = this.filteredOptions[i]
-            const type = (option.type as any)?.name
-            const optionClasses = option?.el?.classList
-
-            if (type === 'Option' && !optionClasses?.contains('disabled')) {
-              optionClasses.add('hovered')
-              break
-            }
-          }
-        }
-      } else if (event.key === 'ArrowDown') {
-        event.preventDefault()
-        let currentFound = false
-        let nextSelected = false
-        for (let i = 0; i < this.filteredOptions.length; i++) {
-          const option = this.filteredOptions[i]
-          const type = (option.type as any)?.name
-          const optionClasses = option?.el?.classList
-
-          if (
-            type === 'Option' &&
-            !optionClasses?.contains('disabled') &&
-            currentFound
-          ) {
-            optionClasses.add('hovered')
-            nextSelected = true
-            break
-          }
-
           if (optionClasses?.contains('hovered') && !currentFound) {
             optionClasses.remove('hovered')
             currentFound = true
@@ -184,6 +161,47 @@ export default defineComponent({
             const optionClasses = option?.el?.classList
 
             if (type === 'Option' && !optionClasses?.contains('disabled')) {
+              option.el?.focus()
+              optionClasses.add('hovered')
+              break
+            }
+          }
+        }
+      } else if (event.key === 'ArrowDown') {
+        if (!this.active) return
+        event.preventDefault()
+        let currentFound = false
+        let nextSelected = false
+        for (let i = 0; i < this.filteredOptions.length; i++) {
+          const option = this.filteredOptions[i]
+          const type = (option.type as any)?.name
+          const optionClasses = option?.el?.classList
+
+          if (
+            type === 'Option' &&
+            !optionClasses?.contains('disabled') &&
+            currentFound
+          ) {
+            option.el?.focus()
+            optionClasses.add('hovered')
+            nextSelected = true
+            break
+          }
+
+          if (optionClasses?.contains('hovered') && !currentFound) {
+            optionClasses.remove('hovered')
+            currentFound = true
+          }
+        }
+
+        if (!nextSelected) {
+          for (let i = 0; i < this.filteredOptions.length; i++) {
+            const option = this.filteredOptions[i]
+            const type = (option.type as any)?.name
+            const optionClasses = option?.el?.classList
+
+            if (type === 'Option' && !optionClasses?.contains('disabled')) {
+              option.el?.focus()
               optionClasses.add('hovered')
               break
             }
@@ -361,7 +379,7 @@ export default defineComponent({
                 : null,
               this.selected || this.placeholder
             ]),
-        h('i', { class: ['pi', 'pi-arrow-drop-down-line', 'pi-lg'] })
+        h('i', { class: ['pi', 'pi-arrow-down-s-line', 'pi-lg'] })
       ]
     )
     const wrapper = h(
@@ -378,6 +396,7 @@ export default defineComponent({
         onMouseenter: this.handleFocus,
         onMouseleave: this.handleMouseLeave,
         onKeydown: this.handleKeydown,
+        onChange: "$emit('change', this.selected, args[2])",
         onClick: () => {
           !this.disabled ? (this.active = !this.active) : null
         }

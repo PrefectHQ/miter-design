@@ -3,14 +3,14 @@
     <div v-if="$slots.activate">
       <slot name="activate" />
     </div>
-    <teleport :to="teleportTo" :disabled="!popupOpen" v-if="popupOpen">
+    <teleport :to="to" :disabled="!popupOpen" v-if="popupOpen">
       <PopupContent
         @close="closePopUp"
         :placement="position"
         :title="title"
         :height="height"
         :width="width"
-        :teleportTo="teleportTo"
+        :to="to"
       >
         <template v-slot:content>
           <div v-if="$slots.content">
@@ -38,7 +38,7 @@ export default defineComponent({
       type: Boolean,
       required: false
     },
-    teleportTo: {
+    to: {
       type: String,
       required: false,
       default: 'body'

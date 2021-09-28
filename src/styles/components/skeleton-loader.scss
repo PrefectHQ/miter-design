@@ -6,7 +6,7 @@
   @include mixins.miter;
   cursor: wait !important;
 
-  > * {
+  * {
     border: none;
     background-color: transparent !important;
     pointer-events: none;

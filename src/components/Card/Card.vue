@@ -46,7 +46,9 @@ class Props {
 // This alias is needed because vue-class-component isn't yet compatible with storybook
 // See https://github.com/storybookjs/storybook/issues/14052#issuecomment-797512590 for details
 const Component = Options
-@Component({})
+@Component({
+  name: 'Card'
+})
 export default class Card extends Vue.with(Props) {
   get style(): { [key: string]: any } {
     return {
