@@ -50,12 +50,9 @@ import Tag from '../sections/Tag.vue'
 import TabSection from '../sections/TabSection.vue'
 import TagGroup from '../sections/TagGroup.vue'
 import TextAreas from '../sections/TextAreas.vue'
-<<<<<<< HEAD
-import Loader from '../sections/Loader.vue'
-=======
 import Toasts from '../sections/Toasts.vue'
 import Tooltip from '../sections/Tooltip.vue'
->>>>>>> main
+import Loader from '../sections/Loader.vue'
 
 @Options({
   components: {
@@ -76,13 +73,9 @@ import Tooltip from '../sections/Tooltip.vue'
     Tag,
     TagGroup,
     TextAreas,
-<<<<<<< HEAD
-    Tooltip,
-    Loader
-=======
     Toasts,
-    Tooltip
->>>>>>> main
+    Tooltip,
+    Loader,
   }
 })
 export default class App extends Vue {}
