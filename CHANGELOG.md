@@ -1,3 +1,4 @@
+- Fix broken tests - [#81](https://github.com/PrefectHQ/miter-design/pull/81)
 - Standardize icon size classes - [#80](https://github.com/PrefectHQ/miter-design/pull/80)
 - Add loader component - [#79](https://github.com/PrefectHQ/miter-design/pull/79)
 - Resolve sundry bugs in select element ([#71](https://github.com/PrefectHQ/miter-design/issues/71)) - [#76](https://github.com/PrefectHQ/miter-design/pull/76)
