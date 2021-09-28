@@ -118,65 +118,84 @@ h3,
 .pi {
   font-size: 24px;
   vertical-align: inherit !important;
+  height: 24px;
+  width: 24px;
 }
 
 .pi-lg {
-  font-size: 1.25em !important;
-  line-height: 1.25em;
+  font-size: 28px !important;
+  height: 28px;
+  width: 28px;
 }
 
 .pi-xs {
-  font-size: 0.75em !important;
+  font-size: 16px !important;
+  height: 16px;
+  width: 16px;
 }
 
 .pi-sm {
-  font-size: 0.875em !important;
+  font-size: 20px !important;
+  height: 20px;
+  width: 20px;
 }
 
 .pi-1x {
   font-size: 1em !important;
+  height: auto;
+  width: auto;
 }
 
 .pi-2x {
   font-size: 2em !important;
+  height: auto;
+  width: auto;
 }
 
 .pi-3x {
   font-size: 3em !important;
+  height: auto;
+  width: auto;
 }
 
 .pi-4x {
   font-size: 4em !important;
+  height: auto;
+  width: auto;
 }
 
 .pi-5x {
   font-size: 5em !important;
+  height: auto;
+  width: auto;
 }
 
 .pi-6x {
   font-size: 6em !important;
+  height: auto;
+  width: auto;
 }
 
 .pi-7x {
   font-size: 7em !important;
+  height: auto;
+  width: auto;
 }
 
 .pi-8x {
   font-size: 8em !important;
+  height: auto;
+  width: auto;
 }
 
 .pi-9x {
   font-size: 9em !important;
+  height: auto;
+  width: auto;
 }
 
 .pi-10x {
   font-size: 10em !important;
-}
-
-.pi-fw {
-  display: inline-block;
-  height: 1em;
-  text-align: center;
-  vertical-align: -0.25em;
-  width: 1.25em;
+  height: auto;
+  width: auto;
 }
