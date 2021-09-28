@@ -25,7 +25,7 @@ export default defineConfig({
   plugins: [
     vue(),
     typescript({
-      check: false,
+      check: true,
       tsconfig: resolve(__dirname, 'tsconfig.json'),
       tsconfigOverride: {
         compilerOptions: {
