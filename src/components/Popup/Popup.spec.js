@@ -107,7 +107,7 @@ test('emits close and update:modelValue as false when the background is clicked'
 
 test('passes popup teleport placement and attaches to element if it exists', () => {
   const wrapper = mount(Popup, {
-    props: { modelValue: true, position: 'flex-start', teleportTo: '#pop' },
+    props: { modelValue: true, position: 'flex-start', to: '#pop' },
     slots: {
       content: '<div>Main Content</div>'
     },
@@ -117,14 +117,14 @@ test('passes popup teleport placement and attaches to element if it exists', () 
       }
     }
   })
-  expect(wrapper.props().teleportTo).toBe('#pop')
+  expect(wrapper.props().to).toBe('#pop')
   const modal = wrapper.findComponent(PopupContent)
   expect(modal.exists()).toBe(true)
 })
 
 test('passes popup teleport placement and does not attach if no element with correct id', () => {
   const wrapper = mount(Popup, {
-    props: { modelValue: true, position: 'flex-start', teleportTo: '#poppy' },
+    props: { modelValue: true, position: 'flex-start', to: '#poppy' },
     slots: {
       content: '<div>Main Content</div>'
     },
@@ -134,7 +134,7 @@ test('passes popup teleport placement and does not attach if no element with cor
       }
     }
   })
-  expect(wrapper.props().teleportTo).toBe('#poppy')
+  expect(wrapper.props().to).toBe('#poppy')
   const modal = wrapper.findComponent(PopupContent)
   expect(modal.exists()).toBe(false)
 })

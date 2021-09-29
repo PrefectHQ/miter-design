@@ -71,14 +71,14 @@ describe('props', () => {
       props: {
         modelValue: true,
         position: 'top',
-        teleportTo: '#pop',
+        to: '#pop',
         target: 'opener'
       },
       slots: {
         content: '<div>Main Content</div>'
       }
     })
-    expect(wrapper.props().teleportTo).toBe('#pop')
+    expect(wrapper.props().to).toBe('#pop')
     const popupcontent = wrapper.findComponent(PopoverContent)
     expect(popupcontent.exists()).toBe(true)
   })
@@ -88,14 +88,14 @@ describe('props', () => {
       props: {
         modelValue: true,
         position: 'top',
-        teleportTo: '#poppy',
+        to: '#poppy',
         target: 'opener'
       },
       slots: {
         content: '<div>Main Content</div>'
       }
     })
-    expect(wrapper.props().teleportTo).toBe('#poppy')
+    expect(wrapper.props().to).toBe('#poppy')
     const popupcontent = wrapper.findComponent(PopoverContent)
     expect(popupcontent.exists()).toBe(false)
   })
@@ -123,7 +123,7 @@ describe('props', () => {
       }
     })
     const popupcontent = wrapper.findComponent(PopoverContent)
-    const divOne = popupcontent.get('#tooltip-container')
+    const divOne = popupcontent.get('#popover-container')
     expect(divOne.classes()).toContain('right')
   })
 })
@@ -138,7 +138,7 @@ describe('default', () => {
       }
     })
     const popupcontent = wrapper.findComponent(PopoverContent)
-    const divOne = popupcontent.get('#tooltip-container')
+    const divOne = popupcontent.get('#popover-container')
     expect(divOne.classes()).toContain('top')
   })
 })
