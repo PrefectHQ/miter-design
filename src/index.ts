@@ -4,6 +4,7 @@ import Button from './components/Button'
 import Card from './components/Card'
 import Checkbox from './components/Checkbox'
 import Input from './components/Input'
+import Loader from './components/Loader'
 import Popover from './components/Popover'
 import Popup from './components/Popup'
 import Radio from './components/Radio'
@@ -33,6 +34,7 @@ const components = {
   Card,
   Checkbox,
   Input,
+  Loader,
   Popover,
   Popup,
   Radio,
@@ -84,6 +86,7 @@ export { default as Button } from './components/Button'
 export { default as Card } from './components/Card'
 export { default as Checkbox } from './components/Checkbox'
 export { default as Input } from './components/Input'
+export { default as Loader } from './components/Loader'
 export { default as Popover } from './components/Popover'
 export { default as Popup } from './components/Popup'
 export { default as Radio } from './components/Radio'
