@@ -85,7 +85,7 @@ $directions: (
   }
 }
 
-@each $breakpoint, $value in $breakpoints {
+@each $breakpoint, $value in variables.$breakpoints {
   @if $breakpoint == '' {
     @include classesForBreakpoint($breakpoint);
   }
