@@ -1,3 +1,4 @@
+- Improve Spacing CSS - [#84](https://github.com/PrefectHQ/miter-design/pull/84)
 - Update License to Apache 2.0 - [86](https://github.com/PrefectHQ/miter-design/pull/86)
 - Fix broken tests - [#81](https://github.com/PrefectHQ/miter-design/pull/81)
 - Standardize icon size classes - [#80](https://github.com/PrefectHQ/miter-design/pull/80)
