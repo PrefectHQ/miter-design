@@ -16,6 +16,9 @@ export default defineComponent({
   emits: {
     'update:modelValue'(...args: any[]) {
       return { ...args }
+    },
+    change(...args: any[]) {
+      return { ...args }
     }
   },
   props: {
@@ -34,6 +37,10 @@ export default defineComponent({
     openUp: {
       type: Boolean,
       default: false
+    },
+    modelValue: {
+      type: [String, Object],
+      default: ''
     }
   },
   data() {
@@ -41,7 +48,7 @@ export default defineComponent({
       hovered: false,
       active: false,
       icon: '',
-      selected: '',
+      selected: this.modelValue,
       searchTerm: '',
       allOptions: [] as VNode<
         RendererNode,
@@ -59,14 +66,26 @@ export default defineComponent({
     active(): void {
       this.searchTerm = ''
       this.filteredOptions = this.allOptions
+    },
+    modelValue(val): void {
+      const selectedOption = this.allOptions.find(
+        (option) => option?.props?.value == val
+      )
+
+      if (selectedOption?.props) {
+        this.selected = selectedOption.props.value || ''
+        this.icon = selectedOption.props.icon || ''
+      }
     }
   },
   methods: {
     handleOptionClick(e: Event, ...args: any[]): Event {
-      if (e.target?.classList?.contains('disabled')) return e
+      if ((e.target as HTMLDivElement)?.classList?.contains('disabled'))
+        return e
       this.selected = args[0]
       this.icon = args[1]
-      this.$emit('update:modelValue', this.selected)
+      this.$emit('update:modelValue', this.selected, args[2])
+      this.$emit('change', this.selected, args[2])
       return e
     },
     handleFocus(): void {
@@ -75,9 +94,11 @@ export default defineComponent({
     },
 
     handleBlur(event: FocusEvent): void {
+      const target = event.relatedTarget as HTMLDivElement
       if (
-        event.relatedTarget?.tagName === 'INPUT' ||
-        event.relatedTarget?.classList.contains('active')
+        target?.tagName === 'INPUT' ||
+        target?.classList.contains('active') ||
+        target?.classList.contains('option')
       )
         return
       this.hovered = false
@@ -94,8 +115,13 @@ export default defineComponent({
         if (this.active) {
           // choose highlighted option, else close
           this.filteredOptions.forEach((option) => {
-            if (option.el.classList.contains('hovered')) {
-              this.handleOptionClick(event, option.props.value)
+            if (option.el?.classList.contains('hovered')) {
+              this.handleOptionClick(
+                event,
+                option?.props?.value,
+                option?.props?.icon || '',
+                option?.props?.data
+              )
             }
           })
         }
@@ -103,67 +129,80 @@ export default defineComponent({
       } else if (event.key === 'Escape') {
         this.active = false
       } else if (event.key === 'ArrowUp') {
+        if (!this.active) return
         event.preventDefault()
         let currentFound = false
         let nextSelected = false
         for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
+          const option = this.filteredOptions[i]
+          const type = (option.type as any)?.name
+          const optionClasses = option?.el?.classList
+
           if (
-            this.filteredOptions[i].type?.name === 'Option' &&
-            !this.filteredOptions[i].el?.classList?.contains('disabled') &&
+            type === 'Option' &&
+            !optionClasses?.contains('disabled') &&
             currentFound
           ) {
-            this.filteredOptions[i].el?.classList.add('hovered')
+            option.el?.focus()
+            optionClasses.add('hovered')
             nextSelected = true
             break
           }
-          if (
-            this.filteredOptions[i].el?.classList?.contains('hovered') &&
-            !currentFound
-          ) {
-            this.filteredOptions[i].el?.classList.remove('hovered')
+          if (optionClasses?.contains('hovered') && !currentFound) {
+            optionClasses.remove('hovered')
             currentFound = true
           }
         }
+
         if (!nextSelected) {
-          for (let i = 0; i < this.filteredOptions.length; i++) {
-            if (
-              this.filteredOptions[i].type?.name === 'Option' &&
-              !this.filteredOptions[i].el?.classList?.contains('disabled')
-            ) {
-              this.filteredOptions[i].el?.classList.add('hovered')
+          for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
+            const option = this.filteredOptions[i]
+            const type = (option.type as any)?.name
+            const optionClasses = option?.el?.classList
+
+            if (type === 'Option' && !optionClasses?.contains('disabled')) {
+              option.el?.focus()
+              optionClasses.add('hovered')
               break
             }
           }
         }
       } else if (event.key === 'ArrowDown') {
+        if (!this.active) return
         event.preventDefault()
         let currentFound = false
         let nextSelected = false
         for (let i = 0; i < this.filteredOptions.length; i++) {
+          const option = this.filteredOptions[i]
+          const type = (option.type as any)?.name
+          const optionClasses = option?.el?.classList
+
           if (
-            this.filteredOptions[i].type?.name === 'Option' &&
-            !this.filteredOptions[i].el?.classList?.contains('disabled') &&
+            type === 'Option' &&
+            !optionClasses?.contains('disabled') &&
             currentFound
           ) {
-            this.filteredOptions[i].el?.classList.add('hovered')
+            option.el?.focus()
+            optionClasses.add('hovered')
             nextSelected = true
             break
           }
-          if (
-            this.filteredOptions[i].el?.classList?.contains('hovered') &&
-            !currentFound
-          ) {
-            this.filteredOptions[i].el?.classList.remove('hovered')
+
+          if (optionClasses?.contains('hovered') && !currentFound) {
+            optionClasses.remove('hovered')
             currentFound = true
           }
         }
+
         if (!nextSelected) {
-          for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
-            if (
-              this.filteredOptions[i].type?.name === 'Option' &&
-              !this.filteredOptions[i].el?.classList?.contains('disabled')
-            ) {
-              this.filteredOptions[i].el?.classList.add('hovered')
+          for (let i = 0; i < this.filteredOptions.length; i++) {
+            const option = this.filteredOptions[i]
+            const type = (option.type as any)?.name
+            const optionClasses = option?.el?.classList
+
+            if (type === 'Option' && !optionClasses?.contains('disabled')) {
+              option.el?.focus()
+              optionClasses.add('hovered')
               break
             }
           }
@@ -179,7 +218,11 @@ export default defineComponent({
           option.type === 'div' ||
           option.props?.value
             .toLowerCase()
-            .includes(searchValue.target?.value?.toString().toLowerCase())
+            .includes(
+              (searchValue.target as HTMLInputElement)?.value
+                ?.toString()
+                .toLowerCase()
+            )
         )
           this.filteredOptions.push(option)
       })
@@ -187,8 +230,7 @@ export default defineComponent({
   },
   render() {
     const slottedItems = this.$slots.default?.()
-    let temp: VNode<RendererNode, RendererElement, { [key: string]: any }>[] =
-      []
+    let temp: any = []
     let children: VNode<RendererNode, RendererElement, { [key: string]: any }>[]
 
     const pickerProps = [
@@ -215,6 +257,7 @@ export default defineComponent({
               )
             } else if (ti.type.name === 'OptionGroup') {
               const innerSlot = h(ti)
+              // @ts-ignore: Ignoring this because the typings seem to be incorrect (but the code works)
               const innerOptions = innerSlot.children?.default?.()
               // this will either be Option(s) or Symbol(Fragment)
               const options = [
@@ -265,6 +308,8 @@ export default defineComponent({
                 ...options
               ]
             } else {
+              if (!Array.isArray(ti.children)) return
+
               //ti.type === Symbol(Fragment) => v-for of options, not in group
               const options = ti.children?.map(
                 (
@@ -292,7 +337,7 @@ export default defineComponent({
     this.allOptions = [...children]
 
     const searchBar = h('div', { class: 'search' }, [
-      h('i', { class: ['pi', 'pi-Search', 'pi-lg', 'mr-1'] }),
+      h('i', { class: ['pi', 'pi-search-line', 'mr-1'] }),
       h(
         'input',
         mergeProps({
@@ -313,19 +358,28 @@ export default defineComponent({
       [this.search && searchBar, this.filteredOptions]
     )
 
+    const activeSlot = this.$slots?.active?.()
+    const icon = children.find(
+      (option) => option?.props?.value == this.modelValue
+    )?.props?.icon
+
     const picker = h(
       'div',
       mergeProps({
         class: ['picker', ...pickerProps]
       }),
       [
-        h('span', [
-          this.icon.length > 0
-            ? h('i', { class: ['pi', `pi-${this.icon}`, 'pi-1x', 'pr-1'] })
-            : null,
-          this.selected || this.placeholder
-        ]),
-        h('i', { class: ['pi', 'pi-Arrow-Down', 'pi-lg'] })
+        activeSlot
+          ? h('span', [activeSlot])
+          : h('span', [
+              this.icon.length > 0 || icon
+                ? h('i', {
+                    class: ['pi', `pi-${this.icon || icon}`, 'pi-1x', 'pr-1']
+                  })
+                : null,
+              this.selected || this.placeholder
+            ]),
+        h('i', { class: ['pi', 'pi-arrow-down-s-line', 'pi-lg'] })
       ]
     )
     const wrapper = h(
@@ -342,6 +396,7 @@ export default defineComponent({
         onMouseenter: this.handleFocus,
         onMouseleave: this.handleMouseLeave,
         onKeydown: this.handleKeydown,
+        onChange: "$emit('change', this.selected, args[2])",
         onClick: () => {
           !this.disabled ? (this.active = !this.active) : null
         }

@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Button from './Button.vue'
+import IconButton from './IconButton.vue'
 
 test('displays text in the default slot', () => {
   const text = 'Hello!'
@@ -12,6 +13,30 @@ test('displays text in the default slot', () => {
   const button = wrapper.get('[data-test="default"]')
 
   expect(button.text()).toBe(text)
+})
+
+describe('icon and text', () => {
+  test('displays icon prop with text if passed', () => {
+    const wrapper = mount(Button, {
+      props: { icon: 'bug-2-line' },
+      slots: { default: 'Foo' }
+    })
+    const button = wrapper.get('button')
+
+    expect(button.text()).toBe('Foo')
+    expect(button.classes()).toContain('icon')
+  })
+
+  test('does not display icon prop with text if not passed', () => {
+    const wrapper = mount(Button, {
+      props: {},
+      slots: { default: 'Foo' }
+    })
+    const button = wrapper.get('button')
+
+    expect(button.text()).toBe('Foo')
+    expect(button.classes()).not.toContain('icon')
+  })
 })
 
 describe('color prop', () => {
@@ -36,7 +61,46 @@ describe('color prop', () => {
   })
 })
 
-describe('icon prop', () => {
+describe('miter prop', () => {
+  test('defaults to rectangle when no miter prop is passed', () => {
+    const wrapper = mount(Button, {
+      props: {}
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).not.toContain('miter')
+  })
+
+  test('passes the miter prop as a class when passed', () => {
+    const wrapper = mount(Button, {
+      props: { miter: true }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).toContain('miter')
+  })
+})
+
+describe('IconButton - icon prop', () => {
+  test('displays the passed icon if passed', () => {
+    const wrapper = mount(IconButton, {
+      props: { icon: 'bug-2-line' }
+    })
+    expect(wrapper.get('i').classes()).toContain('bug-2-line')
+  })
+
+  test('does not display an icon if not passed', () => {
+    const wrapper = mount(IconButton, {
+      props: {}
+    })
+
+    expect(wrapper.get('i').classes()).not.toContain('bug-2-line')
+  })
+})
+
+describe('Button - icon prop', () => {
   test('defaults to the block button when no icon prop is passed', () => {
     const wrapper = mount(Button, {
       props: {}
@@ -49,7 +113,7 @@ describe('icon prop', () => {
 
   test('passes the icon prop as a class when passed', () => {
     const wrapper = mount(Button, {
-      props: { icon: true }
+      props: { icon: 'bug-2-line' }
     })
 
     const button = wrapper.get('button')
@@ -58,7 +122,45 @@ describe('icon prop', () => {
   })
 })
 
-describe('disabled state', () => {
+describe('IconButton - disabled state', () => {
+  test('adds the disabled class when disabled:true is passed as a prop', () => {
+    const wrapper = mount(IconButton, {
+      props: {
+        disabled: true
+      }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.classes()).toContain('disabled')
+  })
+
+  test('adds the disabled attribute when disabled:true is passed as a prop', () => {
+    const wrapper = mount(IconButton, {
+      props: {
+        disabled: true
+      }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.attributes('disabled')).toBeDefined()
+  })
+
+  test("doesn't pass the disabled attribute when disabled:false is passed as a prop", () => {
+    const wrapper = mount(IconButton, {
+      props: {
+        disabled: false
+      }
+    })
+
+    const button = wrapper.get('button')
+
+    expect(button.attributes('disabled')).toBeUndefined()
+  })
+})
+
+describe('Button - disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
     const wrapper = mount(Button, {
       props: {

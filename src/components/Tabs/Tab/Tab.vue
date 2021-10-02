@@ -41,7 +41,7 @@ export default defineComponent({
     return {
       focused: false as boolean,
       hovered: false,
-      title: null
+      title: ''
     }
   },
   computed: {

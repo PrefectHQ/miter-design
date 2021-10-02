@@ -1,0 +1,43 @@
+<template>
+  <div>
+    <h3>Text Areas</h3>
+
+    <div class="my-2">
+      <TextArea
+        label="Text Area"
+        subtitle="Additional Info"
+        class="mr-2"
+        required
+        v-model="value"
+        @invalid="handleInvalid"
+      >
+        <template v-slot:errorMessage>No!</template>
+      </TextArea>
+      <TextArea disabled hideLabel placeholder="can't write here" />
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import TextArea from '@/components/TextArea/TextArea.vue'
+
+export default defineComponent({
+  name: 'TextAreas',
+  components: { TextArea },
+  data() {
+    return {
+      value: ''
+    }
+  },
+  methods: {
+    handleInvalid(validityState: ValidityState) {
+      console.log('validity', validityState)
+    }
+  }
+})
+</script>
+
+<style lang="scss" scoped>
+@use '@/styles/components/textarea';
+</style>

@@ -12,12 +12,13 @@
       hovered: hovered,
       disabled: disabled
     }"
+    tabindex="0"
   >
-    <span
-      ><i v-if="icon" :class="iconClass" class="pi pi-1x mr-1"></i>
-      {{ value }}</span
-    >
-    <i v-if="selected" class="pi pi-Checkmark pi-lg"></i>
+    <span>
+      <i v-if="icon" :class="iconClass" class="pi pi-1x mr-1"></i>
+      <slot>{{ value }}</slot>
+    </span>
+    <i v-if="selected" class="pi pi-check-line pi-lg"></i>
   </div>
 </template>
 
@@ -34,7 +35,11 @@ export default defineComponent({
   props: {
     value: {
       type: String,
+      required: true,
       default: 'Option'
+    },
+    data: {
+      type: [String, Object]
     },
     icon: {
       type: String,
@@ -61,7 +66,7 @@ export default defineComponent({
   },
   methods: {
     choose(e: Event): Event {
-      this.$emit('click', e, this.value, this.icon)
+      this.$emit('click', e, this.value, this.icon, this.data)
       return e
     },
 

@@ -11,7 +11,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/HJgj2eHBaqt1SAYruZNjQQ/Prefect?node-id=1080%3A993'
+      url: 'https://www.figma.com/file/JomY9jsgJdal9wfPBtpWkY/UI?node-id=234%3A12987'
     }
   }
 }
@@ -39,19 +39,19 @@ Default.args = {
   modelValue: 1,
   content: `
 <Tab href="1">
-  <i class="pi pi-Earth pi-lg mr-1" />
+  <i class="pi pi-earth-fill pi-lg mr-1" />
   Tab 1
 </Tab>
 <Tab href="2">
-  <i class="pi pi-Tag-with-Heart pi-lg mr-1" />
+  <i class="pi pi-chat-heart-line pi-lg mr-1" />
   Tab 2 
 </Tab>
 <Tab href="3">
-  <i class="pi pi-Bug-Warning pi-lg mr-1" />
+  <i class="pi pi-bug-2-line pi-lg mr-1" />
   Tab 3 
 </Tab>
 <Tab href="4">
-  <i class="pi pi-Compass pi-lg mr-1" />
+  <i class="pi pi-compass-line pi-lg mr-1" />
   Tab 4 
 </Tab>
         `
@@ -62,18 +62,18 @@ Overflow.args = {
   modelValue: 0,
   content: () => {
     const icons = [
-      'Earth',
-      'Tag-with-Heart',
-      'Bug-Warning',
-      'Compass',
-      'Book',
-      'Bug',
-      'Dark',
-      'Note',
-      'Film',
-      'Safe',
-      'Bar-Graph',
-      'Refresh-5'
+      'earth-fill',
+      'chat-heart-line',
+      'bug-2-line',
+      'compass-line',
+      'book-line',
+      'bug-line',
+      'contrast-fill',
+      'sticky-note-line',
+      'film-fill',
+      'safe-2-fill',
+      'bar-chart-line',
+      'refresh-fill'
     ]
 
     return icons.reduce(

@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import RadioButton from './RadioButton.vue'
+import Radio from './Radio.vue'
 
 test('displays text in the default slot', () => {
   const text = 'Hello!'
-  const wrapper = mount(RadioButton, {
+  const wrapper = mount(Radio, {
     slots: {
       default: text
     }
@@ -16,7 +16,7 @@ test('displays text in the default slot', () => {
 
 describe('disabled state', () => {
   test('adds the disabled class when disabled:true is passed as a prop', () => {
-    const wrapper = mount(RadioButton, {
+    const wrapper = mount(Radio, {
       props: {
         disabled: true
       }
@@ -28,7 +28,7 @@ describe('disabled state', () => {
   })
 
   test('adds the disabled attribute when disabled:true is passed as a prop', () => {
-    const wrapper = mount(RadioButton, {
+    const wrapper = mount(Radio, {
       props: {
         disabled: true
       }
@@ -40,7 +40,7 @@ describe('disabled state', () => {
   })
 
   test('sets disabled to false when disabled:false is passed as a prop', () => {
-    const wrapper = mount(RadioButton)
+    const wrapper = mount(Radio)
 
     const radio = wrapper.get('label')
 
@@ -50,7 +50,7 @@ describe('disabled state', () => {
 
 test('emit button value when selected', async () => {
   const buttonValue = 'radio-button'
-  const wrapper = mount(RadioButton, {
+  const wrapper = mount(Radio, {
     props: {
       value: buttonValue
     }
@@ -63,7 +63,7 @@ test('emit button value when selected', async () => {
 
 test('updating prop also changes value', async () => {
   // we have to test this way as vue-test-utils doesn't offer a good way to test "checked"
-  const wrapper = mount(RadioButton, {
+  const wrapper = mount(Radio, {
     props: {
       value: 'another-button'
     }

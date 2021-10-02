@@ -1,11 +1,8 @@
 import Slider from './Slider.vue'
-import { reactive } from 'vue'
-import { withDesign } from 'storybook-addon-designs'
 
 export default {
   title: 'Miter Design/Slider',
   component: Slider,
-  decorators: [withDesign],
   parameters: {
     design: {
       type: 'figma',

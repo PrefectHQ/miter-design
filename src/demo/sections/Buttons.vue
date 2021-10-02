@@ -25,34 +25,56 @@
       </Button>
     </div>
 
-    <h5 class="mt-5">Icon</h5>
+    <h5 class="mt-5">With Icon</h5>
     <div v-for="state in states" :key="state" class="my-2">
       <span class="text-capitalize">{{ state }}:</span>
       <Button
-        v-for="style in buttonStyles"
+        v-for="(style, index) in buttonStyles"
         :key="style"
         v-skeleton="skeletonLoader"
         class="ml-2"
         :color="style"
-        :icon="true"
         :disabled="state == 'disabled'"
+        :icon="icons[index]"
         @click="handleClick"
       >
-        <i class="pi pi-Fire pi-2x"></i>
+        <span>{{ style }}</span>
       </Button>
+    </div>
+
+    <h5 class="mt-5">Icon Only</h5>
+    <div v-for="state in states" :key="state" class="my-2">
+      <span class="text-capitalize">{{ state }}:</span>
+      <IconButton
+        v-for="icon in icons"
+        :key="icon"
+        v-skeleton="skeletonLoader"
+        class="ml-2"
+        :disabled="state == 'disabled'"
+        :icon="icon"
+        @click="handleClick"
+      >
+      </IconButton>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
+import Button from '@/components/Button/Button.vue'
+import IconButton from '@/components/Button/IconButton.vue'
 
-@Options({})
+@Options({ components: { Button, IconButton } })
 export default class Buttons extends Vue {
   states = ['default', 'disabled']
 
-  buttonStyles = ['primary', 'secondary', 'outlined']
-  fabStyles = ['primary', 'secondary', 'outlined']
+  buttonStyles = ['primary', 'secondary', 'secondary light', 'alternate']
+  icons = [
+    'pi-subtract-line',
+    'pi-add-line',
+    'pi-fullscreen-line',
+    'pi-fullscreen-exit-line'
+  ]
 
   skeletonLoader = false
 

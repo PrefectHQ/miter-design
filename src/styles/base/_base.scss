@@ -133,6 +133,22 @@ $borders: (
   flex-direction: column-reverse !important;
 }
 
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-grow-0 {
+  flex-grow: 0;
+}
+
+.flex-shrink-1 {
+  flex-shrink: 1;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
 .flex-nowrap {
   flex-wrap: nowrap;
 }
@@ -250,5 +266,19 @@ a {
   &.disabled {
     color: variables.$grey-20 !important;
     cursor: not-allowed;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .breakpoint-none {
+    display: none !important;
+  }
+}
+
+@each $breakpoint, $value in variables.$breakpoints {
+  @media screen and (max-width: #{$value}) {
+    .breakpoint-#{$breakpoint} {
+      display: none !important;
+    }
   }
 }

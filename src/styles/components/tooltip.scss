@@ -1,0 +1,73 @@
+$background: #090422;
+
+.tooltip {
+  position: absolute;
+  padding: 5px;
+  border-radius: 4px;
+  background: $background;
+  color: white;
+
+  text-align: center;
+  min-width: 83px;
+  min-height: 34px;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tooltip-content {
+  font-size: 13px;
+}
+
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.top {
+  .tooltip-content::after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid $background;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+  }
+}
+
+.right {
+  .tooltip-content::after {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid $background;
+    bottom: 50%;
+    right: 100%;
+    transform: translateY(50%);
+  }
+}
+
+.bottom {
+  .tooltip-content::after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid $background;
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, 25%);
+  }
+}
+
+.left {
+  .tooltip-content::after {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid $background;
+    bottom: 50%;
+    left: 100%;
+    transform: translateY(50%);
+  }
+}

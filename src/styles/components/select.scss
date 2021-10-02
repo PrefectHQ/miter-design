@@ -5,8 +5,9 @@
   font-family: variables.$font--primary;
   outline: none; //needed for removing safari focus ring
   position: relative;
+  z-index: 2;
   &.active {
-    @include mixins.miter-shadow;
+    @include mixins.drop-shadow;
   }
   &:focus,
   &:focus-visible {
@@ -22,13 +23,13 @@
     width: 350px;
     display: flex;
     align-items: center;
-    padding-left: 32px;
+    padding-left: 21px;
     color: variables.$grey-20;
     font-size: 16px;
     white-space: nowrap;
     z-index: 2;
     span {
-      width: 275px;
+      width: 284px;
     }
     &.selected {
       color: variables.$text--primary;
@@ -57,7 +58,8 @@
 
   .list {
     @include mixins.input-transition;
-
+    max-height: 500px;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     width: 350px;
@@ -69,7 +71,7 @@
       margin-top: -16px;
       padding-top: 16px;
       border-bottom-left-radius: 4px;
-      > * &:last-child {
+      * &:last-child {
         @include mixins.miter-clip(2, 1);
       }
     }
@@ -78,11 +80,12 @@
       border-top-right-radius: 4px;
       bottom: 58px;
     }
+
     > * {
       align-items: center;
       display: flex;
       height: 58px;
-      padding-left: 32px;
+      padding-left: 21px;
       &:not(:last-child) {
         border-bottom: 1px solid variables.$secondary-background;
       }
@@ -110,6 +113,7 @@
   }
 }
 .title {
+  min-height: 58px;
   text-transform: uppercase;
   font-weight: 700;
   color: variables.$grey-20;
@@ -117,28 +121,40 @@
 .option {
   cursor: pointer;
   font-size: 16px;
+  min-height: 58px;
   line-height: 20px;
+  outline: none; //needed for removing safari focus ring
   &:first-of-type {
     height: 74px;
     margin-top: -16px;
     padding-top: 16px;
   }
+  &:focus,
+  &:focus-visible {
+    outline: none !important; // also needed for focus rings
+  }
+
+  span {
+    width: 275px;
+  }
+
   i {
     color: variables.$grey-20;
   }
+
   &.hovered {
     background-color: variables.$secondary-background;
   }
+
   &.selected {
     background-color: variables.$primary;
     color: variables.$white;
-    span {
-      width: 275px;
-    }
+
     i {
       color: variables.$white;
     }
   }
+
   &.disabled {
     color: variables.$inactive;
     cursor: not-allowed !important;

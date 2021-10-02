@@ -24,8 +24,17 @@
             v-for="(option, i) in options"
             :key="i"
             :value="option"
-            icon="Fire"
+            icon="fire-line"
           />
+        </OptionGroup>
+        <OptionGroup label="Object Options">
+          <Option
+            v-for="(option, i) in items"
+            :key="i"
+            :data="option"
+            :value="option.label"
+            icon="fire-line"
+          ></Option>
         </OptionGroup>
         <OptionGroup label="Single Options">
           <Option value="1" /><Option value="2" /><Option value="3" />
@@ -59,7 +68,11 @@ export default defineComponent({
     return {
       selected1: '',
       selected2: '',
-      options: ['First', 'Second', 'Third']
+      options: ['First', 'Second', 'Third'],
+      items: [
+        { id: 'abc', label: 'Hello' },
+        { id: 'dfe', label: 'World' }
+      ]
     }
   }
 })

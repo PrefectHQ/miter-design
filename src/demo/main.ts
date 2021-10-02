@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import '@/styles/main.scss'
 
 import App from './App.vue'
-import MiterDesign from '@/entry.esm'
+import MiterDesign from '@/index'
 import router from './plugins/router'
 
 const app = createApp(App)
@@ -20,5 +20,7 @@ app.config.errorHandler = (err, vm, info) => {
   // TODO: Perform any custom logic or log to server
   console.log(err, vm, info)
 }
+
+console.log(app)
 
 app.mount('#app')
