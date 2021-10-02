@@ -95,12 +95,26 @@
         </button>
       </div>
     </transition>
+    <Timepicker />
+    <div
+      class="timepicker-actions"
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        margin-top: 22px;
+      "
+    >
+      <Button color="primary">Cancel</Button>
+      <Button color="primary">Apply</Button>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-
+import Timepicker from '../Timepicker/Timepicker.vue'
 class Props {
   /**
    * A reactive native JS DateTime Object (only the date portion is reactive)
@@ -125,7 +139,8 @@ const Component = Options
     value(val) {
       this.date = new Date(val)
     }
-  }
+  },
+  components: { Timepicker }
 })
 
 /**
