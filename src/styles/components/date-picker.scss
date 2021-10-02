@@ -11,6 +11,10 @@
   position: relative;
   width: min-content;
 
+  border: 1px solid variables.$grey-20;
+  border-radius: 4px;
+  padding: 20px;
+
   &:focus,
   &:focus-within {
     outline: none;

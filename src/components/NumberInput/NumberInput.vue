@@ -3,6 +3,7 @@
     <div>
       <input
         v-model="value_"
+        :style="`width: ${this.width}px`"
         type="number"
         :max="max_"
         :min="min_"
@@ -39,6 +40,7 @@ class Props {
   required = prop<Boolean>({ default: false })
   modelValue = prop<number | string>({ required: false, default: 0 })
   value = prop<number | string>({ required: false, default: 0 })
+  width = prop<String>({ default: '' })
 }
 
 const Component = Options
@@ -56,7 +58,6 @@ const Component = Options
 })
 export default class NumberInput extends Vue.with(Props) {
   value_ = this.modelValue || this.value || 0
-
   get classList(): string[] {
     return [...(this.disabled ? ['disabled'] : [])]
   }
