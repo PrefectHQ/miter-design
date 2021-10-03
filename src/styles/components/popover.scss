@@ -17,11 +17,13 @@
   border: 1px solid variables.$grey-20;
   border-radius: 4px;
   padding: 10px;
+  padding-bottom: 18px;
 
   header {
     :first-child &:not(i) {
       font-family: variables.$font--primary !important;
       font-weight: 600;
+      padding-bottom: 8px;
 
       :first-child::before {
         vertical-align: middle;
@@ -33,6 +35,7 @@
   hr {
     border: 1px solid #cecdd3;
     margin: 5px -20px 14px;
+    border-bottom: none;
   }
 }
 
