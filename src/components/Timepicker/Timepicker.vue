@@ -11,7 +11,7 @@
           gap: 24px;
         "
       >
-        <i class="pi pi-time-line pi-x" />
+        <i class="pi pi-time-line pi-l" />
         <NumberInput
           v-model="value1"
           :min="min1"
@@ -19,7 +19,26 @@
           :step="step1"
         />
         <NumberInput :min="min2" :max="max2" v-model="value2" :step="step2"  />
-        <NumberInput :min="min" :max="max" :step="step"  />
+        <div class="number-input-wrapper" :class="classList">
+    <div>
+      <input
+        v-model="amPm"
+        class="ampm-input"
+        :style="`width: ${this.width}px`"
+        disabled
+        :aria-placeholder="AmPm"
+        @keypress="handleKeyPress"
+      />
+      <span class="spin-button-container">
+        <button class="spin-button spin-button-up" @click="AMPM">
+          <i class="pi pi-arrow-up-s-fill pi-s" />
+        </button>
+        <button class="spin-button spin-button-down" @click="AMPM">
+          <i class="pi pi-arrow-down-s-fill pi-s" />
+        </button>
+      </span>
+    </div>
+  </div>
       </div>
     </div>
   </div>
@@ -33,6 +52,7 @@ export default {
   data() {
     return {
       disabled: false,
+      amPm: 'AM',
       min1: '0',
       max1: '24',
       step1: '1',
@@ -48,6 +68,11 @@ export default {
     value(val) {
       this.$emit('update:modelValue', val)
     }
+  },
+  methods: {
+    AMPM() {
+      this.amPm == 'AM'? this.amPm = 'PM': this.amPm = 'AM'
+    }
   }
 }
 </script>
@@ -59,3 +84,8 @@ hr {
   border-bottom: none;
 }
 </style>
+
+<style lang="scss" scoped>
+@use '../../styles/components/input--number.scss';
+</style>
+

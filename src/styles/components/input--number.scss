@@ -97,4 +97,30 @@
       background-color: transparent;
     }
   }
+
+  .ampm-input {
+    border: none;
+    border-radius: 4px;
+    display: block;
+    height: 100%;
+    outline: none;
+    padding: 8px;
+    flex-grow: 1;
+    width: 37px;
+
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &:disabled {
+      background-color: transparent;
+    }
+
+  }
 }
