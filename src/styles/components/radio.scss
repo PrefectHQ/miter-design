@@ -31,7 +31,7 @@
     margin-right: 12px;
     border: 1px solid variables.$grey-20;
     user-select: none;
-    z-index: 1;
+
     &:after {
       @include mixins.input-transition-long;
       content: '';
