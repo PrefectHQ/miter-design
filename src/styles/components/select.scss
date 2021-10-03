@@ -5,6 +5,9 @@
   font-family: variables.$font--primary;
   outline: none; //needed for removing safari focus ring
   position: relative;
+  height: 58px;
+  width: 350px;
+
   z-index: 2;
   &.active {
     @include mixins.drop-shadow;
@@ -19,8 +22,8 @@
     border: 1px solid variables.$grey-20;
     border-radius: 4px;
     cursor: pointer;
-    height: 58px;
-    width: 350px;
+    height: inherit;
+    width: inherit;
     display: flex;
     align-items: center;
     padding-left: 21px;
@@ -62,7 +65,7 @@
     overflow: auto;
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: 100%;
     position: absolute;
     background: variables.$white;
 
