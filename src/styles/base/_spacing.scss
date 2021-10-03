@@ -29,54 +29,69 @@ $directions: (
   )
 );
 
-@each $direction, $properties in $directions {
-  .m#{$direction}-auto {
-    @each $property in $properties {
-      margin-#{$property}: auto;
-    }
-  }
+@function selector($direction, $breakpoint, $value) {
+  @return if(
+    $breakpoint != '',
+    #{$direction}-#{$breakpoint}-#{$value},
+    #{$direction}-#{$value}
+  );
+}
 
-  .p#{$direction}-auto {
-    @each $property in $properties {
-      padding-#{$property}: auto;
+@function pixels($number) {
+    @return $number * 8px;
+}
+
+@mixin classesForBreakpoint($breakpoint) {
+  @each $direction, $properties in $directions {
+    $selector: selector($direction, $breakpoint, 'auto');
+    
+    .m#{$selector} {
+      @each $property in $properties {
+        margin-#{$property}: auto;
+      }
     }
-  }
-  @each $break, $value in variables.$breakpoints {
+    
+    .p#{$selector} {
+      @each $property in $properties {
+        padding-#{$property}: auto;
+      }
+    }
+    
     @for $i from 0 through 10 {
-      $selector: if(
-        $break != '',
-        #{$direction}-#{$break}-#{$i},
-        #{$direction}-#{$i}
-      );
-      $amount: $i * 8px;
-
-      @if $break != '' {
-        @media (min-width: $value) {
-          .m#{$selector} {
-            @each $property in $properties {
-              margin-#{$property}: $amount;
-            }
-          }
-
-          .p#{$selector} {
-            @each $property in $properties {
-              padding-#{$property}: $amount;
-            }
-          }
-        }
-      } @else {
-        .m#{$selector} {
-          @each $property in $properties {
-            margin-#{$property}: $amount;
-          }
-        }
-
-        .p#{$selector} {
-          @each $property in $properties {
-            padding-#{$property}: $amount;
-          }
+      $selector: selector($direction, $breakpoint, $i);
+      $amount: pixels($i);
+    
+      .m#{$selector} {
+        @each $property in $properties {
+          margin-#{$property}: $amount;
         }
       }
+      
+      .p#{$selector} {
+        @each $property in $properties {
+          padding-#{$property}: $amount;
+        }
+      }
+    }
+  }
+}
+
+:root {
+  @for $i from 0 through 10 {
+    $amount: pixels($i);
+
+    --p-#{$i}: #{$amount};
+    --m-#{$i}: #{$amount};
+  }
+}
+
+@each $breakpoint, $value in variables.$breakpoints {
+  @if $breakpoint == '' {
+    @include classesForBreakpoint($breakpoint);
+  }
+  @else {
+    @media (min-width: $value) {
+      @include classesForBreakpoint($breakpoint);
     }
   }
 }
