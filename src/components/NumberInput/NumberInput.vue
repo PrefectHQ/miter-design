@@ -14,13 +14,12 @@
         :required="required"
         @keypress="handleKeyPress"
       />
-
       <span class="spin-button-container">
         <button class="spin-button spin-button-up" @click="incrementValue">
-          <i class="pi pi-Arrow-Up pi-sm" />
+          <i class="pi pi-arrow-up-s-fill pi-xs" />
         </button>
         <button class="spin-button spin-button-down" @click="decrementValue">
-          <i class="pi pi-Arrow-Down pi-sm" />
+          <i class="pi pi-arrow-down-s-fill pi-xs" />
         </button>
       </span>
     </div>

@@ -47,6 +47,7 @@
 
   .spin-button-container {
     margin-right: 4px;
+    // padding-top: 5px;
 
     .spin-button {
       background-color: transparent;
@@ -56,6 +57,7 @@
       cursor: pointer;
       display: block;
       outline: none;
+      height: 12px;
 
       &:hover,
       &:focus {
@@ -76,6 +78,7 @@
     outline: none;
     padding: 8px;
     flex-grow: 1;
+    width: 37px;
 
     -moz-appearance: textfield;
     appearance: textfield;

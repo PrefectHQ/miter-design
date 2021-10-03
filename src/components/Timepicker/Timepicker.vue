@@ -11,16 +11,15 @@
           gap: 24px;
         "
       >
-        <i class="pi pi-Clock pi-2x" />
+        <i class="pi pi-time-line pi-2x" />
         <NumberInput
           v-model="value"
-          width="40"
           :min="min"
           :max="max"
           :step="step"
         />
-        <NumberInput :min="min" :max="max" :step="step" width="40" />
-        <NumberInput :min="min" :max="max" :step="step" width="40" />
+        <NumberInput :min="min" :max="max" :step="step"  />
+        <NumberInput :min="min" :max="max" :step="step"  />
       </div>
     </div>
   </div>

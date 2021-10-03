@@ -13,7 +13,7 @@
         title="Previous month"
         @click="() => decrementMonth()"
       >
-        <i class="pi pi-Arrow-Left" />
+        <i class="pi pi-arrow-left-s-line" />
       </button>
 
       <button
@@ -22,7 +22,7 @@
         title="Next month"
         @click="() => incrementMonth()"
       >
-        <i class="pi pi-Arrow-Right" />
+        <i class="pi pi-arrow-right-s-line" />
       </button>
 
       <div class="month-title ml-2"> {{ displayMonth }} {{ year }} </div>
