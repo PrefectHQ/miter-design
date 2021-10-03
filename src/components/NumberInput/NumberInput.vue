@@ -16,10 +16,10 @@
       />
       <span class="spin-button-container">
         <button class="spin-button spin-button-up" @click="incrementValue">
-          <i class="pi pi-arrow-up-s-fill pi-xs" />
+          <i class="pi pi-arrow-up-s-fill pi-s" />
         </button>
         <button class="spin-button spin-button-down" @click="decrementValue">
-          <i class="pi pi-arrow-down-s-fill pi-xs" />
+          <i class="pi pi-arrow-down-s-fill pi-s" />
         </button>
       </span>
     </div>

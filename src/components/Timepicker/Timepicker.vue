@@ -11,14 +11,14 @@
           gap: 24px;
         "
       >
-        <i class="pi pi-time-line pi-2x" />
+        <i class="pi pi-time-line pi-x" />
         <NumberInput
-          v-model="value"
-          :min="min"
-          :max="max"
-          :step="step"
+          v-model="value1"
+          :min="min1"
+          :max="max1"
+          :step="step1"
         />
-        <NumberInput :min="min" :max="max" :step="step"  />
+        <NumberInput :min="min2" :max="max2" v-model="value2" :step="step2"  />
         <NumberInput :min="min" :max="max" :step="step"  />
       </div>
     </div>
@@ -33,10 +33,14 @@ export default {
   data() {
     return {
       disabled: false,
-      min: '-100',
-      max: '100',
-      step: '1',
-      value: 0
+      min1: '0',
+      max1: '24',
+      step1: '1',
+      value1: 0,
+       min2: '0',
+      max2: '60',
+      step2: '1',
+      value2: 0
     }
   },
   emits: ['update:modelValue'],

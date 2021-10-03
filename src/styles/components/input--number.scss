@@ -37,6 +37,7 @@
     margin: 0;
     outline: none;
     transition: all 150ms;
+    height: 40px;
 
     &:focus,
     &:focus-within,
@@ -47,7 +48,7 @@
 
   .spin-button-container {
     margin-right: 4px;
-    // padding-top: 5px;
+    padding-top: 8px;
 
     .spin-button {
       background-color: transparent;
@@ -55,9 +56,11 @@
       border-radius: 4px;
       padding: 0 1px;
       cursor: pointer;
-      display: block;
+      display: flex;
       outline: none;
-      height: 12px;
+      align-items: center;
+    justify-content: center;
+      max-height: 12px;
 
       &:hover,
       &:focus {
