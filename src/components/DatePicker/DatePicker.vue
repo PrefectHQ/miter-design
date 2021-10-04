@@ -242,21 +242,22 @@ export default class DatePicker extends Vue.with(Props) {
     this.monthDirection = 1
 
     if (focus) {
-      this.$nextTick(() => {
-        ;(this.$refs.calendar as HTMLDivElement).focus()
-      })
+      this.focusElement()
     }
   }
 
   decrementMonth(focus?: boolean) {
     this.date = new Date(this.year, this.month - 1)
     this.monthDirection = -1
-
     if (focus) {
-      this.$nextTick(() => {
+      this.focusElement()
+    }
+  }
+
+  focusElement() {
+    this.$nextTick(() => {
         ;(this.$refs.calendar as HTMLDivElement).focus()
       })
-    }
   }
 
   isToday(date: number, month: number, year: number): boolean {
