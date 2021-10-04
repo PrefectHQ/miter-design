@@ -5,7 +5,7 @@
     <Radio
       v-for="(state, i) in states"
       :key="i"
-      class="my-2"
+      class="d-inline-block my-2"
       name="button-group"
       :disabled="state == 'disabled'"
       :label="i"
