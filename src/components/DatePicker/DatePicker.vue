@@ -27,7 +27,9 @@
         <i class="pi pi-arrow-right-s-line" />
       </button>
 
-      <div data-test="month" class="month-title ml-2"> {{ displayMonth }} {{ year }} </div>
+      <div data-test="month" class="month-title ml-2">
+        {{ displayMonth }} {{ year }}
+      </div>
 
       <a
         v-if="showToday"

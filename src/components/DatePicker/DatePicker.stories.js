@@ -23,6 +23,5 @@ const Template = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-    modelValue: new Date()
+  modelValue: new Date()
 }
-
