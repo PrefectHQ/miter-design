@@ -63,10 +63,9 @@
             .reverse()"
           :key="day"
           class="day previous-month"
-          :class="{
-            ['day-' + getDayOfTheWeekPreviousMonth(day)]: true,
-            today: isToday(day, previousMonth, previousMonthYear)
-          }"
+         :class="['day-' + getDayOfTheWeekPreviousMonth(day), {
+            today: isToday(day, nextMonth, nextMonthYear)
+          }]
           @click="selectDate(day, previousMonth, previousMonthYear)"
         >
           {{ day }}
@@ -91,10 +90,9 @@
           v-for="day in 6 - getDayOfTheWeek(daysInMonth)"
           :key="day"
           class="day next-month"
-          :class="{
-            ['day-' + getDayOfTheWeekNextMonth(day)]: true,
+          :class="['day-' + getDayOfTheWeekNextMonth(day), {
             today: isToday(day, nextMonth, nextMonthYear)
-          }"
+          }]
           @click="selectDate(day, nextMonth, nextMonthYear)"
         >
           {{ day }}
@@ -150,9 +148,7 @@ export default class DatePicker extends Vue.with(Props) {
   date: Date = new Date(this.value_)
   monthDirection: number = 0
 
-  get today(): Date {
-    return new Date()
-  }
+  today = new Date()
 
   get previousMonthDate(): Date {
     return new Date(this.year, this.month - 1)
