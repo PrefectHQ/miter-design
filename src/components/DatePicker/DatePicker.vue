@@ -31,6 +31,7 @@
 
       <a
         v-if="showToday"
+        data-test="today"
         class="today-link"
         role="button"
         tabindex="0"
@@ -72,6 +73,7 @@
         <button
           v-for="day in daysInMonth"
           :key="day"
+          data-test="day"
           class="day"
           :class="{
             ['day-' + getDayOfTheWeek(day)]: true,
