@@ -126,7 +126,6 @@ const Component = Options
       this.date = new Date(val)
     }
   }
-  // components: { Timepicker }
 })
 
 /**
