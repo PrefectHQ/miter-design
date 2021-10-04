@@ -120,13 +120,12 @@ const Component = Options
       this.$emit('update:modelValue', val)
     },
     modelValue(val) {
-      console.log(this.date, 'date')
       this.date = new Date(val)
     },
     value(val) {
       this.date = new Date(val)
     }
-  },
+  }
   // components: { Timepicker }
 })
 
