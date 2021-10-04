@@ -106,8 +106,8 @@
         margin-top: 22px;
       "
     >
-      <Button color="primary">Cancel</Button>
-      <Button color="primary">Apply</Button>
+      <Button miter>Cancel</Button>
+      <Button miter color="primary">Apply</Button>
     </div>
   </div>
 </template>

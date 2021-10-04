@@ -8,18 +8,21 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          gap: 24px;
+          gap: 12px;
         "
       >
-        <i class="pi pi-time-line pi-l" :style="{ height: '32px', width: '32px', 'font-size': '32px' }" />
+        <i class="pi pi-time-line pi-l" :style="{ height: '32px', width: '32px', 'font-size': '32px', 'margin-right': '8px' }" />
         <NumberInput
           v-model="hourVal"
           :min="min"
           :max="hourMax"
           :step="step"
         />
+         <span>:</span>
         <NumberInput :min="min" :max="minMax" v-model="minVal" :step="step"  />
+        <span>-</span>
         <div class="number-input-wrapper" :class="classList">
+          
     <div>
       <input
         v-model="amPm"
