@@ -100,6 +100,19 @@
       </div>
     </transition>
     <Timepicker />
+    <div
+      class="timepicker-actions"
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        margin-top: 22px;
+      "
+    >
+      <Button miter>Cancel</Button>
+      <Button miter color="primary">Apply</Button>
+    </div>
   </div>
 </template>
 
