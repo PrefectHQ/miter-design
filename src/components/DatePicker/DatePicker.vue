@@ -148,9 +148,7 @@ export default class DatePicker extends Vue.with(Props) {
   date: Date = new Date(this.value_)
   monthDirection: number = 0
 
-  get today(): Date {
-    return new Date()
-  }
+  today = new Date()
 
   get previousMonthDate(): Date {
     return new Date(this.year, this.month - 1)
