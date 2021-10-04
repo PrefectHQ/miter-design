@@ -22,10 +22,12 @@
         ref="inputbox"
         data-test="default"
         :type="inputType"
+        @keyup="handleKeyup"
+        @keydown="handleKeydown"
+        @keypress="handleKeyPress"
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
         @mousedown="handleMouseDown"
-        @keydown.enter="handleKeydown"
         @focus="handleFocus"
         @blur="handleBlur"
         :placeholder="placeholder"
@@ -134,7 +136,7 @@ export default defineComponent({
       required: false
     }
   },
-  emits: ['update:modelValue', 'invalid'],
+  emits: ['update:modelValue', 'invalid', 'keyup', 'keypress', 'keydown'],
   data() {
     return {
       active: false as boolean,
@@ -162,6 +164,18 @@ export default defineComponent({
     }
   },
   methods: {
+    handleKeydown(e: Event): void {
+      if (this.disabled) return
+      this.$emit('keydown', e)
+    },
+    handleKeyup(e: KeyboardEvent) {
+      if (this.disabled) return
+      this.$emit('keyup', e)
+    },
+    handleKeypress(e: KeyboardEvent) {
+      if (this.disabled) return
+      this.$emit('keypress', e)
+    },
     handleInput(e: Event) {
       this.validate(e)
       this.$emit('update:modelValue', e.target?.value)
@@ -191,11 +205,6 @@ export default defineComponent({
       this.validate(e)
       this.hovered = false
       this.active = false
-    },
-    handleKeydown(e: Event): void {
-      if (this.disabled) return
-      this.validate(e)
-      e.target?.blur()
     },
     validate(e: Event) {
       const valid = e.target?.checkValidity()
