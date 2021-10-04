@@ -11,7 +11,7 @@
           gap: 24px;
         "
       >
-        <i class="pi pi-time-line pi-xl" />
+        <i class="pi pi-time-line pi-l" :style="{ height: '32px', width: '32px', 'font-size': '32px' }" />
         <NumberInput
           v-model="hourVal"
           :min="min"
@@ -30,11 +30,11 @@
         @keypress="handleKeyPress"
       />
       <span class="spin-button-container">
-        <button class="spin-button spin-button-up" @click="AMPM">
-          <i class="pi pi-arrow-up-s-fill pi-s" />
+        <button class="spin-button spin-button-up" @click="setAmPm">
+          <i class="pi pi-arrow-up-s-fill" />
         </button>
-        <button class="spin-button spin-button-down" @click="AMPM">
-          <i class="pi pi-arrow-down-s-fill pi-s" />
+        <button class="spin-button spin-button-down" @click="setAmPm">
+          <i class="pi pi-arrow-down-s-fill" />
         </button>
       </span>
     </div>
@@ -68,7 +68,7 @@ export default {
     }
   },
   methods: {
-    AMPM() {
+    setAmPm() {
       this.amPm == 'AM'? this.amPm = 'PM': this.amPm = 'AM'
     }
   }
