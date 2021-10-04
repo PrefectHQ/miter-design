@@ -124,7 +124,7 @@ class Props {
 const Component = Options
 @Component({
   watch: {
-    value_(val) {
+    innerValue(val) {
       this.$emit('update:modelValue', val)
     },
     modelValue(val) {
@@ -143,13 +143,13 @@ const Component = Options
  * @displayName DatePicker
  */
 export default class DatePicker extends Vue.with(Props) {
-  value_: Date = this.modelValue
+  innerValue: Date = this.modelValue
     ? new Date(this.modelValue)
     : this.value
     ? new Date(this.value)
     : new Date()
 
-  date: Date = new Date(this.value_)
+  date: Date = new Date(this.innerValue)
   monthDirection: number = 0
 
   today = new Date()
@@ -235,7 +235,7 @@ export default class DatePicker extends Vue.with(Props) {
     const month = this.today.getMonth()
     const year = this.today.getFullYear()
     this.setMonthDirection(month, year)
-    this.value_ = new Date(this.today)
+    this.innerValue = new Date(this.today)
   }
 
   incrementMonth(focus?: boolean) {
@@ -271,9 +271,9 @@ export default class DatePicker extends Vue.with(Props) {
 
   isSelectedDay(date: number, month: number, year: number): boolean {
     return (
-      this.value_.getMonth() == month &&
-      this.value_.getDate() == date &&
-      this.value_.getFullYear() == year
+      this.innerValue.getMonth() == month &&
+      this.innerValue.getDate() == date &&
+      this.innerValue.getFullYear() == year
     )
   }
 
@@ -307,7 +307,7 @@ export default class DatePicker extends Vue.with(Props) {
 
   selectDate(date: number, month: number, year: number) {
     this.setMonthDirection(month, year)
-    this.value_ = new Date(year, month, date)
+    this.innerValue = new Date(year, month, date)
   }
 }
 </script>
