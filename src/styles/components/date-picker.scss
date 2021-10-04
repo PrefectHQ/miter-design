@@ -1,0 +1,206 @@
+@use '../abstracts/variables';
+// @use '../abstracts/mixins';
+
+.calendar {
+  font-family: variables.$font--secondary;
+  font-size: 11px;
+  font-weight: bold;
+  max-width: 600px;
+  min-width: 280px;
+  overflow: hidden !important;
+  position: relative;
+  width: min-content;
+
+  border: 1px solid variables.$grey-20;
+  border-radius: 4px;
+  padding: 20px;
+
+  &:focus,
+  &:focus-within {
+    outline: none;  
+  }
+}
+
+.calendar-header {
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+  justify-content: start;
+  padding: 0 4px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+
+  .month-button {
+    background-color: transparent;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    transition: all 100ms;
+    padding: 4px;
+
+    &:hover,
+    &:focus {
+      background-color: variables.$grey-20;
+    }
+
+    &:active {
+      background-color: variables.$grey-40;
+    }
+  }
+
+  .month-title {
+    flex-grow: 1;
+  }
+
+  .today-link {
+    font-size: 11px;
+  }
+}
+
+$days-of-the-week: (
+  0: Su,
+  1: Mo,
+  2: Tu,
+  3: We,
+  4: Th,
+  5: Fr,
+  6: Sa
+);
+
+$grid-template-columns: [Su-start] 40px [Su-end] [Mo-start] 40px [Mo-end]
+  [Tu-start] 40px [Tu-end] [We-start] 40px [We-end] [Th-start] 40px [Th-end]
+  [Fr-start] 40px [Fr-end] [Sa-start] 40px [Sa-end];
+$grid-template-areas: 'Su Mo Tu We Th Fr Sa';
+
+.days-header-grid,
+.days-grid {
+  display: grid;
+  grid-template-columns: $grid-template-columns;
+  row-gap: 6px;
+  column-gap: 6px;
+}
+
+.days-header-grid {
+  grid-template-areas: $grid-template-areas;
+  grid-column: h;
+}
+
+.days-grid {
+  grid-template-areas:
+    'h h h h h h h'
+    $grid-template-areas;
+
+  &:focus,
+  &:focus-within {
+    outline: none;
+    border: 0;
+  }
+
+  .day,
+  .day-header {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: variables.$white;
+    user-select: none;
+    text-align: center;
+    margin: auto;
+    height: 40px;
+    width: 40px;
+  }
+
+  .day {
+    border: none;
+    color: variables.$text--primary;
+    cursor: pointer;
+    font-weight: bold;
+    outline: none;
+
+    &:hover,
+    &:focus {
+      background-color: variables.$grey-20;
+    }
+
+    &.today {
+      border: 2px solid variables.$primary;
+      color: variables.$primary;
+    }
+
+    &.selected-day {
+      color: variables.$white;
+      background-color: variables.$primary;
+    }
+
+    &.next-month,
+    &.previous-month {
+      color: variables.$text--secondary;
+
+      &:hover,
+      &:focus {
+        color: variables.$secondary-hover;
+        background-color: variables.$grey-20;
+      }
+
+      &.current-day {
+        border: 2px solid variables.$grey-40;
+      }
+    }
+  }
+
+  .day-header {
+    color: variables.$text--secondary;
+    font-weight: normal;
+  }
+
+  @each $num, $day in $days-of-the-week {
+    .day.day-#{$num},
+    .day-header.day-#{num} {
+      grid-column: $day;
+    }
+  }
+}
+
+$duration: 350ms;
+
+.slide-reverse-enter-active,
+.slide-reverse-leave-active,
+.slide-enter-active,
+.slide-leave-active {
+  position: relative;
+}
+
+.slide-reverse-enter-active {
+  animation: slide-out $duration;
+}
+.slide-reverse-leave-active {
+  animation: slide-in $duration reverse;
+  position: absolute;
+}
+
+.slide-enter-active {
+  animation: slide-in $duration;
+}
+
+.slide-leave-active {
+  animation: slide-out $duration reverse;
+  position: absolute;
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translate(-200%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translate(200%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}

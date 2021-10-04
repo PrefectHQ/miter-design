@@ -18,6 +18,10 @@
     <TabSection class="mt-10" />
     <Tag class="mt-10" />
     <TagGroup class="mt-10" />
+    <Avatar class="mt-10" />
+    <NumberInputs class="mt-10" />
+    <DatePickerSection class="mt-10" />
+    <Selects class="mt-10" />
     <TextAreas class="mt-10" />
     <Toasts class="mt-10" />
     <Tooltip class="mt-10" />
@@ -31,10 +35,12 @@ import Breakpoints from '../sections/Breakpoints.vue'
 import Buttons from '../sections/Buttons.vue'
 import Cards from '../sections/Cards.vue'
 import Checkboxes from '../sections/Checkboxes.vue'
+import DatePickerSection from '../sections/DatePickerSection.vue'
 import Inputs from '../sections/Inputs.vue'
 import Links from '../sections/Links.vue'
 import Popover from '../sections/Popover.vue'
 import Popups from '../sections/Popups.vue'
+import NumberInputs from '../sections/NumberInputs.vue'
 import Radios from '../sections/Radios.vue'
 import Toggles from '../sections/Toggles.vue'
 import Selects from '../sections/Selects.vue'
@@ -54,8 +60,10 @@ import Loader from '../sections/Loader.vue'
     Breakpoints,
     Cards,
     Checkboxes,
+    DatePickerSection,
     Inputs,
     Links,
+    NumberInputs,
     Popover,
     Popups,
     Radios,

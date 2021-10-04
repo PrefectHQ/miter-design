@@ -3,6 +3,7 @@ import Avatar from './components/Avatar'
 import Button from './components/Button'
 import Card from './components/Card'
 import Checkbox from './components/Checkbox'
+import  Datepicker  from './components/DatePicker'
 import Input from './components/Input'
 import Loader from './components/Loader'
 import Popover from './components/Popover'
@@ -33,6 +34,7 @@ const components = {
   Button,
   Card,
   Checkbox,
+  Datepicker,
   Input,
   Loader,
   Popover,
