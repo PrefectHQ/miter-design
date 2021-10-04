@@ -63,10 +63,9 @@
             .reverse()"
           :key="day"
           class="day previous-month"
-          :class="{
-            ['day-' + getDayOfTheWeekPreviousMonth(day)]: true,
-            today: isToday(day, previousMonth, previousMonthYear)
-          }"
+         :class="['day-' + getDayOfTheWeekPreviousMonth(day), {
+            today: isToday(day, nextMonth, nextMonthYear)
+          }]
           @click="selectDate(day, previousMonth, previousMonthYear)"
         >
           {{ day }}
