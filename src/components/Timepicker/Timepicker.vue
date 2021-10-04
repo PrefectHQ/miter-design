@@ -29,7 +29,7 @@
         class="ampm-input"
         :style="`width: ${this.width}px`"
         disabled
-        :aria-placeholder="AmPm"
+        aria-placeholder="AmPm"
         @keypress="handleKeyPress"
       />
       <span class="spin-button-container">

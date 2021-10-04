@@ -99,11 +99,13 @@
         </button>
       </div>
     </transition>
+    <Timepicker />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
+import Timepicker from '../Timepicker/Timepicker.vue'
 
 class Props {
   /**
@@ -129,8 +131,13 @@ const Component = Options
     value(val) {
       this.date = new Date(val)
     }
-  }
+  },
+  components: {
+  Timepicker
+}
 })
+
+
 
 /**
  * The DatePicker is meant to present a unified cross-browser date picking component, replacing native browser date pickers
