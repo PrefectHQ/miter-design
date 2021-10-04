@@ -1,4 +1,6 @@
 - Add Date Picker component - [#39](https://github.com/PrefectHQ/miter-design/pull/39)
+- Fixes an issue where the main content section wasn't correctly flexed - [#91](https://github.com/PrefectHQ/miter-design/pull/91)
+- Make sure input component emits native keypresses - [#90](https://github.com/PrefectHQ/miter-design/pull/90)
 - Fix input styling on FF and position: absolute for Radio Buttons - [#89](https://github.com/PrefectHQ/miter-design/pull/89)
 - Fix bug where selecor menus were below other relative elements - [#88](https://github.com/PrefectHQ/miter-design/pull/88)
 - Allow customizable height/width on selectors - [#88](https://github.com/PrefectHQ/miter-design/pull/88)
