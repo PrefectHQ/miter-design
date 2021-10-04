@@ -11,6 +11,7 @@
         class="month-button cursor-pointer"
         aria-label="Previous month"
         title="Previous month"
+        data-test="previous"
         @click="() => decrementMonth()"
       >
         <i class="pi pi-arrow-left-s-line" />
@@ -19,13 +20,14 @@
       <button
         class="month-button cursor-pointer"
         aria-label="Next month"
+        data-test="next"
         title="Next month"
         @click="() => incrementMonth()"
       >
         <i class="pi pi-arrow-right-s-line" />
       </button>
 
-      <div class="month-title ml-2"> {{ displayMonth }} {{ year }} </div>
+      <div data-test="month" class="month-title ml-2"> {{ displayMonth }} {{ year }} </div>
 
       <a
         v-if="showToday"
