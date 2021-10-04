@@ -1,5 +1,5 @@
 <template>
-  <div class="number-input-wrapper" :class="classList">
+  <div class="number-input-wrapper" data-test="outer" :class="classList">
     <div>
       <input
         v-model="value_"
@@ -8,6 +8,7 @@
         :max="max_"
         :min="min_"
         :step="step_"
+        data-test="default"
         :disabled="disabled"
         :placeholder="placeholder"
         :aria-placeholder="placeholder"
@@ -58,7 +59,8 @@ const Component = Options
 export default class NumberInput extends Vue.with(Props) {
   value_ = this.modelValue || this.value || 0
   get classList(): string[] {
-    return [...(this.disabled ? ['disabled'] : [])]
+    const list = [...(this.disabled ? ['disabled'] : [])]
+    return list
   }
 
   get min_(): string {
