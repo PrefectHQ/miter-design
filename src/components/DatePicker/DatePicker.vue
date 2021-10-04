@@ -1,8 +1,8 @@
 <template>
   <div
     class="calendar"
-    @keyup.right="() => incrementMonth(true)"
-    @keyup.left="() => decrementMonth(true)"
+    @keyup.right.prevent="() => incrementMonth(true)"
+    @keyup.left.prevent="() => decrementMonth(true)"
     tabindex="0"
     ref="calendar"
   >
