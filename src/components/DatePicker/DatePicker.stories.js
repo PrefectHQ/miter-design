@@ -1,4 +1,4 @@
-import DatePicker from './Datepicker.vue'
+import DatePicker from './DatePicker.vue'
 import { ref } from 'vue'
 
 export default {
