@@ -61,9 +61,12 @@
           v-for="day in daysFromPreviousMonth"
           :key="day"
           class="day previous-month"
-         :class="['day-' + getDayOfTheWeekPreviousMonth(day), {
-            today: isToday(day, nextMonth, nextMonthYear)
-          }]"
+          :class="[
+            'day-' + getDayOfTheWeekPreviousMonth(day),
+            {
+              today: isToday(day, nextMonth, nextMonthYear)
+            }
+          ]"
           @click="selectDate(day, previousMonth, previousMonthYear)"
         >
           {{ day }}
@@ -88,9 +91,12 @@
           v-for="day in 6 - getDayOfTheWeek(daysInMonth)"
           :key="day"
           class="day next-month"
-          :class="['day-' + getDayOfTheWeekNextMonth(day), {
-            today: isToday(day, nextMonth, nextMonthYear)
-          }]"
+          :class="[
+            'day-' + getDayOfTheWeekNextMonth(day),
+            {
+              today: isToday(day, nextMonth, nextMonthYear)
+            }
+          ]"
           @click="selectDate(day, nextMonth, nextMonthYear)"
         >
           {{ day }}
@@ -192,8 +198,8 @@ export default class DatePicker extends Vue.with(Props) {
 
   get daysFromPreviousMonth(): number[] {
     return Array.from({ length: this.getDayOfTheWeek(1) })
-            .map((e, i) => this.daysInPreviousMonth - i)
-            .reverse()
+      .map((e, i) => this.daysInPreviousMonth - i)
+      .reverse()
   }
 
   getDisplayDay(day: number): string {
@@ -228,12 +234,7 @@ export default class DatePicker extends Vue.with(Props) {
   resetDate(): void {
     const month = this.today.getMonth()
     const year = this.today.getFullYear()
-    this.monthDirection =
-      (month >= this.month && year >= this.year) ||
-      (month < this.month && year > this.year)
-        ? 1
-        : -1
-
+    this.setMonthDirection(month, year)
     this.value_ = new Date(this.today)
   }
 
@@ -256,8 +257,8 @@ export default class DatePicker extends Vue.with(Props) {
 
   focusElement() {
     this.$nextTick(() => {
-        ;(this.$refs.calendar as HTMLDivElement).focus()
-      })
+      ;(this.$refs.calendar as HTMLDivElement).focus()
+    })
   }
 
   isToday(date: number, month: number, year: number): boolean {
@@ -296,12 +297,16 @@ export default class DatePicker extends Vue.with(Props) {
     ).getDay()
   }
 
-  selectDate(date: number, month: number, year: number) {
+  setMonthDirection(month: number, year: number) {
     this.monthDirection =
       (month >= this.month && year >= this.year) ||
       (month < this.month && year > this.year)
         ? 1
         : -1
+  }
+
+  selectDate(date: number, month: number, year: number) {
+    this.setMonthDirection(month, year)
     this.value_ = new Date(year, month, date)
   }
 }
