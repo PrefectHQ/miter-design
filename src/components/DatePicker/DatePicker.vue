@@ -90,10 +90,9 @@
           v-for="day in 6 - getDayOfTheWeek(daysInMonth)"
           :key="day"
           class="day next-month"
-          :class="{
-            ['day-' + getDayOfTheWeekNextMonth(day)]: true,
+          :class="['day-' + getDayOfTheWeekNextMonth(day), {
             today: isToday(day, nextMonth, nextMonthYear)
-          }"
+          }]
           @click="selectDate(day, nextMonth, nextMonthYear)"
         >
           {{ day }}
