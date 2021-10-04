@@ -65,7 +65,7 @@
           class="day previous-month"
          :class="['day-' + getDayOfTheWeekPreviousMonth(day), {
             today: isToday(day, nextMonth, nextMonthYear)
-          }]
+          }]"
           @click="selectDate(day, previousMonth, previousMonthYear)"
         >
           {{ day }}
@@ -92,7 +92,7 @@
           class="day next-month"
           :class="['day-' + getDayOfTheWeekNextMonth(day), {
             today: isToday(day, nextMonth, nextMonthYear)
-          }]
+          }]"
           @click="selectDate(day, nextMonth, nextMonthYear)"
         >
           {{ day }}
