@@ -95,26 +95,12 @@
         </button>
       </div>
     </transition>
-    <Timepicker />
-    <div
-      class="timepicker-actions"
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 24px;
-        margin-top: 22px;
-      "
-    >
-      <Button miter>Cancel</Button>
-      <Button miter color="primary">Apply</Button>
-    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-import Timepicker from '../Timepicker/Timepicker.vue'
+
 class Props {
   /**
    * A reactive native JS DateTime Object (only the date portion is reactive)
@@ -134,13 +120,14 @@ const Component = Options
       this.$emit('update:modelValue', val)
     },
     modelValue(val) {
+      console.log(this.date, 'date')
       this.date = new Date(val)
     },
     value(val) {
       this.date = new Date(val)
     }
   },
-  components: { Timepicker }
+  // components: { Timepicker }
 })
 
 /**
@@ -243,7 +230,7 @@ export default class DatePicker extends Vue.with(Props) {
         ? 1
         : -1
 
-    this.date = new Date(this.today)
+    this.value_ = new Date(this.today)
   }
 
   incrementMonth(focus?: boolean) {
