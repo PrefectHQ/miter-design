@@ -58,9 +58,7 @@
         </div>
 
         <button
-          v-for="day in Array.from({ length: getDayOfTheWeek(1) })
-            .map((e, i) => daysInPreviousMonth - i)
-            .reverse()"
+          v-for="day in daysFromPreviousMonth"
           :key="day"
           class="day previous-month"
          :class="['day-' + getDayOfTheWeekPreviousMonth(day), {
@@ -190,6 +188,12 @@ export default class DatePicker extends Vue.with(Props) {
       'December'
     ]
     return months[this.month]
+  }
+
+  get daysFromPreviousMonth(): number[] {
+    return Array.from({ length: this.getDayOfTheWeek(1) })
+            .map((e, i) => this.daysInPreviousMonth - i)
+            .reverse()
   }
 
   getDisplayDay(day: number): string {
