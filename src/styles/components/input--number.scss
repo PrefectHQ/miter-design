@@ -1,126 +1,101 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.number-input-wrapper {
+.number-input {
   @include mixins.miter;
 
   display: inline-block;
   padding: 0;
+}
 
-  &.disabled {
+.number-input--disabled {
+  cursor: not-allowed;
+
+  .number-input__container {
+    background-color: variables.$disabled !important;
+    border-color: variables.$grey-40 !important;
     cursor: not-allowed;
-
-    > div {
-      background-color: variables.$disabled !important;
-      border-color: variables.$grey-40 !important;
-      cursor: not-allowed;
-    }
-
-    input[type='number'] {
-      cursor: not-allowed;
-    }
-
-    .spin-button-container {
-      pointer-events: none;
-
-      .spin-button {
-        color: variables.$grey-40;
-      }
-    }
   }
 
-  > div {
-    border: 1px solid variables.$grey-40;
-    border-radius: 5px;
-    display: flex;
-    padding: 0;
+  .number-input__input {
+    cursor: not-allowed;
+  }
+
+  .number-input__spin-buttons {
+    pointer-events: none;
+
+    .number-input__spin-button {
+      color: variables.$grey-40;
+    }
+  }
+}
+
+.number-input__container {
+  border: 1px solid variables.$grey-40;
+  border-radius: 5px;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  transition: all 150ms;
+  height: 40px;
+
+  &:focus,
+  &:focus-within,
+  &:hover {
+    border-color: variables.$primary;
+  }
+}
+
+.number-input__spin-buttons {
+  margin-right: 4px;
+  padding-top: 8px;
+}
+
+.number-input__spin-button {
+  background-color: transparent;
+  overflow: hidden;
+  border: none;
+  border-radius: 4px;
+  padding: 0 1px;
+  cursor: pointer;
+  display: flex;
+  outline: none;
+  align-items: center;
+  justify-content: center;
+  max-height: 12px;
+
+  &:hover,
+  &:focus {
+    background-color: variables.$grey-20;
+  }
+
+  &:active {
+    background-color: variables.$grey-40;
+  }
+}
+
+.number-input__input {
+  border: none;
+  border-radius: 4px;
+  display: block;
+  height: 100%;
+  outline: none;
+  padding: 8px;
+  flex-grow: 1;
+  width: 37px;
+
+  -moz-appearance: textfield;
+  appearance: textfield;
+  margin: 0;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
     margin: 0;
-    outline: none;
-    transition: all 150ms;
-    height: 40px;
-
-    &:focus,
-    &:focus-within,
-    &:hover {
-      border-color: variables.$primary;
-    }
   }
 
-  .spin-button-container {
-    margin-right: 4px;
-    padding-top: 8px;
-
-    .spin-button {
-      background-color: transparent;
-      border: none;
-      border-radius: 4px;
-      padding: 0 1px;
-      cursor: pointer;
-      display: flex;
-      outline: none;
-      align-items: center;
-    justify-content: center;
-      max-height: 12px;
-
-      &:hover,
-      &:focus {
-        background-color: variables.$grey-20;
-      }
-
-      &:active {
-        background-color: variables.$grey-40;
-      }
-    }
-  }
-
-  input {
-    border: none;
-    border-radius: 4px;
-    display: block;
-    height: 100%;
-    outline: none;
-    padding: 8px;
-    flex-grow: 1;
-    width: 37px;
-
-    -moz-appearance: textfield;
-    appearance: textfield;
-    margin: 0;
-
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    &:disabled {
-      background-color: transparent;
-    }
-  }
-
-  .ampm-input {
-    border: none;
-    border-radius: 4px;
-    display: block;
-    height: 100%;
-    outline: none;
-    padding: 8px;
-    flex-grow: 1;
-    width: 37px;
-
-    -moz-appearance: textfield;
-    appearance: textfield;
-    margin: 0;
-
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    &:disabled {
-      background-color: transparent;
-    }
-
+  &:disabled {
+    background-color: transparent;
   }
 }

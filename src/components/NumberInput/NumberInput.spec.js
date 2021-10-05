@@ -9,7 +9,7 @@ describe('Props', () => {
         modelValue: 'Test'
       }
     })
-    const input = wrapper.get('[data-test="default"]')
+    const input = wrapper.get('[data-test="input"]')
     expect(input.attributes('max')).toBe('5')
   })
 
@@ -20,7 +20,7 @@ describe('Props', () => {
         modelValue: 'Test'
       }
     })
-    const input = wrapper.get('[data-test="default"]')
+    const input = wrapper.get('[data-test="input"]')
     expect(input.attributes('min')).toBe('2')
   })
 
@@ -45,8 +45,8 @@ describe('Props', () => {
           modelValue: '3'
         }
       })
-      const inputElement = wrapper.get('[data-test="outer"]')
-      expect(inputElement.classes()).toContain('disabled')
+      const inputElement = wrapper.get('[data-test="component"]')
+      expect(inputElement.classes()).toContain('number-input--disabled')
     })
 
     test('adds the disabled attribute when disabled:true is passed as a prop', () => {
