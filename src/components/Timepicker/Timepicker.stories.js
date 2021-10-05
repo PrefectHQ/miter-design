@@ -25,3 +25,9 @@ export const Default = Template.bind({})
 Default.args = {
   modelValue: new Date()
 }
+
+export const Disabled = Template.bind({})
+Disabled.args = {
+  modelValue: new Date(),
+  disabled: true
+}

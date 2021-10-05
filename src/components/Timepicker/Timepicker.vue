@@ -12,6 +12,7 @@
           <input
             v-model="meridiem"
             class="ampm-input"
+            :class="classList"
             :aria-placeholder="meridiem"
             :disabled="disabled"
             @keydown.prevent="setMeridiem"
