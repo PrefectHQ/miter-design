@@ -118,7 +118,8 @@
       margin: 0;
     }
 
-    &:disabled {
+    &.disabled {
+      cursor: not-allowed;
       background-color: transparent;
     }
 

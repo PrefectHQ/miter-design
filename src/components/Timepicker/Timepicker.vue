@@ -1,18 +1,20 @@
 <template>
   <div class="time-picker">
     <i class="time-picker__icon pi pi-time-line" />
-    <fieldset class="time-picker__fieldset" :disabled="disabled">
-      <NumberInput v-model="hours" min="1" max="12" />
+    <fieldset class="time-picker__fieldset">
+      <NumberInput v-model="hours" min="1" max="12" :disabled="disabled" />
       <span class="time-picker__separator">:</span>
-      <NumberInput v-model="minutes" min="0" max="59" />
+      <NumberInput v-model="minutes" min="0" max="59" :disabled="disabled" />
       <span class="time-picker__separator">-</span>
       <!-- this should probably be abstracted into its own input. Leaving here for speed now -->
-      <div class="number-input-wrapper">
+      <div class="number-input-wrapper" :class="classList">
         <div>
           <input
             v-model="meridiem"
             class="ampm-input"
+            :classList="classList"
             :aria-placeholder="meridiem"
+            :disabled="disabled"
             @keydown.prevent="setMeridiem"
           />
           <span class="spin-button-container">
@@ -47,6 +49,10 @@ export default {
   },
   emits: ['update:modelValue'],
   computed: {
+    classList(): string[] {
+      const list = [...(this.disabled ? ['disabled'] : [])]
+      return list
+    },
     hours: {
       get() {
         const hours = this.modelValue.getHours()
