@@ -30,8 +30,7 @@
 </template>
 
 <script lang="ts">
-import NumberInput from '@/components/NumberInput/NumberInput.vue'
-
+import NumberInput from '../NumberInput/NumberInput.vue'
 export default {
   components: { 
     NumberInput 
