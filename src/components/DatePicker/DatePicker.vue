@@ -58,14 +58,15 @@
         </div>
 
         <button
-          v-for="day in Array.from({ length: getDayOfTheWeek(1) })
-            .map((e, i) => daysInPreviousMonth - i)
-            .reverse()"
+          v-for="day in daysFromPreviousMonth"
           :key="day"
           class="day previous-month"
-         :class="['day-' + getDayOfTheWeekPreviousMonth(day), {
-            today: isToday(day, nextMonth, nextMonthYear)
-          }]"
+          :class="[
+            'day-' + getDayOfTheWeekPreviousMonth(day),
+            {
+              today: isToday(day, nextMonth, nextMonthYear)
+            }
+          ]"
           @click="selectDate(day, previousMonth, previousMonthYear)"
         >
           {{ day }}
@@ -90,35 +91,23 @@
           v-for="day in 6 - getDayOfTheWeek(daysInMonth)"
           :key="day"
           class="day next-month"
-          :class="['day-' + getDayOfTheWeekNextMonth(day), {
-            today: isToday(day, nextMonth, nextMonthYear)
-          }]"
+          :class="[
+            'day-' + getDayOfTheWeekNextMonth(day),
+            {
+              today: isToday(day, nextMonth, nextMonthYear)
+            }
+          ]"
           @click="selectDate(day, nextMonth, nextMonthYear)"
         >
           {{ day }}
         </button>
       </div>
     </transition>
-    <Timepicker />
-    <div
-      class="timepicker-actions"
-      style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 24px;
-        margin-top: 22px;
-      "
-    >
-      <Button miter>Cancel</Button>
-      <Button miter color="primary">Apply</Button>
-    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-import Timepicker from '../Timepicker/Timepicker.vue'
 
 class Props {
   /**
@@ -135,7 +124,7 @@ class Props {
 const Component = Options
 @Component({
   watch: {
-    value_(val) {
+    innerValue(val) {
       this.$emit('update:modelValue', val)
     },
     modelValue(val) {
@@ -144,13 +133,8 @@ const Component = Options
     value(val) {
       this.date = new Date(val)
     }
-  },
-  components: {
-  Timepicker
-}
+  }
 })
-
-
 
 /**
  * The DatePicker is meant to present a unified cross-browser date picking component, replacing native browser date pickers
@@ -159,13 +143,13 @@ const Component = Options
  * @displayName DatePicker
  */
 export default class DatePicker extends Vue.with(Props) {
-  value_: Date = this.modelValue
+  innerValue: Date = this.modelValue
     ? new Date(this.modelValue)
     : this.value
     ? new Date(this.value)
     : new Date()
 
-  date: Date = new Date(this.value_)
+  date: Date = new Date(this.innerValue)
   monthDirection: number = 0
 
   today = new Date()
@@ -212,6 +196,12 @@ export default class DatePicker extends Vue.with(Props) {
     return months[this.month]
   }
 
+  get daysFromPreviousMonth(): number[] {
+    return Array.from({ length: this.getDayOfTheWeek(1) })
+      .map((e, i) => this.daysInPreviousMonth - i)
+      .reverse()
+  }
+
   getDisplayDay(day: number): string {
     const days: string[] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
     return days[day]
@@ -244,13 +234,8 @@ export default class DatePicker extends Vue.with(Props) {
   resetDate(): void {
     const month = this.today.getMonth()
     const year = this.today.getFullYear()
-    this.monthDirection =
-      (month >= this.month && year >= this.year) ||
-      (month < this.month && year > this.year)
-        ? 1
-        : -1
-
-    this.value_ = new Date(this.today)
+    this.setMonthDirection(month, year)
+    this.innerValue = new Date(this.today)
   }
 
   incrementMonth(focus?: boolean) {
@@ -272,8 +257,8 @@ export default class DatePicker extends Vue.with(Props) {
 
   focusElement() {
     this.$nextTick(() => {
-        ;(this.$refs.calendar as HTMLDivElement).focus()
-      })
+      ;(this.$refs.calendar as HTMLDivElement).focus()
+    })
   }
 
   isToday(date: number, month: number, year: number): boolean {
@@ -286,9 +271,9 @@ export default class DatePicker extends Vue.with(Props) {
 
   isSelectedDay(date: number, month: number, year: number): boolean {
     return (
-      this.value_.getMonth() == month &&
-      this.value_.getDate() == date &&
-      this.value_.getFullYear() == year
+      this.innerValue.getMonth() == month &&
+      this.innerValue.getDate() == date &&
+      this.innerValue.getFullYear() == year
     )
   }
 
@@ -312,13 +297,17 @@ export default class DatePicker extends Vue.with(Props) {
     ).getDay()
   }
 
-  selectDate(date: number, month: number, year: number) {
+  setMonthDirection(month: number, year: number) {
     this.monthDirection =
       (month >= this.month && year >= this.year) ||
       (month < this.month && year > this.year)
         ? 1
         : -1
-    this.value_ = new Date(year, month, date)
+  }
+
+  selectDate(date: number, month: number, year: number) {
+    this.setMonthDirection(month, year)
+    this.innerValue = new Date(year, month, date)
   }
 }
 </script>
