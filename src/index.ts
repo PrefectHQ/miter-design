@@ -3,9 +3,10 @@ import Avatar from './components/Avatar'
 import Button from './components/Button'
 import Card from './components/Card'
 import Checkbox from './components/Checkbox'
-import Datepicker  from './components/DatePicker'
+import Datepicker from './components/DatePicker'
 import Input from './components/Input'
 import Loader from './components/Loader'
+import NumberInput from './components/NumberInput'
 import Popover from './components/Popover'
 import Popup from './components/Popup'
 import Radio from './components/Radio'
@@ -38,6 +39,7 @@ const components = {
   Datepicker,
   Input,
   Loader,
+  NumberInput,
   Popover,
   Popup,
   Radio,
@@ -89,8 +91,10 @@ export { default as Avatar } from './components/Avatar'
 export { default as Button } from './components/Button'
 export { default as Card } from './components/Card'
 export { default as Checkbox } from './components/Checkbox'
+export { default as DatePicker } from './components/DatePicker'
 export { default as Input } from './components/Input'
 export { default as Loader } from './components/Loader'
+export { default as NumberInput } from './components/NumberInput'
 export { default as Popover } from './components/Popover'
 export { default as Popup } from './components/Popup'
 export { default as Radio } from './components/Radio'
