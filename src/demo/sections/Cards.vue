@@ -12,6 +12,13 @@
         class="mr-4 mt-4 d-inline-block"
         shadow="sm"
       >
+        <template v-slot:header>
+          <component :is="'CardActions'" class="pa-2">
+            <Button color="primary">Primary</Button>
+            <a class="ml-2">Skip for now</a>
+          </component>
+        </template>
+
         <div class="pa-2">
           <h2 v-skeleton="skeletonLoader">Overflow content</h2>
 
