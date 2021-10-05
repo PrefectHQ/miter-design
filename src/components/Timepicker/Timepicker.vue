@@ -2,9 +2,9 @@
   <div class="time-picker">
     <i class="time-picker__icon pi pi-time-line" />
     <fieldset class="time-picker__fieldset" :disabled="disabled">
-      <NumberInput v-model.number="hours" min="1" max="12" />
+      <NumberInput v-model="hours" min="1" max="12" />
       <span class="time-picker__separator">:</span>
-      <NumberInput v-model.number="minutes" min="0" max="59" />
+      <NumberInput v-model="minutes" min="0" max="59" />
       <span class="time-picker__separator">-</span>
       <!-- this should probably be abstracted into its own input. Leaving here for speed now -->
       <div class="number-input-wrapper">
@@ -52,12 +52,12 @@ export default {
       get() {
         const hours = this.modelValue.getHours()
         const adjustedForMeridiem = (hours + 11) % 12 + 1
-
         return adjustedForMeridiem
       },
       set(hours: number) {
+        if(!hours) return
         const date = new Date(this.modelValue.getTime())
-        let hoursAdjusted = hours || 1
+        let hoursAdjusted = hours
         
         if(hoursAdjusted === 12) {
           hoursAdjusted = 0
@@ -68,7 +68,6 @@ export default {
         }
 
         date.setHours(hoursAdjusted)
-
         this.$emit('update:modelValue', date)
       }
     },
@@ -78,9 +77,8 @@ export default {
       },
       set(minutes: number) {
         const date = new Date(this.modelValue.getTime())
-        const minutesAdjusted = minutes || 0
 
-        date.setMinutes(minutesAdjusted)
+        date.setMinutes(minutes)
 
         this.$emit('update:modelValue', date)
       }
