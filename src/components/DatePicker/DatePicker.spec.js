@@ -22,8 +22,8 @@ describe('V-Model', () => {
     })
     const button = wrapper.get('[data-test="day"]')
     await button.trigger('click')
-    expect(wrapper.emitted('update:modelValue')[0][0]).toEqual(
-      new Date('2021-10-01T04:00:00.000Z')
+    expect(wrapper.emitted('update:modelValue')[0][0].toString()).toContain(
+      'Oct 01'
     )
   })
 })
