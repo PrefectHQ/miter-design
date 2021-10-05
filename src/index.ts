@@ -3,6 +3,7 @@ import Avatar from './components/Avatar'
 import Button from './components/Button'
 import Card from './components/Card'
 import Checkbox from './components/Checkbox'
+import Datepicker  from './components/DatePicker'
 import Input from './components/Input'
 import Loader from './components/Loader'
 import Popover from './components/Popover'
@@ -16,6 +17,7 @@ import TagGroup from './components/TagGroup'
 import TextArea from './components/TextArea'
 import Toggle from './components/Toggle'
 import Tooltip from './components/Tooltip'
+import TimePicker from './components/TimePicker'
 
 /* Directives */
 import SkeletonDirective from './directives/Skeleton/Skeleton'
@@ -33,6 +35,7 @@ const components = {
   Button,
   Card,
   Checkbox,
+  Datepicker,
   Input,
   Loader,
   Popover,
@@ -45,7 +48,8 @@ const components = {
   TagGroup,
   TextArea,
   Toggle,
-  Tooltip
+  Tooltip,
+  TimePicker
 }
 
 const directives = {
@@ -98,3 +102,4 @@ export { default as TagGroup } from './components/TagGroup'
 export { default as TextArea } from './components/TextArea'
 export { default as Toggle } from './components/Toggle'
 export { default as Tooltip } from './components/Tooltip'
+export { default as TimePicker } from './components/TimePicker'
