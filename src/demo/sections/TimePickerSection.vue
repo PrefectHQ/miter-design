@@ -8,7 +8,7 @@
         <u>{{ date.toLocaleString() }}
         </u>
       </div>
-      <TimePicker v-model="date" class="hello-world" />
+      <TimePicker v-model="date" />
     </div>
   </div>
 </template>
