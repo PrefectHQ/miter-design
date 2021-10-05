@@ -7,18 +7,21 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: ''
+      url: 'https://www.figma.com/file/HJgj2eHBaqt1SAYruZNjQQ/Prefect?node-id=1080%3A4350'
     }
   }
 }
 
-const Template = (args) => ({
+const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
   components: { Timepicker },
   setup() {
     const modelValue = ref(args.modelValue)
-    return { args }
+    const disabled = ref(args.disabled || false)
+
+    return { ...args, modelValue, disabled }
   },
-  template: `<Timepicker v-bind="args"/>`
+  template: '<Timepicker v-model="modelValue" :disabled="disabled" />'
 })
 
 export const Default = Template.bind({})

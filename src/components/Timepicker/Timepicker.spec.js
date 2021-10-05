@@ -202,3 +202,53 @@ describe('sets hour, minute, and meridiem', () => {
     expect(meridiemDisplay.element.value).toBe('AM')
   })
 })
+
+describe('props', () => {
+  test('adds the disabled class when disabled:true is passed as a prop', () => {
+    const day = new Date('2021-10-05T01:18:22.660Z')
+    const wrapper = mount(Timepicker, {
+      props: {
+        modelValue: day,
+        disabled: true
+      }
+    })
+    expect(wrapper.get('.number-input-wrapper').classes()).toContain('disabled')
+    expect(wrapper.get('.ampm-input').classes()).toContain('disabled')
+  })
+
+  test("doesn't add the disabled class when disabled:false is passed as a prop", () => {
+    const day = new Date('2021-10-05T01:18:22.660Z')
+    const wrapper = mount(Timepicker, {
+      props: {
+        modelValue: day
+      }
+    })
+    expect(wrapper.get('.number-input-wrapper').classes()).not.toContain(
+      'disabled'
+    )
+    expect(wrapper.get('.ampm-input').classes()).not.toContain('disabled')
+  })
+
+  test('adds the disabled attribute when disabled:true is passed as a prop', () => {
+    const day = new Date('2021-10-05T01:18:22.660Z')
+    const wrapper = mount(Timepicker, {
+      props: {
+        modelValue: day,
+        disabled: true
+      }
+    })
+
+    expect(wrapper.get('.ampm-input').attributes('disabled')).toBeDefined()
+  })
+
+  test("doesn't pass the disabled attribute when disabled:false is passed as a prop", () => {
+    const day = new Date('2021-10-05T01:18:22.660Z')
+    const wrapper = mount(Timepicker, {
+      props: {
+        modelValue: day
+      }
+    })
+
+    expect(wrapper.get('.ampm-input').attributes('disabled')).toBeUndefined()
+  })
+})
