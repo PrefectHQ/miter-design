@@ -1,3 +1,6 @@
+- Fixes an issue where the main content section wasn't correctly flexed - [#91](https://github.com/PrefectHQ/miter-design/pull/91)
+- Make sure input component emits native keypresses - [#90](https://github.com/PrefectHQ/miter-design/pull/90)
+- Add Time Picker component - [#92](https://github.com/PrefectHQ/miter-design/pull/92)
 - Add Date Picker component - [#39](https://github.com/PrefectHQ/miter-design/pull/39)
 - Fixes an issue where the main content section wasn't correctly flexed - [#91](https://github.com/PrefectHQ/miter-design/pull/91)
 - Make sure input component emits native keypresses - [#90](https://github.com/PrefectHQ/miter-design/pull/90)

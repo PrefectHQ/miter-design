@@ -53,6 +53,9 @@ const Component = Options
       if (this.parsedValue < this.parsedMin)
         return (this.value_ = this.parsedMin)
       this.$emit('update:modelValue', val)
+    },
+    modelValue(val) {
+      this.value_ = this.modelValue
     }
   }
 })

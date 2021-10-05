@@ -1,92 +1,118 @@
 <template>
-  <div>
-    <hr />
-    <div style="padding: 20px">
-      <div
-        class="timepicker-container"
-        style="
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 12px;
-        "
-      >
-        <i class="pi pi-time-line pi-l" :style="{ height: '32px', width: '32px', 'font-size': '32px', 'margin-right': '8px' }" />
-        <NumberInput
-          v-model="hourVal"
-          :min="min"
-          :max="hourMax"
-          :step="step"
-        />
-         <span>:</span>
-        <NumberInput :min="min" :max="minMax" v-model="minVal" :step="step"  />
-        <span>-</span>
-        <div class="number-input-wrapper" :class="classList">
-          
-    <div>
-      <input
-        v-model="amPm"
-        class="ampm-input"
-        :style="`width: ${this.width}px`"
-        disabled
-        :aria-placeholder="AmPm"
-        @keypress="handleKeyPress"
-      />
-      <span class="spin-button-container">
-        <button class="spin-button spin-button-up" @click="setAmPm">
-          <i class="pi pi-arrow-up-s-fill" />
-        </button>
-        <button class="spin-button spin-button-down" @click="setAmPm">
-          <i class="pi pi-arrow-down-s-fill" />
-        </button>
-      </span>
-    </div>
-  </div>
+  <div class="time-picker">
+    <i class="time-picker__icon pi pi-time-line" />
+    <fieldset class="time-picker__fieldset" :disabled="disabled">
+      <NumberInput v-model="hours" min="1" max="12" />
+      <span class="time-picker__separator">:</span>
+      <NumberInput v-model="minutes" min="0" max="59" />
+      <span class="time-picker__separator">-</span>
+      <!-- this should probably be abstracted into its own input. Leaving here for speed now -->
+      <div class="number-input-wrapper">
+        <div>
+          <input
+            v-model="meridiem"
+            class="ampm-input"
+            :aria-placeholder="meridiem"
+            @keydown.prevent="setMeridiem"
+          />
+          <span class="spin-button-container">
+            <button class="spin-button spin-button-up" @click="setMeridiem">
+              <i class="pi pi-arrow-up-s-fill" />
+            </button>
+            <button class="spin-button spin-button-down" @click="setMeridiem">
+              <i class="pi pi-arrow-down-s-fill" />
+            </button>
+          </span>
+        </div>
       </div>
-    </div>
+    </fieldset>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import NumberInput from '@/components/NumberInput/NumberInput.vue'
 
 export default {
-  components: { NumberInput },
-  data() {
-    return {
-      disabled: false,
-      amPm: 'AM',
-      min: '0',
-      hourMax: '12',
-      step: '1',
-      hourVal: 0,
-      maxMin: '60',
-      minVal: 0
+  components: { 
+    NumberInput 
+  },
+  props: {
+    modelValue: {
+      type: Date,
+      required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:modelValue'],
-  watch: {
-    value(val) {
-      this.$emit('update:modelValue', val)
+  computed: {
+    hours: {
+      get() {
+        const hours = this.modelValue.getHours()
+        const adjustedForMeridiem = (hours + 11) % 12 + 1
+        return adjustedForMeridiem
+      },
+      set(hours: number) {
+        if(!hours) return
+        const date = new Date(this.modelValue.getTime())
+        let hoursAdjusted = hours
+        
+        if(hoursAdjusted === 12) {
+          hoursAdjusted = 0
+        }
+
+        if(date.getHours() >= 12) {
+          hoursAdjusted += 12
+        }
+
+        date.setHours(hoursAdjusted)
+        this.$emit('update:modelValue', date)
+      }
+    },
+    minutes: {
+      get() {
+        return this.modelValue.getMinutes().toLocaleString(undefined, { minimumIntegerDigits: 2 })
+      },
+      set(minutes: number) {
+        const date = new Date(this.modelValue.getTime())
+
+        date.setMinutes(minutes)
+
+        this.$emit('update:modelValue', date)
+      }
+    },
+    meridiem: {
+      get(): 'AM' | 'PM' {
+        const hours = this.modelValue.getHours()
+
+        return hours >= 12 ? 'PM' : 'AM'
+      },
+      set(value: 'AM' | 'PM') {
+        const date = new Date(this.modelValue.getTime())
+        const hours = this.modelValue.getHours()
+        
+        if(value == 'AM' && hours >= 12) {
+          date.setHours(hours - 12)
+        } else if(value == 'PM' && hours < 12) {
+          date.setHours(hours + 12)
+        }
+
+        this.$emit('update:modelValue', date)
+      }
     }
   },
   methods: {
-    setAmPm() {
-      this.amPm == 'AM'? this.amPm = 'PM': this.amPm = 'AM'
+    setMeridiem() {
+      this.meridiem = this.meridiem == 'AM' ? 'PM' : 'AM'
     }
   }
 }
 </script>
 
-<style>
-hr {
-  border: 1px solid #cecdd3;
-  margin: 5px -20px 14px;
-  border-bottom: none;
-}
-</style>
-
 <style lang="scss" scoped>
 @use '../../styles/components/input--number.scss';
+@use '../../styles/components/time-picker.scss';
 </style>
 
