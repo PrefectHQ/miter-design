@@ -1,10 +1,10 @@
 <template>
   <div class="time-picker">
     <i class="time-picker__icon pi pi-time-line" />
-    <fieldset class="time-picker__fieldset">
-      <NumberInput v-model="hours" min="1" max="12" :disabled="disabled" />
+    <fieldset class="time-picker__fieldset" :disabled="disabled">
+      <NumberInput v-model="hours" min="1" max="12" />
       <span class="time-picker__separator">:</span>
-      <NumberInput v-model="minutes" min="0" max="59" :disabled="disabled" />
+      <NumberInput v-model="minutes" min="0" max="59" />
       <span class="time-picker__separator">-</span>
       <MeridiemInput v-model="meridiem" />
     </fieldset>
@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts">
-import NumberInput from '@/components/NumberInput/NumberInput.vue'
-import MeridiemInput from '@/components/TimePicker/MeridiemInput.vue'
+import NumberInput from '../NumberInput/NumberInput.vue'
+import MeridiemInput from './MeridiemInput.vue'
 
 export default {
   components: {
@@ -32,10 +32,6 @@ export default {
   },
   emits: ['update:modelValue'],
   computed: {
-    classList(): string[] {
-      const list = [...(this.disabled ? ['disabled'] : [])]
-      return list
-    },
     hours: {
       get() {
         const hours = this.modelValue.getHours()
