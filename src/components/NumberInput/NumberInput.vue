@@ -1,25 +1,20 @@
 <template>
-  <div class="number-input-wrapper" data-test="outer" :class="classList">
-    <div>
+  <div class="number-input" data-test="component" :class="classes.root">
+    <div class="number-input__container">
       <input
-        v-model="value_"
-        :style="`width: ${this.width}px`"
+        v-model="value"
         type="number"
-        :max="max_"
-        :min="min_"
-        :step="step_"
-        data-test="default"
-        :disabled="disabled"
-        :placeholder="placeholder"
+        class="number-input__input"
+        v-bind="{ min, max, step, placeholder, disabled, required }"
+        data-test="input"
         :aria-placeholder="placeholder"
-        :required="required"
         @keypress="handleKeyPress"
       />
-      <span class="spin-button-container">
-        <button class="spin-button spin-button-up" @click="incrementValue">
+      <span class="number-input__spin-buttons">
+        <button class="number-input__spin-button" @click="incrementValue">
           <i class="pi pi-arrow-up-s-fill pi-s" />
         </button>
-        <button class="spin-button spin-button-down" @click="decrementValue">
+        <button class="number-input__spin-button" @click="decrementValue">
           <i class="pi pi-arrow-down-s-fill pi-s" />
         </button>
       </span>
@@ -28,7 +23,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options, prop } from 'vue-class-component'
+import { Vue, prop } from 'vue-class-component'
+import { safeParseFloat } from '../../utilities/parse'
+import { Component } from '../../utilities/vue-class-component'
 
 class Props {
   disabled = prop<Boolean>({ default: false })
@@ -39,71 +36,60 @@ class Props {
   placeholder = prop<string>({ required: false, default: null })
   required = prop<Boolean>({ default: false })
   modelValue = prop<number | string>({ required: false, default: 0 })
-  value = prop<number | string>({ required: false, default: 0 })
-  width = prop<String>({ default: '' })
+  defaultValue = prop<number | string>({ required: false, default: 0 })
 }
 
-const Component = Options
 @Component({
-  emits: ['update:modelValue'],
-  watch: {
-    value_(val) {
-      if (this.parsedValue > this.parsedMax)
-        return (this.value_ = this.parsedMax)
-      if (this.parsedValue < this.parsedMin)
-        return (this.value_ = this.parsedMin)
-      this.$emit('update:modelValue', val)
-    },
-    modelValue(val) {
-      this.value_ = this.modelValue
-    }
-  }
+  emits: ['update:modelValue']
 })
 export default class NumberInput extends Vue.with(Props) {
-  value_ = this.modelValue || this.value || 0
-  get classList(): string[] {
-    const list = [...(this.disabled ? ['disabled'] : [])]
-    return list
+
+  private get value(): number {
+    return safeParseFloat(this.modelValue) || safeParseFloat(this.defaultValue) || 0
   }
 
-  get min_(): string {
-    return typeof this.min !== 'string' ? this.min.toString() : this.min
+  private set value(value: number) {
+    if(value < this.parsedMin) {
+      this.$emit('update:modelValue', this.parsedMin)
+      return
+    }
+    if(value > this.parsedMax) {
+      this.$emit('update:modelValue', this.parsedMax)
+      return
+    }
+
+    this.$emit('update:modelValue', value)
   }
 
-  get max_(): string {
-    return typeof this.max !== 'string' ? this.max.toString() : this.max
-  }
-  get step_(): string {
-    return typeof this.step == 'number' ? this.step.toString() : this.step
-  }
-
-  get parsedMax(): number {
-    return typeof this.max == 'string' ? parseFloat(this.max) : this.max
+  private get classes() {
+    return {
+      root: {
+        'number-input--disabled': this.disabled || this.disabled === ''
+      }
+    }
   }
 
-  get parsedMin(): number {
-    return typeof this.min == 'string' ? parseFloat(this.min) : this.min
+  private get parsedMin(): number {
+    return safeParseFloat(this.min)
   }
 
-  get parsedStep(): number {
-    return typeof this.step == 'string' ? parseFloat(this.step) : this.step
+  private get parsedMax(): number {
+    return safeParseFloat(this.max)
   }
 
-  get parsedValue(): number {
-    return typeof this.value_ == 'string'
-      ? parseFloat(this.value_)
-      : this.value_
+  private get parsedStep(): number {
+    return safeParseFloat(this.step)
   }
 
-  incrementValue(): void {
-    this.value_ = this.parsedValue + this.parsedStep
+  public incrementValue(): void {
+    this.value += this.parsedStep
   }
 
-  decrementValue(): void {
-    this.value_ = this.parsedValue - this.parsedStep
+  public decrementValue(): void {
+    this.value -= this.parsedStep
   }
 
-  handleKeyPress(e: KeyboardEvent) {
+  private handleKeyPress(e: KeyboardEvent) {
     // Prevent non-numeric key presses
     // Note: this is necessary because not all browsers respect type=number inputs (looking at you firefox)
     if (!/[\-0-9]/i.test(e.key)) {
