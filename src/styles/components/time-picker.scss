@@ -24,14 +24,8 @@
   gap: 5px;
   align-items: center;
 
-  &[disabled=''] {
+  &:disabled {
     cursor: not-allowed;
-
-    :first-child {
-      background-color: variables.$disabled !important;
-      border-color: variables.$grey-40 !important;
-      pointer-events: none;
-    }
   }
 }
 

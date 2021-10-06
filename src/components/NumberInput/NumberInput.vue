@@ -1,11 +1,11 @@
 <template>
-  <div class="number-input" data-test="component" :class="classes.root">
-    <div class="number-input__container">
+  <div class="number-input" data-test="component">
+    <fieldset class="number-input__container" :disabled="disabled">
       <input
         v-model="value"
         type="number"
         class="number-input__input"
-        v-bind="{ min, max, step, placeholder, disabled, required }"
+        v-bind="{ min, max, step, placeholder, required }"
         data-test="input"
         :aria-placeholder="placeholder"
         @keypress="handleKeyPress"
@@ -18,7 +18,7 @@
           <i class="pi pi-arrow-down-s-fill pi-s" />
         </button>
       </span>
-    </div>
+    </fieldset>
   </div>
 </template>
 
@@ -59,14 +59,6 @@ export default class NumberInput extends Vue.with(Props) {
     }
 
     this.$emit('update:modelValue', value)
-  }
-
-  private get classes() {
-    return {
-      root: {
-        'number-input--disabled': this.disabled || this.disabled === ''
-      }
-    }
   }
 
   private get parsedMin(): number {

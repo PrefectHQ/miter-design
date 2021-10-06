@@ -8,28 +8,6 @@
   padding: 0;
 }
 
-.number-input--disabled {
-  cursor: not-allowed;
-
-  .number-input__container {
-    background-color: variables.$disabled !important;
-    border-color: variables.$grey-40 !important;
-    cursor: not-allowed;
-  }
-
-  .number-input__input {
-    cursor: not-allowed;
-  }
-
-  .number-input__spin-buttons {
-    pointer-events: none;
-
-    .number-input__spin-button {
-      color: variables.$grey-40;
-    }
-  }
-}
-
 .number-input__container {
   border: 1px solid variables.$grey-40;
   border-radius: 5px;
@@ -44,6 +22,12 @@
   &:focus-within,
   &:hover {
     border-color: variables.$primary;
+  }
+
+  &:disabled {
+    background-color: variables.$disabled !important;
+    border-color: variables.$grey-40 !important;
+    cursor: not-allowed;
   }
 }
 
@@ -73,6 +57,11 @@
   &:active {
     background-color: variables.$grey-40;
   }
+
+  &:disabled {
+    pointer-events: none;
+    color: variables.$grey-40;
+  }
 }
 
 .number-input__input {
@@ -84,6 +73,7 @@
   padding: 8px;
   flex-grow: 1;
   width: 37px;
+  background-color: transparent;
 
   -moz-appearance: textfield;
   appearance: textfield;
@@ -96,6 +86,6 @@
   }
 
   &:disabled {
-    background-color: transparent;
+    cursor: inherit;
   }
 }
