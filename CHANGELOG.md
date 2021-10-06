@@ -1,3 +1,4 @@
+- Refactor NumberInput to be simpler and Clean up TimePicker - [#96](https://github.com/PrefectHQ/miter-design/pull/96)
 - Fixes an issue where the main content section wasn't correctly flexed - [#91](https://github.com/PrefectHQ/miter-design/pull/91)
 - Make sure input component emits native keypresses - [#90](https://github.com/PrefectHQ/miter-design/pull/90)
 - Add Time Picker component - [#92](https://github.com/PrefectHQ/miter-design/pull/92)

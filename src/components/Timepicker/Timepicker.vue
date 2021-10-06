@@ -6,35 +6,19 @@
       <span class="time-picker__separator">:</span>
       <NumberInput v-model="minutes" min="0" max="59" />
       <span class="time-picker__separator">-</span>
-      <!-- this should probably be abstracted into its own input. Leaving here for speed now -->
-      <div class="number-input-wrapper">
-        <div>
-          <input
-            v-model="meridiem"
-            class="ampm-input"
-            :aria-placeholder="meridiem"
-            @keydown.prevent="setMeridiem"
-          />
-          <span class="spin-button-container">
-            <button class="spin-button spin-button-up" @click="setMeridiem">
-              <i class="pi pi-arrow-up-s-fill" />
-            </button>
-            <button class="spin-button spin-button-down" @click="setMeridiem">
-              <i class="pi pi-arrow-down-s-fill" />
-            </button>
-          </span>
-        </div>
-      </div>
+      <MeridiemInput v-model="meridiem" />
     </fieldset>
   </div>
 </template>
 
 <script lang="ts">
 import NumberInput from '@/components/NumberInput/NumberInput.vue'
+import MeridiemInput from '@/components/TimePicker/MeridiemInput.vue'
 
 export default {
   components: { 
-    NumberInput 
+    NumberInput,
+    MeridiemInput
   },
   props: {
     modelValue: {
@@ -52,10 +36,12 @@ export default {
       get() {
         const hours = this.modelValue.getHours()
         const adjustedForMeridiem = (hours + 11) % 12 + 1
+
         return adjustedForMeridiem
       },
       set(hours: number) {
         if(!hours) return
+        
         const date = new Date(this.modelValue.getTime())
         let hoursAdjusted = hours
         
@@ -101,11 +87,6 @@ export default {
 
         this.$emit('update:modelValue', date)
       }
-    }
-  },
-  methods: {
-    setMeridiem() {
-      this.meridiem = this.meridiem == 'AM' ? 'PM' : 'AM'
     }
   }
 }
