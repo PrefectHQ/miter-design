@@ -1,28 +1,40 @@
+@use '../abstracts/variables';
+
 .time-picker {
-    display: flex;
-    align-items: center;
-    appearance: none;
-    border: 0;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  align-items: center;
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.time-picker__icon {
+  height: 32px;
+  width: 32px;
+  font-size: 32px;
+  margin-right: 8px;
+}
+
+.time-picker__fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  &[disabled=''] {
+    cursor: not-allowed;
+
+    :first-child {
+      background-color: variables.$disabled !important;
+      border-color: variables.$grey-40 !important;
+      pointer-events: none;
+    }
   }
-  
-  .time-picker__icon {
-    height: 32px;
-    width: 32px;
-    font-size: 32px;
-    margin-right: 8px;
-  }
-  
-  .time-picker__fieldset {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    display: flex;
-    gap: 5px;
-    align-items: center;
-  }
-  
-  .time-picker__separator {
-    font-weight: 700;
-  }
+}
+
+.time-picker__separator {
+  font-weight: 700;
+}
