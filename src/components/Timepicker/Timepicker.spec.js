@@ -76,3 +76,30 @@ describe('sets hour, minute, and meridiem', () => {
     expect(Number(minuteDisplay.element.value)).toBe(19)
   })
 })
+
+describe('props', () => {
+  test('adds the disabled attribute when disabled:true is passed as a prop', () => {
+    const day = new Date('2021-10-05T01:18:22.660Z')
+    const wrapper = mount(Timepicker, {
+      props: {
+        modelValue: day,
+        disabled: true
+      }
+    })
+    expect(
+      wrapper.get('.time-picker__fieldset').attributes('disabled')
+    ).toBeDefined()
+  })
+
+  test("doesn't pass the disabled attribute when disabled:false is passed as a prop", () => {
+    const day = new Date('2021-10-05T01:18:22.660Z')
+    const wrapper = mount(Timepicker, {
+      props: {
+        modelValue: day
+      }
+    })
+    expect(
+      wrapper.get('.time-picker__fieldset').attributes('disabled')
+    ).toBeUndefined()
+  })
+})
