@@ -1,5 +1,5 @@
 <template>
-  <div class="number-input" data-test="component" :class="classes">
+  <div class="number-input" data-test="component" :class="classes.root">
     <div class="number-input__container">
       <input
         v-model="value"
@@ -63,7 +63,9 @@ export default class NumberInput extends Vue.with(Props) {
 
   private get classes() {
     return {
-      'number-input--disabled': this.disabled || this.disabled === ''
+      root: {
+        'number-input--disabled': this.disabled || this.disabled === ''
+      }
     }
   }
 
