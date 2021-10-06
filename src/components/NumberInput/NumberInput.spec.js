@@ -60,4 +60,34 @@ describe('Props', () => {
       expect(inputElement.attributes('disabled')).toBeDefined()
     })
   })
+
+  test('Max is emitted if exists and value is greater', async () => {
+    const max = 2
+    const wrapper = mount(NumberInput, {
+      props: {
+        modelValue: 1,
+        max
+      }
+    })
+    const input = wrapper.get('input')
+    
+    await input.setValue(3)
+
+    expect(wrapper.emitted('update:modelValue')[0][0]).toBe(max)
+  })
+
+  test('Min is emitted if exists and value is less', async () => {
+    const min = 2
+    const wrapper = mount(NumberInput, {
+      props: {
+        modelValue: 1,
+        min
+      }
+    })
+    const input = wrapper.get('input')
+    
+    await input.setValue(0)
+
+    expect(wrapper.emitted('update:modelValue')[0][0]).toBe(min)
+  })
 })

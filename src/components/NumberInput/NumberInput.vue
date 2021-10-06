@@ -49,7 +49,12 @@ export default class NumberInput extends Vue.with(Props) {
   }
 
   private set value(value: number) {
-    if(value < this.parsedMin || value > this.parsedMax) {
+    if(value < this.parsedMin) {
+      this.$emit('update:modelValue', this.parsedMin)
+      return
+    }
+    if(value > this.parsedMax) {
+      this.$emit('update:modelValue', this.parsedMax)
       return
     }
 
