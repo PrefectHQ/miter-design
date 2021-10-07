@@ -4,7 +4,7 @@
     <fieldset class="time-picker__fieldset" :disabled="disabled">
       <NumberInput v-model="hours" min="1" max="12" />
       <span class="time-picker__separator">:</span>
-      <NumberInput v-model="minutes" min="0" max="59" />
+      <NumberInput v-model="minutes" min="0" max="59" :options="{ minimumIntegerDigits: 2 }" />
       <span class="time-picker__separator">-</span>
       <MeridiemInput v-model="meridiem" />
     </fieldset>
@@ -59,9 +59,7 @@ export default {
     },
     minutes: {
       get() {
-        return this.modelValue
-          .getMinutes()
-          .toLocaleString(undefined, { minimumIntegerDigits: 2 })
+        return this.modelValue.getMinutes()
       },
       set(minutes: number) {
         const date = new Date(this.modelValue.getTime())

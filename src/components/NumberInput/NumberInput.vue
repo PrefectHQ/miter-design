@@ -2,7 +2,7 @@
   <div class="number-input" data-test="component">
     <fieldset class="number-input__container" :disabled="disabled">
       <input
-        v-model="value"
+        v-model="valueString"
         type="number"
         class="number-input__input"
         v-bind="{ min, max, step, placeholder, required }"
@@ -35,8 +35,9 @@ class Props {
   step = prop<number | string>({ default: 1 })
   placeholder = prop<string>({ required: false, default: null })
   required = prop<Boolean>({ default: false })
-  modelValue = prop<number | string>({ required: false, default: 0 })
+  modelValue = prop<number>({ required: false, default: 0 })
   defaultValue = prop<number | string>({ required: false, default: 0 })
+  options = prop<Intl.NumberFormatOptions>({ required: false, default: () => ({}) })
 }
 
 @Component({
@@ -44,21 +45,31 @@ class Props {
 })
 export default class NumberInput extends Vue.with(Props) {
 
-  private get value(): number {
-    return safeParseFloat(this.modelValue) || safeParseFloat(this.defaultValue) || 0
+  get valueNumber(): number {
+    return this.modelValue || safeParseFloat(this.defaultValue) || 0
   }
 
-  private set value(value: number) {
+  set valueNumber(value: number) {
     if(value < this.parsedMin) {
       this.$emit('update:modelValue', this.parsedMin)
       return
     }
+
     if(value > this.parsedMax) {
       this.$emit('update:modelValue', this.parsedMax)
       return
     }
 
     this.$emit('update:modelValue', value)
+
+  }
+  
+  private get valueString(): string {
+    return this.valueNumber?.toLocaleString(undefined, this.options) 
+  }
+
+  private set valueString(value: string) {
+    this.valueNumber = safeParseFloat(value) || 0
   }
 
   private get parsedMin(): number {
@@ -74,11 +85,11 @@ export default class NumberInput extends Vue.with(Props) {
   }
 
   public incrementValue(): void {
-    this.value += this.parsedStep
+    this.valueNumber += this.parsedStep
   }
 
   public decrementValue(): void {
-    this.value -= this.parsedStep
+    this.valueNumber -= this.parsedStep
   }
 
   private handleKeyPress(e: KeyboardEvent) {
