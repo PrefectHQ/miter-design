@@ -1,8 +1,8 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.popover__target {
-  display: inline-block;
+.popover {
+  display: flex;
 }
 
 .popover__container {
