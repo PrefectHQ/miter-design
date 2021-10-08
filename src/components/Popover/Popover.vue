@@ -48,15 +48,6 @@ class Props {
   emits: ['open'],
   components: {
     PopoverContent
-  },
-  watch: {
-    open(value: boolean) {
-      if(value) {
-        this.calculatePopoverPosition()
-      }
-
-      this.$emit('open', value)
-    }
   }
 })
 export default class Popover extends Vue.with(Props) {
@@ -87,6 +78,10 @@ export default class Popover extends Vue.with(Props) {
     } 
   }
 
+  public created() {
+    this.watchOpen()
+  }
+
   public togglePopover() {
     this.open = !this.open
   }
@@ -109,17 +104,15 @@ export default class Popover extends Vue.with(Props) {
     }
   }
 
-  private focusPopover() {
-    this.$nextTick(() => {
-      this.$refs.popover.focus()
+  private focusPopover(): Promise<void> {
+    return this.$nextTick(() => {
+        this.$refs.popover.focus()
     })
   }
 
-  private calculatePopoverPosition() {
-    this.$nextTick(() => {
+  private calculatePopoverPosition(): Promise<void> {
+    return this.$nextTick(() => {
       this.popoverPositionStyles = calculatePopoverPosition(this.position, this.$refs.trigger, this.$refs.popover);
-
-      this.focusPopover()
     })
   }
 
@@ -156,6 +149,17 @@ export default class Popover extends Vue.with(Props) {
       this.closePopover()
       this.focustrigger()
     }
+  }
+
+  private watchOpen() {
+    this.$watch(() => this.open, async (open: boolean) => {
+      if(open) {
+        await this.calculatePopoverPosition()
+        await this.focusPopover()
+      }
+
+      this.$emit('open', open)
+    })
   }
 
 }
