@@ -38,11 +38,6 @@ import { getFirstTabbableElement, getLastTabbableElement } from '../../utilities
 import PopoverContent from './PopoverContent.vue'
 import { calculatePopoverPosition, PopoverPositionStyles } from './getPosition'
 
-interface popoverPositionStyleObject {
-  left?: string | undefined
-  top?: string | undefined
-}
-
 class Props {
   position = prop<'top' | 'right' | 'bottom' | 'left'>({ required: true, default: 'top' })
   title = prop<string>({ required: false, default: '' })
