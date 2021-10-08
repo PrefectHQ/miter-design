@@ -5,7 +5,7 @@ import PopoverContent from './PopoverContent'
 
 describe('Arrow', () => {
   /* 
-  this test is purposefully at the top because of the class check fails if
+  this test is purposefully at the top because the class check fails if
   this test is the 4th or greater test in the file. No idea why.
   The arrow ends up being found twice but the first instance only 
   has default bindings. findAll()[1] would have the correct content.
