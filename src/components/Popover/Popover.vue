@@ -87,15 +87,15 @@ export default class Popover extends Vue.with(Props) {
     } 
   }
 
-  private togglePopover() {
+  public togglePopover() {
     this.open = !this.open
   }
 
-  private openPopover() {
+  public openPopover() {
     this.open = true
   }
 
-  private closePopover() {
+  public closePopover() {
     this.open = false
   }
 
