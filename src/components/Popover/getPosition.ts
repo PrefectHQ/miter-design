@@ -23,8 +23,6 @@ export function calculatePopoverPosition(
   const popoverRect = popover.getBoundingClientRect()
   const containerRect = container.getBoundingClientRect()
 
-  console.log({ target, container, popover })
-
   switch(placement) {
     case 'top':
       return top(targetRect, popoverRect, containerRect)
@@ -56,8 +54,6 @@ function top(target: DOMRect, popover: DOMRect, container: DOMRect): PopoverPosi
 function right(target: DOMRect, popover: DOMRect, container: DOMRect): PopoverPositionStyles {
   const top = target.top - container.top - 0.25 * popover.height + target.height / 2 + arrow.height / 2
   const left = target.left - container.left + target.width + arrow.width
-
-  console.log({target, container, popover})
 
   return { 
     left: toPixels(left), 
