@@ -1,10 +1,10 @@
+import { Pixels, toPixels } from "../../utilities/units"
+
 export type PopoverPlacement = 'top' | 'right' | 'bottom' | 'left'
 
-export type PopoverPositionValue = `${number}px`
-
 export type PopoverPositionStyles = {
-  left?: PopoverPositionValue,
-  top?: PopoverPositionValue
+  left?: Pixels,
+  top?: Pixels
 }
 
 const arrow = {
@@ -35,10 +35,6 @@ export function calculatePopoverPosition(
     default:
       return {}
   }
-}
-
-function toPixels(value: number): PopoverPositionValue {
-  return `${value}px`
 }
 
 function top(target: DOMRect, popover: DOMRect, container: DOMRect): PopoverPositionStyles {
