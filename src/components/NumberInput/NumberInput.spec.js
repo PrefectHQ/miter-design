@@ -38,25 +38,14 @@ describe('Props', () => {
   })
 
   describe('disabled state', () => {
-    test('adds the disabled class when disabled:true is passed as a prop', () => {
+    test('adds the disabled attribute when disabled:true is set', () => {
       const wrapper = mount(NumberInput, {
         props: {
           disabled: true,
           modelValue: '3'
         }
       })
-      const inputElement = wrapper.get('[data-test="component"]')
-      expect(inputElement.classes()).toContain('number-input--disabled')
-    })
-
-    test('adds the disabled attribute when disabled:true is passed as a prop', () => {
-      const wrapper = mount(NumberInput, {
-        props: {
-          disabled: true,
-          modelValue: '3'
-        }
-      })
-      const inputElement = wrapper.get('input')
+      const inputElement = wrapper.get('.number-input__container')
       expect(inputElement.attributes('disabled')).toBeDefined()
     })
   })

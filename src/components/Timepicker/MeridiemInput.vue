@@ -1,10 +1,10 @@
 <template>
-  <div class="number-input" :class="classes">
-    <div class="number-input__container">
+  <div class="number-input">
+    <fieldset class="number-input__container" :disabled="disabled">
       <input
         v-model="meridiem"
         class="number-input__input"
-        v-bind="{ disabled, required }"
+        :required="required"
         :aria-placeholder="meridiem"
         @keydown="keydown"
       />
@@ -16,7 +16,7 @@
           <i class="pi pi-arrow-down-s-fill pi-s" />
         </button>
       </span>
-    </div>
+    </fieldset>
   </div>
 </template>
 
@@ -42,12 +42,6 @@ export default class MeridiemInput extends Vue.with(Props) {
 
   private set meridiem(value) {
     this.$emit('update:modelValue', value)
-  }
-
-  private get classes() {
-    return {
-      'number-input--disabled': this.disabled || this.disabled === ''
-    }
   }
 
   private keydown(event: KeyboardEvent) {

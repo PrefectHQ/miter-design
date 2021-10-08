@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, ref } from 'vue'
 import TimePicker from '@/components/TimePicker/TimePicker.vue'
 
 export default defineComponent({

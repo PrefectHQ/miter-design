@@ -4,7 +4,7 @@
     <fieldset class="time-picker__fieldset" :disabled="disabled">
       <NumberInput v-model="hours" min="1" max="12" />
       <span class="time-picker__separator">:</span>
-      <NumberInput v-model="minutes" min="0" max="59" />
+      <NumberInput v-model="minutes" min="0" max="59" :options="{ minimumIntegerDigits: 2 }" />
       <span class="time-picker__separator">-</span>
       <MeridiemInput v-model="meridiem" />
     </fieldset>
@@ -12,11 +12,11 @@
 </template>
 
 <script lang="ts">
-import NumberInput from '@/components/NumberInput/NumberInput.vue'
-import MeridiemInput from '@/components/TimePicker/MeridiemInput.vue'
+import NumberInput from '../NumberInput/NumberInput.vue'
+import MeridiemInput from './MeridiemInput.vue'
 
 export default {
-  components: { 
+  components: {
     NumberInput,
     MeridiemInput
   },
@@ -35,21 +35,21 @@ export default {
     hours: {
       get() {
         const hours = this.modelValue.getHours()
-        const adjustedForMeridiem = (hours + 11) % 12 + 1
+        const adjustedForMeridiem = ((hours + 11) % 12) + 1
 
         return adjustedForMeridiem
       },
       set(hours: number) {
-        if(!hours) return
-        
+        if (!hours) return
+
         const date = new Date(this.modelValue.getTime())
         let hoursAdjusted = hours
-        
-        if(hoursAdjusted === 12) {
+
+        if (hoursAdjusted === 12) {
           hoursAdjusted = 0
         }
 
-        if(date.getHours() >= 12) {
+        if (date.getHours() >= 12) {
           hoursAdjusted += 12
         }
 
@@ -59,7 +59,7 @@ export default {
     },
     minutes: {
       get() {
-        return this.modelValue.getMinutes().toLocaleString(undefined, { minimumIntegerDigits: 2 })
+        return this.modelValue.getMinutes()
       },
       set(minutes: number) {
         const date = new Date(this.modelValue.getTime())
@@ -78,10 +78,10 @@ export default {
       set(value: 'AM' | 'PM') {
         const date = new Date(this.modelValue.getTime())
         const hours = this.modelValue.getHours()
-        
-        if(value == 'AM' && hours >= 12) {
+
+        if (value == 'AM' && hours >= 12) {
           date.setHours(hours - 12)
-        } else if(value == 'PM' && hours < 12) {
+        } else if (value == 'PM' && hours < 12) {
           date.setHours(hours + 12)
         }
 
@@ -96,4 +96,3 @@ export default {
 @use '../../styles/components/input--number.scss';
 @use '../../styles/components/time-picker.scss';
 </style>
-
