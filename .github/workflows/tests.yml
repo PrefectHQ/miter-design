@@ -25,7 +25,18 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      # reads the node version set in .nvmrc
+      - name: Read .nvmrc
+        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+        id: nvm
+
+      # installs a specific version of nodejs
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+
       # Runs a single command using the runners shell
+      - name: Install Modules
+        run: npm install
       - name: Run Tests
-      - run: npm install
-      - run: npm run test:unit
+        run: npm run test:unit

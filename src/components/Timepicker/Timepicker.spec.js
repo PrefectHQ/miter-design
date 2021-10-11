@@ -3,18 +3,18 @@ import Timepicker from './Timepicker.vue'
 
 describe('v-model', () => {
   test('displays v model hour', () => {
-    const day = new Date('2021-10-05T01:18:22.660Z')
+    const day = new Date('2021-10-05T01:18:22.660')
     const wrapper = mount(Timepicker, {
       props: {
         modelValue: day
       }
     })
     const hourDisplay = wrapper.findAll('.number-input__input')[0].element.value
-    expect(hourDisplay).toBe('6')
+    expect(hourDisplay).toBe('1')
   })
 
   test('displays v model minute', () => {
-    const day = new Date('2021-10-05T01:18:22.660Z')
+    const day = new Date('2021-10-05T01:18:22.660')
     const wrapper = mount(Timepicker, {
       props: {
         modelValue: day
@@ -27,7 +27,7 @@ describe('v-model', () => {
   })
 
   test('displays v model meridiem', () => {
-    const day = new Date('2021-10-05T01:18:22.660Z')
+    const day = new Date('2021-10-05T12:18:22.660')
     const wrapper = mount(Timepicker, {
       props: {
         modelValue: day
@@ -41,7 +41,7 @@ describe('v-model', () => {
 
 describe('sets hour, minute, and meridiem', () => {
   test('sets meridiem', async () => {
-    const day = new Date('2021-10-05T01:18:22.660Z')
+    const day = new Date('2021-10-05T01:18:22.660')
     const wrapper = mount(Timepicker, {
       props: {
         modelValue: day
@@ -53,7 +53,7 @@ describe('sets hour, minute, and meridiem', () => {
     expect(meridiemDisplay.element.value).toBe('AM')
   })
   test('sets hour', async () => {
-    const day = new Date('2021-10-05T01:18:22.660Z')
+    const day = new Date('2021-10-05T01:18:22.660')
     const wrapper = mount(Timepicker, {
       props: {
         modelValue: day
@@ -65,7 +65,7 @@ describe('sets hour, minute, and meridiem', () => {
   })
 
   test('sets minute', async () => {
-    const day = new Date('2021-10-05T01:18:22.660Z')
+    const day = new Date('2021-10-05T01:18:22.660')
     const wrapper = mount(Timepicker, {
       props: {
         modelValue: day
@@ -79,7 +79,7 @@ describe('sets hour, minute, and meridiem', () => {
 
 describe('props', () => {
   test('adds the disabled attribute when disabled:true is passed as a prop', () => {
-    const day = new Date('2021-10-05T01:18:22.660Z')
+    const day = new Date('2021-10-05T01:18:22.660')
     const wrapper = mount(Timepicker, {
       props: {
         modelValue: day,
@@ -92,7 +92,7 @@ describe('props', () => {
   })
 
   test("doesn't pass the disabled attribute when disabled:false is passed as a prop", () => {
-    const day = new Date('2021-10-05T01:18:22.660Z')
+    const day = new Date('2021-10-05T01:18:22.660')
     const wrapper = mount(Timepicker, {
       props: {
         modelValue: day
