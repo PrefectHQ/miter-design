@@ -49,7 +49,7 @@ describe('slots', () => {
         activate: `<button id="opener">Test</button>`
       }
     })
-    expect(wrapper.get('#opener').text()).toEqual('wrong')
+    expect(wrapper.get('#opener').text()).toEqual('Test')
   })
 
   test('loads the content slot', () => {
