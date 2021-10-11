@@ -68,7 +68,7 @@ export default class Popover extends Vue.with(Props) {
 
   get classes() {
     return {
-      arrow: `popover__arrow--${this.position} test`
+      arrow: `popover__arrow--${this.position}`
     }
   }
 
