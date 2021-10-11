@@ -78,6 +78,10 @@ export default class Popover extends Vue.with(Props) {
     } 
   }
 
+  get closed() {
+    return this.open == false
+  }
+
   public created() {
     this.watchOpen()
   }
@@ -118,6 +122,11 @@ export default class Popover extends Vue.with(Props) {
 
   private focusout(event: FocusEvent) {
     const related = event.relatedTarget as HTMLElement
+
+    if(this.closed) {
+      this.focustrigger()
+      return
+    }
 
     if(!this.$refs.popover.contains(related)) {
       this.closePopover()
