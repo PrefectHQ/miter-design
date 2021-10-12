@@ -39,7 +39,7 @@ import PopoverContent from './PopoverContent.vue'
 import { calculatePopoverPosition, PopoverPlacement, PopoverPositionStyles } from './getPosition'
 
 class Props {
-  position = prop<PopoverPlacement>({ required: true, default: 'top' })
+  position = prop<PopoverPlacement>({ default: 'top' })
   title = prop<string>({ required: false, default: '' })
   to = prop<string>({ required: false, default: 'body' })
 }
