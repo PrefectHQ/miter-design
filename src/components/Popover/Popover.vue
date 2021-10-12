@@ -46,6 +46,7 @@ class Props {
 
 @Component({
   emits: ['open'],
+  name: 'Popover',
   components: {
     PopoverContent
   }
