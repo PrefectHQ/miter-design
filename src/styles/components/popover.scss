@@ -6,8 +6,6 @@
 }
 
 .popover__container {
-  @include mixins.miter;
-
   background-color: variables.$white;
   outline: none;
   position: absolute;
