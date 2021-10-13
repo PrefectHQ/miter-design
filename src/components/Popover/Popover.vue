@@ -6,25 +6,23 @@
     <teleport v-if="open" :to="to">
       <PopoverContent>
           <div
-            tabindex="0"
-            class="popover__container"
-            ref="popover"
+            class="popover__content"
+            :class="classes.popover"
             :style="styles.popover"
+            ref="popover"
+            tabindex="0" 
             data-test="container"
             @focusout="focusout"
             @keydown="keydown"
           >
-            <div class="popover__content">
-              <header class="popover__header">
-                <slot name="header" v-bind="scope">
-                  {{ title }}
-                </slot>
-              </header>
-              <section class="popover__body">
-                <slot v-bind="scope"></slot>
-              </section>
-            </div>
-            <div class="popover__arrow" data-test="arrow" :class="classes.arrow"></div>
+            <header class="popover__header">
+              <slot name="header" v-bind="scope">
+                {{ title }}
+              </slot>
+            </header>
+            <section class="popover__body">
+              <slot v-bind="scope"></slot>
+            </section>
           </div>
       </PopoverContent>
     </teleport>
@@ -69,7 +67,7 @@ export default class Popover extends Vue.with(Props) {
 
   get classes() {
     return {
-      arrow: `popover__arrow--${this.position}`
+      popover: `popover__content--arrow-${this.position}`
     }
   }
 

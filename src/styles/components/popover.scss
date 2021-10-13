@@ -5,16 +5,54 @@
   display: flex;
 }
 
-.popover__container {
+.popover__content {
+  --arrow-size: 12px;
+
+  background-color: variables.$white;
+  border: 1px solid variables.$grey-20;
   outline: none;
   position: absolute;
   z-index: 2;
+  border-radius: 4px;
 }
 
-.popover__content {
-  background-color: variables.$white;
-  border: 1px solid variables.$grey-20;
-  border-radius: 4px;
+.popover__content:before {
+  content: '';
+  margin: auto;
+  position: absolute;
+  display: block;
+
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  transform-origin: 50%;
+
+  border: 1px solid;
+  border-color: variables.$grey-20 transparent transparent variables.$grey-20;
+  background-color: white;
+}
+
+.popover__content--arrow-top:before {
+  top: calc(100% - var(--arrow-size) / 2);
+  left: 50%;
+  transform: translate(-50%) rotate(225deg);
+}
+
+.popover__content--arrow-right:before {
+  bottom: 75%;
+  right: 100%;
+  transform: translate(50%) rotate(315deg);
+}
+
+.popover__content--arrow-bottom:before {
+  bottom: calc(100% - var(--arrow-size) / 2);
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+}
+
+.popover__content--arrow-left:before {
+  bottom: 75%;
+  left: calc(100% - var(--arrow-size));
+  transform: translate(50%) rotate(135deg);
 }
 
 .popover__header {
@@ -26,42 +64,4 @@
 
 .popover__body {
   padding: 10px;
-}
-
-.popover__arrow {
-  content: '';
-  margin: auto;
-  position: absolute;
-  display: block;
-
-  width: 12px;
-  height: 12px;
-
-  border: 1px solid;
-  border-color: variables.$grey-20 transparent transparent variables.$grey-20;
-  background-color: white;
-}
-
-.popover__arrow--top {
-  top: calc(100% - 7px);
-  left: 50%;
-  transform: translate(-50%) rotate(225deg);
-}
-
-.popover__arrow--right {
-  bottom: 75%;
-  right: 99.5%;
-  transform: translate(50%) rotate(315deg);
-}
-
-.popover__arrow--bottom {
-  bottom: calc(100% - 7px);
-  left: 50%;
-  transform: translate(-50%) rotate(45deg);
-}
-
-.popover__arrow--left {
-  bottom: 75%;
-  left: calc(100% - 13px);
-  transform: translate(50%) rotate(135deg);
 }
