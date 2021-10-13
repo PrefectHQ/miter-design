@@ -58,10 +58,11 @@ export default class Popover extends Vue.with(Props) {
 
   private open: boolean = false;
   private popoverPositionStyles: PopoverPositionStyles = {}
+  private openedWithFocus: boolean = false;
 
   private scope = {
-    toggle: () => this.togglePopover(),
-    open: () => this.openPopover(),
+    toggle: (event?: Event) => this.togglePopover(event),
+    open: (event?: Event) => this.openPopover(event),
     close: () => this.closePopover()
   }
 
@@ -85,16 +86,31 @@ export default class Popover extends Vue.with(Props) {
     this.watchOpen()
   }
 
-  public togglePopover() {
-    this.open = !this.open
+  public togglePopover(event?: Event) {
+    this.open ? this.closePopover() : this.openPopover(event)
   }
 
-  public openPopover() {
+  public openPopover(event?: Event) {
+    if(this.shouldSkipOpen(event)) {
+      this.openedWithFocus = false
+      return
+    }
+
+    this.handleOpenEvent(event)
+
     this.open = true
   }
 
   public closePopover() {
     this.open = false
+  }
+
+  private shouldSkipOpen(event?: Event): boolean {
+    return this.openedWithFocus && event?.type == 'focus'
+  }
+
+  private handleOpenEvent(event?: Event) {
+    this.openedWithFocus = event?.type == 'focus'
   }
 
   private focustrigger() {
