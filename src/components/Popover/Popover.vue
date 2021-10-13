@@ -170,8 +170,8 @@ export default class Popover extends Vue.with(Props) {
   private tab(event: KeyboardEvent) {
     const first = getFirstTabbableElement(this.$refs.popover)
     const last = getLastTabbableElement(this.$refs.popover)
-    
-    if(event.target == first && event.shiftKey || event.target == last) {
+
+    if(event.target == first && event.shiftKey || event.target == last && !event.shiftKey) {
       event.preventDefault()
 
       this.closePopover()
