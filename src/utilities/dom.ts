@@ -1,22 +1,31 @@
-export function getTabbableElements(element: HTMLElement) {
+export function getTabbableElements(element: HTMLElement, { sort = false }: { sort?: boolean} = {}): HTMLElement[] {
     const elements = [...element.querySelectorAll<HTMLElement>('*')]
     const tabbable = elements.filter(element => element.tabIndex >= 0)
+
+    if(sort) {
+        const descendingOrder = tabbable.sort((a, b) => b.tabIndex - a.tabIndex)
+        const ascendingButWithZerosAtEnd = descendingOrder.sort((a, b) => {
+            if(a.tabIndex === 0) return 0
+            
+            return a.tabIndex - b.tabIndex
+        })
+
+        return ascendingButWithZerosAtEnd;
+    }
 
     return tabbable
 }
 
-export function getFirstTabbableElement(element: HTMLElement) {
-    const elements = getTabbableElements(element);
-    const sorted = elements.sort((a, b) => a.tabIndex - b.tabIndex)
-    const first = sorted[0]
+export function getFirstTabbableElement(element: HTMLElement): HTMLElement | null {
+    const elements = getTabbableElements(element, { sort: true });
+    const first = elements[0]
 
-    return first
+    return first ?? null
 }
 
-export function getLastTabbableElement(element: HTMLElement) {
-    const elements = getTabbableElements(element);
-    const sorted = elements.sort((a, b) => a.tabIndex - b.tabIndex)
-    const last = sorted[sorted.length - 1]
+export function getLastTabbableElement(element: HTMLElement): HTMLElement | null {
+    const elements = getTabbableElements(element, { sort: true });
+    const last = elements[elements.length - 1]
 
-    return last
+    return last ?? null
 }
