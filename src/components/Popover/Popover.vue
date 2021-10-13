@@ -15,7 +15,7 @@
             @focusout="focusout"
             @keydown="keydown"
           >
-            <header class="popover__header">
+            <header class="popover__header" v-if="title.length || $slots.header">
               <slot name="header" v-bind="scope">
                 {{ title }}
               </slot>
