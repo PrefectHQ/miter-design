@@ -6,7 +6,7 @@
         <p class="ma-0"><i class="pi pi-user-smile-line pi-lg"></i> Flow Run Duration</p>
       </template>
       <template v-slot:trigger="{ toggle, open }">
-        <Button id="opener" @keydown.enter="toggle" @mouseover="open">
+        <Button @keydown.enter="toggle" @mouseover="open">
           Popover
         </Button>
       </template>

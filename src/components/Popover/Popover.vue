@@ -1,6 +1,6 @@
 <template>
   <div class="popover">
-    <div ref="trigger" class="popover__target">
+    <div ref="trigger" class="popover__target" :class="classes.target">
       <slot name="trigger" v-bind="scope" />
     </div>
     <teleport v-if="open" :to="to">
@@ -40,6 +40,7 @@ class Props {
   position = prop<PopoverPlacement>({ default: 'top' })
   title = prop<string>({ required: false, default: '' })
   to = prop<string>({ required: false, default: 'body' })
+  block = prop<boolean | string>({ default: false }) // string type added because of vue bug causes an empty string when using boolean attributes
 }
 
 @Component({
@@ -68,6 +69,9 @@ export default class Popover extends Vue.with(Props) {
 
   get classes() {
     return {
+      target: {
+        'popover__target--block': this.block || this.block === ''
+      },
       popover: `popover__content--arrow-${this.position}`
     }
   }
