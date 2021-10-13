@@ -125,7 +125,11 @@ export default class Popover extends Vue.with(Props) {
 
   private focusPopover(): Promise<void> {
     return this.$nextTick(() => {
-        this.$refs.popover.focus()
+        const first = getFirstTabbableElement(this.$refs.popover)
+
+        if(first) {
+          first.focus()
+        }
     })
   }
 
