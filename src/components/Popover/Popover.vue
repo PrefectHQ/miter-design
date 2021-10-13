@@ -10,9 +10,7 @@
             :class="classes.popover"
             :style="styles.popover"
             ref="popover"
-            tabindex="0" 
             data-test="container"
-            @focusout="focusout"
             @keydown="keydown"
           >
             <header class="popover__header" v-if="title.length || $slots.header">
@@ -88,6 +86,12 @@ export default class Popover extends Vue.with(Props) {
 
   public created() {
     this.watchOpen()
+
+    window.addEventListener('focusout', this.focusout)
+  }
+
+  public unmounted() {
+    window.removeEventListener('focusout', this.focusout)
   }
 
   public togglePopover(event?: Event) {
@@ -144,17 +148,22 @@ export default class Popover extends Vue.with(Props) {
   }
 
   private focusout(event: FocusEvent) {
-    const related = event.relatedTarget as HTMLElement
-
     if(this.closed) {
-      this.focustrigger()
       return
     }
 
-    if(!this.$refs.popover.contains(related)) {
+    const related = event.relatedTarget as HTMLElement
+    const inPopover = this.$refs.popover.contains(related)
+    const inTrigger = this.$refs.trigger.contains(related)
+
+    if(!inPopover) {
       this.closePopover()
-      this.focustrigger()
     }
+
+    if(!inTrigger && !inPopover) {
+      this.openedWithFocus = false
+    }
+
   }
 
   private keydown(event: KeyboardEvent) {
