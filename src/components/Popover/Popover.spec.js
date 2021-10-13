@@ -22,9 +22,9 @@ describe('Arrow', () => {
     await nextTick()
     
     const popupcontent = wrapper.findComponent(PopoverContent)
-    const arrow = popupcontent.find('[data-test="arrow"]')
+    const arrow = popupcontent.find('[data-test="container"]')
 
-    expect(arrow.classes()).toContain('popover__arrow--right')
+    expect(arrow.classes()).toContain('popover__content--arrow-right')
   })
 })
 
