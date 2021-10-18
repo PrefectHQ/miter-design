@@ -1,69 +1,286 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
+.textarea-dragging {
+  cursor: se-resize !important;
+}
+
+.textarea {
+  --border-radius: 3px;
+  --padding: 10px;
+  --border-width: 1px;
+  --border-color: #cacccf;
+  --miter: 8px;
+  width: 350px;
+  max-width: 100%;
+
+  &:focus-within {
+    --border-color: #{variables.$primary};
+  }
+
+  &:invalid {
+    --border-color: #{variables.$error};
+  }
+}
+
+.textarea {
+  border: 0;
+  padding: 0;
+  padding: 10px;
   font-family: variables.$font--secondary;
-  .label-wrapper {
-    padding-bottom: 16px;
-    .title {
-      color: variables.$black;
-      font-size: 15px;
-      padding-bottom: 0;
-    }
-    .subtitle {
-      color: variables.$grey-40;
-      font-size: 11px;
-      padding-bottom: 0;
-      margin-top: -10px;
-    }
+}
+
+.textarea__header {
+  margin-bottom: var(--m-2);
+  line-height: 1em;
+}
+
+.textarea__label {
+  display: block;
+  color: variables.$black;
+  font-size: 15px;
+}
+
+.textarea__subtitle {
+  display: block;
+  color: variables.$grey-40;
+  font-size: 11px;
+}
+
+.textarea__miter {
+  position: relative;
+  display: inline-block;
+  padding: 1px;
+  clip-path: polygon(
+    //outside top left
+    0% calc(0% + 3px),
+    calc(0% + 1px) calc(0% + 1px),
+    calc(0% + 3px) 0%,
+
+    // outside top right
+    calc(100% - 3px) 0%,
+    calc(100% - 1px) calc(0% + 1px),
+    100% calc(0% + 3px),
+
+    // outside miter bottom right
+    100% calc(100% - var(--miter)),
+    calc(100% - var(--miter)) 100%,
+
+    // outside bottom left
+    calc(0% + 3px) 100%,
+    calc(0% + 1px) calc(100% - 1px),
+    0% calc(100% - 3px)
+  );
+  
+ &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    background-color: var(--border-color);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: none;
+    clip-path: polygon(
+      //outside top left
+      0% calc(0% + 3px),
+      calc(0% + 1px) calc(0% + 1px),
+      calc(0% + 3px) 0%,
+
+      // outside top right
+      calc(100% - 3px) 0%,
+      calc(100% - 1px) calc(0% + 1px),
+      100% calc(0% + 3px),
+
+      // outside miter bottom right
+      100% calc(100% - var(--miter)),
+      calc(100% - var(--miter)) 100%,
+
+      // outside bottom left
+      calc(0% + 3px) 100%,
+      calc(0% + 1px) calc(100% - 1px),
+      0% calc(100% - 3px),
+
+      // move inside
+      0% 50%,
+      calc(0% + var(--border-width)) 50%,
+
+      // inside bottom left
+      calc(0% + var(--border-width)) calc(100% - var(--border-width) - 3px),
+      calc(0% + var(--border-width) + 1px) calc(100% - var(--border-width) - 1px),
+      calc(0% + var(--border-width) + 3px) calc(100% - var(--border-width)),
+
+      // inside miter bottom right
+      calc(100% - var(--border-width) * 0.5 - var(--miter)) calc(100% - var(--border-width)),
+      calc(100% - var(--border-width)) calc(100% - var(--border-width) * 0.5 - var(--miter)),
+
+      // inside top right
+      calc(100% - var(--border-width)) calc(0% + var(--border-width) + 3px),
+      calc(100% - var(--border-width) - 1px) calc(0% + var(--border-width) + 1px),
+      calc(100% - var(--border-width) - 3px) calc(0% + var(--border-width)),
+
+      // inside top left
+      calc(0% + var(--border-width) + 3px) calc(0% + var(--border-width)),
+      calc(0% + var(--border-width) + 1px) calc(0% + var(--border-width) + 1px),
+      calc(0% + var(--border-width)) calc(0% + var(--border-width) + 3px),
+
+      // move outside
+      calc(0% + var(--border-width)) 50%,
+      0% 50%,
+    );
   }
-  .textarea-wrapper {
-    @include mixins.miter(2, 1);
-    .textarea {
-      border: 1px solid variables.$grey-20;
-      width: auto;
-      border-radius: 4px;
-      padding: 8px 12px 4px 8px;
-      textarea {
-        width: 331px;
-        height: 117px;
-        padding: 8px;
-        border: none;
-        outline: none;
-        &:focus,
-        &:focus-visible {
-          outline: none !important; // needed for focus rings
-        }
-      }
-      ::placeholder,
-      ::-webkit-input-placeholder {
-        color: variables.$text--placeholder;
-      }
-      &.hovered {
-        ::placeholder {
-          color: variables.$text--primary;
-        }
-      }
-      &.focused {
-        border-color: variables.$primary;
-      }
-      &:invalid,
-      &.invalid {
-        border-color: variables.$error;
-      }
-    }
-    &.disabled {
-      * {
-        background-color: variables.$disabled;
-        cursor: not-allowed !important;
-      }
-    }
+}
+
+.textarea__input {
+  display: block;
+  border: 0;
+  background: transparent;
+  padding: 15px;
+  resize: none;
+  white-space: pre;
+  overflow-wrap: normal;
+  cursor: auto;
+  width: 350px;
+  height: 125px;
+
+  @supports not selector(::-webkit-scrollbar-track) {
+    padding-bottom: 0;
+    margin-bottom: 15px;
   }
-  .error-msg {
-    color: variables.$error;
-    font-size: 13px;
-    padding-top: 16px;
+
+  ::placeholder {
+    color: variables.$text--placeholder;
+  }
+
+  &:disabled {
+    background-color: variables.$disabled;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled) {
+
+    &:hover::placeholder {
+        color: variables.$text--primary;
+    }
+  
+    &:focus {
+      outline: none;
+      border-color: variables.$primary;
+    }
+
+  }
+
+  &:invalid {
+    border-color: variables.$error;
+  }
+
+  &::-webkit-scrollbar {
+    cursor: auto;
+    width: 15px;
+    height: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #FAFAFA;
+  }
+
+  &::-webkit-scrollbar-track:vertical {
+    border-top-right-radius: 2px;
+    border-left: 1px solid #cacccf;
+    margin-bottom: 15px;
+  }
+
+  &::-webkit-scrollbar-track:horizontal {
+    border-top: 1px solid #cacccf;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #C1C1C1;
+    border: 4px solid transparent;
+    border-right-width: 3px;
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+    cursor: pointer;
+  }
+}
+
+.textarea__input--overflow-x {
+
+  &::-webkit-scrollbar-track:horizontal {
+    margin-right: 0;
+  }
+
+}
+
+.textarea__input--overflow-y {
+
+  &::-webkit-scrollbar-track:vertical {
+    margin-bottom: 0;
+  }
+
+  @supports not selector(::-webkit-scrollbar-track) {
+    margin-bottom: 0;
+    padding-bottom: 10px;
+  }
+
+}
+
+.textarea__handle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  right: 1px;
+  bottom: 1px;
+  cursor: se-resize;
+  user-select: none;
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+
+  &:before, 
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    background-color: #979797;
+    height: 1px;
+    margin: 2px;
+    transform-origin: 0%;
+    right: 0;
+    transform: rotate(-45deg);
+  }
+
+  &:before {
+    width: 9px;
+    top: 6px;
+    right: 1px;
+  }
+
+  &:after {
+    width: 5px;
+    top: 7px;
+    right: 1px;
+  }
+}
+
+.textarea__handle--overflow-x,
+.textarea__handle--overflow-y {
+  border-top-color: #cacccf;
+  border-left-color: #cacccf;
+}
+
+.textarea__error {
+  display: none;
+  color: variables.$error;
+  font-size: 13px;
+  margin-top: var(--m-2);
+
+  .textarea:invalid & {
+    display: block;
   }
 }
