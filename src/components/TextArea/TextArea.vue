@@ -19,12 +19,22 @@
       </div>
     </template>
     <div class="textarea__miter">
-      <textarea v-model="value" ref="input" class="textarea__input" :class="classes.input" :style="styles.input" v-bind="{ id, placeholder, required, minLength, maxLength }" />
+      <textarea 
+        v-model="value" 
+        ref="input" 
+        class="textarea__input" 
+        :class="classes.input" 
+        :style="styles.input" 
+        v-bind="{ id, disabled, placeholder, required, minLength, maxLength }"
+        @input="validate"
+      />
       <div class="textarea__handle" :class="classes.handle" @mousedown.left="mousedown"></div>
     </div>
-    <div class="textarea__error">
-      <slot name="error" />
-    </div>
+    <template v-if="!valid">
+      <div class="textarea__error">
+        <slot name="error" />
+      </div>
+    </template>
   </fieldset>
 </template>
 
@@ -52,12 +62,13 @@ class props {
 
 @Component({
   name: 'TextArea',
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'invalid'],
   watch: {
     value: {
       immediate: true,
       handler() {
         this.checkForOverflow()
+        this.validate()
       }
     }
   }
@@ -74,6 +85,7 @@ export default class TextArea extends Vue.with(props) {
   private heightDragOffset: number = 0
   private overflowX: boolean = false
   private overflowY: boolean = false
+  private valid: boolean = true;
 
   get value() {
     return this.modelValue
@@ -131,14 +143,22 @@ export default class TextArea extends Vue.with(props) {
     this.width = width - this.widthDragOffset
     this.height = height - this.heightDragOffset
 
-    this.$nextTick(() => {
-      this.checkForOverflow()
+    this.checkForOverflow()
+  }
+
+  private validate() {
+    return this.$nextTick(() => {
+      this.valid = this.$refs.input.checkValidity()
+
+      this.$emit('invalid', this.valid)
     })
   }
 
   private checkForOverflow() {
-    this.overflowX = this.$refs.input.scrollHeight > this.$refs.input.clientHeight
-    this.overflowY = this.$refs.input.scrollWidth > this.$refs.input.clientWidth
+    return this.$nextTick(() => {
+      this.overflowX = this.$refs.input.scrollHeight > this.$refs.input.clientHeight
+      this.overflowY = this.$refs.input.scrollWidth > this.$refs.input.clientWidth
+    })
   }
 
 }

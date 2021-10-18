@@ -172,10 +172,6 @@
 
   }
 
-  &:invalid {
-    border-color: variables.$error;
-  }
-
   &::-webkit-scrollbar {
     cursor: auto;
     width: 15px;
