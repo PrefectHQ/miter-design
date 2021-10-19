@@ -6,20 +6,18 @@
 }
 
 .textarea {
-  --border-radius: 3px;
-  --padding: 10px;
-  --border-width: 1px;
-  --border-color: #cacccf;
-  --miter: 8px;
+  --background-color: #fff;
+  --cursor: default;
+
   width: 350px;
   max-width: 100%;
 
   &:focus-within {
-    --border-color: #{variables.$primary};
+    --miter-border-color: #{variables.$primary};
   }
 
   &:invalid {
-    --border-color: #{variables.$error};
+    --miter-border-color: #{variables.$error};
   }
 
   &:disabled {
@@ -53,91 +51,11 @@
 }
 
 .textarea__miter {
-  position: relative;
   display: inline-block;
-  padding: 1px;
   background-color: var(--background-color);
   cursor: var(--cursor);
-  clip-path: polygon(
-    //outside top left
-    0% calc(0% + 3px),
-    calc(0% + 1px) calc(0% + 1px),
-    calc(0% + 3px) 0%,
 
-    // outside top right
-    calc(100% - 3px) 0%,
-    calc(100% - 1px) calc(0% + 1px),
-    100% calc(0% + 3px),
-
-    // outside miter bottom right
-    100% calc(100% - var(--miter)),
-    calc(100% - var(--miter)) 100%,
-
-    // outside bottom left
-    calc(0% + 3px) 100%,
-    calc(0% + 1px) calc(100% - 1px),
-    0% calc(100% - 3px)
-  );
-  
- &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    background-color: var(--border-color);
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    pointer-events: none;
-    clip-path: polygon(
-      //outside top left
-      0% calc(0% + 3px),
-      calc(0% + 1px) calc(0% + 1px),
-      calc(0% + 3px) 0%,
-
-      // outside top right
-      calc(100% - 3px) 0%,
-      calc(100% - 1px) calc(0% + 1px),
-      100% calc(0% + 3px),
-
-      // outside miter bottom right
-      100% calc(100% - var(--miter)),
-      calc(100% - var(--miter)) 100%,
-
-      // outside bottom left
-      calc(0% + 3px) 100%,
-      calc(0% + 1px) calc(100% - 1px),
-      0% calc(100% - 3px),
-
-      // move inside
-      0% 50%,
-      calc(0% + var(--border-width)) 50%,
-
-      // inside bottom left
-      calc(0% + var(--border-width)) calc(100% - var(--border-width) - 3px),
-      calc(0% + var(--border-width) + 1px) calc(100% - var(--border-width) - 1px),
-      calc(0% + var(--border-width) + 3px) calc(100% - var(--border-width)),
-
-      // inside miter bottom right
-      calc(100% - var(--border-width) * 0.5 - var(--miter)) calc(100% - var(--border-width)),
-      calc(100% - var(--border-width)) calc(100% - var(--border-width) * 0.5 - var(--miter)),
-
-      // inside top right
-      calc(100% - var(--border-width)) calc(0% + var(--border-width) + 3px),
-      calc(100% - var(--border-width) - 1px) calc(0% + var(--border-width) + 1px),
-      calc(100% - var(--border-width) - 3px) calc(0% + var(--border-width)),
-
-      // inside top left
-      calc(0% + var(--border-width) + 3px) calc(0% + var(--border-width)),
-      calc(0% + var(--border-width) + 1px) calc(0% + var(--border-width) + 1px),
-      calc(0% + var(--border-width)) calc(0% + var(--border-width) + 3px),
-
-      // move outside
-      calc(0% + var(--border-width)) 50%,
-      0% 50%,
-    );
-  }
+  @include mixins.miter-bordered-rounded;
 }
 
 .textarea__input {
