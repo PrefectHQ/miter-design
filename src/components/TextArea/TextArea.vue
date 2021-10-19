@@ -1,5 +1,5 @@
 <template>
-  <fieldset class="textarea">
+  <fieldset class="textarea" v-bind="{ disabled }">
     <template v-if="label.length || subtitle.length || $slots.label || $slots.subtitle">
       <div class="textarea__header">
         <template v-if="label.length || $slots.label">
@@ -53,7 +53,7 @@ class props {
   id = prop<string>({ default: generateId })
   label = prop<string>({ default: '' })
   subtitle = prop<string>({ default: '' })
-  placeholder = prop<string>({ default: '' })
+  placeholder = prop<string>({ default: 'Write here...' })
   required = prop<boolean>({ default: false })
   disabled = prop<boolean>({ default: false })
   minLength = prop<number>({ default: null })
