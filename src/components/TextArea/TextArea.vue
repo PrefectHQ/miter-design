@@ -26,7 +26,6 @@
         :class="classes.input" 
         :style="styles.input" 
         v-bind="{ id, disabled, placeholder, required, minLength, maxLength }"
-        @input="validate"
       />
       <div class="textarea__handle" :class="classes.handle" @mousedown.left="mousedown"></div>
     </div>
