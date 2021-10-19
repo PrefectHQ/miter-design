@@ -21,6 +21,11 @@
   &:invalid {
     --border-color: #{variables.$error};
   }
+
+  &:disabled {
+    --background-color: #{variables.$disabled};
+    --cursor: not-allowed;
+  }
 }
 
 .textarea {
@@ -51,6 +56,8 @@
   position: relative;
   display: inline-block;
   padding: 1px;
+  background-color: var(--background-color);
+  cursor: var(--cursor);
   clip-path: polygon(
     //outside top left
     0% calc(0% + 3px),
@@ -155,8 +162,8 @@
   }
 
   &:disabled {
-    background-color: variables.$disabled;
-    cursor: not-allowed;
+    background-color: var(--background-color);
+    cursor: var(--cursor);
   }
 
   &:not(:disabled) {
