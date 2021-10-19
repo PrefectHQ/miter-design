@@ -19,7 +19,7 @@ const Template = (args) => ({
   setup() {
     return { args }
   },
-  template: `<TextArea v-bind="args" v-model="value"><template v-if="args.errorMessage" v-slot:errorMessage>${args.errorMessage}</template></TextArea>`
+  template: `<TextArea v-bind="args" v-model="value"><template v-if="args.error" v-slot:error>${args.error}</template></TextArea>`
 })
 
 export const Default = Template.bind({})
@@ -47,7 +47,7 @@ Error.args = {
   valid: false,
   required: true,
   label: 'TextArea Error',
-  errorMessage: "You've Made an Error!"
+  error: "You've Made an Error!"
 }
 
 export const NoTitle = Template.bind({})
