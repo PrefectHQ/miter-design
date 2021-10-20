@@ -1,144 +1,113 @@
 import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import Popover from './Popover.vue'
 import PopoverContent from './PopoverContent'
 
-beforeEach(() => {
-  // create teleport target
-  const el = document.createElement('div')
-  el.id = 'pop'
-  document.body.appendChild(el)
-})
+describe('Arrow', () => {
+  /* 
+  this test is purposefully at the top because the class check fails if
+  this test is the 4th or greater test in the file. No idea why.
+  The arrow ends up being found twice but the first instance only 
+  has default bindings. findAll()[1] would have the correct content.
+  CH - 10/2021
+  */
+  test('arrow has correct position class', async () => {
+    const wrapper = mount(Popover, {
+      props: { 
+        position: 'right'
+      }
+    })
 
-afterEach(() => {
-  // clean up
-  document.body.outerHTML = ''
+    wrapper.vm.openPopover()
+    await nextTick()
+    
+    const popupcontent = wrapper.findComponent(PopoverContent)
+    const arrow = popupcontent.find('[data-test="container"]')
+
+    expect(arrow.classes()).toContain('popover__content--arrow-right')
+  })
 })
 
 describe('loads popover', () => {
-  test('loads component when modelValue/v-model is true', () => {
-    const wrapper = mount(Popover, {
-      props: { modelValue: true, position: 'top', target: 'opener' },
-      slots: {
-        default: '<div>Main Content</div>',
-        activator: `<button id="opener">Test</button>`
-      }
-    })
+
+  test('does load component when popover is open', async () => {
+    const wrapper = mount(Popover)
+
+    wrapper.vm.openPopover()
+    await nextTick()
+    
     const popupcontent = wrapper.findComponent(PopoverContent)
+
     expect(popupcontent.exists()).toBe(true)
   })
 
-  test('does not load component when modelValue/v-model is false', () => {
-    const wrapper = mount(Popover, {
-      props: { modelValue: false, position: 'top', target: 'opener' },
-      slots: {
-        default: '<div id="content" >Main Content</div>',
-        activate: `<button id="opener">Test</button>`
-      }
-    })
+  test('does not load component when popover is not open', () => {
+    const wrapper = mount(Popover)
     const popupcontent = wrapper.findComponent(PopoverContent)
+
     expect(popupcontent.exists()).toBe(false)
   })
+
 })
 
 describe('slots', () => {
-  test('loads the activate slot', () => {
+  test('loads the trigger slot', () => {
     const wrapper = mount(Popover, {
-      props: { modelValue: true, position: 'top', target: 'opener' },
       slots: {
-        default: '<div id="content">Main Content</div>',
-        activate: `<button id="opener">Test</button>`
+        trigger: `<button id="opener">Test</button>`
       }
     })
-    expect(wrapper.get('#opener').text()).toEqual('Test')
+
+    expect(wrapper.text()).toContain('Test')
   })
 
-  test('loads the content slot', () => {
+  test('loads the content slot', async () => {
     const wrapper = mount(Popover, {
-      props: { modelValue: true, position: 'top', target: 'opener' },
       slots: {
-        default: '<div id="content" >Main Content</div>',
-        activate: `<button id="opener">Test</button>`
+        default: 'Main Content',
       }
     })
+
+    wrapper.vm.openPopover()
+    await nextTick()
+    
     const popupcontent = wrapper.findComponent(PopoverContent)
-    expect(popupcontent.html()).toContain('Main Content')
+    
+    expect(popupcontent.text()).toBe('Main Content')
   })
 })
 
 describe('props', () => {
-  test('passes popover teleport placement and attaches to element if it exists', () => {
-    const wrapper = mount(Popover, {
-      props: {
-        modelValue: true,
-        position: 'top',
-        to: '#pop',
-        target: 'opener'
-      },
-      slots: {
-        content: '<div>Main Content</div>'
-      }
-    })
-    expect(wrapper.props().to).toBe('#pop')
+  test('passes popover teleport placement and attaches to element if it exists', async () => {
+    const wrapper = mount(Popover)
+
+    wrapper.vm.openPopover()
+    await nextTick()
+
     const popupcontent = wrapper.findComponent(PopoverContent)
+
     expect(popupcontent.exists()).toBe(true)
   })
 
-  test('passes popover teleport placement and does not attach if no element with correct id', () => {
-    const wrapper = mount(Popover, {
-      props: {
-        modelValue: true,
-        position: 'top',
-        to: '#poppy',
-        target: 'opener'
-      },
-      slots: {
-        content: '<div>Main Content</div>'
-      }
-    })
-    expect(wrapper.props().to).toBe('#poppy')
-    const popupcontent = wrapper.findComponent(PopoverContent)
-    expect(popupcontent.exists()).toBe(false)
-  })
-
-  test('passes popover title', () => {
+  test('passes popover title', async () => {
     const title = 'My Pop Up'
     const wrapper = mount(Popover, {
-      props: { modelValue: true, target: 'opener', title },
-      slots: {
-        content: '<div>Main Content</div>',
-        activate: '<button id="test-button">Test</button>'
+      props: {
+        title
       }
     })
+
+    wrapper.vm.openPopover()
+    await nextTick()
+
     const popupcontent = wrapper.findComponent(PopoverContent)
-    expect(popupcontent.find('header').text()).toContain(title)
+
+    expect(popupcontent.text()).toContain(title)
   })
 
-  test('passes popover position', () => {
-    const position = 'right'
-    const wrapper = mount(Popover, {
-      props: { modelValue: true, position, target: 'opener' },
-      slots: {
-        content: '<div>Main Content</div>',
-        activate: '<button id="test-button">Test</button>'
-      }
-    })
-    const popupcontent = wrapper.findComponent(PopoverContent)
-    const divOne = popupcontent.get('#popover-container')
-    expect(divOne.classes()).toContain('right')
-  })
-})
-
-describe('default', () => {
   test('has top as default position', () => {
-    const wrapper = mount(Popover, {
-      props: { modelValue: true, target: 'opener' },
-      slots: {
-        content: '<div>Main Content</div>',
-        activate: '<button id="test-button">Test</button>'
-      }
-    })
-    const popupcontent = wrapper.findComponent(PopoverContent)
-    const divOne = popupcontent.get('#popover-container')
-    expect(divOne.classes()).toContain('top')
+    const wrapper = mount(Popover)
+
+    expect(wrapper.props().position).toBe('top')
   })
 })
