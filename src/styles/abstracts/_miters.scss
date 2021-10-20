@@ -1,0 +1,98 @@
+:root {
+  --miter-border-color: #cacccf;
+  --miter-border-width: 1px;
+  --miter-width: 8px;
+}
+
+* {
+    --miter-clip-path: polygon(
+        0% 0%,
+    
+        100% 0%,
+    
+        100% calc(100% - var(--miter-width)),
+        calc(100% - var(--miter-width)) 100%,
+    
+        0% 100%
+    );
+
+    --miter-clip-path-border: polygon(
+      0% 0%,
+      100% 0%,
+
+      100% calc(100% - var(--miter-width)),
+      calc(100% - var(--miter-width)) 100%,
+
+      0% 100%,
+
+      0% 50%,
+      calc(0% + var(--miter-border-width)) 50%,
+
+      calc(0% + var(--miter-border-width)) calc(100% - var(--miter-border-width)),
+
+      calc(100% - var(--miter-border-width) * 0.5 - var(--miter-width)) calc(100% - var(--miter-border-width)),
+      calc(100% - var(--miter-border-width)) calc(100% - var(--miter-border-width) * 0.5 - var(--miter-width)),
+
+      calc(100% - var(--miter-border-width)) calc(0% + var(--miter-border-width)),
+
+      calc(0% + var(--miter-border-width)) calc(0% + var(--miter-border-width)),
+
+      calc(0% + var(--miter-border-width)) 50%,
+      0% 50%
+    );
+
+    --miter-clip-path-rounded: polygon(
+      0% calc(0% + 3px),
+      calc(0% + 1px) calc(0% + 1px),
+      calc(0% + 3px) 0%,
+  
+      calc(100% - 3px) 0%,
+      calc(100% - 1px) calc(0% + 1px),
+      100% calc(0% + 3px),
+  
+      100% calc(100% - var(--miter-width)),
+      calc(100% - var(--miter-width)) 100%,
+  
+      calc(0% + 3px) 100%,
+      calc(0% + 1px) calc(100% - 1px),
+      0% calc(100% - 3px)
+    );
+
+    --miter-clip-path-border-rounded: polygon(
+      0% calc(0% + 3px),
+      calc(0% + 1px) calc(0% + 1px),
+      calc(0% + 3px) 0%,
+
+      calc(100% - 3px) 0%,
+      calc(100% - 1px) calc(0% + 1px),
+      100% calc(0% + 3px),
+
+      100% calc(100% - var(--miter-width)),
+      calc(100% - var(--miter-width)) 100%,
+
+      calc(0% + 3px) 100%,
+      calc(0% + 1px) calc(100% - 1px),
+      0% calc(100% - 3px),
+
+      0% 50%,
+      calc(0% + var(--miter-border-width)) 50%,
+
+      calc(0% + var(--miter-border-width)) calc(100% - var(--miter-border-width) - 3px),
+      calc(0% + var(--miter-border-width) + 1px) calc(100% - var(--miter-border-width) - 1px),
+      calc(0% + var(--miter-border-width) + 3px) calc(100% - var(--miter-border-width)),
+
+      calc(100% - var(--miter-border-width) * 0.5 - var(--miter-width)) calc(100% - var(--miter-border-width)),
+      calc(100% - var(--miter-border-width)) calc(100% - var(--miter-border-width) * 0.5 - var(--miter-width)),
+
+      calc(100% - var(--miter-border-width)) calc(0% + var(--miter-border-width) + 3px),
+      calc(100% - var(--miter-border-width) - 1px) calc(0% + var(--miter-border-width) + 1px),
+      calc(100% - var(--miter-border-width) - 3px) calc(0% + var(--miter-border-width)),
+
+      calc(0% + var(--miter-border-width) + 3px) calc(0% + var(--miter-border-width)),
+      calc(0% + var(--miter-border-width) + 1px) calc(0% + var(--miter-border-width) + 1px),
+      calc(0% + var(--miter-border-width)) calc(0% + var(--miter-border-width) + 3px),
+
+      calc(0% + var(--miter-border-width)) 50%,
+      0% 50%
+    );
+}

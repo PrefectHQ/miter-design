@@ -1,69 +1,183 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
+.textarea-dragging {
+  cursor: se-resize !important;
+}
+
+.textarea {
+  --background-color: #fff;
+  --cursor: default;
+  --handle-size: 16px;
+
+  width: 350px;
+  max-width: 100%;
+  font-size: 15px;
+
+  &:focus-within {
+    --miter-border-color: #{variables.$primary};
+  }
+
+  &:invalid {
+    --miter-border-color: #{variables.$error};
+  }
+
+  &:disabled {
+    --background-color: #{variables.$disabled};
+    --cursor: not-allowed;
+  }
+}
+
+.textarea {
+  border: 0;
+  padding: 0;
   font-family: variables.$font--secondary;
-  .label-wrapper {
-    padding-bottom: 16px;
-    .title {
-      color: variables.$black;
-      font-size: 15px;
-      padding-bottom: 0;
-    }
-    .subtitle {
-      color: variables.$grey-40;
-      font-size: 11px;
-      padding-bottom: 0;
-      margin-top: -10px;
-    }
+}
+
+.textarea__header {
+  margin-bottom: var(--m-2);
+  line-height: 1em;
+}
+
+.textarea__label {
+  display: block;
+  color: variables.$black;
+}
+
+.textarea__subtitle {
+  display: block;
+  color: variables.$grey-40;
+  font-size: 11px;
+}
+
+.textarea__miter {
+  background-color: var(--background-color);
+  cursor: var(--cursor);
+  width: 350px;
+
+  @include mixins.miter-bordered-rounded;
+}
+
+.textarea__input {
+  display: block;
+  border: 0;
+  background: transparent;
+  padding: var(--p-2);
+  resize: none;
+  white-space: pre;
+  overflow-wrap: normal;
+  cursor: auto;
+  width: 100%;
+  height: 125px;
+
+  @supports not selector(::-webkit-scrollbar-track) {
+    padding-bottom: 0;
+    margin-bottom: var(--m-2);
   }
-  .textarea-wrapper {
-    @include mixins.miter(2, 1);
-    .textarea {
-      border: 1px solid variables.$grey-20;
-      width: auto;
-      border-radius: 4px;
-      padding: 8px 12px 4px 8px;
-      textarea {
-        width: 331px;
-        height: 117px;
-        padding: 8px;
-        border: none;
-        outline: none;
-        &:focus,
-        &:focus-visible {
-          outline: none !important; // needed for focus rings
-        }
-      }
-      ::placeholder,
-      ::-webkit-input-placeholder {
-        color: variables.$text--placeholder;
-      }
-      &.hovered {
-        ::placeholder {
-          color: variables.$text--primary;
-        }
-      }
-      &.focused {
-        border-color: variables.$primary;
-      }
-      &:invalid,
-      &.invalid {
-        border-color: variables.$error;
-      }
-    }
-    &.disabled {
-      * {
-        background-color: variables.$disabled;
-        cursor: not-allowed !important;
-      }
-    }
+
+  ::placeholder {
+    color: variables.$text--placeholder;
   }
-  .error-msg {
-    color: variables.$error;
-    font-size: 13px;
-    padding-top: 16px;
+
+  &:disabled {
+    background-color: var(--background-color);
+    cursor: var(--cursor);
+  }
+
+  &:not(:disabled) {
+
+    &:hover::placeholder {
+        color: variables.$text--primary;
+    }
+  
+    &:focus {
+      outline: none;
+      border-color: variables.$primary;
+    }
+
+  }
+
+  &::-webkit-scrollbar {
+    cursor: auto;
+    width: var(--handle-size);
+    height: var(--handle-size);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #FAFAFA;
+  }
+
+  &::-webkit-scrollbar-track:vertical {
+    border-left: 1px solid #cacccf;
+    margin-bottom: var(--handle-size);
+  }
+
+  &::-webkit-scrollbar-track:horizontal {
+    border-top: 1px solid #cacccf;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #c1c1c1;
+    border: 4px solid transparent;
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #7d7d7d;
+    cursor: pointer;
+  }
+}
+
+.textarea__input--overflow-x {
+
+  &::-webkit-scrollbar-track:horizontal {
+    margin-right: 0;
+  }
+
+}
+
+.textarea__input--overflow-y {
+
+  &::-webkit-scrollbar-track:vertical {
+    margin-bottom: 0;
+  }
+
+  @supports not selector(::-webkit-scrollbar-track) {
+    margin-bottom: 0;
+    padding-bottom: var(--p-2);
+  }
+
+}
+
+.textarea__handle {
+  position: absolute;
+  width: var(--handle-size);
+  height: var(--handle-size);
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+  user-select: none;
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+  background-image: url("data:image/svg+xml,%3Csvg width='8' height='9' viewBox='0 0 8 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7.8763 0.829259L0.876295 8.82926C0.694454 9.03708 0.378573 9.05814 0.170755 8.8763C-0.0370638 8.69445 -0.0581225 8.37857 0.123719 8.17075L7.12372 0.170755C7.30556 -0.0370638 7.62144 -0.0581225 7.82926 0.123719C8.03708 0.30556 8.05814 0.621441 7.8763 0.829259ZM7.88412 5.8201L5.38412 8.82011C5.20734 9.03224 4.89206 9.06091 4.67992 8.88412C4.46778 8.70734 4.43912 8.39206 4.6159 8.17992L7.1159 5.17992C7.29268 4.96778 7.60797 4.93912 7.8201 5.1159C8.03224 5.29268 8.0609 5.60797 7.88412 5.8201Z' fill='%238F95B2'/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat;
+  background-position: 10% 10%;
+}
+
+.textarea__handle--overflow-x,
+.textarea__handle--overflow-y {
+  border-top-color: #cacccf;
+  border-left-color: #cacccf;
+}
+
+.textarea__error {
+  display: none;
+  color: variables.$error;
+  font-size: 13px;
+  margin-top: var(--m-2);
+
+  .textarea:invalid & {
+    display: block;
   }
 }

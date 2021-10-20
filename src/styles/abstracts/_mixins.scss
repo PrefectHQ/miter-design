@@ -205,3 +205,41 @@ $shadows: (
     transform: translateX(100%);
   }
 }
+
+@mixin miter-bordered() {
+  position: relative;
+  clip-path: var(--miter-clip-path);
+  
+ &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background-color: var(--miter-border-color);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: none;
+    clip-path: var(--miter-clip-path-border);
+  }
+}
+
+@mixin miter-bordered-rounded() {
+  position: relative;
+  clip-path: var(--miter-clip-path-rounded);
+  
+ &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background-color: var(--miter-border-color);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: none;
+    clip-path: var(--miter-clip-path-border-rounded);
+  }
+}
