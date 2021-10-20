@@ -1,29 +1,26 @@
 <template>
-  <div class="d-flex">
-    <div v-if="$slots.activate">
-      <slot name="activate" />
+  <div class="popover">
+    <div ref="trigger" class="popover__target">
+      <slot name="trigger" v-bind="scope" />
     </div>
     <teleport v-if="open" :to="to">
       <PopoverContent>
           <div
-            tabindex="0"
-            :disabled="!open"
-            id="popover-container"
-            class="container"
-            :class="position"
-            ref="containerRef"
-            :style="popoverPositionStyle"
-            @blur="handleBlur"
-            @keydown="handleKeyDown"
+            class="popover__content"
+            :class="classes.popover"
+            :style="styles.popover"
+            ref="popover"
+            data-test="container"
+            @keydown="keydown"
           >
-            <div class="content-container">
-              <header v-html="title"> </header>
-              <hr class="break" />
-              <section>
-                <slot></slot>
-              </section>
-            </div>
-            <div class="arrow"></div>
+            <header class="popover__header" v-if="title.length || $slots.header">
+              <slot name="header" v-bind="scope">
+                {{ title }}
+              </slot>
+            </header>
+            <section class="popover__body">
+              <slot v-bind="scope"></slot>
+            </section>
           </div>
       </PopoverContent>
     </teleport>
@@ -31,164 +28,178 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { Vue, prop } from 'vue-class-component'
+import { Component } from '../../utilities/vue-class-component'
+import { getFirstTabbableElement, getLastTabbableElement } from '../../utilities/dom'
 import PopoverContent from './PopoverContent.vue'
-import { popoverPosition } from './getPosition'
+import { calculatePopoverPosition, PopoverPlacement, PopoverPositionStyles } from './getPosition'
 
-interface popoverPositionStyleObject {
-  left?: string | undefined
-  top?: string | undefined
+class Props {
+  position = prop<PopoverPlacement>({ default: 'top' })
+  title = prop<string>({ required: false, default: '' })
+  to = prop<string>({ required: false, default: 'body' })
 }
 
-export default defineComponent({
+@Component({
+  emits: ['open'],
   name: 'Popover',
   components: {
     PopoverContent
-  },
-  props: {
-    target: {
-      type: String,
-      required: true
-    },
-    position: {
-      type: String,
-      default: () => 'top'
-    },
-    title: {
-      type: String,
-      default: () => 'title'
-    },
-    modelValue: {
-      type: Boolean,
-      required: false
-    },
-    to: {
-      type: String,
-      required: false,
-      default: 'body'
-    },
-    value: {
-      type: Boolean,
-      required: false
-    },
-    focusable: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      popoverPositionStyle: {} as popoverPositionStyleObject | undefined,
-      previouslyFocused: null as HTMLDivElement | null,
-      tabbable: [] as Element[]
-    }
-  },
-  emits: ['update:modelValue'],
-  computed: {
-    open(): boolean {
-      return typeof this.modelValue === 'boolean' ? this.modelValue : this.value
-    }
-  },
-  mounted() {
-    setTimeout(() => {
-      const activator: HTMLElement | null = document.getElementById(this.target)
-      if (activator) activator.tabIndex = 0
-    }, 200)
-  },
-  watch: {
-    open(val) {
-      if (val) {
-        this.setPreviouslyFocused()
-        this.setTabbable()
-        this.getPosition()
-      }
-    }
-  },
-  methods: {
-    setPreviouslyFocused() {
-      if (typeof document !== 'undefined')
-        this.previouslyFocused =
-          document.activeElement === document.body ||
-          document.querySelector(`#${this.target}`)
-            ? document.querySelector(`#${this.target}`)
-            : null
-    },
-    setTabbable() {
-      if (this.focusable) {
-        setTimeout(() => {
-          const modalNodes = (
-            this.$refs.containerRef as HTMLElement
-          ).querySelectorAll('*')
-          this.tabbable = Array.from(modalNodes).filter(
-            (n: any) => n.tabIndex >= 0
-          )
-          this.tabbable.forEach((n) => {
-            n.addEventListener('blur', (e: Event) => this.handleBlur(e))
-          })
-        }, 300)
-      }
-    },
-    getPosition() {
-      if (document.querySelector(`#${this.target}`)) {
-        this.$nextTick(() => {
-          const popoverRect = (
-            this.$refs?.containerRef as HTMLElement
-          ).getBoundingClientRect()
-          const bodyRect = document.body.getBoundingClientRect()
-          const target = document
-            ?.querySelector(`#${this.target}`)
-            ?.getBoundingClientRect()
-          const activator: HTMLElement | null = document.getElementById(
-            this.target
-          )
-          if (activator) activator.style.display = 'inline-block'
-          this.popoverPositionStyle = popoverPosition(
-            this.position,
-            target,
-            bodyRect,
-            popoverRect
-          )
-          this.addFocus()
-        })
-      } else {
-        throw new Error(`Could not find element with the id of ${this.target}`)
-      }
-    },
-    addFocus() {
-      this.$nextTick(() => {
-        ;(this.$refs.containerRef as HTMLElement).focus()
-      })
-    },
-    handleKeyDown(evt: KeyboardEvent): void {
-      if (document.activeElement) {
-        let index: number = this.tabbable.indexOf(document.activeElement)
-        if (evt.key.toLowerCase() === 'escape') {
-          this.close()
-        } else if (evt.key.toLowerCase() === 'tab') {
-          if (index < this.tabbable.length - 1) {
-            index += 1
-            //leading semicolon here so that TS/Vue does not think this line is part of index+=1
-            ;(this.tabbable[index] as HTMLElement).focus()
-            evt.preventDefault()
-          } else this.previouslyFocused?.focus()
-        }
-      }
-    },
-    handleBlur(e: any) {
-      const target = e.relatedTarget as HTMLDivElement
-      if (!this.tabbable.includes(target)) {
-        this.close()
-      }
-    },
-    close() {
-      this.tabbable.forEach((n) => {
-        n.removeEventListener('blur', (e: Event) => this.handleBlur(e))
-      })
-      this.$emit('update:modelValue', false)
-      this.previouslyFocused?.focus()
-    }
   }
 })
+export default class Popover extends Vue.with(Props) {
+  
+  $refs!: {
+    popover: HTMLDivElement,
+    trigger: HTMLDivElement
+  }
+
+  private open: boolean = false;
+  private popoverPositionStyles: PopoverPositionStyles = {}
+  private openedWithFocus: boolean = false;
+
+  private scope = {
+    toggle: (event?: Event) => this.togglePopover(event),
+    open: (event?: Event) => this.openPopover(event),
+    close: () => this.closePopover()
+  }
+
+  get classes() {
+    return {
+      popover: `popover__content--arrow-${this.position}`
+    }
+  }
+
+  get styles() {
+    return {
+      popover: this.popoverPositionStyles
+    } 
+  }
+
+  get closed() {
+    return this.open == false
+  }
+
+  public created() {
+    this.watchOpen()
+
+    window.addEventListener('focusout', this.focusout)
+  }
+
+  public unmounted() {
+    window.removeEventListener('focusout', this.focusout)
+  }
+
+  public togglePopover(event?: Event) {
+    this.open ? this.closePopover() : this.openPopover(event)
+  }
+
+  public openPopover(event?: Event) {
+    if(this.shouldSkipOpen(event)) {
+      this.openedWithFocus = false
+      return
+    }
+
+    this.handleOpenEvent(event)
+
+    this.open = true
+  }
+
+  public closePopover() {
+    this.open = false
+  }
+
+  private shouldSkipOpen(event?: Event): boolean {
+    return this.openedWithFocus && event?.type == 'focus'
+  }
+
+  private handleOpenEvent(event?: Event) {
+    this.openedWithFocus = event?.type == 'focus'
+  }
+
+  private focustrigger() {
+    const tabbable = getFirstTabbableElement(this.$refs.trigger)
+
+    if(tabbable) {
+      tabbable.focus()
+    } else {
+      this.$refs.trigger.focus()
+    }
+  }
+
+  private focusPopover(): Promise<void> {
+    return this.$nextTick(() => {
+        const first = getFirstTabbableElement(this.$refs.popover)
+
+        if(first) {
+          first.focus()
+        }
+    })
+  }
+
+  private calculatePopoverPosition(): Promise<void> {
+    return this.$nextTick(() => {
+      this.popoverPositionStyles = calculatePopoverPosition(this.position, this.$refs.trigger, this.$refs.popover);
+    })
+  }
+
+  private focusout(event: FocusEvent) {
+    if(this.closed) {
+      return
+    }
+
+    const related = event.relatedTarget as HTMLElement
+    const inPopover = this.$refs.popover.contains(related)
+    const inTrigger = this.$refs.trigger.contains(related)
+
+    if(!inPopover) {
+      this.closePopover()
+    }
+
+    if(!inTrigger && !inPopover) {
+      this.openedWithFocus = false
+    }
+
+  }
+
+  private keydown(event: KeyboardEvent) {
+    switch(event.key) {
+      case 'Escape':
+        return this.escape(event)
+      case 'Tab':
+        return this.tab(event)
+    }
+  }
+
+  private escape(event: KeyboardEvent) {
+      this.closePopover()
+      this.focustrigger()
+  }
+
+  private tab(event: KeyboardEvent) {
+    const first = getFirstTabbableElement(this.$refs.popover)
+    const last = getLastTabbableElement(this.$refs.popover)
+
+    if(event.target == first && event.shiftKey || event.target == last && !event.shiftKey) {
+      event.preventDefault()
+
+      this.closePopover()
+      this.focustrigger()
+    }
+  }
+
+  private watchOpen() {
+    this.$watch(() => this.open, async (open: boolean) => {
+      if(open) {
+        await this.calculatePopoverPosition()
+        await this.focusPopover()
+      }
+
+      this.$emit('open', open)
+    })
+  }
+
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,86 +1,67 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.container {
-  @include mixins.miter(1, 1);
+.popover__target {
+  display: inherit;
+}
+
+.popover__content {
+  --arrow-size: 12px;
+
   background-color: variables.$white;
-  width: auto;
-  height: auto;
+  border: 1px solid variables.$grey-20;
   outline: none;
-  border: none;
-  display: block;
   position: absolute;
   z-index: 2;
-}
-
-.content-container {
-  border: 1px solid variables.$grey-20;
   border-radius: 4px;
-  padding: 10px;
-  padding-bottom: 18px;
-
-  header {
-    :first-child &:not(i) {
-      font-family: variables.$font--primary !important;
-      font-weight: 600;
-      padding-bottom: 8px;
-
-      :first-child::before {
-        vertical-align: middle;
-        margin-right: 5px;
-      }
-    }
-  }
-
-  hr {
-    border: 1px solid #cecdd3;
-    margin: 5px -20px 14px;
-    border-bottom: none;
-  }
 }
 
-.arrow {
+.popover__content:before {
   content: '';
   margin: auto;
   position: absolute;
   display: block;
 
-  width: 12px;
-  height: 12px;
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  transform-origin: 50%;
 
   border: 1px solid;
   border-color: variables.$grey-20 transparent transparent variables.$grey-20;
   background-color: white;
 }
 
-.top {
-  .arrow {
-    top: calc(100% - 7px);
-    left: 50%;
-    transform: translate(-50%) rotate(225deg);
-  }
+.popover__content--arrow-top:before {
+  top: calc(100% - var(--arrow-size) / 2);
+  left: 50%;
+  transform: translate(-50%) rotate(225deg);
 }
 
-.bottom {
-  .arrow {
-    bottom: calc(100% - 7px);
-    left: 50%;
-    transform: translate(-50%) rotate(45deg);
-  }
+.popover__content--arrow-right:before {
+  bottom: 75%;
+  right: 100%;
+  transform: translate(50%) rotate(315deg);
 }
 
-.right {
-  .arrow {
-    bottom: 75%;
-    right: 99.5%;
-    transform: translate(50%) rotate(315deg);
-  }
+.popover__content--arrow-bottom:before {
+  bottom: calc(100% - var(--arrow-size) / 2);
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
 }
 
-.left {
-  .arrow {
-    bottom: 75%;
-    left: calc(100% - 13px);
-    transform: translate(50%) rotate(135deg);
-  }
+.popover__content--arrow-left:before {
+  bottom: 75%;
+  left: calc(100% - var(--arrow-size));
+  transform: translate(50%) rotate(135deg);
+}
+
+.popover__header {
+  border-bottom: 1px solid #cecdd3;
+  padding: 10px;
+  font-weight: 600;
+  font-family: variables.$font--primary;
+}
+
+.popover__body {
+  padding: 10px;
 }
