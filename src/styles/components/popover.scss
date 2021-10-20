@@ -2,11 +2,7 @@
 @use '../abstracts/mixins';
 
 .popover__target {
-  display: inline-block;
-}
-
-.popover__target--block {
-  display: block;
+  display: inherit;
 }
 
 .popover__content {
