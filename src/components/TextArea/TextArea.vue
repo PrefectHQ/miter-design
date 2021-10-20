@@ -18,13 +18,13 @@
         </template>
       </div>
     </template>
-    <div class="textarea__miter">
+    <div class="textarea__miter" :style="styles.miter">
       <textarea 
         v-model="value" 
         ref="input" 
         class="textarea__input" 
         :class="classes.input" 
-        :style="styles.input" 
+         :style="styles.input"
         v-bind="{ id, disabled, placeholder, required, minLength, maxLength }"
       />
       <div class="textarea__handle" :class="classes.handle" @mousedown.left="mousedown"></div>
@@ -109,6 +109,9 @@ export default class TextArea extends Vue.with(props) {
 
   get styles() {
     return {
+      miter: {
+        width: `${this.width}px`
+      },
       input: {
         width: `${this.width}px`,
         height: `${this.height}px`
