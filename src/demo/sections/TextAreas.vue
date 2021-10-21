@@ -6,14 +6,14 @@
       <TextArea
         label="Text Area"
         subtitle="Additional Info"
-        class="mr-2"
+        class="mb-2"
         required
         v-model="value"
         @invalid="handleInvalid"
       >
-        <template v-slot:errorMessage>No!</template>
+        <template v-slot:error>No!</template>
       </TextArea>
-      <TextArea disabled hideLabel placeholder="can't write here" />
+      <TextArea v-model="value" disabled placeholder="can't write here" />
     </div>
   </div>
 </template>
@@ -37,7 +37,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss" scoped>
-@use '@/styles/components/textarea';
-</style>
