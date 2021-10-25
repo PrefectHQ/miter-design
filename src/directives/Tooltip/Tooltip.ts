@@ -29,7 +29,6 @@ class Tooltip {
   }
 
   public hide() {
-    console.log('here')
     this.el.remove()
   }
 
