@@ -3,7 +3,7 @@
     <slot name="trigger" />
   </div>
   <teleport v-if="open" to="body">
-    <TooltipContent ref="tooltip" :placement="placement" :content="content" :class="classes.tooltip" :style="styles.tooltip">
+    <TooltipContent ref="tooltip" :placement="placement" :content="content" :style="styles.tooltip">
       <slot />
     </TooltipContent>
   </teleport>
@@ -42,12 +42,6 @@ export default class Tooltip extends Vue.with(Props) {
 
   get closed() {
     return !this.open
-  }
-
-  get classes() {
-    return {
-      tooltip: `tooltip--${this.placement}`
-    }
   }
 
   get styles() {

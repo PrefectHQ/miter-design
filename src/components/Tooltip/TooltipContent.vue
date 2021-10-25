@@ -1,5 +1,5 @@
 <template>
-    <div ref="tooltip" class="tooltip">
+    <div ref="tooltip" class="tooltip" :class="classes.tooltip">
       <div class="tooltip__content">
         <slot>
           {{ content }}
@@ -18,6 +18,12 @@ class Props {
 }
 
 export default class TooltipContent extends Vue.with(Props) {
+
+  get classes() {
+    return {
+      tooltip: `tooltip--${this.placement}`
+    }
+  }
 
 }
 </script>
