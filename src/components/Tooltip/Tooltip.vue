@@ -1,133 +1,87 @@
 <template>
-  <div
-    ref="tooltipRef"
-    role="tooltip"
-    id="tooltip-container"
-    class="tooltip"
-    :class="position"
-    :style="tooltipRefStyle"
-  >
-    <div class="tooltip-content" v-html="content"></div>
+  <div ref="trigger" v-bind="$attrs" @mouseover="mouseover" @mouseout="mouseout">
+    <slot name="trigger" />
   </div>
+  <teleport v-if="open" to="body">
+    <TooltipContent ref="tooltip" :placement="placement" :content="content" :class="classes.tooltip" :style="styles.tooltip">
+      <slot />
+    </TooltipContent>
+  </teleport>
 </template>
 
 <script lang="ts">
-interface tooltipRefStyleObject {
-  left?: string | undefined
-  top?: string | undefined
+import { nextTick } from 'vue'
+import { Vue, prop } from 'vue-class-component'
+import { Component } from '@/utilities/vue-class-component'
+import { calculatePlacementPositionStyles, Placement, PlacementPositionStyles } from '@/utilities/position'
+import TooltipContent from './TooltipContent.vue'
+
+
+class Props {
+  placement = prop<Placement>({ default: 'top' })
+  content = prop<string>({ required: false, default: '' })
 }
 
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'Tooltip',
-  props: {
-    content: {
-      type: String,
-      default: ''
-    },
-    position: {
-      type: String,
-      default: 'top'
-    },
-    currentElRect: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  data() {
-    return {
-      tooltipRefStyle: {} as tooltipRefStyleObject | undefined
-    }
-  },
-  methods: {
-    getElement() {
-      this.$nextTick(() => {
-        this.tooltipRefStyle = this.calculatePosition()
-      })
-    },
-    calculatePosition() {
-      if (!this.currentElRect || !this.$refs.tooltipRef) return
-
-      const tooltipRefRect = (
-        this.$refs.tooltipRef as HTMLElement
-      ).getBoundingClientRect()
-      const bodyRect = document.body.getBoundingClientRect()
-
-      if (this.position == 'top') {
-        return {
-          top:
-            this.currentElRect.top -
-            bodyRect.top -
-            this.currentElRect.height -
-            10 +
-            'px',
-          left:
-            this.currentElRect.left -
-            bodyRect.left +
-            this.currentElRect.width / 2 -
-            tooltipRefRect.width / 2 +
-            'px'
-        }
-      }
-
-      if (this.position == 'right') {
-        return {
-          top:
-            this.currentElRect.top -
-            bodyRect.top +
-            this.currentElRect.height / 2 -
-            tooltipRefRect.height / 2 +
-            'px',
-          left:
-            this.currentElRect.left -
-            bodyRect.left +
-            this.currentElRect.width +
-            10 +
-            'px'
-        }
-      }
-
-      if (this.position == 'bottom') {
-        return {
-          top:
-            this.currentElRect.top -
-            bodyRect.top +
-            this.currentElRect.height +
-            10 +
-            'px',
-          left:
-            this.currentElRect.left -
-            bodyRect.left +
-            this.currentElRect.width / 2 -
-            tooltipRefRect.width / 2 +
-            'px'
-        }
-      }
-
-      if (this.position == 'left') {
-        return {
-          top:
-            this.currentElRect.top -
-            bodyRect.top +
-            this.currentElRect.height / 2 -
-            tooltipRefRect.height / 2 +
-            'px',
-          left:
-            this.currentElRect.left -
-            bodyRect.left -
-            this.currentElRect.width -
-            10 +
-            'px'
-        }
-      }
-    }
-  },
-  mounted() {
-    this.getElement()
+@Component({
+  components: {
+    TooltipContent
   }
 })
-</script>
+export default class Tooltip extends Vue.with(Props) {
 
-<style lang="scss" scoped>
-@use '../../styles/components/tooltip';
-</style>
+  $refs!: {
+    trigger: HTMLDivElement
+    tooltip: TooltipContent
+  }
+
+  private open: boolean = false
+  private position: PlacementPositionStyles = {
+    left: '0px',
+    top: '0px'
+  }
+
+  get closed() {
+    return !this.open
+  }
+
+  get classes() {
+    return {
+      tooltip: `tooltip--${this.placement}`
+    }
+  }
+
+  get styles() {
+    return {
+      tooltip: this.position,
+    }
+  }
+
+  private mouseover(event: MouseEvent) {
+    if(this.open) {
+      return
+    }
+
+    this.openTooltip()
+  }
+
+  private mouseout(event: MouseEvent) {
+    if(this.closed) {
+      return
+    }
+
+    this.closeTooltip()
+  }
+
+  public async openTooltip() {
+    this.open = true
+
+    await nextTick()
+
+    this.position = calculatePlacementPositionStyles(this.placement, this.$refs.trigger, this.$refs.tooltip.$el)
+  }
+
+  public closeTooltip() {
+    this.open = false
+  }
+}
+</script>
