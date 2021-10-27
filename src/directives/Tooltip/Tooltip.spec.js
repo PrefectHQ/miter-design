@@ -1,8 +1,12 @@
 import { mount } from '@vue/test-utils'
-import * as Module from './Tooltip.ts'
-const TooltipDirective = Module.TooltipDirective
+import TooltipDirective from './Tooltip.ts'
+import { nextTick } from 'vue'
 
-const factoryMount = (position = '', text = '') => {
+class DOMRect {}
+
+global.DOMRect = DOMRect
+
+const factoryMount = (position = '', text = 'test') => {
   return mount(
     { template: `<div v-tooltip:[position]="text">Foo</div>` },
     {
@@ -21,44 +25,81 @@ const factoryMount = (position = '', text = '') => {
   )
 }
 
+afterEach(() => {
+  const tooltip = document.querySelector('.tooltip')
+
+  if(tooltip) {
+    tooltip.remove()
+  }
+});
+
 describe('mounted hook', () => {
+
   test('does not append component when mounted', () => {
     const wrapper = factoryMount()
-    const tooltipContainer = document.querySelector('#tooltip-container')
+    const tooltipContainer = document.querySelector('.tooltip')
 
     expect(tooltipContainer).toBe(null)
   })
 
   test('appends the component on mouseenter', async () => {
     const wrapper = factoryMount()
+    
     await wrapper.trigger('mouseenter')
-    const tooltipContainer = document.querySelector('#tooltip-container')
+
+    const tooltipContainer = document.querySelector('.tooltip')
 
     expect(tooltipContainer).not.toBe(null)
-    expect(tooltipContainer.classList.contains('tooltip')).toBe(true)
   })
 
   test('removes the component on mouseleave', async () => {
     const wrapper = factoryMount()
+    
+    await wrapper.trigger('mouseenter')
+    
+    const tooltipOpen = document.querySelector('.tooltip')
+    
+    expect(tooltipOpen).not.toBe(null)
+
     await wrapper.trigger('mouseleave')
-    const tooltipContainer = document.querySelector('#tooltip-container')
-    expect(tooltipContainer).toBe(null)
+    
+    const tooltipClosed = document.querySelector('.tooltip')
+    
+    expect(tooltipClosed).toBe(null)
   })
 })
 
 describe('arguments', () => {
+  
   test('content is passed if provided', async () => {
     const wrapper = factoryMount('right', 'Hello')
+
     await wrapper.trigger('mouseenter')
 
-    const tooltipContainer = document.querySelector('#tooltip-container')
-    expect(tooltipContainer.textContent).toBe('Hello')
+    const content = document.querySelector('.tooltip__content')
+
+    expect(content.innerText).toBe('Hello')
+  })
+  
+  test('content html is not parsed', async () => {
+    const content = '<p>hello world</p>'
+    const wrapper = factoryMount('right', content)
+
+    await wrapper.trigger('mouseenter')
+
+    const contentContainer = document.querySelector('.tooltip__content')
+
+    expect(contentContainer.innerText).toBe(content)
   })
 
   test('position is passed if provided ', async () => {
     const wrapper = factoryMount('right')
+
     await wrapper.trigger('mouseenter')
-    const tooltipContainer = document.querySelector('#tooltip-container')
-    expect(tooltipContainer.classList.contains('right')).toBe(true)
+
+    const tooltipContainer = document.querySelector('.tooltip')
+    
+    expect(tooltipContainer.classList.contains('tooltip--right')).toBe(true)
   })
+
 })
