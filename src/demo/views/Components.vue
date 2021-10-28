@@ -13,7 +13,6 @@
     <Popups class="mt-10" />
     <Radios class="mt-10" />
     <Toggles class="mt-10" />
-    <Selects class="mt-10" />
     <Sliders class="mt-10" />
     <TabSection class="mt-10" />
     <Tag class="mt-10" />

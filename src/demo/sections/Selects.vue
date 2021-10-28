@@ -1,7 +1,8 @@
 <template>
   <div>
     <h3>Selects</h3>
-    <div class="d-flex">
+    <Select v-model="value" :options="options" search />
+    <!-- <div class="d-flex">
       <Select
         class="my-2 mr-2"
         name="without-icon"
@@ -104,28 +105,44 @@
         disabled
       >
       </Select>
-    </div>
-  </div>
+    </div>-->
+  </div> 
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Select from '@/components/Select/Select.vue'
-import OptionGroup from '@/components/Select/OptionGroup.vue'
-import Option from '@/components/Select/Option.vue'
+import { Options } from '@/components/Select/types'
+
+const options: Options<string> = [
+  { label: 'First', value: 'first' },
+  { label: 'Second', value: 'second', disabled: true },
+  { label: 'Third', value: 'third' },
+  { label: 'Group', options: [
+    { label: 'Another', value: 'another' },
+    { label: 'And Another', value: 'and another' },
+  ]},
+]
+
 
 export default defineComponent({
   name: 'Selects',
-  components: { Select, OptionGroup, Option },
+  components: { 
+    Select, 
+    // OptionGroup, 
+    // Option 
+  },
   data() {
     return {
-      selected1: '',
-      selected2: '',
-      options: ['First', 'Second', 'Third'],
-      items: [
-        { id: 'abc', label: 'Hello' },
-        { id: 'dfe', label: 'World' }
-      ]
+      // selected1: '',
+      // selected2: '',
+      // options: ['First', 'Second', 'Third'],
+      // items: [
+      //   { id: 'abc', label: 'Hello' },
+      //   { id: 'dfe', label: 'World' }
+      // ]
+      value: null,
+      options
     }
   }
 })
