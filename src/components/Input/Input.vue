@@ -136,7 +136,7 @@ export default defineComponent({
       required: false
     }
   },
-  emits: ['update:modelValue', 'invalid', 'keyup', 'keypress', 'keydown'],
+  emits: ['update:modelValue', 'invalid', 'keyup', 'keypress', 'keydown', 'blur'],
   data() {
     return {
       active: false as boolean,
@@ -205,6 +205,8 @@ export default defineComponent({
       this.validate(e)
       this.hovered = false
       this.active = false
+
+      this.$emit('blur', e)
     },
     validate(e: Event) {
       const valid = e.target?.checkValidity()
