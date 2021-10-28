@@ -5,13 +5,17 @@ export type Placement = 'top' | 'right' | 'bottom' | 'left'
 export const allPlacements: Placement[] = ['top', 'right', 'bottom', 'left']
 
 export type PlacementPositionStyles = {
+  top: Pixels,
+  right: Pixels,
+  bottom: Pixels
   left: Pixels,
-  top: Pixels
 }
 
 export type PlacementPosition = {
+  top: number,
+  right: number,
+  bottom: number
   left: number,
-  top: number
 }
 
 export type PlacementVisibility = {
@@ -25,8 +29,10 @@ export function isPlacement(value: any): value is Placement {
 
 export function positionToPositionStyles(position: PlacementPosition): PlacementPositionStyles {
   return {
-    left: toPixels(position.left),
-    top: toPixels(position.top)
+    top: toPixels(position.top),
+    right: toPixels(position.right),
+    bottom: toPixels(position.bottom),
+    left: toPixels(position.left)
   }
 }
 
@@ -147,39 +153,55 @@ function placementMethod(placement: Placement) {
 function top(target: DOMRect, popover: DOMRect, container: DOMRect): PlacementPosition {
   const top = target.top - container.top - popover.height
   const left = target.left - container.left + target.width / 2 - popover.width / 2
+  const right = container.width - left - popover.width
+  const bottom = container.height - top - popover.height
 
   return { 
-    left, 
-    top
+    top,
+    right,
+    bottom,
+    left
   }
 }
 
 function right(target: DOMRect, popover: DOMRect, container: DOMRect): PlacementPosition {
   const top = target.top - container.top - 0.5 * popover.height + target.height / 2
   const left = target.left - container.left + target.width
+  const right = container.width - left - popover.width
+  const bottom = container.height - top - popover.height
 
   return { 
-    left, 
-    top
+    top,
+    right,
+    bottom,
+    left
   }
 }
 
 function bottom(target: DOMRect, popover: DOMRect, container: DOMRect): PlacementPosition {
   const top = target.top - container.top + target.height
   const left = target.left - container.left + target.width / 2 - popover.width / 2
+  const right = container.width - left - popover.width
+  const bottom = container.height - top - popover.height
 
   return { 
-    left, 
-    top
+    top,
+    right,
+    bottom,
+    left
   }
 }
 
 function left(target: DOMRect, popover: DOMRect, container: DOMRect): PlacementPosition {
   const top = target.top - container.top - 0.5 * popover.height + target.height / 2
   const left = target.left - popover.width
+  const right = container.width - left - popover.width
+  const bottom = container.height - top - popover.height
 
   return { 
-    left, 
-    top
+    top,
+    right,
+    bottom,
+    left
   }
 }
