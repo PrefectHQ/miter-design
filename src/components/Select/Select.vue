@@ -1,19 +1,17 @@
 <template>
   <!-- need to implement a native <select/> here as well for accesability -->
   <div class="select" ref="trigger" :class="classes.select" v-bind="$attrs">
-    <div class="select__input" ref="input" tabindex="0" :class="classes.input" @click="click" @blur="blur" @keydown="keydown">
+    <div class="select__input" ref="input" tabindex="0" :class="classes.input" @click="click">
       <span class="select__label" :class="classes.label">
-        <slot name="label">
-          {{ valueLabelOrInputLabel }}
-        </slot>
+        {{ valueLabelOrInputLabel }}
       </span>
-      <i class="select__arrow pi pi-arrow-down-s-line pi-lg" :class="classes.arrow" />
+      <i class="pi pi-arrow-down-s-line pi-lg" />
     </div>
   </div>
   <teleport v-if="open" to="body">
-    <SelectContent ref="content" class="select__content" :style="position" :options="searchedOptions" :selected="modelValue" @select="select">
+    <SelectContent ref="content" class="select__content" :class="classes.content" :style="styles.content" :filter="term" v-bind="{ options, selected }" @select="select">
       <template v-slot:before-options v-if="showSearch">
-        <Input v-model="term" class="select__search" :placeholder="searchPlaceholder" @blur="blur">
+        <Input v-model="term" class="select__search" :placeholder="searchPlaceholder">
           <template v-slot:prepend>
             <i class="pi pi-xs pi-search-line" />
           </template>
@@ -33,17 +31,17 @@
 </template>
 
 <script lang="ts">
-import { calculateMostVisiblePlacementPositionStyles, PlacementPositionStyles } from '@/utilities/position'
+import { calculateMostVisiblePlacement, calculatePlacementPositionStyles, Placement, PlacementPositionStyles } from '@/utilities/position'
 import { nextTick } from 'vue'
 import { Vue, prop } from 'vue-class-component'
 import { Component } from '../../utilities/vue-class-component'
 import SelectContent from './SelectContent.vue'
 import { Options } from './types'
-import { getOptionsFromOptionsAndGroups, searchOptionsAndGroups } from './utilities'
+import { getOptionFromOptionsAndGroupsByValue } from './utilities'
 import Input from '@/components/Input/Input.vue'
 
 class Props {
-  modelValue = prop({ default: null })
+  modelValue = prop<string | null>({ default: null })
   label = prop<string>({ default: 'Choose an Option' })
   options = prop<Options>({ default: () => ([]) })
   disabled = prop<boolean | string>({ default: false })
@@ -69,13 +67,24 @@ export default class Select extends Vue.with(Props) {
 
   private open: boolean = false
   private term: string = ''
+  private placement: Placement = 'top'
   private position: PlacementPositionStyles = {
-    left: '0px',
-    top: '0px'
+    top: '0px',
+    right: '0px',
+    bottom: '0px',
+    left: '0px'
   }
 
   get selected() {
-    return this.modelValue !== null
+    return this.modelValue
+  }
+
+  set selected(value: string | null) {
+    this.$emit('update:modelValue', value)
+  }
+
+  get selectedOption() {
+    return getOptionFromOptionsAndGroupsByValue(this.options, this.selected)
   }
 
   get showSearch() {
@@ -86,24 +95,6 @@ export default class Select extends Vue.with(Props) {
     return this.selectedOption?.label ?? this.label
   }
 
-  get selectedOption() {
-    if(!this.selected) {
-      return null
-    }
-
-    const allOptions = getOptionsFromOptionsAndGroups(this.options)
-
-    return allOptions.find(option => option.value === this.modelValue)
-  }
-
-  get searchedOptions() {
-    if(!this.showSearch || this.term.length == 0) {
-      return this.options
-    }
-
-    return searchOptionsAndGroups(this.options, this.term)
-  }
-
   get classes() {
     return {
       select: {
@@ -111,15 +102,36 @@ export default class Select extends Vue.with(Props) {
         'select--disabled': this.disabled || this.disabled === ''
       },
       input: {
-        'select__input--open': this.open
+        'select__input--open': this.open,
+        'select__input--open-top': this.open && this.placement === 'top',
+        'select__input--open-bottom': this.open && this.placement === 'bottom'
       },
       label: {
         'select__label--selected': this.selected
       },
-      arrow: {
-        'select__arrow--open': this.open
+      content: {
+        'select__content--top': this.placement === 'top',
+        'select__content--bottom': this.placement === 'bottom'
       }
     }
+  }
+
+  get styles() {
+    return {
+      content: {
+        top: this.placement === 'bottom' ? this.position.top : null,
+        bottom: this.placement === 'top' ? this.position.bottom : null,
+        left: this.position.left
+      }
+    }
+  }
+
+  public mounted() {
+    document.addEventListener('click', this.documentClick)
+  }
+
+  public unmounted() {
+    document.removeEventListener('click', this.documentClick)
   }
 
   public async openSelect() {
@@ -127,8 +139,11 @@ export default class Select extends Vue.with(Props) {
 
     await nextTick()
 
-    // convert position methods to accept an argument object
-    this.position = calculateMostVisiblePlacementPositionStyles(this.$refs.trigger, this.$refs.content.$el, document.body, ['bottom', 'top'])
+    // convert position methods to accept an argument object?
+    const { placement } = calculateMostVisiblePlacement(this.$refs.trigger, this.$refs.content.$el, document.body, ['bottom', 'top'])
+
+    this.placement = placement
+    this.position = calculatePlacementPositionStyles(placement, this.$refs.trigger, this.$refs.content.$el, document.body)
   }
 
   public closeSelect() {
@@ -139,8 +154,9 @@ export default class Select extends Vue.with(Props) {
     this.$refs.input.focus()
   }
 
-  private select(value: any) {
-    this.$emit('update:modelValue', value)
+  private select(value: string) {
+    this.selected = value
+    this.term = ''
 
     this.closeSelect()
     this.focus()
@@ -154,18 +170,14 @@ export default class Select extends Vue.with(Props) {
     this.open ? this.closeSelect() : this.openSelect()
   }
 
-  private blur(event: FocusEvent) {
-    const related = event.relatedTarget as HTMLElement
-    const inContent = this.$refs.content?.$el?.contains(related)
-    const inTrigger = this.$refs.trigger.contains(related)
+  private documentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement
+    const inContent = this.$refs.content?.$el?.contains(target)
+    const inTrigger = this.$refs.trigger.contains(target)
 
     if(!inContent && !inTrigger) {
       this.closeSelect()
     }
-  }
-
-  private keydown(event: KeyboardEvent) {
-    // open the menu
   }
 
 }
@@ -190,6 +202,10 @@ export default class Select extends Vue.with(Props) {
 .select--open,
 .select:focus-within {
   --miter-border-color: #{variables.$primary};
+}
+
+.select--open {
+  @include mixins.drop-shadow;
 }
 
 .select--disabled {
@@ -218,10 +234,24 @@ export default class Select extends Vue.with(Props) {
 }
 
 .select__search {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
   padding-left: 20px;
 }
 
 .select__content {
   position: absolute;
+  z-index: 1;
+
+  @include mixins.drop-shadow;
+}
+
+.select__content--top {
+  transform: translateY(-2px);
+}
+
+.select__content--bottom {
+  transform: translateY(2px);
 }
 </style>

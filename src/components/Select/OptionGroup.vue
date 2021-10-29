@@ -6,7 +6,7 @@
       </slot>
     </div>
     <template v-for="(option, i) in options" :key="i">
-      <Option :disabled="disabled" :selected="isOptionSelected(option, selected)" v-bind="option" @select="select">
+      <Option v-show="isOptionVisible(option, filter)" :disabled="disabled" :selected="isOptionSelected(option, selected)" v-bind="option" @select="select">
         <template v-slot:icon="scope">
           <slot name="option-icon" v-bind="scope" />
         </template>
@@ -23,13 +23,14 @@ import { Vue, prop } from 'vue-class-component'
 import { Component } from '@/utilities/vue-class-component'
 import Option from './Option.vue'
 import { OptionType } from './types'
-import { isOptionSelected } from './utilities'
+import { isOptionSelected, isOptionVisible } from './utilities'
 
 class Props {
   label = prop<string>({ required: true })
   disabled = prop<boolean>({ default: false })
   options = prop<OptionType[]>({ default: () => ([]) })
   selected = prop({ default: null })
+  filter = prop<string>({ default: '' })
 }
 
 @Component({
@@ -41,6 +42,7 @@ class Props {
 export default class OptionGroup extends Vue.with(Props) {
 
   private isOptionSelected = isOptionSelected
+  private isOptionVisible = isOptionVisible
 
   get scope() {
     return {
