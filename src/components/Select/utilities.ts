@@ -12,6 +12,10 @@ export function isOptionVisible<T>(option: OptionType<T>, term: string): boolean
   return option.label.toLocaleLowerCase().includes(term)
 }
 
+export function isOptionGroupVisible<T>(group: OptionGroupType<T>, term: string): boolean {
+  return group.options.some(option => isOptionVisible(option, term))
+}
+
 export function getOptionsFromOptionsAndGroups<T>(options: Options<T>): OptionType<T>[] {
   return options.reduce<OptionType<T>[]>((result, option) => {
     if(isOptionGroup(option)) {

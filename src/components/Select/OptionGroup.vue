@@ -1,12 +1,12 @@
 <template>
-  <div class="option-group" :class="classes.group">
+  <div v-show="isOptionGroupVisible(group, filter)" class="option-group" :class="classes.group">
     <div class="option-group__label" :class="classes.label">
-      <slot name="label" v-bind="scope">
-        {{ label }}
+      <slot name="label" v-bind="group">
+        {{ group.label }}
       </slot>
     </div>
-    <template v-for="(option, i) in options" :key="i">
-      <Option v-show="isOptionVisible(option, filter)" :disabled="disabled" :selected="isOptionSelected(option, selected)" v-bind="option" @select="select">
+    <template v-for="(option, i) in group.options" :key="i">
+      <Option v-show="isOptionVisible(option, filter)" :disabled="group.disabled" :selected="isOptionSelected(option, selected)" v-bind="option" @select="select">
         <template v-slot:icon="scope">
           <slot name="option-icon" v-bind="scope" />
         </template>
@@ -22,13 +22,11 @@
 import { Vue, prop } from 'vue-class-component'
 import { Component } from '@/utilities/vue-class-component'
 import Option from './Option.vue'
-import { OptionType } from './types'
-import { isOptionSelected, isOptionVisible } from './utilities'
+import { OptionGroupType } from './types'
+import { isOptionSelected, isOptionVisible, isOptionGroupVisible } from './utilities'
 
 class Props {
-  label = prop<string>({ required: true })
-  disabled = prop<boolean>({ default: false })
-  options = prop<OptionType[]>({ default: () => ([]) })
+  group = prop<OptionGroupType>({ default: () => ({}) })
   selected = prop({ default: null })
   filter = prop<string>({ default: '' })
 }
@@ -43,21 +41,15 @@ export default class OptionGroup extends Vue.with(Props) {
 
   private isOptionSelected = isOptionSelected
   private isOptionVisible = isOptionVisible
-
-  get scope() {
-    return {
-      label: this.label,
-      disabled: this.disabled
-    }
-  }
+  private isOptionGroupVisible = isOptionGroupVisible
 
   get classes() {
     return {
       group: {
-        'option-group--disabled': this.disabled
+        'option-group--disabled': this.group.disabled
       },
       label: {
-        'option-label--disabled': this.disabled
+        'option-label--disabled': this.group.disabled
       }
     }
   }

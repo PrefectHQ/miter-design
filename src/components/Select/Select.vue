@@ -139,7 +139,6 @@ export default class Select extends Vue.with(Props) {
 
     await nextTick()
 
-    // convert position methods to accept an argument object?
     const { placement } = calculateMostVisiblePlacement(this.$refs.trigger, this.$refs.content.$el, document.body, ['bottom', 'top'])
 
     this.placement = placement

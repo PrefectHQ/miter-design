@@ -4,7 +4,7 @@
     <div class="select-content__options">
       <template v-for="option in options" :key="option.label">
         <template v-if="isOptionGroup(option)">
-          <OptionGroup v-bind="{ filter, selected, ...option }" @select="select">
+          <OptionGroup :group="option" v-bind="{ filter, selected }" @select="select">
             <template v-slot:label="scope">
               <slot name="option-group-label" v-bind="scope" />
             </template>
