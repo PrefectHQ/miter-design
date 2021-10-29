@@ -1,7 +1,7 @@
 <template>
   <div class="native-select" :class="classes.select">
     <div class="native-select__input-container">
-      <select v-model="value" class="native-select__input" :disabled="disabled">
+      <select ref="input" v-model="selected" class="native-select__input" :disabled="disabled">
         <template v-for="(optionOrGroup, i) in options" :key="i">
           <template v-if="isOptionGroup(optionOrGroup)">
             <optgroup :label="optionOrGroup.label" :disabled="optionOrGroup.disabled">
@@ -15,12 +15,24 @@
           </template>
         </template>
       </select>
-      <template v-if="modelValue === null">
-        <label class="native-select__label">
-          {{ label }}
-        </label>
-      </template>
-      <i class="native-select__arrow pi pi-arrow-down-s-line pi-lg" />
+      <div class="native-select__overlay">
+        <template v-if="showSelected">
+          <OptionLabel :label="selectedOption?.label" :icon="selectedOption?.icon">
+            <template v-slot:label="scope">
+              <slot name="selected-option-label" v-bind="scope" />
+            </template>
+            <template v-slot:icon="scope">
+              <slot name="selected-option-icon" v-bind="scope" />
+            </template>
+          </OptionLabel>
+        </template>
+        <template v-else>
+          <span class="native-select__label">
+            {{ label }}
+          </span>
+        </template>
+        <i class="native-select__arrow pi pi-arrow-down-s-line pi-lg" />
+      </div>
     </div>
   </div>
 </template>
@@ -28,7 +40,7 @@
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
 import { Options } from './types'
-import { isOptionGroup } from './utilities'
+import { getOptionFromOptionsAndGroupsByValue, isOptionGroup } from './utilities'
 import { Component } from '@/utilities/vue-class-component'
 
 class Props {
@@ -43,14 +55,26 @@ class Props {
 })
 export default class NativeSelect extends Vue.with(Props) {
 
+  $refs!: {
+    input: HTMLSelectElement
+  }
+
   private isOptionGroup = isOptionGroup
 
-  get value() {
+  get selected() {
     return this.modelValue
   }
 
-  set value(value: string | null) {
+  set selected(value: string | null) {
     this.$emit('update:modelValue', value)
+  }
+
+  get selectedOption() {
+    return getOptionFromOptionsAndGroupsByValue(this.options, this.selected)
+  }
+
+  get showSelected() {
+    return this.selectedOption?.value !== undefined
   }
 
   get classes() {
@@ -60,6 +84,10 @@ export default class NativeSelect extends Vue.with(Props) {
         'native-select--selected': this.modelValue !== null
       }
     }
+  }
+
+  public focus() {
+    this.$refs.input.focus()
   }
 
 }
@@ -96,12 +124,19 @@ export default class NativeSelect extends Vue.with(Props) {
   @include mixins.miter-bordered-rounded;
 }
 
-.native-select__label {
+.native-select__overlay {
   position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
   pointer-events: none;
+  padding: 0 20px;
+}
+
+.native-select__label {
   color: #{variables.$grey-20};
 }
 
@@ -122,6 +157,6 @@ export default class NativeSelect extends Vue.with(Props) {
   height: inherit;
   border: 0;
   padding: 0 20px;
-  color: inherit;
+  color: var(--select-background-color);
 }
 </style>
