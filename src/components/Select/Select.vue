@@ -2,22 +2,22 @@
   <!-- need to implement a native <select/> here as well for accesability -->
   <div class="select" ref="trigger" :class="classes.select" v-bind="$attrs">
     <div class="select__input" ref="input" tabindex="0" :class="classes.input" @click="click">
-      <span class="select__label" :class="classes.label">
-        <template v-if="showSelected">
-          <OptionLabel :label="selectedOption?.label" :icon="selectedOption?.icon">
-            <template v-slot:label="scope">
-              <slot name="selected-option-label" v-bind="scope" />
-            </template>
-            <template v-slot:icon="scope">
-              <slot name="selected-option-icon" v-bind="scope" />
-            </template>
-          </OptionLabel>
-        </template>
-        <template v-else>
+      <template v-if="showSelected">
+        <OptionLabel :label="selectedOption?.label" :icon="selectedOption?.icon">
+          <template v-slot:label="scope">
+            <slot name="selected-option-label" v-bind="scope" />
+          </template>
+          <template v-slot:icon="scope">
+            <slot name="selected-option-icon" v-bind="scope" />
+          </template>
+        </OptionLabel>
+      </template>
+      <template v-else>
+        <span class="select__label">
           {{ label }}
-        </template>
-      </span>
-      <i class="pi pi-arrow-down-s-line pi-lg" />
+        </span>
+      </template>
+      <i class="select__arrow pi pi-arrow-down-s-line pi-lg" />
     </div>
   </div>
   <teleport v-if="open" to="body">
@@ -119,9 +119,6 @@ export default class Select extends Vue.with(Props) {
         'select__input--open': this.open,
         'select__input--open-top': this.open && this.placement === 'top',
         'select__input--open-bottom': this.open && this.placement === 'bottom'
-      },
-      label: {
-        'select__label--selected': this.selected
       },
       content: {
         'select__content--top': this.placement === 'top',
@@ -238,12 +235,11 @@ export default class Select extends Vue.with(Props) {
 }
 
 .select__label {
-  margin-right: auto;
   color: #{variables.$grey-20};
 }
 
-.select__label--selected {
-  color: #{variables.$text--primary}
+.select__arrow {
+  margin-left: auto;
 }
 
 .select__search {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Selects</h3>
+    <h3 class="mb-2">Selects</h3>
     <Select v-model="value" :options="options" search />
     <!-- <div class="d-flex">
       <Select
@@ -115,7 +115,7 @@ import Select from '@/components/Select/Select.vue'
 import { Options } from '@/components/Select/types'
 
 const options: Options<string> = [
-  { label: 'First', value: 'first' },
+  { label: 'First', value: 'first', icon: 'time-line' },
   { label: 'Second', value: 'second', disabled: true },
   { label: 'Third', value: 'third' },
   { label: 'Group', options: [
