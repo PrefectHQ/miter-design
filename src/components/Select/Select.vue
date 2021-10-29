@@ -3,7 +3,19 @@
   <div class="select" ref="trigger" :class="classes.select" v-bind="$attrs">
     <div class="select__input" ref="input" tabindex="0" :class="classes.input" @click="click">
       <span class="select__label" :class="classes.label">
-        {{ valueLabelOrInputLabel }}
+        <template v-if="showSelected">
+          <OptionLabel :label="selectedOption?.label" :icon="selectedOption?.icon">
+            <template v-slot:label="scope">
+              <slot name="selected-option-label" v-bind="scope" />
+            </template>
+            <template v-slot:icon="scope">
+              <slot name="selected-option-icon" v-bind="scope" />
+            </template>
+          </OptionLabel>
+        </template>
+        <template v-else>
+          {{ label }}
+        </template>
       </span>
       <i class="pi pi-arrow-down-s-line pi-lg" />
     </div>
@@ -35,6 +47,7 @@ import { calculateMostVisiblePlacement, calculatePlacementPositionStyles, Placem
 import { nextTick } from 'vue'
 import { Vue, prop } from 'vue-class-component'
 import { Component } from '../../utilities/vue-class-component'
+import OptionLabel from './OptionLabel.vue'
 import SelectContent from './SelectContent.vue'
 import { Options } from './types'
 import { getOptionFromOptionsAndGroupsByValue } from './utilities'
@@ -53,6 +66,7 @@ class Props {
   emits: ['update:modelValue'],
   name: 'Select',
   components: {
+    OptionLabel,
     SelectContent,
     Input
   }
@@ -87,12 +101,12 @@ export default class Select extends Vue.with(Props) {
     return getOptionFromOptionsAndGroupsByValue(this.options, this.selected)
   }
 
-  get showSearch() {
-    return this.search || this.search === ''
+  get showSelected() {
+    return this.selectedOption?.value !== undefined
   }
 
-  get valueLabelOrInputLabel() {
-    return this.selectedOption?.label ?? this.label
+  get showSearch() {
+    return this.search || this.search === ''
   }
 
   get classes() {

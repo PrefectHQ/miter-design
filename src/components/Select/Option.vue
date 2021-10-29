@@ -1,15 +1,13 @@
 <template>
   <div class="option" :class="classes.option" @click="click">
-    <template v-if="icon">
-      <slot name="icon" :classes="classes.icon" v-bind="scope">
-        <i :class="classes.icon" />
-      </slot>
-    </template>
-    <div class="option__label">
-      <slot name="label" v-bind="scope">
-        {{ label }}
-      </slot>
-    </div>
+    <OptionLabel class="option__label" v-bind="{ icon, label }">
+      <template v-slot:icon="scope">
+        <slot name="icon" v-bind="scope" />
+      </template>
+      <template v-slot:label="scope">
+        <slot name="label" v-bind="scope" />
+      </template>
+    </OptionLabel>
     <template v-if="selected">
       <i class="pi pi-check-line pi-lg" />
     </template>
@@ -19,6 +17,7 @@
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
 import { Component } from '@/utilities/vue-class-component'
+import OptionLabel from '@/components/Select/OptionLabel.vue'
 
 class Props {
   label = prop<string>({ required: true })
@@ -29,7 +28,10 @@ class Props {
 }
 
 @Component({
-  emits: ['select']
+  emits: ['select'],
+  components: {
+    OptionLabel
+  }
 })
 export default class Option extends Vue.with(Props) {
 
