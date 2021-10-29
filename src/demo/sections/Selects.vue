@@ -2,6 +2,8 @@
   <div>
     <h3 class="mb-2">Selects</h3>
     <Select v-model="value" :options="options" search />
+    <p>Native Select</p>
+    <NativeSelect v-model="value" :options="options" />
     <!-- <div class="d-flex">
       <Select
         class="my-2 mr-2"
@@ -112,6 +114,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Select from '@/components/Select/Select.vue'
+import NativeSelect from '@/components/Select/NativeSelect.vue'
 import { Options } from '@/components/Select/types'
 
 const options: Options<string> = [
@@ -128,7 +131,8 @@ const options: Options<string> = [
 export default defineComponent({
   name: 'Selects',
   components: { 
-    Select, 
+    Select,
+    NativeSelect
     // OptionGroup, 
     // Option 
   },
