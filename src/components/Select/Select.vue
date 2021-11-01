@@ -59,6 +59,7 @@ class Props {
   label = prop<string>({ default: 'Choose an Option' })
   options = prop<Options>({ default: () => ([]) })
   disabled = prop<boolean | string>({ default: false })
+  required = prop<boolean | string>({ default: false })
   search = prop<boolean | string>({ default: false })
   searchPlaceholder = prop<string>({ default: 'Search by name' })
 }
@@ -115,11 +116,16 @@ export default class Select extends Vue.with(Props) {
     return this.disabled || this.disabled === ''
   }
 
+  get isRequired() {
+    return this.required || this.required === ''
+  }
+
   get classes() {
     return {
       select: {
         'select--open': this.open,
-        'select--disabled': this.isDisabled
+        'select--disabled': this.isDisabled,
+        'select--invalid': this.isRequired && this.modelValue === null
       },
       input: {
         'select__input--open': this.open,
@@ -241,6 +247,10 @@ export default class Select extends Vue.with(Props) {
 .select--disabled {
   --select-background-color: #{variables.$disabled};
   --select-cursor: not-allowed;
+}
+
+.select--invalid {
+  --miter-border-color: #{variables.$error};
 }
 
 .select__input {

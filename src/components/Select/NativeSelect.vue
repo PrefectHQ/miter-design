@@ -1,7 +1,7 @@
 <template>
   <div class="native-select" :class="classes.select">
     <div class="native-select__input-container">
-      <select ref="input" v-model="selected" class="native-select__input" :disabled="disabled">
+      <select ref="input" v-model="selected" class="native-select__input" v-bind="{ disabled, required }">
         <template v-for="(optionOrGroup, i) in options" :key="i">
           <template v-if="isOptionGroup(optionOrGroup)">
             <optgroup :label="optionOrGroup.label" :disabled="optionOrGroup.disabled">
@@ -48,6 +48,7 @@ class Props {
   options = prop<Options>({ default: () => ({}) })
   label = prop<string>({ default: 'Choose an Option' })
   disabled = prop<boolean | string>({ default: false })
+  required = prop<boolean | string>({ default: false })
 }
 
 @Component({
@@ -77,11 +78,16 @@ export default class NativeSelect extends Vue.with(Props) {
     return this.selectedOption?.value !== undefined
   }
 
+  get isRequired() {
+    return this.required || this.required === ''
+  }
+
   get classes() {
     return {
       select: {
         'native-select--disabled': this.disabled || this.disabled === '',
-        'native-select--selected': this.modelValue !== null
+        'native-select--selected': this.modelValue !== null,
+        'native-select--invalid': this.isRequired && this.modelValue === null
       }
     }
   }
@@ -110,6 +116,10 @@ export default class NativeSelect extends Vue.with(Props) {
 .native-select--disabled {
   --select-background-color: #{variables.$disabled};
   --select-cursor: not-allowed;
+}
+
+.native-select--invalid {
+  --miter-border-color: #{variables.$error};
 }
 
 .native-select:focus-within {

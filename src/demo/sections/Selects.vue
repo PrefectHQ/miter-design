@@ -8,6 +8,8 @@
     <SimpleSelect v-model="value" :options="simpleOptions" />
     <p>Disabled Select</p>
     <Select v-model="value" :options="options" disabled />
+    <p>Required Select</p>
+    <Select v-model="value" :options="options" required />
     <!-- <div class="d-flex">
       <Select
         class="my-2 mr-2"
