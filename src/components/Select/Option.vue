@@ -8,7 +8,7 @@
         <slot name="label" v-bind="scope" />
       </template>
     </OptionLabel>
-    <template v-if="selected">
+    <template v-if="isSelected">
       <i class="pi pi-check-line pi-lg" />
     </template>
   </div>
@@ -23,8 +23,8 @@ class Props {
   label = prop<string>({ required: true })
   value = prop({ required: true })
   icon = prop<string>({ default: '' })
-  disabled = prop<boolean>({ default: false })
-  selected = prop<boolean>({ default: false })
+  disabled = prop<boolean | string>({ default: false })
+  selected = prop<boolean | string>({ default: false })
 }
 
 @Component({
@@ -35,28 +35,36 @@ class Props {
 })
 export default class Option extends Vue.with(Props) {
 
+  get isDisabled() {
+    return this.disabled || this.disabled === ''
+  }
+
+  get isSelected() {
+    return this.selected || this.selected === ''
+  }
+
   get scope() {
     return {
       label: this.label,
       value: this.value,
       icon: this.icon,
-      disabled: this.disabled,
-      selected: this.selected
+      disabled: this.isDisabled,
+      selected: this.isSelected
     }
   }
 
   get classes() {
     return {
       option: {
-        'option--disabled': this.disabled,
-        'option--selected': this.selected
+        'option--disabled': this.isDisabled,
+        'option--selected': this.isSelected
       },
       icon: `pi pi-1x mr-1 pi-${this.icon}`
     }
   }
 
   private click() {
-    if(this.disabled) {
+    if(this.isDisabled) {
       return
     }
 
