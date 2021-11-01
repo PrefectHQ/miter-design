@@ -75,8 +75,4 @@ export default class OptionGroup extends Vue.with(Props) {
   color: #{variables.$grey-20};
 }
 
-.option-group--disabled {
-
-}
-
 </style>
