@@ -3,7 +3,7 @@ name: Release
 on:
   create:
     tags:
-      - "[0-9]+.[0-9]+.[0-9]+" # assumes x.y.z versioning
+      - "v[0-9]+.[0-9]+.[0-9]+" # assumes x.y.z versioning
 
 jobs:
   build-and-publish:
@@ -21,9 +21,12 @@ jobs:
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
           
-      - run: npm ci install
-      - run: npm run build
-      - run: npm publish --dry-run
+      - name: Install dependencies
+        run: npm ci install
+      - name: Build components
+        run: npm run build
+      - name: Publish to NPM 
+        run: npm publish --dry-run
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
