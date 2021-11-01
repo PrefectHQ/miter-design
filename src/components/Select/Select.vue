@@ -1,5 +1,5 @@
 <template>
-  <button class="select" tabindex="-1" ref="trigger" :disabled="disabled" :class="classes.select" v-bind="$attrs">
+  <div class="select" ref="trigger" :disabled="disabled" :class="classes.select" v-bind="$attrs">
     <NativeSelect ref="input" v-model="selected" v-bind="{ options, disabled }" />
     <div class="select__input" :class="classes.input" @click="click">
       <template v-if="showSelected">
@@ -19,7 +19,7 @@
       </template>
       <i class="select__arrow pi pi-arrow-down-s-line pi-lg" />
     </div>
-  </button>
+  </div>
   <teleport v-if="open" to="body">
     <SelectContent ref="content" class="select__content" :class="classes.content" :style="styles.content" :filter="term" v-bind="{ options, selected }" @select="select">
       <template v-slot:before-options v-if="showSearch">
