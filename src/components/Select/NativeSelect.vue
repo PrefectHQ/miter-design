@@ -17,7 +17,7 @@
       </select>
       <div class="native-select__overlay">
         <template v-if="showSelected">
-          <OptionLabel :label="selectedOption?.label" :icon="selectedOption?.icon">
+          <OptionLabel v-bind="selectedOption">
             <template v-slot:label="scope">
               <slot name="selected-option-label" v-bind="scope" />
             </template>

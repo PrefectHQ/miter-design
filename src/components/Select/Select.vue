@@ -3,7 +3,7 @@
     <NativeSelect ref="input" v-model="selected" v-bind="{ options, disabled }" />
     <div class="select__input" :class="classes.input" @click="click">
       <template v-if="showSelected">
-        <OptionLabel :label="selectedOption?.label" :icon="selectedOption?.icon">
+        <OptionLabel v-bind="selectedOption">
           <template v-slot:label="scope">
             <slot name="selected-option-label" v-bind="scope" />
           </template>
