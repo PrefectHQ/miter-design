@@ -10,19 +10,12 @@
 
       <div class="my-2">
         Inner:
-        <Select v-model="content">
-          <Option value="Text">Text</Option>
-          <Option value="Component">Component</Option>
-        </Select>
+        <SimpleSelect v-model="content" :options="['Text', 'Component']" />
       </div>
 
       <div class="my-2">
         Type:
-        <Select v-model="type">
-          <Option>None</Option>
-          <Option value="error">Error</Option>
-          <Option value="success">Success</Option>
-        </Select>
+        <SimpleSelect v-model="type" :options="['None', 'Error', 'Success']" />
       </div>
 
       <div class="my-2">
@@ -47,11 +40,11 @@ import Toast from '@/components/Toast/Toast.vue'
 })
 export default class Toasts extends Vue {
   toasts: any[] = []
-  content: string = 'text'
+  content: string = 'Text'
   dismissable: boolean = true
   timeout: string = '5000'
   showToast: boolean = true
-  type: string = 'success'
+  type: string = 'Success'
 
   addToast() {
     this.toasts.push(
@@ -61,7 +54,7 @@ export default class Toasts extends Vue {
         content: new Date().toString(),
         dismissable: this.dismissable,
         timeout: this.timeout ? parseInt(this.timeout) : undefined,
-        type: this.type
+        type: this.type.toLowerCase()
       })
     )
   }
