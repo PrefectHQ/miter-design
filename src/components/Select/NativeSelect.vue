@@ -27,8 +27,8 @@
           </OptionLabel>
         </template>
         <template v-else>
-          <span class="native-select__label">
-            {{ label }}
+          <span class="native-select__placeholder">
+            {{ placeholder }}
           </span>
         </template>
         <i class="native-select__arrow pi pi-arrow-down-s-line pi-lg" />
@@ -47,7 +47,7 @@ import OptionLabel from './OptionLabel.vue'
 class Props {
   modelValue = prop<string | null>({ default: null })
   options = prop<Options>({ default: () => ({}) })
-  label = prop<string>({ default: 'Choose an Option' })
+  placeholder = prop<string>({ default: 'Choose an Option' })
   disabled = prop<boolean | string>({ default: false })
   required = prop<boolean | string>({ default: false })
 }
@@ -152,7 +152,7 @@ export default class NativeSelect extends Vue.with(Props) {
   padding: 0 20px;
 }
 
-.native-select__label {
+.native-select__placeholder {
   color: #{variables.$grey-20};
 }
 

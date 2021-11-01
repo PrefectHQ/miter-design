@@ -13,8 +13,8 @@
         </OptionLabel>
       </template>
       <template v-else>
-        <span class="select__label">
-          {{ label }}
+        <span class="select__placeholder">
+          {{ placeholder }}
         </span>
       </template>
       <i class="select__arrow pi pi-arrow-down-s-line pi-lg" />
@@ -56,7 +56,7 @@ import Input from '@/components/Input/Input.vue'
 
 class Props {
   modelValue = prop<string | null>({ default: null })
-  label = prop<string>({ default: 'Choose an Option' })
+  placeholder = prop<string>({ default: 'Choose an Option' })
   options = prop<Options>({ default: () => ([]) })
   disabled = prop<boolean | string>({ default: false })
   required = prop<boolean | string>({ default: false })
@@ -273,7 +273,7 @@ export default class Select extends Vue.with(Props) {
   }
 }
 
-.select__label {
+.select__placeholder {
   color: #{variables.$grey-20};
 }
 
