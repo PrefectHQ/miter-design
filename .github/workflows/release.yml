@@ -10,9 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+
+      # reads the node version set in .nvmrc
+      - name: Read .nvmrc
+        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+        id: nvm
+
+      # installs a specific version of nodejs
+      - uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+          
       - run: npm ci install
       - run: npm run build
       - run: npm publish --dry-run
