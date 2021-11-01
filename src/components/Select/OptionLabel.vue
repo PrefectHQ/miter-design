@@ -15,12 +15,14 @@
 
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
+import { Component } from '@/utilities/vue-class-component'
 
 class Props {
   label = prop<string>({ required: true })
   icon = prop<string>({ default: '' })
 }
 
+@Component({})
 export default class OptionLabel extends Vue.with(Props) {
 
   get scope() {
