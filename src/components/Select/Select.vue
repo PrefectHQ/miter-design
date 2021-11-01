@@ -1,5 +1,5 @@
 <template>
-  <div class="select" ref="trigger" :disabled="disabled" :class="classes.select" v-bind="$attrs">
+  <div class="select" ref="trigger" :class="classes.select" v-bind="$attrs">
     <NativeSelect ref="input" v-model="selected" v-bind="{ options, disabled }" />
     <div class="select__input" :class="classes.input" @click="click">
       <template v-if="isSelected">
@@ -262,8 +262,9 @@ export default class Select extends Vue.with(Props) {
 
 .select--open,
 .select:active,
+.select:hover,
 .select:focus-within {
-  &:not(:disabled) {
+  &:not(.select--disabled) {
     --miter-border-color: #{variables.$primary};
   }
 }
