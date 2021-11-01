@@ -1,5 +1,5 @@
 <template>
-  <button class="select" tabindex="-1" ref="trigger" :class="classes.select" v-bind="$attrs">
+  <button class="select" tabindex="-1" ref="trigger" :disabled="disabled" :class="classes.select" v-bind="$attrs">
     <NativeSelect ref="input" v-model="selected" v-bind="{ options, disabled }" />
     <div class="select__input" :class="classes.input" @click="click">
       <template v-if="showSelected">
@@ -111,11 +111,15 @@ export default class Select extends Vue.with(Props) {
     return this.search || this.search === ''
   }
 
+  get isDisabled() {
+    return this.disabled || this.disabled === ''
+  }
+
   get classes() {
     return {
       select: {
         'select--open': this.open,
-        'select--disabled': this.disabled || this.disabled === ''
+        'select--disabled': this.isDisabled
       },
       input: {
         'select__input--open': this.open,
@@ -177,7 +181,7 @@ export default class Select extends Vue.with(Props) {
   }
 
   private click(event: MouseEvent) {
-    if(this.disabled) {
+    if(this.isDisabled) {
       return
     }
 
@@ -225,7 +229,9 @@ export default class Select extends Vue.with(Props) {
 .select--open,
 .select:active,
 .select:focus-within {
-  --miter-border-color: #{variables.$primary};
+  &:not(:disabled) {
+    --miter-border-color: #{variables.$primary};
+  }
 }
 
 .select--open {

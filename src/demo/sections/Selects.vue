@@ -6,6 +6,8 @@
     <NativeSelect v-model="value" :options="options" />
     <p>Simple Select</p>
     <SimpleSelect v-model="value" :options="simpleOptions" />
+    <p>Disabled Select</p>
+    <Select v-model="value" :options="options" disabled />
     <!-- <div class="d-flex">
       <Select
         class="my-2 mr-2"
