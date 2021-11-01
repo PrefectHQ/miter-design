@@ -16,7 +16,7 @@
         </template>
       </select>
       <div class="native-select__overlay">
-        <template v-if="showSelected">
+        <template v-if="isSelected">
           <OptionLabel v-bind="selectedOption">
             <template v-slot:label="scope">
               <slot name="selected-option-label" v-bind="scope" />
@@ -78,8 +78,8 @@ export default class NativeSelect extends Vue.with(Props) {
     return getOptionFromOptionsAndGroupsByValue(this.options, this.selected)
   }
 
-  get showSelected() {
-    return this.selectedOption?.value !== undefined
+  get isSelected() {
+    return this.selected !== null
   }
 
   get isRequired() {
@@ -91,7 +91,7 @@ export default class NativeSelect extends Vue.with(Props) {
       select: {
         'native-select--disabled': this.disabled || this.disabled === '',
         'native-select--simple-selected': this.modelValue !== null,
-        'native-select--invalid': this.isRequired && this.modelValue === null
+        'native-select--invalid': this.isRequired && !this.isSelected
       }
     }
   }

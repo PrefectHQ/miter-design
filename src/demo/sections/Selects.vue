@@ -20,7 +20,8 @@ import NativeSelect from '@/components/Select/NativeSelect.vue'
 import SimpleSelect from '@/components/Select/SimpleSelect.vue'
 import { Options } from '@/components/Select/types'
 
-const options: Options<string> = [
+const options: Options<string | null> = [
+  { label: 'None', value: null, icon: 'time-line' },
   { label: 'First', value: 'first', icon: 'time-line' },
   { label: 'Second', value: 'second', disabled: true },
   { label: 'Third', value: 'third' },
