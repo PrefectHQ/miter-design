@@ -14,13 +14,15 @@
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
 import { PopoverPlacement } from './getPosition'
+import { Component } from '@/utilities/vue-class-component'
 
 class Props {
   position = prop<PopoverPlacement>({ default: 'top' })
   title = prop<string>({ required: false, default: '' })
 }
 
-export default class Popover extends Vue.with(Props) {
+@Component({})
+export default class PopoverContent extends Vue.with(Props) {
 
   get classes() {
     return {
