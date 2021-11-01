@@ -125,9 +125,7 @@ export default class Select extends Vue.with(Props) {
         'select--invalid': this.isRequired && !this.isSelected
       },
       input: {
-        'select__input--open': this.open,
-        'select__input--open-top': this.open && this.placement === 'top',
-        'select__input--open-bottom': this.open && this.placement === 'bottom'
+        'select__input--open': this.open
       },
       content: {
         'select__content--top': this.placement === 'top',
