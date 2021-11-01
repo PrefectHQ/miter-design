@@ -1,9 +1,9 @@
-import Timepicker from './Timepicker.vue'
+import TimePicker from './TimePicker.vue'
 import { ref } from 'vue'
 
 export default {
-  title: 'Miter Design/Timepicker',
-  component: Timepicker,
+  title: 'Miter Design/TimePicker',
+  component: TimePicker,
   parameters: {
     design: {
       type: 'figma',
@@ -14,14 +14,14 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { Timepicker },
+  components: { TimePicker },
   setup() {
     const modelValue = ref(args.modelValue)
     const disabled = ref(args.disabled || false)
 
     return { ...args, modelValue, disabled }
   },
-  template: '<Timepicker v-model="modelValue" :disabled="disabled" />'
+  template: '<TimePicker v-model="modelValue" :disabled="disabled" />'
 })
 
 export const Default = Template.bind({})
