@@ -42,6 +42,7 @@ import { Vue, prop } from 'vue-class-component'
 import { Options } from './types'
 import { getOptionFromOptionsAndGroupsByValue, isOptionGroup } from './utilities'
 import { Component } from '@/utilities/vue-class-component'
+import OptionLabel from './OptionLabel.vue'
 
 class Props {
   modelValue = prop<string | null>({ default: null })
@@ -52,7 +53,10 @@ class Props {
 }
 
 @Component({
-  emits: ['update:modelValue']
+  emits: ['update:modelValue'],
+  components: {
+    OptionLabel
+  }
 })
 export default class NativeSelect extends Vue.with(Props) {
 
