@@ -254,12 +254,15 @@ export default class Select extends Vue.with(Props) {
   width: 100%;
   max-width: var(--select-max-width);
   height: var(--select-height);
+  -webkit-appearance: none;
   appearance: none;
   border: 0;
   padding: 0;
   background-color: transparent;
+  -webkit-user-select: none;
   user-select: none;
   position: relative;
+  color: #{variables.$black};
 }
 
 .select--open,
@@ -322,8 +325,7 @@ export default class Select extends Vue.with(Props) {
 .select__content {
   position: absolute;
   z-index: 1;
-
-  @include mixins.drop-shadow;
+  box-shadow: #{variables.$box-shadow-md};
 }
 
 .select__content--top {

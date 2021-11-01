@@ -1,5 +1,5 @@
 <template>
-  <div class="select-content" tabindex="0" @keydown="keydown">
+  <div class="select-content">
     <slot name="before-options" />
     <div class="select-content__options">
       <template v-for="option in options" :key="option.label">
@@ -72,21 +72,17 @@ export default class SelectContent extends Vue.with(Props) {
     this.$emit('select', value)
   }
 
-  private keydown(event: KeyboardEvent) {
-    // nav/select options
-  }
-
 }
 </script>
 
 <style lang="scss">
 
 .select-content {
-  width: var(--select-max-width, 350px);
+  max-width: 350px;
   background-color: #fff;
   border: 1px solid var(--miter-border-color);
   border-radius: 3px;
-  max-height: calc(var(--select-height, 58px) * 6);
+  max-height: calc(58px * 6);
   overflow-y: auto;
 }
 

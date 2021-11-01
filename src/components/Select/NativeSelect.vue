@@ -165,6 +165,7 @@ export default class NativeSelect extends Vue.with(Props) {
 .native-select__input {
   background-color: var(--simple-select-background-color);
   cursor: var(--simple-select-cursor);
+  -webkit-appearance: none;
   appearance: none;
   width: inherit;
   height: inherit;
