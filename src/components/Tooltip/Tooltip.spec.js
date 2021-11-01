@@ -1,5 +1,10 @@
 import { mount } from '@vue/test-utils'
 import Tooltip from './Tooltip.vue'
+import TooltipContent from './TooltipContent.vue'
+
+class DOMRect {}
+
+global.DOMRect = DOMRect
 
 const factoryMount = (props = {}) => {
   return mount(Tooltip, {
@@ -10,23 +15,44 @@ const factoryMount = (props = {}) => {
 }
 
 describe('props', () => {
-  test('content prop is passed', () => {
+  test('content prop is passed', async () => {
     const wrapper = factoryMount({ content: 'hello' })
-    expect(wrapper.find('.tooltip-content').text()).toBe('hello')
-  })
+    
+    await wrapper.vm.openTooltip()
+    
+    const tooltip = wrapper.findComponent(TooltipContent)
 
-  test('displays empty string text if content prop is not passed', () => {
+    expect(tooltip.find('.tooltip__content').text()).toBe('hello')
+  })
+  
+  test('displays empty string text if content prop is not passed', async () => {
     const wrapper = factoryMount()
-    expect(wrapper.find('.tooltip-content').text()).toBe('')
+    
+    await wrapper.vm.openTooltip()
+    
+    const tooltip = wrapper.findComponent(TooltipContent)
+
+    expect(tooltip.find('.tooltip__content').text()).toBe('')
   })
 
-  test('position is passed', () => {
-    const wrapper = factoryMount({ position: 'right' })
-    expect(wrapper.classes()).toContain('right')
+  test('placement is passed', async () => {
+    const wrapper = factoryMount({ placement: 'right' })
+    
+    await wrapper.vm.openTooltip()
+    
+    const tooltip = wrapper.findComponent(TooltipContent)
+
+    expect(tooltip.classes()).toContain('tooltip--right')
   })
 
-  test('defaults to top if position is not passed', () => {
+  test('placement defaults to top', async () => {
     const wrapper = factoryMount()
-    expect(wrapper.classes()).toContain('top')
+    
+    await wrapper.vm.openTooltip()
+    
+    const tooltip = wrapper.findComponent(TooltipContent)
+
+    expect(tooltip.classes()).toContain('tooltip--top')
   })
+
 })
