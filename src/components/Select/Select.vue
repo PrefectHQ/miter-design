@@ -22,7 +22,7 @@
   </div>
   <teleport v-if="open" to="body">
     <SelectContent ref="content" class="select__content" :class="classes.content" :style="styles.content" :filter="term" v-bind="{ options, selected }" @select="select">
-      <template v-slot:before-options v-if="showSearch">
+      <template v-if="showSearch" v-slot:before-options>
         <Input v-model="term" class="select__search" :placeholder="searchPlaceholder">
           <template v-slot:prepend>
             <i class="pi pi-xs pi-search-line" />
