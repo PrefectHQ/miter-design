@@ -1,4 +1,5 @@
-- Refactored tooltip directive and component - [#99](https://github.com/PrefectHQ/miter-design/pull/101)
+- Refactored Select Component. Introduce SimpleSelect and NativeSelect components - [#104](https://github.com/PrefectHQ/miter-design/pull/104)
+- Refactored tooltip directive and component - [#101](https://github.com/PrefectHQ/miter-design/pull/101)
 - Github action to automate running tests - [#99](https://github.com/PrefectHQ/miter-design/pull/99)
 - Refactor NumberInput to be simpler and Clean up TimePicker - [#96](https://github.com/PrefectHQ/miter-design/pull/96)
 - Fixes an issue where the main content section wasn't correctly flexed - [#91](https://github.com/PrefectHQ/miter-design/pull/91)
