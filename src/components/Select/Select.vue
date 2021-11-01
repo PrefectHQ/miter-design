@@ -147,12 +147,12 @@ export default class Select extends Vue.with(Props) {
 
   public mounted() {
     document.addEventListener('click', this.documentClick)
-    window.addEventListener('resize', this.windowResize)
+    window.addEventListener('resize', this.closeSelect)
   }
 
   public unmounted() {
     document.removeEventListener('click', this.documentClick)
-    window.removeEventListener('resize', this.windowResize)
+    window.removeEventListener('resize', this.closeSelect)
   }
 
   public async openSelect() {
@@ -224,10 +224,6 @@ export default class Select extends Vue.with(Props) {
     if(!inContent && !inTrigger) {
       this.closeSelect()
     }
-  }
-
-  private windowResize() {
-    this.closeSelect()
   }
 
 }
