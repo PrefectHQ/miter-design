@@ -21,7 +21,7 @@ import OptionLabel from '@/components/Select/OptionLabel.vue'
 
 class Props {
   label = prop<string>({ required: true })
-  value = prop({ required: false }) // will this work or value being optional?
+  value = prop({ required: true })
   icon = prop<string>({ default: '' })
   disabled = prop<boolean>({ default: false })
   selected = prop<boolean>({ default: false })
