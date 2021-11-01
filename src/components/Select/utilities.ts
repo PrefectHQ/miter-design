@@ -1,7 +1,11 @@
 import { OptionGroupType, Options, OptionType } from "./types";
 
-export function isOptionGroup<T>(option: OptionGroupType<T> | OptionType<T>): option is OptionGroupType<T> {
-  return option.hasOwnProperty('options')
+export function isOptionGroup<T>(optionOrGroup: OptionGroupType<T> | OptionType<T>): optionOrGroup is OptionGroupType<T> {
+  return optionOrGroup.hasOwnProperty('options')
+}
+
+export function isOption<T>(optionOrGroup: OptionGroupType<T> | OptionType<T>): optionOrGroup is OptionType<T> {
+  return optionOrGroup.hasOwnProperty('value')
 }
 
 export function isOptionSelected<T>(option: OptionType<T>, value: T): boolean {
