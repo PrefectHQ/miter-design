@@ -1,7 +1,7 @@
 <template>
-  <!-- need to implement a native <select/> here as well for accesability -->
-  <div class="select" ref="trigger" :class="classes.select" v-bind="$attrs">
-    <div class="select__input" ref="input" tabindex="0" :class="classes.input" @click="click">
+  <button class="select" tabindex="-1" ref="trigger" :class="classes.select" v-bind="$attrs">
+    <NativeSelect ref="input" v-model="selected" v-bind="{ options, disabled }" />
+    <div class="select__input" :class="classes.input" @click="click">
       <template v-if="showSelected">
         <OptionLabel :label="selectedOption?.label" :icon="selectedOption?.icon">
           <template v-slot:label="scope">
@@ -19,7 +19,7 @@
       </template>
       <i class="select__arrow pi pi-arrow-down-s-line pi-lg" />
     </div>
-  </div>
+  </button>
   <teleport v-if="open" to="body">
     <SelectContent ref="content" class="select__content" :class="classes.content" :style="styles.content" :filter="term" v-bind="{ options, selected }" @select="select">
       <template v-slot:before-options v-if="showSearch">
@@ -47,6 +47,7 @@ import { calculateMostVisiblePlacement, calculatePlacementPositionStyles, Placem
 import { nextTick } from 'vue'
 import { Vue, prop } from 'vue-class-component'
 import { Component } from '../../utilities/vue-class-component'
+import NativeSelect from './NativeSelect.vue'
 import OptionLabel from './OptionLabel.vue'
 import SelectContent from './SelectContent.vue'
 import { Options } from './types'
@@ -66,6 +67,7 @@ class Props {
   emits: ['update:modelValue'],
   name: 'Select',
   components: {
+    NativeSelect,
     OptionLabel,
     SelectContent,
     Input
@@ -75,7 +77,7 @@ export default class Select extends Vue.with(Props) {
 
   $refs!: {
     trigger: HTMLDivElement
-    input: HTMLDivElement
+    input: NativeSelect
     content: SelectContent
   }
 
@@ -158,6 +160,8 @@ export default class Select extends Vue.with(Props) {
 
   public closeSelect() {
     this.open = false
+
+    this.focus()
   }
 
   public focus() {
@@ -181,6 +185,10 @@ export default class Select extends Vue.with(Props) {
   }
 
   private documentClick(event: MouseEvent) {
+    if(!this.open) {
+      return
+    }
+
     const target = event.target as HTMLElement
     const inContent = this.$refs.content?.$el?.contains(target)
     const inTrigger = this.$refs.trigger.contains(target)
@@ -206,10 +214,16 @@ export default class Select extends Vue.with(Props) {
 
   width: var(--select-width);
   height: var(--select-height);
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
   user-select: none;
+  position: relative;
 }
 
 .select--open,
+.select:active,
 .select:focus-within {
   --miter-border-color: #{variables.$primary};
 }
@@ -227,11 +241,20 @@ export default class Select extends Vue.with(Props) {
   background-color: var(--select-background-color);
   cursor: var(--select-cursor);
   height: inherit;
-  display: flex;
   align-items: center;
   padding: 0 20px;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
 
   @include mixins.miter-bordered-rounded;
+
+  @media (hover: hover) {
+    display: flex;
+  }
 }
 
 .select__label {
