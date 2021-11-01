@@ -86,7 +86,7 @@ export default class NativeSelect extends Vue.with(Props) {
     return {
       select: {
         'native-select--disabled': this.disabled || this.disabled === '',
-        'native-select--selected': this.modelValue !== null,
+        'native-select--simple-selected': this.modelValue !== null,
         'native-select--invalid': this.isRequired && this.modelValue === null
       }
     }
@@ -104,18 +104,20 @@ export default class NativeSelect extends Vue.with(Props) {
 @use '../../styles/abstracts/mixins';
 
 .native-select {
-  --select-background-color: #fff;
-  --select-cursor: pointer;
+  --simple-select-background-color: var(--select-background-color, #fff);
+  --simple-select-cursor: var(--select-cursor, pointer);
+  --simple-select-width: var(--select-width, 350px);
+  --simple-select-height: var(--select-height, 58px);
   --miter-width: 16px;
 
-  width: 350px;
-  height: 58px;
+  width: var(--simple-select-width);
+  height: var(--simple-select-height);
   user-select: none;
 }
 
 .native-select--disabled {
-  --select-background-color: #{variables.$disabled};
-  --select-cursor: not-allowed;
+  --simple-select-background-color: #{variables.$disabled};
+  --simple-select-cursor: not-allowed;
 }
 
 .native-select--invalid {
@@ -160,13 +162,13 @@ export default class NativeSelect extends Vue.with(Props) {
 }
 
 .native-select__input {
-  background-color: var(--select-background-color);
-  cursor: var(--select-cursor);
+  background-color: var(--simple-select-background-color);
+  cursor: var(--simple-select-cursor);
   appearance: none;
   width: inherit;
   height: inherit;
   border: 0;
   padding: 0 20px;
-  color: var(--select-background-color);
+  color: var(--simple-select-background-color);
 }
 </style>
