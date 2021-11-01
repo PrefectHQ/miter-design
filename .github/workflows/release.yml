@@ -1,0 +1,21 @@
+name: Release
+
+on:
+  create:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+" # assumes x.y.z versioning
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: npm ci install
+      - run: npm run build
+      - run: npm publish --dry-run
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_PUBLISH_TOKEN }}
