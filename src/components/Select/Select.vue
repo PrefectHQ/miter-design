@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { calculateMostVisiblePlacement, calculatePlacementPositionStyles, Placement, PlacementPositionStyles } from '@/utilities/position'
+import { calculateMostVisiblePlacement, calculatePlacementPositionStyles, Placement, PlacementPositionStyles, defaultPositionStyles } from '@/utilities/position'
 import { nextTick } from 'vue'
 import { Vue, prop } from 'vue-class-component'
 import { Component } from '../../utilities/vue-class-component'
@@ -87,12 +87,7 @@ export default class Select extends Vue.with(Props) {
   private term: string = ''
   private placement: Placement = 'top'
   private width: number = 0
-  private position: PlacementPositionStyles = {
-    top: '0px',
-    right: '0px',
-    bottom: '0px',
-    left: '0px'
-  }
+  private position: PlacementPositionStyles = defaultPositionStyles
 
   get selected() {
     return this.modelValue

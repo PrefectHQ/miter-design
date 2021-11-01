@@ -4,6 +4,13 @@ export type Placement = 'top' | 'right' | 'bottom' | 'left'
 
 export const allPlacements: Placement[] = ['top', 'right', 'bottom', 'left']
 
+export const defaultPositionStyles: PlacementPositionStyles = {
+  top: '0px',
+  right: '0px',
+  bottom: '0px',
+  left: '0px'
+}
+
 export type PlacementPositionStyles = {
   top: Pixels,
   right: Pixels,
