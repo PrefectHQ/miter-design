@@ -4,6 +4,8 @@
     <Select v-model="value" :options="options" search />
     <p>Native Select</p>
     <NativeSelect v-model="value" :options="options" />
+    <p>Simple Select</p>
+    <SimpleSelect v-model="value" :options="simpleOptions" />
     <!-- <div class="d-flex">
       <Select
         class="my-2 mr-2"
@@ -115,6 +117,7 @@
 import { defineComponent } from 'vue'
 import Select from '@/components/Select/Select.vue'
 import NativeSelect from '@/components/Select/NativeSelect.vue'
+import SimpleSelect from '@/components/Select/SimpleSelect.vue'
 import { Options } from '@/components/Select/types'
 
 const options: Options<string> = [
@@ -132,21 +135,14 @@ export default defineComponent({
   name: 'Selects',
   components: { 
     Select,
-    NativeSelect
-    // OptionGroup, 
-    // Option 
+    NativeSelect,
+    SimpleSelect
   },
   data() {
     return {
-      // selected1: '',
-      // selected2: '',
-      // options: ['First', 'Second', 'Third'],
-      // items: [
-      //   { id: 'abc', label: 'Hello' },
-      //   { id: 'dfe', label: 'World' }
-      // ]
       value: null,
-      options
+      options,
+      simpleOptions: ['first', 'second', 'third', 'another', 'and another']
     }
   }
 })
