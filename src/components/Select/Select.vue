@@ -297,7 +297,6 @@ export default class Select extends Vue.with(Props) {
 }
 
 .select__placeholder {
-  text-align: left;
   color: #{variables.$grey-20};
 }
 
