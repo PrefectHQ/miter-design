@@ -122,7 +122,7 @@ export default class Select extends Vue.with(Props) {
       select: {
         'select--open': this.open,
         'select--disabled': this.isDisabled,
-        'select--invalid': this.isRequired && this.modelValue === null
+        'select--invalid': this.isRequired && !this.isSelected
       },
       input: {
         'select__input--open': this.open,
