@@ -82,7 +82,7 @@ export default class SelectContent extends Vue.with(Props) {
 <style lang="scss">
 
 .select-content {
-  width: var(--select-width, 350px);
+  width: var(--select-max-width, 350px);
   background-color: #fff;
   border: 1px solid var(--miter-border-color);
   border-radius: 3px;

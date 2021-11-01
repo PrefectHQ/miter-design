@@ -53,6 +53,7 @@ import SelectContent from './SelectContent.vue'
 import { Options } from './types'
 import { getOptionFromOptionsAndGroupsByValue } from './utilities'
 import Input from '@/components/Input/Input.vue'
+import { toPixels } from '@/utilities/units'
 
 class Props {
   modelValue = prop<string | null>({ default: null })
@@ -85,6 +86,7 @@ export default class Select extends Vue.with(Props) {
   private open: boolean = false
   private term: string = ''
   private placement: Placement = 'top'
+  private width: number = 0
   private position: PlacementPositionStyles = {
     top: '0px',
     right: '0px',
@@ -144,31 +146,41 @@ export default class Select extends Vue.with(Props) {
       content: {
         top: this.placement === 'bottom' ? this.position.top : null,
         bottom: this.placement === 'top' ? this.position.bottom : null,
-        left: this.position.left
+        left: this.position.left,
+        width: toPixels(this.width)
       }
     }
   }
 
   public mounted() {
     document.addEventListener('click', this.documentClick)
+    window.addEventListener('resize', this.windowResize)
   }
 
   public unmounted() {
     document.removeEventListener('click', this.documentClick)
+    window.removeEventListener('resize', this.windowResize)
   }
 
   public async openSelect() {
+    if(this.open) {
+      return
+    }
+
     this.open = true
 
     await nextTick()
-
-    const { placement } = calculateMostVisiblePlacement(this.$refs.trigger, this.$refs.content.$el, document.body, ['bottom', 'top'])
-
-    this.placement = placement
-    this.position = calculatePlacementPositionStyles(placement, this.$refs.trigger, this.$refs.content.$el, document.body)
+    this.updateContentWidth()
+    
+    await nextTick()
+    this.calculatePlacementAndPosition()
   }
 
   public closeSelect() {
+    if(!this.open) {
+      return
+    }
+
     this.open = false
 
     this.focus()
@@ -184,6 +196,19 @@ export default class Select extends Vue.with(Props) {
 
     this.closeSelect()
     this.focus()
+  }
+
+  private calculatePlacementAndPosition() {
+    const { placement } = calculateMostVisiblePlacement(this.$refs.trigger, this.$refs.content.$el, document.body, ['bottom', 'top'])
+
+    this.placement = placement
+    this.position = calculatePlacementPositionStyles(placement, this.$refs.trigger, this.$refs.content.$el, document.body)
+  }
+
+  private updateContentWidth() {
+    const { width } = this.$refs.trigger.getBoundingClientRect()
+
+    this.width = width
   }
 
   private click(event: MouseEvent) {
@@ -208,6 +233,10 @@ export default class Select extends Vue.with(Props) {
     }
   }
 
+  private windowResize() {
+    this.closeSelect()
+  }
+
 }
 </script>
 
@@ -218,11 +247,12 @@ export default class Select extends Vue.with(Props) {
 .select {
   --select-background-color: #fff;
   --select-cursor: pointer;
-  --select-width: 350px;
+  --select-max-width: 350px;
   --select-height: 58px;
   --miter-width: 16px;
 
-  width: var(--select-width);
+  width: 100%;
+  max-width: var(--select-max-width);
   height: var(--select-height);
   appearance: none;
   border: 0;
@@ -274,6 +304,7 @@ export default class Select extends Vue.with(Props) {
 }
 
 .select__placeholder {
+  text-align: left;
   color: #{variables.$grey-20};
 }
 

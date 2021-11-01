@@ -110,11 +110,12 @@ export default class NativeSelect extends Vue.with(Props) {
 .native-select {
   --simple-select-background-color: var(--select-background-color, #fff);
   --simple-select-cursor: var(--select-cursor, pointer);
-  --simple-select-width: var(--select-width, 350px);
+  --simple-select-max-width: var(--select-max-width, 350px);
   --simple-select-height: var(--select-height, 58px);
   --miter-width: 16px;
 
-  width: var(--simple-select-width);
+  width: 100%;
+  max-width: var(--simple-select-max-width);
   height: var(--simple-select-height);
   user-select: none;
 }
@@ -157,12 +158,8 @@ export default class NativeSelect extends Vue.with(Props) {
 }
 
 .native-select__arrow {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
   color: #{variables.$grey-80};
-  pointer-events: none;
+  margin-left: auto;
 }
 
 .native-select__input {
