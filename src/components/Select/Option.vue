@@ -91,7 +91,7 @@ export default class Option extends Vue.with(Props) {
   }
 
   &:not(:last-child) {
-    border-bottom: 1px solid #f7f7f8;
+    border-bottom: 1px solid #{variables.$secondary-background};
   }
 }
 
