@@ -2,7 +2,7 @@
   <div class="select" ref="trigger" :class="classes.select" v-bind="$attrs">
     <NativeSelect ref="input" v-model="selected" v-bind="{ options, disabled }" />
     <div class="select__input" :class="classes.input" @click="click">
-      <template v-if="isSelected">
+      <template v-if="hasSelection">
         <OptionLabel v-bind="selectedOption">
           <template v-slot:label="scope">
             <slot name="selected-option-label" v-bind="scope" />
@@ -101,7 +101,7 @@ export default class Select extends Vue.with(Props) {
     return getOptionFromOptionsAndGroupsByValue(this.options, this.selected)
   }
 
-  get isSelected() {
+  get hasSelection() {
     return this.selected !== null
   }
 
@@ -122,7 +122,7 @@ export default class Select extends Vue.with(Props) {
       select: {
         'select--open': this.open,
         'select--disabled': this.isDisabled,
-        'select--invalid': this.isRequired && !this.isSelected
+        'select--invalid': this.isRequired && !this.hasSelection
       },
       input: {
         'select__input--open': this.open
