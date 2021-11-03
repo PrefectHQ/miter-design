@@ -1,10 +1,6 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.popover__target {
-  display: inherit;
-}
-
 .popover__content {
   --arrow-size: 12px;
 

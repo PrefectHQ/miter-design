@@ -22,9 +22,8 @@ describe('Arrow', () => {
     await nextTick()
     
     const popupcontent = wrapper.findComponent(PopoverContent)
-    const arrow = popupcontent.find('[data-test="container"]')
 
-    expect(arrow.classes()).toContain('popover__content--arrow-right')
+    expect(popupcontent.vm.$el.classList.contains('popover__content--arrow-right')).toBe(true)
   })
 })
 
