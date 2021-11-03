@@ -1,5 +1,4 @@
 import Select from './Select.vue'
-// import '@/styles/components/select.scss'
 
 export default {
   title: 'Miter Design/Select',
