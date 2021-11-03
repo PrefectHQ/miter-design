@@ -48,8 +48,8 @@ class Props {
   modelValue = prop<string | null>({ default: null })
   options = prop<Options>({ default: () => ({}) })
   placeholder = prop<string>({ default: 'Choose an Option' })
-  disabled = prop<boolean | string>({ default: false })
-  required = prop<boolean | string>({ default: false })
+  disabled = prop<boolean>({ default: false, type: Boolean })
+  required = prop<boolean>({ default: false, type: Boolean })
 }
 
 @Component({
@@ -82,16 +82,12 @@ export default class NativeSelect extends Vue.with(Props) {
     return this.selected !== null
   }
 
-  get isRequired() {
-    return this.required || this.required === ''
-  }
-
   get classes() {
     return {
       select: {
-        'native-select--disabled': this.disabled || this.disabled === '',
+        'native-select--disabled': this.disabled,
         'native-select--simple-selected': this.modelValue !== null,
-        'native-select--invalid': this.isRequired && !this.hasSelection
+        'native-select--invalid': this.required && !this.hasSelection
       }
     }
   }
