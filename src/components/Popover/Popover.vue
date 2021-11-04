@@ -1,30 +1,17 @@
 <template>
-  <div class="popover">
-    <div ref="trigger" class="popover__target">
-      <slot name="trigger" v-bind="scope" />
-    </div>
-    <teleport v-if="open" :to="to">
-      <PopoverContent>
-          <div
-            class="popover__content"
-            :class="classes.popover"
-            :style="styles.popover"
-            ref="popover"
-            data-test="container"
-            @keydown="keydown"
-          >
-            <header class="popover__header" v-if="title.length || $slots.header">
-              <slot name="header" v-bind="scope">
-                {{ title }}
-              </slot>
-            </header>
-            <section class="popover__body">
-              <slot v-bind="scope"></slot>
-            </section>
-          </div>
-      </PopoverContent>
-    </teleport>
+  <div ref="trigger" v-bind="$attrs">
+    <slot name="trigger" v-bind="scope" />
   </div>
+  <teleport v-if="open" :to="to">
+    <PopoverContent ref="popover" :style="styles.popover" v-bind="{ position, title }" @keydown="keydown">
+        <template v-slot:header>
+          <slot name="header" v-bind="scope" />
+        </template>
+        <template v-slot:default>
+          <slot v-bind="scope" />
+        </template>
+    </PopoverContent>
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -50,7 +37,7 @@ class Props {
 export default class Popover extends Vue.with(Props) {
   
   $refs!: {
-    popover: HTMLDivElement,
+    popover: PopoverContent,
     trigger: HTMLDivElement
   }
 
@@ -62,12 +49,6 @@ export default class Popover extends Vue.with(Props) {
     toggle: (event?: Event) => this.togglePopover(event),
     open: (event?: Event) => this.openPopover(event),
     close: () => this.closePopover()
-  }
-
-  get classes() {
-    return {
-      popover: `popover__content--arrow-${this.position}`
-    }
   }
 
   get styles() {
@@ -129,7 +110,7 @@ export default class Popover extends Vue.with(Props) {
 
   private focusPopover(): Promise<void> {
     return this.$nextTick(() => {
-        const first = getFirstTabbableElement(this.$refs.popover)
+        const first = getFirstTabbableElement(this.$refs.popover.$el)
 
         if(first) {
           first.focus()
@@ -139,7 +120,7 @@ export default class Popover extends Vue.with(Props) {
 
   private calculatePopoverPosition(): Promise<void> {
     return this.$nextTick(() => {
-      this.popoverPositionStyles = calculatePopoverPosition(this.position, this.$refs.trigger, this.$refs.popover);
+      this.popoverPositionStyles = calculatePopoverPosition(this.position, this.$refs.trigger, this.$refs.popover.$el);
     })
   }
 
@@ -149,7 +130,7 @@ export default class Popover extends Vue.with(Props) {
     }
 
     const related = event.relatedTarget as HTMLElement
-    const inPopover = this.$refs.popover.contains(related)
+    const inPopover = this.$refs.popover.$el.contains(related)
     const inTrigger = this.$refs.trigger.contains(related)
 
     if(!inPopover) {
@@ -177,8 +158,8 @@ export default class Popover extends Vue.with(Props) {
   }
 
   private tab(event: KeyboardEvent) {
-    const first = getFirstTabbableElement(this.$refs.popover)
-    const last = getLastTabbableElement(this.$refs.popover)
+    const first = getFirstTabbableElement(this.$refs.popover.$el)
+    const last = getLastTabbableElement(this.$refs.popover.$el)
 
     if(event.target == first && event.shiftKey || event.target == last && !event.shiftKey) {
       event.preventDefault()
@@ -201,7 +182,3 @@ export default class Popover extends Vue.with(Props) {
 
 }
 </script>
-
-<style lang="scss" scoped>
-@use '../../styles/components/popover';
-</style>

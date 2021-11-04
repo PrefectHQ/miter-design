@@ -1,4 +1,5 @@
 - Refactored Select Component. Introduce SimpleSelect and NativeSelect components - [#104](https://github.com/PrefectHQ/miter-design/pull/104)
+- Use fragments for Popovers and make PopoverContent a standalone component - [#102](https://github.com/PrefectHQ/miter-design/pull/102)
 - Refactored tooltip directive and component - [#101](https://github.com/PrefectHQ/miter-design/pull/101)
 - Github action to automate running tests - [#99](https://github.com/PrefectHQ/miter-design/pull/99)
 - Refactor NumberInput to be simpler and Clean up TimePicker - [#96](https://github.com/PrefectHQ/miter-design/pull/96)

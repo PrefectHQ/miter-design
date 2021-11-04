@@ -22,7 +22,7 @@
   </div>
   <teleport v-if="open" to="body">
     <SelectContent ref="content" class="select__content" :class="classes.content" :style="styles.content" :filter="term" v-bind="{ options, selected }" @select="select">
-      <template v-if="showSearch" v-slot:before-options>
+      <template v-if="search" v-slot:before-options>
         <Input v-model="term" class="select__search" :placeholder="searchPlaceholder">
           <template v-slot:prepend>
             <i class="pi pi-xs pi-search-line" />
@@ -59,9 +59,9 @@ class Props {
   modelValue = prop<string | null>({ default: null })
   placeholder = prop<string>({ default: 'Choose an Option' })
   options = prop<Options>({ default: () => ([]) })
-  disabled = prop<boolean | string>({ default: false })
-  required = prop<boolean | string>({ default: false })
-  search = prop<boolean | string>({ default: false })
+  disabled = prop<boolean>({ default: false, type: Boolean })
+  required = prop<boolean>({ default: false, type: Boolean })
+  search = prop<boolean>({ default: false, type: Boolean })
   searchPlaceholder = prop<string>({ default: 'Search by name' })
 }
 
@@ -105,24 +105,12 @@ export default class Select extends Vue.with(Props) {
     return this.selected !== null
   }
 
-  get showSearch() {
-    return this.search || this.search === ''
-  }
-
-  get isDisabled() {
-    return this.disabled || this.disabled === ''
-  }
-
-  get isRequired() {
-    return this.required || this.required === ''
-  }
-
   get classes() {
     return {
       select: {
         'select--open': this.open,
-        'select--disabled': this.isDisabled,
-        'select--invalid': this.isRequired && !this.hasSelection
+        'select--disabled': this.disabled,
+        'select--invalid': this.required && !this.hasSelection
       },
       input: {
         'select__input--open': this.open
@@ -205,7 +193,7 @@ export default class Select extends Vue.with(Props) {
   }
 
   private click(event: MouseEvent) {
-    if(this.isDisabled) {
+    if(this.disabled) {
       return
     }
 
