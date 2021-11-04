@@ -1,87 +1,107 @@
 <template>
-  <div
-    @click="choose"
-    @mouseenter="handleFocus"
-    @mouseleave="handleBlur"
-    @focus="handleFocus"
-    @blur="handleBlur"
-    @keydown.enter.space="choose"
-    class="option"
-    :class="{
-      selected: selected,
-      hovered: hovered,
-      disabled: disabled
-    }"
-    tabindex="0"
-  >
-    <span>
-      <i v-if="icon" :class="iconClass" class="pi pi-1x mr-1"></i>
-      <slot>{{ value }}</slot>
-    </span>
-    <i v-if="selected" class="pi pi-check-line pi-lg"></i>
+  <div class="option" :class="classes.option" @click="click">
+    <OptionLabel class="option__label" v-bind="{ icon, label }">
+      <template v-slot:icon="scope">
+        <slot name="icon" v-bind="scope" />
+      </template>
+      <template v-slot:label="scope">
+        <slot name="label" v-bind="scope" />
+      </template>
+    </OptionLabel>
+    <template v-if="selected">
+      <i class="pi pi-check-line pi-lg" />
+    </template>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { Vue, prop } from 'vue-class-component'
+import { Component } from '@/utilities/vue-class-component'
+import OptionLabel from '@/components/Select/OptionLabel.vue'
 
-export default defineComponent({
-  name: 'Option',
-  emits: {
-    click(e: Event, ...args: any[]) {
-      return { e, ...args }
-    }
-  },
-  props: {
-    value: {
-      type: String,
-      required: true,
-      default: 'Option'
-    },
-    data: {
-      type: [String, Object]
-    },
-    icon: {
-      type: String,
-      default: ''
-    },
-    selected: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      hovered: false
-    }
-  },
-  computed: {
-    iconClass(): string | null {
-      return this.icon.length > 0 ? `pi-${this.icon}` : null
-    }
-  },
-  methods: {
-    choose(e: Event): Event {
-      this.$emit('click', e, this.value, this.icon, this.data)
-      return e
-    },
+class Props {
+  label = prop<string>({ required: true })
+  value = prop({ required: true })
+  icon = prop<string>({ default: '' })
+  disabled = prop<boolean>({ default: false, type: Boolean })
+  selected = prop<boolean>({ default: false, type: Boolean })
+}
 
-    handleFocus(): void {
-      if (this.disabled) return
-      this.hovered = true
-    },
-
-    handleBlur(): void {
-      this.hovered = false
-    }
+@Component({
+  emits: ['select'],
+  components: {
+    OptionLabel
   }
 })
+export default class Option extends Vue.with(Props) {
+
+  get scope() {
+    return {
+      label: this.label,
+      value: this.value,
+      icon: this.icon,
+      disabled: this.disabled,
+      selected: this.selected
+    }
+  }
+
+  get classes() {
+    return {
+      option: {
+        'option--disabled': this.disabled,
+        'option--selected': this.selected
+      },
+      icon: `pi pi-1x mr-1 pi-${this.icon}`
+    }
+  }
+
+  private click() {
+    if(this.disabled) {
+      return
+    }
+
+    this.$emit('select', this.value)
+  }
+
+}
 </script>
 
-<style lang="scss" scoped>
-@use '../../styles/components/select';
+<style lang="scss">
+@use '../../styles/abstracts/variables';
+
+.option {
+  height: var(--select-height, 58px);
+  color: #{variables.$text--primary};
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: #{variables.$grey-10};
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #{variables.$secondary-background};
+  }
+}
+
+.option--disabled {
+  color: #{variables.$inactive};
+  cursor: not-allowed;
+}
+
+.option--selected {
+  background-color: #{variables.$primary};
+  color: #fff;
+
+  &:hover {
+    background-color: #{variables.$primary};
+  }
+}
+
+.option__label {
+  margin-right: auto;
+}
 </style>

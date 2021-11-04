@@ -1,420 +1,315 @@
+<template>
+  <div class="select" ref="trigger" :class="classes.select" v-bind="$attrs">
+    <NativeSelect ref="input" v-model="selected" v-bind="{ options, disabled }" />
+    <div class="select__input" :class="classes.input" @click="click">
+      <template v-if="hasSelection">
+        <OptionLabel v-bind="selectedOption">
+          <template v-slot:label="scope">
+            <slot name="selected-option-label" v-bind="scope" />
+          </template>
+          <template v-slot:icon="scope">
+            <slot name="selected-option-icon" v-bind="scope" />
+          </template>
+        </OptionLabel>
+      </template>
+      <template v-else>
+        <span class="select__placeholder">
+          {{ placeholder }}
+        </span>
+      </template>
+      <i class="select__arrow pi pi-arrow-down-s-line pi-lg" />
+    </div>
+  </div>
+  <teleport v-if="open" to="body">
+    <SelectContent ref="content" class="select__content" :class="classes.content" :style="styles.content" :filter="term" v-bind="{ options, selected }" @select="select">
+      <template v-if="search" v-slot:before-options>
+        <Input v-model="term" class="select__search" :placeholder="searchPlaceholder">
+          <template v-slot:prepend>
+            <i class="pi pi-xs pi-search-line" />
+          </template>
+        </Input>
+      </template>
+      <template v-slot:label="scope">
+        <slot name="option-group-label" v-bind="scope" />
+      </template>
+      <template v-slot:option-icon="scope">
+        <slot name="option-icon" v-bind="scope" />
+      </template>
+      <template v-slot:option-label="scope">
+        <slot name="option-label" v-bind="scope" />
+      </template>
+    </SelectContent>
+  </teleport>
+</template>
+
 <script lang="ts">
-import {
-  h,
-  defineComponent,
-  mergeProps,
-  VNode,
-  RendererNode,
-  RendererElement
-} from 'vue'
-import Option from './Option.vue'
-import OptionGroup from './OptionGroup.vue'
+import { calculateMostVisiblePlacement, calculatePlacementPositionStyles, Placement, PlacementPositionStyles, defaultPositionStyles } from '@/utilities/position'
+import { nextTick } from 'vue'
+import { Vue, prop } from 'vue-class-component'
+import { Component } from '../../utilities/vue-class-component'
+import NativeSelect from './NativeSelect.vue'
+import OptionLabel from './OptionLabel.vue'
+import SelectContent from './SelectContent.vue'
+import { Options } from './types'
+import { getOptionFromOptionsAndGroupsByValue } from './utilities'
+import Input from '@/components/Input/Input.vue'
+import { toPixels } from '@/utilities/units'
 
-export default defineComponent({
+class Props {
+  modelValue = prop<string | null>({ default: null })
+  placeholder = prop<string>({ default: 'Choose an Option' })
+  options = prop<Options>({ default: () => ([]) })
+  disabled = prop<boolean>({ default: false, type: Boolean })
+  required = prop<boolean>({ default: false, type: Boolean })
+  search = prop<boolean>({ default: false, type: Boolean })
+  searchPlaceholder = prop<string>({ default: 'Search by name' })
+}
+
+@Component({
+  emits: ['update:modelValue'],
   name: 'Select',
-  components: { Option, OptionGroup },
-  emits: {
-    'update:modelValue'(...args: any[]) {
-      return { ...args }
-    },
-    change(...args: any[]) {
-      return { ...args }
-    }
-  },
-  props: {
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    placeholder: {
-      type: String,
-      default: 'Choose an Option'
-    },
-    search: {
-      type: Boolean,
-      default: false
-    },
-    openUp: {
-      type: Boolean,
-      default: false
-    },
-    modelValue: {
-      type: [String, Object],
-      default: ''
-    }
-  },
-  data() {
-    return {
-      hovered: false,
-      active: false,
-      icon: '',
-      selected: this.modelValue,
-      searchTerm: '',
-      allOptions: [] as VNode<
-        RendererNode,
-        RendererElement,
-        { [key: string]: any }
-      >[],
-      filteredOptions: [] as VNode<
-        RendererNode,
-        RendererElement,
-        { [key: string]: any }
-      >[]
-    }
-  },
-  watch: {
-    active(): void {
-      this.searchTerm = ''
-      this.filteredOptions = this.allOptions
-    },
-    modelValue(val): void {
-      const selectedOption = this.allOptions.find(
-        (option) => option?.props?.value == val
-      )
-
-      if (selectedOption?.props) {
-        this.selected = selectedOption.props.value || ''
-        this.icon = selectedOption.props.icon || ''
-      }
-    }
-  },
-  methods: {
-    handleOptionClick(e: Event, ...args: any[]): Event {
-      if ((e.target as HTMLDivElement)?.classList?.contains('disabled'))
-        return e
-      this.selected = args[0]
-      this.icon = args[1]
-      this.$emit('update:modelValue', this.selected, args[2])
-      this.$emit('change', this.selected, args[2])
-      return e
-    },
-    handleFocus(): void {
-      if (this.disabled) return
-      this.hovered = true
-    },
-
-    handleBlur(event: FocusEvent): void {
-      const target = event.relatedTarget as HTMLDivElement
-      if (
-        target?.tagName === 'INPUT' ||
-        target?.classList.contains('active') ||
-        target?.classList.contains('option')
-      )
-        return
-      this.hovered = false
-      this.active = false
-    },
-
-    handleMouseLeave(): void {
-      this.hovered = false
-    },
-    handleKeydown(event: KeyboardEvent): void {
-      if (event.key === 'Enter' || event.code === 'Space') {
-        event.preventDefault()
-        if (this.disabled) return
-        if (this.active) {
-          // choose highlighted option, else close
-          this.filteredOptions.forEach((option) => {
-            if (option.el?.classList.contains('hovered')) {
-              this.handleOptionClick(
-                event,
-                option?.props?.value,
-                option?.props?.icon || '',
-                option?.props?.data
-              )
-            }
-          })
-        }
-        this.active = !this.active
-      } else if (event.key === 'Escape') {
-        this.active = false
-      } else if (event.key === 'ArrowUp') {
-        if (!this.active) return
-        event.preventDefault()
-        let currentFound = false
-        let nextSelected = false
-        for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
-          const option = this.filteredOptions[i]
-          const type = (option.type as any)?.name
-          const optionClasses = option?.el?.classList
-
-          if (
-            type === 'Option' &&
-            !optionClasses?.contains('disabled') &&
-            currentFound
-          ) {
-            option.el?.focus()
-            optionClasses.add('hovered')
-            nextSelected = true
-            break
-          }
-          if (optionClasses?.contains('hovered') && !currentFound) {
-            optionClasses.remove('hovered')
-            currentFound = true
-          }
-        }
-
-        if (!nextSelected) {
-          for (let i = this.filteredOptions.length - 1; i >= 0; i--) {
-            const option = this.filteredOptions[i]
-            const type = (option.type as any)?.name
-            const optionClasses = option?.el?.classList
-
-            if (type === 'Option' && !optionClasses?.contains('disabled')) {
-              option.el?.focus()
-              optionClasses.add('hovered')
-              break
-            }
-          }
-        }
-      } else if (event.key === 'ArrowDown') {
-        if (!this.active) return
-        event.preventDefault()
-        let currentFound = false
-        let nextSelected = false
-        for (let i = 0; i < this.filteredOptions.length; i++) {
-          const option = this.filteredOptions[i]
-          const type = (option.type as any)?.name
-          const optionClasses = option?.el?.classList
-
-          if (
-            type === 'Option' &&
-            !optionClasses?.contains('disabled') &&
-            currentFound
-          ) {
-            option.el?.focus()
-            optionClasses.add('hovered')
-            nextSelected = true
-            break
-          }
-
-          if (optionClasses?.contains('hovered') && !currentFound) {
-            optionClasses.remove('hovered')
-            currentFound = true
-          }
-        }
-
-        if (!nextSelected) {
-          for (let i = 0; i < this.filteredOptions.length; i++) {
-            const option = this.filteredOptions[i]
-            const type = (option.type as any)?.name
-            const optionClasses = option?.el?.classList
-
-            if (type === 'Option' && !optionClasses?.contains('disabled')) {
-              option.el?.focus()
-              optionClasses.add('hovered')
-              break
-            }
-          }
-        }
-      }
-    },
-    runSearch(searchValue: InputEvent): void {
-      searchValue.data == ''
-        ? (this.filteredOptions = this.allOptions)
-        : (this.filteredOptions = [])
-      this.allOptions.forEach((option) => {
-        if (
-          option.type === 'div' ||
-          option.props?.value
-            .toLowerCase()
-            .includes(
-              (searchValue.target as HTMLInputElement)?.value
-                ?.toString()
-                .toLowerCase()
-            )
-        )
-          this.filteredOptions.push(option)
-      })
-    }
-  },
-  render() {
-    const slottedItems = this.$slots.default?.()
-    let temp: any = []
-    let children: VNode<RendererNode, RendererElement, { [key: string]: any }>[]
-
-    const pickerProps = [
-      ...(this.disabled ? ['disabled'] : []),
-      ...(this.hovered ? ['hovered'] : []),
-      ...(this.active ? ['active'] : []),
-      ...(this.selected.length > 0 ? ['selected'] : [])
-    ]
-
-    if (slottedItems) {
-      temp = [
-        slottedItems?.map(
-          (ti: RendererNode | RendererElement | { [key: string]: any }) => {
-            if (ti.type.name === 'Option') {
-              return h(
-                ti,
-                mergeProps(
-                  {
-                    selected: this.selected == ti.props?.value,
-                    onClick: this.handleOptionClick
-                  },
-                  { ...ti.props }
-                )
-              )
-            } else if (ti.type.name === 'OptionGroup') {
-              const innerSlot = h(ti)
-              // @ts-ignore: Ignoring this because the typings seem to be incorrect (but the code works)
-              const innerOptions = innerSlot.children?.default?.()
-              // this will either be Option(s) or Symbol(Fragment)
-              const options = [
-                innerOptions?.map(
-                  (
-                    ti: RendererNode | RendererElement | { [key: string]: any }
-                  ) => {
-                    if (ti.type.name === 'Option') {
-                      return h(
-                        ti,
-                        mergeProps(
-                          {
-                            disabled: innerSlot.props?.disabled,
-                            selected: this.selected == ti.props?.value,
-                            onClick: this.handleOptionClick
-                          },
-                          { ...ti.props }
-                        )
-                      )
-                    } else {
-                      const options = ti.children?.map(
-                        (
-                          node:
-                            | RendererNode
-                            | RendererElement
-                            | { [key: string]: any }
-                        ) => {
-                          return h(
-                            node,
-                            mergeProps(
-                              {
-                                disabled: innerSlot.props?.disabled,
-                                selected: this.selected == node.props?.value,
-                                onClick: this.handleOptionClick
-                              },
-                              { ...node.props }
-                            )
-                          )
-                        }
-                      )
-                      return [...options]
-                    }
-                  }
-                )
-              ]
-              return [
-                h('div', { class: ['title'] }, ti.props.label),
-                ...options
-              ]
-            } else {
-              if (!Array.isArray(ti.children)) return
-
-              //ti.type === Symbol(Fragment) => v-for of options, not in group
-              const options = ti.children?.map(
-                (
-                  node: RendererNode | RendererElement | { [key: string]: any }
-                ) => {
-                  return h(
-                    node,
-                    mergeProps(
-                      {
-                        selected: this.selected == node.props?.value,
-                        onClick: this.handleOptionClick
-                      },
-                      { ...node.props }
-                    )
-                  )
-                }
-              )
-              return [...options]
-            }
-          }
-        )
-      ]
-    }
-    children = temp.flat(4)
-    this.allOptions = [...children]
-
-    const searchBar = h('div', { class: 'search' }, [
-      h('i', { class: ['pi', 'pi-search-line', 'mr-1'] }),
-      h(
-        'input',
-        mergeProps({
-          class: 'py-2',
-          placeholder: 'Search by name',
-          onClick: (event: Event) => {
-            event.stopPropagation()
-          },
-          onBlur: this.handleBlur,
-          onInput: this.runSearch
-        })
-      )
-    ])
-
-    const listContainer = h(
-      'div',
-      { class: ['list', this.openUp && 'openUp'], disabled: this.disabled },
-      [this.search && searchBar, this.filteredOptions]
-    )
-
-    const activeSlot = this.$slots?.active?.()
-    const icon = children.find(
-      (option) => option?.props?.value == this.modelValue
-    )?.props?.icon
-
-    const picker = h(
-      'div',
-      mergeProps({
-        class: ['picker', ...pickerProps]
-      }),
-      [
-        activeSlot
-          ? h('span', [activeSlot])
-          : h('span', [
-              this.icon.length > 0 || icon
-                ? h('i', {
-                    class: ['pi', `pi-${this.icon || icon}`, 'pi-1x', 'pr-1']
-                  })
-                : null,
-              this.selected || this.placeholder
-            ]),
-        h('i', {
-          class: [
-            'pi',
-            this.openUp ? 'pi-arrow-up-s-line' : 'pi-arrow-down-s-line',
-            'pi-lg'
-          ]
-        })
-      ]
-    )
-    const wrapper = h(
-      'div',
-      mergeProps({
-        class: [
-          'wrapper',
-          this.disabled && 'disabled',
-          this.active && 'active'
-        ],
-        tabindex: 0,
-        onFocus: this.handleFocus,
-        onBlur: this.handleBlur,
-        onMouseenter: this.handleFocus,
-        onMouseleave: this.handleMouseLeave,
-        onKeydown: this.handleKeydown,
-        onChange: "$emit('change', this.selected, args[2])",
-        onClick: () => {
-          !this.disabled ? (this.active = !this.active) : null
-        }
-      }),
-      [picker, this.active && listContainer]
-    )
-
-    return wrapper
+  components: {
+    NativeSelect,
+    OptionLabel,
+    SelectContent,
+    Input
   }
 })
+export default class Select extends Vue.with(Props) {
+
+  $refs!: {
+    trigger: HTMLDivElement
+    input: NativeSelect
+    content: SelectContent
+  }
+
+  private open: boolean = false
+  private term: string = ''
+  private placement: Placement = 'top'
+  private width: number = 0
+  private position: PlacementPositionStyles = defaultPositionStyles
+
+  get selected() {
+    return this.modelValue
+  }
+
+  set selected(value: string | null) {
+    this.$emit('update:modelValue', value)
+  }
+
+  get selectedOption() {
+    return getOptionFromOptionsAndGroupsByValue(this.options, this.selected)
+  }
+
+  get hasSelection() {
+    return this.selected !== null
+  }
+
+  get classes() {
+    return {
+      select: {
+        'select--open': this.open,
+        'select--disabled': this.disabled,
+        'select--invalid': this.required && !this.hasSelection
+      },
+      input: {
+        'select__input--open': this.open
+      },
+      content: {
+        'select__content--top': this.placement === 'top',
+        'select__content--bottom': this.placement === 'bottom'
+      }
+    }
+  }
+
+  get styles() {
+    return {
+      content: {
+        top: this.placement === 'bottom' ? this.position.top : null,
+        bottom: this.placement === 'top' ? this.position.bottom : null,
+        left: this.position.left,
+        width: toPixels(this.width)
+      }
+    }
+  }
+
+  public mounted() {
+    document.addEventListener('click', this.documentClick)
+    window.addEventListener('resize', this.closeSelect)
+  }
+
+  public unmounted() {
+    document.removeEventListener('click', this.documentClick)
+    window.removeEventListener('resize', this.closeSelect)
+  }
+
+  public async openSelect() {
+    if(this.open) {
+      return
+    }
+
+    this.open = true
+
+    await nextTick()
+    this.updateContentWidth()
+    
+    await nextTick()
+    this.calculatePlacementAndPosition()
+  }
+
+  public closeSelect() {
+    if(!this.open) {
+      return
+    }
+
+    this.open = false
+
+    this.focus()
+  }
+
+  public focus() {
+    this.$refs.input.focus()
+  }
+
+  private select(value: string) {
+    this.selected = value
+    this.term = ''
+
+    this.closeSelect()
+    this.focus()
+  }
+
+  private calculatePlacementAndPosition() {
+    const { placement } = calculateMostVisiblePlacement(this.$refs.trigger, this.$refs.content.$el, document.body, ['bottom', 'top'])
+
+    this.placement = placement
+    this.position = calculatePlacementPositionStyles(placement, this.$refs.trigger, this.$refs.content.$el, document.body)
+  }
+
+  private updateContentWidth() {
+    const { width } = this.$refs.trigger.getBoundingClientRect()
+
+    this.width = width
+  }
+
+  private click(event: MouseEvent) {
+    if(this.disabled) {
+      return
+    }
+
+    this.open ? this.closeSelect() : this.openSelect()
+  }
+
+  private documentClick(event: MouseEvent) {
+    if(!this.open) {
+      return
+    }
+
+    const target = event.target as HTMLElement
+    const inContent = this.$refs.content?.$el?.contains(target)
+    const inTrigger = this.$refs.trigger.contains(target)
+
+    if(!inContent && !inTrigger) {
+      this.closeSelect()
+    }
+  }
+
+}
 </script>
 
 <style lang="scss" scoped>
-@use '../../styles/components/select';
+@use '../../styles/abstracts/variables';
+@use '../../styles/abstracts/mixins';
+
+.select {
+  --select-background-color: #fff;
+  --select-cursor: pointer;
+  --select-max-width: 350px;
+  --select-height: 58px;
+  --miter-width: 16px;
+
+  width: 100%;
+  max-width: var(--select-max-width);
+  height: var(--select-height);
+  -webkit-appearance: none;
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+  color: #{variables.$black};
+}
+
+.select--open,
+.select:active,
+.select:hover,
+.select:focus-within {
+  &:not(.select--disabled) {
+    --miter-border-color: #{variables.$primary};
+  }
+}
+
+.select--open {
+  @include mixins.drop-shadow;
+}
+
+.select--disabled {
+  --select-background-color: #{variables.$disabled};
+  --select-cursor: not-allowed;
+}
+
+.select--invalid {
+  --miter-border-color: #{variables.$error};
+}
+
+.select__input {
+  background-color: var(--select-background-color);
+  cursor: var(--select-cursor);
+  height: inherit;
+  align-items: center;
+  padding: 0 20px;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+
+  @include mixins.miter-bordered-rounded;
+
+  @media (hover: hover) {
+    display: flex;
+  }
+}
+
+.select__placeholder {
+  color: #{variables.$grey-20};
+}
+
+.select__arrow {
+  margin-left: auto;
+}
+
+.select__search {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  padding-left: 20px;
+}
+
+.select__content {
+  position: absolute;
+  z-index: 1;
+  box-shadow: #{variables.$box-shadow-md};
+}
+
+.select__content--top {
+  transform: translateY(-2px);
+}
+
+.select__content--bottom {
+  transform: translateY(2px);
+}
 </style>
