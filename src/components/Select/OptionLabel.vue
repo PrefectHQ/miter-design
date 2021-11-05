@@ -5,11 +5,9 @@
         <i :class="classes.icon" />
       </slot>
     </template>
-    <div class="option__label">
-      <slot name="label" v-bind="scope">
-        {{ label }}
-      </slot>
-    </div>
+    <slot name="label" v-bind="scope">
+      {{ label }}
+    </slot>
   </div>
 </template>
 
@@ -45,5 +43,6 @@ export default class OptionLabel extends Vue.with(Props) {
 .option-label {
   display: flex;
   align-items: center;
+  flex-grow: 1;
 }
 </style>

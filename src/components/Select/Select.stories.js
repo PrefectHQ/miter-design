@@ -22,6 +22,26 @@ const Template = (args) => ({
   template: '<Select v-model="value" v-bind="args" />'
 })
 
+const SlotsTemplate = (args) => ({
+  components: { Select },
+  data() {
+    return { value: null }
+  },
+  setup() {
+    return { args }
+  },
+  template: `
+    <Select v-model="value" v-bind="args">
+    <template v-slot:selected-option-label="{ label }">
+      <span>Selected: {{ label }}</span>
+    </template>
+    <template v-slot:option-label="{ label }">
+      <span>Choice - {{ label }}</span>
+    </template>
+    </Select>
+  `
+})
+
 const options = [
   { label: 'One', value: 'one' },
   { label: 'Two', value: 'two' },
@@ -43,6 +63,15 @@ const options = [
 
 export const Default = Template.bind({})
 Default.args = {
+  search: false,
+  disabled: false,
+  required: false,
+  placeholder: 'Choose an Option',
+  options
+}
+
+export const Slots = SlotsTemplate.bind({})
+Slots.args = {
   search: false,
   disabled: false,
   required: false,

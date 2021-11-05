@@ -301,7 +301,7 @@ export default class Select extends Vue.with(Props) {
 
 .select__content {
   position: absolute;
-  z-index: 1;
+  z-index: 10;
   box-shadow: #{variables.$box-shadow-md};
 }
 
