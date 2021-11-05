@@ -1,5 +1,9 @@
 <template>
-    <Select v-model="internalValue" :options="internalOptions" v-bind="$attrs" />
+    <Select v-model="internalValue" :options="internalOptions" v-bind="$attrs">
+      <template v-for="(slot, name) in $slots" v-slot:[name]="scope">
+        <slot :name="name" v-bind="scope" />
+      </template>
+    </Select>
 </template>
 
 <script lang="ts">
@@ -13,6 +17,7 @@ class Props {
 }
 
 @Component({
+  name: 'SimpleSelect',
   emits: ['update:modelValue']
 })
 export default class NativeSelect extends Vue.with(Props) {
