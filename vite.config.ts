@@ -24,6 +24,7 @@ export default defineConfig({
       // ensures vue isn't added to the bundle
       external: ['vue'],
       output: {
+        exports: 'named',
         // Provide vue as a global variable to use in the UMD build
         globals: {
           vue: 'Vue'
