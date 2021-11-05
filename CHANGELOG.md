@@ -1,3 +1,4 @@
+- Fix slot and option layout in select components - [#109](https://github.com/PrefectHQ/miter-design/pull/109)
 - Refactored Select Component. Introduce SimpleSelect and NativeSelect components - [#104](https://github.com/PrefectHQ/miter-design/pull/104)
 - Use fragments for Popovers and make PopoverContent a standalone component - [#102](https://github.com/PrefectHQ/miter-design/pull/102)
 - Refactored tooltip directive and component - [#101](https://github.com/PrefectHQ/miter-design/pull/101)
