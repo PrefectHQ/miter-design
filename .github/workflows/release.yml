@@ -1,33 +1,89 @@
 name: Release
 
 on:
-  create:
-    tags:
-      - "v[0-9]+.[0-9]+.[0-9]+" # assumes x.y.z versioning
+  push:
+    branches:
+      - main
 
 jobs:
-  build-and-publish:
+
+  build-release:
+    name: Build Release
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v1
 
-      # reads the node version set in .nvmrc
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
         id: nvm
 
-      # installs a specific version of nodejs
       - uses: actions/setup-node@v2
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
-          
+      
       - name: Install dependencies
         run: npm ci install
-        
-      - name: Build components
+      
+      - name: Build package
         run: npm run build
 
-      - uses: JS-DevTools/npm-publish@v1
+      - name: Publish build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: built-package
+          path: './'
+
+  publish-dry-run:
+    name: Publish Dry Run
+    needs: [build-release]
+    runs-on: ubuntu-latest
+
+    steps: 
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: built-package
+          path: './'
+
+      - name: Dry Run Publish
+        id: dry-run
+        uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
           access: public
+          dry-run: true
+
+      - name: Cancel
+        if: steps.dry-run.outputs.type == 'none'
+        uses: andymckay/cancel-action@0.2
+
+  publish:
+    name: Publish Release to npm
+    needs: [build-release, publish-dry-run]
+    runs-on: ubuntu-latest
+    environment: 'prod'
+
+    steps: 
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: built-package
+          path: './'
+
+      - name: Publish Package
+        id: publish
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_PUBLISH_TOKEN }}
+          access: public
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.publish.outputs.version }}
+          release_name: Release ${{ steps.publish.outputs.version }}
+          body: |
+            Please refer to [CHANGELOG.md](https://github.com/PrefectHQ/miter-design/blob/main/CHANGELOG.md) for details.
