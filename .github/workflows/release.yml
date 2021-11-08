@@ -9,9 +9,26 @@ on:
 
 jobs:
 
-  build-release:
-    name: Build Release
+  check:
+    name: Check Package Version
     runs-on: ubuntu-latest
+
+    steps: 
+      - uses: actions/checkout@v1
+
+      - name: Check Package Version
+        uses: EndBug/version-check@v1
+        id: check
+
+      - name: Cancel
+        if: steps.check.outputs.changed == 'false'
+        uses: andymckay/cancel-action@0.2
+
+  build-and-publish:
+    name: Build & Publish Release
+    runs-on: ubuntu-latest
+    needs: [check]
+    environment: 'prod'
 
     steps:
       - uses: actions/checkout@v1
@@ -29,51 +46,6 @@ jobs:
       
       - name: Build package
         run: npm run build
-
-      - name: Publish build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: built-package
-          path: './'
-
-  publish-dry-run:
-    name: Publish Dry Run
-    needs: [build-release]
-    runs-on: ubuntu-latest
-
-    steps: 
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: built-package
-          path: './'
-
-      - name: Dry Run Publish
-        id: dry-run
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_PUBLISH_TOKEN }}
-          access: public
-          dry-run: true
-
-      - name: Cancel
-        if: steps.dry-run.outputs.type == 'none'
-        uses: andymckay/cancel-action@0.2
-
-  publish:
-    name: Publish Release to npm
-    needs: [build-release, publish-dry-run]
-    runs-on: ubuntu-latest
-    environment: 'prod'
-
-    steps: 
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: built-package
-          path: './'
 
       - name: Publish Package
         id: publish
