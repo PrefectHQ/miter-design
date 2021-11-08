@@ -27,7 +27,7 @@ jobs:
   build-and-publish:
     name: Build & Publish Release
     runs-on: ubuntu-latest
-    needs: [check]
+    needs: [version-change-check]
     environment: 'prod'
 
     steps:
