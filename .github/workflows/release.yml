@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  check:
+  version-change-check:
     name: Check Package Version
     runs-on: ubuntu-latest
 
