@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts">
+import { watch } from 'vue'
 import { Vue, prop } from 'vue-class-component'
 import { Component } from '../../utilities/vue-class-component'
 import { getFirstTabbableElement, getLastTabbableElement } from '../../utilities/dom'
@@ -170,7 +171,7 @@ export default class Popover extends Vue.with(Props) {
   }
 
   private watchOpen() {
-    this.$watch(() => this.open, async (open: boolean) => {
+    watch(() => this.open, async (open: boolean) => {
       if(open) {
         await this.calculatePopoverPosition()
         await this.focusPopover()
