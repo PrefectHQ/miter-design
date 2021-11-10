@@ -6,7 +6,7 @@
   
   position: absolute;
   padding: 10px;
-  z-index: 2;
+  z-index: var(--popover-z-index, 2);
 }
 
 .popover-content__body {
@@ -44,7 +44,7 @@
   transform: translate(50%) rotate(315deg);
 }
 
-.popover-content__body--arrow-right:before {
+.popover-content__body--arrow-right-top:before {
   bottom: 75%;
   right: 100%;
   transform: translate(50%) rotate(315deg);
