@@ -1,6 +1,7 @@
 <template>
-    <div class="popover__content" :class="classes.popover" data-test="container">
-      <header class="popover__header" v-if="title.length || $slots.header">
+    <div class="popover-content">
+      <div class="popover-content__body" :class="classes.body">
+        <header class="popover__header" v-if="title.length || $slots.header">
         <slot name="header">
           {{ title }}
         </slot>
@@ -8,16 +9,18 @@
       <section class="popover__body">
         <slot />
       </section>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
-import { PopoverPlacement } from './getPosition'
 import { Component } from '@/utilities/vue-class-component'
+import { Placement } from '@/utilities/position'
+import { snakeCase } from '@/utilities/strings'
 
 class Props {
-  position = prop<PopoverPlacement>({ default: 'top' })
+  placement = prop<Placement>({ default: 'top' })
   title = prop<string>({ required: false, default: '' })
 }
 
@@ -26,7 +29,7 @@ export default class PopoverContent extends Vue.with(Props) {
 
   get classes() {
     return {
-      popover: `popover__content--arrow-${this.position}`
+      body: `popover-content__body--arrow-${snakeCase(this.placement)}`
     }
   }
 

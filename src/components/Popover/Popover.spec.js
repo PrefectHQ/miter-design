@@ -23,7 +23,7 @@ describe('Arrow', () => {
     
     const popupcontent = wrapper.findComponent(PopoverContent)
 
-    expect(popupcontent.vm.$el.classList.contains('popover__content--arrow-right')).toBe(true)
+    expect(popupcontent.vm.$el.classList.contains('popover-content--arrow-right')).toBe(true)
   })
 })
 

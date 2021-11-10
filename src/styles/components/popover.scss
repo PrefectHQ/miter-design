@@ -1,18 +1,23 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.popover__content {
+.popover-content {
   --arrow-size: 12px;
+  
+  position: absolute;
+  padding: 10px;
+  z-index: 2;
+}
 
+.popover-content__body {
   background-color: variables.$white;
   border: 1px solid variables.$grey-20;
   outline: none;
-  position: absolute;
-  z-index: 2;
   border-radius: 4px;
+  position: relative;
 }
 
-.popover__content:before {
+.popover-content__body:before {
   content: '';
   margin: auto;
   position: absolute;
@@ -27,25 +32,37 @@
   background-color: white;
 }
 
-.popover__content--arrow-top:before {
+.popover-content__body--arrow-top:before {
   top: calc(100% - var(--arrow-size) / 2);
   left: 50%;
   transform: translate(-50%) rotate(225deg);
 }
 
-.popover__content--arrow-right:before {
+.popover-content__body--arrow-right:before {
+  bottom: calc(50% - var(--arrow-size) / 2);
+  right: 100%;
+  transform: translate(50%) rotate(315deg);
+}
+
+.popover-content__body--arrow-right:before {
   bottom: 75%;
   right: 100%;
   transform: translate(50%) rotate(315deg);
 }
 
-.popover__content--arrow-bottom:before {
+.popover-content__body--arrow-bottom:before {
   bottom: calc(100% - var(--arrow-size) / 2);
   left: 50%;
   transform: translate(-50%) rotate(45deg);
 }
 
-.popover__content--arrow-left:before {
+.popover-content__body--arrow-left:before {
+  bottom: calc(50% - var(--arrow-size) / 2);
+  left: calc(100% - var(--arrow-size));
+  transform: translate(50%) rotate(135deg);
+}
+
+.popover-content__body--arrow-left-top:before {
   bottom: 75%;
   left: calc(100% - var(--arrow-size));
   transform: translate(50%) rotate(135deg);
