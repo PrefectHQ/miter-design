@@ -17,7 +17,7 @@
 import { Vue, prop } from 'vue-class-component'
 import { Component } from '@/utilities/vue-class-component'
 import { Placement } from '@/utilities/position'
-import { snakeCase } from '@/utilities/strings'
+import { kebabCase } from '@/utilities/strings'
 
 class Props {
   placement = prop<Placement>({ default: 'top' })
@@ -29,7 +29,7 @@ export default class PopoverContent extends Vue.with(Props) {
 
   get classes() {
     return {
-      body: `popover-content__body--arrow-${snakeCase(this.placement)}`
+      body: `popover-content__body--arrow-${kebabCase(this.placement)}`
     }
   }
 
