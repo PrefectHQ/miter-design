@@ -1,6 +1,6 @@
 {
   "name": "@prefecthq/miter-design",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "private": false,
   "scripts": {
     "serve": "vite",
