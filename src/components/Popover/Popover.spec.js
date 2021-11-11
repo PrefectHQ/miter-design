@@ -3,27 +3,38 @@ import { nextTick } from 'vue'
 import Popover from './Popover.vue'
 import PopoverContent from './PopoverContent'
 
+class DOMRect {}
+
+global.DOMRect = DOMRect
+
+afterEach(() => {
+  const content = document.querySelector('.popover-content')
+
+  if(content) {
+    content.remove()
+  }
+});
+
 describe('Arrow', () => {
-  /* 
-  this test is purposefully at the top because the class check fails if
-  this test is the 4th or greater test in the file. No idea why.
-  The arrow ends up being found twice but the first instance only 
-  has default bindings. findAll()[1] would have the correct content.
-  CH - 10/2021
-  */
   test('arrow has correct position class', async () => {
     const wrapper = mount(Popover, {
       props: { 
-        position: 'right'
+        placement: 'right'
       }
     })
 
     wrapper.vm.openPopover()
+
+    // magical number of nextTicks. 
+    // todo: refactor openPopover to be async
+    await nextTick()
+    await nextTick()
     await nextTick()
     
-    const popupcontent = wrapper.findComponent(PopoverContent)
+    const popupContent = wrapper.findComponent(PopoverContent)
+    const arrowClass = popupContent.find('.popover-content__body')
 
-    expect(popupcontent.vm.$el.classList.contains('popover__content--arrow-right')).toBe(true)
+    expect(arrowClass.classes()).toContain('popover-content__body--arrow-right')
   })
 })
 
@@ -104,9 +115,9 @@ describe('props', () => {
     expect(popupcontent.text()).toContain(title)
   })
 
-  test('has top as default position', () => {
+  test('has top as default placement', () => {
     const wrapper = mount(Popover)
 
-    expect(wrapper.props().position).toBe('top')
+    expect(wrapper.props().placement).toBe('top')
   })
 })

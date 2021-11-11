@@ -3,7 +3,7 @@
     <slot name="trigger" v-bind="scope" />
   </div>
   <teleport v-if="open" :to="to">
-    <PopoverContent ref="popover" :style="styles.popover" v-bind="{ position, title }" @keydown="keydown">
+    <PopoverContent ref="popover" :style="styles.popover" :placement="activePlacement" v-bind="{ title }" @keydown="keydown">
         <template v-slot:header>
           <slot name="header" v-bind="scope" />
         </template>
@@ -15,14 +15,15 @@
 </template>
 
 <script lang="ts">
+import { nextTick, watch } from 'vue'
 import { Vue, prop } from 'vue-class-component'
 import { Component } from '../../utilities/vue-class-component'
 import { getFirstTabbableElement, getLastTabbableElement } from '../../utilities/dom'
 import PopoverContent from './PopoverContent.vue'
-import { calculatePopoverPosition, PopoverPlacement, PopoverPositionStyles } from './getPosition'
+import { calculateMostVisiblePlacement, calculatePlacementPositionStyles, defaultPositionStyles, Placement, PlacementPositionStyles } from '@/utilities/position'
 
 class Props {
-  position = prop<PopoverPlacement>({ default: 'top' })
+  placement = prop<Placement | Placement[]>({ default: 'top' })
   title = prop<string>({ required: false, default: '' })
   to = prop<string>({ required: false, default: 'body' })
 }
@@ -42,8 +43,9 @@ export default class Popover extends Vue.with(Props) {
   }
 
   private open: boolean = false;
-  private popoverPositionStyles: PopoverPositionStyles = {}
+  private popoverStyles: PlacementPositionStyles = defaultPositionStyles
   private openedWithFocus: boolean = false;
+  private activePlacement: Placement = 'top'
 
   private scope = {
     toggle: (event?: Event) => this.togglePopover(event),
@@ -53,7 +55,10 @@ export default class Popover extends Vue.with(Props) {
 
   get styles() {
     return {
-      popover: this.popoverPositionStyles
+      popover: {
+        top: this.popoverStyles.top,
+        left: this.popoverStyles.left
+      }
     } 
   }
 
@@ -118,10 +123,26 @@ export default class Popover extends Vue.with(Props) {
     })
   }
 
-  private calculatePopoverPosition(): Promise<void> {
-    return this.$nextTick(() => {
-      this.popoverPositionStyles = calculatePopoverPosition(this.position, this.$refs.trigger, this.$refs.popover.$el);
-    })
+  private async calculatePopoverPosition(): Promise<void> {
+    const placements = Array.isArray(this.placement) ? this.placement : [this.placement];
+    const container = document.querySelector(this.to) as HTMLElement
+    
+    await nextTick()
+
+    const { placement } = calculateMostVisiblePlacement(
+      this.$refs.trigger, 
+      this.$refs.popover.$el, 
+      container, 
+      placements
+    )
+    
+    this.activePlacement = placement
+    this.popoverStyles = calculatePlacementPositionStyles(
+      placement,
+      this.$refs.trigger,
+      this.$refs.popover.$el,
+      container
+    )
   }
 
   private focusout(event: FocusEvent) {
@@ -170,7 +191,7 @@ export default class Popover extends Vue.with(Props) {
   }
 
   private watchOpen() {
-    this.$watch(() => this.open, async (open: boolean) => {
+    watch(() => this.open, async (open: boolean) => {
       if(open) {
         await this.calculatePopoverPosition()
         await this.focusPopover()

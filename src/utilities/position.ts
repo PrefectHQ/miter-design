@@ -1,8 +1,8 @@
 import { Pixels, toPixels } from "./units"
 
-export type Placement = 'top' | 'right' | 'bottom' | 'left'
+export type Placement = 'top' | 'right' | 'bottom' | 'left' | 'leftTop' | 'rightTop'
 
-export const allPlacements: Placement[] = ['top', 'right', 'bottom', 'left']
+export const allPlacements: Placement[] = ['top', 'right', 'bottom', 'left', 'leftTop', 'rightTop']
 
 export const defaultPositionStyles: PlacementPositionStyles = {
   top: '0px',
@@ -71,7 +71,6 @@ export function calculateMostVisiblePlacement(
   container: HTMLElement | DOMRect = document.body,
   placements: Placement[] = allPlacements
 ): PlacementVisibility {
-  const popoverRect = domRectFromElementOrRect(popover)
   let mostVisible: PlacementVisibility = { placement: placements[0], visibility: 0 }
 
   for (let i = 0; i < placements.length; i++) {
@@ -150,10 +149,14 @@ function placementMethod(placement: Placement) {
       return top
     case 'right':
       return right
+    case 'rightTop':
+      return rightTop
     case 'bottom':
       return bottom
     case 'left':
       return left
+    case 'leftTop':
+      return leftTop
   }
 }
 
@@ -185,6 +188,21 @@ function right(target: DOMRect, popover: DOMRect, container: DOMRect): Placement
   }
 }
 
+// Same as right but with a 0.25 offset on the popover's height
+function rightTop(target: DOMRect, popover: DOMRect, container: DOMRect): PlacementPosition {
+  const top = target.top - container.top - 0.25 * popover.height + target.height / 2
+  const left = target.left - container.left + target.width
+  const right = container.width - left - popover.width
+  const bottom = container.height - top - popover.height
+
+  return { 
+    top,
+    right,
+    bottom,
+    left
+  }
+}
+
 function bottom(target: DOMRect, popover: DOMRect, container: DOMRect): PlacementPosition {
   const top = target.top - container.top + target.height
   const left = target.left - container.left + target.width / 2 - popover.width / 2
@@ -201,6 +219,21 @@ function bottom(target: DOMRect, popover: DOMRect, container: DOMRect): Placemen
 
 function left(target: DOMRect, popover: DOMRect, container: DOMRect): PlacementPosition {
   const top = target.top - container.top - 0.5 * popover.height + target.height / 2
+  const left = target.left - popover.width
+  const right = container.width - left - popover.width
+  const bottom = container.height - top - popover.height
+
+  return { 
+    top,
+    right,
+    bottom,
+    left
+  }
+}
+
+// Same as left but with a 0.25 offset on the popover's height
+function leftTop(target: DOMRect, popover: DOMRect, container: DOMRect): PlacementPosition {
+  const top = target.top - container.top - 0.25 * popover.height + target.height / 2
   const left = target.left - popover.width
   const right = container.width - left - popover.width
   const bottom = container.height - top - popover.height
