@@ -120,4 +120,19 @@ describe('props', () => {
 
     expect(wrapper.props().placement).toBe('top')
   })
+
+  test('disabled prop prevents open', async () => {
+    const wrapper = mount(Popover, {
+      props: {
+        disabled: true
+      }
+    })
+
+    wrapper.vm.openPopover()
+    await nextTick()
+
+    const popupcontent = wrapper.findComponent(PopoverContent)
+
+    expect(popupcontent.exists()).toBe(false)
+  })
 })
