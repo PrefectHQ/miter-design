@@ -26,6 +26,7 @@ class Props {
   placement = prop<Placement | Placement[]>({ default: 'top' })
   title = prop<string>({ required: false, default: '' })
   to = prop<string>({ required: false, default: 'body' })
+  disabled = prop<boolean>({ default: false, type: Boolean })
 }
 
 @Component({
@@ -81,6 +82,10 @@ export default class Popover extends Vue.with(Props) {
   }
 
   public openPopover(event?: Event) {
+    if(this.disabled) {
+      return
+    }
+
     if(this.shouldSkipOpen(event)) {
       this.openedWithFocus = false
       return
@@ -92,6 +97,10 @@ export default class Popover extends Vue.with(Props) {
   }
 
   public closePopover() {
+    if(this.disabled) {
+      return
+    }
+    
     this.open = false
   }
 
