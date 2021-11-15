@@ -26,7 +26,7 @@ class Props {
   placement = prop<Placement | Placement[]>({ default: 'top' })
   title = prop<string>({ required: false, default: '' })
   to = prop<string>({ required: false, default: 'body' })
-  disabled = prop<boolean>({ default: false })
+  disabled = prop<boolean>({ default: false, type: Boolean })
 }
 
 @Component({
