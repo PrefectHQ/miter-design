@@ -1,3 +1,4 @@
+- Fix bug where tabs do not update with programmatic setting of Vue ref - [#125](https://github.com/PrefectHQ/miter-design/pull/126)
 - Fix watcher bug in Popovers and updated Popovers to use position utilities - [#117](https://github.com/PrefectHQ/miter-design/pull/117)
 - Fix slot and option layout in select components - [#109](https://github.com/PrefectHQ/miter-design/pull/109)
 - Refactored Select Component. Introduce SimpleSelect and NativeSelect components - [#104](https://github.com/PrefectHQ/miter-design/pull/104)
