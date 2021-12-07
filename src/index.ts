@@ -19,6 +19,7 @@ import TextArea from './components/TextArea'
 import Toggle from './components/Toggle'
 import Tooltip from './components/Tooltip'
 import TimePicker from './components/TimePicker'
+import Datatable from './components/Datatable'
 
 /* Directives */
 import SkeletonDirective from './directives/Skeleton/Skeleton'
@@ -51,7 +52,8 @@ const components = {
   TextArea,
   Toggle,
   Tooltip,
-  TimePicker
+  TimePicker,
+  Datatable
 }
 
 const directives = {
@@ -107,3 +109,4 @@ export { default as TextArea } from './components/TextArea'
 export { default as Toggle } from './components/Toggle'
 export { default as Tooltip } from './components/Tooltip'
 export { default as TimePicker } from './components/TimePicker'
+export { default as Datatable } from './components/Datatable'
