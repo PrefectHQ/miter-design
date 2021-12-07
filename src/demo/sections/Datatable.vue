@@ -1,6 +1,16 @@
 <template>
   <div>
-    <Datatable :headers="headers" :items="items"> </Datatable>
+    <Datatable :headers="headers" :items="items">
+      <template #item-name="{ item, handleClick }">
+        <Checkbox>
+          {{ item.name.toLowerCase() }}
+        </Checkbox>
+      </template>
+
+      <template #header-name="{ column }">
+        {{ column.text.toUpperCase() }}
+      </template>
+    </Datatable>
   </div>
 </template>
 
@@ -11,6 +21,7 @@ export default defineComponent({
   components: { Datatable },
   data() {
     return {
+      table: '',
       headers: [
         {
           text: 'Name',

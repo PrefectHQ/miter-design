@@ -7,8 +7,9 @@
           :key="prop"
           @click="setSort(column.value)"
         >
-          {{ column.text }}
-          <slot :name="'header-' + prop" :column="column"> </slot>
+          <slot :name="'header-' + headers[prop].value" :column="column">
+            {{ column.text }}
+          </slot>
         </th>
       </tr>
     </thead>
@@ -25,13 +26,19 @@
       </tr>
 
       <tr v-for="(row, rowIndex) in sortedCats" :key="rowIndex">
-        <td>
+        <!-- <td>
           <Checkbox>
             {{ row.name }}
           </Checkbox>
-        </td>
-        <td v-for="(header, headerIndex) in formatHeaders" :key="headerIndex">
-          {{ row[Object.keys(row)[headerIndex]] }}
+        </td> -->
+        <td v-for="(header, headerIndex) in headers" :key="headerIndex">
+          <slot
+            :name="'item-' + Object.keys(row)[headerIndex]"
+            :item="row"
+            :handleClick="handleClick"
+          >
+            {{ row[Object.keys(row)[headerIndex]] }}
+          </slot>
         </td>
       </tr>
     </tbody>
@@ -82,6 +89,10 @@ export default defineComponent({
         this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc'
       }
       this.currentSort = key
+    },
+    handleClick(e: Event) {
+      console.log('clicked from datatable')
+      // this.$emit('handleClick', e.target.innerText)
     }
   }
 })
