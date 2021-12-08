@@ -40,7 +40,6 @@ export default defineComponent({
   },
   data() {
     return {
-
       showLeft: false,
       showRight: false
     }
@@ -51,7 +50,7 @@ export default defineComponent({
   },
   methods: {
     handleTabClick(e: Event, ...args: any[]): Event {
-      this._modelValue = args[0]
+      this._modelValue = args[0];
       const target: HTMLDivElement = e.target as HTMLDivElement
       // TODO: Polyfill this for Safari, since scrollIntoViewOptions aren't supported in Safari
       target?.scrollIntoView({
@@ -59,7 +58,6 @@ export default defineComponent({
         inline: 'center',
         block: 'nearest'
       })
-
       return e
     },
     handleTabFocus(e: Event, ...args: any[]) {
@@ -74,7 +72,7 @@ export default defineComponent({
     handleOverflowUpdate(target: HTMLDivElement) {
       this.showLeft = target.scrollLeft > 0
       this.showRight =
-        target.scrollLeft + target.clientWidth < target.scrollWidth
+          target.scrollLeft + target.clientWidth < target.scrollWidth
     },
     scrollLeft() {
       this.tabsContainer?.scroll({
@@ -87,6 +85,9 @@ export default defineComponent({
         left: this.tabsContainer.scrollLeft + this.tabsContainer.clientWidth,
         behavior: 'smooth'
       })
+    },
+    scrollToTab() {
+
     }
   },
   updated() {
@@ -98,121 +99,100 @@ export default defineComponent({
   render() {
     const slottedItems = this.$slots.default?.()
     let children: VNode<
-      RendererNode,
-      RendererElement,
-      { [key: string]: any }
-    >[][]
-
+        RendererNode,
+        RendererElement,
+        { [key: string]: any }
+        >[][]
     const activeIndex = slottedItems?.findIndex(
-      (ti) => ti.props?.href == this._modelValue
+        (ti) => ti.props?.href == this._modelValue
     )
-
     const computedProps: string[] = []
-
     const onClick = ($e: Event, ...args: any): Event =>
-      this.handleTabClick($e, ...args)
-
+        this.handleTabClick($e, ...args)
     if (slottedItems) {
       children = [
         slottedItems
-          ?.filter(
-            (ti: RendererNode | RendererElement | { [key: string]: any }) =>
-              ti.type.name == 'Tab'
-          )
-          .map(
-            (ti: RendererNode | RendererElement | { [key: string]: any }) => {
-              return h(
-                ti,
-                mergeProps(
-                  {
-                    active: this._modelValue == ti.props?.href,
-                    class: computedProps,
-                    onClick: onClick,
-                    onfocus: this.handleTabFocus
-                  },
-                  { ...ti.props }
-                )
-              )
-            }
-          )
+            ?.filter(
+                (ti: RendererNode | RendererElement | { [key: string]: any }) =>
+                    ti.type.name == 'Tab'
+            )
+            .map(
+                (ti: RendererNode | RendererElement | { [key: string]: any }) => {
+                  return h(
+                      ti,
+                      mergeProps(
+                          {
+                            active: this._modelValue == ti.props?.href,
+                            class: computedProps,
+                            onClick: onClick,
+                            onfocus: this.handleTabFocus,
+                            ref: "Tab"
+
+                          },
+                          { ...ti.props }
+                      )
+                  )
+                }
+            )
       ]
     } else {
-      children = [
-        Array.from({ length: 2 }).map((elem, i) => {
-          return h(
-            Tab,
-            mergeProps({
-              active: this._modelValue == i,
-              href: i,
-              onClick: onClick,
-              onfocus: this.handleTabFocus
-            }),
-            () => `Tab ${i + 1}`
-          )
-        })
-      ]
+      children = []
     }
-
     const tabsContainer = h(
-      'div',
-      {
-        ref: 'tabsContainer',
-        tabindex: -1,
-        class: [
-          'tabs-container',
-          `tab-${activeIndex}-active`,
-          ...computedProps
-        ],
-        onscroll: (e: Event) => {
-          const target = e?.target as HTMLDivElement
-          if (!target) return
-          this.handleOverflowUpdate(target)
-        }
-      },
-      children
+        'div',
+        {
+          ref: 'tabsContainer',
+          tabindex: -1,
+          class: [
+            'tabs-container',
+            `tab-${activeIndex}-active`,
+            ...computedProps
+          ],
+          onscroll: (e: Event) => {
+            const target = e?.target as HTMLDivElement
+            if (!target) return
+            this.handleOverflowUpdate(target)
+          }
+        },
+        children
     )
-
     let leftArrow, rightArrow
     if (this.showLeft)
       leftArrow = h(
-        'button',
-        {
-          'aria-label': 'Arrow Left',
-          class: ['overflow-button', 'left'],
-          onClick: this.scrollLeft,
-          tabindex: -1
-        },
-        [h('i', { class: ['pi', 'pi-arrow-left-s-line', 'pi-lg'] })]
+          'button',
+          {
+            'aria-label': 'Arrow Left',
+            class: ['overflow-button', 'left'],
+            onClick: this.scrollLeft,
+            tabindex: -1
+          },
+          [h('i', { class: ['pi', 'pi-arrow-left-s-line', 'pi-lg'] })]
       )
-
     if (this.showRight)
       rightArrow = h(
-        'button',
-        {
-          'aria-label': 'Arrow Right',
-          class: ['overflow-button', 'right'],
-          onClick: this.scrollRight,
-          tabindex: -1
-        },
-        [h('i', { class: ['pi', 'pi-arrow-right-s-line', 'pi-lg'] })]
+          'button',
+          {
+            'aria-label': 'Arrow Right',
+            class: ['overflow-button', 'right'],
+            onClick: this.scrollRight,
+            tabindex: -1
+          },
+          [h('i', { class: ['pi', 'pi-arrow-right-s-line', 'pi-lg'] })]
       )
-
     const borderContainer = h(
-      'div',
-      {
-        class: ['border-container']
-      },
-      [leftArrow, tabsContainer, rightArrow]
+        'div',
+        {
+          class: ['border-container']
+        },
+        [leftArrow, tabsContainer, rightArrow]
     )
-
     const wrapper = h(
-      'div',
-      {
-        class: ['component-wrapper']
-      },
-      [borderContainer]
+        'div',
+        {
+          class: ['component-wrapper']
+        },
+        [borderContainer]
     )
-
     return wrapper
   }
 })

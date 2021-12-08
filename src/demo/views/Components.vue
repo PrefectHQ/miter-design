@@ -1,5 +1,6 @@
 <template>
   <div class="mt-5 pb-10" v-cloak>
+    <Test/>
     <h1>Components</h1>
     <Loader class="mt-10"/>
     <Avatar class="mt-10" />
@@ -53,9 +54,11 @@ import TextAreas from '../sections/TextAreas.vue'
 import Toasts from '../sections/Toasts.vue'
 import Tooltip from '../sections/Tooltip.vue'
 import Loader from '../sections/Loader.vue'
+import Test from "@/demo/views/Test.vue";
 
 @Options({
   components: {
+    Test,
     Avatar,
     Buttons,
     Breakpoints,
