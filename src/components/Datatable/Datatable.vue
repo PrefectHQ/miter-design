@@ -12,31 +12,29 @@
           </slot>
         </th>
       </tr>
-    </thead>
-
-    <tbody>
       <tr>
         <td :colspan="Object.keys(headers).length">
-          <Input v-model="search" placeholder="Search...">
+          <Input
+            v-model="search"
+            placeholder="Search..."
+            style="
+              border-bottom: 1px solid #cecdd3;
+              margin-left: 16px;
+              margin-right: 16px;
+            "
+          >
             <template v-slot:prepend>
               <i class="pi pi-search-line pi-1x" />
             </template>
           </Input>
         </td>
       </tr>
+    </thead>
 
+    <tbody>
       <tr v-for="(row, rowIndex) in sortedCats" :key="rowIndex">
-        <!-- <td>
-          <Checkbox>
-            {{ row.name }}
-          </Checkbox>
-        </td> -->
         <td v-for="(header, headerIndex) in headers" :key="headerIndex">
-          <slot
-            :name="'item-' + Object.keys(row)[headerIndex]"
-            :item="row"
-            :handleClick="handleClick"
-          >
+          <slot :name="'item-' + Object.keys(row)[headerIndex]" :item="row">
             {{ row[Object.keys(row)[headerIndex]] }}
           </slot>
         </td>
@@ -92,27 +90,32 @@ export default defineComponent({
     },
     handleClick(e: Event) {
       console.log('clicked from datatable')
-      // this.$emit('handleClick', e.target.innerText)
     }
   }
 })
 </script>
 <style>
 table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
+  border-spacing: 0;
   width: 100%;
-}
+  color: #465968;
 
-td,
-th {
-  border: 1px solid #dddddd;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+
+  border: 1px solid #e8e8e8;
   text-align: left;
-  padding: 8px;
-  cursor: pointer;
+  border-radius: 4px;
+}
+thead > tr > th {
+  padding: 20px;
+  border-bottom: 1px solid #e8e8e8;
 }
 
-/* tbody > tr > :nth-child(1) {
-  
-} */
+tbody > tr > td {
+  padding: 8px;
+  border-bottom: 1px solid #e8e8e8;
+}
 </style>

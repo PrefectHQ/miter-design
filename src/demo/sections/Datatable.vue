@@ -1,14 +1,37 @@
 <template>
   <div>
     <Datatable :headers="headers" :items="items">
-      <template #item-name="{ item, handleClick }">
+      <template #header-name="{ column }">
         <Checkbox>
-          {{ item.name.toLowerCase() }}
+          {{ column.text }}
+          <i class="pi pi-arrow-up-down-line pi-1x" />
         </Checkbox>
       </template>
 
-      <template #header-name="{ column }">
-        {{ column.text.toUpperCase() }}
+      <template #header-memberCount="{ column }">
+        {{ column.text }}
+        <i class="pi pi-arrow-up-down-line pi-1x" />
+      </template>
+
+      <template #header-roles="{ column }">
+        {{ column.text }}
+        <i class="pi pi-arrow-up-down-line pi-1x" />
+      </template>
+
+      <template #item-name="{ item }">
+        <Checkbox>
+          {{ item.name }}
+        </Checkbox>
+      </template>
+
+      <template #item-roles>
+        <Select
+          :options="[
+            { label: 'Admin', value: 'admin' },
+            { label: 'User', value: 'user' },
+            { label: 'ReadOnly', value: 'readonly' }
+          ]"
+        />
       </template>
     </Datatable>
   </div>
@@ -17,8 +40,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Datatable from '@/components/Datatable/Datatable.vue'
+import Checkbox from '@/components/Checkbox/Checkbox.vue'
 export default defineComponent({
-  components: { Datatable },
+  components: { Datatable, Checkbox },
   data() {
     return {
       table: '',
