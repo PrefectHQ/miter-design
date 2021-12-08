@@ -3,17 +3,17 @@
     <thead>
       <tr>
         <th
-          v-for="(column, prop) in headers"
-          :key="prop"
+          v-for="(column, columnIndex) in columns"
+          :key="columnIndex"
           @click="setSort(column.value)"
         >
-          <slot :name="'header-' + headers[prop].value" :column="column">
+          <slot :name="'header-' + columns[columnIndex].value" :column="column">
             {{ column.text }}
           </slot>
         </th>
       </tr>
       <tr>
-        <td :colspan="Object.keys(headers).length">
+        <td :colspan="Object.keys(columns).length">
           <Input
             v-model="search"
             placeholder="Search..."
@@ -33,9 +33,9 @@
 
     <tbody>
       <tr v-for="(row, rowIndex) in sortedCats" :key="rowIndex">
-        <td v-for="(header, headerIndex) in headers" :key="headerIndex">
-          <slot :name="'item-' + Object.keys(row)[headerIndex]" :item="row">
-            {{ row[Object.keys(row)[headerIndex]] }}
+        <td v-for="(_, columnIndex) in columns" :key="columnIndex">
+          <slot :name="'item-' + Object.keys(row)[columnIndex]" :item="row">
+            {{ row[Object.keys(row)[columnIndex]] }}
           </slot>
         </td>
       </tr>
@@ -44,6 +44,10 @@
 </template>
 
 <script lang="ts">
+// todo: use nested slots
+// todo: how to get the consumer's sort function and use it to sort
+// todo: how to use v-model on external components
+
 import { defineComponent } from 'vue'
 import Checkbox from '../Checkbox/Checkbox.vue'
 
@@ -51,7 +55,7 @@ export default defineComponent({
   components: { Checkbox },
   name: 'Datatable',
   props: {
-    headers: { type: Object, required: true },
+    columns: { type: Object, required: true },
     items: { type: Array, required: true }
   },
   data() {
@@ -63,8 +67,8 @@ export default defineComponent({
   },
   mounted() {},
   computed: {
-    formatHeaders() {
-      return this.headers.slice(1)
+    formatcolumns() {
+      return this.columns.slice(1)
     },
     sortedCats() {
       if (this.search) {

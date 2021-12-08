@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Datatable :headers="headers" :items="items">
+    <Datatable :columns="columns" :items="items">
       <template #header-name="{ column }">
         <Checkbox>
           {{ column.text }}
@@ -46,7 +46,7 @@ export default defineComponent({
   data() {
     return {
       table: '',
-      headers: [
+      columns: [
         {
           text: 'Name',
           value: 'name'
