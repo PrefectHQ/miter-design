@@ -5,10 +5,15 @@
         <th
           v-for="(column, columnIndex) in columns"
           :key="columnIndex"
-          @click="setSort(column.value)"
+          @click="sortColumns(column.value)"
         >
-          <slot :name="'header-' + columns[columnIndex].value" :column="column">
-            {{ column.text }}
+          <slot name="column" :column="column">
+            <slot
+              :name="'column-' + columns[columnIndex].value"
+              :column="column"
+            >
+              {{ columns[columnIndex].text }}
+            </slot>
           </slot>
         </th>
       </tr>
@@ -34,8 +39,10 @@
     <tbody>
       <tr v-for="(row, rowIndex) in sortedCats" :key="rowIndex">
         <td v-for="(_, columnIndex) in columns" :key="columnIndex">
-          <slot :name="'item-' + Object.keys(row)[columnIndex]" :item="row">
-            {{ row[Object.keys(row)[columnIndex]] }}
+          <slot name="item" :item="row">
+            <slot :name="'item-' + Object.keys(row)[columnIndex]" :item="row">
+              {{ row[Object.keys(row)[columnIndex]] }}
+            </slot>
           </slot>
         </td>
       </tr>
@@ -49,10 +56,8 @@
 // todo: how to use v-model on external components
 
 import { defineComponent } from 'vue'
-import Checkbox from '../Checkbox/Checkbox.vue'
 
 export default defineComponent({
-  components: { Checkbox },
   name: 'Datatable',
   props: {
     columns: { type: Object, required: true },
@@ -67,13 +72,10 @@ export default defineComponent({
   },
   mounted() {},
   computed: {
-    formatcolumns() {
-      return this.columns.slice(1)
-    },
     sortedCats() {
       if (this.search) {
         return this.items.filter((item) =>
-          item.name.toUpperCase().includes(this.search.toUpperCase())
+          item.name.toLowerCase().includes(this.search.toLowerCase())
         )
       }
       return this.items.sort((a, b) => {
@@ -86,7 +88,7 @@ export default defineComponent({
     }
   },
   methods: {
-    setSort(key: string) {
+    sortColumns(key: string) {
       if (key === this.currentSort) {
         this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc'
       }
@@ -116,10 +118,11 @@ table {
 thead > tr > th {
   padding: 20px;
   border-bottom: 1px solid #e8e8e8;
+  cursor: pointer;
 }
 
 tbody > tr > td {
-  padding: 8px;
+  padding: 10px;
   border-bottom: 1px solid #e8e8e8;
 }
 </style>

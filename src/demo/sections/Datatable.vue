@@ -1,19 +1,28 @@
 <template>
   <div>
+    <!-- <Datatable :columns="columns" :items="items">
+      <template #column-name="{ column }">
+        {{ column.value }}
+      </template>
+
+      <template #column="{ column }">
+        {{ column }}
+      </template>
+    </Datatable> -->
     <Datatable :columns="columns" :items="items">
-      <template #header-name="{ column }">
+      <template #column-name="{ column }">
         <Checkbox>
           {{ column.text }}
           <i class="pi pi-arrow-up-down-line pi-1x" />
         </Checkbox>
       </template>
 
-      <template #header-memberCount="{ column }">
+      <template #column-memberCount="{ column }">
         {{ column.text }}
         <i class="pi pi-arrow-up-down-line pi-1x" />
       </template>
 
-      <template #header-roles="{ column }">
+      <template #column-roles="{ column }">
         {{ column.text }}
         <i class="pi pi-arrow-up-down-line pi-1x" />
       </template>
@@ -34,6 +43,20 @@
         />
       </template>
     </Datatable>
+    <!-- <Datatable :columns="columns" :items="items">
+      <template #column="{ column }">
+        {{ column }}
+      </template>
+      <template #column-name="{ column }">
+        {{ column.text.toUpperCase() }}
+      </template>
+      <template #item="{ item }">
+        {{ item }}
+      </template>
+      <template #item-name="{ item }">
+        {{ item.name.toUpperCase() }}
+      </template>
+    </Datatable> -->
   </div>
 </template>
 
