@@ -3,9 +3,7 @@ import {
   h,
   defineComponent,
   mergeProps,
-  VNode,
   RendererNode,
-  RendererElement,
   ref
 } from 'vue'
 import Tab from './Tab/Tab.vue'
@@ -15,10 +13,6 @@ export default defineComponent({
   components: { Tab },
   props: {
     modelValue: {
-      type: [String, Number],
-      default: 0
-    },
-    value: {
       type: [String, Number],
       default: 0
     }
@@ -33,43 +27,26 @@ export default defineComponent({
       }
     }
   },
-  emits: {
-    'update:modelValue'(...args: any[]) {
-      return { ...args }
-    }
-  },
+  emits: ['update:modelValue'],
   data() {
     return {
-
       showLeft: false,
       showRight: false
     }
   },
+  watch: {
+    _modelValue(tab) {
+      this.scrollTabIntoView(tab)
+    }
+  },
   setup() {
     const tabsContainer = ref<HTMLDivElement>()
+
     return { tabsContainer }
   },
   methods: {
-    handleTabClick(e: Event, ...args: any[]): Event {
-      this._modelValue = args[0]
-      const target: HTMLDivElement = e.target as HTMLDivElement
-      // TODO: Polyfill this for Safari, since scrollIntoViewOptions aren't supported in Safari
-      target?.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest'
-      })
-
-      return e
-    },
-    handleTabFocus(e: Event, ...args: any[]) {
-      const target: HTMLDivElement = e.target as HTMLDivElement
-      // TODO: Polyfill this for Safari, since scrollIntoViewOptions aren't supported in Safari
-      target?.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest'
-      })
+    handleTabClick(tab: string | number) {
+      this._modelValue = tab
     },
     handleOverflowUpdate(target: HTMLDivElement) {
       this.showLeft = target.scrollLeft > 0
@@ -87,6 +64,17 @@ export default defineComponent({
         left: this.tabsContainer.scrollLeft + this.tabsContainer.clientWidth,
         behavior: 'smooth'
       })
+    },
+    scrollTabIntoView(value: string | number) {
+      const tab = this.$refs[`tab-${value}`] as typeof Tab
+
+      if(tab) {
+        tab.$el.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        })
+      }
     }
   },
   updated() {
@@ -96,62 +84,27 @@ export default defineComponent({
     this.handleOverflowUpdate(this.tabsContainer!)
   },
   render() {
-    const slottedItems = this.$slots.default?.()
-    let children: VNode<
-      RendererNode,
-      RendererElement,
-      { [key: string]: any }
-    >[][]
+    const slottedItems = this.$slots.default?.() ?? []
 
     const activeIndex = slottedItems?.findIndex(
-      (ti) => ti.props?.href == this._modelValue
+      (tab) => tab.props?.href == this._modelValue
     )
 
-    const computedProps: string[] = []
-
-    const onClick = ($e: Event, ...args: any): Event =>
-      this.handleTabClick($e, ...args)
-
-    if (slottedItems) {
-      children = [
-        slottedItems
-          ?.filter(
-            (ti: RendererNode | RendererElement | { [key: string]: any }) =>
-              ti.type.name == 'Tab'
+    const children = (slottedItems as RendererNode[])
+      .filter((element) => element.type.name == 'Tab')
+      .map((tab) => h(
+            tab,
+            mergeProps(
+              {
+                active: this._modelValue == tab.props.href,
+                onClick: () => this.handleTabClick(tab.props.href),
+                onfocus: () => this.scrollTabIntoView(tab.props.href),
+                ref: `tab-${tab.props.href}`
+              },
+              tab.props
+            )
           )
-          .map(
-            (ti: RendererNode | RendererElement | { [key: string]: any }) => {
-              return h(
-                ti,
-                mergeProps(
-                  {
-                    active: this._modelValue == ti.props?.href,
-                    class: computedProps,
-                    onClick: onClick,
-                    onfocus: this.handleTabFocus
-                  },
-                  { ...ti.props }
-                )
-              )
-            }
-          )
-      ]
-    } else {
-      children = [
-        Array.from({ length: 2 }).map((elem, i) => {
-          return h(
-            Tab,
-            mergeProps({
-              active: this._modelValue == i,
-              href: i,
-              onClick: onClick,
-              onfocus: this.handleTabFocus
-            }),
-            () => `Tab ${i + 1}`
-          )
-        })
-      ]
-    }
+        )
 
     const tabsContainer = h(
       'div',
@@ -161,7 +114,6 @@ export default defineComponent({
         class: [
           'tabs-container',
           `tab-${activeIndex}-active`,
-          ...computedProps
         ],
         onscroll: (e: Event) => {
           const target = e?.target as HTMLDivElement
