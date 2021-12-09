@@ -23,6 +23,16 @@ export default defineComponent({
       default: 0
     }
   },
+  computed: {
+    _modelValue: {
+      get() {
+        return this.modelValue
+      },
+      set(newVal: String | Number) {
+        this.$emit('update:modelValue', newVal)
+      }
+    }
+  },
   emits: {
     'update:modelValue'(...args: any[]) {
       return { ...args }
@@ -30,7 +40,7 @@ export default defineComponent({
   },
   data() {
     return {
-      value_: this.value || this.modelValue,
+
       showLeft: false,
       showRight: false
     }
@@ -41,9 +51,7 @@ export default defineComponent({
   },
   methods: {
     handleTabClick(e: Event, ...args: any[]): Event {
-      this.value_ = args[0]
-      this.$emit('update:modelValue', this.value_)
-
+      this._modelValue = args[0]
       const target: HTMLDivElement = e.target as HTMLDivElement
       // TODO: Polyfill this for Safari, since scrollIntoViewOptions aren't supported in Safari
       target?.scrollIntoView({
@@ -96,7 +104,7 @@ export default defineComponent({
     >[][]
 
     const activeIndex = slottedItems?.findIndex(
-      (ti) => ti.props?.href == this.value_
+      (ti) => ti.props?.href == this._modelValue
     )
 
     const computedProps: string[] = []
@@ -117,7 +125,7 @@ export default defineComponent({
                 ti,
                 mergeProps(
                   {
-                    active: this.value_ == ti.props?.href,
+                    active: this._modelValue == ti.props?.href,
                     class: computedProps,
                     onClick: onClick,
                     onfocus: this.handleTabFocus
@@ -134,7 +142,7 @@ export default defineComponent({
           return h(
             Tab,
             mergeProps({
-              active: this.value_ == i,
+              active: this._modelValue == i,
               href: i,
               onClick: onClick,
               onfocus: this.handleTabFocus
