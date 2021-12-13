@@ -1,1 +1,1 @@
-declare module '@prefect/miter-design'
+declare module '@prefecthq/miter-design'
