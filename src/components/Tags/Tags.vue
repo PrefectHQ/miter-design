@@ -1,29 +1,11 @@
 <template>
-    <div v-if="tags.length > 0">
-      <Tag v-for="tag in tags"
+  <div class="tags">
+      <Tag v-for="tag in internalTags"
            :key="tag"
-           :icon="icon"
-           :disabled="disabled"
-           :outlined="outlined"
-           :hovered="hovered"
-           :elevated="elevated"
-           :flat="flat"
-           :color="color"
+           v-bind="{icon, disabled, outlined, hovered, elevated, flat, color}"
            class="mr-1"
       >{{ tag }}</Tag>
-    </div>
-    <div v-else class="tag d-flex mr-1" >
-      <Tag
-          :icon="icon"
-          :disabled="disabled"
-          :outlined="outlined"
-          :elevated="elevated"
-          :hovered="hovered"
-          :color="color"
-          :flat="flat"
-          class="mr-1"
-      >--</Tag>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -64,6 +46,11 @@ export default defineComponent( {
     color: {
       type: String,
       default: ''
+    }
+  },
+  computed: {
+    internalTags() {
+      return this.tags.length > 0 ? this.tags : ['--']
     }
   }
 })
