@@ -15,6 +15,7 @@ import Slider from './components/Slider'
 import Tabs from './components/Tabs'
 import Tag from './components/Tag'
 import TagGroup from './components/TagGroup'
+import Tags from './components/Tags'
 import TextArea from './components/TextArea'
 import Toggle from './components/Toggle'
 import Tooltip from './components/Tooltip'
@@ -48,6 +49,7 @@ const components = {
   Tabs,
   Tag,
   TagGroup,
+  Tags,
   TextArea,
   Toggle,
   Tooltip,
@@ -103,6 +105,7 @@ export { default as Slider } from './components/Slider'
 export { default as Tabs } from './components/Tabs'
 export { default as Tag } from './components/Tag'
 export { default as TagGroup } from './components/TagGroup'
+export { default as Tags } from './components/Tags'
 export { default as TextArea } from './components/TextArea'
 export { default as Toggle } from './components/Toggle'
 export { default as Tooltip } from './components/Tooltip'
