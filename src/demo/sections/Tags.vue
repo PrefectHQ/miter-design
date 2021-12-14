@@ -4,7 +4,7 @@
   <div class="caption-small mb-2">(Renders optional <b>v-for</b> of <b>Tag</b>-s components, or returns "--" (2 hyphens) if a passed tags prop is an empty array. To style <b>Tags</b> pass same props (disabled, outlined, elevated etc.) as you would for <b>Tag</b>)</div>
   <Tags :tags="this.tags" elevated disabled hovered/>
   <br>
-  <Tags icon="pi-label" :tags="this.tags" flat/>
+  <Tags icon="pi-label" :tags="this.tags" flat color="primary"/>
   <br>
   <Tags icon="pi-fire-line" :tags="this.no_tags" elevated hovered/>
   <br>

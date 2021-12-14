@@ -21,7 +21,7 @@ export default defineComponent( {
     },
     tags: {
       type: Array,
-      default: null
+      default: []
     },
     disabled: {
       type: Boolean,
