@@ -3,7 +3,6 @@
       <Tag v-for="tag in internalTags"
            :key="tag"
            v-bind="{icon, disabled, outlined, hovered, elevated, flat, color}"
-           class="mr-1"
       >{{ tag }}</Tag>
   </div>
 </template>
@@ -11,6 +10,7 @@
 <script>
 import { defineComponent } from 'vue'
 import Tag from "@/components/Tag/Tag.vue";
+
 export default defineComponent( {
   name: "Tags",
   components: {Tag},
@@ -57,5 +57,9 @@ export default defineComponent( {
 </script>
 
 <style lang="scss" scoped>
-@use '../../styles/components/tag';
+.tags {
+  display: flex;
+  align-items: center;
+  gap: var(--m-1);
+}
 </style>
