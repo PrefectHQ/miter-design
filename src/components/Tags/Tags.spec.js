@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils'
 import Tags from './Tags'
-import Tag from "@/components/Tag/Tag";
 
 describe('icon prop', () => {
     test('passes an icon as a prop', () => {

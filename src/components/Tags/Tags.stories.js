@@ -27,11 +27,13 @@ export const Default = Template.bind({})
 export const EmptyInternalTags = Template.bind({})
 EmptyInternalTags.args = {
     tags: [],
-    icon: 'pi-label'
+    icon: 'pi-label',
+    flat: true
 }
 
 export const InternalTags = Template.bind({})
 InternalTags.args = {
     tags: ["foo", "bar"],
-    icon: 'pi-label'
+    icon: 'pi-label',
+    flat: true
 }

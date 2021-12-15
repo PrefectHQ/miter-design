@@ -7,13 +7,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue'
 import Tag from "@/components/Tag/Tag.vue";
 
-export default defineComponent( {
+export default defineComponent({
   name: "Tags",
-  components: {Tag},
+  components: { Tag },
   props: {
     icon: {
       type: String,
@@ -21,7 +21,7 @@ export default defineComponent( {
     },
     tags: {
       type: Array,
-      default: []
+      default: function () { return [] }
     },
     disabled: {
       type: Boolean,
