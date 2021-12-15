@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <i v-if="icon" class="pi" :class="icon" />
-    <Tag v-bind="{disabled, outlined, hovered, elevated, flat, color}">
+    <Tag flat>
       {{ internalTags }}
       <Tooltip v-if="tagLengthLimit" placement="bottom">
         <template v-slot:trigger>
@@ -29,30 +29,6 @@ export default defineComponent({
     tags: {
       type: Array,
       default: function () { return [] }
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    outlined: {
-      type: Boolean,
-      default: false
-    },
-    elevated: {
-      type: Boolean,
-      default: false
-    },
-    flat: {
-      type: Boolean,
-      default: false
-    },
-    hovered: {
-      type: Boolean,
-      default: false
-    },
-    color: {
-      type: String,
-      default: ''
     }
   },
   computed: {
