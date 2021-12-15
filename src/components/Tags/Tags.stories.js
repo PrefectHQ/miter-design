@@ -23,17 +23,15 @@ const Template = (args) => ({
 })
 
 export const Default = Template.bind({})
-
-export const EmptyInternalTags = Template.bind({})
-EmptyInternalTags.args = {
-    tags: [],
+Default.args = {
+    tags: ["foo", "bar"],
     icon: 'pi-label',
     flat: true
 }
 
-export const InternalTags = Template.bind({})
-InternalTags.args = {
-    tags: ["foo", "bar"],
+export const EmptyState = Template.bind({})
+EmptyState.args = {
+    tags: [],
     icon: 'pi-label',
     flat: true
 }
