@@ -23,6 +23,7 @@
     text-overflow: ellipsis;
 
     .tag {
+      display: flex;
       font-family: variables.$font--primary !important;
       font-size: 13px;
       font-weight: 600;
