@@ -25,6 +25,9 @@ const Template = (args) => ({
 })
 
 export const Default = Template.bind({})
+Default.args = {
+    icon: 'pi-label'
+}
 
 export const DefaultLimited = Template.bind({})
 DefaultLimited.args = {
