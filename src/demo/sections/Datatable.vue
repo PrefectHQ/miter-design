@@ -1,30 +1,21 @@
 <template>
   <div>
-    <!-- <Datatable :columns="columns" :items="items">
+    <Datatable
+      v-model:dir="sortDir"
+      v-model:sort-by="sortBy"
+      :columns="columns"
+      :items="items"
+    >
       <template #column-name="{ column }">
-        {{ column.value }}
-      </template>
-
-      <template #column="{ column }">
-        {{ column }}
-      </template>
-    </Datatable> -->
-    <Datatable :columns="columns" :items="items">
-      <template #column-name="{ column }">
-        <Checkbox>
-          {{ column.text }}
-          <i class="pi pi-arrow-up-down-line pi-1x" />
-        </Checkbox>
+        {{ column.text }}
       </template>
 
       <template #column-memberCount="{ column }">
         {{ column.text }}
-        <i class="pi pi-arrow-up-down-line pi-1x" />
       </template>
 
       <template #column-roles="{ column }">
         {{ column.text }}
-        <i class="pi pi-arrow-up-down-line pi-1x" />
       </template>
 
       <template #item-name="{ item }">
@@ -33,30 +24,22 @@
         </Checkbox>
       </template>
 
+      <template #item-memberCount="{ item }">
+        <span><strong>Member Count:</strong> {{ item.memberCount }}</span>
+      </template>
+
       <template #item-roles>
-        <Select
-          :options="[
-            { label: 'Admin', value: 'admin' },
-            { label: 'User', value: 'user' },
-            { label: 'ReadOnly', value: 'readonly' }
-          ]"
-        />
+        <div class="select-container">
+          <Select
+            :options="[
+              { label: 'Admin', value: 'admin' },
+              { label: 'User', value: 'user' },
+              { label: 'ReadOnly', value: 'readonly' }
+            ]"
+          />
+        </div>
       </template>
     </Datatable>
-    <!-- <Datatable :columns="columns" :items="items">
-      <template #column="{ column }">
-        {{ column }}
-      </template>
-      <template #column-name="{ column }">
-        {{ column.text.toUpperCase() }}
-      </template>
-      <template #item="{ item }">
-        {{ item }}
-      </template>
-      <template #item-name="{ item }">
-        {{ item.name.toUpperCase() }}
-      </template>
-    </Datatable> -->
   </div>
 </template>
 
@@ -68,19 +51,24 @@ export default defineComponent({
   components: { Datatable, Checkbox },
   data() {
     return {
+      sortBy: 'memberCount',
+      sortDir: 'desc',
       table: '',
       columns: [
         {
           text: 'Name',
-          value: 'name'
+          value: 'name',
+          align: 'start'
         },
         {
           text: 'Member Count',
-          value: 'memberCount'
+          value: 'memberCount',
+          align: 'start'
         },
         {
           text: 'Roles',
-          value: 'roles'
+          value: 'roles',
+          align: 'start'
         }
       ],
       items: [
@@ -91,6 +79,40 @@ export default defineComponent({
         { name: 'Winter Interns', memberCount: 3, roles: 'Admin' }
       ]
     }
+  },
+  methods: {
+    nameSort(a, b) {
+      if (a < b) {
+        return -1
+      }
+      if (a > b) {
+        return 1
+      }
+      return 0
+    },
+    memberCountSort(a, b) {
+      return a - b
+    },
+    handleToggle() {
+      this.sortBy = this.sortBy === 'memberCount' ? 'name' : 'memberCount'
+    }
   }
 })
 </script>
+
+<style>
+.select-container > .select > div {
+  height: 42px;
+  background: #f7f7f8;
+  color: #465968;
+  border: 1px solid #cecdd3;
+  border-radius: 4px;
+}
+
+.select-container > .select > div > span {
+  color: #465968;
+
+  font-size: 14px;
+  line-height: 24px;
+}
+</style>

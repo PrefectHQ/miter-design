@@ -1,44 +1,62 @@
 <template>
   <table>
-    <thead>
-      <tr>
+    <thead class="table-head">
+      <tr class="table-row">
         <th
           v-for="(column, columnIndex) in columns"
+          class="table-header"
           :key="columnIndex"
-          @click="sortColumns(column.value)"
+          @click="sortColumns(column)"
         >
-          <slot name="column" :column="column">
-            <slot
-              :name="'column-' + columns[columnIndex].value"
-              :column="column"
-            >
-              {{ columns[columnIndex].text }}
+          <div class="icon-container">
+            <slot name="column" :column="column">
+              <slot
+                :name="'column-' + columns[columnIndex].value"
+                :column="column"
+              >
+                {{ columns[columnIndex].text }}
+              </slot>
+
+              <i
+                v-if="currentSortDir == 'asc'"
+                class="pi pi-arrow-up-line pi-1x"
+              />
+              <i
+                v-else-if="currentSortDir == 'desc'"
+                class="pi pi-arrow-down-line pi-1x"
+              />
+
+              <div v-else class="rotate-arrow">
+                <i class="pi pi-code-line pi-1x" />
+              </div>
             </slot>
-          </slot>
+          </div>
         </th>
       </tr>
-      <tr>
-        <td :colspan="Object.keys(columns).length">
-          <Input
-            v-model="search"
-            placeholder="Search..."
-            style="
-              border-bottom: 1px solid #cecdd3;
-              margin-left: 16px;
-              margin-right: 16px;
-            "
-          >
+      <tr class="table-row">
+        <td :colspan="Object.keys(columns).length" class="search-input">
+          <Input v-model="search" placeholder="Search...">
             <template v-slot:prepend>
-              <i class="pi pi-search-line pi-1x" />
+              <div class="search-icon">
+                <i class="pi pi-search-line pi-1x" />
+              </div>
             </template>
           </Input>
         </td>
       </tr>
     </thead>
 
-    <tbody>
-      <tr v-for="(row, rowIndex) in sortedCats" :key="rowIndex">
-        <td v-for="(_, columnIndex) in columns" :key="columnIndex">
+    <tbody class="table-body">
+      <tr
+        v-for="(row, rowIndex) in sortedColumns"
+        :key="rowIndex"
+        class="table-row row-hover"
+      >
+        <td
+          v-for="(column, columnIndex) in columns"
+          :key="columnIndex"
+          class="table-cell"
+        >
           <slot name="item" :item="row">
             <slot :name="'item-' + Object.keys(row)[columnIndex]" :item="row">
               {{ row[Object.keys(row)[columnIndex]] }}
@@ -51,57 +69,71 @@
 </template>
 
 <script lang="ts">
-// todo: use nested slots
-// todo: how to get the consumer's sort function and use it to sort
-// todo: how to use v-model on external components
-
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'Datatable',
   props: {
     columns: { type: Object, required: true },
-    items: { type: Array, required: true }
+    items: { type: Array, required: true },
+    dir: { type: String, required: false },
+    sortBy: { type: String, required: false }
+  },
+  emits: ['update:dir'],
+  watch: {
+    dir(val) {
+      this.currentSortDir = val
+    }
   },
   data() {
     return {
       currentSort: '',
-      currentSortDir: 'asc',
-      search: ''
+      currentSortDir: this.dir ? this.dir : 'asc',
+      search: '',
+      sortedItems: []
     }
   },
-  mounted() {},
   computed: {
-    sortedCats() {
+    sortedColumns() {
+      const customSort =
+        this.sortedItems.length === 0 ? this.items : this.sortedItems
+
       if (this.search) {
-        return this.items.filter((item) =>
+        return customSort.filter((item) =>
           item.name.toLowerCase().includes(this.search.toLowerCase())
         )
       }
-      return this.items.sort((a, b) => {
-        let modifier = 1
-        if (this.currentSortDir === 'desc') modifier = -1
-        if (a[this.currentSort] < b[this.currentSort]) return -1 * modifier
-        if (a[this.currentSort] > b[this.currentSort]) return 1 * modifier
-        return 0
-      })
+
+      if (this.sortedItems.length === 0) {
+        const sortBy = this.sortBy ? this.sortBy : 'name'
+        return this.currentSortDir === 'asc'
+          ? this.items.sort((a, b) => (a[sortBy] > b[sortBy] ? -1 : 1))
+          : this.items
+              .sort((a, b) => (a[sortBy] > b[sortBy] ? -1 : 1))
+              .reverse()
+      } else
+        return this.currentSortDir === 'asc'
+          ? this.sortedItems
+          : this.sortedItems.reverse()
     }
   },
   methods: {
-    sortColumns(key: string) {
-      if (key === this.currentSort) {
-        this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc'
+    sortColumns(col: object) {
+      this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc'
+      this.$emit('update:dir', this.currentSortDir)
+      if (col?.sort) {
+        this.sortedItems = this.items.sort(function (a, b) {
+          return col.sort(a[col?.value], b[col?.value])
+        })
       }
-      this.currentSort = key
-    },
-    handleClick(e: Event) {
-      console.log('clicked from datatable')
     }
   }
 })
 </script>
 <style>
 table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   border-spacing: 0;
   width: 100%;
   color: #465968;
@@ -115,14 +147,89 @@ table {
   text-align: left;
   border-radius: 4px;
 }
+
+thead,
+tbody,
+tr {
+  display: contents;
+}
+
 thead > tr > th {
-  padding: 20px;
+  padding: 16px;
   border-bottom: 1px solid #e8e8e8;
   cursor: pointer;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.06);
+}
+
+.search-input {
+  grid-column: 1 / 4;
 }
 
 tbody > tr > td {
-  padding: 10px;
+  padding: 16px;
   border-bottom: 1px solid #e8e8e8;
+  width: 100%;
+}
+
+tbody > tr > td:hover {
+  background: #fcfdfe;
+}
+
+tbody > tr > td > label:hover,
+a:hover {
+  color: #024dfd;
+}
+
+.icon-container {
+  text-align: start;
+}
+
+.rotate-arrow {
+  transform: rotate(90deg);
+  margin-left: 5px;
+  display: inline-block;
+  color: #d2d9df;
+  -webkit-text-stroke: 1px #d2d9df;
+}
+
+.icon-container > i {
+  margin-left: 6px;
+  color: #d2d9df;
+}
+
+.search-input {
+  border-bottom: 1px solid #cecdd3;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-top: 10px;
+  background: #fcfdfe;
+}
+
+.search-icon {
+  margin-top: 5px;
+}
+
+@media (max-width: 1200px) {
+  table {
+    grid-template-columns: 1fr;
+  }
+
+  .search-input {
+    grid-column: 1 / 2;
+  }
+
+  tbody > tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  tbody > tr > td {
+  }
+
+  tbody > tr > td:nth-child(3) {
+    grid-row: 1/3;
+    grid-column: 2;
+    /* border: 5px solid plum; */
+  }
 }
 </style>
