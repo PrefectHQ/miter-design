@@ -3,12 +3,14 @@
     <i v-if="icon" class="pi" :class="icon" />
     <Tag flat>
       {{ internalTags }}
-      <Tooltip v-if="tagLengthLimit" placement="bottom">
-        <template v-slot:trigger>
-          <span class="tags__showTooltip">show</span>
-        </template>
-        <span class="tags__tooltipTag">{{jointTags}}</span>
-      </Tooltip>
+      <template v-if="tagLengthLimit">
+        <Tooltip  placement="bottom">
+          <template v-slot:trigger>
+            <span class="tags__showTooltip">show</span>
+          </template>
+          <span class="tags__tooltipTag">{{ jointTags }}</span>
+        </Tooltip>
+      </template>
     </Tag>
   </div>
 </template>
@@ -19,7 +21,7 @@ import Tag from "@/components/Tag/Tag.vue";
 import Tooltip from "@/components/Tooltip/Tooltip.vue"
 
 export default defineComponent({
-  name: "TagsList",
+  name: "TagList",
   components: { Tag, Tooltip },
   props: {
     icon: {
@@ -29,6 +31,10 @@ export default defineComponent({
     tags: {
       type: Array,
       default: function () { return [] }
+    },
+    limit: {
+      type: Number,
+      default: 30
     }
   },
   computed: {
@@ -36,7 +42,7 @@ export default defineComponent({
       return this.tags?.join(", ")
     },
     tagLengthLimit(): boolean {
-      return this.jointTags.length > 30
+      return this.jointTags.length > this.limit
     },
     internalTags(): string {
       if(this.tags.length > 0) {
