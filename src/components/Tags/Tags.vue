@@ -6,9 +6,9 @@
       <template v-if="tagAmountLimit">
         <Tooltip  placement="bottom">
           <template v-slot:trigger>
-            ...<span class="tags__moreTooltip">{{hiddenTagsNumber}} more</span>
+            ...<span class="tags__more-tooltip">{{hiddenTagsNumber}} more</span>
           </template>
-          <span class="tags__tooltipTag">{{ hiddenTags }}</span>
+          <span class="tags__tooltip-tag">{{ hiddenTags }}</span>
         </Tooltip>
       </template>
     </Tag>
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import Tag from "@/components/Tag/Tag.vue";
 import Tooltip from "@/components/Tooltip/Tooltip.vue"
 
@@ -29,7 +29,7 @@ export default defineComponent({
       default: "pi-label"
     },
     tags: {
-      type: Array,
+      type: Array as PropType<string[]>,
       default: function () { return [] }
     },
     limit: {
@@ -44,11 +44,14 @@ export default defineComponent({
     visibleTags(): string {
       return this.tags.slice(0, this.limit).join(", ")
     },
+    hiddenTagsSlice(): string[] {
+      return this.tags.slice(this.limit)
+    },
     hiddenTags(): string {
-      return this.tags.slice(this.limit).join(", ")
+      return this.hiddenTagsSlice.join(", ")
     },
     hiddenTagsNumber(): number {
-      return this.tags.slice(this.limit).length
+      return this.hiddenTagsSlice.length
     },
     internalTags(): string {
       if(this.tags.length === 0) {
@@ -70,18 +73,18 @@ export default defineComponent({
 
   &__icon {
     color: var(--grey-20);
-    vertical-align: center !important;
+    vertical-align: center;
   }
 
-  &__moreTooltip {
+  &__more-tooltip {
     color: var(--primary)
   }
 
-  &__tooltipTag {
-    font-family: variables.$font--secondary!important;
+  &__tooltip-tag {
+    font-family: variables.$font--secondary;
     line-height: 18px;
     letter-spacing: -0.09px;
-    padding: 8px 16px 8px 16px;
+    padding: var(--p-1) var(--p-2);
   }
 }
 </style>
