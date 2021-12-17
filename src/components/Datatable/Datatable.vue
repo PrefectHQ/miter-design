@@ -66,7 +66,7 @@
         <td
           v-for="(column, columnIndex) in columns"
           :key="columnIndex"
-          :style="{ textAlign: column.align ? column.align : '' }"
+          :align="column.align"
           class="table-cell"
         >
           <slot name="item" :item="row">
@@ -77,10 +77,19 @@
         </td>
       </tr>
 
-      <div v-if="sortedColumns.length === 0">
-        <div>No results found</div>
-        <Button @click="clearSearch">Clear search</Button>
-      </div>
+      <tr>
+        <td
+          v-if="sortedColumns.length === 0"
+          :colspan="Object.keys(columns).length"
+          align="center"
+          class="no-search-results"
+        >
+          <div>No results found</div>
+          <Button @click="clearSearch" miter width="170px" height="36px"
+            >Clear search</Button
+          >
+        </td>
+      </tr>
     </tbody>
   </table>
 </template>
@@ -161,8 +170,6 @@ export default defineComponent({
 </script>
 <style>
 table {
-  /* display: grid; */
-  grid-template-columns: repeat(3, 1fr);
   border-spacing: 0;
   width: 100%;
   color: #465968;
@@ -177,27 +184,14 @@ table {
   border-radius: 4px;
 }
 
-thead,
-tbody,
-tr {
-  /* display: contents; */
-}
-
 thead > tr > th {
   padding: 16px;
-  /* border-bottom: 1px solid #e8e8e8; */
   cursor: pointer;
-  /* box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.06); */
-}
-
-.search-input {
-  grid-column: 1 / 4;
 }
 
 .table-cell {
   padding: 16px;
   border-bottom: 1px solid #e8e8e8;
-  /* width: 100%; */
 }
 
 tbody > tr > td:hover {
@@ -228,9 +222,9 @@ a:hover {
 
 .search-input {
   border-bottom: 1px solid #cecdd3;
-  margin-left: 16px;
-  margin-right: 16px;
-  margin-top: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 10px;
   background: #fcfdfe;
 }
 
@@ -238,13 +232,22 @@ a:hover {
   margin-top: 5px;
 }
 
-/* .icon-container {
-   text-align: start;
-} */
+.no-search-results {
+  padding: 50px;
+}
 
-/* .table-cell {
-  text-align: start;
-} */
+.no-search-results > div {
+  font-size: 24px;
+  line-height: 28px;
+
+  text-align: center;
+
+  color: #465968;
+}
+
+.no-search-results > button {
+  margin-top: 24px;
+}
 
 @media (max-width: 1200px) {
   tr,
