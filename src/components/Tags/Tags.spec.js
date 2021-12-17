@@ -32,6 +32,6 @@ describe('tags prop', () => {
         const wrapper = mount(Tags)
 
         await wrapper.setProps({ tags: ["Orion", "Nebula", "Production", "Label", "Label", "Label"] })
-        expect(wrapper.vm.internalTags).toStrictEqual(`6 Tags...` )
+        expect(wrapper.vm.internalTags).toStrictEqual("Orion, Nebula, Production, Label" )
     })
 })
