@@ -6,7 +6,7 @@
       <template v-if="tagAmountLimit">
         <Tooltip  placement="bottom">
           <template v-slot:trigger>
-            <span class="tags__showTooltip">...{{hiddenTagsNumber}} more</span>
+            ...<span class="tags__moreTooltip">{{hiddenTagsNumber}} more</span>
           </template>
           <span class="tags__tooltipTag">{{ hiddenTags }}</span>
         </Tooltip>
@@ -73,7 +73,7 @@ export default defineComponent({
     vertical-align: center !important;
   }
 
-  &__showTooltip {
+  &__moreTooltip {
     color: var(--primary)
   }
 
