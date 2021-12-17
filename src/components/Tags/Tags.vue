@@ -8,7 +8,7 @@
           <template v-slot:trigger>
             ...<span class="tags__more-tooltip">{{hiddenTagsNumber}} more</span>
           </template>
-          <span class="tags__tooltip-tag">{{ hiddenTags }}</span>
+          <span>{{ hiddenTags }}</span>
         </Tooltip>
       </template>
     </Tag>
@@ -78,13 +78,6 @@ export default defineComponent({
 
   &__more-tooltip {
     color: var(--primary)
-  }
-
-  &__tooltip-tag {
-    font-family: variables.$font--secondary;
-    line-height: 18px;
-    letter-spacing: -0.09px;
-    padding: var(--p-1) var(--p-2);
   }
 }
 </style>
