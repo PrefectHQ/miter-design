@@ -6,6 +6,10 @@
       :columns="columns"
       :items="items"
     >
+      <!-- <template #header-sort="{ handleMobileSort }">
+        <button @click="handleMobileSort(columns[0])">sort</button>
+      </template> -->
+
       <template #column-name="{ column }">
         {{ column.text }}
       </template>

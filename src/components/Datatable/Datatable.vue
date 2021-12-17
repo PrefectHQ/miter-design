@@ -1,14 +1,25 @@
 <template>
   <table>
     <thead class="table-head">
-      <tr class="table-row">
+      <tr v-if="windowWidth <= 1200" class="mobile-sort-container">
+        <th v-if="windowWidth <= 1200" class="mobile-sort">
+          <slot name="header-sort" :handleMobileSort="sortColumns">
+            <Button @click="sortColumns(columns[0])">Sort: A-Z</Button></slot
+          >
+        </th>
+      </tr>
+
+      <tr v-if="windowWidth >= 1200" class="table-row">
         <th
           v-for="(column, columnIndex) in columns"
           class="table-header"
           :key="columnIndex"
           @click="sortColumns(column)"
         >
-          <div class="icon-container">
+          <div
+            class="icon-container"
+            :style="{ textAlign: column.align ? column.align : '' }"
+          >
             <slot name="column" :column="column">
               <slot
                 :name="'column-' + columns[columnIndex].value"
@@ -55,6 +66,7 @@
         <td
           v-for="(column, columnIndex) in columns"
           :key="columnIndex"
+          :style="{ textAlign: column.align ? column.align : '' }"
           class="table-cell"
         >
           <slot name="item" :item="row">
@@ -64,6 +76,11 @@
           </slot>
         </td>
       </tr>
+
+      <div v-if="sortedColumns.length === 0">
+        <div>No results found</div>
+        <Button @click="clearSearch">Clear search</Button>
+      </div>
     </tbody>
   </table>
 </template>
@@ -85,15 +102,24 @@ export default defineComponent({
       this.currentSortDir = val
     }
   },
+  mounted() {
+    window.onresize = () => {
+      this.windowWidth = window.innerWidth
+    }
+  },
   data() {
     return {
       currentSort: '',
       currentSortDir: this.dir ? this.dir : 'asc',
       search: '',
-      sortedItems: []
+      sortedItems: [],
+      windowWidth: window.innerWidth
     }
   },
   computed: {
+    mobileView() {
+      return true
+    },
     sortedColumns() {
       const customSort =
         this.sortedItems.length === 0 ? this.items : this.sortedItems
@@ -126,13 +152,16 @@ export default defineComponent({
           return col.sort(a[col?.value], b[col?.value])
         })
       }
+    },
+    clearSearch() {
+      this.search = ''
     }
   }
 })
 </script>
 <style>
 table {
-  display: grid;
+  /* display: grid; */
   grid-template-columns: repeat(3, 1fr);
   border-spacing: 0;
   width: 100%;
@@ -151,24 +180,24 @@ table {
 thead,
 tbody,
 tr {
-  display: contents;
+  /* display: contents; */
 }
 
 thead > tr > th {
   padding: 16px;
-  border-bottom: 1px solid #e8e8e8;
+  /* border-bottom: 1px solid #e8e8e8; */
   cursor: pointer;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.06);
+  /* box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.06); */
 }
 
 .search-input {
   grid-column: 1 / 4;
 }
 
-tbody > tr > td {
+.table-cell {
   padding: 16px;
   border-bottom: 1px solid #e8e8e8;
-  width: 100%;
+  /* width: 100%; */
 }
 
 tbody > tr > td:hover {
@@ -209,27 +238,31 @@ a:hover {
   margin-top: 5px;
 }
 
+/* .icon-container {
+   text-align: start;
+} */
+
+/* .table-cell {
+  text-align: start;
+} */
+
 @media (max-width: 1200px) {
-  table {
-    grid-template-columns: 1fr;
+  tr,
+  td {
+    display: block;
   }
 
-  .search-input {
-    grid-column: 1 / 2;
+  .table-cell:last-of-type {
+    border-bottom: 1px solid #e8e8e8;
   }
 
-  tbody > tr {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .table-cell {
+    border-bottom: none;
   }
 
-  tbody > tr > td {
-  }
-
-  tbody > tr > td:nth-child(3) {
-    grid-row: 1/3;
-    grid-column: 2;
-    /* border: 5px solid plum; */
+  .mobile-sort-container {
+    display: flex;
+    justify-content: end;
   }
 }
 </style>
