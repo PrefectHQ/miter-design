@@ -6,7 +6,7 @@
       <template v-if="tagAmountLimit">
         <Tooltip  placement="bottom">
           <template v-slot:trigger>
-            ...<span class="tags__more-tooltip">{{hiddenTagsNumber}} more</span>
+            ...<span class="tags__more-tooltip">{{ hiddenTagsNumber }} more</span>
           </template>
           <span>{{ hiddenTags }}</span>
         </Tooltip>
