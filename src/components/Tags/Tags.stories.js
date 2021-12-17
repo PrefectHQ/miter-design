@@ -19,19 +19,26 @@ const Template = (args) => ({
     setup() {
         return { args }
     },
-    template: '<Tags v-bind="args" />'
+    template: `<Tags v-bind="args">
+    ${args.content}
+  </Tags>`
 })
 
 export const Default = Template.bind({})
-Default.args = {
-    tags: ["foo", "bar"],
-    icon: 'pi-label',
-    flat: true
+
+export const DefaultLimited = Template.bind({})
+DefaultLimited.args = {
+    tags: ["Apollo", "Orion", "Production"],
 }
 
-export const EmptyState = Template.bind({})
-EmptyState.args = {
-    tags: [],
-    icon: 'pi-label',
-    flat: true
+export const ManuallyLimited = Template.bind({})
+ManuallyLimited.args = {
+    tags: ["Apollo", "Orion", "Production"],
+    limit: 2
+}
+
+export const DefaultLimitedLongList = Template.bind({})
+DefaultLimitedLongList.args = {
+    tags: ["Apollo", "Orion", "Production", "Label", "Label2", "Label3"],
+    icon: 'pi-earth-line'
 }

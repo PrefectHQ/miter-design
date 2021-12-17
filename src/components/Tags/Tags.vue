@@ -1,65 +1,88 @@
 <template>
   <div class="tags">
-      <Tag v-for="tag in internalTags"
-           :key="tag"
-           v-bind="{icon, disabled, outlined, hovered, elevated, flat, color}"
-      >{{ tag }}</Tag>
+    <i v-if="icon" class="pi tags__icon" :class="icon" />
+    <Tag flat>
+      {{ internalTags }}
+      <template v-if="tagAmountLimit">
+        <Tooltip  placement="bottom">
+          <template v-slot:trigger>
+            <span class="tags__showTooltip">...{{hiddenTagsNumber}} more</span>
+          </template>
+          <span class="tags__tooltipTag">{{ hiddenTags }}</span>
+        </Tooltip>
+      </template>
+    </Tag>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Tag from "@/components/Tag/Tag.vue";
+import Tooltip from "@/components/Tooltip/Tooltip.vue"
 
 export default defineComponent({
   name: "Tags",
-  components: { Tag },
+  components: { Tag, Tooltip },
   props: {
     icon: {
       type: String,
-      default: null
+      default: "pi-label"
     },
     tags: {
       type: Array,
       default: function () { return [] }
     },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    outlined: {
-      type: Boolean,
-      default: false
-    },
-    elevated: {
-      type: Boolean,
-      default: false
-    },
-    flat: {
-      type: Boolean,
-      default: false
-    },
-    hovered: {
-      type: Boolean,
-      default: false
-    },
-    color: {
-      type: String,
-      default: ''
+    limit: {
+      type: Number,
+      default: 4
     }
   },
   computed: {
-    internalTags() {
-      return this.tags.length > 0 ? this.tags : ['--']
+    tagAmountLimit(): boolean {
+      return this.tags.length > this.limit
+    },
+    visibleTags(): string {
+      return this.tags.slice(0, this.limit).join(", ")
+    },
+    hiddenTags(): string {
+      return this.tags.slice(this.limit).join(", ")
+    },
+    hiddenTagsNumber(): number {
+      return this.tags.slice(this.limit).length
+    },
+    internalTags(): string {
+      if(this.tags.length === 0) {
+        return '--'
+      }
+      return this.visibleTags
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
+@use '../../styles/abstracts/_variables.scss';
+
 .tags {
   display: flex;
   align-items: center;
   gap: var(--m-1);
+
+  &__icon {
+    color: var(--grey-20);
+    vertical-align: center !important;
+  }
+
+  &__showTooltip {
+    color: var(--primary)
+  }
+
+  &__tooltipTag {
+    font-family: variables.$font--secondary!important;
+    line-height: 18px;
+    letter-spacing: -0.09px;
+    padding: 8px 16px 8px 16px;
+  }
 }
 </style>
+

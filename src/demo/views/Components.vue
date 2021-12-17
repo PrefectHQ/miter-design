@@ -17,7 +17,6 @@
     <TabSection class="mt-10" />
     <Tag class="mt-10" />
     <TagGroup class="mt-10" />
-    <TagList class="mt-10" />
     <Tags class="mt-10" />
     <Avatar class="mt-10" />
     <NumberInputs class="mt-10" />
@@ -51,7 +50,6 @@ import Sliders from '../sections/Sliders.vue'
 import Tag from '../sections/Tag.vue'
 import TabSection from '../sections/TabSection.vue'
 import TagGroup from '../sections/TagGroup.vue'
-import TagList from '../sections/TagList.vue'
 import Tags from '../sections/Tags.vue'
 import TextAreas from '../sections/TextAreas.vue'
 import Toasts from '../sections/Toasts.vue'
@@ -79,7 +77,6 @@ import Loader from '../sections/Loader.vue'
     TabSection,
     Tag,
     TagGroup,
-    TagList,
     Tags,
     TextAreas,
     Toasts,

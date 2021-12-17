@@ -15,7 +15,6 @@ import Slider from './components/Slider'
 import Tabs from './components/Tabs'
 import Tag from './components/Tag'
 import TagGroup from './components/TagGroup'
-import TagList from './components/TagList'
 import Tags from './components/Tags'
 import TextArea from './components/TextArea'
 import Toggle from './components/Toggle'
@@ -50,7 +49,6 @@ const components = {
   Tabs,
   Tag,
   TagGroup,
-  TagList,
   Tags,
   TextArea,
   Toggle,
@@ -107,7 +105,6 @@ export { default as Slider } from './components/Slider'
 export { default as Tabs } from './components/Tabs'
 export { default as Tag } from './components/Tag'
 export { default as TagGroup } from './components/TagGroup'
-export { default as TagList } from './components/TagList'
 export { default as Tags } from './components/Tags'
 export { default as TextArea } from './components/TextArea'
 export { default as Toggle } from './components/Toggle'
