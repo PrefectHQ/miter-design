@@ -1,3 +1,4 @@
+@use '../../styles/abstracts/variables';
 
 .tooltip {
   --tooltip-background: #090422;
@@ -13,10 +14,13 @@
 .tooltip__content {
   text-align: center;
   background-color: var(--tooltip-background);
-  padding: 5px;
   border-radius: 4px;
   min-height: 34px;
   min-width: 83px;
+  font-family: variables.$font--secondary;
+  line-height: 18px;
+  letter-spacing: -0.09px;
+  padding: var(--p-1) var(--p-2);
 }
 
 .tooltip::after {
