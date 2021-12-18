@@ -98,7 +98,7 @@ export default defineComponent({
       return a - b
     },
     handleToggle() {
-      this.sortBy = this.sortBy === 'memberCount' ? 'name' : 'memberCount'
+      this.sortDir = this.sortDir === 'desc' ? 'asc' : 'desc'
     }
   }
 })

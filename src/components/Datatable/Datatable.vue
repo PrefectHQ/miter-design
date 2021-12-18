@@ -106,11 +106,6 @@ export default defineComponent({
     sortBy: { type: String, required: false }
   },
   emits: ['update:dir'],
-  watch: {
-    dir(val) {
-      this.currentSortDir = val
-    }
-  },
   mounted() {
     window.onresize = () => {
       this.windowWidth = window.innerWidth
@@ -119,7 +114,7 @@ export default defineComponent({
   data() {
     return {
       currentSort: '',
-      currentSortDir: this.dir ? this.dir : 'asc',
+      currentSortDir: 'asc',
       search: '',
       sortedItems: [],
       windowWidth: window.innerWidth
@@ -130,6 +125,7 @@ export default defineComponent({
       return true
     },
     sortedColumns() {
+      const sortDir = this.dir ? this.dir : this.currentSortDir
       const customSort =
         this.sortedItems.length === 0 ? this.items : this.sortedItems
 
@@ -141,15 +137,13 @@ export default defineComponent({
 
       if (this.sortedItems.length === 0) {
         const sortBy = this.sortBy ? this.sortBy : 'name'
-        return this.currentSortDir === 'asc'
+        return sortDir === 'asc'
           ? this.items.sort((a, b) => (a[sortBy] > b[sortBy] ? -1 : 1))
           : this.items
               .sort((a, b) => (a[sortBy] > b[sortBy] ? -1 : 1))
               .reverse()
       } else
-        return this.currentSortDir === 'asc'
-          ? this.sortedItems
-          : this.sortedItems.reverse()
+        return sortDir === 'asc' ? this.sortedItems : this.sortedItems.reverse()
     }
   },
   methods: {
