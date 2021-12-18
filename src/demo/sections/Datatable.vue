@@ -11,7 +11,7 @@
       </template> -->
 
       <template #column-name="{ column }">
-        {{ column.text }}
+        <Checkbox>{{ column.text }}</Checkbox>
       </template>
 
       <template #column-memberCount="{ column }">
@@ -98,7 +98,8 @@ export default defineComponent({
       return a - b
     },
     handleToggle() {
-      this.sortDir = this.sortDir === 'desc' ? 'asc' : 'desc'
+      //this.sortDir = this.sortDir === 'desc' ? 'asc' : 'desc'
+      // this.sortBy = this.sortBy === 'memberCount' ? 'name' : 'memberCount'
     }
   }
 })

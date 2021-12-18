@@ -198,7 +198,9 @@ a:hover {
 }
 
 .icon-container {
-  text-align: start;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .rotate-arrow {
@@ -215,7 +217,6 @@ a:hover {
 }
 
 .search-input {
-  border-bottom: 1px solid #cecdd3;
   padding-left: 16px;
   padding-right: 16px;
   padding-top: 10px;
@@ -241,6 +242,10 @@ a:hover {
 
 .no-search-results > button {
   margin-top: 24px;
+}
+
+.table-header {
+  border-bottom: 1px solid #e8e8e8;
 }
 
 @media (max-width: 1200px) {
