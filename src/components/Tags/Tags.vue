@@ -69,7 +69,7 @@ export default defineComponent({
 .tags {
   display: flex;
   align-items: center;
-  gap: var(--m-1);
+  gap: 4px;
 
   &__icon {
     color: var(--grey-20);
