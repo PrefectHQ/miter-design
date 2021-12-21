@@ -13,12 +13,13 @@
         <th
           v-for="(column, columnIndex) in columns"
           class="table-header"
+          :style="{ textAlign: column.align ? column.align : 'start' }"
           :key="columnIndex"
           @click="sortColumns(column)"
         >
           <div
             class="icon-container"
-            :style="{ textAlign: column.align ? column.align : '' }"
+            :style="{ textAlign: column.align ? column.align : 'start' }"
           >
             <slot name="column" :column="column">
               <slot
@@ -58,15 +59,11 @@
     </thead>
 
     <tbody class="table-body">
-      <tr
-        v-for="(row, rowIndex) in sortedColumns"
-        :key="rowIndex"
-        class="table-row row-hover"
-      >
+      <tr v-for="(row, rowIndex) in sortedColumns" :key="rowIndex">
         <td
           v-for="(column, columnIndex) in columns"
           :key="columnIndex"
-          :align="column.align"
+          :align="column.align || 'start'"
           class="table-cell"
         >
           <slot name="item" :item="row">
@@ -107,47 +104,50 @@ export default defineComponent({
   },
   emits: ['update:dir'],
   mounted() {
-    window.onresize = () => {
-      this.windowWidth = window.innerWidth
-    }
+    window.addEventListener('resize', this.handleResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize)
   },
   data() {
     return {
-      currentSort: '',
-      currentSortDir: 'asc',
-      search: '',
-      sortedItems: [],
-      windowWidth: window.innerWidth
+      currentSort: '' as String,
+      currentSortDir: 'asc' as String,
+      search: '' as String,
+      sortedItems: [] as Array<Object>,
+      windowWidth: window.innerWidth as Number
     }
   },
   computed: {
-    mobileView() {
-      return true
-    },
-    sortedColumns() {
-      const sortDir = this.dir ? this.dir : this.currentSortDir
+    sortedColumns(): Array<Object> {
+      const sortDir: String = this.dir || this.currentSortDir
+      const sortBy: String = this.sortBy ? this.sortBy : 'name'
       const customSort =
-        this.sortedItems.length === 0 ? this.items : this.sortedItems
+        this.sortedItems.length === 0
+          ? (this.items as Array<Object>)
+          : (this.sortedItems as Array<Object>)
+      const sorted = customSort.sort((a: any, b: any) =>
+        a[sortBy] > b[sortBy] ? -1 : 1
+      )
 
       if (this.search) {
-        return customSort.filter((item) =>
+        return customSort.filter((item: any) =>
           item.name.toLowerCase().includes(this.search.toLowerCase())
         )
       }
 
-      if (this.sortedItems.length === 0) {
-        const sortBy = this.sortBy ? this.sortBy : 'name'
-        return sortDir === 'asc'
-          ? this.items.sort((a, b) => (a[sortBy] > b[sortBy] ? -1 : 1))
-          : this.items
-              .sort((a, b) => (a[sortBy] > b[sortBy] ? -1 : 1))
-              .reverse()
-      } else
-        return sortDir === 'asc' ? this.sortedItems : this.sortedItems.reverse()
+      if (sortDir === 'asc') {
+        return sorted
+      } else {
+        return sorted.reverse()
+      }
     }
   },
   methods: {
-    sortColumns(col: object) {
+    handleResize(): void {
+      this.windowWidth = window.innerWidth
+    },
+    sortColumns(col: Object) {
       this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc'
       this.$emit('update:dir', this.currentSortDir)
       if (col?.sort) {
@@ -156,7 +156,7 @@ export default defineComponent({
         })
       }
     },
-    clearSearch() {
+    clearSearch(): void {
       this.search = ''
     }
   }
@@ -178,21 +178,16 @@ table {
   border-radius: 4px;
 }
 
-thead > tr > th {
-  padding: 16px;
-  cursor: pointer;
-}
-
 .table-cell {
   padding: 16px;
   border-bottom: 1px solid #e8e8e8;
 }
 
-tbody > tr > td:hover {
+.table-cell:hover {
   background: #fcfdfe;
 }
 
-tbody > tr > td > label:hover,
+.table-cell > label:hover,
 a:hover {
   color: #024dfd;
 }
@@ -245,6 +240,8 @@ a:hover {
 }
 
 .table-header {
+  padding: 16px;
+  cursor: pointer;
   border-bottom: 1px solid #e8e8e8;
 }
 

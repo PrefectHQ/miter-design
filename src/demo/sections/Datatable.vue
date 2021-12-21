@@ -61,8 +61,7 @@ export default defineComponent({
       columns: [
         {
           text: 'Name',
-          value: 'name',
-          align: 'start'
+          value: 'name'
         },
         {
           text: 'Member Count',
@@ -84,6 +83,8 @@ export default defineComponent({
       ]
     }
   },
+
+  computed: {},
   methods: {
     nameSort(a, b) {
       if (a < b) {
