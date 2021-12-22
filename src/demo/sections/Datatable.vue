@@ -6,9 +6,9 @@
       :columns="columns"
       :items="items"
     >
-      <template #header-sort="{ handleMobileSort }">
+      <!-- <template #header-sort="{ handleMobileSort }">
         <button @click="handleMobileSort(columns[0])">sort</button>
-      </template>
+      </template> -->
 
       <template #column-name="{ column }">
         <Checkbox>{{ column.text }}</Checkbox>
