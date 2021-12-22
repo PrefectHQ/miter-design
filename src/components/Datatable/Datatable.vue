@@ -102,7 +102,7 @@ export default defineComponent({
   props: {
     columns: { type: Array, required: true, default: () => [] },
     items: { type: Array, required: true, default: () => [] },
-    dir: { type: String, required: false, default: 'asc' },
+    dir: { type: String, required: false, default: '' },
     sortBy: { type: String, required: false, default: 'name' }
   },
   emits: ['update:dir'],
@@ -122,7 +122,7 @@ export default defineComponent({
   },
   computed: {
     sortedColumns(): object[] {
-      const sortDir: String = this.dir || this.currentSortDir
+      const sortDir: String = this.dir || this.currentSortDir || 'asc'
       const sortBy: String = this.sortBy ? this.sortBy : 'name'
       const isCustomSort = this.sortedItems.length === 0
       let results = []
