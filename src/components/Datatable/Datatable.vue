@@ -1,15 +1,15 @@
 <template>
   <table>
     <thead class="table-head">
-      <tr v-if="windowWidth <= 1200" class="mobile-sort-container">
-        <th v-if="windowWidth <= 1200" class="mobile-sort">
+      <tr class="mobile-sort-container">
+        <th class="mobile-sort">
           <slot name="header-sort" :handleMobileSort="sortColumns">
             <Button @click="sortColumns(columns[0])">Sort: A-Z</Button></slot
           >
         </th>
       </tr>
 
-      <tr v-if="windowWidth >= 1200" class="table-row">
+      <tr class="table-row">
         <th
           v-for="(column, columnIndex) in columns"
           class="table-header"
@@ -129,18 +129,11 @@ export default defineComponent({
     }
   },
   emits: ['update:dir'],
-  mounted() {
-    window.addEventListener('resize', this.handleResize)
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.handleResize)
-  },
   data() {
     return {
       currentSortDir: '' as String,
       search: '' as String,
-      sortedItems: [] as object[],
-      windowWidth: window.innerWidth as Number
+      sortedItems: [] as object[]
     }
   },
   computed: {
@@ -280,18 +273,24 @@ a:hover {
   border-bottom: 1px solid #e8e8e8;
 }
 
+.mobile-sort-container {
+  display: none;
+}
+
 @media (max-width: 1200px) {
   tr,
   td {
     display: block;
   }
 
-  .table-cell:last-of-type {
-    border-bottom: 1px solid #e8e8e8;
+  .table-header {
+    display: none;
   }
-
   .table-cell {
     border-bottom: none;
+  }
+  .table-cell:last-of-type {
+    border-bottom: 1px solid #e8e8e8;
   }
 
   .mobile-sort-container {
