@@ -26,7 +26,7 @@
                 :name="'column-' + columns[columnIndex].value"
                 :column="column"
               >
-                {{ columns[columnIndex].text }}
+                {{ column.text }}
               </slot>
 
               <i
