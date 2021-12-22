@@ -60,12 +60,6 @@ const Template = (args) => ({
   `
 })
 
-export const Default = Template.bind({})
-Default.args = {
-  items: items,
-  columns: columns
-}
-
 export const Slot = Template.bind({})
 Slot.args = {
   items: items,
