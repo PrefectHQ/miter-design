@@ -92,18 +92,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import Button from '../Button/Button.vue'
 import Input from '../Input/Input.vue'
+
+interface Columns {
+  text: string
+  value: string
+  align: string
+  sort: void
+}
 
 export default defineComponent({
   name: 'Datatable',
   components: { Button, Input },
   props: {
-    columns: { type: Array, required: true, default: () => [] },
-    items: { type: Array, required: true, default: () => [] },
-    dir: { type: String, required: false, default: '' },
-    sortBy: { type: String, required: false, default: 'name' }
+    columns: {
+      type: Array as PropType<Columns[]>,
+      required: true,
+      default: function () {
+        return []
+      }
+    },
+    items: {
+      type: Array as PropType<object[]>,
+      required: true,
+      default: function () {
+        return []
+      }
+    },
+    dir: { type: String as PropType<string>, required: false, default: '' },
+    sortBy: {
+      type: String as PropType<string>,
+      required: false,
+      default: 'name'
+    }
   },
   emits: ['update:dir'],
   mounted() {
