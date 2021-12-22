@@ -93,12 +93,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Button from '../Button/Button.vue'
+import Input from '../Input/Input.vue'
 
 export default defineComponent({
   name: 'Datatable',
+  components: { Button, Input },
   props: {
-    columns: { type: Object, required: false, default: {} },
-    items: { type: Array, required: false, default: [] },
+    columns: { type: Array, required: true, default: () => [] },
+    items: { type: Array, required: true, default: () => [] },
     dir: { type: String, required: false, default: 'asc' },
     sortBy: { type: String, required: false, default: 'name' }
   },
