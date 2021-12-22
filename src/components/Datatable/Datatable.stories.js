@@ -6,7 +6,7 @@ export default {
   parameters: {
     design: {
       type: 'figma',
-      url: ''
+      url: 'https://www.figma.com/file/JomY9jsgJdal9wfPBtpWkY/UI?node-id=1881%3A37776'
     }
   }
 }
