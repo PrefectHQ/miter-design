@@ -6,9 +6,9 @@
       :columns="columns"
       :items="items"
     >
-      <!-- <template #header-sort="{ handleMobileSort }">
+      <template #header-sort="{ handleMobileSort }">
         <button @click="handleMobileSort(columns[0])">sort</button>
-      </template> -->
+      </template>
 
       <template #column-name="{ column }">
         <Checkbox>{{ column.text }}</Checkbox>
@@ -33,15 +33,13 @@
       </template>
 
       <template #item-roles>
-        <div class="select-container">
-          <Select
-            :options="[
-              { label: 'Admin', value: 'admin' },
-              { label: 'User', value: 'user' },
-              { label: 'ReadOnly', value: 'readonly' }
-            ]"
-          />
-        </div>
+        <Select
+          :options="[
+            { label: 'Admin', value: 'admin' },
+            { label: 'User', value: 'user' },
+            { label: 'ReadOnly', value: 'readonly' }
+          ]"
+        />
       </template>
     </Datatable>
   </div>
@@ -57,7 +55,6 @@ export default defineComponent({
     return {
       sortBy: 'memberCount',
       sortDir: 'desc',
-      table: '',
       columns: [
         {
           text: 'Name',
@@ -65,26 +62,23 @@ export default defineComponent({
         },
         {
           text: 'Member Count',
-          value: 'memberCount',
-          align: 'start'
+          value: 'memberCount'
         },
         {
           text: 'Roles',
-          value: 'roles',
-          align: 'start'
+          value: 'roles'
         }
       ],
       items: [
         { name: 'Staging Team', memberCount: 57, roles: 'Admin' },
-        { name: 'Data Science', memberCount: 75, roles: 'Admin' },
+        { name: 'Data Science', memberCount: 405, roles: 'Admin' },
         { name: 'Dev Ops', memberCount: 22, roles: 'Admin' },
         { name: 'Production Team', memberCount: 35, roles: 'Admin' },
-        { name: 'Winter Interns', memberCount: 3, roles: 'Admin' }
+        { name: 'Winter Interns', memberCount: 90, roles: 'Admin' }
       ]
     }
   },
 
-  computed: {},
   methods: {
     nameSort(a, b) {
       if (a < b) {
@@ -94,31 +88,7 @@ export default defineComponent({
         return 1
       }
       return 0
-    },
-    memberCountSort(a, b) {
-      return a - b
-    },
-    handleToggle() {
-      //this.sortDir = this.sortDir === 'desc' ? 'asc' : 'desc'
-      // this.sortBy = this.sortBy === 'memberCount' ? 'name' : 'memberCount'
     }
   }
 })
 </script>
-
-<style>
-.select-container > .select > div {
-  height: 42px;
-  background: #f7f7f8;
-  color: #465968;
-  border: 1px solid #cecdd3;
-  border-radius: 4px;
-}
-
-.select-container > .select > div > span {
-  color: #465968;
-
-  font-size: 14px;
-  line-height: 24px;
-}
-</style>

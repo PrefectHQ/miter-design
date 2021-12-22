@@ -97,10 +97,10 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'Datatable',
   props: {
-    columns: { type: Object, required: true },
-    items: { type: Array, required: true },
-    dir: { type: String, required: false },
-    sortBy: { type: String, required: false }
+    columns: { type: Object, required: false, default: {} },
+    items: { type: Array, required: false, default: [] },
+    dir: { type: String, required: false, default: 'asc' },
+    sortBy: { type: String, required: false, default: 'name' }
   },
   emits: ['update:dir'],
   mounted() {
@@ -111,39 +111,48 @@ export default defineComponent({
   },
   data() {
     return {
-      currentSort: '' as String,
-      currentSortDir: 'asc' as String,
+      currentSortDir: '' as String,
       search: '' as String,
-      sortedItems: [] as Array<Object>,
+      sortedItems: [] as object[],
       windowWidth: window.innerWidth as Number
     }
   },
   computed: {
-    sortedColumns(): Array<Object> {
+    sortedColumns(): object[] {
       const sortDir: String = this.dir || this.currentSortDir
       const sortBy: String = this.sortBy ? this.sortBy : 'name'
-      const customSort =
-        this.sortedItems.length === 0
-          ? (this.items as Array<Object>)
-          : (this.sortedItems as Array<Object>)
-      const sorted = customSort.sort((a: any, b: any) =>
-        a[sortBy] > b[sortBy] ? -1 : 1
-      )
+      const isCustomSort = this.sortedItems.length === 0
+      let results = []
+
+      if (isCustomSort) {
+        results = this.sortAscOrDesc(sortDir, sortBy, this.items)
+      } else {
+        results = this.sortedItems
+      }
 
       if (this.search) {
-        return customSort.filter((item: any) =>
+        results = results.filter((item: any) =>
           item.name.toLowerCase().includes(this.search.toLowerCase())
         )
       }
 
-      if (sortDir === 'asc') {
-        return sorted
-      } else {
-        return sorted.reverse()
-      }
+      return results
     }
   },
   methods: {
+    sortAscOrDesc(
+      direction: String,
+      sortBy: String,
+      items: object[]
+    ): object[] {
+      if (direction === 'asc') {
+        return items.sort((a, b) => (a[sortBy] > b[sortBy] ? 1 : -1))
+      } else if (direction === 'desc') {
+        return items.sort((a, b) => (a[sortBy] > b[sortBy] ? -1 : 1))
+      } else {
+        return []
+      }
+    },
     handleResize(): void {
       this.windowWidth = window.innerWidth
     },
@@ -262,6 +271,7 @@ a:hover {
   .mobile-sort-container {
     display: flex;
     justify-content: end;
+    padding: 16px;
   }
 }
 </style>
