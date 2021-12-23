@@ -93,7 +93,7 @@ import { defineComponent, PropType } from 'vue'
 import Button from '../Button/Button.vue'
 import Input from '../Input/Input.vue'
 
-interface Columns {
+interface DataTableColumn {
   label: string
   value: string
   align: string
@@ -105,7 +105,7 @@ export default defineComponent({
   components: { Button, Input },
   props: {
     columns: {
-      type: Array as PropType<Columns[]>,
+      type: Array as PropType<DataTableColumn[]>,
       required: true,
       default: () => []
     },
