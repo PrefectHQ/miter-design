@@ -1,7 +1,7 @@
 <template>
   <div>
     <Datatable
-      v-model:dir="sortDir"
+      v-model:direction="sortDir"
       v-model:sort-by="sortBy"
       :columns="columns"
       :items="items"

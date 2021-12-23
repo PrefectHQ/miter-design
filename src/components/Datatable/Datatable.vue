@@ -114,14 +114,18 @@ export default defineComponent({
       required: true,
       default: () => []
     },
-    dir: { type: String as PropType<string>, required: false, default: '' },
+    direction: {
+      type: String as PropType<string>,
+      required: false,
+      default: ''
+    },
     sortBy: {
       type: String as PropType<string>,
       required: false,
       default: 'name'
     }
   },
-  emits: ['update:dir'],
+  emits: ['update:direction'],
   data() {
     return {
       currentSortDir: '' as String,
@@ -131,7 +135,7 @@ export default defineComponent({
   },
   computed: {
     sortedColumns(): object[] {
-      const sortDir: String = this.dir || this.currentSortDir || 'asc'
+      const sortDir: String = this.direction || this.currentSortDir || 'asc'
       const sortBy: String = this.sortBy ? this.sortBy : 'name'
       const isCustomSort = this.sortedItems.length === 0
       let results = []
@@ -170,7 +174,7 @@ export default defineComponent({
     },
     sortColumns(col: Object) {
       this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc'
-      this.$emit('update:dir', this.currentSortDir)
+      this.$emit('update:direction', this.currentSortDir)
       if (col?.sort) {
         this.sortedItems = this.items.sort(function (a, b) {
           return col.sort(a[col?.value], b[col?.value])
