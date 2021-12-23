@@ -45,6 +45,12 @@ SecondaryLight.args = {
   color: 'secondary light'
 }
 
+export const Delete = Template.bind({})
+Delete.args = {
+  template: `<Button :color="args.color">{{args.content}}</Button>`,
+  color: 'delete'
+}
+
 export const Alternate = Template.bind({})
 Alternate.args = {
   template: `<Button :color="args.color">{{args.content}}</Button>`,
