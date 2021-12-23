@@ -22,19 +22,7 @@
               <slot :name="`column-${column.value}`" :column="column">
                 {{ column.label }}
               </slot>
-
-              <i
-                v-if="internalDirection == 'asc'"
-                class="pi pi-arrow-up-line pi-1x"
-              />
-              <i
-                v-else-if="internalDirection == 'desc'"
-                class="pi pi-arrow-down-line pi-1x"
-              />
-
-              <div v-else class="rotate-arrow">
-                <i class="pi pi-code-line pi-1x" />
-              </div>
+              <i class="data-table__header-icon pi pi-1x" :class="getColumnSortIconClasses(column)" />
             </slot>
           </span>
         </th>
@@ -172,6 +160,13 @@ export default defineComponent({
     getDefaultSorter(sortBy: string) {
       return (a: DataTableRow, b: DataTableRow) => a[sortBy].toString().localeCompare(b[sortBy].toString())
     },
+    getColumnSortIconClasses(column: DataTableColumn)  {
+      if(column.value !== this.internalSortBy || this.internalDirection == 'none') {
+        return 'pi-code-line rotate-arrow'
+      }
+
+      return this.internalDirection == 'asc' ? 'pi-arrow-up-line' : 'pi-arrow-down-line'
+    },
     sortColumn(column: DataTableColumn): void {
       const sameColumn = this.internalSortBy == column.value
       let direction: DataTableColumnSort = 'asc'
@@ -307,5 +302,10 @@ a:hover {
     justify-content: end;
     padding: 16px;
   }
+}
+
+.data-table__header-icon {
+  width: 16px;
+  height: 16px;
 }
 </style>
