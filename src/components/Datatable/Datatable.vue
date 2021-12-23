@@ -17,10 +17,7 @@
           :key="columnIndex"
           @click="sortColumns(column)"
         >
-          <div
-            class="icon-container"
-            :style="{ textAlign: column.align ? column.align : 'start' }"
-          >
+          <span class="icon-container">
             <slot name="column" :column="column">
               <slot
                 :name="'column-' + columns[columnIndex].value"
@@ -42,7 +39,7 @@
                 <i class="pi pi-code-line pi-1x" />
               </div>
             </slot>
-          </div>
+          </span>
         </th>
       </tr>
       <tr class="table-row">
