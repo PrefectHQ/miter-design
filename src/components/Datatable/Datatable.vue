@@ -43,7 +43,7 @@
         </th>
       </tr>
       <tr class="table-row">
-        <td :colspan="Object.keys(columns).length" class="search-input">
+        <td :colspan="columns.length" class="search-input">
           <Input v-model="search" placeholder="Search...">
             <template v-slot:prepend>
               <div class="search-icon">
