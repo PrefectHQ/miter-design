@@ -20,7 +20,7 @@
           <span class="icon-container">
             <slot name="column" :column="column">
               <slot
-                :name="'column-' + columns[columnIndex].value"
+                :name="`column-${column.value}`"
                 :column="column"
               >
                 {{ column.text }}
