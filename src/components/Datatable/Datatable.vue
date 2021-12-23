@@ -19,10 +19,7 @@
         >
           <span class="icon-container">
             <slot name="column" :column="column">
-              <slot
-                :name="`column-${column.value}`"
-                :column="column"
-              >
+              <slot :name="`column-${column.value}`" :column="column">
                 {{ column.label }}
               </slot>
 
@@ -92,13 +89,7 @@
 import { defineComponent, PropType } from 'vue'
 import Button from '../Button/Button.vue'
 import Input from '../Input/Input.vue'
-
-interface DataTableColumn {
-  label: string
-  value: string
-  align: string
-  sort: void
-}
+import { DataTableColumn } from '../../types/DataTableColumn'
 
 export default defineComponent({
   name: 'DataTable',
