@@ -21,15 +21,17 @@
           </th>
         </template>
       </tr>
-      <tr>
-        <td :colspan="columns.length" class="data-table__search">
-          <Input v-model="search" placeholder="Search...">
-            <template v-slot:prepend>
-              <i class="pi pi-search-line pi-1x data-table__search-icon" />
-            </template>
-          </Input>
-        </td>
-      </tr>
+      <template v-if="searchableColumns.length">
+        <tr>
+          <td :colspan="columns.length" class="data-table__search">
+            <Input v-model="search" placeholder="Search...">
+              <template v-slot:prepend>
+                <i class="pi pi-search-line pi-1x data-table__search-icon" />
+              </template>
+            </Input>
+          </td>
+        </tr>
+      </template>
     </thead>
 
     <tbody class="data-table__table-body">
@@ -48,7 +50,7 @@
       </template>
     </tbody>
 
-    <template v-if="sorted.length === 0">
+    <template v-if="this.search.length > 0 && sorted.length === 0">
       <tbody class="data-table__table-body">
           <tr>
             <td :colspan="columns.length" align="center" class="data-table__no-search-results">
@@ -72,6 +74,7 @@ import { defineComponent, PropType } from 'vue'
 import Button from '../Button/Button.vue'
 import Input from '../Input/Input.vue'
 import { DataTableColumn } from '../../types/DataTableColumn'
+import { pick } from '@/utilities/objects'
 
 export type DataTableColumnSort = 'asc' | 'desc' | 'none'
 export type DataTableRow = Record<string, any>
@@ -127,13 +130,33 @@ export default defineComponent({
     internalSortByColumn(): DataTableColumn {
       return this.columns.find(column => column.value == this.internalSortBy)!
     },
-    sorted(): DataTableRow[] {
-      if(this.internalSortBy === null || this.internalDirection === 'none') {
+    searchableColumns(): DataTableColumn[] {
+      return this.columns.filter(column => column.search)
+    },
+    searched(): DataTableRow[] {
+      if(this.searchableColumns.length == 0) {
         return this.rows
       }
 
+      const searchable = this.searchableColumns.map(column => column.value)
+      const term = this.search.toLowerCase()
+
+      return this.rows.filter(row => {
+        const onlySearchableRow = pick(row, searchable)
+        const onlySearchableValues = Object.values(onlySearchableRow)
+
+        return onlySearchableValues.some(value => value.toString().toLowerCase().includes(term))
+      })
+    },
+    sorted(): DataTableRow[] {
+      const rows = this.searched
+
+      if(this.internalSortBy === null || this.internalDirection === 'none') {
+        return rows
+      }
+
       const sorter = this.internalSortByColumn.sort ?? this.getDefaultSorter(this.internalSortBy)
-      const sorted = [...this.rows].sort(sorter)
+      const sorted = [...rows].sort(sorter)
 
       if(this.internalDirection == 'desc') {
         sorted.reverse()

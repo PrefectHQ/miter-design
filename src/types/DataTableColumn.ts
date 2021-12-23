@@ -3,4 +3,5 @@ export interface DataTableColumn {
   value: string
   align?: string
   sort?: void
+  search?: boolean
 }

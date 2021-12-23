@@ -14,7 +14,8 @@ export default {
 const columns = [
   {
     label: 'Name',
-    value: 'name'
+    value: 'name',
+    search: true
   },
   {
     label: 'Member Count',
