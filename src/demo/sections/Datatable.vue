@@ -11,15 +11,15 @@
       </template> -->
 
       <template #column-name="{ column }">
-        <Checkbox>{{ column.text }}</Checkbox>
+        <Checkbox>{{ column.label }}</Checkbox>
       </template>
 
       <template #column-memberCount="{ column }">
-        {{ column.text }}
+        {{ column.label }}
       </template>
 
       <template #column-roles="{ column }">
-        {{ column.text }}
+        {{ column.label }}
       </template>
 
       <template #item-name="{ item }">
@@ -57,15 +57,15 @@ export default defineComponent({
       sortDir: 'desc',
       columns: [
         {
-          text: 'Name',
+          label: 'Name',
           value: 'name'
         },
         {
-          text: 'Member Count',
+          label: 'Member Count',
           value: 'memberCount'
         },
         {
-          text: 'Roles',
+          label: 'Roles',
           value: 'roles'
         }
       ],

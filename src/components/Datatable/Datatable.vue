@@ -23,7 +23,7 @@
                 :name="'column-' + columns[columnIndex].value"
                 :column="column"
               >
-                {{ column.text }}
+                {{ column.label }}
               </slot>
 
               <i
@@ -94,7 +94,7 @@ import Button from '../Button/Button.vue'
 import Input from '../Input/Input.vue'
 
 interface Columns {
-  text: string
+  label: string
   value: string
   align: string
   sort: void
