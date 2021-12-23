@@ -3,9 +3,9 @@
     <thead class="table-head">
       <tr class="mobile-sort-container">
         <th class="mobile-sort">
-          <slot name="header-sort" :handleMobileSort="sortColumns">
-            <Button @click="sortColumns(columns[0])">Sort: A-Z</Button></slot
-          >
+          <slot name="header-sort" :sortColumn="sortColumn">
+            <Button @click="sortColumn(internalSortByColumn)">Sort: A-Z</Button>
+          </slot>
         </th>
       </tr>
 
@@ -15,7 +15,7 @@
           class="table-header"
           :style="{ textAlign: column.align ? column.align : 'start' }"
           :key="columnIndex"
-          @click="sortColumns(column)"
+          @click="sortColumn(column)"
         >
           <span class="icon-container">
             <slot name="column" :column="column">
@@ -24,11 +24,11 @@
               </slot>
 
               <i
-                v-if="currentSortDir == 'asc'"
+                v-if="internalDirection == 'asc'"
                 class="pi pi-arrow-up-line pi-1x"
               />
               <i
-                v-else-if="currentSortDir == 'desc'"
+                v-else-if="internalDirection == 'desc'"
                 class="pi pi-arrow-down-line pi-1x"
               />
 
@@ -53,7 +53,7 @@
     </thead>
 
     <tbody class="table-body">
-      <tr v-for="(row, rowIndex) in sortedColumns" :key="rowIndex">
+      <tr v-for="(row, rowIndex) in sorted" :key="rowIndex">
         <td
           v-for="column in columns"
           :key="column.value"
@@ -70,15 +70,15 @@
 
       <tr>
         <td
-          v-if="sortedColumns.length === 0"
+          v-if="sorted.length === 0"
           :colspan="columns.length"
           align="center"
           class="no-search-results"
         >
           <div>No results found</div>
-          <Button @click="clearSearch" miter width="170px" height="36px"
-            >Clear search</Button
-          >
+          <Button @click="clearSearch" miter width="170px" height="36px">
+            Clear search
+          </Button>
         </td>
       </tr>
     </tbody>
@@ -91,6 +91,9 @@ import Button from '../Button/Button.vue'
 import Input from '../Input/Input.vue'
 import { DataTableColumn } from '../../types/DataTableColumn'
 
+export type DataTableColumnSort = 'asc' | 'desc' | 'none'
+export type DataTableRow = Record<string, any>
+
 export default defineComponent({
   name: 'DataTable',
   components: { Button, Input },
@@ -100,77 +103,95 @@ export default defineComponent({
       required: true,
       default: () => []
     },
-    items: {
-      type: Array as PropType<object[]>,
+    rows: {
+      type: Array as PropType<DataTableRow[]>,
       required: true,
       default: () => []
     },
     direction: {
-      type: String as PropType<string>,
+      type: String as PropType<DataTableColumnSort>,
       required: false,
-      default: ''
+      default: 'none' 
     },
     sortBy: {
-      type: String as PropType<string>,
+      type: String as PropType<string | null>,
       required: false,
-      default: 'name'
+      default: null
     }
   },
-  emits: ['update:direction'],
+  emits: ['update:direction', 'update:sortBy'],
   data() {
     return {
-      currentSortDir: '' as String,
-      search: '' as String,
-      sortedItems: [] as object[]
+      internalDirection: 'none' as DataTableColumnSort,
+      internalSortBy: null as string | null,
+      search: ''
+    }
+  },
+  watch: {
+    direction: {
+      immediate: true,
+      handler: function(direction) {
+        this.internalDirection = direction
+      }
+    },
+    sortBy: {
+      immediate: true,
+      handler: function(sortBy) {
+        this.internalSortBy = sortBy
+      }
     }
   },
   computed: {
-    sortedColumns(): object[] {
-      const sortDir: String = this.direction || this.currentSortDir || 'asc'
-      const sortBy: String = this.sortBy ? this.sortBy : 'name'
-      const isCustomSort = this.sortedItems.length === 0
-      let results = []
-
-      if (isCustomSort) {
-        results = this.sortAscOrDesc(sortDir, sortBy, this.items)
-      } else {
-        results = this.sortedItems
+    internalSortByColumn(): DataTableColumn {
+      return this.columns.find(column => column.value == this.internalSortBy)!
+    },
+    sorted(): DataTableRow[] {
+      if(this.internalSortBy === null || this.internalDirection === 'none') {
+        return this.rows
       }
 
-      if (this.search) {
-        results = results.filter((item: any) =>
-          item.name.toLowerCase().includes(this.search.toLowerCase())
-        )
+      const sorter = this.internalSortByColumn.sort ?? this.getDefaultSorter(this.internalSortBy)
+      const sorted = [...this.rows].sort(sorter)
+
+      if(this.internalDirection == 'desc') {
+        sorted.reverse()
       }
 
-      return results
-    }
+      return sorted
+    },
   },
   methods: {
-    sortAscOrDesc(
-      direction: String,
-      sortBy: String,
-      items: object[]
-    ): object[] {
-      if (direction === 'asc') {
-        return items.sort((a, b) => (a[sortBy] > b[sortBy] ? 1 : -1))
-      } else if (direction === 'desc') {
-        return items.sort((a, b) => (a[sortBy] > b[sortBy] ? -1 : 1))
-      } else {
-        return []
-      }
+    setDirection(direction: DataTableColumnSort) {
+      this.internalDirection = direction
+      this.$emit('update:direction', direction)
     },
-    handleResize(): void {
-      this.windowWidth = window.innerWidth
+    setSortBy(column: DataTableColumn) {
+      this.internalSortBy = column.value
+      this.$emit('update:sortBy', column.value)
     },
-    sortColumns(col: Object) {
-      this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc'
-      this.$emit('update:direction', this.currentSortDir)
-      if (col?.sort) {
-        this.sortedItems = this.items.sort(function (a, b) {
-          return col.sort(a[col?.value], b[col?.value])
-        })
+    getDefaultSorter(sortBy: string) {
+      return (a: DataTableRow, b: DataTableRow) => a[sortBy].toString().localeCompare(b[sortBy].toString())
+    },
+    sortColumn(column: DataTableColumn): void {
+      const sameColumn = this.internalSortBy == column.value
+      let direction: DataTableColumnSort = 'asc'
+
+      if(sameColumn) {
+        switch(this.internalDirection) {
+          case 'asc':
+            direction = 'desc'
+            break
+          case 'desc':
+            direction = 'none'
+            break
+          case 'none':
+            direction = 'asc'
+            break
+        }
       }
+
+      this.setDirection(direction)
+      this.setSortBy(column)
     },
     clearSearch(): void {
       this.search = ''

@@ -1,8 +1,8 @@
-import Datatable from './Datatable.vue'
+import DataTable from './Datatable.vue'
 import Select from '../Select/Select.vue'
 export default {
   title: 'Miter Design/Datatable',
-  component: Datatable,
+  component: DataTable,
   parameters: {
     design: {
       type: 'figma',
@@ -13,19 +13,19 @@ export default {
 
 const columns = [
   {
-    text: 'Name',
+    label: 'Name',
     value: 'name'
   },
   {
-    text: 'Member Count',
+    label: 'Member Count',
     value: 'memberCount'
   },
   {
-    text: 'Roles',
+    label: 'Roles',
     value: 'roles'
   }
 ]
-const items = [
+const rows = [
   { name: 'Staging Team', memberCount: 57, roles: 'Admin' },
   { name: 'Data Science', memberCount: 405, roles: 'Admin' },
   { name: 'Dev Ops', memberCount: 22, roles: 'Admin' },
@@ -49,20 +49,20 @@ const slotTemplate = `
 `
 
 const Template = (args) => ({
-  components: { Datatable, Select },
+  components: { DataTable, Select },
   setup() {
     return { args }
   },
   template: `
-    <Datatable v-bind="args">
+    <DataTable v-bind="args">
      ${args.slot ? args.slot : ''}
-    </Datatable>
+    </DataTable>
   `
 })
 
 export const Slot = Template.bind({})
 Slot.args = {
-  items: items,
+  rows: rows,
   columns: columns,
   slot: slotTemplate
 }
