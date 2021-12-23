@@ -13,7 +13,7 @@
         <th
           v-for="(column, columnIndex) in columns"
           class="table-header"
-          :style="{ textAlign: column.align ? column.align : 'start' }"
+          :style="{ textAlign: column.align ?? 'start' }"
           :key="columnIndex"
           @click="sortColumn(column)"
         >
@@ -57,7 +57,7 @@
         <td
           v-for="column in columns"
           :key="column.value"
-          :align="column.align || 'start'"
+          :align="column.align ?? 'start'"
           class="table-cell"
         >
           <slot name="item" :item="row">
