@@ -68,12 +68,13 @@ import IconButton from '@/components/Button/IconButton.vue'
 export default class Buttons extends Vue {
   states = ['default', 'disabled']
 
-  buttonStyles = ['primary', 'secondary', 'secondary light', 'alternate']
+  buttonStyles = ['primary', 'secondary', 'secondary light', 'alternate', 'delete']
   icons = [
     'pi-subtract-line',
     'pi-add-line',
     'pi-fullscreen-line',
-    'pi-fullscreen-exit-line'
+    'pi-fullscreen-exit-line',
+    'pi-delete-back-2-line',
   ]
 
   skeletonLoader = false

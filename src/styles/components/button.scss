@@ -93,6 +93,25 @@
     }
   }
 
+  &.delete{
+    color: variables.$text--white;
+
+    > :first-child {
+      background-color: variables.$delete;
+      border: 1px solid variables.$delete;
+    }
+
+    &.hovered > :first-child {
+      background-color: variables.$delete-hover;
+      border: 1px solid variables.$delete-hover;
+    }
+
+    &.active > :first-child {
+      background-color: variables.$delete-pressed;
+      border: 1px solid variables.$delete-pressed;
+    }
+  }
+
   &.secondary {
     color: variables.$primary;
 

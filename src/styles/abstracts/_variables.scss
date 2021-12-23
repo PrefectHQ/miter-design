@@ -84,6 +84,10 @@ $secondary-background: #f7f7f8;
 $secondary-hover: #e8e8e8;
 $secondary-pressed: #cecdd3;
 
+$delete: $error;
+$delete-hover: #b82e2e;
+$delete-pressed: #722020;
+
 $grey-80: #465968;
 $grey-40: #8ea0ae;
 $grey-30: #d2d9df;
@@ -116,6 +120,9 @@ $colors: (
   secondary-background: $secondary-background,
   secondary-hover: $secondary-hover,
   secondary-pressed: $secondary-pressed,
+  delete: $delete,
+  delete-hover: $delete-hover,
+  delete-pressed: $delete-pressed,
   grey-80: $grey-80,
   grey-40: $grey-40,
   grey-30: $grey-30,
