@@ -1,4 +1,4 @@
-import Datatable from './Datatable.vue'
+import Datatable from './DataTable.vue'
 
 import { App } from 'vue'
 

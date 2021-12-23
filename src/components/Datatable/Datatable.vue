@@ -58,14 +58,14 @@
     <tbody class="table-body">
       <tr v-for="(row, rowIndex) in sortedColumns" :key="rowIndex">
         <td
-          v-for="(column, columnIndex) in columns"
-          :key="columnIndex"
+          v-for="column in columns"
+          :key="column.value"
           :align="column.align || 'start'"
           class="table-cell"
         >
           <slot name="item" :item="row">
-            <slot :name="'item-' + Object.keys(row)[columnIndex]" :item="row">
-              {{ row[Object.keys(row)[columnIndex]] }}
+            <slot :name="`item-${column.value}`" :item="row">
+              {{ row[column.value] }}
             </slot>
           </slot>
         </td>
@@ -74,7 +74,7 @@
       <tr>
         <td
           v-if="sortedColumns.length === 0"
-          :colspan="Object.keys(columns).length"
+          :colspan="columns.length"
           align="center"
           class="no-search-results"
         >
@@ -101,7 +101,7 @@ interface Columns {
 }
 
 export default defineComponent({
-  name: 'Datatable',
+  name: 'DataTable',
   components: { Button, Input },
   props: {
     columns: {

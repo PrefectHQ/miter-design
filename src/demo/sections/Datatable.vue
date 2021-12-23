@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Datatable from '@/components/Datatable/Datatable.vue'
+import Datatable from '@/components/Datatable/DataTable.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
 export default defineComponent({
   components: { Datatable, Checkbox },
