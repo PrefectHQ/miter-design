@@ -107,16 +107,12 @@ export default defineComponent({
     columns: {
       type: Array as PropType<Columns[]>,
       required: true,
-      default: function () {
-        return []
-      }
+      default: () => []
     },
     items: {
       type: Array as PropType<object[]>,
       required: true,
-      default: function () {
-        return []
-      }
+      default: () => []
     },
     dir: { type: String as PropType<string>, required: false, default: '' },
     sortBy: {
