@@ -1,75 +1,69 @@
 <template>
-  <table>
-    <thead class="table-head">
-      <tr class="mobile-sort-container">
-        <th class="mobile-sort">
+  <table class="data-table">
+    <thead class="data-table__head">
+      <tr class="data-table__header-mobile">
+        <th class="data-table__table-header-mobile">
           <slot name="header-sort" :sortColumn="sortColumn">
             <Button @click="sortColumn(internalSortByColumn)">Sort: A-Z</Button>
           </slot>
         </th>
       </tr>
 
-      <tr class="table-row">
-        <th
-          v-for="(column, columnIndex) in columns"
-          class="table-header"
-          :style="{ textAlign: column.align ?? 'start' }"
-          :key="columnIndex"
-          @click="sortColumn(column)"
-        >
-          <span class="icon-container">
-            <slot name="column" :column="column">
-              <slot :name="`column-${column.value}`" :column="column">
-                {{ column.label }}
+      <tr class="data-table__header-desktop">
+        <template v-for="(column, columnIndex) in columns" :key="columnIndex">
+          <th class="data-table__table-header" :style="{ textAlign: column.align ?? 'start' }" @click="sortColumn(column)">
+              <slot name="column" :column="column">
+                <slot :name="`column-${column.value}`" :column="column">
+                  {{ column.label }}
+                </slot>
               </slot>
-              <i class="data-table__header-icon pi pi-1x" :class="getColumnSortIconClasses(column)" />
-            </slot>
-          </span>
-        </th>
+              <i class="data-table__table-header-sort-icon pi pi-1x" :class="getColumnSortIconClasses(column)" />
+          </th>
+        </template>
       </tr>
-      <tr class="table-row">
-        <td :colspan="columns.length" class="search-input">
+      <tr>
+        <td :colspan="columns.length" class="data-table__search">
           <Input v-model="search" placeholder="Search...">
             <template v-slot:prepend>
-              <div class="search-icon">
-                <i class="pi pi-search-line pi-1x" />
-              </div>
+              <i class="pi pi-search-line pi-1x data-table__search-icon" />
             </template>
           </Input>
         </td>
       </tr>
     </thead>
 
-    <tbody class="table-body">
-      <tr v-for="(row, rowIndex) in sorted" :key="rowIndex">
-        <td
-          v-for="column in columns"
-          :key="column.value"
-          :align="column.align ?? 'start'"
-          class="table-cell"
-        >
-          <slot name="item" :item="row">
-            <slot :name="`item-${column.value}`" :item="row">
-              {{ row[column.value] }}
-            </slot>
-          </slot>
-        </td>
-      </tr>
-
-      <tr>
-        <td
-          v-if="sorted.length === 0"
-          :colspan="columns.length"
-          align="center"
-          class="no-search-results"
-        >
-          <div>No results found</div>
-          <Button @click="clearSearch" miter width="170px" height="36px">
-            Clear search
-          </Button>
-        </td>
-      </tr>
+    <tbody class="data-table__table-body">
+      <template v-for="(row, rowIndex) in sorted" :key="rowIndex">
+        <tr class="data-table__table-row">
+          <template v-for="column in columns" :key="column.value">
+            <td :align="column.align ?? 'start'" class="data-table__table-cell">
+              <slot name="item" :item="row">
+                <slot :name="`item-${column.value}`" :item="row">
+                  {{ row[column.value] }}
+                </slot>
+              </slot>
+            </td>
+          </template>
+        </tr>
+      </template>
     </tbody>
+
+    <template v-if="sorted.length === 0">
+      <tbody class="data-table__table-body">
+          <tr>
+            <td :colspan="columns.length" align="center" class="data-table__no-search-results">
+              <div class="data-table__no-search-results-description">
+                <slot name="no-results">
+                  <p class="data-table__no-search-results-label">No results found</p>
+                </slot>
+              </div>
+              <Button @click="clearSearch" miter width="170px" height="36px">
+                Clear search
+              </Button>
+            </td>
+          </tr>
+      </tbody>
+    </template>
   </table>
 </template>
 
@@ -162,7 +156,7 @@ export default defineComponent({
     },
     getColumnSortIconClasses(column: DataTableColumn)  {
       if(column.value !== this.internalSortBy || this.internalDirection == 'none') {
-        return 'pi-code-line rotate-arrow'
+        return 'pi-code-line data-table__table-header-sort-icon--rotate'
       }
 
       return this.internalDirection == 'asc' ? 'pi-arrow-up-line' : 'pi-arrow-down-line'
@@ -194,8 +188,10 @@ export default defineComponent({
   }
 })
 </script>
-<style>
-table {
+
+<style scoped>
+
+.data-table {
   border-spacing: 0;
   width: 100%;
   color: #465968;
@@ -210,102 +206,84 @@ table {
   border-radius: 4px;
 }
 
-.table-cell {
-  padding: 16px;
-  border-bottom: 1px solid #e8e8e8;
-}
-
-.table-cell:hover {
-  background: #fcfdfe;
-}
-
-.table-cell > label:hover,
-a:hover {
-  color: #024dfd;
-}
-
-.icon-container {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.rotate-arrow {
-  transform: rotate(90deg);
-  margin-left: 5px;
-  display: inline-block;
-  color: #d2d9df;
-  -webkit-text-stroke: 1px #d2d9df;
-}
-
-.icon-container > i {
-  margin-left: 6px;
-  color: #d2d9df;
-}
-
-.search-input {
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 10px;
-  background: #fcfdfe;
-}
-
-.search-icon {
-  margin-top: 5px;
-}
-
-.no-search-results {
-  padding: 50px;
-}
-
-.no-search-results > div {
-  font-size: 24px;
-  line-height: 28px;
-
-  text-align: center;
-
-  color: #465968;
-}
-
-.no-search-results > button {
-  margin-top: 24px;
-}
-
-.table-header {
-  padding: 16px;
-  cursor: pointer;
-  border-bottom: 1px solid #e8e8e8;
-}
-
-.mobile-sort-container {
+.data-table__header-mobile {
   display: none;
 }
 
-@media (max-width: 1200px) {
-  tr,
-  td {
-    display: block;
-  }
+.data-table__table-header {
+  padding: 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #e8e8e8;
+  user-select: none;
+}
 
-  .table-header {
+.data-table__table-header-sort-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 6px;
+  margin-top: -3px;
+  color: #d2d9df;
+  display: inline-block;
+}
+
+.data-table__table-header-sort-icon--rotate {
+  transform: rotate(90deg);
+}
+
+.data-table__search {
+  padding: 0 var(--m-1)
+}
+
+.data-table__search-icon {
+  margin-top: 5px;
+}
+
+.data-table__table-row:hover {
+  background: #fcfdfe;
+}
+
+.data-table__table-cell {
+  padding: 16px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.data-table__no-search-results {
+  padding: 50px;
+}
+
+.data-table__no-search-results-description {
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  color: #465968;
+  margin-bottom: var(--m-3)
+}
+
+.data-table__no-search-results-label {
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .data-table__header-desktop {
     display: none;
   }
-  .table-cell {
-    border-bottom: none;
-  }
-  .table-cell:last-of-type {
-    border-bottom: 1px solid #e8e8e8;
-  }
 
-  .mobile-sort-container {
+  .data-table__header-mobile {
     display: flex;
     justify-content: end;
     padding: 16px;
   }
-}
 
-.data-table__header-icon {
-  width: 16px;
-  height: 16px;
+  .data-table__table-row,
+  .data-table__table-cell {
+    display: block;
+  }
+
+  .data-table__table-cell {
+    border-bottom: none;
+  }
+  .data-table__table-cell:last-of-type {
+    border-bottom: 1px solid #e8e8e8;
+  }
 }
 </style>
