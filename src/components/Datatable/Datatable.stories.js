@@ -1,7 +1,7 @@
-import DataTable from './Datatable.vue'
+import DataTable from './DataTable.vue'
 import Select from '../Select/Select.vue'
 export default {
-  title: 'Miter Design/Datatable',
+  title: 'Miter Design/DataTable',
   component: DataTable,
   parameters: {
     design: {

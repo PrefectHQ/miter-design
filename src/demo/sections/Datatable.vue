@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Datatable
+    <DataTable
       v-model:direction="sortDir"
       v-model:sort-by="sortBy"
       :columns="columns"
@@ -41,16 +41,16 @@
           ]"
         />
       </template>
-    </Datatable>
+    </DataTable>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Datatable from '@/components/Datatable/DataTable.vue'
+import DataTable from '@/components/DataTable/DataTable.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
 export default defineComponent({
-  components: { Datatable, Checkbox },
+  components: { DataTable, Checkbox },
   data() {
     return {
       sortBy: 'memberCount',

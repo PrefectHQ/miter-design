@@ -26,7 +26,7 @@
     <TextAreas class="mt-10" />
     <Toasts class="mt-10" />
     <Tooltip class="mt-10" />
-    <Datatable class="mt-10" />
+    <DataTable class="mt-10" />
   </div>
 </template>
 
@@ -56,7 +56,8 @@ import TextAreas from '../sections/TextAreas.vue'
 import Toasts from '../sections/Toasts.vue'
 import Tooltip from '../sections/Tooltip.vue'
 import Loader from '../sections/Loader.vue'
-import Datatable from '../sections/Datatable.vue'
+import DataTable from '../sections/DataTable.vue'
+
 @Options({
   components: {
     Avatar,
@@ -83,7 +84,7 @@ import Datatable from '../sections/Datatable.vue'
     Toasts,
     Tooltip,
     Loader,
-    Datatable
+    DataTable
   }
 })
 export default class App extends Vue {}

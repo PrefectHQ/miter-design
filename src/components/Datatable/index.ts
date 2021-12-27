@@ -1,9 +1,9 @@
-import Datatable from './DataTable.vue'
+import DataTable from './DataTable.vue'
 
 import { App } from 'vue'
 
-Datatable.install = (app: App) => {
-  app.component(Datatable.name, Datatable)
+DataTable.install = (app: App) => {
+  app.component(DataTable.name, DataTable)
 }
 
-export default Datatable
+export default DataTable
