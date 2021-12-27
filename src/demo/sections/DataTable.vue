@@ -4,7 +4,7 @@
       v-model:direction="sortDir"
       v-model:sort-by="sortBy"
       :columns="columns"
-      :items="items"
+      :rows="rows"
     >
       <!-- <template #header-sort="{ handleMobileSort }">
         <button @click="handleMobileSort(columns[0])">sort</button>
@@ -69,7 +69,7 @@ export default defineComponent({
           value: 'roles'
         }
       ],
-      items: [
+      rows: [
         { name: 'Staging Team', memberCount: 57, roles: 'Admin' },
         { name: 'Data Science', memberCount: 405, roles: 'Admin' },
         { name: 'Dev Ops', memberCount: 22, roles: 'Admin' },
