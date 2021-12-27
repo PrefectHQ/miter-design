@@ -12,8 +12,8 @@
       <tr class="data-table__header-desktop">
         <template v-for="(column, columnIndex) in columns" :key="columnIndex">
           <th class="data-table__table-header" :style="{ textAlign: column.align ?? 'start' }" @click="sortColumn(column)">
-              <slot name="column" :column="column">
-                <slot :name="`column-${column.value}`" :column="column">
+              <slot name="column-header" :label="column.label" :column="column">
+                <slot :name="columnHeaderSlotName(column)" :label="column.label" :column="column">
                   {{ column.label }}
                 </slot>
               </slot>
@@ -39,8 +39,8 @@
         <tr class="data-table__table-row">
           <template v-for="column in columns" :key="column.value">
             <td :align="column.align ?? 'start'" class="data-table__table-cell">
-              <slot name="item" :item="row">
-                <slot :name="`item-${column.value}`" :item="row">
+              <slot name="column" :value="row[column.value]" :row="row">
+                <slot :name="columnSlotName(column)" :value="row[column.value]" :row="row">
                   {{ row[column.value] }}
                 </slot>
               </slot>
@@ -75,6 +75,7 @@ import Button from '../Button/Button.vue'
 import Input from '../Input/Input.vue'
 import { DataTableColumn } from '../../types/DataTableColumn'
 import { pick } from '@/utilities/objects'
+import { kebabCase } from '@/utilities/strings'
 
 export type DataTableColumnSort = 'asc' | 'desc' | 'none'
 export type DataTableRow = Record<string, any>
@@ -207,6 +208,12 @@ export default defineComponent({
     },
     clearSearch(): void {
       this.search = ''
+    },
+    columnSlotName(column: DataTableColumn): string {
+      return `column-${kebabCase(column.value)}`
+    },
+    columnHeaderSlotName(column: DataTableColumn): string {
+      return `column-header-${kebabCase(column.value)}`
     }
   }
 })

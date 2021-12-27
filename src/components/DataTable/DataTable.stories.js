@@ -35,10 +35,10 @@ const rows = [
 ]
 
 const slotTemplate = `
-<template #item-memberCount="{ item }">
-        <span><strong>Member Count:</strong> {{ item.memberCount }}</span>
+<template #column-member-count="{ value }">
+        <span><strong>Member Count:</strong> {{ value }}</span>
 </template>
-<template #item-roles>
+<template #column-roles>
         <Select
           :options="[
             { label: 'Admin', value: 'admin' },
