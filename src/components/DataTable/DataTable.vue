@@ -225,24 +225,20 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@use '../../styles/abstracts/variables';
 
 .data-table {
-  --datatable-text-color: #465968;
-  --datatable-border-color: #e8e8e8;
-  --datatable-background-hover-color: #fcfdfe;
-  --datatable-icon-color: #d2d9df;
-
   border-spacing: 0;
   width: 100%;
-  color: var(--datatable-text-color);
+  color: #{variables.$text--primary};
 
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
 
-  border: 1px solid var(--datatable-border-color);
+  border: 1px solid #{variables.$secondary-hover};
   text-align: left;
   border-radius: 4px;
 }
@@ -254,7 +250,7 @@ export default defineComponent({
 .data-table__table-header {
   padding: 16px;
   cursor: pointer;
-  border-bottom: 1px solid var(--datatable-border-color);
+  border-bottom: 1px solid #{variables.$secondary-hover};
   user-select: none;
 }
 
@@ -263,7 +259,7 @@ export default defineComponent({
   height: 16px;
   margin-left: 6px;
   margin-top: -3px;
-  color: var(--datatable-icon-color);
+  color: #{variables.$grey-30};
   display: inline-block;
 }
 
@@ -280,12 +276,12 @@ export default defineComponent({
 }
 
 .data-table__table-row:hover {
-  background: var(--datatable-background-hover-color);
+  background: #{variables.$blue-5};
 }
 
 .data-table__table-cell {
   padding: 16px;
-  border-bottom: 1px solid var(--datatable-border-color);
+  border-bottom: 1px solid #{variables.$secondary-hover};
 }
 
 .data-table__no-search-results {
@@ -296,7 +292,7 @@ export default defineComponent({
   font-size: 24px;
   line-height: 28px;
   text-align: center;
-  color: var(--datatable-text-color);
+  color: #{variables.$text--primary};
   margin-bottom: var(--m-3);
 }
 
@@ -324,7 +320,7 @@ export default defineComponent({
     border-bottom: none;
   }
   .data-table__table-cell:last-of-type {
-    border-bottom: 1px solid var(--datatable-border-color);
+    border-bottom: 1px solid #{variables.$secondary-hover};
   }
 }
 </style>
