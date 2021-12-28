@@ -10,29 +10,29 @@
         <button @click="handleMobileSort(columns[0])">sort</button>
       </template> -->
 
-      <template #column-name="{ column }">
-        <Checkbox>{{ column.label }}</Checkbox>
+      <template #column-header-name="{ label }">
+        <Checkbox>{{ label }}</Checkbox>
       </template>
 
-      <template #column-memberCount="{ column }">
-        {{ column.label }}
+      <template #column-header-memberCount="{ label }">
+        {{ label }}
       </template>
 
-      <template #column-roles="{ column }">
-        {{ column.label }}
+      <template #column-header-roles="{ label }">
+        {{ label }}
       </template>
 
-      <template #item-name="{ item }">
+      <template #column-name="{ value }">
         <Checkbox>
-          {{ item.name }}
+          {{ value }}
         </Checkbox>
       </template>
 
-      <template #item-memberCount="{ item }">
-        <span><strong>Member Count:</strong> {{ item.memberCount }}</span>
+      <template #column-member-count="{ value }">
+        <span><strong>Member Count:</strong> {{ value }}</span>
       </template>
 
-      <template #item-roles>
+      <template #column-roles>
         <Select
           :options="[
             { label: 'Admin', value: 'admin' },
@@ -49,10 +49,20 @@
 import { defineComponent } from 'vue'
 import DataTable from '@/components/DataTable/DataTable.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
+
+import { DataTableColumn } from '../../types/DataTableColumn'
+export type DataTableColumnSort = 'asc' | 'desc' | 'none'
+export type DataTableRow = Record<string, any>
+
 export default defineComponent({
   components: { DataTable, Checkbox },
   data() {
-    return {
+    const data: {
+      sortBy: string
+      sortDir: DataTableColumnSort
+      columns: DataTableColumn
+      rows: DataTableRow
+    } = {
       sortBy: 'memberCount',
       sortDir: 'desc',
       columns: [
@@ -77,18 +87,8 @@ export default defineComponent({
         { name: 'Winter Interns', memberCount: 90, roles: 'Admin' }
       ]
     }
-  },
 
-  methods: {
-    nameSort(a, b) {
-      if (a < b) {
-        return -1
-      }
-      if (a > b) {
-        return 1
-      }
-      return 0
-    }
+    return data
   }
 })
 </script>

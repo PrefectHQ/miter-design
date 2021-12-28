@@ -228,16 +228,21 @@ export default defineComponent({
 <style scoped>
 
 .data-table {
+  --datatable-text-color: #465968;
+  --datatable-border-color: #e8e8e8;
+  --datatable-background-hover-color: #fcfdfe;
+  --datatable-icon-color: #d2d9df;
+
   border-spacing: 0;
   width: 100%;
-  color: #465968;
+  color: var(--datatable-text-color);
 
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
 
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--datatable-border-color);
   text-align: left;
   border-radius: 4px;
 }
@@ -249,7 +254,7 @@ export default defineComponent({
 .data-table__table-header {
   padding: 16px;
   cursor: pointer;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid var(--datatable-border-color);
   user-select: none;
 }
 
@@ -258,7 +263,7 @@ export default defineComponent({
   height: 16px;
   margin-left: 6px;
   margin-top: -3px;
-  color: #d2d9df;
+  color: var(--datatable-icon-color);
   display: inline-block;
 }
 
@@ -267,7 +272,7 @@ export default defineComponent({
 }
 
 .data-table__search {
-  padding: 0 var(--m-1)
+  padding: 0 var(--m-1);
 }
 
 .data-table__search-icon {
@@ -275,12 +280,12 @@ export default defineComponent({
 }
 
 .data-table__table-row:hover {
-  background: #fcfdfe;
+  background: var(--datatable-background-hover-color);
 }
 
 .data-table__table-cell {
   padding: 16px;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid var(--datatable-border-color);
 }
 
 .data-table__no-search-results {
@@ -291,8 +296,8 @@ export default defineComponent({
   font-size: 24px;
   line-height: 28px;
   text-align: center;
-  color: #465968;
-  margin-bottom: var(--m-3)
+  color: var(--datatable-text-color);
+  margin-bottom: var(--m-3);
 }
 
 .data-table__no-search-results-label {
@@ -319,7 +324,7 @@ export default defineComponent({
     border-bottom: none;
   }
   .data-table__table-cell:last-of-type {
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid var(--datatable-border-color);
   }
 }
 </style>
