@@ -107,11 +107,17 @@ export default defineComponent({
   },
   emits: ['update:direction', 'update:sortBy'],
   data() {
-    return {
-      internalDirection: 'none' as DataTableColumnSort,
-      internalSortBy: null as string | null,
+    const data: {
+      internalDirection: DataTableColumnSort,
+      internalSortBy: string | null,
+      search: string
+    } =  {
+      internalDirection: 'none',
+      internalSortBy: null,
       search: ''
     }
+
+    return data
   },
   watch: {
     direction: {
