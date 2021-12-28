@@ -17,7 +17,7 @@
         :width="width"
       >
         <div class="pa-2">
-          <h4 class="h4-bottom">
+          <div class="h4-bottom">
             {{ title }}
             <button
               icon
@@ -34,7 +34,7 @@
             >
               <i class="pi pi-close-line"></i>
             </button>
-          </h4>
+          </div>
 
           <div v-if="$slots.content">
             <slot name="content" />
@@ -138,7 +138,7 @@ export default defineComponent({
     addFocus() {
       this.hovered = true
       this.$nextTick(() => {
-        (this.$refs.popUpCloseButton as HTMLElement).tabIndex = 0
+        ;(this.$refs.popUpCloseButton as HTMLElement).tabIndex = 0
         ;(this.$refs.popUpCloseButton as HTMLElement).focus()
       })
     },
@@ -160,7 +160,9 @@ export default defineComponent({
       this.focused = false
     },
     handleBackdropKeyDown(evt: event): void {
-      const modalNodes = (this.$refs.popUpContent as Card).$el.querySelectorAll('*')
+      const modalNodes = (this.$refs.popUpContent as Card).$el.querySelectorAll(
+        '*'
+      )
       const tabbable = Array.from(modalNodes).filter(
         (n: any) => n.tabIndex >= 0
       )
@@ -169,11 +171,11 @@ export default defineComponent({
       const parentHidden = (parent?.firstChild as any)?.ariaHidden
       if (evt.key === 'Escape' || evt.key === 'escape') {
         // Pressing the ESC key resets ariaHidden and closes the modal.
-        (parent?.firstChild as any).ariaHidden= parentHidden
+        ;(parent?.firstChild as any).ariaHidden = parentHidden
         this.closePopUp()
       } else if (evt.key === 'Tab' || evt.key === 'tab') {
         //set aria hidden on non-popup element
-        (parent?.firstChild as any).ariaHidden = true
+        ;(parent?.firstChild as any).ariaHidden = true
         // Pressing the Tab key traps the focus in the modal.
         index += tabbable.length + 1
         index %= tabbable.length

@@ -12,6 +12,11 @@
         :width="width"
         :to="to"
       >
+        <template v-slot:title>
+          <div v-if="$slots.title">
+            <slot name="title" />
+          </div>
+        </template>
         <template v-slot:content>
           <div v-if="$slots.content">
             <slot name="content" />

@@ -12,17 +12,27 @@
         :height="popup.height"
         :width="popup.width"
       >
+        <!-- title slot here -->
+        <template v-slot:title>
+          <h1>I AM A TITLE</h1>
+        </template>
+
         <template v-slot:activate>
+          <!-- What component is going to open the popup via click -->
           <Button color="primary" @click="openPopup(popup)" class="ml-1">
             Open {{ popup.position }} Popup
           </Button>
         </template>
+
         <template v-slot:content>
+          <!-- the content of the popup -->
           <component :is="'div'">
             {{ popup.content }}
           </component>
         </template>
+
         <template v-slot:actions>
+          <!-- the action buttons -->
           <component :is="'Actions'">
             <Button @click="actionClicked" color="primary">Action</Button>
           </component>
