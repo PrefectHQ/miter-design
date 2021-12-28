@@ -8,11 +8,11 @@ import {
   RendererElement,
   ref
 } from 'vue'
-import Tab from './Tab/Tab.vue'
+import MTab from './Tab/Tab.vue'
 
 export default defineComponent({
-  name: 'Tabs',
-  components: { Tab },
+  name: 'MTabs',
+  components: { MTab },
   props: {
     modelValue: {
       type: [String, Number],
@@ -140,7 +140,7 @@ export default defineComponent({
       children = [
         Array.from({ length: 2 }).map((elem, i) => {
           return h(
-            Tab,
+            MTab,
             mergeProps({
               active: this._modelValue == i,
               href: i,

@@ -17,10 +17,10 @@ class Props {
 }
 
 @Component({
-  name: 'SimpleSelect',
+  name: 'MSimpleSelect',
   emits: ['update:modelValue']
 })
-export default class NativeSelect extends Vue.with(Props) {
+export default class MSimpleSelect extends Vue.with(Props) {
 
   get internalValue() {
     return this.modelValue

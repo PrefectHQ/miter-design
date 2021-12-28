@@ -11,8 +11,10 @@ class Props {
   height = prop<string>({ default: null })
 }
 
-@Options({})
-export default class CardActions extends Vue.with(Props) {
+@Options({
+  name: 'MCardActions'
+})
+export default class MCardActions extends Vue.with(Props) {
   get style(): { [key: string]: any } {
     return {
       height: this.height

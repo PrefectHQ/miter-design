@@ -30,7 +30,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Radio',
+  name: 'MRadio',
   emits: {
     'update:modelValue'(...args: any[]) {
       return { ...args }

@@ -32,9 +32,10 @@ class Props {
 }
 
 @Component({
+  name: 'MMeridiemInput',
   emits: ['update:modelValue']
 })
-export default class MeridiemInput extends Vue.with(Props) {
+export default class MMeridiemInput extends Vue.with(Props) {
 
   private get meridiem() {
     return this.modelValue

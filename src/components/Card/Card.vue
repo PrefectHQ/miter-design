@@ -47,9 +47,9 @@ class Props {
 // See https://github.com/storybookjs/storybook/issues/14052#issuecomment-797512590 for details
 const Component = Options
 @Component({
-  name: 'Card'
+  name: 'MCard'
 })
-export default class Card extends Vue.with(Props) {
+export default class MCard extends Vue.with(Props) {
   get style(): { [key: string]: any } {
     return {
       backgroundColor: this.backgroundColor,

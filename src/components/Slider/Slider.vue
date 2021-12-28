@@ -40,7 +40,7 @@ interface event {
 }
 
 export default defineComponent({
-  name: 'Slider',
+  name: 'MSlider',
   props: {
     disabled: {
       type: Boolean,

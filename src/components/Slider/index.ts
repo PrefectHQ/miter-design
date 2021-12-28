@@ -3,6 +3,7 @@ import Slider from './Slider.vue'
 import { App } from 'vue'
 
 Slider.install = (app: App) => {
+  app.component('Slider', Slider)
   app.component(Slider.name, Slider)
 }
 

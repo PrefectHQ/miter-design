@@ -12,8 +12,10 @@ class Props {
 }
 
 const Component = Options
-@Component({})
-export default class Loader extends Vue.with(Props) {}
+@Component({
+  name: 'MLoader'
+})
+export default class MLoader extends Vue.with(Props) {}
 </script>
 
 <style lang="scss" scoped>
