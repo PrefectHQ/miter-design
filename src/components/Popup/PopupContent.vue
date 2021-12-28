@@ -18,7 +18,8 @@
       >
         <div class="pa-2">
           <div class="h4-bottom">
-            {{ title }}
+            <!-- {{ title }} -->
+            <!-- <span> {{ title }}</span> -->
             <button
               icon
               data-test="closeButton"
