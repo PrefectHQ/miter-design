@@ -20,8 +20,10 @@ class Props {
   icon = prop<string>({ default: '' })
 }
 
-@Component({})
-export default class OptionLabel extends Vue.with(Props) {
+@Component({
+  name: 'MOptionLabel'
+})
+export default class MOptionLabel extends Vue.with(Props) {
 
   get scope() {
     return {

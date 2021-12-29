@@ -31,12 +31,12 @@ class Props {
 
 @Component({
   emits: ['open'],
-  name: 'Popover',
+  name: 'MPopover',
   components: {
     PopoverContent
   }
 })
-export default class Popover extends Vue.with(Props) {
+export default class MPopover extends Vue.with(Props) {
   
   $refs!: {
     popover: PopoverContent,

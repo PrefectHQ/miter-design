@@ -6,13 +6,14 @@ import {
   VNode,
   RendererNode,
   RendererElement,
-  ref
+  ref,
+  resolveComponent
 } from 'vue'
-import Tab from './Tab/Tab.vue'
+import MTab from './Tab/Tab.vue'
 
 export default defineComponent({
-  name: 'Tabs',
-  components: { Tab },
+  name: 'MTabs',
+  components: { MTab },
   props: {
     modelValue: {
       type: [String, Number],
@@ -117,7 +118,7 @@ export default defineComponent({
         slottedItems
           ?.filter(
             (ti: RendererNode | RendererElement | { [key: string]: any }) =>
-              ti.type.name == 'Tab'
+              ti.type.name == 'MTab'
           )
           .map(
             (ti: RendererNode | RendererElement | { [key: string]: any }) => {
@@ -140,7 +141,7 @@ export default defineComponent({
       children = [
         Array.from({ length: 2 }).map((elem, i) => {
           return h(
-            Tab,
+            resolveComponent('MTab'),
             mergeProps({
               active: this._modelValue == i,
               href: i,

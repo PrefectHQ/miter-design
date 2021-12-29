@@ -28,12 +28,13 @@ class Props {
 }
 
 @Component({
+  name: 'MOption',
   emits: ['select'],
   components: {
     OptionLabel
   }
 })
-export default class Option extends Vue.with(Props) {
+export default class MOption extends Vue.with(Props) {
 
   get scope() {
     return {

@@ -10,7 +10,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Avatar',
+  name: 'MAvatar',
   props: {
     color: {
       type: String,

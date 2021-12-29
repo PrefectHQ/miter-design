@@ -11,7 +11,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Tag',
+  name: 'MTag',
   props: {
     disabled: {
       type: Boolean,

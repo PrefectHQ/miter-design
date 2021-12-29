@@ -11,8 +11,10 @@ class Props {
   width = prop<string>({ default: null })
 }
 
-@Options({})
-export default class CardAside extends Vue.with(Props) {
+@Options({
+  name: 'MCardAside'
+})
+export default class MCardAside extends Vue.with(Props) {
   get style(): { [key: string]: any } {
     return {
       width: this.width

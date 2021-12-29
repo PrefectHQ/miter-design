@@ -72,8 +72,10 @@ function install(app: App) {
     if (components[component].install) {
       // @ts-expect-error
       components[component].install(app)
+    } else {
       // @ts-expect-error
-    } else app.component(components[component].name, components[component])
+      app.component(components[component].name, components[component])
+    }
   }
 
   for (const directive in directives) {

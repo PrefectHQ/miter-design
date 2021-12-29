@@ -22,11 +22,12 @@ import { ref, h } from 'vue'
 import Toast from './Toast.vue'
 
 @Options({
+  name: 'MToastContainer',
   components: {
     Toast
   }
 })
-export default class ToastContainer extends Vue {
+export default class MToastContainer extends Vue {
   container = ref<HTMLElement>() as unknown as HTMLElement
   toasts: Map<number, any> = new Map()
 

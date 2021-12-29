@@ -18,8 +18,10 @@ class Props {
   content = prop<string>({ required: false, default: '' })
 }
 
-@Component({})
-export default class TooltipContent extends Vue.with(Props) {
+@Component({
+  name: 'MTooltipContent'
+})
+export default class MTooltipContent extends Vue.with(Props) {
 
   get classes() {
     return {

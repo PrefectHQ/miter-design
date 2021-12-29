@@ -26,7 +26,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Checkbox',
+  name: 'MCheckbox',
   emits: {
     'update:modelValue'(...args: any[]) {
       return { ...args }
