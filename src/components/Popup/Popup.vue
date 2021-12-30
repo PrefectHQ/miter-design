@@ -7,7 +7,6 @@
       <PopupContent
         @close="closePopUp"
         :placement="position"
-        :title="title"
         :height="height"
         :width="width"
         :to="to"
@@ -56,10 +55,6 @@ export default defineComponent({
       type: String,
       required: false,
       default: 'center'
-    },
-    title: {
-      type: String,
-      required: false
     },
     height: {
       type: String,

@@ -16,32 +16,18 @@
         :height="height"
         :width="width"
       >
-        <div class="pa-2">
-          <div class="h4-bottom">
-            <!-- {{ title }} -->
-            <!-- <span> {{ title }}</span> -->
-            <button
-              icon
-              data-test="closeButton"
-              title="close pop up"
-              ref="popUpCloseButton"
-              class="close-icon"
-              :class="classList"
-              @click="closePopUp"
-              @mouseenter="handleMouseEnter"
-              @mouseleave="handleMouseLeave"
-              @focus="handleFocus"
-              @blur="handleBlur"
-            >
-              <i class="pi pi-close-line"></i>
-            </button>
+        <div>
+          <div v-if="$slots.title" class="pa-2">
+            <slot name="title" />
           </div>
+          <hr class="line-color" />
 
-          <div v-if="$slots.content">
+          <div v-if="$slots.content" class="pa-2">
             <slot name="content" />
           </div>
         </div>
         <template v-slot:actions>
+          <hr class="line-color" />
           <div v-if="$slots.actions" class="pa-2">
             <slot name="actions" />
           </div>
@@ -86,10 +72,6 @@ export default defineComponent({
       type: String,
       required: false,
       default: 'center'
-    },
-    title: {
-      type: String,
-      required: false
     },
     to: {
       type: String,

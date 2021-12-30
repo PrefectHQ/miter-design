@@ -8,33 +8,40 @@
         teleportTo="#app"
         v-model="popup.value"
         :position="popup.position"
-        :title="popup.title"
         :height="popup.height"
         :width="popup.width"
       >
-        <!-- title slot here -->
         <template v-slot:title>
-          <h1>I AM A TITLE</h1>
+          <span style="display: inline-flex; align-items: center"
+            ><i class="pi pi-error-warning-line pi-lg"></i> Title</span
+          >
         </template>
 
         <template v-slot:activate>
-          <!-- What component is going to open the popup via click -->
           <Button color="primary" @click="openPopup(popup)" class="ml-1">
             Open {{ popup.position }} Popup
           </Button>
         </template>
 
         <template v-slot:content>
-          <!-- the content of the popup -->
           <component :is="'div'">
             {{ popup.content }}
           </component>
         </template>
 
         <template v-slot:actions>
-          <!-- the action buttons -->
           <component :is="'Actions'">
-            <Button @click="actionClicked" color="primary">Action</Button>
+            <Button @click="closePopUp(popup)" color="primary" miter
+              >Cancel</Button
+            >
+
+            <Button
+              @click="actionClicked"
+              color="primary"
+              style="margin-right: 10px"
+              miter
+              >Confirm</Button
+            >
           </component>
         </template>
       </Popup>
@@ -53,7 +60,6 @@ export default class Popup extends Vue {
       height: '341px',
       width: '730px',
       position: 'center',
-      title: 'Center Pop Up',
       value: false
     },
     {
@@ -61,7 +67,6 @@ export default class Popup extends Vue {
       height: '269px',
       width: '350px',
       position: 'flex-end',
-      title: 'Flex End Pop Up',
       value: false
     }
   ]
@@ -76,6 +81,9 @@ export default class Popup extends Vue {
   }
   actionClicked(): void {
     console.log('pop up action button clicked')
+  }
+  closePopUp(popup: { value: Boolean }): void {
+    popup.value = false
   }
 }
 </script>
