@@ -120,10 +120,10 @@ export default defineComponent({
   methods: {
     addFocus() {
       this.hovered = true
-      this.$nextTick(() => {
-        ;(this.$refs.popUpCloseButton as HTMLElement).tabIndex = 0
-        ;(this.$refs.popUpCloseButton as HTMLElement).focus()
-      })
+      // this.$nextTick(() => {
+      //   ;(this.$refs.popUpCloseButton as HTMLElement).tabIndex = 0
+      //   ;(this.$refs.popUpCloseButton as HTMLElement).focus()
+      // })
     },
     closePopUp() {
       this.$emit('close', false)
