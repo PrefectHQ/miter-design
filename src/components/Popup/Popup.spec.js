@@ -196,9 +196,8 @@ test('has center as default position', () => {
 })
 
 test('passes popup height and width', () => {
-  const title = 'My Pop Up'
   const wrapper = mount(Popup, {
-    props: { modelValue: true, title, height: '200px', width: '300px' },
+    props: { modelValue: true, height: '200px', width: '300px' },
     slots: {
       content: '<div>Main Content</div>',
       activate: '<button id="test-button">Test</button>'
