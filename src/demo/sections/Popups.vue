@@ -10,6 +10,7 @@
         :position="popup.position"
         :height="popup.height"
         :width="popup.width"
+        :showCloseButton="popup.showCloseButton"
       >
         <template v-slot:title>
           <span style="display: inline-flex; align-items: center"
@@ -60,14 +61,16 @@ export default class Popup extends Vue {
       height: '341px',
       width: '730px',
       position: 'center',
-      value: false
+      value: false,
+      showCloseButton: false
     },
     {
       content: 'This is another pop up',
       height: '269px',
       width: '350px',
       position: 'flex-end',
-      value: false
+      value: false,
+      showCloseButton: true
     }
   ]
 

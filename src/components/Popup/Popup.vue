@@ -10,6 +10,7 @@
         :height="height"
         :width="width"
         :to="to"
+        :showCloseButton="showCloseButton"
       >
         <template v-slot:title>
           <div v-if="$slots.title">
@@ -63,6 +64,11 @@ export default defineComponent({
     width: {
       type: String,
       required: false
+    },
+    showCloseButton: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   emits: ['update:modelValue'],

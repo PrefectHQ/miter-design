@@ -216,52 +216,88 @@ test('passes popup height and width', () => {
   expect(cardProps.width).toBe('300px')
 })
 
-// describe('focus trap', () => {
-//   test('applies focus to close button on mount', async () => {
-//     const wrapper = mount(Popup, {
-//       attachTo: document.body,
-//       props: { modelValue: true },
-//       slots: {
-//         content: '<div>Main Content</div>',
-//         actions: '<Button id="pop-button">Pop Up Button</Button>',
-//         activate: '<button id="test-button">Test</button>'
-//       },
-//       global: {
-//         components: {
-//           Button: Button
-//         }
-//       }
-//     })
-//     const modal = wrapper.findComponent(PopupContent)
-//     const close = modal.find('[data-test="closeButton"]')
-//     //Wait until component hovered class applied when focus is called on mount
-//     await setTimeout(() => {}, 500)
-//     expect(close.classes()).toContain('hovered')
-//   })
+test('shows close button if showCloseButton is true', () => {
+  const wrapper = mount(Popup, {
+    props: { modelValue: true, position: 'center', showCloseButton: true },
+    slots: {
+      title: '<div>Title</div>',
+      content: '<div>Main Content</div>',
+      activate: '<button id="test-button">Test</button>'
+    },
+    global: {
+      components: {
+        Card: Card
+      }
+    }
+  })
+  const modal = wrapper.findComponent(PopupContent)
+  expect(modal.find('h4').isVisible()).toBe(true)
+})
 
-//   test('closes pop up on escape', async () => {
-//     const wrapper = mount(Popup, {
-//       attachTo: document.body,
-//       props: { modelValue: true },
-//       slots: {
-//         content: '<div>Main Content</div>',
-//         actions: '<Button id="pop-button">Pop Up Button</Button>',
-//         activate: '<button id="test-button">Test</button>'
-//       },
-//       global: {
-//         components: {
-//           Button: Button
-//         }
-//       }
-//     })
-//     const modal = wrapper.findComponent(PopupContent)
-//     const backdrop = modal.find('#backdrop')
-//     await backdrop.trigger('keydown.escape')
-//     const closeEvent = modal.emitted('close')
-//     expect(closeEvent).toHaveLength(1)
-//     expect(closeEvent[0]).toEqual([false])
-//     const outerCloseEvent = wrapper.emitted('update:modelValue')
-//     expect(outerCloseEvent).toHaveLength(1)
-//     expect(outerCloseEvent[0]).toEqual([false])
-//   })
-// })
+test('does not show close button if showCloseButton is false', () => {
+  const wrapper = mount(Popup, {
+    props: { modelValue: true, position: 'center' },
+    slots: {
+      title: '<div>Title</div>',
+      content: '<div>Main Content</div>',
+      activate: '<button id="test-button">Test</button>'
+    },
+    global: {
+      components: {
+        Card: Card
+      }
+    }
+  })
+  const modal = wrapper.findComponent(PopupContent)
+  expect(modal.find('h4').isVisible()).toBe(false)
+})
+
+describe('focus trap', () => {
+  test('applies focus to close button on mount', async () => {
+    const wrapper = mount(Popup, {
+      attachTo: document.body,
+      props: { modelValue: true },
+      slots: {
+        content: '<div>Main Content</div>',
+        actions: '<Button id="pop-button">Pop Up Button</Button>',
+        activate: '<button id="test-button">Test</button>'
+      },
+      global: {
+        components: {
+          Button: Button
+        }
+      }
+    })
+    const modal = wrapper.findComponent(PopupContent)
+    const close = modal.find('[data-test="closeButton"]')
+    //Wait until component hovered class applied when focus is called on mount
+    await setTimeout(() => {}, 500)
+    expect(close.classes()).toContain('hovered')
+  })
+
+  test('closes pop up on escape', async () => {
+    const wrapper = mount(Popup, {
+      attachTo: document.body,
+      props: { modelValue: true },
+      slots: {
+        content: '<div>Main Content</div>',
+        actions: '<Button id="pop-button">Pop Up Button</Button>',
+        activate: '<button id="test-button">Test</button>'
+      },
+      global: {
+        components: {
+          Button: Button
+        }
+      }
+    })
+    const modal = wrapper.findComponent(PopupContent)
+    const backdrop = modal.find('#backdrop')
+    await backdrop.trigger('keydown.escape')
+    const closeEvent = modal.emitted('close')
+    expect(closeEvent).toHaveLength(1)
+    expect(closeEvent[0]).toEqual([false])
+    const outerCloseEvent = wrapper.emitted('update:modelValue')
+    expect(outerCloseEvent).toHaveLength(1)
+    expect(outerCloseEvent[0]).toEqual([false])
+  })
+})

@@ -17,6 +17,23 @@
         :width="width"
       >
         <div>
+          <h4 v-show="showCloseButton" class="h4-bottom">
+            <button
+              icon
+              data-test="closeButton"
+              title="close pop up"
+              ref="popUpCloseButton"
+              class="close-icon"
+              :class="classList"
+              @click="closePopUp"
+              @mouseenter="handleMouseEnter"
+              @mouseleave="handleMouseLeave"
+              @focus="handleFocus"
+              @blur="handleBlur"
+            >
+              <i class="pi pi-close-line"></i>
+            </button>
+          </h4>
           <div v-if="$slots.title" class="pa-2">
             <slot name="title" />
           </div>
@@ -76,6 +93,11 @@ export default defineComponent({
     to: {
       type: String,
       default: 'body'
+    },
+    showCloseButton: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   emits: ['close'],
@@ -120,10 +142,10 @@ export default defineComponent({
   methods: {
     addFocus() {
       this.hovered = true
-      // this.$nextTick(() => {
-      //   ;(this.$refs.popUpCloseButton as HTMLElement).tabIndex = 0
-      //   ;(this.$refs.popUpCloseButton as HTMLElement).focus()
-      // })
+      this.$nextTick(() => {
+        ;(this.$refs.popUpCloseButton as HTMLElement).tabIndex = 0
+        ;(this.$refs.popUpCloseButton as HTMLElement).focus()
+      })
     },
     closePopUp() {
       this.$emit('close', false)
