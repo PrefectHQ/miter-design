@@ -2,6 +2,6 @@ export interface DataTableColumn {
   label: string
   value: string
   align?: string
-  sort?: void
+  sort?: (a: any, b: any) => -1 | 0 | 1
   search?: boolean
 }

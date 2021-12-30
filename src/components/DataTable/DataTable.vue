@@ -12,8 +12,8 @@
       <tr class="data-table__header-desktop">
         <template v-for="(column, columnIndex) in columns" :key="columnIndex">
           <th class="data-table__table-header" :style="{ textAlign: column.align ?? 'start' }" @click="sortColumn(column)">
-              <slot name="column" :column="column">
-                <slot :name="`column-${column.value}`" :column="column">
+              <slot name="column-header" :label="column.label" :column="column">
+                <slot :name="columnHeaderSlotName(column)" :label="column.label" :column="column">
                   {{ column.label }}
                 </slot>
               </slot>
@@ -39,8 +39,8 @@
         <tr class="data-table__table-row">
           <template v-for="column in columns" :key="column.value">
             <td :align="column.align ?? 'start'" class="data-table__table-cell">
-              <slot name="item" :item="row">
-                <slot :name="`item-${column.value}`" :item="row">
+              <slot name="column" :value="row[column.value]" :row="row">
+                <slot :name="columnSlotName(column)" :value="row[column.value]" :row="row">
                   {{ row[column.value] }}
                 </slot>
               </slot>
@@ -75,6 +75,7 @@ import Button from '../Button/Button.vue'
 import Input from '../Input/Input.vue'
 import { DataTableColumn } from '../../types/DataTableColumn'
 import { pick } from '@/utilities/objects'
+import { kebabCase } from '@/utilities/strings'
 
 export type DataTableColumnSort = 'asc' | 'desc' | 'none'
 export type DataTableRow = Record<string, any>
@@ -106,11 +107,17 @@ export default defineComponent({
   },
   emits: ['update:direction', 'update:sortBy'],
   data() {
-    return {
-      internalDirection: 'none' as DataTableColumnSort,
-      internalSortBy: null as string | null,
+    const data: {
+      internalDirection: DataTableColumnSort,
+      internalSortBy: string | null,
+      search: string
+    } =  {
+      internalDirection: 'none',
+      internalSortBy: null,
       search: ''
     }
+
+    return data
   },
   watch: {
     direction: {
@@ -207,24 +214,31 @@ export default defineComponent({
     },
     clearSearch(): void {
       this.search = ''
+    },
+    columnSlotName(column: DataTableColumn): string {
+      return `column-${kebabCase(column.value)}`
+    },
+    columnHeaderSlotName(column: DataTableColumn): string {
+      return `column-header-${kebabCase(column.value)}`
     }
   }
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@use '../../styles/abstracts/variables';
 
 .data-table {
   border-spacing: 0;
   width: 100%;
-  color: #465968;
+  color: #{variables.$text--primary};
 
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
 
-  border: 1px solid #e8e8e8;
+  border: 1px solid #{variables.$secondary-hover};
   text-align: left;
   border-radius: 4px;
 }
@@ -236,7 +250,7 @@ export default defineComponent({
 .data-table__table-header {
   padding: 16px;
   cursor: pointer;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #{variables.$secondary-hover};
   user-select: none;
 }
 
@@ -245,7 +259,7 @@ export default defineComponent({
   height: 16px;
   margin-left: 6px;
   margin-top: -3px;
-  color: #d2d9df;
+  color: #{variables.$grey-30};
   display: inline-block;
 }
 
@@ -254,7 +268,7 @@ export default defineComponent({
 }
 
 .data-table__search {
-  padding: 0 var(--m-1)
+  padding: 0 var(--m-1);
 }
 
 .data-table__search-icon {
@@ -262,12 +276,12 @@ export default defineComponent({
 }
 
 .data-table__table-row:hover {
-  background: #fcfdfe;
+  background: #{variables.$blue-5};
 }
 
 .data-table__table-cell {
   padding: 16px;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #{variables.$secondary-hover};
 }
 
 .data-table__no-search-results {
@@ -278,8 +292,8 @@ export default defineComponent({
   font-size: 24px;
   line-height: 28px;
   text-align: center;
-  color: #465968;
-  margin-bottom: var(--m-3)
+  color: #{variables.$text--primary};
+  margin-bottom: var(--m-3);
 }
 
 .data-table__no-search-results-label {
@@ -306,7 +320,7 @@ export default defineComponent({
     border-bottom: none;
   }
   .data-table__table-cell:last-of-type {
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid #{variables.$secondary-hover};
   }
 }
 </style>
