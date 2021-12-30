@@ -1,3 +1,4 @@
+- Updates the pop up component to match the new designs [#152](https://github.com/PrefectHQ/miter-design/pull/152)
 - Add delete color option [#622](https://github.com/PrefectHQ/orion/issues/622)
 - Add Tags component [#697](https://github.com/PrefectHQ/orion/pull/697)
 - Fix bug where tabs do not update with programmatic setting of Vue ref - [#125](https://github.com/PrefectHQ/miter-design/pull/126)
