@@ -34,8 +34,10 @@ class Props {
 }
 
 const Component = Options
-@Component({})
-export default class Button extends Vue.with(Props) {
+@Component({
+  name: 'MButton'
+})
+export default class MButton extends Vue.with(Props) {
   active: boolean = false
   hovered: boolean = false
 

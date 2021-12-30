@@ -66,7 +66,7 @@ interface event {
 }
 
 export default defineComponent({
-  name: 'Popcontent',
+  name: 'MPopupContent',
   components: {
     Card
   },

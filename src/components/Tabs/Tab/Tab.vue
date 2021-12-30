@@ -21,7 +21,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Tab',
+  name: 'MTab',
   emits: {
     click(e: Event, ...args: any[]) {
       return { e, ...args }

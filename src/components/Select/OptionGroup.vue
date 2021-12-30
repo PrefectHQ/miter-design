@@ -32,12 +32,13 @@ class Props {
 }
 
 @Component({
+  name: 'MOptionGroup',
   emits: ['select'],
   components: {
     Option
   }
 })
-export default class OptionGroup extends Vue.with(Props) {
+export default class MOptionGroup extends Vue.with(Props) {
 
   private isOptionSelected = isOptionSelected
   private isOptionVisible = isOptionVisible

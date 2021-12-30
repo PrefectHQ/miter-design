@@ -21,7 +21,7 @@ import Tag from "@/components/Tag/Tag.vue";
 import Tooltip from "@/components/Tooltip/Tooltip.vue"
 
 export default defineComponent({
-  name: "Tags",
+  name: "MTags",
   components: { Tag, Tooltip },
   props: {
     icon: {

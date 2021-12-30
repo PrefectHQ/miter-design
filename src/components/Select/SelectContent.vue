@@ -46,13 +46,14 @@ class Props {
 }
 
 @Component({
+  name: 'MSelectContent',
   emits: ['select', 'blur'],
   components: {
     OptionGroup,
     Option
   }
 })
-export default class SelectContent extends Vue.with(Props) {
+export default class MSelectContent extends Vue.with(Props) {
 
   $el!: HTMLDivElement
 

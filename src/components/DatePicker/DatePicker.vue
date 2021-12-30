@@ -123,6 +123,7 @@ class Props {
 
 const Component = Options
 @Component({
+  name: 'MDatePicker',
   watch: {
     innerValue(val) {
       this.$emit('update:modelValue', val)
@@ -137,12 +138,12 @@ const Component = Options
 })
 
 /**
- * The DatePicker is meant to present a unified cross-browser date picking component, replacing native browser date pickers
+ * The MDatePicker is meant to present a unified cross-browser date picking component, replacing native browser date pickers
  * which vary drastically browser to browser.
  *
- * @displayName DatePicker
+ * @displayName MDatePicker
  */
-export default class DatePicker extends Vue.with(Props) {
+export default class MDatePicker extends Vue.with(Props) {
   innerValue: Date = this.modelValue
     ? new Date(this.modelValue)
     : this.value

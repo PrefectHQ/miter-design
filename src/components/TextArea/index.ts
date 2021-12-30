@@ -3,6 +3,7 @@ import TextArea from './TextArea.vue'
 import { App } from 'vue'
 
 TextArea.install = (app: App) => {
+  app.component('TextArea', TextArea)
   app.component(TextArea.name, TextArea)
 }
 

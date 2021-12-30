@@ -24,8 +24,10 @@ class Props {
   title = prop<string>({ required: false, default: '' })
 }
 
-@Component({})
-export default class PopoverContent extends Vue.with(Props) {
+@Component({
+  name: 'MPopoverContent'
+})
+export default class MPopoverContent extends Vue.with(Props) {
 
   get classes() {
     return {
