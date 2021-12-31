@@ -1,7 +1,10 @@
 import { mount } from '@vue/test-utils'
 import DataTable from './DataTable.vue'
+import { DataTableColumn } from '../../types/DataTableColumn'
+export type DataTableColumnSort = 'asc' | 'desc' | 'none'
+export type DataTableRow = Record<string, any>
 
-const columns = [
+const columns: DataTableColumn[] = [
   {
     label: 'Name',
     value: 'name'
@@ -16,7 +19,7 @@ const columns = [
   }
 ]
 
-const rows = [
+const rows: DataTableRow[] = [
   { name: 'Staging Team', memberCount: 57, roles: 'Admin' },
   { name: 'Data Science', memberCount: 405, roles: 'Admin' },
   { name: 'Dev Ops', memberCount: 22, roles: 'Admin' },
@@ -24,7 +27,7 @@ const rows = [
   { name: 'Winter Interns', memberCount: 90, roles: 'Admin' }
 ]
 
-const ascRows = [
+const ascRows: DataTableRow[] = [
   { name: 'Data Science', memberCount: 405, roles: 'Admin' },
   { name: 'Dev Ops', memberCount: 22, roles: 'Admin' },
   { name: 'Production Team', memberCount: 35, roles: 'Admin' },
@@ -36,8 +39,8 @@ describe('props', () => {
   test('displays columns', () => {
     const wrapper = mount(DataTable, {
       props: {
-        rows: rows,
-        columns: columns
+        columns: columns,
+        rows: []
       }
     })
 
@@ -51,8 +54,8 @@ describe('props', () => {
   test('displays rows', () => {
     const wrapper = mount(DataTable, {
       props: {
-        rows: rows,
-        columns: columns
+        columns: [],
+        rows: rows
       }
     })
 
@@ -62,7 +65,7 @@ describe('props', () => {
 })
 
 describe('emits', () => {
-  test('direction', async () => {
+  test('emits update:direction and update:sortBy when clicked', async () => {
     const wrapper = mount(DataTable, {
       props: {
         rows: rows,
@@ -73,11 +76,11 @@ describe('emits', () => {
     const header = wrapper.find('.data-table__table-header')
     await header.trigger('click')
 
-    expect(wrapper.emitted('update:direction')[0][0]).toEqual('asc')
-    expect(wrapper.vm.sorted).toEqual(ascRows)
+    expect(wrapper.emitted()).toHaveProperty('update:direction')
+    expect(wrapper.emitted()).toHaveProperty('update:sortBy')
   })
 
-  test('sort by', async () => {
+  test('sorting', async () => {
     const wrapper = mount(DataTable, {
       props: {
         rows: rows,
@@ -88,7 +91,61 @@ describe('emits', () => {
     const header = wrapper.find('.data-table__table-header')
     await header.trigger('click')
 
-    expect(wrapper.emitted('update:sortBy')[0][0]).toEqual('name')
+    expect(wrapper.emitted('update:direction')).toEqual([['asc']])
+    expect(wrapper.vm.sorted).toEqual(ascRows)
+
+    expect(wrapper.emitted('update:sortBy')).toEqual([['name']])
+  })
+})
+
+describe('column arrow', () => {
+  test('displays table-header-sort-icon--rotate on mount', () => {
+    const wrapper = mount(DataTable, {
+      props: {
+        rows: rows,
+        columns: columns
+      }
+    })
+
+    const tableHeaderSortIcon = wrapper.find(
+      '.data-table__table-header-sort-icon'
+    )
+
+    expect(tableHeaderSortIcon.classes()).toContain(
+      'data-table__table-header-sort-icon--rotate'
+    )
+  })
+
+  test('displays pi-arrow-up-line on asc', async () => {
+    const wrapper = mount(DataTable, {
+      props: {
+        rows: rows,
+        columns: columns
+      }
+    })
+    const header = wrapper.find('.data-table__table-header')
+    const tableHeaderSortIcon = wrapper.find(
+      '.data-table__table-header-sort-icon'
+    )
+    await header.trigger('click')
+    expect(tableHeaderSortIcon.classes()).toContain('pi-arrow-up-line')
+  })
+
+  test('displays pi-arrow-down-line on desc', async () => {
+    const wrapper = mount(DataTable, {
+      props: {
+        rows: rows,
+        columns: columns
+      }
+    })
+    const header = wrapper.find('.data-table__table-header')
+    const tableHeaderSortIcon = wrapper.find(
+      '.data-table__table-header-sort-icon'
+    )
+    await header.trigger('click')
+    await header.trigger('click')
+
+    expect(tableHeaderSortIcon.classes()).toContain('pi-arrow-down-line')
   })
 })
 
