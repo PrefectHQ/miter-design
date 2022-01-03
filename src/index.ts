@@ -17,6 +17,7 @@ import Tag from './components/Tag'
 import TagGroup from './components/TagGroup'
 import Tags from './components/Tags'
 import TextArea from './components/TextArea'
+import Toast from './components/Toast'
 import Toggle from './components/Toggle'
 import Tooltip from './components/Tooltip'
 import TimePicker from './components/TimePicker'
@@ -28,7 +29,7 @@ import TooltipDirective from './directives/Tooltip/Tooltip'
 
 /* Plugins */
 import Breakpoints from './plugins/Breakpoints/Breakpoints'
-import Toast from './plugins/Toast/Toast'
+import ToastPlugin from './plugins/Toast/Toast'
 
 import './styles/main.scss'
 import { App } from 'vue'
@@ -52,6 +53,7 @@ const components = {
   TagGroup,
   Tags,
   TextArea,
+  Toast,
   Toggle,
   Tooltip,
   TimePicker,
@@ -65,7 +67,7 @@ const directives = {
 
 const plugins = {
   breakpoints: Breakpoints,
-  toast: Toast
+  toast: ToastPlugin
 }
 
 function install(app: App) {
@@ -74,8 +76,10 @@ function install(app: App) {
     if (components[component].install) {
       // @ts-expect-error
       components[component].install(app)
+    } else {
       // @ts-expect-error
-    } else app.component(components[component].name, components[component])
+      app.component(components[component].name, components[component])
+    }
   }
 
   for (const directive in directives) {
@@ -109,6 +113,7 @@ export { default as Tag } from './components/Tag'
 export { default as TagGroup } from './components/TagGroup'
 export { default as Tags } from './components/Tags'
 export { default as TextArea } from './components/TextArea'
+export { default as Toast } from './components/Toast'
 export { default as Toggle } from './components/Toggle'
 export { default as Tooltip } from './components/Tooltip'
 export { default as TimePicker } from './components/TimePicker'

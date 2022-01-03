@@ -76,7 +76,7 @@ interface $refs {
 }
 
 export default defineComponent({
-  name: 'Input',
+  name: 'MInput',
   props: {
     disabled: {
       type: Boolean,

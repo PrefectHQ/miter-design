@@ -60,7 +60,7 @@ class props {
 }
 
 @Component({
-  name: 'TextArea',
+  name: 'MTextArea',
   emits: ['update:modelValue', 'invalid'],
   watch: {
     value: {

@@ -66,8 +66,8 @@ class Props {
 }
 
 @Component({
+  name: 'MSelect',
   emits: ['update:modelValue'],
-  name: 'Select',
   components: {
     NativeSelect,
     OptionLabel,
@@ -75,7 +75,7 @@ class Props {
     Input
   }
 })
-export default class Select extends Vue.with(Props) {
+export default class MSelect extends Vue.with(Props) {
 
   $refs!: {
     trigger: HTMLDivElement

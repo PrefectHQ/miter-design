@@ -3,9 +3,9 @@
     <slot name="trigger" />
   </div>
   <teleport v-if="open" to="body">
-    <TooltipContent ref="tooltip" :placement="placement" :content="content" :style="styles.tooltip">
+    <MTooltipContent ref="tooltip" :placement="placement" :content="content" :style="styles.tooltip">
       <slot />
-    </TooltipContent>
+    </MTooltipContent>
   </teleport>
 </template>
 
@@ -14,7 +14,7 @@ import { nextTick } from 'vue'
 import { Vue, prop } from 'vue-class-component'
 import { Component } from '@/utilities/vue-class-component'
 import { calculatePlacementPositionStyles, Placement, PlacementPositionStyles } from '@/utilities/position'
-import TooltipContent from './TooltipContent.vue'
+import MTooltipContent from './TooltipContent.vue'
 
 
 class Props {
@@ -23,15 +23,16 @@ class Props {
 }
 
 @Component({
+  name: 'MTooltip',
   components: {
-    TooltipContent
+    MTooltipContent
   }
 })
-export default class Tooltip extends Vue.with(Props) {
+export default class MTooltip extends Vue.with(Props) {
 
   $refs!: {
     trigger: HTMLDivElement
-    tooltip: TooltipContent
+    tooltip: MTooltipContent
   }
 
   private open: boolean = false

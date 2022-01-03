@@ -41,9 +41,10 @@ class Props {
 }
 
 @Component({
+  name: 'MNumberInput',
   emits: ['update:modelValue']
 })
-export default class NumberInput extends Vue.with(Props) {
+export default class MNumberInput extends Vue.with(Props) {
 
   get valueNumber(): number {
     return this.modelValue || safeParseFloat(this.defaultValue) || 0

@@ -32,7 +32,7 @@ import { defineComponent } from 'vue'
 import PopupContent from './PopupContent.vue'
 
 export default defineComponent({
-  name: 'Popup',
+  name: 'MPopup',
   props: {
     modelValue: {
       type: Boolean,

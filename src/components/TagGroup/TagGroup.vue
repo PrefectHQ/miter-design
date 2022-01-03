@@ -9,11 +9,11 @@ import {
   resolveComponent
 } from 'vue'
 
-import Tag from '../Tag/Tag.vue'
+import MTag from '../Tag/Tag.vue'
 
 export default defineComponent({
-  name: 'TagGroup',
-  components: { Tag },
+  name: 'MTagGroup',
+  components: { MTag },
   props: {
     modelValue: {
       type: [Array],
@@ -97,7 +97,7 @@ export default defineComponent({
       children = [
         Array.from({ length: 2 }).map((elem, i) => {
           return h(
-            resolveComponent('Tag'),
+            resolveComponent('MTag'),
             mergeProps({
               tabIndex: 0,
               hovered: true,

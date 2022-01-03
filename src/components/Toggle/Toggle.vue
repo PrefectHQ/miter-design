@@ -26,7 +26,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Toggle',
+  name: 'MToggle',
   emits: {
     'update:modelValue'(...args: any[]) {
       return { ...args }

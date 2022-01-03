@@ -53,12 +53,13 @@ class Props {
 }
 
 @Component({
+  name: 'MNativeSelect',
   emits: ['update:modelValue'],
   components: {
     OptionLabel
   }
 })
-export default class NativeSelect extends Vue.with(Props) {
+export default class MNativeSelect extends Vue.with(Props) {
 
   $refs!: {
     input: HTMLSelectElement

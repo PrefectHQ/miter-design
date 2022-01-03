@@ -43,12 +43,13 @@ class Props {
 
 const Component = Options
 @Component({
+  name: 'MToast',
   components: {
     IconButton,
     Card
   }
 })
-export default class Toast extends Vue.with(Props) {
+export default class MToast extends Vue.with(Props) {
   timeout_: ReturnType<typeof setInterval> | null = null
 
   get classList_() {
