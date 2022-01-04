@@ -1,7 +1,7 @@
 <template>
   <div class="mt-5 pb-10" v-cloak>
     <h1>Components</h1>
-    <Loader class="mt-10"/>
+    <Loader class="mt-10" />
     <Avatar class="mt-10" />
     <Breakpoints class="mt-10" />
     <Buttons class="mt-10" />
@@ -26,6 +26,7 @@
     <TextAreas class="mt-10" />
     <Toasts class="mt-10" />
     <Tooltip class="mt-10" />
+    <DataTable class="mt-10" />
   </div>
 </template>
 
@@ -55,6 +56,7 @@ import TextAreas from '../sections/TextAreas.vue'
 import Toasts from '../sections/Toasts.vue'
 import Tooltip from '../sections/Tooltip.vue'
 import Loader from '../sections/Loader.vue'
+import DataTable from '../sections/DataTable.vue'
 
 @Options({
   components: {
@@ -81,7 +83,8 @@ import Loader from '../sections/Loader.vue'
     TextAreas,
     Toasts,
     Tooltip,
-    Loader
+    Loader,
+    DataTable
   }
 })
 export default class App extends Vue {}
