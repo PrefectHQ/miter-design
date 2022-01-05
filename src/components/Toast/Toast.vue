@@ -1,8 +1,8 @@
 <template>
-  <Card miter class="toast" @mouseenter="clearTimeout" @mouseleave="setTimeout">
+  <Card miter class="toast">
     <div class="toast--content d-flex align-center" :class="classList_">
       <i v-if="icon_" class="pi pi-2x mr-1" :class="icon_" />
-      <slot>{{ content }}</slot>
+      <slot>{{ message }}</slot>
       <IconButton
         v-if="dismissable"
         class="text--white ml-2 toast--close-button"
@@ -34,10 +34,10 @@ const colorMap: { [key: string]: string } = {
 
 class Props {
   classList = prop<[]>({ default: [], required: false })
-  content = prop<string>({ required: false, default: '' })
+  message = prop<string>({ required: false, default: '' })
   dismissable = prop<boolean>({ default: true, type: Boolean })
   icon = prop<string>({ default: null, required: false })
-  timeout = prop<number>({ default: 0, required: false })
+  timeout = prop<number>({ default: 3000, required: false })
   type = prop<string>({ required: false, default: null })
 }
 
@@ -69,7 +69,9 @@ export default class MToast extends Vue.with(Props) {
   }
 
   clearTimeout() {
-    if (this.timeout_) clearTimeout(this.timeout_)
+    if (this.timeout_) {
+      clearTimeout(this.timeout_)
+    }
   }
 
   setTimeout() {
@@ -82,11 +84,17 @@ export default class MToast extends Vue.with(Props) {
   mounted() {
     if (this.timeout) {
       this.setTimeout()
+      this.$el.addEventListener('mouseenter', this.clearTimeout)
+      this.$el.addEventListener('mouseleave', this.setTimeout)
     }
   }
 
   unmounted() {
-    this.clearTimeout()
+    if (this.timeout) {
+      this.clearTimeout()
+      this.$el.removeEventListener('mouseenter', this.clearTimeout)
+      this.$el.removeEventListener('mouseleave', this.setTimeout)
+    }
   }
 }
 </script>
