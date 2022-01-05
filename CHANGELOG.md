@@ -1,3 +1,4 @@
+- Updated Toast plugin, fixed bugs, improved developer experience [#159](https://github.com/PrefectHQ/miter-design/pull/159)
 - Add DataTable component [#137](https://github.com/PrefectHQ/miter-design/pull/137)
 - Add delete color option [#622](https://github.com/PrefectHQ/orion/issues/622)
 - Add Tags component [#697](https://github.com/PrefectHQ/orion/pull/697)
