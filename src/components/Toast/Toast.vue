@@ -90,11 +90,9 @@ export default class MToast extends Vue.with(Props) {
   }
 
   unmounted() {
-    if (this.timeout) {
-      this.clearTimeout()
-      this.$el.removeEventListener('mouseenter', this.clearTimeout)
-      this.$el.removeEventListener('mouseleave', this.setTimeout)
-    }
+    this.clearTimeout()
+    this.$el.removeEventListener('mouseenter', this.clearTimeout)
+    this.$el.removeEventListener('mouseleave', this.setTimeout)
   }
 }
 </script>

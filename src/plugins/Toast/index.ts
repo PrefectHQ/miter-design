@@ -43,9 +43,9 @@ function tryQuerySelector(query:string): Element {
 }
 
 function getMountElement(mountPoint: Element | string | undefined): Element {
-  if(!mountPoint){
-    return createDefaultMountElement()
-  }
+if(!mountPoint){
+  return createDefaultMountElement()
+}
 
   if(typeof mountPoint === 'string'){
     return tryQuerySelector(mountPoint)
@@ -97,8 +97,6 @@ const ToastPlugin: Plugin = {
     createApp(ToastContainer).mount(element)
 
     app.config.globalProperties.$toast = showToast
-
-    app.provide('$toast', showToast)
   }
 }
 

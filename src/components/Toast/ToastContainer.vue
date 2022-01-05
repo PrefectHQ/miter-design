@@ -18,7 +18,7 @@
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
 import Toast from './Toast.vue'
-import { queue } from '@/plugins/Toast/Toast'
+import { queue } from '@/plugins/Toast'
 
 @Options({
   name: 'MToastContainer',
@@ -33,13 +33,13 @@ export default class MToastContainer extends Vue {
 
 <style lang="scss" scoped>
 .toast-container {
+  padding-right: 16px;
   display: flex;
   align-items: end;
   flex-direction: column-reverse;
 }
 
 .toast-container__toast {
-  padding-right: 16px;
   padding-bottom: 16px;
 }
 
