@@ -1,25 +1,24 @@
 <template>
-  <div ref="container" class="toast-container">
-    <transition-group name="slide" mode="out-in" appear>
-      <Toast
-        v-for="[key, toast] in toasts"
-        :key="key"
-        v-bind="toast.props"
-        @close="remove(key)"
+  <div class="toast-container">
+    <transition-group name="toast-list">
+      <div
+        v-for="toast in queue"
+        :key="toast.id"
+        class="toast-container__toast"
       >
-        <component v-if="toast.props.component" :is="toast.props.component" />
-        <template v-else>
-          {{ toast.props.content }}
-        </template>
-      </Toast>
+        <Toast
+          v-bind="toast"
+          @close="toast.dismiss"
+        />
+      </div>
     </transition-group>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
-import { ref, h } from 'vue'
 import Toast from './Toast.vue'
+import { queue } from '@/plugins/Toast/Toast'
 
 @Options({
   name: 'MToastContainer',
@@ -28,36 +27,57 @@ import Toast from './Toast.vue'
   }
 })
 export default class MToastContainer extends Vue {
-  container = ref<HTMLElement>() as unknown as HTMLElement
-  toasts: Map<number, any> = new Map()
-
-  add(options: any) {
-    const index =
-      this.toasts.size == 0 ? 0 : Math.max(...this.toasts.keys()) + 1
-    this.toasts.set(index, {
-      props: { ...options }
-    })
-
-    this.$nextTick(() => {
-      this.container.scroll({
-        top: this.container.scrollHeight,
-        behavior: 'smooth'
-      })
-    })
-
-    return () => this.remove(index)
-  }
-
-  remove(i: number) {
-    this.toasts.delete(i)
-  }
-
-  removeAll() {
-    this.toasts = new Map()
-  }
+  queue = queue
 }
 </script>
 
 <style lang="scss" scoped>
-@use '../../styles/components/toast';
+.toast-container {
+  display: flex;
+  align-items: end;
+  flex-direction: column-reverse;
+}
+
+.toast-container__toast {
+  padding-right: 16px;
+  padding-bottom: 16px;
+}
+
+.toast-list-enter-active {
+  opacity: 0;
+  transition: transform 0.75s, opacity 0.75s;
+  transform: translateY(100%);
+}
+
+.toast-list-enter-active ~ .toast-container__toast {
+  transition: transform 0.75s;
+  transform: translateY(100%);
+}
+
+.toast-list-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.toast-list-enter-to ~ .toast-container__toast  {
+  transform: translateY(0);
+}
+
+.toast-list-leave-active {
+  opacity: 1;
+  transition: transform 0.75s, opacity 0.75s;
+  transform: translateY(0);
+}
+
+.toast-list-leave-active ~ .toast-container__toast {
+  transition: transform 0.75s;
+  transform: translateY(0);
+}
+
+.toast-list-leave-to {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.toast-list-leave-to ~ .toast-container__toast  {
+  transform: translateY(100%);
+}
 </style>

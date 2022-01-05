@@ -1,74 +1,107 @@
-import { App, createApp, InjectionKey, Component } from 'vue'
+import { App, createApp, reactive, Plugin } from 'vue'
 import ToastContainer from '@/components/Toast/ToastContainer.vue'
 
-declare module '@vue/runtime-core' {
-  export interface ComponentCustomProperties {
-    $toast: {
-      add: (options: ToastOptions) => MountedElement
-    }
-  }
-}
+type ToastType = 'default' | 'success' | 'error'
 
-export type MountedElement = {
-  remove(): any
+type Toast = ToastOptions & {
+  id: number,
+  dismiss: () => void
 }
 
 type ToastOptions = {
-  component?: Component
-  content?: string
+  message: string,
+  type?: ToastType,
   timeout?: number
   dismissable?: boolean
-  type?: string
-  classList?: string[]
 }
 
-export type Toast = {
-  add: (options: ToastOptions) => MountedElement
+type ToastPluginOptions = {
+  mountPoint?: Element | string
 }
 
-export interface ToastPlugin {
-  install(app: App): void
+function createDefaultMountElement():Element {
+  const element = document.createElement('div')
+  element.id = 'miter-toast-app'
+  element.style.position = 'fixed'
+  element.style.bottom = '0'
+  element.style.right = '0'
+  document.body.appendChild(element)
+
+  return element
 }
 
-export const injectionKey: InjectionKey<ToastPlugin> = Symbol('toast')
+function tryQuerySelector(query:string): Element {
+  const element = document.querySelector(query)
+   
+  if (!element) {
+      throw new Error(
+        "Toast plugin wasn't provided a valid mount point. Make sure the mount point exists in the DOM or pass nothing to create one automatically."
+      )
+  }
 
-export default {
-  install: (app: App, options: any = {}) => {
-    let mountPoint: Element
+  return element
+}
 
-    if (options.mountPoint) {
-      mountPoint = document.querySelector(options.mountPoint)
-      if (!mountPoint)
-        throw new Error(
-          "Toast plugin wasn't provided a valid mount point. Make sure the mount point exists in the DOM or pass nothing to create one automatically."
-        )
-    } else {
-      mountPoint = document.createElement('div')
-      mountPoint.id = 'miter-toast-app'
-      document.body.appendChild(mountPoint)
-    }
+function getMountElement(mountPoint: Element | string | undefined): Element {
+  if(!mountPoint){
+    return createDefaultMountElement()
+  }
 
-    const toastApp = createApp(ToastContainer)
+  if(typeof mountPoint === 'string'){
+    return tryQuerySelector(mountPoint)
+  }
 
-    const toastContainer: any = toastApp.mount(mountPoint)
+  return mountPoint
+}
 
-    const Toast = {
-      /**
-       * Adds a new toast to the global interface - if a component is passed, the content string will be ignored
-       * @param options: { component: Component, content: string, color: string, timeout: number }
-       * @returns remove
-       */
-      add(options: ToastOptions = {}): MountedElement {
-        return { remove: toastContainer.add(options) }
-      },
+let toastId = 0
+const queue: Toast[] = reactive([])
 
-      removeAll(): void {
-        toastContainer.removeAll()
-      }
-    }
+function getToastId(): number {
+  return toastId++
+}
 
-    app.config.globalProperties.$toast = Toast
+function hideToast(id: number): void{
+  const index = queue.findIndex(toast => toast.id === id)
 
-    app.provide('$toast', Toast)
+  if (index > -1) {
+    queue.splice(index, 1)
   }
 }
+
+function showToast(options: ToastOptions): Toast
+function showToast(message: string): Toast
+function showToast(message: string, type: ToastType): Toast
+function showToast(optionsOrMessage: ToastOptions | string, type: ToastType = 'default'): Toast {
+  const id = getToastId()
+
+  const options = typeof optionsOrMessage === 'string'
+    ? { message: optionsOrMessage, type }
+    : optionsOrMessage
+
+  const toast: Toast = { 
+    id, 
+    dismiss: () => hideToast(id), 
+    ...options
+  }
+
+  queue.unshift(toast)
+
+  return toast
+}
+
+const ToastPlugin: Plugin = {
+  install: (app: App, options: ToastPluginOptions = {}) => {
+    const element = getMountElement(options.mountPoint)
+    
+    createApp(ToastContainer).mount(element)
+
+    app.config.globalProperties.$toast = showToast
+
+    app.provide('$toast', showToast)
+  }
+}
+
+export type { Toast, ToastType, ToastOptions, ToastPluginOptions }
+export { queue, showToast, hideToast }
+export default ToastPlugin
