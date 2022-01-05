@@ -14,7 +14,7 @@
       >
         <template v-slot:title>
           <span style="display: inline-flex; align-items: center"
-            ><i class="pi pi-error-warning-line pi-lg"></i> Title</span
+            ><i class="pi pi-error-warning-line pi-lg"></i>Title</span
           >
         </template>
 
