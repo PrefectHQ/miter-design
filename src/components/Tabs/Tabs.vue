@@ -116,10 +116,6 @@ export default defineComponent({
     if (slottedItems) {
       children = [
         slottedItems
-          ?.filter(
-            (ti: RendererNode | RendererElement | { [key: string]: any }) =>
-              ti.type.name == 'MTab'
-          )
           .map(
             (ti: RendererNode | RendererElement | { [key: string]: any }) => {
               return h(
