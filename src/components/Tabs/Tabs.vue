@@ -97,12 +97,21 @@ export default defineComponent({
     this.handleOverflowUpdate(this.tabsContainer!)
   },
   render() {
-    const slottedItems = this.$slots.default?.()
+    let slottedItems = this.$slots.default?.()
     let children: VNode<
       RendererNode,
       RendererElement,
       { [key: string]: any }
     >[][]
+
+    // hack to allow v-for's to work
+    // this component needs to be redone using slots. CH. 
+    // https://github.com/PrefectHQ/miter-design/issues/161
+    const isTemplate = typeof slottedItems?.[0].type === 'symbol'
+    
+    if(isTemplate) {
+      slottedItems = slottedItems![0].children as any
+    }
 
     const activeIndex = slottedItems?.findIndex(
       (ti) => ti.props?.href == this._modelValue
@@ -116,10 +125,6 @@ export default defineComponent({
     if (slottedItems) {
       children = [
         slottedItems
-          ?.filter(
-            (ti: RendererNode | RendererElement | { [key: string]: any }) =>
-              ti.type.name == 'MTab'
-          )
           .map(
             (ti: RendererNode | RendererElement | { [key: string]: any }) => {
               return h(
