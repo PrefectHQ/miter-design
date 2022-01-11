@@ -37,7 +37,7 @@
           <div class="text-center mt-4">
             <Button
               class="mr-1"
-              color="secondary light"
+              color="secondary"
               miter
               height="36px"
               @click="close"

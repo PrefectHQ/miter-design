@@ -33,7 +33,7 @@
           <component :is="'Actions'">
             <Button
               class="mr-1"
-              color="secondary light"
+              color="secondary"
               @click="closePopUp(popup)"
               miter
               width="132px"
