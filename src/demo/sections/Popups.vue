@@ -12,8 +12,8 @@
         :width="popup.width"
       >
         <template v-slot:title>
-          <span style="display: inline-flex; align-items: center"
-            ><i class="pi pi-error-warning-line pi-lg"></i>Title</span
+          <span class="d-inline-flex align-center"
+            ><i class="pi pi-error-warning-line pi-lg mr-1"></i>Title</span
           >
         </template>
 
@@ -31,15 +31,22 @@
 
         <template v-slot:actions>
           <component :is="'Actions'">
-            <Button @click="closePopUp(popup)" color="primary" miter
+            <Button
+              class="mr-1"
+              color="secondary light"
+              @click="closePopUp(popup)"
+              miter
+              width="132px"
+              height="36px"
               >Cancel</Button
             >
 
             <Button
               @click="actionClicked"
               color="primary"
-              style="margin-right: 10px"
               miter
+              width="132px"
+              height="36px"
               >Confirm</Button
             >
           </component>

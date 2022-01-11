@@ -1,15 +1,16 @@
 <template>
   <div>
     <h3 class="mb-2">Popover</h3>
-    <div style="display: flex;">
+    <div style="display: flex">
       <Popover position="right">
         <template v-slot:header>
-          <p class="ma-0"><i class="pi pi-user-smile-line pi-lg"></i> Flow Run Duration</p>
+          <p class="ma-0 d-inline-flex align-center"
+            ><i class="pi pi-user-smile-line pi-lg mr-1"></i> Flow Run
+            Duration</p
+          >
         </template>
         <template v-slot:trigger="{ toggle, open }">
-          <Button @keydown.enter="toggle" @mouseover="open">
-            Popover
-          </Button>
+          <Button @keydown.enter="toggle" @mouseover="open"> Popover </Button>
         </template>
         <template v-slot="{ close }">
           <div>
@@ -34,8 +35,17 @@
             </div>
           </div>
           <div class="text-center mt-4">
-            <Button class="mr-1" color="primary" @click="handleClick">Click</Button>
-            <Button color="primary" @click="close">Close</Button>
+            <Button
+              class="mr-1"
+              color="secondary light"
+              miter
+              height="36px"
+              @click="close"
+              >Cancel</Button
+            >
+            <Button color="primary" miter height="36px" @click="handleClick"
+              >Click</Button
+            >
           </div>
         </template>
       </Popover>
