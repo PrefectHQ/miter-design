@@ -21,6 +21,7 @@ import Toast from './components/Toast'
 import Toggle from './components/Toggle'
 import Tooltip from './components/Tooltip'
 import TimePicker from './components/TimePicker'
+import DataTable from './components/DataTable'
 
 /* Directives */
 import SkeletonDirective from './directives/Skeleton/Skeleton'
@@ -55,7 +56,8 @@ const components = {
   Toast,
   Toggle,
   Tooltip,
-  TimePicker
+  TimePicker,
+  DataTable
 }
 
 const directives = {
@@ -115,3 +117,4 @@ export { default as Toast } from './components/Toast'
 export { default as Toggle } from './components/Toggle'
 export { default as Tooltip } from './components/Tooltip'
 export { default as TimePicker } from './components/TimePicker'
+export { default as DataTable } from './components/DataTable'
