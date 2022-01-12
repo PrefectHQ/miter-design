@@ -1,3 +1,4 @@
+- Add logs icon and update font files - [#164](https://github.com/PrefectHQ/miter-design/pull/164)
 - Add DataTable component [#137](https://github.com/PrefectHQ/miter-design/pull/137)
 - Add delete color option [#622](https://github.com/PrefectHQ/orion/issues/622)
 - Add Tags component [#697](https://github.com/PrefectHQ/orion/pull/697)
