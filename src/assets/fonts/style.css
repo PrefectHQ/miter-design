@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'prefect-icons';
   src:
-    url('fonts/prefect-icons.ttf?fujx65') format('truetype'),
-    url('fonts/prefect-icons.woff?fujx65') format('woff'),
-    url('fonts/prefect-icons.svg?fujx65#prefect-icons') format('svg');
+    url('fonts/prefect-icons.ttf?7gnc5t') format('truetype'),
+    url('fonts/prefect-icons.woff?7gnc5t') format('woff'),
+    url('fonts/prefect-icons.svg?7gnc5t#prefect-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.pi-logs-fill:before {
+  content: "\f1ef";
+}
 .pi-awaiting-retry:before {
   content: "\f1e2";
 }
