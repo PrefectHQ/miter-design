@@ -9,13 +9,8 @@
       </div>
 
       <div class="my-2">
-        Inner:
-        <SimpleSelect v-model="content" :options="['Text', 'Component']" />
-      </div>
-
-      <div class="my-2">
         Type:
-        <SimpleSelect v-model="type" :options="['None', 'Error', 'Success']" />
+        <SimpleSelect v-model="type" :options="availableTypes" />
       </div>
 
       <div class="my-2">
@@ -29,43 +24,34 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component'
-import ToastComponentExample from './ToastComponentExample.vue'
-import Toast from '@/components/Toast/Toast.vue'
+import { Vue } from 'vue-class-component'
+import { ToastType, Toast } from '@/plugins/Toast'
 
-@Options({
-  components: {
-    Toast
-  }
-})
 export default class Toasts extends Vue {
-  toasts: any[] = []
-  content: string = 'Text'
+  toasts: Toast[] = []
   dismissable: boolean = true
   timeout: string = '5000'
   showToast: boolean = true
-  type: string = 'Success'
+  type: ToastType = 'success'
+  availableTypes: ToastType[] = [
+    'default', 'success', 'error'
+  ]
 
   addToast() {
     this.toasts.push(
-      this.$toast.add({
-        component:
-          this.content == 'Component' ? ToastComponentExample : undefined,
-        content: new Date().toString(),
+      this.$toast({
+        message: new Date().toString(),
         dismissable: this.dismissable,
         timeout: this.timeout ? parseInt(this.timeout) : undefined,
-        type: this.type.toLowerCase()
+        type: this.type
       })
     )
   }
 
   removeToasts() {
-    this.toasts.forEach((toast) => {
-      toast.remove()
+    this.toasts.forEach(toast => {
+      toast.dismiss()
     })
-
-    // Either of these methods can be used to remove toasts
-    // this.$toast.removeAll()
   }
 }
 </script>

@@ -4,7 +4,7 @@
       <router-link class="mr-4" to="/">Components</router-link>
       <router-link to="/icons">Icons</router-link>
     </div>
-
+    
     <router-view />
   </div>
 </template>
