@@ -101,6 +101,8 @@ $blue-10: #f9fafd;
 $blue-5: #fcfdfe;
 
 $colors: (
+  font-primary: $font--primary,
+  font-secondary: $font--secondary,
   text--primary: $text--primary,
   text--secondary: $text--secondary,
   text--placeholder: $text--placeholder,
@@ -127,6 +129,7 @@ $colors: (
   grey-40: $grey-40,
   grey-30: $grey-30,
   grey-20: $grey-20,
+  grey-10: $grey-10,
   blue-80: $blue-80,
   blue-40: $blue-40,
   blue-20: $blue-20,
