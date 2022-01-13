@@ -22,7 +22,14 @@ const Template = (args) => ({
     document.body.appendChild(el)
     return { args, val }
   },
-  template: `<Popup v-model="val" v-bind="args"><template v-slot:activate>${args.activate}</template><template v-if="args.popupContent" v-slot:content>${args.popupContent}</template><template v-if="args.popupActions" v-slot:actions>${args.popupActions}</template>
+  template: `
+  <Popup 
+    v-model="val" 
+    v-bind="args">
+    <template v-slot:activate>${args.activate}</template>
+    <template v-if="args.popupTitle" v-slot:title>${args.popupTitle}</template>
+    <template v-if="args.popupContent" v-slot:content>${args.popupContent}</template>
+    <template v-if="args.popupActions" v-slot:actions>${args.popupActions}</template>
   </Popup>
   `
 })
@@ -34,8 +41,9 @@ Center.args = {
   title: 'Pop Up',
   width: '180px',
   activate: `<Button v-bind="args" color="primary" @click="val = true">Button</Button>`,
+  popupTitle: '<span>Title</span>',
   popupContent: `<div>Pop Up Content</div>`,
-  popupActions: `<Button color="primary">Blank Button</Button>`
+  popupActions: `<Button color="primary" @click="val = false">Blank Button</Button>`
 }
 
 export const FlexEnd = Template.bind({})
@@ -44,5 +52,8 @@ FlexEnd.args = {
   position: 'flex-end',
   title: 'Pop Up',
   width: '180px',
-  activate: `<Button v-bind="args" color="primary" @click="val = true">Button</Button>`
+  activate: `<Button v-bind="args" color="primary" @click="val = true">Button</Button>`,
+  popupTitle: '<span>Title</span>',
+  popupContent: `<div>Pop Up Content</div>`,
+  popupActions: `<Button color="primary" @click="val = false">Blank Button</Button>`
 }
