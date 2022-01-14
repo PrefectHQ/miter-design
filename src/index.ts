@@ -28,7 +28,6 @@ import SkeletonDirective from './directives/Skeleton/Skeleton'
 import TooltipDirective from './directives/Tooltip/Tooltip'
 
 /* Plugins */
-import BreakpointsPlugin from './plugins/Breakpoints'
 import ToastPlugin from './plugins/Toast'
 
 import './styles/main.scss'
@@ -66,7 +65,6 @@ const directives = {
 }
 
 const plugins = {
-  breakpoints: BreakpointsPlugin,
   toast: ToastPlugin
 }
 

@@ -3,7 +3,6 @@
     <h1>Components</h1>
     <Loader class="mt-10" />
     <Avatar class="mt-10" />
-    <Breakpoints class="mt-10" />
     <Buttons class="mt-10" />
     <Cards class="mt-10" />
     <Checkboxes class="mt-10" />
@@ -33,7 +32,6 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import Avatar from '../sections/Avatar.vue'
-import Breakpoints from '../sections/Breakpoints.vue'
 import Buttons from '../sections/Buttons.vue'
 import Cards from '../sections/Cards.vue'
 import Checkboxes from '../sections/Checkboxes.vue'
@@ -62,7 +60,6 @@ import DataTable from '../sections/DataTable.vue'
   components: {
     Avatar,
     Buttons,
-    Breakpoints,
     Cards,
     Checkboxes,
     DatePickerSection,
