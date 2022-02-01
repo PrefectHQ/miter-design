@@ -1,3 +1,4 @@
+- Update alignment for tag and input [#36](https://github.com/PrefectHQ/nebula-ui/issues/36)
 - Updated Toast plugin, fixed bugs, improved developer experience [#159](https://github.com/PrefectHQ/miter-design/pull/159)
 - Updates the pop up component to match the new designs [#152](https://github.com/PrefectHQ/miter-design/pull/152)
 - Add logs icon and update font files - [#164](https://github.com/PrefectHQ/miter-design/pull/164)
