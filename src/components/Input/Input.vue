@@ -18,7 +18,7 @@
         {{ label }}</label
       >
       <input
-        :id="label"
+        :label="label"
         ref="inputbox"
         data-test="default"
         :type="inputType"
@@ -42,6 +42,9 @@
         @input="handleInput"
         class="input"
         :class="classList"
+        :autocomplete="autocomplete"
+        :id="id"
+        :name="name"
       />
       <p v-if="subtitle" data-test="subtitle" class="subtitle">{{
         subtitle
@@ -132,6 +135,18 @@ export default defineComponent({
       required: false
     },
     pattern: {
+      type: String,
+      required: false
+    },
+    autocomplete: {
+      type: Boolean,
+      required: false
+    },
+    id: {
+      type: String,
+      required: false
+    },
+    name: {
       type: String,
       required: false
     }

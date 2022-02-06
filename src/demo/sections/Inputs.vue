@@ -4,6 +4,10 @@
     <div v-for="state in states" :key="state" class="my-2 setWidth">
       <Input
         v-model="state.val"
+        label="label"
+        id="123"
+        name="input"
+        autocomplete
         :disabled="state.state == 'disabled'"
         :label="state.label"
         @invalid="handleInvalid"
