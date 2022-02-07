@@ -119,10 +119,6 @@ export default defineComponent({
     minLength: {
       type: Number,
       required: false
-    },
-    pattern: {
-      type: String,
-      required: false
     }
     
   },
