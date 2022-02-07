@@ -18,10 +18,9 @@
         {{ label }}</label
       >
       <input
-        :label="label"
+      :disabled="disabled"
         ref="inputbox"
         data-test="default"
-        :type="inputType"
         @keyup="handleKeyup"
         @keydown="handleKeydown"
         @keypress="handleKeyPress"
@@ -30,21 +29,15 @@
         @mousedown="handleMouseDown"
         @focus="handleFocus"
         @blur="handleBlur"
-        :placeholder="placeholder"
-        :disabled="disabled"
         :value="internalValue"
         :valid="valid"
-        :required="required"
-        :pattern="pattern"
         :maxlength="maxLength"
         :minlength="minLength"
         @invalid.capture="handleInvalid"
         @input="handleInput"
         class="input"
         :class="classList"
-        :autocomplete="autocomplete"
-        :id="id"
-        :name="name"
+        v-bind="$attrs"
       />
       <p v-if="subtitle" data-test="subtitle" class="subtitle">{{
         subtitle
@@ -54,8 +47,8 @@
       ><slot name="append" />
     </span>
     <span class="append" :class="classList" v-else>
-      <i v-if="!invalid" class="pi pi-check-line pi-2x"></i>
-      <i v-if="invalid" class="pi pi-error-warning-line pi-2x invalid"></i>
+      <i v-if="!invalid" class="pi-check-line pi-2x"></i>
+      <i v-if="invalid" class="pi-error-warning-line pi-2x invalid"></i>
     </span>
   </div>
 </template>
@@ -80,18 +73,15 @@ interface $refs {
 
 export default defineComponent({
   name: 'MInput',
+  inheritAttrs: false,
   props: {
-    disabled: {
+   disabled: {
       type: Boolean,
       default: false
     },
     subtitle: {
       type: String,
       default: ''
-    },
-    inputType: {
-      type: String,
-      default: 'text'
     },
     validityIcon: {
       type: Boolean,
@@ -105,7 +95,7 @@ export default defineComponent({
       type: String,
       required: false
     },
-    label: {
+  label: {
       type: String,
       required: false
     },
@@ -116,11 +106,6 @@ export default defineComponent({
     valid: {
       type: Boolean,
       default: true
-    },
-    placeholder: {
-      type: String,
-      default: '',
-      required: false
     },
     required: {
       type: Boolean,
@@ -137,19 +122,8 @@ export default defineComponent({
     pattern: {
       type: String,
       required: false
-    },
-    autocomplete: {
-      type: Boolean,
-      required: false
-    },
-    id: {
-      type: String,
-      required: false
-    },
-    name: {
-      type: String,
-      required: false
     }
+    
   },
   emits: ['update:modelValue', 'invalid', 'keyup', 'keypress', 'keydown'],
   data() {

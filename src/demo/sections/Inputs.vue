@@ -4,16 +4,17 @@
     <div v-for="state in states" :key="state" class="my-2 setWidth">
       <Input
         v-model="state.val"
-        label="label"
         id="123"
+        type="state.type"
         name="input"
-        autocomplete
+        autocomplete="on"
+        :placeholder="state.placeholder"
+        required
         :disabled="state.state == 'disabled'"
         :label="state.label"
         @invalid="handleInvalid"
         :subtitle="state.subtitle"
-        required
-        :validityIcon="false"
+        :validityIcon="true"
       >
         <template v-slot:prepend>
           <i class="pi pi-Search pi-2x"></i>
@@ -36,8 +37,9 @@ export default class Inputs extends Vue {
   minVal = 0 as number
   maxVal = 10 as number
   states = [
-    { state: 'default', val: 'Hello', subtitle: 'Default subtitle' },
-    { state: 'disabled', val: 'Hello again', label: 'Disabled' }
+    { state: 'default', val: 'hello', subtitle: 'Default subtitle', label: "test label" },
+    { state: 'placeholder', val: '', subtitle: 'placeholder subtitle', placeholder:"Placeholder" },
+    { state: 'disabled', val: 'Hello again', label: 'Disabled',  }
   ]
 
   mounted(): void {
