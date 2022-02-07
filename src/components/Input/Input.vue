@@ -31,6 +31,7 @@
         @blur="handleBlur"
         :value="internalValue"
         :valid="valid"
+        :required="required"
         :maxlength="maxLength"
         :minlength="minLength"
         @invalid.capture="handleInvalid"
@@ -95,6 +96,10 @@ export default defineComponent({
       type: String,
       required: false
     },
+    required: {
+      type: Boolean,
+      required: false,
+    },
   label: {
       type: String,
       required: false
@@ -106,10 +111,6 @@ export default defineComponent({
     valid: {
       type: Boolean,
       default: true
-    },
-    required: {
-      type: Boolean,
-      default: false
     },
     maxLength: {
       type: Number,

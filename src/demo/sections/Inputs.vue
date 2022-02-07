@@ -17,7 +17,7 @@
         :validityIcon="true"
       >
         <template v-slot:prepend>
-          <i class="pi pi-Search pi-2x"></i>
+          <i class="pi-Search pi-2x"></i>
         </template>
         <template v-slot:append>
           <Toggle :disabled="state.state == 'disabled'" />
