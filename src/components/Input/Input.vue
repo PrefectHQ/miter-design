@@ -133,18 +133,18 @@ export default defineComponent({
   },
   computed: {
     outerClassList(): any {
-      return [
-        ...this.$attrs.class,
-        {
-          disabled: this.disabled,
-          invalid: this.invalid,
-          active: this.active,
-          hovered: this.hovered
-        }
-      ]
+      const baseList = [this.$attrs.class]
+      return this.disabled
+        ? ['disabled', ...baseList]
+        : this.invalid
+        ? ['invalid', ...baseList]
+        : this.active
+        ? ['active', ...baseList]
+        : this.hovered
+        ? ['hovered', ...baseList]
+        : baseList
     },
-    classList(): any {
-      
+    classList(): any {  
       return this.disabled
         ? ['disabled']
         : this.invalid
