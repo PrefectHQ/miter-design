@@ -1,11 +1,12 @@
 <template>
   <div
-    :class="classList"
+    :class="outerClassList"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousedown="handleMouseDown"
     @keydown.enter="handleKeydown"
     class="flexInput"
+    :style="$attrs.style"
   >
     <span class="prepend" data-test="prepend"><slot name="prepend" /></span>
     <span class="input-text">
@@ -39,7 +40,6 @@
         class="input"
         :class="classList"
         v-bind="attributes"
-        :style="$attrs.style"
       />
       <p v-if="subtitle" data-test="subtitle" class="subtitle">{{
         subtitle
@@ -132,7 +132,7 @@ export default defineComponent({
     }
   },
   computed: {
-    classList(): any {
+    outerClassList(): any {
       const baseList = [this.$attrs.class]
       return this.disabled
         ? ['disabled', ...baseList]
@@ -143,6 +143,18 @@ export default defineComponent({
         : this.hovered
         ? ['hovered', ...baseList]
         : baseList
+    },
+    classList(): any {
+      
+      return this.disabled
+        ? ['disabled']
+        : this.invalid
+        ? ['invalid']
+        : this.active
+        ? ['active']
+        : this.hovered
+        ? ['hovered']
+        : []
     },
     attributes() {
       const { class, style, ...attrs } = this.$attrs
