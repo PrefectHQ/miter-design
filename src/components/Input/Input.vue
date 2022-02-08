@@ -38,7 +38,8 @@
         @input="handleInput"
         class="input"
         :class="classList"
-        v-bind="$attrs"
+        v-bind="attributes"
+        :style="$attrs.style"
       />
       <p v-if="subtitle" data-test="subtitle" class="subtitle">{{
         subtitle
@@ -48,8 +49,8 @@
       ><slot name="append" />
     </span>
     <span class="append" :class="classList" v-else>
-      <i v-if="!invalid" class="pi-check-line pi-2x"></i>
-      <i v-if="invalid" class="pi-error-warning-line pi-2x invalid"></i>
+      <i v-if="!invalid" class="pi-check-line "></i>
+      <i v-if="invalid" class="pi-error-warning-line invalid"></i>
     </span>
   </div>
 </template>
@@ -132,15 +133,20 @@ export default defineComponent({
   },
   computed: {
     classList(): any {
+      const baseList = [this.$attrs.class]
       return this.disabled
-        ? ['disabled']
+        ? ['disabled', ...baseList]
         : this.invalid
-        ? ['invalid']
+        ? ['invalid', ...baseList]
         : this.active
-        ? ['active']
+        ? ['active', ...baseList]
         : this.hovered
-        ? ['hovered']
-        : []
+        ? ['hovered', ...baseList]
+        : baseList
+    },
+    attributes() {
+      const { class, style, ...attrs } = this.$attrs
+      return attrs
     },
     internalValue(): string {
       return this.value || this.modelValue || ''
