@@ -19,7 +19,7 @@
         {{ label }}</label
       >
       <input
-      :disabled="disabled"
+        :disabled="disabled"
         ref="inputbox"
         data-test="default"
         @keyup="handleKeyup"
@@ -49,7 +49,7 @@
       ><slot name="append" />
     </span>
     <span class="append" :class="classList" v-else>
-      <i v-if="!invalid" class="pi-check-line "></i>
+      <i v-if="!invalid" class="pi-check-line"></i>
       <i v-if="invalid" class="pi-error-warning-line invalid"></i>
     </span>
   </div>
@@ -77,7 +77,7 @@ export default defineComponent({
   name: 'MInput',
   inheritAttrs: false,
   props: {
-   disabled: {
+    disabled: {
       type: Boolean,
       default: false
     },
@@ -99,9 +99,9 @@ export default defineComponent({
     },
     required: {
       type: Boolean,
-      required: false,
+      required: false
     },
-  label: {
+    label: {
       type: String,
       required: false
     },
@@ -121,7 +121,6 @@ export default defineComponent({
       type: Number,
       required: false
     }
-    
   },
   emits: ['update:modelValue', 'invalid', 'keyup', 'keypress', 'keydown'],
   data() {
@@ -144,7 +143,7 @@ export default defineComponent({
         ? ['hovered', ...baseList]
         : baseList
     },
-    classList(): any {  
+    classList(): any {
       return this.disabled
         ? ['disabled']
         : this.invalid
@@ -156,8 +155,10 @@ export default defineComponent({
         : []
     },
     attributes() {
-      const { style, ...attrs } = this.$attrs
-      return attrs
+      const attrsCopy = { ...this.$attrs }
+      delete attrsCopy.class
+      delete attrsCopy.style
+      return attrsCopy
     },
     internalValue(): string {
       return this.value || this.modelValue || ''

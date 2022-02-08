@@ -8,6 +8,7 @@
         type="state.type"
         name="input"
         autocomplete="on"
+        class="ml-3"
         :placeholder="state.placeholder"
         required
         :disabled="state.state == 'disabled'"
