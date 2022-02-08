@@ -157,7 +157,7 @@ export default defineComponent({
         : []
     },
     attributes() {
-      const { ...attrs } = this.$attrs
+      const { class, style, ...attrs } = this.$attrs
       return attrs
     },
     internalValue(): string {
