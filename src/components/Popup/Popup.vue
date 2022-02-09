@@ -66,6 +66,7 @@ export default defineComponent({
       required: false
     }
   },
+  inheritAttrs: false,
   emits: ['update:modelValue'],
   components: {
     PopupContent

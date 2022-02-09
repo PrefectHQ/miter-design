@@ -6,9 +6,9 @@
       miter: miter,
       outlined: outlined
     }"
-    :style="{ height: height, width: width }"
+    :style="containerStyle"
   >
-    <div>
+    <div v-bind="$attrs" :style="style">
       <header v-if="$slots.header">
         <slot name="header" />
       </header>
@@ -47,12 +47,19 @@ class Props {
 // See https://github.com/storybookjs/storybook/issues/14052#issuecomment-797512590 for details
 const Component = Options
 @Component({
-  name: 'MCard'
+  name: 'MCard',
 })
 export default class MCard extends Vue.with(Props) {
   get style(): { [key: string]: any } {
     return {
       backgroundColor: this.backgroundColor,
+      height: this.height,
+      width: this.width
+    }
+  }
+
+  get containerStyle(): { [key: string]: any } {
+    return {
       height: this.height,
       width: this.width
     }
