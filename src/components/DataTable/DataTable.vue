@@ -81,7 +81,7 @@ export type DataTableColumnSort = 'asc' | 'desc' | 'none'
 export type DataTableRow = Record<string, any>
 
 export default defineComponent({
-  name: 'DataTable',
+  name: 'MDataTable',
   components: { Button, Input },
   props: {
     columns: {
