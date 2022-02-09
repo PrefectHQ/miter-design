@@ -22,11 +22,13 @@
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
+    height: 100%;
     padding-left: inherit;
     padding-right: inherit;
     padding-top: inherit;
     padding-bottom: inherit;
     overflow: hidden;
+    width: 100%;
 
     > header {
       border-radius: 3px;
