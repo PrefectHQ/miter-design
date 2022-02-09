@@ -6,7 +6,6 @@
       miter: miter,
       outlined: outlined
     }"
-    v-bind="$attrs"
     :style="{ height: height, width: width }"
   >
     <div>
