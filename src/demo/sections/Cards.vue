@@ -9,7 +9,7 @@
       <Card
         width="400px"
         height="500px"
-        class="mr-4 mt-4 d-inline-block"
+        class="mr-4 mt-4 d-inline-block flex-shrink-0"
         shadow="sm"
       >
         <template v-slot:header>
@@ -103,7 +103,7 @@
       <Card
         v-for="(card, index) in cards"
         :key="index"
-        class="mr-4 mt-4 d-inline-block"
+        class="mr-4 mt-4 d-inline-block flex-shrink-0"
         :class="card.cardClass"
         :height="card.height"
         :width="card.width"

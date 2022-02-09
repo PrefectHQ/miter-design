@@ -6,9 +6,10 @@
       miter: miter,
       outlined: outlined
     }"
-    :style="{ width: width }"
+    v-bind="$attrs"
+    :style="{ height: height, width: width }"
   >
-    <div :style="style">
+    <div>
       <header v-if="$slots.header">
         <slot name="header" />
       </header>
@@ -36,8 +37,8 @@ import { Vue, Options, prop } from 'vue-class-component'
 
 class Props {
   backgroundColor = prop<string>({ default: null })
-  height = prop<string>({ default: 'inherit' })
-  width = prop<string>({ default: 'inherit' })
+  height = prop<string>({ default: null })
+  width = prop<string>({ default: null })
   outlined = prop<boolean>({ default: false, type: Boolean })
   shadow = prop<string>({ default: null })
   miter = prop<boolean>({ default: false, type: Boolean })

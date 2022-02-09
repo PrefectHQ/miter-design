@@ -10,6 +10,7 @@
         :height="height"
         :width="width"
         :to="to"
+        v-bind="$attrs"
       >
         <template v-slot:title>
           <div v-if="$slots.title">
