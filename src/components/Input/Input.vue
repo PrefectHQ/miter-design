@@ -1,11 +1,12 @@
 <template>
   <div
-    :class="classList"
+    :class="outerClassList"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousedown="handleMouseDown"
     @keydown.enter="handleKeydown"
     class="flexInput"
+    :style="$attrs.style"
   >
     <span class="prepend" data-test="prepend"><slot name="prepend" /></span>
     <span class="input-text">
@@ -18,10 +19,9 @@
         {{ label }}</label
       >
       <input
-        :id="label"
+        :disabled="disabled"
         ref="inputbox"
         data-test="default"
-        :type="inputType"
         @keyup="handleKeyup"
         @keydown="handleKeydown"
         @keypress="handleKeyPress"
@@ -30,18 +30,16 @@
         @mousedown="handleMouseDown"
         @focus="handleFocus"
         @blur="handleBlur"
-        :placeholder="placeholder"
-        :disabled="disabled"
         :value="internalValue"
         :valid="valid"
         :required="required"
-        :pattern="pattern"
         :maxlength="maxLength"
         :minlength="minLength"
         @invalid.capture="handleInvalid"
         @input="handleInput"
         class="input"
         :class="classList"
+        v-bind="attributes"
       />
       <p v-if="subtitle" data-test="subtitle" class="subtitle">{{
         subtitle
@@ -51,8 +49,8 @@
       ><slot name="append" />
     </span>
     <span class="append" :class="classList" v-else>
-      <i v-if="!invalid" class="pi pi-check-line pi-2x"></i>
-      <i v-if="invalid" class="pi pi-error-warning-line pi-2x invalid"></i>
+      <i v-if="!invalid" class="pi-check-line"></i>
+      <i v-if="invalid" class="pi-error-warning-line invalid"></i>
     </span>
   </div>
 </template>
@@ -77,6 +75,7 @@ interface $refs {
 
 export default defineComponent({
   name: 'MInput',
+  inheritAttrs: false,
   props: {
     disabled: {
       type: Boolean,
@@ -85,10 +84,6 @@ export default defineComponent({
     subtitle: {
       type: String,
       default: ''
-    },
-    inputType: {
-      type: String,
-      default: 'text'
     },
     validityIcon: {
       type: Boolean,
@@ -100,6 +95,10 @@ export default defineComponent({
     },
     value: {
       type: String,
+      required: false
+    },
+    required: {
+      type: Boolean,
       required: false
     },
     label: {
@@ -114,25 +113,12 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    placeholder: {
-      type: String,
-      default: '',
-      required: false
-    },
-    required: {
-      type: Boolean,
-      default: false
-    },
     maxLength: {
       type: Number,
       required: false
     },
     minLength: {
       type: Number,
-      required: false
-    },
-    pattern: {
-      type: String,
       required: false
     }
   },
@@ -145,6 +131,18 @@ export default defineComponent({
     }
   },
   computed: {
+    outerClassList(): any {
+      const baseList = [this.$attrs.class]
+      return this.disabled
+        ? ['disabled', ...baseList]
+        : this.invalid
+        ? ['invalid', ...baseList]
+        : this.active
+        ? ['active', ...baseList]
+        : this.hovered
+        ? ['hovered', ...baseList]
+        : baseList
+    },
     classList(): any {
       return this.disabled
         ? ['disabled']
@@ -155,6 +153,12 @@ export default defineComponent({
         : this.hovered
         ? ['hovered']
         : []
+    },
+    attributes() {
+      const attrsCopy = { ...this.$attrs }
+      delete attrsCopy.class
+      delete attrsCopy.style
+      return attrsCopy
     },
     internalValue(): string {
       return this.value || this.modelValue || ''

@@ -58,6 +58,16 @@ describe('Props', () => {
     expect(input.attributes('valid')).toBe('false')
   })
 
+  test('passes placeholder', () => {
+    const wrapper = mount(Input, {
+      props: {
+        placeholder: 'Placeholder'
+      }
+    })
+    const input = wrapper.get('[data-test="default"]')
+    expect(input.attributes('placeholder')).toBe('Placeholder')
+  })
+
   test('passes maxLength', () => {
     const wrapper = mount(Input, {
       props: {
