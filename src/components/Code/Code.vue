@@ -1,18 +1,21 @@
 <template>
   <code class="code">
+    <div class="code__copy-button-wrapper">
+      <Button
+        v-if="!hideCopyButton"
+        class="code__copy-button"
+        height="36px"
+        icon="pi pi-file-copy-line"
+        color="primary"
+        @click="copy"
+      >Copy</Button>
+    </div>
+
     <div class="code__file-name">
       <slot name="file-name" />
     </div>
     <div class="code__content">
       <slot />
-
-      <Button
-        v-if="!hideCopyButton"
-        class="code__copy-button"
-        icon="pi pi-file-copy-line"
-        color="primary"
-        @click="copy"
-      >Copy</Button>
     </div>
   </code>
 </template>
