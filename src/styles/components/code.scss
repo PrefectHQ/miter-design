@@ -1,9 +1,5 @@
 @use '../abstracts/variables';
 
-code {
-   font-family: variables.$font--secondary !important;
-}
-
 .code {
   background-color: #000;
   border-radius: 4px;
@@ -14,10 +10,6 @@ code {
   overflow-x: scroll;
   padding: 12px;
   position: relative;
-
-  pre {
-    font-family: variables.$font--secondary !important;
-  }
 
   &__content {
     color: variables.$white;

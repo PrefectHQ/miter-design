@@ -50,3 +50,15 @@ const copy = async (): Promise<void> => {
 <style lang="scss" scoped>
 @use '../../styles/components/code';
 </style>
+
+<style lang="scss">
+@use '@/styles/abstracts/variables';
+
+.code {
+  &__content {
+    pre {
+      font-family: variables.$font--secondary !important;
+    }
+  }
+}
+</style>
