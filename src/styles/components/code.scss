@@ -1,6 +1,35 @@
 @use '../abstracts/variables';
 
+code {
+   font-family: variables.$font--secondary !important;
+}
+
 .code {
-    background-color: #000;
-    color: $white;
+  background-color: #000;
+  border-radius: 4px;
+  display: block;
+  font-family: variables.$font--secondary !important;
+  max-width: 100%;
+  min-width: 100px;
+  overflow-x: scroll;
+  padding: 12px;
+  position: relative;
+
+  pre {
+    font-family: variables.$font--secondary !important;
+  }
+
+  &__content {
+    color: variables.$white;
+  }
+
+  &__file-name {
+    color: variables.$grey-40;
+  }
+
+  &__copy-button {
+    bottom: 12px;
+    position: absolute;
+    right: 12px;
+  }
 }

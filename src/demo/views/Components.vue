@@ -6,6 +6,7 @@
     <Buttons class="mt-10" />
     <Cards class="mt-10" />
     <Checkboxes class="mt-10" />
+    <CodeSection class="mt-10" />
     <Inputs class="mt-10" />
     <Links class="mt-10" />
     <Popover class="mt-10" />
@@ -35,6 +36,7 @@ import Avatar from '../sections/Avatar.vue'
 import Buttons from '../sections/Buttons.vue'
 import Cards from '../sections/Cards.vue'
 import Checkboxes from '../sections/Checkboxes.vue'
+import CodeSection from '../sections/CodeSection.vue'
 import DatePickerSection from '../sections/DatePickerSection.vue'
 import TimePickerSection from '../sections/TimePickerSection.vue'
 import Inputs from '../sections/Inputs.vue'
@@ -62,6 +64,7 @@ import DataTable from '../sections/DataTable.vue'
     Buttons,
     Cards,
     Checkboxes,
+    CodeSection,
     DatePickerSection,
     TimePickerSection,
     Inputs,
@@ -84,7 +87,7 @@ import DataTable from '../sections/DataTable.vue'
     DataTable
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue { }
 </script>
 
 <style lang="scss">
