@@ -7,11 +7,11 @@
   *:after {
     box-sizing: border-box;
   }
-  display: flex;
   align-items: flex-end;
-  padding-bottom: 7px;
   border-bottom: 1px solid variables.$secondary-hover;
+  display: flex;
   height: 53px;
+  padding-bottom: 7px;
 
   &--active {
     border-bottom: 1px solid variables.$primary;
@@ -19,11 +19,12 @@
 
   &--disabled {
     border-bottom: 1px solid variables.$secondary-hover;
+
     *,
     *:before,
     *:after {
-      opacity: 60%;
       cursor: not-allowed;
+      opacity: 60%;
     }
   }
 
@@ -42,18 +43,19 @@
   *:after {
     align-items: center;
   }
+
   align-items: inherit;
   display: flex;
+  height: 40px;
   justify-items: flex-end;
   margin-right: 0;
-  height: 40px;
 }
 
 .miter-input__append {
   align-items: center;
   display: flex;
-  justify-items: flex-end;
   height: 40px;
+  justify-items: flex-end;
   margin-left: auto;
 
   &--active {
@@ -72,9 +74,9 @@
 .miter-input__text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   font-size: 15px;
   height: 40px;
+  justify-content: center;
   width: 100%;
 
   input {
@@ -84,11 +86,11 @@
 
 .miter-input__label {
   font-size: 11px;
-  line-height: 14px;
-  padding-left: 2px;
-  margin-bottom: 4px;
   justify-content: center;
+  line-height: 14px;
+  margin-bottom: 4px;
   opacity: 80%;
+  padding-left: 2px;
 }
 
 .miter-input__input {
@@ -112,8 +114,8 @@
 .miter-input__subtitle {
   font-size: 11px;
   line-height: 14px;
-  opacity: 60%;
-  margin-top: 0;
   margin-bottom: 0;
+  margin-top: 0;
+  opacity: 60%;
   padding-left: 2px;
 }
