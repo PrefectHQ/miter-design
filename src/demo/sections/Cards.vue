@@ -9,7 +9,7 @@
       <Card
         width="400px"
         height="500px"
-        class="mr-4 mt-4 d-inline-block"
+        class="mr-4 mt-4 d-inline-block flex-shrink-0"
         shadow="sm"
       >
         <template v-slot:header>
@@ -103,7 +103,7 @@
       <Card
         v-for="(card, index) in cards"
         :key="index"
-        class="mr-4 mt-4 d-inline-block"
+        class="mr-4 mt-4 d-inline-block flex-shrink-0"
         :class="card.cardClass"
         :height="card.height"
         :width="card.width"
@@ -202,8 +202,8 @@ export default class Cards extends Vue {
     {
       title: 'Welcome to PREFECT',
       titleTag: 'h2',
-      cardClass: ['text-center'],
-      backgroundColor: 'var(--background)',
+      cardClass: ['text-center', 'text--white', 'card-test'],
+      backgroundColor: 'var(--primary)',
       height: '385px',
       width: '350px',
       shadow: 'md',
@@ -212,7 +212,7 @@ export default class Cards extends Vue {
       content: "See all the new features we've added in the tutorial.",
       actionClass: ['flex-column', 'pa-2'],
       actions: [
-        { tag: 'Button', color: 'primary', text: 'Primary' },
+        { tag: 'Button', color: 'secondary', text: 'Primary' },
         { tag: 'a', text: 'Skip for now', class: ['my-2'] }
       ]
     },
@@ -291,12 +291,16 @@ export default class Cards extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use '@/styles/components/button';
 
 .card-section {
   max-width: 100%;
   overflow: auto;
   display: flex;
+}
+
+.card-test {
+  padding: 24px;
 }
 </style>

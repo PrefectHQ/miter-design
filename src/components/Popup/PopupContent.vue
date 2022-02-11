@@ -3,9 +3,11 @@
     <div
       id="backdrop"
       tabindex="0"
-      @keydown="handleBackdropKeyDown"
       class="modal-backdrop"
+      ref="popUpBackdrop"
       :style="position"
+      @keydown="handleBackdropKeyDown"
+      @click.self="disableBackdropClose ? null : closePopUp()"
     >
       <Card
         role="dialog"
@@ -15,6 +17,7 @@
         :class="positionClass"
         :height="height"
         :width="width"
+        v-bind="$attrs"
       >
         <div>
           <div v-if="$slots.title" class="pa-2">
@@ -76,6 +79,10 @@ export default defineComponent({
     to: {
       type: String,
       default: 'body'
+    },
+    disableBackdropClose: {
+      type: Boolean,
+      default: () => false
     }
   },
   emits: ['close'],
@@ -120,6 +127,9 @@ export default defineComponent({
   methods: {
     addFocus() {
       this.hovered = true
+     const popupBackdrop = this.$refs.popUpBackdrop as HTMLElement
+
+      popupBackdrop.focus()
     },
     closePopUp() {
       this.$emit('close', false)

@@ -6,11 +6,16 @@
     @include mixins.miter(2, 1);
   }
 
+  background: unset !important;
+  background-color: unset !important;
   border-radius: 4px;
   display: block;
-  height: min-content;
   position: relative;
-  width: min-content;
+  padding: unset !important;
+  padding-top: unset !important;
+  padding-left: unset !important;
+  padding-bottom: unset !important;
+  padding-right: unset !important;
 
   &.outlined {
     > div {
@@ -24,10 +29,12 @@
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
-    padding-left: inherit;
-    padding-right: inherit;
-    padding-top: inherit;
-    padding-bottom: inherit;
+    margin: unset !important;
+    margin-top: unset !important;
+    margin-left: unset !important;
+    margin-bottom: unset !important;
+    margin-right: unset !important;
+
     overflow: hidden;
 
     > header {
@@ -41,10 +48,11 @@
       display: flex;
       flex-direction: row;
       flex-grow: 1;
+      height: 100%;
       overflow: auto;
       justify-content: flex-start;
       padding: inherit;
-      width: inherit;
+      width: auto;
 
       > aside {
         border-radius: inherit;
