@@ -1,34 +1,16 @@
 <template>
   <div class="toast-container">
     <transition-group name="toast-list">
-      <div
-        v-for="toast in queue"
-        :key="toast.id"
-        class="toast-container__toast"
-      >
-        <Toast
-          v-bind="toast"
-          @close="toast.dismiss"
-        />
+      <div v-for="toast in queue" :key="toast.id" class="toast-container__toast">
+        <Toast v-bind="toast" @close="toast.dismiss" />
       </div>
     </transition-group>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options } from 'vue-class-component'
+<script lang="ts" setup>
 import Toast from './Toast.vue'
 import { queue } from '@/plugins/Toast'
-
-@Options({
-  name: 'MToastContainer',
-  components: {
-    Toast
-  }
-})
-export default class MToastContainer extends Vue {
-  queue = queue
-}
 </script>
 
 <style lang="scss" scoped>
@@ -58,7 +40,7 @@ export default class MToastContainer extends Vue {
   opacity: 1;
   transform: translateY(0);
 }
-.toast-list-enter-to ~ .toast-container__toast  {
+.toast-list-enter-to ~ .toast-container__toast {
   transform: translateY(0);
 }
 
@@ -77,7 +59,7 @@ export default class MToastContainer extends Vue {
   opacity: 0;
   transform: translateY(100%);
 }
-.toast-list-leave-to ~ .toast-container__toast  {
+.toast-list-leave-to ~ .toast-container__toast {
   transform: translateY(100%);
 }
 </style>
