@@ -127,7 +127,9 @@ export default defineComponent({
   methods: {
     addFocus() {
       this.hovered = true
-      ;(this.$refs.popUpBackdrop as HTMLElement).focus()
+     const popupBackdrop = this.$refs.popUpBackdrop as HTMLElement
+
+      popupBackdrop.focus()
     },
     closePopUp() {
       this.$emit('close', false)
