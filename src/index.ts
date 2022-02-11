@@ -3,6 +3,7 @@ import Avatar from './components/Avatar'
 import Button from './components/Button'
 import Card from './components/Card'
 import Checkbox from './components/Checkbox'
+import Code from './components/Code'
 import Datepicker from './components/DatePicker'
 import Input from './components/Input'
 import Loader from './components/Loader'
@@ -38,6 +39,7 @@ const components = {
   Button,
   Card,
   Checkbox,
+  Code,
   Datepicker,
   Input,
   Loader,
@@ -98,6 +100,7 @@ export { showToast } from './plugins/Toast'
 export { default as Avatar } from './components/Avatar'
 export { default as Button } from './components/Button'
 export { default as Card } from './components/Card'
+export { default as Code } from './components/Code'
 export { default as Checkbox } from './components/Checkbox'
 export { default as DatePicker } from './components/DatePicker'
 export { default as Input } from './components/Input'
