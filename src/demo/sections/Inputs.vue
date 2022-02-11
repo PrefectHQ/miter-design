@@ -8,7 +8,6 @@
         type="state.type"
         name="input"
         autocomplete="on"
-        class="ml-3"
         :placeholder="state.placeholder"
         required
         :disabled="state.state == 'disabled'"
@@ -39,8 +38,8 @@ export default class Inputs extends Vue {
   maxVal = 10 as number
   states = [
     { state: 'default', val: 'hello', subtitle: 'Default subtitle', label: "test label" },
-    { state: 'placeholder', val: '', subtitle: 'placeholder subtitle', placeholder:"Placeholder" },
-    { state: 'disabled', val: 'Hello again', label: 'Disabled',  }
+    { state: 'placeholder', val: '', subtitle: 'placeholder subtitle', placeholder: "Placeholder" },
+    { state: 'disabled', val: 'Hello again', label: 'Disabled', }
   ]
 
   mounted(): void {
