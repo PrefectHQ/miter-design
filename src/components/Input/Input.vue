@@ -5,26 +5,21 @@
     @mouseleave="handleMouseLeave"
     @mousedown="handleMouseDown"
     @keydown.enter="handleKeydown"
-    class="flexInput"
+    class="miter-input"
     :style="$attrs.style"
   >
-    <span class="prepend" data-test="prepend"><slot name="prepend" /></span>
-    <span class="input-text">
-      <label
-        data-test="label"
-        v-if="!hideLabel"
-        :for="label"
-        class="input-label"
-      >
-        {{ label }}</label
-      >
+    <span class="miter-input__prepend" data-test="prepend">
+      <slot name="prepend" />
+    </span>
+    <span class="miter-input__text">
+      <label data-test="label" v-if="!hideLabel" :for="label" class="miter-input__label">{{ label }}</label>
       <input
         :disabled="disabled"
         ref="inputbox"
         data-test="default"
         @keyup="handleKeyup"
         @keydown="handleKeydown"
-        @keypress="handleKeyPress"
+        @keypress="handleKeypress"
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
         @mousedown="handleMouseDown"
@@ -37,20 +32,22 @@
         :minlength="minLength"
         @invalid.capture="handleInvalid"
         @input="handleInput"
-        class="input"
+        class="miter-input__input"
         :class="classList"
         v-bind="attributes"
       />
-      <p v-if="subtitle" data-test="subtitle" class="subtitle">{{
-        subtitle
-      }}</p>
+      <p v-if="subtitle" data-test="subtitle" class="miter-input__subtitle">
+        {{
+          subtitle
+        }}
+      </p>
     </span>
-    <span v-if="!validityIcon" class="append" data-test="append"
-      ><slot name="append" />
+    <span v-if="!validityIcon" class="miter-input__append" data-test="append">
+      <slot name="append" />
     </span>
-    <span class="append" :class="classList" v-else>
+    <span class="miter-input__append" :class="classList" v-else>
       <i v-if="!invalid" class="pi-check-line"></i>
-      <i v-if="invalid" class="pi-error-warning-line invalid"></i>
+      <i v-if="invalid" class="pi-error-warning-line miter-input__append--invalid"></i>
     </span>
   </div>
 </template>
@@ -134,25 +131,25 @@ export default defineComponent({
     outerClassList(): any {
       const baseList = [this.$attrs.class]
       return this.disabled
-        ? ['disabled', ...baseList]
+        ? ['miter-input--disabled', ...baseList]
         : this.invalid
-        ? ['invalid', ...baseList]
-        : this.active
-        ? ['active', ...baseList]
-        : this.hovered
-        ? ['hovered', ...baseList]
-        : baseList
+          ? ['miter-input--invalid', ...baseList]
+          : this.active
+            ? ['miter-input--active', ...baseList]
+            : this.hovered
+              ? ['miter-input--hovered', ...baseList]
+              : baseList
     },
     classList(): any {
       return this.disabled
-        ? ['disabled']
+        ? ['miter-input__input--disabled']
         : this.invalid
-        ? ['invalid']
-        : this.active
-        ? ['active']
-        : this.hovered
-        ? ['hovered']
-        : []
+          ? ['miter-input__input--invalid']
+          : this.active
+            ? ['miter-input__input--active']
+            : this.hovered
+              ? ['miter-input__input--hovered']
+              : []
     },
     attributes() {
       const attrsCopy = { ...this.$attrs }
@@ -162,13 +159,10 @@ export default defineComponent({
     },
     internalValue(): string {
       return this.value || this.modelValue || ''
-    },
-    iconClass(): any {
-      return this.invalid ? ['invalid'] : ['valid']
     }
   },
   methods: {
-    handleKeydown(e: Event): void {
+    handleKeydown(e: KeyboardEvent): void {
       if (this.disabled) return
       this.$emit('keydown', e)
     },
@@ -198,7 +192,8 @@ export default defineComponent({
     handleMouseDown(): void {
       if (this.disabled) return
       setTimeout(() => {
-        ;(this.$refs.inputbox as any).focus()
+        const inputbox = this.$refs.inputbox as HTMLInputElement
+        inputbox.focus()
       }, 100)
     },
     handleFocus(): void {
