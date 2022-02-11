@@ -46,7 +46,7 @@ const copy = async (): Promise<void> => {
   }
 
   await navigator.clipboard.writeText(value)
-  showToast({ message: 'Copied!', type: 'success', timeout: 3000 })
+  showToast('Copied!', 'success')
 }
 </script>
 
