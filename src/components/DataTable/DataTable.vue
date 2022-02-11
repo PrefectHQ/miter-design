@@ -11,13 +11,22 @@
 
       <tr class="data-table__header-desktop">
         <template v-for="(column, columnIndex) in columns" :key="columnIndex">
-          <th class="data-table__table-header" :style="{ textAlign: column.align ?? 'start' }" @click="sortColumn(column)">
-              <slot name="column-header" :label="column.label" :column="column">
-                <slot :name="columnHeaderSlotName(column)" :label="column.label" :column="column">
-                  {{ column.label }}
-                </slot>
-              </slot>
-              <i class="data-table__table-header-sort-icon pi pi-1x" :class="getColumnSortIconClasses(column)" />
+          <th
+            class="data-table__table-header"
+            :style="{ textAlign: column.align ?? 'left' }"
+            @click="sortColumn(column)"
+          >
+            <slot name="column-header" :label="column.label" :column="column">
+              <slot
+                :name="columnHeaderSlotName(column)"
+                :label="column.label"
+                :column="column"
+              >{{ column.label }}</slot>
+            </slot>
+            <i
+              class="data-table__table-header-sort-icon pi pi-1x"
+              :class="getColumnSortIconClasses(column)"
+            />
           </th>
         </template>
       </tr>
@@ -38,11 +47,13 @@
       <template v-for="(row, rowIndex) in sorted" :key="rowIndex">
         <tr class="data-table__table-row">
           <template v-for="column in columns" :key="column.value">
-            <td :align="column.align ?? 'start'" class="data-table__table-cell">
+            <td :align="column.align ?? 'left'" class="data-table__table-cell">
               <slot name="column" :value="row[column.value]" :row="row">
-                <slot :name="columnSlotName(column)" :value="row[column.value]" :row="row">
-                  {{ row[column.value] }}
-                </slot>
+                <slot
+                  :name="columnSlotName(column)"
+                  :value="row[column.value]"
+                  :row="row"
+                >{{ row[column.value] }}</slot>
               </slot>
             </td>
           </template>
@@ -50,20 +61,18 @@
       </template>
     </tbody>
 
-    <template v-if="this.search.length > 0 && sorted.length === 0">
+    <template v-if="search.length > 0 && sorted.length === 0">
       <tbody class="data-table__table-body">
-          <tr>
-            <td :colspan="columns.length" align="center" class="data-table__no-search-results">
-              <div class="data-table__no-search-results-description">
-                <slot name="no-results">
-                  <p class="data-table__no-search-results-label">No results found</p>
-                </slot>
-              </div>
-              <Button @click="clearSearch" miter width="170px" height="36px">
-                Clear search
-              </Button>
-            </td>
-          </tr>
+        <tr>
+          <td :colspan="columns.length" align="center" class="data-table__no-search-results">
+            <div class="data-table__no-search-results-description">
+              <slot name="no-results">
+                <p class="data-table__no-search-results-label">No results found</p>
+              </slot>
+            </div>
+            <Button @click="clearSearch" miter width="170px" height="36px">Clear search</Button>
+          </td>
+        </tr>
       </tbody>
     </template>
   </table>
@@ -97,7 +106,7 @@ export default defineComponent({
     direction: {
       type: String as PropType<DataTableColumnSort>,
       required: false,
-      default: 'none' 
+      default: 'none'
     },
     sortBy: {
       type: String as PropType<string | null>,
@@ -111,7 +120,7 @@ export default defineComponent({
       internalDirection: DataTableColumnSort,
       internalSortBy: string | null,
       search: string
-    } =  {
+    } = {
       internalDirection: 'none',
       internalSortBy: null,
       search: ''
@@ -122,13 +131,13 @@ export default defineComponent({
   watch: {
     direction: {
       immediate: true,
-      handler: function(direction) {
+      handler: function (direction) {
         this.internalDirection = direction
       }
     },
     sortBy: {
       immediate: true,
-      handler: function(sortBy) {
+      handler: function (sortBy) {
         this.internalSortBy = sortBy
       }
     }
@@ -141,7 +150,7 @@ export default defineComponent({
       return this.columns.filter(column => column.search)
     },
     searched(): DataTableRow[] {
-      if(this.searchableColumns.length == 0) {
+      if (this.searchableColumns.length == 0) {
         return this.rows
       }
 
@@ -152,20 +161,20 @@ export default defineComponent({
         const onlySearchableRow = pick(row, searchable)
         const onlySearchableValues = Object.values(onlySearchableRow)
 
-        return onlySearchableValues.some(value => value.toString().toLowerCase().includes(term))
+        return onlySearchableValues.some(value => value?.toString().toLowerCase().includes(term))
       })
     },
     sorted(): DataTableRow[] {
       const rows = this.searched
 
-      if(this.internalSortBy === null || this.internalDirection === 'none') {
+      if (this.internalSortBy === null || this.internalDirection === 'none') {
         return rows
       }
 
       const sorter = this.internalSortByColumn.sort ?? this.getDefaultSorter(this.internalSortBy)
       const sorted = [...rows].sort(sorter)
 
-      if(this.internalDirection == 'desc') {
+      if (this.internalDirection == 'desc') {
         sorted.reverse()
       }
 
@@ -182,10 +191,16 @@ export default defineComponent({
       this.$emit('update:sortBy', column.value)
     },
     getDefaultSorter(sortBy: string) {
-      return (a: DataTableRow, b: DataTableRow) => a[sortBy].toString().localeCompare(b[sortBy].toString())
+      return (a: DataTableRow, b: DataTableRow) => {
+        if (typeof a[sortBy] == 'number' && typeof b[sortBy] == 'number') {
+          return a[sortBy] - b[sortBy]
+        } else {
+          return a[sortBy]?.toString().localeCompare(b[sortBy]?.toString())
+        }
+      }
     },
-    getColumnSortIconClasses(column: DataTableColumn)  {
-      if(column.value !== this.internalSortBy || this.internalDirection == 'none') {
+    getColumnSortIconClasses(column: DataTableColumn) {
+      if (column.value !== this.internalSortBy || this.internalDirection == 'none') {
         return 'pi-code-line data-table__table-header-sort-icon--rotate'
       }
 
@@ -195,8 +210,8 @@ export default defineComponent({
       const sameColumn = this.internalSortBy == column.value
       let direction: DataTableColumnSort = 'asc'
 
-      if(sameColumn) {
-        switch(this.internalDirection) {
+      if (sameColumn) {
+        switch (this.internalDirection) {
           case 'asc':
             direction = 'desc'
             break

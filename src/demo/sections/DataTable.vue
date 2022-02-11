@@ -1,36 +1,30 @@
 <template>
   <div>
-    <DataTable
-      v-model:direction="sortDir"
-      v-model:sort-by="sortBy"
-      :columns="columns"
-      :rows="rows"
-    >
+    <DataTable v-model:direction="sortDir" v-model:sort-by="sortBy" :columns="columns" :rows="rows">
       <!-- <template #header-sort="{ handleMobileSort }">
         <button @click="handleMobileSort(columns[0])">sort</button>
-      </template> -->
+      </template>-->
 
       <template #column-header-name="{ label }">
-        <Checkbox>{{ label }}</Checkbox>
+        <Checkbox @click.stop @mouseup.stop="toggleSelectAll">{{ label }}</Checkbox>
       </template>
 
-      <template #column-header-memberCount="{ label }">
-        {{ label }}
-      </template>
+      <template #column-header-memberCount="{ label }">{{ label }}</template>
 
-      <template #column-header-roles="{ label }">
-        {{ label }}
-      </template>
+      <template #column-header-roles="{ label }">{{ label }}</template>
 
       <template #column-name="{ value }">
-        <Checkbox>
-          {{ value }}
-        </Checkbox>
+        <Checkbox :value="selected.includes(value)">{{ value }}</Checkbox>
       </template>
 
       <template #column-member-count="{ value }">
-        <span><strong>Member Count:</strong> {{ value }}</span>
+        <span>
+          <strong>Member Count:</strong>
+          {{ value }}
+        </span>
       </template>
+
+      <template #column-created="{ value }">{{ value?.toISOString().split('T')[0] }}</template>
 
       <template #column-roles>
         <Select
@@ -58,37 +52,56 @@ export default defineComponent({
   components: { DataTable, Checkbox },
   data() {
     const data: {
+      selected: any[],
       sortBy: string
       sortDir: DataTableColumnSort
       columns: DataTableColumn
       rows: DataTableRow
     } = {
+      selected: [],
       sortBy: 'memberCount',
       sortDir: 'desc',
       columns: [
         {
           label: 'Name',
-          value: 'name'
+          value: 'name',
+          search: true
         },
         {
           label: 'Member Count',
-          value: 'memberCount'
+          value: 'memberCount',
+          search: true
+        },
+        {
+          label: 'Created',
+          value: 'created',
+          search: true
         },
         {
           label: 'Roles',
-          value: 'roles'
-        }
+          value: 'roles',
+          search: true
+        },
       ],
       rows: [
-        { name: 'Staging Team', memberCount: 57, roles: 'Admin' },
-        { name: 'Data Science', memberCount: 405, roles: 'Admin' },
-        { name: 'Dev Ops', memberCount: 22, roles: 'Admin' },
-        { name: 'Production Team', memberCount: 35, roles: 'Admin' },
-        { name: 'Winter Interns', memberCount: 90, roles: 'Admin' }
+        { name: 'Staging Team', memberCount: 57, roles: 'Admin', created: new Date() },
+        { name: 'Data Science', memberCount: 405, roles: 'Admin', created: new Date() },
+        { name: 'Dev Ops', memberCount: 22, roles: 'Admin', created: new Date() },
+        { name: 'Production Team', memberCount: 35, roles: 'Admin', created: new Date() },
+        { name: 'Winter Interns', memberCount: 90, roles: 'Admin', created: undefined }
       ]
     }
 
     return data
+  },
+  methods: {
+    toggleSelectAll(e: any) {
+      if (this.selected.length == this.rows.length) {
+        this.selected.length = 0
+      } else {
+        this.selected = this.rows.map((row: DataTableRow) => row.name)
+      }
+    }
   }
 })
 </script>
