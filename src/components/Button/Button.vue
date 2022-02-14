@@ -28,6 +28,7 @@ class Props {
   miter = prop<boolean>({ default: false, type: Boolean })
   color = prop<string>({ default: 'secondary' })
   flat = prop<boolean>({ default: false, type: Boolean })
+  rounded = prop<boolean>({ default: false, type: Boolean })
   disabled = prop<boolean>({ default: false, type: Boolean })
   height = prop<string>({ default: '' })
   width = prop<string>({ default: '' })

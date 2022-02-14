@@ -106,4 +106,8 @@ export default class MIconButton extends Vue.with(Props) {
 
 <style lang="scss" scoped>
 @use '../../styles/components/button';
+
+.rounded:first-child {
+  border-radius: 100%;
+}
 </style>
