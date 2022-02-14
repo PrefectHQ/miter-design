@@ -11,7 +11,7 @@ describe('Slots', () => {
 
     const icon = wrapper.get('[data-test="prepend"]')
     expect(icon.html()).toBe(
-      `<span class="prepend" data-test="prepend"><i class="pi pi-Search pi-2x"></i></span>`
+      `<span class="miter-input__prepend" data-test="prepend"><i class="pi pi-Search pi-2x"></i></span>`
     )
   })
 
@@ -126,14 +126,14 @@ describe('active state', () => {
 
   test('focus adds the active class', async () => {
     await input.trigger('focus')
-    expect(input.classes()).toContain('active')
+    expect(input.classes()).toContain('miter-input__input--active')
   })
 
   test('blur removes the active class', async () => {
     await input.trigger('focus')
-    expect(input.classes()).toContain('active')
+    expect(input.classes()).toContain('miter-input__input--active')
     await input.trigger('blur')
-    expect(input.classes()).not.toContain('active')
+    expect(input.classes()).not.toContain('miter-input__input--active')
   })
 })
 
@@ -146,7 +146,7 @@ describe('disabled state', () => {
       }
     })
     const inputElement = wrapper.get('input')
-    expect(inputElement.classes()).toContain('disabled')
+    expect(inputElement.classes()).toContain('miter-input__input--disabled')
   })
 
   test('adds the disabled attribute when disabled:true is passed as a prop', () => {
@@ -170,7 +170,7 @@ describe('error state', () => {
       }
     })
     const inputElement = wrapper.get('input')
-    expect(inputElement.classes()).toContain('invalid')
+    expect(inputElement.classes()).toContain('miter-input__input--invalid')
   })
 
   test('emits invalid', async () => {
@@ -182,7 +182,7 @@ describe('error state', () => {
     })
     const input = wrapper.get('input')
     await input.setValue('')
-    expect(input.classes()).toContain('invalid')
+    expect(input.classes()).toContain('miter-input__input--invalid')
     expect(wrapper.emitted('invalid')[0][0]).toBeTruthy()
   })
 })

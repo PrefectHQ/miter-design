@@ -1,66 +1,68 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.flexInput {
+.miter-input {
   *,
   *:before,
   *:after {
     box-sizing: border-box;
   }
-  display: flex;
   align-items: flex-end;
-  padding-bottom: 7px;
   border-bottom: 1px solid variables.$secondary-hover;
-  padding-left: 8px;
-  padding-right: 8px;
+  display: flex;
   height: 53px;
-  &.active {
+  padding-bottom: 7px;
+
+  &--active {
     border-bottom: 1px solid variables.$primary;
   }
 
-  &.disabled {
+  &--disabled {
     border-bottom: 1px solid variables.$secondary-hover;
+
     *,
     *:before,
     *:after {
-      opacity: 60%;
       cursor: not-allowed;
+      opacity: 60%;
     }
   }
 
-  &.invalid {
+  &--invalid {
     border-bottom: 1px solid variables.$error;
   }
 
-  &.hovered {
+  &--hovered {
     background-color: variables.$background;
   }
 }
 
-.prepend {
+.miter-input__prepend {
   *,
   *:before,
   *:after {
     align-items: center;
   }
+
   align-items: inherit;
   display: flex;
-  justify-items: flex-end;
-  margin-right: 10px;
   height: 40px;
+  justify-items: flex-end;
+  margin-right: 0;
 }
 
-.append {
+.miter-input__append {
   align-items: center;
   display: flex;
-  justify-items: flex-end;
   height: 40px;
+  justify-items: flex-end;
   margin-left: auto;
-  &.active {
+
+  &--active {
     color: variables.$primary;
   }
 
-  &.invalid {
+  &--invalid {
     *,
     *:before,
     *:after {
@@ -69,12 +71,12 @@
   }
 }
 
-.input-text {
+.miter-input__text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   font-size: 15px;
   height: 40px;
+  justify-content: center;
   width: 100%;
 
   input {
@@ -82,35 +84,38 @@
   }
 }
 
-.input-label {
+.miter-input__label {
   font-size: 11px;
-  line-height: 14px;
-  padding-left: 2px;
-  margin-bottom: 4px;
   justify-content: center;
+  line-height: 14px;
+  margin-bottom: 4px;
   opacity: 80%;
+  padding-left: 2px;
 }
 
-.input {
+.miter-input__input {
   border: 0;
   line-height: 20px;
+
   &:focus {
     border-color: transparent;
     outline-style: none;
   }
-  &.hovered {
+
+  &--hovered {
     background-color: variables.$background;
   }
-  &.disabled {
+
+  &--disabled {
     background-color: transparent;
   }
 }
 
-.subtitle {
+.miter-input__subtitle {
   font-size: 11px;
   line-height: 14px;
-  opacity: 60%;
-  margin-top: 0;
   margin-bottom: 0;
+  margin-top: 0;
+  opacity: 60%;
   padding-left: 2px;
 }
