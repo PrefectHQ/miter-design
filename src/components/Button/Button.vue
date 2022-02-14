@@ -14,7 +14,7 @@
     @blur="handleBlur"
   >
     <span data-test="default" :style="{ height: height, width: width }">
-      <i v-if="icon" class="pi" :class="icon"></i>
+      <i v-if="icon" class="pi pi-xs" :class="icon"></i>
       <slot />
     </span>
   </button>
