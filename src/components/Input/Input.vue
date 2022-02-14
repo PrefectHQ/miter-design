@@ -130,26 +130,22 @@ export default defineComponent({
   computed: {
     outerClassList(): any {
       const baseList = [this.$attrs.class]
-      return this.disabled
-        ? ['miter-input--disabled', ...baseList]
-        : this.invalid
-          ? ['miter-input--invalid', ...baseList]
-          : this.active
-            ? ['miter-input--active', ...baseList]
-            : this.hovered
-              ? ['miter-input--hovered', ...baseList]
-              : baseList
+      const baseClass = 'miter-input'
+      return [{
+        [`${baseClass}--disabled`]: this.disabled,
+        [`${baseClass}--invalid`]: this.invalid,
+        [`${baseClass}--active`]: this.active,
+        [`${baseClass}--hovered`]: this.hovered,
+      }, ...baseList]
     },
     classList(): any {
-      return this.disabled
-        ? ['miter-input__input--disabled']
-        : this.invalid
-          ? ['miter-input__input--invalid']
-          : this.active
-            ? ['miter-input__input--active']
-            : this.hovered
-              ? ['miter-input__input--hovered']
-              : []
+      const baseClass = 'miter-input__input'
+      return {
+        [`${baseClass}--disabled`]: this.disabled,
+        [`${baseClass}--invalid`]: this.invalid,
+        [`${baseClass}--active`]: this.active,
+        [`${baseClass}--hovered`]: this.hovered,
+      }
     },
     attributes() {
       const attrsCopy = { ...this.$attrs }
