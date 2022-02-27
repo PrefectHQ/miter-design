@@ -8,7 +8,7 @@
     class="miter-input"
     :style="$attrs.style"
   >
-    <span class="miter-input__prepend" data-test="prepend">
+    <span v-if="$slots.prepend" class="miter-input__prepend" data-test="prepend">
       <slot name="prepend" />
     </span>
     <span class="miter-input__text">

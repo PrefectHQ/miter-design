@@ -7,6 +7,7 @@
   *:after {
     box-sizing: border-box;
   }
+
   align-items: flex-end;
   border-bottom: 1px solid variables.$secondary-hover;
   display: flex;
@@ -44,11 +45,11 @@
     align-items: center;
   }
 
-  align-items: inherit;
+  align-items: center;
   display: flex;
   height: 40px;
   justify-items: flex-end;
-  margin-right: 0;
+  margin-right: 8px;
 }
 
 .miter-input__append {
