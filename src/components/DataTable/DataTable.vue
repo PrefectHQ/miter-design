@@ -286,10 +286,6 @@ export default defineComponent({
   padding: 0 var(--m-1);
 }
 
-.data-table__search-icon {
-  margin-top: 5px;
-}
-
 .data-table__table-row:hover {
   background: #{variables.$blue-5};
 }

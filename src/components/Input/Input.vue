@@ -8,7 +8,7 @@
     class="miter-input"
     :style="$attrs.style"
   >
-    <span class="miter-input__prepend" data-test="prepend">
+    <span v-if="$slots.prepend" class="miter-input__prepend" data-test="prepend">
       <slot name="prepend" />
     </span>
     <span class="miter-input__text">
@@ -42,7 +42,7 @@
         }}
       </p>
     </span>
-    <span v-if="!validityIcon" class="miter-input__append" data-test="append">
+    <span v-if="!validityIcon && $slots.append" class="miter-input__append" data-test="append">
       <slot name="append" />
     </span>
     <span class="miter-input__append" :class="classList" v-else>
