@@ -1,5 +1,5 @@
 import { Component, createApp, Plugin, reactive } from 'vue'
-import ToastContainer from '@/components/Panels/PanelContainer.vue'
+import PanelContainer from '@/components/Panels/PanelContainer.vue'
 
 // any because its a generic constructor
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,6 +31,6 @@ export const PanelPlugin: Plugin = {
   install: () => {
     const element = createMountElement()
 
-    createApp(ToastContainer).mount(element)
+    createApp(PanelContainer).mount(element)
   },
 }

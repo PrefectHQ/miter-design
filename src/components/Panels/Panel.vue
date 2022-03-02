@@ -68,7 +68,6 @@
   --padding: var(--p-2);
 
   position: fixed;
-  z-index: 20;
   top: 0;
   right: 0;
 
