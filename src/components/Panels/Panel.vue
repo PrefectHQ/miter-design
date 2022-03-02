@@ -63,7 +63,7 @@
   const scope = { close, exit, showBack }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .panel {
   --padding: var(--p-2);
 
@@ -122,7 +122,7 @@
   }
 }
 
-.panel-hr {
+:slotted(.panel-hr) {
   border: 0;
   border-top: 1px solid var(--secondary-hover);
   margin: var(--padding) calc(var(--padding) * -1);
