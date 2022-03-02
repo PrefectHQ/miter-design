@@ -27,6 +27,7 @@
     <Toasts class="mt-10" />
     <Tooltip class="mt-10" />
     <DataTable class="mt-10" />
+    <PanelsSection class="mt-10" />
   </div>
 </template>
 
@@ -57,6 +58,7 @@ import Toasts from '../sections/Toasts.vue'
 import Tooltip from '../sections/Tooltip.vue'
 import Loader from '../sections/Loader.vue'
 import DataTable from '../sections/DataTable.vue'
+import PanelsSection from '../sections/PanelsSection.vue'
 
 @Options({
   components: {
@@ -84,7 +86,8 @@ import DataTable from '../sections/DataTable.vue'
     Toasts,
     Tooltip,
     Loader,
-    DataTable
+    DataTable,
+    PanelsSection
   }
 })
 export default class App extends Vue { }
