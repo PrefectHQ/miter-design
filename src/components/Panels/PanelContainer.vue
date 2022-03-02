@@ -1,18 +1,16 @@
 <template>
-  <teleport to="body">
-    <div class="panel-container" :class="classes.root">
-      <transition-group name="panel-slide-transition" appear>
-        <template v-for="(panel, index) in queue" :key="index">
-          <component :is="panel.component" v-bind="panel.props" @close="close" @exit="exit" />
-        </template>
-      </transition-group>
-    </div>
-  </teleport>
+  <div class="panel-container" :class="classes.root">
+    <transition-group name="panel-slide-transition" appear>
+      <template v-for="(panel, index) in queue" :key="index">
+        <component :is="panel.component" v-bind="panel.props" @close="close" @exit="exit" />
+      </template>
+    </transition-group>
+  </div>
 </template>
 
 <script lang="ts" setup>
   import { computed, watchEffect } from 'vue'
-  import { queue } from '@/plugins/panel'
+  import { queue } from '@/plugins/Panel'
 
   const visible = computed(() => queue.length > 0)
 

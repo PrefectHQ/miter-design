@@ -1,4 +1,4 @@
-import { Component, createApp, Plugin, reactive } from 'vue'
+import { App, Component, createApp, createVNode, markRaw, Plugin, reactive, render } from 'vue'
 import PanelContainer from '@/components/Panels/PanelContainer.vue'
 
 // any because its a generic constructor
@@ -14,7 +14,7 @@ export const queue: PanelQueueItem[] = reactive([])
 
 export function showPanel<T extends InstanceOfComponent>(component: T, props: InstanceType<T>['$props']): void {
   queue.push({
-    component,
+    component: markRaw(component),
     props,
   })
 }
@@ -28,9 +28,11 @@ function createMountElement(): Element {
 }
 
 export const PanelPlugin: Plugin = {
-  install: () => {
+  install: (app: App) => {
     const element = createMountElement()
+    const vNode = createVNode(PanelContainer)
+    vNode.appContext = app._context
 
-    createApp(PanelContainer).mount(element)
+    render(vNode, element)
   },
 }
