@@ -23,6 +23,7 @@ import Toggle from './components/Toggle'
 import Tooltip from './components/Tooltip'
 import TimePicker from './components/TimePicker'
 import DataTable from './components/DataTable'
+import Panel from './components/Panels'
 
 /* Directives */
 import SkeletonDirective from './directives/Skeleton/Skeleton'
@@ -30,6 +31,7 @@ import TooltipDirective from './directives/Tooltip/Tooltip'
 
 /* Plugins */
 import ToastPlugin from './plugins/Toast'
+import { PanelPlugin } from './plugins/Panel'
 
 import './styles/main.scss'
 import { App } from 'vue'
@@ -58,7 +60,8 @@ const components = {
   Toggle,
   Tooltip,
   TimePicker,
-  DataTable
+  DataTable,
+  Panel
 }
 
 const directives = {
@@ -67,7 +70,8 @@ const directives = {
 }
 
 const plugins = {
-  toast: ToastPlugin
+  toast: ToastPlugin,
+  panel: PanelPlugin
 }
 
 function install(app: App) {
@@ -96,6 +100,7 @@ function install(app: App) {
 export default { install }
 
 export { showToast } from './plugins/Toast'
+export { showPanel } from './plugins/Panel'
 
 export { default as Avatar } from './components/Avatar'
 export { default as Button } from './components/Button'
