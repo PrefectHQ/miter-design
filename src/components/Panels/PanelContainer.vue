@@ -1,0 +1,79 @@
+<template>
+  <teleport to="body">
+    <div class="panel-container" :class="classes.root">
+      <transition-group name="panel-slide-transition" appear>
+        <template v-for="(panel, index) in queue" :key="index">
+          <component :is="panel.component" v-bind="panel.props" @close="close" @exit="exit" />
+        </template>
+      </transition-group>
+    </div>
+  </teleport>
+</template>
+
+<script lang="ts" setup>
+  import { computed } from 'vue'
+  import { queue } from '@/plugins/panel'
+
+  const visible = computed(() => queue.length > 0)
+
+  const classes = computed(() => ({
+    root: {
+      'panel-container--visible': visible.value,
+    },
+  }))
+
+  function close(): void {
+    queue.pop()
+  }
+
+  function exit(): void {
+    queue.splice(0)
+  }
+</script>
+
+<style lang="scss" scoped>
+.panel-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--layer-panels, 100);
+  pointer-events: none;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0);
+    transition: background-color 0.5s ease;
+  }
+}
+
+.panel-container--visible {
+  pointer-events: all;
+
+  &:before {
+    background-color: rgba(0,0,0,0.1);
+  }
+}
+
+.panel-slide-transition-leave-active,
+.panel-slide-transition-enter-active {
+  transition: transform 0.5s;
+}
+.panel-slide-transition-enter-from {
+  transform: translate(100%, 0);
+}
+
+.panel-slide-transition-enter-to,
+.panel-slide-transition-leave-from {
+  transform: translate(0, 0);
+}
+.panel-slide-transition-leave-to {
+  transform: translate(100%, 0);
+}
+</style>
