@@ -2,7 +2,7 @@
   <div class="panel-container" :class="classes.root">
     <transition-group name="panel-slide-transition" appear>
       <template v-for="(panel, index) in queue" :key="index">
-        <component :is="panel.component" v-bind="panel.props" @close="close" @exit="exit" />
+        <component :is="panel.component" v-bind="panel.props" :showBack="index !== 0" @close="close" @exit="exit" />
       </template>
     </transition-group>
   </div>

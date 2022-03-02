@@ -47,20 +47,20 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, useSlots } from 'vue'
-  import { queue } from '@/plugins/Panel'
+  import { useSlots } from 'vue'
+
+  defineProps<{
+    showBack?: boolean
+  }>()
 
   const emit = defineEmits<{
     (event: 'close' | 'exit'): void,
   }>()
 
   const slots = useSlots()
-
-  const showBack = computed(() => queue.length > 1)
-
   const close = (): void => emit('close')
   const exit = (): void => emit('exit')
-  const scope = { close, exit, showBack }
+  const scope = { close, exit }
 </script>
 
 <style lang="scss" scoped>
