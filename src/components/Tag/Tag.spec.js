@@ -116,6 +116,26 @@ describe('flat prop', () => {
   })
 })
 
+describe('miter prop', () => {
+  test('adds the miter class when miter is passed as a prop', () => {
+    const wrapper = mount(Tag, {
+      props: {
+        miter: true
+      }
+    })
+
+    expect(wrapper.classes()).toContain('miter')
+  })
+
+  test("doesn't pass the miter class when miter is not passed as a prop", () => {
+    const wrapper = mount(Tag, {
+      props: {}
+    })
+
+    expect(wrapper.classes()).not.toContain('miter')
+  })
+})
+
 describe('icon prop', () => {
   test('displays an icon when one is passed', () => {
     const wrapper = mount(Tag, {
