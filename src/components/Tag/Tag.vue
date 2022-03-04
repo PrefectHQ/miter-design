@@ -40,6 +40,10 @@ export default defineComponent({
     color: {
       type: String,
       default: ''
+    },
+    miter:{
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -50,6 +54,7 @@ export default defineComponent({
         ...(this.hovered ? ['hovered'] : []),
         ...(this.elevated ? ['elevated'] : []),
         ...(this.flat ? ['flat'] : []),
+         ...(this.miter ? ['miter'] : []),
         this.color
       ]
     }

@@ -53,3 +53,9 @@ Flat.args = {
   icon: 'pi-label',
   flat: true
 }
+
+export const NoMiter = Template.bind({})
+Miter.args = {
+  content: 'Tag',
+  miter: false
+}
