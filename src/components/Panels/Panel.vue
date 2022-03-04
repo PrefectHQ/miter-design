@@ -65,7 +65,7 @@
 
 <style lang="scss" scoped>
 .panel {
-  --padding: var(--p-2);
+  --panel-padding: var(--p-2);
 
   position: fixed;
   top: 0;
@@ -86,11 +86,8 @@
   align-items: center;
   font-size: 20px;
   color:  var(--grey-80);
-  padding: var(--padding);
-}
-
-.panel__title {
-  margin-left: auto;
+  padding: var(--panel-padding);
+  gap: var(--m-1);
 }
 
 .panel__close {
@@ -102,28 +99,28 @@
   color:  var(--grey-80);
   border-top: 1px solid var(--secondary-hover);
   border-bottom: 1px solid var(--secondary-hover);
-  padding: var(--padding);
+  padding: var(--panel-padding);
   flex-grow: 1;
   overflow-x: scroll;
 }
 
 .panel__footer,
 .panel__actions {
-  padding: var(--padding);
+  padding: var(--panel-padding);
 }
 
 .panel__actions {
   display: flex;
   gap: var(--m-1);
+}
 
-  > * {
-    flex-grow: 1;
-  }
+:slotted(.panel__actions > *) {
+  flex-grow: 1;
 }
 
 :slotted(.panel-hr) {
   border: 0;
   border-top: 1px solid var(--secondary-hover);
-  margin: var(--padding) calc(var(--padding) * -1);
+  margin: var(--panel-padding) calc(var(--panel-padding) * -1);
 }
 </style>
