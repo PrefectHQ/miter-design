@@ -57,7 +57,7 @@
 <div class="short-">
     
     <Tag
-      v-for="(style, i) in recTagStyles"
+      v-for="(style, i) in rectangleTagStyles"
       :key="i"
       class="mr-2 mt-2 short-tag"
       :color="style.color"
@@ -88,7 +88,7 @@ export default class Tag extends Vue {
       }
     }
   ]
-  recTagStyles = [{text: 'Rec', color: 'primary', disabled: false}, {text: 'Disabled', color: 'primary', disabled: true}, {text: 'Green', color: 'success', disabled: false}]
+  rectangleTagStyles = [{text: 'Rectangle', color: 'primary', disabled: false}, {text: 'Disabled', color: 'primary', disabled: true}, {text: 'Green', color: 'success', disabled: false}]
   disabled = false
   outlined = false
   elevated = false
