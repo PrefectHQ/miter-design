@@ -63,6 +63,10 @@
     vertical-align: middle;
     color: variables.$text--white;
 
+    .tag {
+      height: 100%;
+    }
+
     &.elevated {
       @include mixins.drop-shadow;
     }

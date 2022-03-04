@@ -53,6 +53,20 @@
     >
       {{ style.text }}
     </Tag>
+    <h4 class="mt-4">Rectangle</h4>
+<div class="short-">
+    
+    <Tag
+      v-for="(style, i) in recTagStyles"
+      :key="i"
+      class="mr-2 mt-2 short-tag"
+      :color="style.color"
+      :disabled="style.disabled"
+      :miter="false"
+    >
+      {{ style.text }}
+    </Tag>
+    </div>
   </div>
 </template>
 
@@ -74,6 +88,7 @@ export default class Tag extends Vue {
       }
     }
   ]
+  recTagStyles = [{text: 'Rec', color: 'primary', disabled: false}, {text: 'Disabled', color: 'primary', disabled: true}, {text: 'Green', color: 'success', disabled: false}]
   disabled = false
   outlined = false
   elevated = false
@@ -84,4 +99,8 @@ export default class Tag extends Vue {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.short-tag {
+  height: 20px;
+}
+  </style>
