@@ -1,4 +1,4 @@
-import { App, Component, createApp, createVNode, markRaw, Plugin, reactive, render } from 'vue'
+import { App, Component, createVNode, InjectionKey, markRaw, Plugin, reactive, render } from 'vue'
 import PanelContainer from '@/components/Panels/PanelContainer.vue'
 
 // any because its a generic constructor
@@ -18,6 +18,8 @@ export function showPanel<T extends InstanceOfComponent>(component: T, props: In
     props,
   })
 }
+
+export const showPanelKey: InjectionKey<typeof showPanel> = Symbol()
 
 function createMountElement(): Element {
   const element = document.createElement('div')
