@@ -100,7 +100,7 @@ function install(app: App) {
 export default { install }
 
 export { showToast } from './plugins/Toast'
-export { showPanel } from './plugins/Panel'
+export { showPanel, showPanelKey } from './plugins/Panel'
 
 export { default as Avatar } from './components/Avatar'
 export { default as Button } from './components/Button'
