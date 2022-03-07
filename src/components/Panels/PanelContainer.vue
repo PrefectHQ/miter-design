@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
   import { computed, watchEffect } from 'vue'
-  import { queue } from '@/plugins/Panel'
+  import { queue, close, exit } from '@/plugins/Panel'
 
   const visible = computed(() => queue.length > 0)
 
@@ -19,14 +19,6 @@
       'panel-container--visible': visible.value,
     },
   }))
-
-  function close(): void {
-    queue.pop()
-  }
-
-  function exit(): void {
-    queue.splice(0)
-  }
 
   watchEffect(() => {
     document.body.classList.toggle('body--panels-visible', visible.value)
