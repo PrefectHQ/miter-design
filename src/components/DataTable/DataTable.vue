@@ -200,6 +200,7 @@ export default defineComponent({
       }
     },
     getColumnSortIconClasses(column: DataTableColumn) {
+      if (column.sortable === false) return
       if (column.value !== this.internalSortBy || this.internalDirection == 'none') {
         return 'pi-code-line data-table__table-header-sort-icon--rotate'
       }
@@ -207,6 +208,7 @@ export default defineComponent({
       return this.internalDirection == 'asc' ? 'pi-arrow-up-line' : 'pi-arrow-down-line'
     },
     sortColumn(column: DataTableColumn): void {
+      if (column.sortable === false) return
       const sameColumn = this.internalSortBy == column.value
       let direction: DataTableColumnSort = 'asc'
 

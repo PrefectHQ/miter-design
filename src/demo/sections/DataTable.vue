@@ -80,7 +80,8 @@ export default defineComponent({
         {
           label: 'Roles',
           value: 'roles',
-          search: true
+          search: true,
+          sortable: false
         },
       ],
       rows: [
