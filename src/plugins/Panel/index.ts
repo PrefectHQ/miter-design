@@ -10,18 +10,18 @@ type PanelQueueItem = {
   props: Record<string, unknown>,
 }
 
-export const queue: PanelQueueItem[] = reactive([])
+export const panelQueue: PanelQueueItem[] = reactive([])
 
-export function close(): void {
-  queue.pop()
+export function closePanel(): void {
+  panelQueue.pop()
 }
 
-export function exit(): void {
-  queue.splice(0)
+export function exitPanel(): void {
+  panelQueue.splice(0)
 }
 
 export function showPanel<T extends InstanceOfComponent>(component: T, props: InstanceType<T>['$props']): void {
-  queue.push({
+  panelQueue.push({
     component: markRaw(component),
     props,
   })
