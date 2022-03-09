@@ -19,6 +19,10 @@ import { queue } from '@/plugins/Toast'
   display: flex;
   align-items: end;
   flex-direction: column-reverse;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: var(--layer-toasts, 500);
 }
 
 .toast-container__toast {

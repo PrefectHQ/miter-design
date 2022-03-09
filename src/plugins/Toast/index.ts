@@ -22,9 +22,6 @@ type ToastPluginOptions = {
 function createDefaultMountElement():Element {
   const element = document.createElement('div')
   element.id = 'miter-toast-app'
-  element.style.position = 'fixed'
-  element.style.bottom = '0'
-  element.style.right = '0'
   document.body.appendChild(element)
 
   return element
