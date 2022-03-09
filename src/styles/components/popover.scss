@@ -6,7 +6,7 @@
   
   position: absolute;
   padding: 10px;
-  z-index: var(--popover-z-index, 2);
+  z-index: var(--layer-popovers, 2);
 }
 
 .popover-content__body {

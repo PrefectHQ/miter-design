@@ -301,7 +301,7 @@ export default class MSelect extends Vue.with(Props) {
 
 .select__content {
   position: absolute;
-  z-index: 10;
+  z-index: var(--layer-selects, 300);
   box-shadow: #{variables.$box-shadow-md};
 }
 
