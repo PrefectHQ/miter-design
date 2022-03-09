@@ -13,7 +13,7 @@
         <template v-for="(column, columnIndex) in columns" :key="columnIndex">
           <th
             class="data-table__table-header"
-            :style="{ textAlign: column.align ?? 'left', cursor: column.sortable || column.sortable == undefined ? 'pointer' : '' }"
+            :style="{ textAlign: column.align ?? 'left', cursor: column.sortable ? 'pointer' : '' }"
             @click="sortColumn(column)"
           >
             <slot name="column-header" :label="column.label" :column="column">
