@@ -13,7 +13,7 @@
         <template v-for="(column, columnIndex) in columns" :key="columnIndex">
           <th
             class="data-table__table-header"
-            :style="{ textAlign: column.align ?? 'left' }"
+            :style="{ textAlign: column.align ?? 'left', cursor: column.sortable ? 'pointer' : '' }"
             @click="sortColumn(column)"
           >
             <slot name="column-header" :label="column.label" :column="column">
@@ -200,6 +200,7 @@ export default defineComponent({
       }
     },
     getColumnSortIconClasses(column: DataTableColumn) {
+      if (column.sortable === false) return
       if (column.value !== this.internalSortBy || this.internalDirection == 'none') {
         return 'pi-code-line data-table__table-header-sort-icon--rotate'
       }
@@ -207,6 +208,7 @@ export default defineComponent({
       return this.internalDirection == 'asc' ? 'pi-arrow-up-line' : 'pi-arrow-down-line'
     },
     sortColumn(column: DataTableColumn): void {
+      if (column.sortable === false) return
       const sameColumn = this.internalSortBy == column.value
       let direction: DataTableColumnSort = 'asc'
 
@@ -264,7 +266,6 @@ export default defineComponent({
 
 .data-table__table-header {
   padding: 16px;
-  cursor: pointer;
   border-bottom: 1px solid #{variables.$secondary-hover};
   user-select: none;
 }
