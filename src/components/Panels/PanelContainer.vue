@@ -1,8 +1,8 @@
 <template>
   <div class="panel-container" :class="classes.root">
     <transition-group name="panel-slide-transition" appear>
-      <template v-for="(panel, index) in queue" :key="index">
-        <component :is="panel.component" v-bind="panel.props" :showBack="index !== 0" @close="close" @exit="exit" />
+      <template v-for="(panel, index) in panelQueue" :key="index">
+        <component :is="panel.component" v-bind="panel.props" :showBack="index !== 0" @close="closePanel" @exit="exitPanel" />
       </template>
     </transition-group>
   </div>
@@ -10,9 +10,9 @@
 
 <script lang="ts" setup>
   import { computed, watchEffect } from 'vue'
-  import { queue, close, exit } from '@/plugins/Panel'
+  import { panelQueue, closePanel, exitPanel } from '@/plugins/Panel'
 
-  const visible = computed(() => queue.length > 0)
+  const visible = computed(() => panelQueue.length > 0)
 
   const classes = computed(() => ({
     root: {
