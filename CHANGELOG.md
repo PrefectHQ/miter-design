@@ -1,3 +1,4 @@
+- Fix text area install - [#215](https://github.com/PrefectHQ/miter-design/pull/215)
 - Fix some small spacing issues with inputs and datatable search [#189](https://github.com/PrefectHQ/miter-design/pull/189)
 - Update inputs styles to match nebula [#58](https://github.com/PrefectHQ/nebula-ui/issues/58)
 - Add input inputs autocomplete, id and name [#174](input-inputs)
