@@ -55,7 +55,7 @@ Flat.args = {
 }
 
 export const NoMiter = Template.bind({})
-Miter.args = {
+NoMiter.args = {
   content: 'Tag',
   miter: false
 }
