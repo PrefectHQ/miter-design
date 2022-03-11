@@ -11,10 +11,8 @@
   line-height: 20px;
 
   > input {
-    margin-left: 6px;
-    position: absolute;
-    height: 0;
-    width: 0;
+    appearance: none; 
+    -webkit-appearance: none;
   }
   .box {
     background-color: variables.$white;
