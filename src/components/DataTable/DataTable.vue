@@ -144,7 +144,8 @@ export default defineComponent({
   },
   computed: {
     internalSortByColumn(): DataTableColumn {
-      return this.columns.find(column => column.value == this.internalSortBy)!
+      if (this.internalSortBy) return this.columns.find(column => column.value == this.internalSortBy)!
+      return this.columns.find(column => column.sortable !== false)!
     },
     searchableColumns(): DataTableColumn[] {
       return this.columns.filter(column => column.search)
