@@ -1,4 +1,5 @@
 - Replace '--' with 'No Tags' when no tags provided [monday:2466940267](https://prefect-squad.monday.com/boards/2335616877/pulses/2466940267)
+- Add focus on DatePicker component mounted
 - Fix datatable sorting bug when on mobile view [#219](https://github.com/PrefectHQ/miter-design/pull/219)
 - Fix some small spacing issues with inputs and datatable search [#189](https://github.com/PrefectHQ/miter-design/pull/189)
 - Update inputs styles to match nebula [#58](https://github.com/PrefectHQ/nebula-ui/issues/58)

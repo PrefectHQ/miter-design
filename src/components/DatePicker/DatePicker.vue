@@ -310,6 +310,10 @@ export default class MDatePicker extends Vue.with(Props) {
     this.setMonthDirection(month, year)
     this.innerValue = new Date(year, month, date)
   }
+
+  mounted() {
+    this.focusElement()
+  }
 }
 </script>
 
