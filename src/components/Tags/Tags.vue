@@ -55,7 +55,7 @@ export default defineComponent({
     },
     internalTags(): string {
       if(this.tags.length === 0) {
-        return '--'
+        return 'No Tags'
       }
       return this.visibleTags
     }
