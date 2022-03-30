@@ -15,10 +15,10 @@ describe('icon prop', () => {
 })
 
 describe('tags prop', () => {
-    test('check if computed property return "--" when no props passed', () => {
+    test('check if computed property return "No Tags" when no props passed', () => {
         const wrapper = mount(Tags)
 
-        expect(wrapper.vm.internalTags).toStrictEqual("--")
+        expect(wrapper.vm.internalTags).toStrictEqual("No Tags")
     })
 
     test('check if internalTags computed property returns values passed through props under the limit', async () => {
