@@ -64,11 +64,11 @@
     }
 
     &.hovered > :first-child {
-      background: variables.$secondary-hover;
-      border-color: variables.$secondary-pressed;
+      opacity: 0.5;
     }
 
     &.active > :first-child {
+      opacity: 1;
       background: variables.$secondary-pressed;
       border-color: variables.$secondary-pressed;
     }
