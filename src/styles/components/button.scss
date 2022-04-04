@@ -64,8 +64,7 @@
     }
 
     &.hovered > :first-child {
-      background: variables.$secondary-hover;
-      border-color: variables.$secondary-pressed;
+      color:variables.$secondary-hover;
     }
 
     &.active > :first-child {
