@@ -8,6 +8,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/Icons.vue') // We don't implement route level code splitting for the components route because we don't want this to load asyncronously
   },
   {
+    path: '/views',
+    name: 'views',
+    component: () => import('../views/Views.vue') // We don't implement route level code splitting for the components route because we don't want this to load asyncronously
+  },
+  {
     path: '/',
     name: 'components',
     component: Components

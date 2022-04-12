@@ -9,17 +9,18 @@
   }
 
   align-items: flex-end;
-  border-bottom: 1px solid variables.$secondary-hover;
+  border: 1px solid variables.$secondary-hover;
+  border-radius: 4px;
   display: flex;
   height: 53px;
-  padding-bottom: 7px;
+  padding: 7px;
 
   &--active {
-    border-bottom: 1px solid variables.$primary;
+    border: 1px solid variables.$primary;
   }
 
   &--disabled {
-    border-bottom: 1px solid variables.$secondary-hover;
+    border: 1px solid variables.$secondary-hover;
 
     *,
     *:before,
@@ -30,7 +31,7 @@
   }
 
   &--invalid {
-    border-bottom: 1px solid variables.$error;
+    border: 1px solid variables.$error;
   }
 
   &--hovered {
