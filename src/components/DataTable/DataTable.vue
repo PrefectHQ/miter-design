@@ -27,6 +27,11 @@
               class="data-table__table-header-sort-icon pi pi-1x"
               :class="getColumnSortIconClasses(column)"
             />
+              <slot
+                :name="`${columnHeaderSlotName(column)}-after`"
+                :label="column.label"
+                :column="column"
+              ></slot>
           </th>
         </template>
       </tr>
