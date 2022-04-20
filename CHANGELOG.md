@@ -1,3 +1,4 @@
+- Add column header after slot [#228](https://github.com/PrefectHQ/miter-design/pull/228)
 - Add padding to toasts and tone down hover states [orion#932](https://github.com/PrefectHQ/orion/issues/932)
 - Replace '--' with 'No Tags' when no tags provided [monday:2466940267](https://prefect-squad.monday.com/boards/2335616877/pulses/2466940267)
 - Add focus on DatePicker component mounted
