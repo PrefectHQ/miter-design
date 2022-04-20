@@ -31,7 +31,7 @@
                 :name="`${columnHeaderSlotName(column)}-after`"
                 :label="column.label"
                 :column="column"
-              ></slot>
+              />
           </th>
         </template>
       </tr>
