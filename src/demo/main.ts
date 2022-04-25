@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 
 // Global and functional styles
-import '@/styles/main.scss'
+import '@/styles/index.css'
 
 import App from './App.vue'
 import MiterDesign from '@/index'

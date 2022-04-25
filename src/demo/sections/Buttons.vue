@@ -60,36 +60,18 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component'
 import Button from '@/components/Button/Button.vue'
-import IconButton from '@/components/Button/IconButton.vue'
 
-@Options({ components: { Button, IconButton } })
-export default class Buttons extends Vue {
-  states = ['default', 'disabled']
+const states = ['default', 'disabled']
 
-  buttonStyles = ['primary', 'secondary', 'secondary light', 'alternate', 'delete']
-  icons = [
-    'pi-subtract-line',
-    'pi-add-line',
-    'pi-fullscreen-line',
-    'pi-fullscreen-exit-line',
-    'pi-delete-back-2-line',
-  ]
+const buttonStyles = ['primary', 'secondary', 'secondary light', 'alternate', 'delete']
+const icons = [
+  'pi-subtract-line',
+  'pi-add-line',
+  'pi-fullscreen-line',
+  'pi-fullscreen-exit-line',
+  'pi-delete-back-2-line',
+]
 
-  skeletonLoader = false
-
-  mounted(): void {
-    return
-  }
-
-  handleClick(): void {
-    // eslint-disable-next-line no-console
-    console.log('clicked!')
-  }
-}
+const  skeletonLoader = false
 </script>
-
-<style lang="scss" scoped>
-// @use '@/styles/components/button';
-</style>

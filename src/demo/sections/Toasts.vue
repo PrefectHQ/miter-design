@@ -55,5 +55,3 @@ export default class Toasts extends Vue {
   }
 }
 </script>
-
-<style lang="scss" scoped></style>

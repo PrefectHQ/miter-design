@@ -1,102 +1,94 @@
 <template>
-  <Card miter class="toast">
-    <div class="toast--content d-flex align-center" :class="classList_">
-      <i v-if="icon_" class="pi pi-2x mr-1" :class="icon_" />
-      <slot>{{ message }}</slot>
-      <IconButton
-        v-if="dismissable"
-        class="text--white ml-2 toast--close-button"
-        icon="pi pi-lg pi-close-line"
-        width="32px"
-        height="32px"
-        rounded
-        flat
-        @click="remove"
-      />
+  <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+    <div class="p-4">
+      <div class="flex items-start">
+        <div class="flex-shrink-0">
+          <CheckCircleIcon class="h-6 w-6 text-green-400" aria-hidden="true" />
+        </div>
+        <div class="ml-3 w-0 flex-1 pt-0.5">
+          <p class="text-sm font-medium text-gray-900">
+            Successfully saved!
+          </p>
+          <p class="mt-1 text-sm text-gray-500">
+            Anyone with a link can now view this file.
+          </p>
+        </div>
+        <div class="ml-4 flex-shrink-0 flex">
+          <button v-if="dismissable" type="button" class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="emit('close')">
+            <span class="sr-only">Close</span>
+            <XIcon class="h-5 w-5" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
     </div>
-  </Card>
+  </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options, prop } from 'vue-class-component'
-import Card from '@/components/Card/Card.vue'
-import IconButton from '@/components/Button/IconButton.vue'
 
-const iconMap: { [key: string]: string } = {
-  success: 'pi-checkbox-circle-line',
-  error: 'pi-error-warning-line'
-}
+<script lang="ts" setup>
+  import { XIcon } from '@heroicons/vue/solid'
+  import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
-const colorMap: { [key: string]: string } = {
-  success: 'bg--success',
-  error: 'bg--error'
-}
-
-class Props {
-  classList = prop<[]>({ default: [], required: false })
-  message = prop<string>({ required: false, default: '' })
-  dismissable = prop<boolean>({ default: true, type: Boolean })
-  icon = prop<string>({ default: null, required: false })
-  timeout = prop<number>({ default: 3000, required: false })
-  type = prop<string>({ required: false, default: null })
-}
-
-const Component = Options
-@Component({
-  name: 'MToast',
-  components: {
-    IconButton,
-    Card
-  }
-})
-export default class MToast extends Vue.with(Props) {
-  timeout_: ReturnType<typeof setInterval> | null = null
-
-  get classList_() {
-    return [this.color, ...this.classList]
+  const iconMap: Record<string, string> = {
+    success: 'pi-checkbox-circle-line',
+    error: 'pi-error-warning-line',
   }
 
-  get icon_(): string {
-    return this.icon ? this.icon : iconMap[this.type]
+  const colorMap: Record<string, string> = {
+    success: 'bg--success',
+    error: 'bg--error',
   }
 
-  get color(): string {
-    return colorMap[this.type]
+  const emit = defineEmits<{
+    (event: 'close'): void,
+  }>()
+
+  const props = defineProps<{
+    classList?: string[],
+    message?: string,
+    dismissable?: boolean,
+    icon?: string,
+    timeout?: number,
+    type?: string,
+  }>()
+
+  const timeout_ = ref<number | undefined>(undefined)
+
+  const classList_ = computed(() => props.classList)
+
+
+  const remove = () => {
+    emit('close')
   }
 
-  remove() {
-    this.$emit('close')
-  }
-
-  clearTimeout() {
-    if (this.timeout_) {
-      clearTimeout(this.timeout_)
+  const clearRemoveTimeout = () => {
+    if (timeout_.value) {
+      clearTimeout(timeout_.value)
     }
   }
 
-  setTimeout() {
-    this.clearTimeout()
-    this.timeout_ = setTimeout(() => {
-      this.remove()
-    }, this.timeout)
+
+  const setRemoveTimeout = () => {
+    clearRemoveTimeout()
+    timeout_.value = setTimeout(() => {
+      remove()
+    }, props.timeout)
   }
 
-  mounted() {
-    if (this.timeout) {
-      this.setTimeout()
-      this.$el.addEventListener('mouseenter', this.clearTimeout)
-      this.$el.addEventListener('mouseleave', this.setTimeout)
+
+  onMounted(() => {
+    if (props.timeout) {
+      setRemoveTimeout()
+      // this.$el.addEventListener('mouseenter', this.clearTimeout)
+      // this.$el.addEventListener('mouseleave', this.setTimeout)
     }
-  }
+  })
 
-  unmounted() {
-    this.clearTimeout()
-    this.$el.removeEventListener('mouseenter', this.clearTimeout)
-    this.$el.removeEventListener('mouseleave', this.setTimeout)
-  }
-}
+
+  onBeforeUnmount(() => {
+    clearRemoveTimeout()
+    // this.$el.removeEventListener('mouseenter', this.clearTimeout)
+    // this.$el.removeEventListener('mouseleave', this.setTimeout)
+
+  })
 </script>
-
-<style lang="scss" scoped>
-@use '../../styles/components/toast';
-</style>
